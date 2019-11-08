@@ -1,4 +1,4 @@
-package model;
+package clinic.centersystem.model;
 
 public class Medicine {
     private String name;

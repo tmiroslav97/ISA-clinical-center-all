@@ -1,4 +1,4 @@
-package model;
+package clinic.centersystem.model;
 
 public class Perscription {
     public Medicine medecines;

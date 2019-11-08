@@ -1,4 +1,4 @@
-package model;
+package clinic.centersystem.model;
 
 import java.util.ArrayList;
 
