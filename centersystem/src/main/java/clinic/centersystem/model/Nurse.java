@@ -1,24 +1,15 @@
 package clinic.centersystem.model;
 
-import java.util.ArrayList;
 
-public class Nurse extends User {
-    private ArrayList<HolidayReq> holReq;
-    private ArrayList<Perscription> perscriptions;
+import lombok.Getter;
+import lombok.Setter;
 
-
-    public Celandar calendar;
+@Getter
+@Setter
+public class Nurse extends Personnel {
 
     public Nurse() {
         // TODO: implement
-    }
-
-    public Celandar getCalendar() {
-        return calendar;
-    }
-
-    public void setCalendar(Celandar newCalendar) {
-        calendar = newCalendar;
     }
 
 }

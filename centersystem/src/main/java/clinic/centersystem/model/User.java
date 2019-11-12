@@ -1,54 +1,33 @@
 package clinic.centersystem.model;
 
+
+import clinic.centersystem.model.enumeration.RoleEnum;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+
+@Setter
+@Getter
+@Entity
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column
     private String name;
-    private String surname;
+    @Column
+    private String lasName;
+    @Column
     private String password;
+    @Column
     private String email;
-    private int id;
+    @Column
+    private RoleEnum role;
 
     public User() {
         // TODO: implement
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String newName) {
-        name = newName;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String newSurname) {
-        surname = newSurname;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String newPassword) {
-        password = newPassword;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String newEmail) {
-        email = newEmail;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int newId) {
-        id = newId;
     }
 
 }

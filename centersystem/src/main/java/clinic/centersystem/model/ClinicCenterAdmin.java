@@ -1,5 +1,10 @@
 package clinic.centersystem.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class ClinicCenterAdmin extends User {
     private Boolean predefined;
 
@@ -7,12 +12,5 @@ public class ClinicCenterAdmin extends User {
         // TODO: implement
     }
 
-    public Boolean getPredefined() {
-        return predefined;
-    }
-
-    public void setPredefined(Boolean newPredefined) {
-        predefined = newPredefined;
-    }
 
 }
