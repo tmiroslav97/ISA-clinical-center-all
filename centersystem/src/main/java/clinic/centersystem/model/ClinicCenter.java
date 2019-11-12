@@ -1,57 +1,25 @@
 package clinic.centersystem.model;
 
-import java.util.ArrayList;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.Set;
+
+@Setter
+@Getter
 public class ClinicCenter {
+
+    private Long id;
     private String name;
-    private ArrayList<RegReq> regReqs;
-    private Record record;
-    private ArrayList<ClinicCenterAdmin> ccAdmins;
-    private ArrayList<Clinic> clinics;
-
-
+    private Set<RegistrationRequirement> registrationRequirements;
+    private Set<ClinicCenterAdmin> ccAdmins;
+    private Set<Clinic> clinics;
+    private PerscriptionRecord perscriptionRecord;
+    private DiagnoseRecord diagnoseRecord;
+    
     public ClinicCenter() {
         // TODO: implement
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String newName) {
-        name = newName;
-    }
-
-    public ArrayList<RegReq> getRegReqs() {
-        return regReqs;
-    }
-
-    public void setRegReqs(ArrayList<RegReq> newRegReqs) {
-        regReqs = newRegReqs;
-    }
-
-    public Record getRecord() {
-        return record;
-    }
-
-    public void setRecord(Record newRecord) {
-        record = newRecord;
-    }
-
-    public ArrayList<ClinicCenterAdmin> getCcAdmins() {
-        return ccAdmins;
-    }
-
-    public void setCcAdmins(ArrayList<ClinicCenterAdmin> newCcAdmins) {
-        ccAdmins = newCcAdmins;
-    }
-
-    public ArrayList<Clinic> getClinics() {
-        return clinics;
-    }
-
-    public void setClinics(ArrayList<Clinic> newClinics) {
-        clinics = newClinics;
-    }
 
 }

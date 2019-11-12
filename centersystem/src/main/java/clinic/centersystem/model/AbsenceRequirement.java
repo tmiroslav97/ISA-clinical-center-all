@@ -7,6 +7,13 @@ import lombok.Setter;
 @Getter
 public class AbsenceRequirement {
 
+    private Long id;
+    private String type;
+    private Long startDate;
+    private Long endDate;
+    private Personnel personnel;
+    private Clinic clinic;
+
     public AbsenceRequirement() {
 
     }

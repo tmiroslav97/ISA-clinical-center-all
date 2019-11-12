@@ -1,29 +1,20 @@
 package clinic.centersystem.model;
 
-import java.util.ArrayList;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.Set;
+
+@Setter
+@Getter
 public class PriceList {
-    private String name;
-    private ArrayList<Item> items;
+
+    private Long id;
+    private Set<PriceListItem> items;
+    private Clinic clinic;
 
     public PriceList() {
         // TODO: implement
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String newName) {
-        name = newName;
-    }
-
-    public ArrayList<Item> getItems() {
-        return items;
-    }
-
-    public void setItems(ArrayList<Item> newItems) {
-        items = newItems;
     }
 
 }

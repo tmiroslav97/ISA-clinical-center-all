@@ -3,18 +3,17 @@ package clinic.centersystem.model;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
 @Setter
-public class SurgExRoom {
+@Getter
+public class Medecine {
 
     private Long id;
-    private Integer number;
     private String name;
-    private Clinic clinic;
+    private String description;
+    private PerscriptionRecord perscriptionRecord;
 
-    public SurgExRoom() {
+    public Medecine() {
         // TODO: implement
     }
-
 
 }

@@ -15,13 +15,16 @@ public class Clinic {
     private String description;
     private Float rating;
     private BusinessReport busReport;
+    private PriceList priceList;
     private Set<Doctor> doctors;
     private Set<Nurse> nurses;
     private Set<ClinicAdmin> clinicAdmins;
     private Set<SurgExRoom> surExRooms;
     private Set<Appointment> appointments;
-    private Set<HolidayReq> holReqs;
-
+    private Set<AbsenceRequirement> reqAbs;
+    private Set<AppRequirement> appReqs;
+    private Set<SurgeryRequirement> surReqs;
+    private ClinicCenter clinicCenter;
 
     public Clinic() {
         // TODO: implement

@@ -1,29 +1,16 @@
 package clinic.centersystem.model;
 
-import java.util.ArrayList;
+
+import java.util.Set;
 
 public class MedicalRecord {
+
+    private Long id;
+    private Set<MedicalReport> diseaseHistory;
     private String description;
-    private ArrayList<MedicalReport> records;
 
     public MedicalRecord() {
         // TODO: implement
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String newDescription) {
-        description = newDescription;
-    }
-
-    public ArrayList<MedicalReport> getRecords() {
-        return records;
-    }
-
-    public void setRecords(ArrayList<MedicalReport> newRecords) {
-        records = newRecords;
     }
 
 }

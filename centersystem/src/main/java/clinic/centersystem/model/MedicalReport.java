@@ -1,39 +1,24 @@
 package clinic.centersystem.model;
 
-import java.util.ArrayList;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.Set;
+
+@Setter
+@Getter
 public class MedicalReport {
-    private String description;
-    private ArrayList<Diagnose> diagnoses;
-    private ArrayList<Perscription> perscriptions;
 
+    private Long id;
+    private String description;
+    private Set<Diagnose> diagnoses;
+    private Set<Recepie> recepies;
+    private Appointment appointment;
+    private MedicalRecord medicalRecord;
 
     public MedicalReport() {
         // TODO: implement
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String newDescription) {
-        description = newDescription;
-    }
-
-    public ArrayList<Diagnose> getDiagnoses() {
-        return diagnoses;
-    }
-
-    public void setDiagnoses(ArrayList<Diagnose> newDiagnoses) {
-        diagnoses = newDiagnoses;
-    }
-
-    public ArrayList<Perscription> getPerscriptions() {
-        return perscriptions;
-    }
-
-    public void setPerscriptions(ArrayList<Perscription> newPerscriptions) {
-        perscriptions = newPerscriptions;
     }
 
 }

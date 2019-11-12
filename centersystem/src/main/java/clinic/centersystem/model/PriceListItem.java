@@ -5,16 +5,15 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SurgExRoom {
+public class PriceListItem {
 
     private Long id;
-    private Integer number;
-    private String name;
-    private Clinic clinic;
+    private String serviceName;
+    private Float price;
+    private PriceList priceList;
 
-    public SurgExRoom() {
+    public PriceListItem() {
         // TODO: implement
     }
-
 
 }

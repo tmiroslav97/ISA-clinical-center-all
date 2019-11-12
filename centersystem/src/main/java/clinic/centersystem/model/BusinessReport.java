@@ -1,45 +1,22 @@
 package clinic.centersystem.model;
 
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class BusinessReport {
-    private float clinicRating;
-    private float doctorRating;
-    private int graphic;
-    private float income;
+
+    private Long id;
+    private Float clinicRating;
+    private Float doctorRating;
+    private Float graphic;
+    private Float income;
+    private Clinic clinic;
 
     public BusinessReport() {
         // TODO: implement
-    }
-
-    public float getClinicRating() {
-        return clinicRating;
-    }
-
-    public void setClinicRating(float newClinicRating) {
-        clinicRating = newClinicRating;
-    }
-
-    public float getDoctorRating() {
-        return doctorRating;
-    }
-
-    public void setDoctorRating(float newDoctorRating) {
-        doctorRating = newDoctorRating;
-    }
-
-    public int getGraphic() {
-        return graphic;
-    }
-
-    public void setGraphic(int newGraphic) {
-        graphic = newGraphic;
-    }
-
-    public float getIncome() {
-        return income;
-    }
-
-    public void setIncome(float newIncome) {
-        income = newIncome;
     }
 
 }
