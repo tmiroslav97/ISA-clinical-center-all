@@ -3,21 +3,45 @@ package clinic.centersystem.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Setter
 @Getter
+@Entity
+@Table(name = "patient")
 public class Patient extends User {
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Clinic> clinics = new HashSet<Clinic>();
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private MedicalRecord medicalRecord;
-    private Set<Clinic> clinics;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Appointment> appointments;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<AppRequirement> reqApp;
-    private Set<Surgery> surgeries;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Surgery> surgeries = new HashSet<Surgery>();
+
+
+
+    @Column(name = "isActivated", unique = false, nullable = true)
     private boolean isActivated;
+
+
+
 
     public Patient() {
         // TODO: implement
+
+
     }
+
+
 
 }
