@@ -16,7 +16,7 @@ public class ClinicCenterAdmin extends User {
     @Column(name = "predefined", unique = false, nullable = true)
     private Boolean predefined;
 
-    //treba mapirati
+
     //private ClinicCenter clinicCenter;
 
     public ClinicCenterAdmin() {
