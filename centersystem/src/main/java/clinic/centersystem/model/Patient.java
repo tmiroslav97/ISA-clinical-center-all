@@ -14,7 +14,7 @@ import java.util.Set;
 public class Patient extends User {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Clinic> clinics = new HashSet<Clinic>();
+    private Set<Clinic> clinics;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private MedicalRecord medicalRecord;
@@ -26,14 +26,10 @@ public class Patient extends User {
     private Set<AppRequirement> reqApp;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<Surgery> surgeries = new HashSet<Surgery>();
-
-
+    private Set<Surgery> surgeries;
 
     @Column(name = "isActivated", unique = false, nullable = true)
     private boolean isActivated;
-
-
 
 
     public Patient() {
@@ -41,7 +37,6 @@ public class Patient extends User {
 
 
     }
-
 
 
 }

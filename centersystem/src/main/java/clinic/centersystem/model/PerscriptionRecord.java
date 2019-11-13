@@ -18,7 +18,7 @@ public class PerscriptionRecord {
     private Long id;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<Medecine> medecines = new HashSet<Medecine>();
+    private Set<Medecine> medecines;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private ClinicCenter clinicCenter;

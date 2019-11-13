@@ -10,6 +10,8 @@ import java.util.Set;
 
 @Getter
 @Setter
+@Entity
+@Table(name = "personnel")
 public class Personnel extends User {
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -22,10 +24,10 @@ public class Personnel extends User {
     private Calendar calendar;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<AbsenceRequirement> reqAbs = new HashSet<AbsenceRequirement>();
+    private Set<AbsenceRequirement> reqAbs;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<Appointment> appointments = new HashSet<Appointment>();
+    private Set<Appointment> appointments;
 
     public Personnel() {
     }

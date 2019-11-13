@@ -9,6 +9,8 @@ import java.util.Set;
 
 @Setter
 @Getter
+@Entity
+@Table(name = "medicalRecord")
 public class MedicalRecord {
 
     @Id

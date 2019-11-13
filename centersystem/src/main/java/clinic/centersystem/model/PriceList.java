@@ -18,7 +18,7 @@ public class PriceList {
     private Long id;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<PriceListItem> items = new HashSet<PriceListItem>();
+    private Set<PriceListItem> items;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Clinic clinic;

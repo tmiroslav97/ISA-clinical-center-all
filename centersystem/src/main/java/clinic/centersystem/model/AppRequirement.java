@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Entity
-@Table(name="AppRequirement")
+@Table(name = "AppRequirement")
 public class AppRequirement {
 
     @Id
@@ -25,7 +25,7 @@ public class AppRequirement {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Doctor doctor;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Column(name = "appState", unique = false, nullable = false)
     private AppStateEnum appState;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
