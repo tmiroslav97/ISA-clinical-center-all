@@ -13,8 +13,7 @@ import java.util.Set;
 public class AppointmentType {
 
     @Id
-    @GeneratedValue
-    @Column(name = "id", unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "type", unique = true, nullable = false)

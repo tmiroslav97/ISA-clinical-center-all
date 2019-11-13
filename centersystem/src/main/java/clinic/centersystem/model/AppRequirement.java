@@ -13,8 +13,7 @@ import javax.persistence.*;
 public class AppRequirement {
 
     @Id
-    @GeneratedValue
-    @Column(name = "id", unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "dateTime", unique = false, nullable = false)

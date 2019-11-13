@@ -12,8 +12,7 @@ import javax.persistence.*;
 public class AbsenceRequirement {
 
     @Id
-    @GeneratedValue
-    @Column(name = "id", unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "type", unique = false, nullable = false)

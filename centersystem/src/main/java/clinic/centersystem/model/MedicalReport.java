@@ -14,8 +14,7 @@ import java.util.Set;
 public class MedicalReport {
 
     @Id
-    @GeneratedValue
-    @Column(name = "id", unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "description", unique = false, nullable = false)

@@ -12,8 +12,7 @@ import javax.persistence.*;
 public class Medecine {
 
     @Id
-    @GeneratedValue
-    @Column(name = "id", unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name", unique = false, nullable = false)
