@@ -15,7 +15,7 @@ import java.util.Set;
 public class Personnel extends User {
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<Patient> patients = new HashSet<Patient>();
+    private Set<Patient> patients;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Clinic clinic;

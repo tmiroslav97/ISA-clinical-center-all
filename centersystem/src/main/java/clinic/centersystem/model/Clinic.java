@@ -1,5 +1,7 @@
 package clinic.centersystem.model;
 
+import clinic.centersystem.common.db.DbColumnConstants;
+import clinic.centersystem.common.db.DbTableConstants;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,14 +11,14 @@ import java.util.Set;
 @Setter
 @Getter
 @Entity
-@Table(name = "clinic")
+@Table(name = DbTableConstants.CLINIC)
 public class Clinic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", unique = false, nullable = false)
+    @Column(name = DbColumnConstants.NAME, unique = false, nullable = false)
     private String name;
 
     @Column(name = "address", unique = false, nullable = false)

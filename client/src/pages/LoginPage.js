@@ -1,10 +1,10 @@
 import React from 'react';
-import './css/bootstrap.css';
 
 function Login() {
     return (
         <div class="row">
-            <div class="col-md-6 col-sm-12">
+            <div class="col-md-3 col-sm-12 col-xs-12"></div>
+            <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="login-form">
                     <form>
                         <div class="form-group">
@@ -16,10 +16,10 @@ function Login() {
                             <input type="text" class="form-control" placeholder="Password"></input>
                         </div>
                         <button type="submit" class="btn btn-black">Login</button>
-                        <button type="submit" class="btn btn-black">Register</button>
                     </form>
                 </div>
             </div>
+            <div class="col-md-3 col-sm-12 col-xs-12"></div>
         </div>
     );
   }
