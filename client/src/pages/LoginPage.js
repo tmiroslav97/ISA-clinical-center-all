@@ -1,26 +1,31 @@
 import React from 'react';
+import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 
 function Login() {
     return (
-        <div className="row">
-            <div className="col-md-3 col-sm-12 col-xs-12"></div>
-            <div className="col-md-6 col-sm-12 col-xs-12">
-                <div className="login-form">
-                    <form>
-                        <div className="form-group">
-                            <label>E-mail</label>
-                            <input type="text" className="form-control" placeholder="E-mail"></input>
-                        </div>
-                        <div className="form-group">
-                            <label>Password</label>
-                            <input type="text" className="form-control" placeholder="Password"></input>
-                        </div>
-                        <button type="submit" className="btn btn-black">Login</button>
-                    </form>
-                </div>
-            </div>
-            <div className="col-md-3 col-sm-12 col-xs-12"></div>
-        </div>
+        <Container>
+            <Row>
+                <Col md={{ span:3, offset: 3 }} xs={12}>
+                    <Form>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>Email address</Form.Label>
+                            <Form.Control type="email" placeholder="Enter email" />
+                            <Form.Text className="text-muted">
+                                We'll never share your email with anyone else.
+                            </Form.Text>
+                        </Form.Group>
+
+                        <Form.Group controlId="formBasicPassword">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control type="password" placeholder="Password" />
+                        </Form.Group>
+                        <Button variant="primary" type="submit">
+                            Submit
+                        </Button>
+                    </Form>
+                </Col>
+            </Row>
+        </Container>
     );
   }
   
