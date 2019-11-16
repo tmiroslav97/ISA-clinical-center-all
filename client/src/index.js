@@ -11,11 +11,9 @@ export const history = createBrowserHistory();
 
 ReactDOM.render(
     <Router history={history}>
-        <div>
-            <NavBar/>
-            <AppRouter/>
-            <Footer/>
-        </div>
+        <NavBar/>
+        <AppRouter/>
+        <Footer/>
     </Router>
     , 
     document.getElementById('root')

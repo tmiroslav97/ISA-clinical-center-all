@@ -2,24 +2,24 @@ import React from 'react';
 
 function Login() {
     return (
-        <div class="row">
-            <div class="col-md-3 col-sm-12 col-xs-12"></div>
-            <div class="col-md-6 col-sm-12 col-xs-12">
-                <div class="login-form">
+        <div className="row">
+            <div className="col-md-3 col-sm-12 col-xs-12"></div>
+            <div className="col-md-6 col-sm-12 col-xs-12">
+                <div className="login-form">
                     <form>
-                        <div class="form-group">
-                            <label>User Name</label>
-                            <input type="text" class="form-control" placeholder="User Name"></input>
+                        <div className="form-group">
+                            <label>E-mail</label>
+                            <input type="text" className="form-control" placeholder="E-mail"></input>
                         </div>
-                        <div class="form-group">
+                        <div className="form-group">
                             <label>Password</label>
-                            <input type="text" class="form-control" placeholder="Password"></input>
+                            <input type="text" className="form-control" placeholder="Password"></input>
                         </div>
-                        <button type="submit" class="btn btn-black">Login</button>
+                        <button type="submit" className="btn btn-black">Login</button>
                     </form>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-12 col-xs-12"></div>
+            <div className="col-md-3 col-sm-12 col-xs-12"></div>
         </div>
     );
   }
