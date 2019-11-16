@@ -44,7 +44,7 @@ Spajanje neke druge grane na granu na kojoj se nalazimo
     `git checkout -b feature-view-za-login-page`
     `git checkout -b bugfix-view-za-login-page`
 3. Kada odradimo neki task sa trella, pa treba da komitujemo (najscese na granu koju smo otvorili)
-    `git add*`
+    `git add *`
     `git commit -m 'Uradjen task za tekst polja'`
     `git push origin branch_name`
 4. Kada zavrsimo kompletan rad na nasoj grani treba da otvorimo pull_request (dopunicu ovu tacku kasnije)
