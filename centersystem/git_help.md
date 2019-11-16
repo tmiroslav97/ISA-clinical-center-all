@@ -1,13 +1,13 @@
 ### GIT iz komande linije
 
 Da git bude "svjestan" da je folder za repozitorijum  
-`git -init` 
+`git init` 
 
 Kloniranje lokalnog repozitorijuma  
 `git clone /path/to/repository`
 
 Kloniranje remote repozitorijuma  
-`git clone username@host:/path/to/repository`
+`git clone host:/path/to/repository`
 
 Dodavanje promjena na index (za lokalni)  
 `git add*`
@@ -62,4 +62,8 @@ Spajanje neke druge grane na granu na kojoj se nalazimo
     git reset --hard origin/master
     git merge branch_name
    ```
+   
+   Linkovi:  
+   https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow
+   
 
