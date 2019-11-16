@@ -6,6 +6,7 @@ import NavBar from './components/NavBar';
 import AppRouter from './AppRouter';
 import { createBrowserHistory } from 'history'
 import Footer from './components/Footer';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const history = createBrowserHistory();
 
