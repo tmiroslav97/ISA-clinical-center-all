@@ -21,13 +21,13 @@ public class Clinic {
     @Column(name = DbColumnConstants.NAME, unique = false, nullable = false)
     private String name;
 
-    @Column(name = "address", unique = false, nullable = false)
+    @Column(name = DbColumnConstants.ADDRESS, unique = false, nullable = false)
     private String address;
 
-    @Column(name = "description", unique = false, nullable = false)
+    @Column(name = DbColumnConstants.DESCRIPTION, unique = false, nullable = false)
     private String description;
 
-    @Column(name = "rating", unique = false, nullable = false)
+    @Column(name = DbColumnConstants.RATING, unique = false, nullable = false)
     private Float rating;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

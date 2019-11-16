@@ -1,5 +1,6 @@
 package clinic.centersystem.model;
 
+import clinic.centersystem.common.db.DbColumnConstants;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,10 +10,10 @@ import java.util.HashSet;
 @Getter
 @Setter
 @Entity
-@Table(name="clinicCenterAdmin")
+@Table(name= DbColumnConstants.CLINICCENTERADMIN)
 public class ClinicCenterAdmin extends User {
 
-    @Column(name = "predefined", unique = false, nullable = true)
+    @Column(name = DbColumnConstants.PREDEFINED, unique = false, nullable = true)
     private Boolean predefined;
 
 

@@ -1,6 +1,7 @@
 package clinic.centersystem.model;
 
 
+import clinic.centersystem.common.db.DbColumnConstants;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +11,7 @@ import java.util.Set;
 @Setter
 @Getter
 @Entity
-@Table(name = "medicalRecord")
+@Table(name = DbColumnConstants.MEDICALRECORD)
 public class MedicalRecord {
 
     @Id
@@ -20,7 +21,7 @@ public class MedicalRecord {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<MedicalReport> diseaseHistory;
 
-    @Column(name = "description", unique = false, nullable = false)
+    @Column(name = DbColumnConstants.DESCRIPTION, unique = false, nullable = false)
     private String description;
 
     public MedicalRecord() {

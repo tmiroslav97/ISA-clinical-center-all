@@ -1,5 +1,6 @@
 package clinic.centersystem.model;
 
+import clinic.centersystem.common.db.DbColumnConstants;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +11,7 @@ import java.util.Set;
 @Setter
 @Getter
 @Entity
-@Table(name = "recepie")
+@Table(name = DbColumnConstants.RECEPIE)
 public class Recepie {
 
     @Id
@@ -23,7 +24,7 @@ public class Recepie {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Medecine medecine;
 
-    @Column(name = "isValidate", unique = false, nullable = true)
+    @Column(name = DbColumnConstants.ISVALIDATE, unique = false, nullable = true)
     private boolean isValidate;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

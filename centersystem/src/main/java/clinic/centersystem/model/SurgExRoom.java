@@ -1,5 +1,6 @@
 package clinic.centersystem.model;
 
+import clinic.centersystem.common.db.DbColumnConstants;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,17 +11,17 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "surg_ex_room")
+@Table(name = DbColumnConstants.SURGEXROOM)
 public class SurgExRoom {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "number", nullable = false)
+    @Column(name = DbColumnConstants.NUMBER, nullable = false)
     private Integer number;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = DbColumnConstants.NAME, nullable = false)
     private String name;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

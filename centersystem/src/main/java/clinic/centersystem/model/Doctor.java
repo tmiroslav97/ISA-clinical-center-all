@@ -1,6 +1,7 @@
 package clinic.centersystem.model;
 
 
+import clinic.centersystem.common.db.DbColumnConstants;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,10 +11,10 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "doctor")
+@Table(name = DbColumnConstants.DOCTOR)
 public class Doctor extends Personnel {
 
-    @Column(name = "rating", unique = false, nullable = false)
+    @Column(name = DbColumnConstants.RATING, unique = false, nullable = false)
     private Float rating;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

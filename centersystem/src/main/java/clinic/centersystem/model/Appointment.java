@@ -1,5 +1,6 @@
 package clinic.centersystem.model;
 
+import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.model.enumeration.AppStateEnum;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,29 +10,29 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Entity
-@Table(name = "appoint")
+@Table(name = DbColumnConstants.APPOINT)
 public class Appointment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "dateTime", unique = false, nullable = false)
+    @Column(name = DbColumnConstants.DATETIME, unique = false, nullable = false)
     private Long dateTime;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private AppointmentType type;
 
-    @Column(name = "appState", unique = false, nullable = false)
+    @Column(name = DbColumnConstants.APPSTATE, unique = false, nullable = false)
     private AppStateEnum appState;
 
-    @Column(name = "startTime", unique = false, nullable = false)
+    @Column(name = DbColumnConstants.STARTTIME, unique = false, nullable = false)
     private Long startTime;
 
-    @Column(name = "endTime", unique = false, nullable = false)
+    @Column(name = DbColumnConstants.ENDTIME, unique = false, nullable = false)
     private Long endTime;
 
-    @Column(name = "duration", unique = false, nullable = false)
+    @Column(name = DbColumnConstants.DURATION, unique = false, nullable = false)
     private Long duration;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -40,10 +41,10 @@ public class Appointment {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Doctor doctor;
 
-    @Column(name = "price", unique = false, nullable = false)
+    @Column(name = DbColumnConstants.PRICE, unique = false, nullable = false)
     private Float price;
 
-    @Column(name = "discount", unique = false, nullable = false)
+    @Column(name = DbColumnConstants.DISCOUNT, unique = false, nullable = false)
     private Float discount;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

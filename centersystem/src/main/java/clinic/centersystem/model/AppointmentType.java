@@ -1,5 +1,6 @@
 package clinic.centersystem.model;
 
+import clinic.centersystem.common.db.DbColumnConstants;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,14 +10,14 @@ import java.util.Set;
 @Setter
 @Getter
 @Entity
-@Table(name = "appointmentType")
+@Table(name = DbColumnConstants.APPOINTMENTTYPE)
 public class AppointmentType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "type", unique = true, nullable = false)
+    @Column(name = DbColumnConstants.TYPE, unique = true, nullable = false)
     private String type;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

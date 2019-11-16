@@ -1,5 +1,6 @@
 package clinic.centersystem.model;
 
+import clinic.centersystem.common.db.DbColumnConstants;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +10,7 @@ import java.util.Set;
 @Setter
 @Getter
 @Entity
-@Table(name = "diagnoseRecord")
+@Table(name = DbColumnConstants.DIAGNOSERECORD)
 public class DiagnoseRecord {
 
     @Id

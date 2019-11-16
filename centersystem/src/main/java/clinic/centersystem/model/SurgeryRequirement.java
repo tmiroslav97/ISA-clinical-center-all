@@ -1,5 +1,6 @@
 package clinic.centersystem.model;
 
+import clinic.centersystem.common.db.DbColumnConstants;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,14 +9,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "surgery_requirement")
+@Table(name = DbColumnConstants.SURGERYREQUIREMENT)
 public class SurgeryRequirement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "dateTime", nullable = false)
+    @Column(name = DbColumnConstants.DATETIME, nullable = false)
     private Long dateTime;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

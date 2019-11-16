@@ -1,5 +1,6 @@
 package clinic.centersystem.model;
 
+import clinic.centersystem.common.db.DbColumnConstants;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +12,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "personnel")
+@Table(name = DbColumnConstants.PERSONNEL)
 public class Personnel extends User {
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -20,7 +21,7 @@ public class Personnel extends User {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Clinic clinic;
 
-    @Column(name = "calendar", nullable = false)
+    @Column(name = DbColumnConstants.CALENDAR, nullable = false)
     private Calendar calendar;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
