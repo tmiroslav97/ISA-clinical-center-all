@@ -14,16 +14,24 @@ class AuthSecurityService extends HttpBaseClient{
         );
 
         localStorage.setItem('token', data.token);
-        localStorage.setItem('email', data.email);
-        localStorage.setItem('role', data.role);
-        localStorage.setItem('userID', data.userID);
+        // localStorage.setItem('email', data.email);
+        // localStorage.setItem('role', data.role);
+        // localStorage.setItem('userID', data.userID);
 
         this.AuthenticatorAssertionResponse({
             Authorization: `Bearer ${data.token}`
         });
 
-        //treba razraditi logiku ko se loguje, dali treba da mjenja password ili ne if (dat.role === 'ROLE_ADMIN')...
-    }
+        // treba razraditi logiku ko se loguje, dali treba da mjenja password 
+        // ili ne if (dat.role === 'ROLE_ADMIN')...
+        // da se redirektuje na svoju stranicu u zavisnosti od role
+        
+        return { data }
+    };
+
+    registration = userData => {
+        return this.getApiClient().post(FINALPOINTS.REGISTRATION,userData);
+    };
 }
 
 export default new AuthSecurityService(); 

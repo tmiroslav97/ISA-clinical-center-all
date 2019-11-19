@@ -3,6 +3,7 @@ import {Route, Redirect, Switch} from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import AdminProfile from './components/AdminProfile';
+import RegPage from './pages/RegPage';
 
 const AppRouter = () =>{
     return(
@@ -10,6 +11,7 @@ const AppRouter = () =>{
             <Route exact path="/" component={HomePage}/>
             <Route exact path="/login" component={LoginPage}/>
             <Route exact path="/adminprof" component={AdminProfile}/>
+            <Route exact path="/signup" component={RegPage}/>
 
             <Route exact path="/page-not-found" component={() => <h1>Page not found!</h1>}/>
             <Redirect from="*" to="/page-not-found" />
