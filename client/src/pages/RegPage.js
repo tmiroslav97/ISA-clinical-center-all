@@ -6,7 +6,7 @@ import { registerUser } from '../store/user/actions';
 const RegPage = () => {
     const dispatch = useDispatch();
     const [email, setEmail] = useState();
-    const [password1, setPassword1] = useState();
+    const [password, setPassword] = useState();
     const [password2, setPassword2] = useState();
     const [firstName, setFirstName] = useState();
     const [lastName, setLastName] = useState();
@@ -20,7 +20,7 @@ const RegPage = () => {
         dispatch(
             registerUser({
                 email,
-                password1,
+                password,
                 password2,
                 firstName,
                 lastName,
@@ -47,7 +47,7 @@ const RegPage = () => {
                             <Form.Group as={Col} controlId="formBasicEmail">
                                 <Form.Label>E-mail address</Form.Label>
                                 <Form.Control type="email" placeholder="E-mail"
-                                    onChange={( currentTarget ) => {
+                                    onChange={( {currentTarget} ) => {
                                         setEmail(currentTarget.value);
                                 }}/>
                                 <Form.Text className="text-muted">
@@ -57,23 +57,21 @@ const RegPage = () => {
                             <Form.Group as={Col} controlId="formCity">
                                 <Form.Label>City</Form.Label>
                                 <Form.Control type="text" placeholder="City" 
-                                    onChange={( currentTarget ) => {
-                                        setCity(currentTarget.value);
-                                }} />
+                                    onChange={( {currentTarget} ) => {setCity(currentTarget.value);}} />
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
                             <Form.Group as={Col} controlId="formBasicPassword">
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control type="password" placeholder="Password" 
-                                    onChange={( currentTarget ) => {
-                                        setPassword1(currentTarget.value);
+                                    onChange={( {currentTarget} ) => {
+                                        setPassword(currentTarget.value);
                                 }}/>
                             </Form.Group>
                             <Form.Group as={Col} controlId="formAddressd">
                                 <Form.Label>Address</Form.Label>
                                 <Form.Control type="text" placeholder="Address"
-                                    onChange={( currentTarget ) => {
+                                    onChange={( {currentTarget} ) => {
                                         setAddress(currentTarget.value);
                                 }} />
                             </Form.Group>
@@ -82,14 +80,14 @@ const RegPage = () => {
                             <Form.Group as={Col} controlId="formConfirmPassword">
                                 <Form.Label>Confirm password</Form.Label>
                                 <Form.Control type="password" placeholder="Confirm your password" 
-                                    onChange={( currentTarget ) => {
+                                    onChange={( {currentTarget} ) => {
                                         setPassword2(currentTarget.value);
                                 }} />
                             </Form.Group>
                             <Form.Group as={Col} controlId="formCountry">
                                 <Form.Label>Country</Form.Label>
                                 <Form.Control type="text" placeholder="Country"
-                                    onChange={( currentTarget ) => {
+                                    onChange={( {currentTarget} ) => {
                                         setCountry(currentTarget.value);
                                 }} />
                             </Form.Group>
@@ -98,14 +96,14 @@ const RegPage = () => {
                             <Form.Group as={Col} controlId="formFirstName">
                                 <Form.Label>First name</Form.Label>
                                 <Form.Control type="text" placeholder="First name"
-                                    onChange={( currentTarget ) => {
+                                    onChange={( {currentTarget} ) => {
                                         setFirstName(currentTarget.value);
                                 }}/>
                             </Form.Group>
                             <Form.Group as={Col} controlId="formContact">
                                 <Form.Label>Contact</Form.Label>
                                 <Form.Control type="text" placeholder="Contact"
-                                    onChange={( currentTarget ) => {
+                                    onChange={( {currentTarget} ) => {
                                         setPhoneNum(currentTarget.value);
                                 }} />
                             </Form.Group>
@@ -114,14 +112,14 @@ const RegPage = () => {
                             <Form.Group as={Col} controlId="formLastName">
                                 <Form.Label>Last name</Form.Label>
                                 <Form.Control type="text" placeholder="Last name"    
-                                    onChange={( currentTarget ) => {
+                                    onChange={( {currentTarget} ) => {
                                         setLastName(currentTarget.value);
                                 }} />
                             </Form.Group>
                             <Form.Group as={Col} controlId="formUNOIP">
                                     <Form.Label>Unique number of insured persons</Form.Label>
                                     <Form.Control type="text" placeholder="UNOIP" 
-                                        onChange={( currentTarget ) => {
+                                        onChange={( {currentTarget} ) => {
                                             setUnoip(currentTarget.value);
                                     }}/>
                             </Form.Group>

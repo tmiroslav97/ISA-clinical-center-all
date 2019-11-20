@@ -14,9 +14,9 @@ class AuthSecurityService extends HttpBaseClient{
         );
 
         localStorage.setItem('token', data.token);
-        // localStorage.setItem('email', data.email);
-        // localStorage.setItem('role', data.role);
-        // localStorage.setItem('userID', data.userID);
+        localStorage.setItem('email', data.email);
+        localStorage.setItem('role', data.role);
+        localStorage.setItem('userID', data.userID);
 
         this.AuthenticatorAssertionResponse({
             Authorization: `Bearer ${data.token}`
@@ -30,6 +30,7 @@ class AuthSecurityService extends HttpBaseClient{
     };
 
     registration = userData => {
+        console.log(userData);
         return this.getApiClient().post(FINALPOINTS.REGISTRATION,userData);
     };
 }

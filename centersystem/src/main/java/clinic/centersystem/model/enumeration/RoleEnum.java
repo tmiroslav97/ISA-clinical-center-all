@@ -1,5 +1,5 @@
 package clinic.centersystem.model.enumeration;
 
 public enum RoleEnum {
-    CLINIC_CENTER_ADMIN, CLINIC_ADMIN, PATIENT, DOCTOR, NURSE
+    ROLE_CCADMIN, ROLE_ADMINC, ROLE_PATIENT, ROLE_DOCTOR, ROLE_NURSE, ROLE_PERSONNEL
 }

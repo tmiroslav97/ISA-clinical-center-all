@@ -50,14 +50,14 @@ public class User implements UserDetails {
     @Column(name = "phoneNum", unique = false, nullable = false)
     private String phoneNum;
 
-    @Column(name = "secNum", unique = false, nullable = false)
-    private Long secNum;
-
     @Column(name = "role", unique = false, nullable = false)
     private RoleEnum role;
 
     @Column(name = "firstLog", unique = false, nullable = false)
     private boolean isFirstLog;
+
+    @Column(name = "unoip", unique = false, nullable = false)
+    private String unoip;
 
     @Column(name = "enabled", unique = false, nullable = false)
     private boolean enabled;
@@ -75,7 +75,7 @@ public class User implements UserDetails {
         // TODO: implement
     }
 
-    public String getUsername(){
+    public String getUsername() {
         return this.email;
     }
 

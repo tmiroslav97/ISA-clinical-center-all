@@ -68,15 +68,15 @@ public class AuthenticationController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/registration")
     public ResponseEntity<?> addUser(@RequestBody RegistrationRequirement userRequest, UriComponentsBuilder ucBuilder) {
-        System.out.println("register!");
-        User existUser = this.userService.findByEmail(userRequest.getEmail());
+        User existUser = this.userService.findByUsername(userRequest.getEmail());
         if (existUser != null) {
             throw new ResourceConflictException(userRequest.getId(), "Email already exists");
         }
+        System.out.println("desilo se!");
 
         User user = this.userService.save(userRequest);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/api/user/{userId}").buildAndExpand(user.getId()).toUri());
+        headers.setLocation(ucBuilder.path("/user/{userId}").buildAndExpand(user.getId()).toUri());
         return new ResponseEntity<User>(user, HttpStatus.CREATED);
     }
 

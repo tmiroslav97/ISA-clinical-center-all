@@ -8,11 +8,9 @@ import {
     putUserToken 
 } from './actions';
 
-export function* registration(){
+export function* registration(){    
     const { payload } = yield take(REGISTRATION);
     const { data } = yield call(authService.registration,payload);
-    alert('registraovan');
-    // payload.callback();
 }
 
 export function* login(){

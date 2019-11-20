@@ -8,7 +8,7 @@ import java.util.List;
 public interface UserService {
     User findById(Long id);
 
-    User findByEmail(String username);
+    User findByUsername(String email);
 
     List<User> findAll();
 
