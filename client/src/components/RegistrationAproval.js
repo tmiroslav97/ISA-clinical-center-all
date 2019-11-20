@@ -18,7 +18,7 @@ function RegistrationAproval(){
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={handleClose}>
-            Sand
+            Send
           </Button>
         </Modal.Footer>
       </Modal>

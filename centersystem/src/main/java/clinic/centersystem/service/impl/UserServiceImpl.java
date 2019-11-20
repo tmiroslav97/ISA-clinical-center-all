@@ -60,9 +60,9 @@ public class UserServiceImpl implements UserService {
         u.setUnoip(registrationRequirement.getUnoip());
         u.setRole(RoleEnum.ROLE_PATIENT);
         u.setEnabled(false);
-        u.setFirstLog(true);
+        u.setFirstLog(false);
 
-        List<Authority> auth = authorityService.findByName("ROLE_USER");
+        List<Authority> auth = authorityService.findByName("ROLE_PATIENT");
         u.setAuthorities(auth);
 
         u = this.userRepository.save(u);

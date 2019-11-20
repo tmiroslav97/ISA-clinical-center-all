@@ -68,20 +68,21 @@ const RegPage = () => {
                                         setPassword(currentTarget.value);
                                 }}/>
                             </Form.Group>
-                            <Form.Group as={Col} controlId="formAddressd">
-                                <Form.Label>Address</Form.Label>
-                                <Form.Control type="text" placeholder="Address"
-                                    onChange={( {currentTarget} ) => {
-                                        setAddress(currentTarget.value);
-                                }} />
-                            </Form.Group>
-                        </Form.Row>
-                        <Form.Row>
                             <Form.Group as={Col} controlId="formConfirmPassword">
                                 <Form.Label>Confirm password</Form.Label>
                                 <Form.Control type="password" placeholder="Confirm your password" 
                                     onChange={( {currentTarget} ) => {
                                         setPassword2(currentTarget.value);
+                                }} />
+                            </Form.Group>
+                            
+                        </Form.Row>
+                        <Form.Row>
+                        <Form.Group as={Col} controlId="formAddressd">
+                                <Form.Label>Address</Form.Label>
+                                <Form.Control type="text" placeholder="Address"
+                                    onChange={( {currentTarget} ) => {
+                                        setAddress(currentTarget.value);
                                 }} />
                             </Form.Group>
                             <Form.Group as={Col} controlId="formCountry">

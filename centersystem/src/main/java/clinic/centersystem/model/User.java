@@ -23,7 +23,7 @@ import java.util.List;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = DbColumnConstants.ID, unique = true, nullable = false)
     private Long id;
 
@@ -33,7 +33,7 @@ public class User implements UserDetails {
     @Column(name = DbColumnConstants.LASTNAME, unique = false, nullable = false)
     private String lastName;
 
-    @Column(name = DbColumnConstants.PASSWORD, unique = true, nullable = false)
+    @Column(name = DbColumnConstants.PASSWORD, unique = false, nullable = false)
     private String password;
 
     @Column(name = DbColumnConstants.EMAIL, unique = true, nullable = false)
