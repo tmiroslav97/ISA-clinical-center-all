@@ -1,7 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap'
- 
-function Login() {
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../store/user/actions';
+
+const LoginPage = () => {
+    const dispatch = useDispatch();
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    
+    const handleLogin = () => {
+        dispatch(
+            loginUser({
+                email,
+                password
+            })
+        );
+    };
+
     return (
         <Container>
             <Row>
@@ -9,18 +24,24 @@ function Login() {
                     <Form>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" />
+                            <Form.Control type="email" placeholder="Enter email" 
+                                onChange={( currentTarget ) => {
+                                    setEmail(currentTarget.value);
+                            }} />
                             <Form.Text className="text-muted">
                                 We'll never share your email with anyone else.
                             </Form.Text>
                         </Form.Group>
- 
+
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" />
+                            <Form.Control type="password" placeholder="Password" 
+                                onChange={( currentTarget ) => {
+                                    setPassword(currentTarget.value);
+                            }} />
                         </Form.Group>
-                        <Button variant="primary" type="submit">
-                            Submit
+                        <Button variant="primary" onClick={handleLogin}>
+                            Login
                         </Button>
                     </Form>
                 </Col>
@@ -28,5 +49,5 @@ function Login() {
         </Container>
     );
   }
- 
-  export default Login;
+  
+  export default LoginPage;

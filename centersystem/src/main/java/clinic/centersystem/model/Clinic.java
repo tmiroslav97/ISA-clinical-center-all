@@ -27,8 +27,11 @@ public class Clinic {
     @Column(name = DbColumnConstants.DESCRIPTION, unique = false, nullable = false)
     private String description;
 
-    @Column(name = DbColumnConstants.RATING, unique = false, nullable = false)
-    private Float rating;
+    @Column(name = "sumRating", unique = false, nullable = false)
+    private Float sumRating;
+
+    @Column(name = "cntRating", unique = false, nullable = false)
+    private Float cntRating;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private BusinessReport busReport;

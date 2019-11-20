@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Setter
 @Getter
@@ -30,6 +28,25 @@ public class RegistrationRequirement {
 
     @Column(name = DbColumnConstants.PASSWORD, nullable = false)
     private String password;
+
+    @Column(name = "password2", nullable = false)
+
+    private String password2;
+
+    @Column(name = "address", nullable = false)
+    private String address;
+
+    @Column(name = "country", nullable = false)
+    private String country;
+
+    @Column(name = "city", nullable = false)
+    private String city;
+
+    @Column(name = "phoneNum", nullable = false)
+    private String phoneNum;
+
+    @Column(name = "unoip", nullable = false)
+    private String unoip;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private ClinicCenter clinicCenter;
