@@ -5,7 +5,11 @@ function UpdateProfile(){
     return(
         <Container>
             <Row>
+<<<<<<< HEAD
                 <Col md={{ span:6, offset: 2 }} xs={12}>
+=======
+                <Col md={{ span:4, offset:1 }} xs={12}>
+>>>>>>> feature-homepage-reg-log
                 <Form >
                         <Form.Group controlId="formBasicCity">
                             <Form.Label>City</Form.Label>
@@ -35,7 +39,11 @@ function UpdateProfile(){
                 </Col>
             </Row>
         </Container>
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> feature-homepage-reg-log
     );
 }
 
