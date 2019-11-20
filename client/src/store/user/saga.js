@@ -11,12 +11,13 @@ import {
 export function* registration(){    
     const { payload } = yield take(REGISTRATION);
     const { data } = yield call(authService.registration,payload);
+     
 }
 
 export function* login(){
     const { payload } = yield take(LOGIN);
     const { data } = yield call(authService.login, payload);
-    alert('logovan');
-    // yield put(puUserData(data));
-    // yield put(putUserToken(data.token));
+    yield put(putUserData(data));
+    yield put(putUserToken(data.token));
 }
+

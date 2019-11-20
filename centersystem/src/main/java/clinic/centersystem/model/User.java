@@ -53,6 +53,7 @@ public class User implements UserDetails {
     private String phoneNum;
 
     @Column(name = DbColumnConstants.ROLE, unique = false, nullable = false)
+    @Enumerated(EnumType.STRING)
     private RoleEnum role;
 
     @Column(name = DbColumnConstants.FIRSTLOG, unique = false, nullable = false)
@@ -84,24 +85,24 @@ public class User implements UserDetails {
     @JsonIgnore
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @JsonIgnore
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @JsonIgnore
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return enabled;
     }
 
 }

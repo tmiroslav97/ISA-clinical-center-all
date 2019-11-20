@@ -42,7 +42,7 @@ public class DbColumnConstants {
     public static final String FIRSTLOG = "first_log";
     public static final String ENABLED = "enabled";
     public static final String LASTPASSWORDRESETDATE = "lastPasswordResetDate";
-    public static final String USERAUTHORITY = "authorities";
+    public static final String USERAUTHORITY = "user_authority";
     public static final String CALENDAR = "calendar";
 
 

@@ -7,11 +7,22 @@ const FINALPOINTS = {
 };
 
 class AuthSecurityService extends HttpBaseClient{
-    login = async credentials =>{
+    login = async credentials => { 
         const { data } = await this.getApiClient().post(
             FINALPOINTS.LOGIN,
             credentials
         );
+
+        if(data.role === 'ROLE_PATIENT'){
+            history.push('/pat');
+        }else if(data.role === 'ROLE_CCADMIN'){
+            history.push('/adm');
+        }else if(data.role === 'ROLE_DOCTOR'){
+            history.push('/doc');
+        }else{
+            alert('Nije odobren pristup sistemu!');
+        }
+        
 
         localStorage.setItem('token', data.token);
         localStorage.setItem('email', data.email);
@@ -21,7 +32,7 @@ class AuthSecurityService extends HttpBaseClient{
         this.AuthenticatorAssertionResponse({
             Authorization: `Bearer ${data.token}`
         });
-
+        
         // treba razraditi logiku ko se loguje, dali treba da mjenja password 
         // ili ne if (dat.role === 'ROLE_ADMIN')...
         // da se redirektuje na svoju stranicu u zavisnosti od role
@@ -29,9 +40,14 @@ class AuthSecurityService extends HttpBaseClient{
         return { data }
     };
 
-    registration = userData => {
-        console.log(userData);
-        return this.getApiClient().post(FINALPOINTS.REGISTRATION,userData);
+    registration = async userData => {
+        const { data } = await this.getApiClient().post(
+            FINALPOINTS.REGISTRATION,
+            userData
+        );
+        alert(data);       
+        history.push('/');
+        return { data }
     };
 }
 

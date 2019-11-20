@@ -1,7 +1,10 @@
-import React from 'react';
-import { Navbar, Nav, } from 'react-bootstrap'
+import React, { useState, useEffect } from 'react';
+import { Navbar, Nav, } from 'react-bootstrap';
+import {userDataSelector} from '../store/user/selectors';
+import {useSelector} from 'react-redux';
 
-function NavBar() {
+export default function NavBar() {
+    const user = useSelector(userDataSelector);
     return (
         <Navbar bg="light" expand="lg">
             <Navbar.Brand href="/">Clinic Center</Navbar.Brand>
@@ -9,19 +12,21 @@ function NavBar() {
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
                     <Nav.Link href="/">Home</Nav.Link>
-                    <Nav.Link href="/doc">Doctors Profile</Nav.Link>
-                    <Nav.Link href="/prob">Proba</Nav.Link>
-                    <Nav.Link href="/adm">Clinic Center Admin</Nav.Link>
-                    <Nav.Link href="/pat">Patients Profile</Nav.Link>
                 </Nav>
+                { user.role === '' &&(
                 <Nav className="ml-auto">
                     <Nav.Link href="/login">Login</Nav.Link>
                     <Nav.Link href="/signup">Sign Up</Nav.Link>
                 </Nav>
+                )}
+                { user.role !== '' &&(
+                <Nav className="ml-auto">
+                    <Nav.Link href="">Sing out</Nav.Link>
+                </Nav>
+                )}
             </Navbar.Collapse>
         </Navbar>
 
     );
   }
  
-  export default NavBar;

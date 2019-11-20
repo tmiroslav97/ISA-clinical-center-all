@@ -2,7 +2,7 @@ import React from 'react';
  
 function Footer(){
     return(
-        <footer className="footer">
+        <footer className="fixed-bottom">
 		<nav className="navbar navbar-expand-sm bg-light navbar-light">
 		  <div className="container">
 				<div className="navbar-text pull-left">

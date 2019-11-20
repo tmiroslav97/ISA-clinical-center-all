@@ -6,7 +6,7 @@ import {
 import * as computationFunctions from './computation-functions';
 
 const initialState = {
-    user:{
+    data:{
         id: window.localStorage.getItem('userID'),
         firstName: '',
         lastName: '',

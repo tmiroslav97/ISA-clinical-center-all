@@ -1,10 +1,9 @@
 package clinic.centersystem.controller;
 
 import clinic.centersystem.authentication.JwtAuthenticationRequest;
-import clinic.centersystem.exception.ResourceConflictException;
+import clinic.centersystem.dto.response.LoginUserResponse;
 import clinic.centersystem.model.RegistrationRequirement;
 import clinic.centersystem.model.User;
-import clinic.centersystem.model.UserTokenState;
 import clinic.centersystem.security.TokenUtils;
 import clinic.centersystem.service.UserService;
 import clinic.centersystem.service.impl.CustomUserDetailsService;
@@ -25,7 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletResponse;
-import java.awt.*;
 import java.io.IOException;
 
 @RestController
@@ -48,36 +46,30 @@ public class AuthenticationController {
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest,
                                                        HttpServletResponse response) throws AuthenticationException, IOException {
 
-        System.out.println("login!");
         final Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(),
                         authenticationRequest.getPassword()));
 
-        // Ubaci username + password u kontext
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        // Kreiraj token
         User user = (User) authentication.getPrincipal();
-        String jwt = tokenUtils.generateToken(user.getUsername());
-        int expiresIn = tokenUtils.getExpiredIn();
+        String jwt = tokenUtils.generateToken(user.getEmail());
 
-        // Vrati token kao odgovor na uspesno autentifikaciju
-        UserTokenState token = new UserTokenState(jwt, expiresIn);
-        return ResponseEntity.ok(token);
+        LoginUserResponse loginUserResponse = LoginUserResponse.builder().city(user.getCity())                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      .userID(user.getId()).email(user.getEmail()).token(jwt).firstName(user.getFirstName()).lastName(user.getLastName()).role(user.getRole().name()).country(user.getCountry()).phoneNumber(user.getPhoneNum()).isNotFirstLogin(user.isFirstLog()).build();
+        return new ResponseEntity<>(loginUserResponse, HttpStatus.CREATED);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/registration")
     public ResponseEntity<?> addUser(@RequestBody RegistrationRequirement userRequest, UriComponentsBuilder ucBuilder) {
         User existUser = this.userService.findByUsername(userRequest.getEmail());
         if (existUser != null) {
-            throw new ResourceConflictException(userRequest.getId(), "Email already exists");
+            return new ResponseEntity<>("Korisnik je vec registrovan!", HttpStatus.CREATED);
         }
-        System.out.println("desilo se!");
 
         User user = this.userService.save(userRequest);
         HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/user/{userId}").buildAndExpand(user.getId()).toUri());
-        return new ResponseEntity<User>(user, HttpStatus.CREATED);
+        headers.setLocation(ucBuilder.path("/").buildAndExpand(user.getId()).toUri());
+        return new ResponseEntity<>("Uspjesno ste se registrovali sacekajte email za potvrdu!", HttpStatus.CREATED);
     }
 
 }

@@ -5,13 +5,13 @@ import { loginUser } from '../store/user/actions';
 
 const LoginPage = () => {
     const dispatch = useDispatch();
-    const [email, setEmail] = useState();
+    const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     
     const handleLogin = () => {
         dispatch(
             loginUser({
-                email,
+                username,
                 password
             })
         );
@@ -25,8 +25,8 @@ const LoginPage = () => {
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
                             <Form.Control type="email" placeholder="Enter email" 
-                                onChange={( currentTarget ) => {
-                                    setEmail(currentTarget.value);
+                                onChange={( { currentTarget } ) => {
+                                    setUsername(currentTarget.value);
                             }} />
                             <Form.Text className="text-muted">
                                 We'll never share your email with anyone else.
@@ -36,7 +36,7 @@ const LoginPage = () => {
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" placeholder="Password" 
-                                onChange={( currentTarget ) => {
+                                onChange={( { currentTarget } ) => {
                                     setPassword(currentTarget.value);
                             }} />
                         </Form.Group>

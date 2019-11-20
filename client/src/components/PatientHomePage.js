@@ -8,17 +8,17 @@ import Profile from './Profile';
 
 function PatientHomePage(){
     return(
-        <Tabs id="left-tabs-example" defaultActiveKey="clinics">
-            <Tab eventKey="clinics" title="Clinics">
+        <Tabs id="left-tabs-example" defaultActiveKey="first">
+            <Tab eventKey="first" title="Clinics">
                 <Clinics/>
             </Tab>
-            <Tab eventKey="history" title="History">
+            <Tab eventKey="second" title="History">
                 <History/>
             </Tab>
-            <Tab eventKey="medicalrecord" title="Medical Record">
+            <Tab eventKey="third" title="Medical Record">
                 <MedicalRecord/>
             </Tab>
-            <Tab eventKey="profile" title="Profile">
+            <Tab eventKey="fourth" title="Profile">
                 <Profile/>
             </Tab>
                     
