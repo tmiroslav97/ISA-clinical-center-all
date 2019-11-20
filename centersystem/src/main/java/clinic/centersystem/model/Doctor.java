@@ -2,6 +2,7 @@ package clinic.centersystem.model;
 
 
 import clinic.centersystem.common.db.DbColumnConstants;
+import clinic.centersystem.common.db.DbTableConstants;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,17 +12,17 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = DbColumnConstants.DOCTOR)
+@Table(name = DbTableConstants.DOCTOR)
 public class Doctor extends Personnel {
 
 
-    @Column(name = "sumRating", unique = false, nullable = false)
+    @Column(name = DbColumnConstants.SUMRATING, unique = false, nullable = false)
     private Float sumRating;
 
-    @Column(name = "cntRating", unique = false, nullable = false)
+    @Column(name = DbColumnConstants.CNTRATING, unique = false, nullable = false)
     private Integer cntRating;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<AppRequirement> appReqs;
 
     public Doctor() {

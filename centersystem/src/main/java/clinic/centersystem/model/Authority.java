@@ -1,21 +1,23 @@
 package clinic.centersystem.model;
 
 
+import clinic.centersystem.common.db.DbColumnConstants;
+import clinic.centersystem.common.db.DbTableConstants;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "AUTHORITY")
+@Table(name = DbTableConstants.AUTHORITY)
 public class Authority implements GrantedAuthority {
 
     @Id
-    @Column(name = "id")
+    @Column(name = DbColumnConstants.ID)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(name = "name")
+    @Column(name = DbColumnConstants.NAME)
     String name;
 
     @Override

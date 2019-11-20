@@ -2,6 +2,7 @@ package clinic.centersystem.model;
 
 
 import clinic.centersystem.common.db.DbColumnConstants;
+import clinic.centersystem.common.db.DbTableConstants;
 import clinic.centersystem.model.enumeration.RoleEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
@@ -18,7 +19,7 @@ import java.util.List;
 @Setter
 @Getter
 @Entity
-@Table(name = DbColumnConstants.USER)
+@Table(name = DbTableConstants.USER)
 @Inheritance(strategy = JOINED)
 public class User implements UserDetails {
 
@@ -39,35 +40,35 @@ public class User implements UserDetails {
     @Column(name = DbColumnConstants.EMAIL, unique = true, nullable = false)
     private String email;
 
-    @Column(name = "address", unique = false, nullable = false)
+    @Column(name = DbColumnConstants.ADDRESS, unique = false, nullable = false)
     private String address;
 
-    @Column(name = "country", unique = false, nullable = false)
+    @Column(name = DbColumnConstants.COUNTRY, unique = false, nullable = false)
     private String country;
 
-    @Column(name = "city", unique = false, nullable = false)
+    @Column(name = DbColumnConstants.CITY, unique = false, nullable = false)
     private String city;
 
-    @Column(name = "phoneNum", unique = false, nullable = false)
+    @Column(name = DbColumnConstants.PHONENUM, unique = false, nullable = false)
     private String phoneNum;
 
     @Column(name = DbColumnConstants.ROLE, unique = false, nullable = false)
     private RoleEnum role;
 
-    @Column(name = "firstLog", unique = false, nullable = false)
+    @Column(name = DbColumnConstants.FIRSTLOG, unique = false, nullable = false)
     private boolean isFirstLog;
 
-    @Column(name = "unoip", unique = false, nullable = false)
+    @Column(name = DbColumnConstants.UNOIP, unique = false, nullable = false)
     private String unoip;
 
-    @Column(name = "enabled", unique = false, nullable = false)
+    @Column(name = DbColumnConstants.ENABLED, unique = false, nullable = false)
     private boolean enabled;
 
-    @Column(name = "last_password_reset_date")
+    @Column(name = DbColumnConstants.LASTPASSWORDRESETDATE)
     private Timestamp lastPasswordResetDate;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_authority",
+    @JoinTable(name = DbColumnConstants.USERAUTHORITY,
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
     private List<Authority> authorities;

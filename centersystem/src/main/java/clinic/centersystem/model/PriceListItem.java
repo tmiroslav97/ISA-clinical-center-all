@@ -1,6 +1,7 @@
 package clinic.centersystem.model;
 
 import clinic.centersystem.common.db.DbColumnConstants;
+import clinic.centersystem.common.db.DbTableConstants;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +12,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = DbColumnConstants.PRICELISTITEM)
+@Table(name = DbTableConstants.PRICELISTITEM)
 public class PriceListItem {
 
     @Id
@@ -24,7 +25,7 @@ public class PriceListItem {
     @Column(name = DbColumnConstants.PRICE, nullable = false)
     private Float price;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private PriceList priceList;
 
     public PriceListItem() {

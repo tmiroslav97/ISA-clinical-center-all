@@ -2,6 +2,7 @@ package clinic.centersystem.model;
 
 
 import clinic.centersystem.common.db.DbColumnConstants;
+import clinic.centersystem.common.db.DbTableConstants;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Entity
-@Table(name = DbColumnConstants.REGISTRATIONREQUIREMENT)
+@Table(name = DbTableConstants.REGISTRATIONREQUIREMENT)
 public class RegistrationRequirement {
 
     @Id
@@ -29,26 +30,26 @@ public class RegistrationRequirement {
     @Column(name = DbColumnConstants.PASSWORD, nullable = false)
     private String password;
 
-    @Column(name = "password2", nullable = false)
+    @Column(name = DbColumnConstants.PASSWORD2, nullable = false)
 
     private String password2;
 
-    @Column(name = "address", nullable = false)
+    @Column(name = DbColumnConstants.ADDRESS, nullable = false)
     private String address;
 
-    @Column(name = "country", nullable = false)
+    @Column(name = DbColumnConstants.COUNTRY, nullable = false)
     private String country;
 
-    @Column(name = "city", nullable = false)
+    @Column(name = DbColumnConstants.CITY, nullable = false)
     private String city;
 
-    @Column(name = "phoneNum", nullable = false)
+    @Column(name = DbColumnConstants.PHONENUM, nullable = false)
     private String phoneNum;
 
-    @Column(name = "unoip", nullable = false)
+    @Column(name = DbColumnConstants.UNOIP, nullable = false)
     private String unoip;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private ClinicCenter clinicCenter;
 
     public RegistrationRequirement() {

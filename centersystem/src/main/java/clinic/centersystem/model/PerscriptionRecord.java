@@ -1,6 +1,7 @@
 package clinic.centersystem.model;
 
 import clinic.centersystem.common.db.DbColumnConstants;
+import clinic.centersystem.common.db.DbTableConstants;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,17 +12,17 @@ import java.util.Set;
 @Setter
 @Getter
 @Entity
-@Table(name = DbColumnConstants.PERSCRIPTIONRECORD)
+@Table(name = DbTableConstants.PERSCRIPTIONRECORD)
 public class PerscriptionRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Medecine> medecines;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private ClinicCenter clinicCenter;
 
     public PerscriptionRecord() {
