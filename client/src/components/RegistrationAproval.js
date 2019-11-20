@@ -1,9 +1,8 @@
 import React, {useState} from 'react';
-import {Table, Form, Button, Modal, Container,Row} from 'react-bootstrap';
-//import RejectedReason from './RejectedReason';
+import {Container,Row,Table, Button, Modal, Form} from 'react-bootstrap';
 
-function HolidayAproval(){
-    const [show, setShow] = useState(false);
+function RegistrationAproval(){
+        const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -15,7 +14,7 @@ function HolidayAproval(){
           <Modal.Title>Rejected reason:</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <Form.Control type="text"/>
+            <Form.Control as="textarea" rows="4" />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={handleClose}>
@@ -25,7 +24,7 @@ function HolidayAproval(){
       </Modal>
         <Container>
             <Row>
-                <h2>Aprove or reject the request for holiday</h2>
+                <h3>Approve or refuse registration requests</h3>
             </Row>
             <Row>
                 <Table responsive>
@@ -35,24 +34,24 @@ function HolidayAproval(){
                         <th>E-mail</th>
                         <th>First Name</th>
                         <th>Last Name</th>
-                        <th>Accept</th>
-                        <th>Reject</th>
+                        <th>Approve</th>
+                        <th>Refuse</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                         <td>1</td>
                         <td>perica@gmail.com</td>
-                        <td>Pera</td>
-                        <td>Peric</td>
+                        <td>Aleksa</td>
+                        <td>Lukic</td>
                         <td>
                             <Button variant="success" type="submit">
-                                Accept
+                                Approve
                             </Button>
                         </td>
                         <td>
-                            <Button variant="danger" type="primary" onClick={handleShow} >
-                                Reject
+                            <Button variant="danger" type="primary" onClick={handleShow}  >
+                                Refuse
                             </Button>
                         </td>
                         
@@ -61,31 +60,31 @@ function HolidayAproval(){
                         <td>2</td>
                         <td>ana@yahoo.com</td>
                         <td>Ana</td>
-                        <td>Kuk</td>
+                        <td>Banana</td>
                         <td>
                             <Button variant="success" type="submit">
-                                Accept
+                                Approve
                             </Button>
                         </td>
                         <td>
                             <Button variant="danger" type="submit" onClick={handleShow} >
-                                Reject
+                                Refuse
                             </Button>
                         </td>
                         </tr>
                         <tr>
                         <td>3</td>
                         <td>top@gmail.com</td>
-                        <td>Ivo</td>
+                        <td>Marko</td>
                         <td>Tot</td>
                         <td>
                             <Button variant="success" type="submit" >
-                                Accept
+                                Approve
                             </Button>
                         </td>
                         <td>
                             <Button variant="danger" type="submit" onClick={handleShow} >
-                                Reject
+                                Refuse
                                 
                             </Button>
                             
@@ -95,12 +94,9 @@ function HolidayAproval(){
                 </Table>
                 
             </Row>
-            
         </Container>
         </>
-        
     );
 }
 
-
-export default HolidayAproval;
+export default RegistrationAproval;

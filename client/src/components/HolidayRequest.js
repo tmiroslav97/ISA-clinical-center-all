@@ -5,11 +5,12 @@ function HolidayRequest(){
     return(
         <Container>
             <Row>
-                <Col md={{ span:8, offset: 1 }} xs={12}>
-                    <h1 className="border-bottom">Holiday Request</h1>
+                <Col md={{ span:5, offset: 2 }} xs={12}>
+                    <h3 className="border-bottom">Holiday Request</h3>
                 </Col>
-            
-                <Col md={{ span:8 , offset: 1}} xs={12}>
+            </Row>
+            <Row>
+                <Col md={{ span:4 , offset: 2}} xs={12}>
                     <Form>
                         <Form.Row>
                             <Form.Group as={Col} >

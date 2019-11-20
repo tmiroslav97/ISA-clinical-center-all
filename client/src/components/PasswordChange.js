@@ -5,7 +5,7 @@ function PasswordChange(){
     return(
         <Container>
             <Row>
-                <Col md={{ span:3, offset: 3 }} xs={12}>
+                <Col md={{ span:3, offset: 1 }} xs={12}>
                     <Form>
                         <Form.Group controlId="formBasicChangePassword">
                             <Form.Label>Change your password</Form.Label>

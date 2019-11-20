@@ -6,15 +6,10 @@ function BookingDoc(){
         
         <Form>
             <Row>
-                <Col md={{ span:10, offset: 1 }} xs={12}>
-                    <h2>Booking surgery/apointment</h2>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={{ span:10, offset: 1 }} xs={12}>
+                <Col md={{ span:3, offset:2 }} xs={12}>
                     <Form>
                         <Form.Group as={Col}>
-                            <h3  className="border-top">Booking an apointment</h3>
+                            <h3  className="border-bottom">Booking an apointment</h3>
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Form.Label>Choose a date for your apointment:</Form.Label>
@@ -36,10 +31,10 @@ function BookingDoc(){
                     </Form>
                     
                 </Col>
-                <Col md={{ span:10, offset: 1 }} xs={12}>
+                <Col md={{ span:3, offset:1 }} xs={12}>
                 <Form>
                         <Form.Group as={Col}>
-                            <h3 className="border-top">Booking a surgery</h3>
+                            <h3 className="border-bottom">Booking a surgery</h3>
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Form.Label>Choose a date for your surgery:</Form.Label>

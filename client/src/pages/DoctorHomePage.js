@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tab, Nav, Col, Row } from 'react-bootstrap';
+import { Tabs, Tab } from 'react-bootstrap';
 import UserProfile from '../components/UserProfile';
 import PatientList from '../components/PatientList';
 import WorkCalendar from '../components/WorkCalendar';
@@ -9,54 +9,26 @@ import ApointmentInfo from '../components/ApointmentInfo';
 
 function DoctorHomePage(){
     return(
-        <Tab.Container id="left-tabs-doc-home" defaultActiveKey="first">
-            <Row>
-                <Col md={2} xs={12}>
-                    <Nav variant="pills" className="flex-column">
-                        <Nav.Item>
-                            <Nav.Link eventKey="first">Patients list</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link eventKey="second">Apointment info</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link eventKey="third">Calendar</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link eventKey="fourth">Make holiday request</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link eventKey="fifth">Profile</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link eventKey="sixth">Book apointment/surgery</Nav.Link>
-                        </Nav.Item>
-                    </Nav>
-                </Col>
-                <Col md={10} xs={12}>
-                    <Tab.Content>
-                        <Tab.Pane eventKey="first">
-                            <PatientList/>
-                        </Tab.Pane>
-                        <Tab.Pane eventKey="second">
-                            <ApointmentInfo/>
-                        </Tab.Pane>
-                        <Tab.Pane eventKey="third">
-                            <WorkCalendar/>
-                        </Tab.Pane>
-                        <Tab.Pane eventKey="fourth">
-                            <HolidayRequest/>
-                        </Tab.Pane>
-                        <Tab.Pane eventKey="fifth">
-                            <UserProfile/>
-                        </Tab.Pane>
-                        <Tab.Pane eventKey="sixth">
-                            <BookingDoc/> 
-                        </Tab.Pane>
-                    </Tab.Content>
-                </Col>
-            </Row>
-        </Tab.Container>
+        <Tabs id="left-tabs-doc-home" >
+            <Tab  eventKey="zero" title="Patients list">
+                <PatientList/>
+            </Tab>
+            <Tab eventKey="first" title="ApointmentInfo">
+                <ApointmentInfo/>
+            </Tab>
+            <Tab eventKey="second" title="WorkCalendar">
+                <WorkCalendar/>
+            </Tab>
+            <Tab eventKey="third" title="Holiday requests">
+                <HolidayRequest/>
+            </Tab>
+            <Tab eventKey="fourth" title=" User Profile">
+                <UserProfile/>
+            </Tab>
+            <Tab eventKey="fifth" title="Booking">
+                <BookingDoc/> 
+            </Tab>
+        </Tabs>
     );
 }
 

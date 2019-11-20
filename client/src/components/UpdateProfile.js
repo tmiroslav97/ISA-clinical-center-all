@@ -5,7 +5,7 @@ function UpdateProfile(){
     return(
         <Container>
             <Row>
-                <Col md={{ span:8, offset: 1 }} xs={12}>
+                <Col md={{ span:4, offset:1 }} xs={12}>
                 <Form >
                         <Form.Group controlId="formBasicCity">
                             <Form.Label>City</Form.Label>
