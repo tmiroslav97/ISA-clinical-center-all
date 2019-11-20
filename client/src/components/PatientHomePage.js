@@ -1,44 +1,28 @@
 import React from 'react';
-import { Row, Tab, Nav, Col } from 'react-bootstrap';
+import {Tab, Tabs} from 'react-bootstrap';
+import Clinics from './Clinics';
+import History from './History';
+import MedicalRecord from './MedicalRecord';
+import Profile from './Profile';
+
 
 function PatientHomePage(){
     return(
-        <Tab.Container id="left-tabs-example" defaultActiveKey="first">
-            <Row>
-                <Col md={2}>
-                    <Nav variante="pills" className="flex-column">
-                        <Nav.Item>
-                            <Nav.Link eventKey="first">Clinics</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link eventKey="second">History</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link eventKey="third">Medical record</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link eventKey="fourth">Profile</Nav.Link>
-                        </Nav.Item>
-                    </Nav>
-                </Col>
-                <Col md ={10}>
-                    <Tab.Content>
-                        <Tab.Pane eventKey="first">
-                            komp1
-                        </Tab.Pane>
-                        <Tab.Pane eventKey="second">
-                            komp2
-                        </Tab.Pane>
-                        <Tab.Pane eventKey="third">
-                            komp3
-                        </Tab.Pane>
-                        <Tab.Pane eventKey="fourth">
-                            komp4
-                        </Tab.Pane>
-                    </Tab.Content>
-                </Col>
-            </Row>
-        </Tab.Container>
+        <Tabs id="left-tabs-example" defaultActiveKey="clinics">
+            <Tab eventKey="clinics" title="Clinics">
+                <Clinics/>
+            </Tab>
+            <Tab eventKey="history" title="History">
+                <History/>
+            </Tab>
+            <Tab eventKey="medicalrecord" title="Medical Record">
+                <MedicalRecord/>
+            </Tab>
+            <Tab eventKey="profile" title="Profile">
+                <Profile/>
+            </Tab>
+                    
+        </Tabs>
     );
 }
  
