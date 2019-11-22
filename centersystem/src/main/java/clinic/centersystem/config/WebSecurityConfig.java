@@ -3,7 +3,7 @@ package clinic.centersystem.config;
 import clinic.centersystem.authentication.RestAuthenticationEntryPoint;
 import clinic.centersystem.authentication.TokenAuthenticationFilter;
 import clinic.centersystem.security.TokenUtils;
-import clinic.centersystem.service.impl.CustomUserDetailsService;
+import clinic.centersystem.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -51,31 +51,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                // komunikacija izmedju klijenta i servera je stateless
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 
-                // za neautorizovane zahteve posalji 401 gresku
                 .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint).and()
 
-                // svim korisnicima dopusti da pristupe putanjama /auth/**, /h2-console/** i /api/foo
                 .authorizeRequests().antMatchers("/sec/**").permitAll().antMatchers("/h2-console/**").permitAll().antMatchers("/api/foo").permitAll()
 
-                // svaki zahtev mora biti autorizovan
                 .anyRequest().authenticated().and()
 
                 .cors().and()
 
-                // presretni svaki zahtev filterom
                 .addFilterBefore(new TokenAuthenticationFilter(tokenUtils, jwtUserDetailsService),
                         BasicAuthenticationFilter.class);
 
         http.csrf().disable();
     }
 
-    // Generalna bezbednost aplikacije
     @Override
     public void configure(WebSecurity web) {
-        // TokenAuthenticationFilter ce ignorisati sve ispod navedene putanje
         web.ignoring().antMatchers(HttpMethod.POST, "/sec/login");
         web.ignoring().antMatchers(HttpMethod.POST, "/sec/registration");
         web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html",

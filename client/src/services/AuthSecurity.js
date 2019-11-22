@@ -33,9 +33,6 @@ class AuthSecurityService extends HttpBaseClient{
             Authorization: `Bearer ${data.token}`
         });
         
-        // treba razraditi logiku ko se loguje, dali treba da mjenja password 
-        // ili ne if (dat.role === 'ROLE_ADMIN')...
-        // da se redirektuje na svoju stranicu u zavisnosti od role
         
         return { data }
     };

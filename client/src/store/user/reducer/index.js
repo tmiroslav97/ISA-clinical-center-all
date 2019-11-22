@@ -16,7 +16,8 @@ const initialState = {
         city: '',
         phoneNum: '',
         role: window.localStorage.getItem('role')
-    }
+    },
+    token: window.localStorage.getItem('token')
 };
 
 const userReducer = (state = initialState, { type, payload })=>{

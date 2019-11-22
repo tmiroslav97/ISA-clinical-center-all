@@ -13,17 +13,13 @@ export default function NavBar() {
                 <Nav className="mr-auto">
                     <Nav.Link href="/">Home</Nav.Link>
                 </Nav>
-                { user.role === '' &&(
+                
                 <Nav className="ml-auto">
                     <Nav.Link href="/login">Login</Nav.Link>
                     <Nav.Link href="/signup">Sign Up</Nav.Link>
                 </Nav>
-                )}
-                { user.role !== '' &&(
-                <Nav className="ml-auto">
-                    <Nav.Link href="">Sing out</Nav.Link>
-                </Nav>
-                )}
+                
+                
             </Navbar.Collapse>
         </Navbar>
 

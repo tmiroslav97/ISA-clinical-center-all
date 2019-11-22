@@ -1,4 +1,4 @@
-package clinic.centersystem.service;
+package clinic.centersystem.service.intf;
 
 import clinic.centersystem.model.Authority;
 

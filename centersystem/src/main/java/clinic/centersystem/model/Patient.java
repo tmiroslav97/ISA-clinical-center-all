@@ -2,18 +2,56 @@ package clinic.centersystem.model;
 
 import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
-import lombok.Getter;
-import lombok.Setter;
+import clinic.centersystem.model.enumeration.RoleEnum;
+import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Setter
 @Getter
 @Entity
+@NoArgsConstructor
 @Table(name = DbTableConstants.PATIENT)
 public class Patient extends User {
+
+    @Builder(builderMethodName = "patientBuilder")
+    public Patient(Long id, String email, String password, String firstName, String lastName,
+                   boolean enabled, RoleEnum role, boolean isFirstLog, Timestamp lastPasswordResetDate,
+                   List<Authority> authorities, String address, String country, String city, String phoneNum, String unoip,
+                   Set<Clinic> clinics, MedicalRecord medicalRecord, Set<Appointment> appointments, Set<AppRequirement> appRequirements,
+                   Set<Surgery> surgeries, boolean isActivated) {
+        super(id, email, password, firstName, lastName, enabled, role, isFirstLog, lastPasswordResetDate, authorities);
+        this.address = address;
+        this.country = country;
+        this.city = city;
+        this.phoneNum = phoneNum;
+        this.unoip = unoip;
+        this.clinics = clinics;
+        this.medicalRecord = medicalRecord;
+        this.appointments = appointments;
+        this.appRequirements = appRequirements;
+        this.surgeries = surgeries;
+        this.isActivated = isActivated;
+    }
+
+    @Column(name = DbColumnConstants.ADDRESS, nullable = false)
+    private String address;
+
+    @Column(name = DbColumnConstants.COUNTRY, nullable = false)
+    private String country;
+
+    @Column(name = DbColumnConstants.CITY, nullable = false)
+    private String city;
+
+    @Column(name = DbColumnConstants.PHONENUM, nullable = false)
+    private String phoneNum;
+
+    @Column(name = DbColumnConstants.UNOIP, nullable = false)
+    private String unoip;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Clinic> clinics;
@@ -25,20 +63,12 @@ public class Patient extends User {
     private Set<Appointment> appointments;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<AppRequirement> reqApp;
+    private Set<AppRequirement> appRequirements;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Surgery> surgeries;
 
-    @Column(name = DbColumnConstants.ISACTIVATED, unique = false, nullable = true)
+    @Column(name = DbColumnConstants.ISACTIVATED, nullable = false)
     private boolean isActivated;
-
-
-    public Patient() {
-        // TODO: implement
-
-
-    }
-
 
 }

@@ -3,19 +3,23 @@ package clinic.centersystem.model;
 
 import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
+@Builder
 @Setter
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = DbTableConstants.REGISTRATIONREQUIREMENT)
 public class RegistrationRequirement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = DbColumnConstants.ID, unique = true, nullable = false)
+
     private Long id;
 
     @Column(name = DbColumnConstants.FIRSTNAME, nullable = false)
@@ -52,7 +56,5 @@ public class RegistrationRequirement {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private ClinicCenter clinicCenter;
 
-    public RegistrationRequirement() {
-    }
 
 }

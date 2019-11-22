@@ -1,4 +1,4 @@
-package clinic.centersystem.service.impl;
+package clinic.centersystem.service;
 
 import clinic.centersystem.model.User;
 import clinic.centersystem.repository.UserRepository;

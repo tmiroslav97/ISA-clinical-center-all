@@ -1,6 +1,6 @@
-package clinic.centersystem.service;
+package clinic.centersystem.service.intf;
 
-import clinic.centersystem.model.RegistrationRequirement;
+import clinic.centersystem.dto.request.RegistrationRequirementDTO;
 import clinic.centersystem.model.User;
 
 import java.util.List;
@@ -12,5 +12,5 @@ public interface UserService {
 
     List<User> findAll();
 
-    User save(RegistrationRequirement registrationRequirement);
+    User save();
 }

@@ -1,9 +1,9 @@
-package clinic.centersystem.service.impl;
+package clinic.centersystem.service;
 
 import clinic.centersystem.model.Authority;
 import clinic.centersystem.repository.AuthorityRepository;
-import clinic.centersystem.service.AuthorityService;
 
+import clinic.centersystem.service.intf.AuthorityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

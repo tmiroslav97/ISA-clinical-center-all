@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+
 @Data
 @AllArgsConstructor
 @Builder
@@ -17,16 +18,5 @@ public class LoginUserResponse {
     private boolean isNotFirstLogin;
 
     private String role;
-
-    private String firstName;
-
-    private String lastName;
-
-    private String phoneNumber;
-
-    private String country;
-
-    private String city;
-
 
 }
