@@ -8,6 +8,7 @@ const FINALPOINTS = {
 
 class AuthSecurityService extends HttpBaseClient{
     login = async credentials => { 
+        try{
         const { data } = await this.getApiClient().post(
             FINALPOINTS.LOGIN,
             credentials
@@ -16,35 +17,43 @@ class AuthSecurityService extends HttpBaseClient{
         if(data.role === 'ROLE_PATIENT'){
             history.push('/pat');
         }else if(data.role === 'ROLE_CCADMIN'){
-            history.push('/adm');
+            history.push('/ccadmin');
         }else if(data.role === 'ROLE_DOCTOR'){
             history.push('/doc');
         }else{
             alert('Nije odobren pristup sistemu!');
         }
         
-
         localStorage.setItem('token', data.token);
         localStorage.setItem('email', data.email);
         localStorage.setItem('role', data.role);
         localStorage.setItem('userID', data.userID);
 
-        this.AuthenticatorAssertionResponse({
+        /* this.AuthenticatorAssertionResponse({
             Authorization: `Bearer ${data.token}`
-        });
-        
-        
-        return { data }
+        }); */
+
+        return { data };
+
+        }catch(error){
+            console.log(error.response.data);
+        }
     };
 
     registration = async userData => {
-        const { data } = await this.getApiClient().post(
-            FINALPOINTS.REGISTRATION,
-            userData
-        );
-        alert(data);       
-        history.push('/');
-        return { data }
+        try{
+            const { data } = await this.getApiClient().post(
+                FINALPOINTS.REGISTRATION,
+                userData
+            );
+            console.log(data);   
+
+            history.push('/');
+
+            return { data }
+        }catch(error){
+            console.log(error.response.data);
+        }
     };
 }
 

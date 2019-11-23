@@ -17,7 +17,7 @@ const AppRouter = () =>{
             <Route exact path="/signup" component={RegPage}/>
             <Route exact path="/doc" component={DoctorHomePage}/>
             <Route exact path="/prob" component={HolidayAproval}/>
-            <Route exact path="/adm" component={ClinicCenterAdminProfile}/>
+            <Route exact path="/ccadmin" component={ClinicCenterAdminProfile}/>
             <Route exact path="/signup" component={RegPage}/>
 
             <Route exact path="/page-not-found" component={() => <h1>Page not found!</h1>}/>

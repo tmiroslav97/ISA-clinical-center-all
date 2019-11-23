@@ -1,4 +1,4 @@
-import { take, put, call } from "redux-saga/effects";
+import { take, put, call } from 'redux-saga/effects';
 
 import {LOGIN, REGISTRATION} from './constants';
 import authService from '../../services/AuthSecurity';
@@ -16,6 +16,7 @@ export function* registration(){
 
 export function* login(){
     const { payload } = yield take(LOGIN);
+    console.log(payload);
     const { data } = yield call(authService.login, payload);
     yield put(putUserData(data));
     yield put(putUserToken(data.token));

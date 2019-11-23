@@ -1,6 +1,6 @@
 import {
-    PUT_USER_DATA,
-    PUT_USER_TOKEN
+    PUT_CCADMIN_DATA,
+    PUT_CCADMIN_TOKEN
 } from '../constants';
 
 import * as computationFunctions from './computation-functions';
@@ -11,12 +11,13 @@ const initialState = {
         firstName: '',
         lastName: '',
         email: '',
-        role: window.localStorage.getItem('role')
+        role: window.localStorage.getItem('role'),
+        predefined: false
     },
     token: window.localStorage.getItem('token')
 };
 
-const userReducer = (state = initialState, { type, payload })=>{
+const ccAdminReducer = (state = initialState, { type, payload })=>{
     if(actionHandler.hasOwnProperty(type)){
         return actionHandler[type](state,payload);
     }
@@ -24,8 +25,8 @@ const userReducer = (state = initialState, { type, payload })=>{
 };
 
 const actionHandler = {
-    [PUT_USER_DATA]: computationFunctions.putUserData,
-    [PUT_USER_TOKEN]: computationFunctions.putUserToken,
+    [PUT_CCADMIN_DATA]: computationFunctions.putCCAdminData,
+    [PUT_CCADMIN_TOKEN]: computationFunctions.putCCAdminToken,
   };
 
-export default userReducer;
+export default ccAdminReducer;

@@ -40,4 +40,7 @@ VALUES (3, 3);
 INSERT INTO patient (address, city, country, is_activated, phone_num, unoip, id, medical_record_id)
 VALUES ('Ilije Bircanina', 'Vlasenica', 'Bosna i Hercegovina', true, '065987544', '1234567890', 2, 1);
 
+INSERT INTO clinic_center_admin (predefined, id)
+VALUES (true, 1);
+
 

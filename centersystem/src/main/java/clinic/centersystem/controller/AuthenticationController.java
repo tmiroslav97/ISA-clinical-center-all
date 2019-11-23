@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import sun.rmi.runtime.Log;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,7 +27,7 @@ public class AuthenticationController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<LoginUserResponse> createAuthenticationToken(HttpServletRequest servletRequest, @RequestBody JwtAuthenticationRequest authenticationRequest) {
-        return ResponseEntity.ok(authenticationService.login(servletRequest, authenticationRequest));
+        return new ResponseEntity<>(authenticationService.login(servletRequest, authenticationRequest), HttpStatus.CREATED);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/registration")

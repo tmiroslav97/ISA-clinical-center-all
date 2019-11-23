@@ -1,11 +1,12 @@
 import { all, spawn, call, put } from 'redux-saga/effects';
 import flatten from 'lodash/flatten';
 import * as userSaga from './user/saga';
+import * as ccAdminSaga from './clinic_center_admin/saga';
 
 export default function* rootSaga() {
     let sagas = flatten(
         //za sad prazne uglaste tu stavljamo sve "sage"
-        [ userSaga ].map(saga => Object.keys(saga).map(sagaFunctionName => saga[sagaFunctionName]))
+        [ userSaga,ccAdminSaga ].map(saga => Object.keys(saga).map(sagaFunctionName => saga[sagaFunctionName]))
     );
   
     yield all(
