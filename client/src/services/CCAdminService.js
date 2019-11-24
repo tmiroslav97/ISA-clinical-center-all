@@ -46,7 +46,6 @@ class CCAdminService extends HttpClient {
 
     rejectRegReq = async payload => {
         try {
-            console.log(payload.message);
             const { data } = await this.getApiClient().post(
                 format(FINALPOINTS.REJECT_REG_REQ, payload.reqId,payload.message)            );
 

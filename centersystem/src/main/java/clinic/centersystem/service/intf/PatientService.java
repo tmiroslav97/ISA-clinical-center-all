@@ -3,6 +3,7 @@ package clinic.centersystem.service.intf;
 
 import clinic.centersystem.dto.request.RegistrationRequirementDTO;
 import clinic.centersystem.model.Patient;
+import clinic.centersystem.model.RegistrationRequirement;
 
 import java.util.List;
 
@@ -11,5 +12,5 @@ public interface PatientService {
 
     List<Patient> findAll();
 
-    Patient save(RegistrationRequirementDTO registrationRequirementDTO);
+    Patient save(RegistrationRequirement registrationRequirement);
 }

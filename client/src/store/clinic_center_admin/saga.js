@@ -29,11 +29,9 @@ export function* fetchRegReqsData() {
 export function* approveRegReq() {
     const { payload } = yield take(APPROVE_REG_REQ);
     const { data } = yield call(CCAdminService.approveRegReq, payload);
-    console.log(data);
 }
 
 export function* rejectRegReq(){
     const { payload } = yield take(REJECT_REG_REQ);
     const { data } = yield call(CCAdminService.rejectRegReq, payload);
-    console.log(data);
 }
