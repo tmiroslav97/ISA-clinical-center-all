@@ -54,55 +54,55 @@ function RegistrationAproval() {
                     />
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" onClick={() => handleReject()}>
+                    <Button variant="primary" onClick={() => {handleReject(); handleClose()}}>
                         Send
                 </Button>
                 </Modal.Footer>
             </Modal>
-            <Container>
-                <Row>
-                    <h3>Approve or refuse registration requests</h3>
-                </Row>
-                <Row>
-                    <Table responsive>
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>E-mail</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Approve</th>
-                                <th>Refuse</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                regReqs.map((req, index) => {
-                                    return (
-                                        <tr key={req.id}>
-                                            <td>{index + 1}</td>
-                                            <td>{req.email}</td>
-                                            <td>{req.firstName}</td>
-                                            <td>{req.lastName}</td>
-                                            <td>
-                                                <Button variant="success" onClick={() => handleApprove(req.id)}>
-                                                    Approve
+        <Container>
+            <Row>
+                <h3>Approve or refuse registration requests</h3>
+            </Row>
+            <Row>
+                <Table responsive>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>E-mail</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Approve</th>
+                            <th>Refuse</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            regReqs.map((req, index) => {
+                                return (
+                                    <tr key={req.id}>
+                                        <td>{index + 1}</td>
+                                        <td>{req.email}</td>
+                                        <td>{req.firstName}</td>
+                                        <td>{req.lastName}</td>
+                                        <td>
+                                            <Button variant="success" onClick={() => handleApprove(req.id)}>
+                                                Approve
                                                 </Button>
-                                            </td>
-                                            <td>
-                                                <Button variant="danger" type="primary" onClick={() => handleShow(req.id)}>
-                                                    Refuse
+                                        </td>
+                                        <td>
+                                            <Button variant="danger" type="primary" onClick={() => handleShow(req.id)}>
+                                                Refuse
                                                 </Button>
-                                            </td>
-                                        </tr>
-                                    );
-                                })
-                            }
-                        </tbody>
-                    </Table>
+                                        </td>
+                                    </tr>
+                                );
+                            })
+                        }
+                    </tbody>
+                </Table>
 
-                </Row>
-            </Container>
+            </Row>
+        </Container>
         </div >
     );
 }
