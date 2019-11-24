@@ -2,6 +2,7 @@ package clinic.centersystem.controller;
 
 
 import clinic.centersystem.dto.response.ClinicCenterAdminResponse;
+import clinic.centersystem.dto.response.RegistrationRequirementResponse;
 import clinic.centersystem.model.ClinicCenterAdmin;
 import clinic.centersystem.model.RegistrationRequirement;
 import clinic.centersystem.service.ClinicCenterAdministratorService;
@@ -37,8 +38,7 @@ public class ClinicCenterAdminController {
 
     @RequestMapping(method = GET, value = "/regreqs")
     @PreAuthorize("hasRole('CCADMIN')")
-    public ResponseEntity<List<RegistrationRequirement>> registrationReqs() {
-        System.out.print("usao contr");
+    public ResponseEntity<List<RegistrationRequirementResponse>> registrationReqs() {
         return new ResponseEntity<>(this.clinicCenterAdministratorService.registrationRequirementList(), HttpStatus.OK);
     }
 }

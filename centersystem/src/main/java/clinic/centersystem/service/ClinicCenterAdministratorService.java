@@ -1,7 +1,9 @@
 package clinic.centersystem.service;
 
 import clinic.centersystem.converter.ClinicCenterAdminConverter;
+import clinic.centersystem.converter.RegistrationRequirementConverter;
 import clinic.centersystem.dto.response.ClinicCenterAdminResponse;
+import clinic.centersystem.dto.response.RegistrationRequirementResponse;
 import clinic.centersystem.model.ClinicCenter;
 import clinic.centersystem.model.ClinicCenterAdmin;
 import clinic.centersystem.model.RegistrationRequirement;
@@ -14,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -26,6 +29,7 @@ public class ClinicCenterAdministratorService {
     @Autowired
     private RegistrationRequirementService registrationRequirementService;
 
+
     private static final Logger logger = LoggerFactory.getLogger(ClinicCenterAdministratorService.class);
 
     public ClinicCenterAdminResponse clinicCenterAdmin(Long id) {
@@ -33,9 +37,13 @@ public class ClinicCenterAdministratorService {
         return ClinicCenterAdminConverter.toCreateClinicCenterAdmin(clinicCenterAdmin);
     }
 
-    public List<RegistrationRequirement> registrationRequirementList() {
-        System.out.println("usao");
-        return registrationRequirementService.findAll();
+    public List<RegistrationRequirementResponse> registrationRequirementList() {
+        List<RegistrationRequirement> reqs = registrationRequirementService.findAll();
+        List<RegistrationRequirementResponse> registrationRequirementResponses = new ArrayList<>();
+        for (RegistrationRequirement req: reqs) {
+            registrationRequirementResponses.add(RegistrationRequirementConverter.toCreateRegistrationRequirementResponse(req));
+        }
+        return registrationRequirementResponses;
     }
 
 }
