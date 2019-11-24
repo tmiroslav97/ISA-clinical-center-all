@@ -8,11 +8,19 @@ import clinic.centersystem.service.intf.RegistrationRequirementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RegistrationRequirementServiceImpl implements RegistrationRequirementService {
 
     @Autowired
     private RegistrationRequirementRepository registrationRequirementRepository;
+
+
+    @Override
+    public List<RegistrationRequirement> findAll() {
+        return this.registrationRequirementRepository.findAll();
+    }
 
     @Override
     public RegistrationRequirement save(RegistrationRequirementDTO registrationRequirementDTO) {
