@@ -5,9 +5,3 @@ export function putCCAdminData(state, payload) {
     };
 }
   
-export function putCCAdminToken(state, payload) {
-    return {
-        ...state,
-        token: payload
-    };
-}

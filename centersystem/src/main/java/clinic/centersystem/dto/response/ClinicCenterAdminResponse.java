@@ -4,19 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
-
+@Builder
 @Data
 @AllArgsConstructor
-@Builder
-public class LoginUserResponse {
-    private Long id;
+public class ClinicCenterAdminResponse {
+    Long id;
 
     private String email;
-
-    private String token;
 
     private boolean isNotFirstLogin;
 
     private String role;
 
+    private boolean predefined;
 }

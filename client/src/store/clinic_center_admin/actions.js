@@ -1,6 +1,6 @@
 import { 
     PUT_CCADMIN_DATA,
-    PUT_CCADMIN_TOKEN
+    FETCH_CCADMIN_DATA
 } from './constants';
 
 
@@ -9,7 +9,8 @@ export const putCCAdminData = payload => ({
     payload
 });
   
-export const putCCAdminToken = payload => ({
-    type: PUT_CCADMIN_TOKEN,
+
+export const fetchCCAdminData = payload =>({
+    type: FETCH_CCADMIN_DATA,
     payload
 });

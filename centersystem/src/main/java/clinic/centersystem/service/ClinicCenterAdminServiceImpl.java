@@ -5,9 +5,11 @@ import clinic.centersystem.model.ClinicCenterAdmin;
 import clinic.centersystem.repository.ClinicCenterAdminRepository;
 import clinic.centersystem.service.intf.ClinicCenterAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ClinicCenterAdminServiceImpl implements ClinicCenterAdminService {
 
     @Autowired
