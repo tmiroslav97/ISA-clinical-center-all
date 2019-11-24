@@ -2,7 +2,9 @@ import { take, put, call } from 'redux-saga/effects';
 
 import {
     FETCH_CCADMIN_DATA,
-    FETCH_REG_REQS_DATA
+    FETCH_REG_REQS_DATA,
+    APPROVE_REG_REQ,
+    REJECT_REG_REQ
 } from './constants';
 
 import CCAdminService from '../../services/CCAdminService';
@@ -21,6 +23,17 @@ export function* fetchCCAdminData() {
 export function* fetchRegReqsData() {
     const { payload } = yield take(FETCH_REG_REQS_DATA);
     const { data } = yield call(CCAdminService.fetchRegReqsData, payload);
-    console.log(data);
     yield put(putRegReqsData(data));
+}
+
+export function* approveRegReq() {
+    const { payload } = yield take(APPROVE_REG_REQ);
+    const { data } = yield call(CCAdminService.approveRegReq, payload);
+    console.log(data);
+}
+
+export function* rejectRegReq(){
+    const { payload } = yield take(REJECT_REG_REQ);
+    const { data } = yield call(CCAdminService.rejectRegReq, payload);
+    console.log(data);
 }

@@ -1,17 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Table, Button, Modal, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchRegReqsData } from '../../store/clinic_center_admin/actions';
+import { fetchRegReqsData, approveRegReq, rejectRegReq } from '../../store/clinic_center_admin/actions';
 import { regReqsDataSelector } from '../../store/clinic_center_admin/selectors';
 
 function RegistrationAproval() {
-    const dispatch = useDispatch();
     const [show, setShow] = useState(false);
+    const [reqId, setReqId] = useState(0);
+    const [message, setMessage] = useState('');
+    const dispatch = useDispatch();
     const regReqs = useSelector(regReqsDataSelector);
 
+    const handleApprove = (regReqId) => {
+        dispatch(
+            approveRegReq({
+                regReqId
+            })
+        );
+    };
+
+    const handleReject = () => {
+        dispatch(
+            rejectRegReq({
+                reqId,
+                message
+            })
+        );
+    };
 
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleShow = (regReqId) => {
+        setShow(true)
+        setReqId(regReqId);
+    };
 
     useEffect(() => {
         dispatch(
@@ -26,12 +47,16 @@ function RegistrationAproval() {
                     <Modal.Title>Rejected reason:</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form.Control as="textarea" rows="4" />
+                    <Form.Control as="textarea" rows="4" id="reason" name="txtReason"
+                        onChange={({ currentTarget }) => {
+                            setMessage(currentTarget.value);
+                        }}
+                    />
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" onClick={handleClose}>
+                    <Button variant="primary" onClick={() => handleReject()}>
                         Send
-          </Button>
+                </Button>
                 </Modal.Footer>
             </Modal>
             <Container>
@@ -60,12 +85,12 @@ function RegistrationAproval() {
                                             <td>{req.firstName}</td>
                                             <td>{req.lastName}</td>
                                             <td>
-                                                <Button variant="success" type="submit">
+                                                <Button variant="success" onClick={() => handleApprove(req.id)}>
                                                     Approve
                                                 </Button>
                                             </td>
                                             <td>
-                                                <Button variant="danger" type="primary" onClick={handleShow}  >
+                                                <Button variant="danger" type="primary" onClick={() => handleShow(req.id)}>
                                                     Refuse
                                                 </Button>
                                             </td>
@@ -78,7 +103,7 @@ function RegistrationAproval() {
 
                 </Row>
             </Container>
-        </div>
+        </div >
     );
 }
 

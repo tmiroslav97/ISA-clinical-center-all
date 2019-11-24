@@ -6,7 +6,6 @@ export function putCCAdminData(state, payload) {
 }
 
 export function putRegReqsData(state, payload) {
-    console.log(payload);
     return {
         ...state,
         reqs: payload

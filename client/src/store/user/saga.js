@@ -1,6 +1,9 @@
 import { take, put, call } from 'redux-saga/effects';
 
-import { LOGIN, REGISTRATION } from './constants';
+import { 
+    LOGIN, 
+    REGISTRATION,
+} from './constants';
 import authService from '../../services/AuthSecurity';
 
 import {
@@ -10,6 +13,7 @@ import {
 
 export function* registration() {
     const { payload } = yield take(REGISTRATION);
+    // eslint-disable-next-line
     const { data } = yield call(authService.registration, payload);
 }
 
@@ -19,4 +23,6 @@ export function* login() {
     yield put(putUserData(data));
     yield put(putUserToken(data.token));
 }
+
+
 

@@ -11,11 +11,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -50,10 +53,10 @@ public class ClinicCenterAdminController {
         return new ResponseEntity<>(this.clinicCenterAdministratorService.approveRegistrationRequest(reqId), HttpStatus.OK);
     }
 
-    @RequestMapping(method = POST, value = "/reject/{reqId}")
+    @RequestMapping(method = POST, value = "/reject/{reqId}/{msg}")
     @PreAuthorize("hasRole('CCADMIN')")
-    public ResponseEntity<String> rejectRegistrationRequest(@PathVariable Long reqId, @RequestBody String message) {
-        return new ResponseEntity<>(this.clinicCenterAdministratorService.rejectRegistrationRequest(reqId, message), HttpStatus.OK);
+    public ResponseEntity<String> rejectRegistrationRequest(@PathVariable Long reqId, @PathVariable String msg) {
+        return new ResponseEntity<>(this.clinicCenterAdministratorService.rejectRegistrationRequest(reqId, msg), HttpStatus.OK);
     }
 
 }

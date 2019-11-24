@@ -54,8 +54,7 @@ public class ClinicCenterAdministratorService {
 
     public String rejectRegistrationRequest(Long id, String message) {
         RegistrationRequirement req = registrationRequirementService.findById(id);
-        System.out.println(message);
-        String answer = "Patient account was activated successfully";
+        String answer = "Patient account was rejected";
         return answer;
     }
 
