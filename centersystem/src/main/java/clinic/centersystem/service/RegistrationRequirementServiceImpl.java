@@ -18,6 +18,11 @@ public class RegistrationRequirementServiceImpl implements RegistrationRequireme
 
 
     @Override
+    public RegistrationRequirement findById(Long id) {
+        return this.registrationRequirementRepository.findById(id).orElseGet(null);
+    }
+
+    @Override
     public List<RegistrationRequirement> findAll() {
         return this.registrationRequirementRepository.findAll();
     }

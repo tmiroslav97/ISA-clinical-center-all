@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface RegistrationRequirementService {
 
+    RegistrationRequirement findById(Long id);
+
     List<RegistrationRequirement> findAll();
 
     RegistrationRequirement save(RegistrationRequirementDTO registrationRequirement);

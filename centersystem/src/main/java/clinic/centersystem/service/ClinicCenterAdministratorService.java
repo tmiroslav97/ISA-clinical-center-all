@@ -40,10 +40,23 @@ public class ClinicCenterAdministratorService {
     public List<RegistrationRequirementResponse> registrationRequirementList() {
         List<RegistrationRequirement> reqs = registrationRequirementService.findAll();
         List<RegistrationRequirementResponse> registrationRequirementResponses = new ArrayList<>();
-        for (RegistrationRequirement req: reqs) {
+        for (RegistrationRequirement req : reqs) {
             registrationRequirementResponses.add(RegistrationRequirementConverter.toCreateRegistrationRequirementResponse(req));
         }
         return registrationRequirementResponses;
+    }
+
+    public String approveRegistrationRequest(Long id) {
+        RegistrationRequirement req = registrationRequirementService.findById(id);
+        String answer = "Patient account was activated successfully";
+        return answer;
+    }
+
+    public String rejectRegistrationRequest(Long id, String message) {
+        RegistrationRequirement req = registrationRequirementService.findById(id);
+        System.out.println(message);
+        String answer = "Patient account was activated successfully";
+        return answer;
     }
 
 }
