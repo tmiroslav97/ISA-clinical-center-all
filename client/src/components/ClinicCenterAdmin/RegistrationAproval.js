@@ -17,9 +17,7 @@ function RegistrationAproval() {
         dispatch(
             fetchRegReqsData({})
         );
-    });
-
-    console.log(regReqs);
+    }, []);
 
     return (
         <div>
@@ -55,9 +53,9 @@ function RegistrationAproval() {
                         <tbody>
                             {
                                 regReqs.map((req, index) => {
-                                    return(
-                                        <tr>
-                                            <td>{index}</td>
+                                    return (
+                                        <tr key={req.id}>
+                                            <td>{index + 1}</td>
                                             <td>{req.email}</td>
                                             <td>{req.firstName}</td>
                                             <td>{req.lastName}</td>

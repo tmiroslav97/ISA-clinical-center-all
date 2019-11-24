@@ -4,12 +4,13 @@ import {
     FETCH_CCADMIN_DATA,
     FETCH_REG_REQS_DATA
 } from './constants';
+
 import CCAdminService from '../../services/CCAdminService';
 
 import {
     putCCAdminData,
+    putRegReqsData
 } from './actions';
-import { putRegReqsData } from './reducer/computation-functions';
 
 export function* fetchCCAdminData() {
     const { payload } = yield take(FETCH_CCADMIN_DATA);
@@ -20,5 +21,6 @@ export function* fetchCCAdminData() {
 export function* fetchRegReqsData() {
     const { payload } = yield take(FETCH_REG_REQS_DATA);
     const { data } = yield call(CCAdminService.fetchRegReqsData, payload);
+    console.log(data);
     yield put(putRegReqsData(data));
 }
