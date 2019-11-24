@@ -1,4 +1,4 @@
-import React, { useState, Component, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Tab, Tabs } from 'react-bootstrap';
 import RegistrationAproval from './RegistrationAproval';

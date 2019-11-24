@@ -38,6 +38,7 @@ public class ClinicCenterAdminController {
     @RequestMapping(method = GET, value = "/regreqs")
     @PreAuthorize("hasRole('CCADMIN')")
     public ResponseEntity<List<RegistrationRequirement>> registrationReqs() {
+        System.out.print("usao contr");
         return new ResponseEntity<>(this.clinicCenterAdministratorService.registrationRequirementList(), HttpStatus.OK);
     }
 }

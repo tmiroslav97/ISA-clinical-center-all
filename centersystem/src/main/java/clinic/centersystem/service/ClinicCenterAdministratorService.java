@@ -34,6 +34,7 @@ public class ClinicCenterAdministratorService {
     }
 
     public List<RegistrationRequirement> registrationRequirementList() {
+        System.out.println("usao");
         return registrationRequirementService.findAll();
     }
 

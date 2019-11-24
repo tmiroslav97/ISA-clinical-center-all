@@ -31,7 +31,4 @@ public class RegistrationRequirementDTO {
     private String phoneNum;
 
     private String unoip;
-
-    private ClinicCenter clinicCenter;
-
 }
