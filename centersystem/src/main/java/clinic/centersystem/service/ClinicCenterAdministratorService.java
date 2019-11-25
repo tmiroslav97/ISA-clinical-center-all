@@ -100,6 +100,7 @@ public class ClinicCenterAdministratorService {
         if (user != null) {
             msg = "Email is already taken by another user";
         }
+        ccaRegReqDTO.setPassword(this.passwordEncoder.encode(ccaRegReqDTO.getPassword()));
         ClinicCenterAdmin newCCAdmin = this.clinicCenterAdminService.save(ccaRegReqDTO);
         msg = "Successfully added new clinic center administrator";
         return msg;

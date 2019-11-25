@@ -2,8 +2,10 @@ package clinic.centersystem.service;
 
 import clinic.centersystem.converter.PatientConverter;
 import clinic.centersystem.dto.request.RegistrationRequirementDTO;
+import clinic.centersystem.model.Authority;
 import clinic.centersystem.model.Patient;
 import clinic.centersystem.model.RegistrationRequirement;
+import clinic.centersystem.repository.AuthorityRepository;
 import clinic.centersystem.repository.PatientRepository;
 import clinic.centersystem.service.intf.AuthorityService;
 import clinic.centersystem.service.intf.PatientService;
@@ -35,7 +37,8 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public Patient save(RegistrationRequirement registrationRequirement) {
         Patient patient = PatientConverter.toCreatePatientFromRequest(registrationRequirement);
-
+        List<Authority> auths = this.authorityService.findByName("ROLE_PATIENT");
+        patient.setAuthorities(auths);
         patient = this.patientRepository.save(patient);
 
         return patient;

@@ -1,16 +1,24 @@
 import React, { useState } from 'react';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
+import { regCCAdmin } from '../../store/clinic_center_admin/actions';
 
-function AdminReg() {
+const AdminReg = ({ ccaId }) => {
     const dispatch = useDispatch();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
-    const [fistName, setFirstName] = useState();
+    const [firstName, setFirstName] = useState();
     const [lastName, setLastName] = useState();
-
-    const handleRegister = () => {
-
+    const handleRegCCAdmin = () => {
+        dispatch(
+            regCCAdmin({
+                ccaId,
+                email,
+                password,
+                firstName,
+                lastName
+            })
+        );
     };
 
     return (
@@ -59,7 +67,7 @@ function AdminReg() {
                                 />
                             </Form.Group>
                         </Form.Row>
-                        <Button variant="primary" onClick={handleRegister}>
+                        <Button variant="primary" onClick={handleRegCCAdmin}>
                             Register
                         </Button>
                     </Form>

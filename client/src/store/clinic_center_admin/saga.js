@@ -4,7 +4,8 @@ import {
     FETCH_CCADMIN_DATA,
     FETCH_REG_REQS_DATA,
     APPROVE_REG_REQ,
-    REJECT_REG_REQ
+    REJECT_REG_REQ,
+    REG_CC_ADMIN
 } from './constants';
 
 import CCAdminService from '../../services/CCAdminService';
@@ -28,10 +29,18 @@ export function* fetchRegReqsData() {
 
 export function* approveRegReq() {
     const { payload } = yield take(APPROVE_REG_REQ);
+    // eslint-disable-next-line
     const { data } = yield call(CCAdminService.approveRegReq, payload);
 }
 
-export function* rejectRegReq(){
+export function* rejectRegReq() {
     const { payload } = yield take(REJECT_REG_REQ);
+    // eslint-disable-next-line
     const { data } = yield call(CCAdminService.rejectRegReq, payload);
+}
+
+export function* regCCAdmin() {
+    const { payload } = yield take(REG_CC_ADMIN);
+    // eslint-disable-next-line
+    const { data } = yield call(CCAdminService.regCCAdmin, payload);
 }

@@ -6,7 +6,8 @@ const FINALPOINTS = {
     FETCH_CCADMIN_DATA: '/cca/%s',
     FETCH_REG_REQS_DATA: '/cca/regreqs',
     APPROVE_REG_REQ: '/cca/approve/%s',
-    REJECT_REG_REQ: '/cca/reject/%s/%s'
+    REJECT_REG_REQ: '/cca/reject/%s/%s',
+    REG_CC_ADMIN: '/cca/reg-cca/%s'
 };
 
 class CCAdminService extends HttpClient {
@@ -46,8 +47,7 @@ class CCAdminService extends HttpClient {
 
     rejectRegReq = async payload => {
         try {
-            const { data } = await this.getApiClient().post(
-                format(FINALPOINTS.REJECT_REG_REQ, payload.reqId,payload.message)            );
+            const { data } = await this.getApiClient().post(format(FINALPOINTS.REJECT_REG_REQ, payload.reqId, payload.message));
 
             return { data };
 
@@ -55,6 +55,19 @@ class CCAdminService extends HttpClient {
             console.log(error.response.data);
         }
     };
+
+    regCCAdmin = async payload => {
+        try {
+            const { data } = await this.getApiClient().post(
+                format(FINALPOINTS.REG_CC_ADMIN, payload.ccaId),
+                payload
+            );
+
+        return (data);
+    } catch(error) {
+        console.log(error.response.data);
+    }
+};
 }
 
 export default new CCAdminService();
