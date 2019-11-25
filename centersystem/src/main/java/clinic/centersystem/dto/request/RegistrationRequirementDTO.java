@@ -1,6 +1,5 @@
 package clinic.centersystem.dto.request;
 
-import clinic.centersystem.model.ClinicCenter;
 import lombok.*;
 
 @Builder

@@ -22,8 +22,6 @@ public class PerscriptionRecord {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Medecine> medecines;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private ClinicCenter clinicCenter;
 
     public PerscriptionRecord() {
 

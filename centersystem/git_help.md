@@ -10,7 +10,7 @@ Kloniranje remote repozitorijuma
 `git clone host:/path/to/repository`
 
 Dodavanje promjena na index (za lokalni)  
-`git add*`
+`git add *`
 
 Komitovanje promjena (za lokalni)  
 `git commit -m 'Neka poruka sta ste uradili'`

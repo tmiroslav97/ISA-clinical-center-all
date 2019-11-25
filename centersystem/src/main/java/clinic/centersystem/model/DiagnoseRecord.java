@@ -21,8 +21,6 @@ public class DiagnoseRecord {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Diagnose> diagnoses;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private ClinicCenter clinicCenter;
 
     public DiagnoseRecord() {
 

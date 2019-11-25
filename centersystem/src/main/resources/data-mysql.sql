@@ -1,6 +1,3 @@
-INSERT INTO clinic_center (id, name, diagnose_record_id, perscription_record_id)
-VALUES (1, 'Bijeljina', 1, 1);
-
 INSERT INTO authority (name)
 VALUES ('ROLE_CCADMIN');
 INSERT INTO authority (name)

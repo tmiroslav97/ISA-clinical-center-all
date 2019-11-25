@@ -63,9 +63,6 @@ public class Clinic {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<SurgeryRequirement> surReqs;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private ClinicCenter clinicCenter;
-
 
     public Clinic() {
         // TODO: implement
