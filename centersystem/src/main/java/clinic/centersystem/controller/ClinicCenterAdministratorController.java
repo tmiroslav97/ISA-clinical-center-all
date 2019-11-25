@@ -2,6 +2,7 @@ package clinic.centersystem.controller;
 
 
 import clinic.centersystem.dto.request.CCARegReqDTO;
+import clinic.centersystem.dto.request.ClinicRequestDTO;
 import clinic.centersystem.dto.response.ClinicCenterAdminResponse;
 import clinic.centersystem.dto.response.RegistrationRequirementResponse;
 import clinic.centersystem.service.ClinicCenterAdministratorService;
@@ -58,6 +59,12 @@ public class ClinicCenterAdministratorController {
     @PreAuthorize("hasRole('CCADMIN')")
     public ResponseEntity<String> registerCCA(@PathVariable Long ccaId, @RequestBody CCARegReqDTO ccaRegReqDTO) {
         return new ResponseEntity<>(this.clinicCenterAdministratorService.registerCCA(ccaRegReqDTO, ccaId), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = POST, value = "/reg-clinic/")
+    @PreAuthorize("hasRole('CCADMIN')")
+    public ResponseEntity<String> registerClinic(@RequestBody ClinicRequestDTO ccaRegReqDTO) {
+        return new ResponseEntity<>(this.clinicCenterAdministratorService.registerClinic(ccaRegReqDTO), HttpStatus.OK);
     }
 
 }

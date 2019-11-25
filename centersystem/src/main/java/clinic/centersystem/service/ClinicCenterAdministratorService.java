@@ -4,6 +4,7 @@ import clinic.centersystem.converter.ClinicCenterAdminConverter;
 import clinic.centersystem.converter.PatientConverter;
 import clinic.centersystem.converter.RegistrationRequirementConverter;
 import clinic.centersystem.dto.request.CCARegReqDTO;
+import clinic.centersystem.dto.request.ClinicRequestDTO;
 import clinic.centersystem.dto.response.ClinicCenterAdminResponse;
 import clinic.centersystem.dto.response.RegistrationRequirementResponse;
 import clinic.centersystem.model.ClinicCenterAdmin;
@@ -104,6 +105,10 @@ public class ClinicCenterAdministratorService {
         ClinicCenterAdmin newCCAdmin = this.clinicCenterAdminService.save(ccaRegReqDTO);
         msg = "Successfully added new clinic center administrator";
         return msg;
+    }
+
+    public String registerClinic(ClinicRequestDTO clinicRequestDTO) {
+        return "";
     }
 
 }
