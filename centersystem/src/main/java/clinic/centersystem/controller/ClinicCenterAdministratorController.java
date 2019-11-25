@@ -54,7 +54,7 @@ public class ClinicCenterAdministratorController {
         return new ResponseEntity<>(this.clinicCenterAdministratorService.rejectRegistrationRequest(reqId, msg), HttpStatus.OK);
     }
 
-    @RequestMapping(method = POST, value = "/reg-cca/{ccaId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = POST, value = "/reg-cca/{ccaId}")
     @PreAuthorize("hasRole('CCADMIN')")
     public ResponseEntity<String> registerCCA(@PathVariable Long ccaId, @RequestBody CCARegReqDTO ccaRegReqDTO) {
         return new ResponseEntity<>(this.clinicCenterAdministratorService.registerCCA(ccaRegReqDTO, ccaId), HttpStatus.OK);
