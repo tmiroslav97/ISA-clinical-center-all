@@ -1,5 +1,7 @@
 package clinic.centersystem.service;
 
+import clinic.centersystem.converter.ClinicCenterAdminConverter;
+import clinic.centersystem.dto.request.CCARegReqDTO;
 import clinic.centersystem.model.Clinic;
 import clinic.centersystem.model.ClinicCenterAdmin;
 import clinic.centersystem.repository.ClinicCenterAdminRepository;
@@ -27,7 +29,9 @@ public class ClinicCenterAdminServiceImpl implements ClinicCenterAdminService {
     }
 
     @Override
-    public ClinicCenterAdmin save() {
-        return null;
+    public ClinicCenterAdmin save(CCARegReqDTO ccaRegReqDTO) {
+        ClinicCenterAdmin clinicCenterAdmin = ClinicCenterAdminConverter.toCreateClinicCenterAdmin(ccaRegReqDTO);
+        clinicCenterAdmin = this.clinicCenterAdminRepository.save(clinicCenterAdmin);
+        return clinicCenterAdmin;
     }
 }

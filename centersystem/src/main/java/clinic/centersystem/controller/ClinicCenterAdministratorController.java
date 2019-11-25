@@ -21,12 +21,12 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 @RequestMapping(value = "/cca", produces = MediaType.APPLICATION_JSON_VALUE)
-public class ClinicCenterAdminController {
+public class ClinicCenterAdministratorController {
 
 
     private final ClinicCenterAdministratorService clinicCenterAdministratorService;
 
-    public ClinicCenterAdminController(ClinicCenterAdministratorService clinicCenterAdministratorService) {
+    public ClinicCenterAdministratorController(ClinicCenterAdministratorService clinicCenterAdministratorService) {
         this.clinicCenterAdministratorService = clinicCenterAdministratorService;
     }
 
@@ -54,10 +54,10 @@ public class ClinicCenterAdminController {
         return new ResponseEntity<>(this.clinicCenterAdministratorService.rejectRegistrationRequest(reqId, msg), HttpStatus.OK);
     }
 
-    @RequestMapping(method = POST, value = "/reg-cca")
+    @RequestMapping(method = POST, value = "/reg-cca/{ccaId}")
     @PreAuthorize("hasRole('CCADMIN')")
-    public ResponseEntity<String> registerCCA(@RequestBody CCARegReqDTO CCARegReqDTO) {
-        return new ResponseEntity<>("Registrovan", HttpStatus.OK);
+    public ResponseEntity<String> registerCCA(@PathVariable Long ccaId, @RequestBody CCARegReqDTO ccaRegReqDTO) {
+        return new ResponseEntity<>(this.clinicCenterAdministratorService.registerCCA(ccaRegReqDTO, ccaId), HttpStatus.OK);
     }
 
 }
