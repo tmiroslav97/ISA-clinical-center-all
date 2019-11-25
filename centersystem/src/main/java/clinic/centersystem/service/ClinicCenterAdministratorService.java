@@ -3,14 +3,17 @@ package clinic.centersystem.service;
 import clinic.centersystem.converter.ClinicCenterAdminConverter;
 import clinic.centersystem.converter.PatientConverter;
 import clinic.centersystem.converter.RegistrationRequirementConverter;
+import clinic.centersystem.dto.request.CCARegReqDTO;
 import clinic.centersystem.dto.response.ClinicCenterAdminResponse;
 import clinic.centersystem.dto.response.RegistrationRequirementResponse;
 import clinic.centersystem.model.ClinicCenterAdmin;
 import clinic.centersystem.model.Patient;
 import clinic.centersystem.model.RegistrationRequirement;
+import clinic.centersystem.model.User;
 import clinic.centersystem.service.intf.ClinicCenterAdminService;
 import clinic.centersystem.service.intf.PatientService;
 import clinic.centersystem.service.intf.RegistrationRequirementService;
+import clinic.centersystem.service.intf.UserService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +35,9 @@ public class ClinicCenterAdministratorService {
     private RegistrationRequirementService registrationRequirementService;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private EmailService emailService;
 
     @Autowired
@@ -44,7 +50,7 @@ public class ClinicCenterAdministratorService {
 
     public ClinicCenterAdminResponse clinicCenterAdmin(Long id) {
         ClinicCenterAdmin clinicCenterAdmin = this.clinicCenterAdminService.findById(id);
-        return ClinicCenterAdminConverter.toCreateClinicCenterAdmin(clinicCenterAdmin);
+        return ClinicCenterAdminConverter.toCreateClinicCenterAdminResponse(clinicCenterAdmin);
     }
 
     public List<RegistrationRequirementResponse> registrationRequirementList() {
@@ -81,6 +87,23 @@ public class ClinicCenterAdministratorService {
             System.out.println("Mail send error!");
         }
         return message;
+    }
+
+    public String registerCCA(CCARegReqDTO ccaRegReqDTO, Long id) {
+        ClinicCenterAdmin clinicCenterAdmin = this.clinicCenterAdminService.findById(id);
+        String msg = "";
+        if (!clinicCenterAdmin.isPredefined()) {
+            msg = "You are not predefined clinic center administrator, you don't have rights to create new";
+            return msg;
+        }
+        User user = this.userService.findByUsername(ccaRegReqDTO.getEmail());
+        if (user != null) {
+            msg = "Email is already taken by another user";
+        }
+        ccaRegReqDTO.setPassword(this.passwordEncoder.encode(ccaRegReqDTO.getPassword()));
+        ClinicCenterAdmin newCCAdmin = this.clinicCenterAdminService.save(ccaRegReqDTO);
+        msg = "Successfully added new clinic center administrator";
+        return msg;
     }
 
 }

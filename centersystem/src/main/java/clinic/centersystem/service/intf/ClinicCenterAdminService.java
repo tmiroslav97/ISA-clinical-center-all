@@ -1,5 +1,6 @@
 package clinic.centersystem.service.intf;
 
+import clinic.centersystem.dto.request.CCARegReqDTO;
 import clinic.centersystem.model.ClinicCenterAdmin;
 
 import java.util.List;
@@ -9,6 +10,6 @@ public interface ClinicCenterAdminService {
 
     List<ClinicCenterAdmin> findAll();
 
-    ClinicCenterAdmin save();
+    ClinicCenterAdmin save(CCARegReqDTO ccaRegReqDTO);
 
 }

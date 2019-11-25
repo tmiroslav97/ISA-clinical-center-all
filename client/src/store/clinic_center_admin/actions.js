@@ -4,7 +4,8 @@ import {
     FETCH_REG_REQS_DATA,
     PUT_REG_REQS_DATA,
     APPROVE_REG_REQ,
-    REJECT_REG_REQ
+    REJECT_REG_REQ,
+    REG_CC_ADMIN
 } from './constants';
 
 
@@ -36,5 +37,10 @@ export const approveRegReq = payload => ({
 
 export const rejectRegReq = payload => ({
     type: REJECT_REG_REQ,
+    payload
+});
+
+export const regCCAdmin = payload => ({
+    type: REG_CC_ADMIN,
     payload
 });

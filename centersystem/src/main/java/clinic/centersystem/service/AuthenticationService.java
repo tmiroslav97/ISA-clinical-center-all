@@ -4,6 +4,7 @@ import clinic.centersystem.authentication.JwtAuthenticationRequest;
 import clinic.centersystem.converter.UserConverter;
 import clinic.centersystem.dto.request.RegistrationRequirementDTO;
 import clinic.centersystem.dto.response.LoginUserResponse;
+import clinic.centersystem.model.PasswordChanger;
 import clinic.centersystem.model.Patient;
 import clinic.centersystem.model.RegistrationRequirement;
 import clinic.centersystem.model.User;
@@ -78,6 +79,11 @@ public class AuthenticationService {
         RegistrationRequirement registrationRequirement = this.registrationRequirementService.save(userRequest);
         //samo proba da vidimo da li cuva i usera i pacijenta automatski i naravno cuva
         //Patient patient = this.patientService.save(userRequest);
+        return true;
+    }
+
+    public boolean changePassword(PasswordChanger passwordChanger) {
+        this.customUserDetailsService.changePassword(passwordChanger.getOldPassword(), passwordChanger.getNewPassword());
         return true;
     }
 

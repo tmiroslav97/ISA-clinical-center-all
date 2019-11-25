@@ -7,7 +7,7 @@ import RegPage from './pages/RegPage';
 import DoctorHomePage from './pages/DoctorHomePage';
 import ClinicCenterAdminProfile from './components/ClinicCenterAdmin/ClinicCenterAdminProfile';
 import HolidayAproval from './components/HolidayAproval';
-
+import PasswordChanger from './components/PasswordChanger';
 const AppRouter = () =>{
     return(
         <Switch>
@@ -19,6 +19,7 @@ const AppRouter = () =>{
             <Route exact path="/prob" component={HolidayAproval}/>
             <Route exact path="/ccadmin/:id" component={ClinicCenterAdminProfile}/>
             <Route exact path="/signup" component={RegPage}/>
+            <Route exact path="/change-pass" component={PasswordChanger}/>
 
             <Route exact path="/page-not-found" component={() => <h1>Page not found!</h1>}/>
             <Redirect from="*" to="/page-not-found" />

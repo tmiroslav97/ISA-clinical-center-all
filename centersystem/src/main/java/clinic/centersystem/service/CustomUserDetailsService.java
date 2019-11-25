@@ -1,5 +1,6 @@
 package clinic.centersystem.service;
 
+import clinic.centersystem.common.TimeProvider;
 import clinic.centersystem.model.User;
 import clinic.centersystem.repository.UserRepository;
 import org.apache.commons.logging.Log;
@@ -14,6 +15,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.sql.Timestamp;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
@@ -61,6 +64,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         User user = (User) loadUserByUsername(email);
 
         user.setPassword(passwordEncoder.encode(newPassword));
+        user.setFirstLog(false);
+        user.setLastPasswordResetDate(new Timestamp(System.currentTimeMillis()));
         userRepository.save(user);
 
     }
