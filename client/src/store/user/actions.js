@@ -3,6 +3,7 @@ import {
     REGISTRATION,
     PUT_USER_DATA,
     PUT_USER_TOKEN,
+    CHANGE_PASSWORD
 } from './constants';
 
 export const loginUser = payload => ({
@@ -22,6 +23,11 @@ export const putUserData = payload => ({
 
 export const putUserToken = payload => ({
     type: PUT_USER_TOKEN,
+    payload
+});
+
+export const changePassword = payload => ({
+    type: CHANGE_PASSWORD,
     payload
 });
 

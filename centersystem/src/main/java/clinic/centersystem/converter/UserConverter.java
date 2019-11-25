@@ -7,12 +7,12 @@ import clinic.centersystem.model.User;
 public class UserConverter {
 
     public static LoginUserResponse toCreateUserLoginResponse(User user, String jwt) {
-        return  LoginUserResponse.builder()
+        return LoginUserResponse.builder()
                 .id(user.getId())
                 .email(user.getEmail())
                 .token(jwt)
                 .role(user.getRole().name())
-                .isNotFirstLogin(user.isFirstLog())
+                .isFirstLog(true)
                 .build();
     }
 }

@@ -15,7 +15,7 @@ public class LoginUserResponse {
 
     private String token;
 
-    private boolean isNotFirstLogin;
+    private boolean isFirstLog;
 
     private String role;
 

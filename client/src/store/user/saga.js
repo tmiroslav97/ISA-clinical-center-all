@@ -1,8 +1,9 @@
 import { take, put, call } from 'redux-saga/effects';
 
-import { 
-    LOGIN, 
+import {
+    LOGIN,
     REGISTRATION,
+    CHANGE_PASSWORD
 } from './constants';
 import authService from '../../services/AuthSecurity';
 
@@ -24,5 +25,10 @@ export function* login() {
     yield put(putUserToken(data.token));
 }
 
+export function* changePassword() {
+    const { payload } = yield take(CHANGE_PASSWORD);
+    const { data } = yield call(authService.changePassword, payload);
+    console.log(data);
+}
 
 
