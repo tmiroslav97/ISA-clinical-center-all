@@ -4,6 +4,7 @@ import {userDataSelector} from '../store/user/selectors';
 import {useSelector} from 'react-redux';
 
 export default function NavBar() {
+    // esling-disable-next-line
     const user = useSelector(userDataSelector);
     return (
         <Navbar bg="light" expand="lg">
