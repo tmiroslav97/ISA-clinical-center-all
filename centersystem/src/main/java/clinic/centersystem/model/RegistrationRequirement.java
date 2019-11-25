@@ -53,8 +53,5 @@ public class RegistrationRequirement {
     @Column(name = DbColumnConstants.UNOIP, nullable = false)
     private String unoip;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private ClinicCenter clinicCenter;
-
 
 }

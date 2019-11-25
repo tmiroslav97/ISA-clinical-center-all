@@ -33,8 +33,8 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public Patient save(RegistrationRequirementDTO registrationRequirementDTO) {
-        Patient patient = PatientConverter.toCreatePatientFromRequest(registrationRequirementDTO);
+    public Patient save(RegistrationRequirement registrationRequirement) {
+        Patient patient = PatientConverter.toCreatePatientFromRequest(registrationRequirement);
 
         patient = this.patientRepository.save(patient);
 

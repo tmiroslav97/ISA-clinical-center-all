@@ -43,4 +43,12 @@ VALUES ('Ilije Bircanina', 'Vlasenica', 'Bosna i Hercegovina', true, '065987544'
 INSERT INTO clinic_center_admin (predefined, id)
 VALUES (true, 1);
 
+INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
+                                      phone_num, unoip)
+VALUES ('Safarikova', 'Bijeljina', 'Bosna', 'sspasoje3@gmail.com', 'Pero', 'Peric', '123', '123', '065987654', '1234543');
+
+INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
+                                      phone_num, unoip)
+VALUES ('Safarikova', 'Bijeljina', 'Bosna', 'roncevic1996@gmail.com', 'Pajo', 'Pajic', '321', '321', '345435345', '432132');
+
 

@@ -8,7 +8,7 @@ public class UserConverter {
 
     public static LoginUserResponse toCreateUserLoginResponse(User user, String jwt) {
         return  LoginUserResponse.builder()
-                .userID(user.getId())
+                .id(user.getId())
                 .email(user.getEmail())
                 .token(jwt)
                 .role(user.getRole().name())

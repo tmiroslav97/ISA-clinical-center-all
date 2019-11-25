@@ -1,6 +1,7 @@
 package clinic.centersystem.converter;
 
 import clinic.centersystem.dto.request.RegistrationRequirementDTO;
+import clinic.centersystem.dto.response.RegistrationRequirementResponse;
 import clinic.centersystem.model.RegistrationRequirement;
 
 public class RegistrationRequirementConverter {
@@ -17,6 +18,15 @@ public class RegistrationRequirementConverter {
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .unoip(request.getUnoip())
+                .build();
+    }
+
+    public static RegistrationRequirementResponse toCreateRegistrationRequirementResponse(RegistrationRequirement registrationRequirement) {
+        return RegistrationRequirementResponse.builder()
+                .id(registrationRequirement.getId())
+                .email(registrationRequirement.getEmail())
+                .firstName(registrationRequirement.getFirstName())
+                .lastName(registrationRequirement.getLastName())
                 .build();
     }
 

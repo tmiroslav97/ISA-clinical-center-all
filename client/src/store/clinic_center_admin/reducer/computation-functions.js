@@ -4,10 +4,10 @@ export function putCCAdminData(state, payload) {
         data: payload
     };
 }
-  
-export function putCCAdminToken(state, payload) {
+
+export function putRegReqsData(state, payload) {
     return {
         ...state,
-        token: payload
+        reqs: payload
     };
 }

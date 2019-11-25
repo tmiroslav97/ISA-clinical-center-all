@@ -1,22 +1,21 @@
 package clinic.centersystem.dto.response;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
-
+@Builder
 @Data
 @AllArgsConstructor
-@Builder
-public class LoginUserResponse {
+public class RegistrationRequirementResponse {
+
     private Long id;
 
     private String email;
 
-    private String token;
+    private String firstName;
 
-    private boolean isNotFirstLogin;
-
-    private String role;
+    private String lastName;
 
 }

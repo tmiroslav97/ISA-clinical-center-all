@@ -17,7 +17,7 @@ class AuthSecurityService extends HttpBaseClient{
         if(data.role === 'ROLE_PATIENT'){
             history.push('/pat');
         }else if(data.role === 'ROLE_CCADMIN'){
-            history.push('/ccadmin');
+            history.push('/ccadmin/'+data.id);
         }else if(data.role === 'ROLE_DOCTOR'){
             history.push('/doc');
         }else{

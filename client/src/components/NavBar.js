@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Navbar, Nav, } from 'react-bootstrap';
 import {userDataSelector} from '../store/user/selectors';
 import {useSelector} from 'react-redux';

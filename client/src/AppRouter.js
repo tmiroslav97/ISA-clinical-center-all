@@ -5,7 +5,7 @@ import LoginPage from './pages/LoginPage';
 import PatientHomePage from './components/PatientHomePage';
 import RegPage from './pages/RegPage';
 import DoctorHomePage from './pages/DoctorHomePage';
-import ClinicCenterAdminProfile from './components/ClinicCenterAdminProfile';
+import ClinicCenterAdminProfile from './components/ClinicCenterAdmin/ClinicCenterAdminProfile';
 import HolidayAproval from './components/HolidayAproval';
 
 const AppRouter = () =>{
@@ -17,7 +17,7 @@ const AppRouter = () =>{
             <Route exact path="/signup" component={RegPage}/>
             <Route exact path="/doc" component={DoctorHomePage}/>
             <Route exact path="/prob" component={HolidayAproval}/>
-            <Route exact path="/ccadmin" component={ClinicCenterAdminProfile}/>
+            <Route exact path="/ccadmin/:id" component={ClinicCenterAdminProfile}/>
             <Route exact path="/signup" component={RegPage}/>
 
             <Route exact path="/page-not-found" component={() => <h1>Page not found!</h1>}/>
