@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -65,6 +66,11 @@ public class ClinicCenterAdministratorController {
     @PreAuthorize("hasRole('CCADMIN')")
     public ResponseEntity<String> registerClinic(@RequestBody ClinicRequestDTO ccaRegReqDTO) {
         return new ResponseEntity<>(this.clinicCenterAdministratorService.registerClinic(ccaRegReqDTO), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = GET, value = "/activate-account/{id}")
+    public ResponseEntity<String> activateAccount(@PathVariable Long id, HttpServletResponse httpServletResponse) {
+        return new ResponseEntity<>(this.clinicCenterAdministratorService.activateAccount(id, httpServletResponse), HttpStatus.TEMPORARY_REDIRECT);
     }
 
 }

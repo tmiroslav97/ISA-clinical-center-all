@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,12 +66,19 @@ public class ClinicCenterAdministratorService {
 
     public String approveRegistrationRequest(Long id) {
         RegistrationRequirement req = registrationRequirementService.findById(id);
-        String answer = "Patient account was created successfully";
-        String subject = "Account registration";
         req.setPassword(passwordEncoder.encode(req.getPassword()));
         Patient patient = this.patientService.save(req);
+        this.registrationRequirementService.deleteById(id);
+        String subject = "";
+        String answer = "";
         try {
-            emailService.sendMailTo(patient, subject, answer);
+            subject = "Account registration";
+            answer = String.format(
+                    "    Patient account was create successfully!\n" +
+                            "    Please follow this link to activate account:\n" +
+                            "    http://localhost:8080/cca/activate-account/%s"
+                    , patient.getId().toString());
+            emailService.sendMailTo(patient.getEmail(), subject, answer);
         } catch (Exception e) {
             System.out.println("Mail send error!");
         }
@@ -78,12 +86,11 @@ public class ClinicCenterAdministratorService {
     }
 
     public String rejectRegistrationRequest(Long id, String message) {
-        RegistrationRequirement req = registrationRequirementService.findById(id);
+        RegistrationRequirement req = this.registrationRequirementService.findById(id);
         String subject = "Account registration";
-        req.setPassword(passwordEncoder.encode(req.getPassword()));
-        Patient patient = PatientConverter.toCreatePatientFromRequest(req);
+        this.registrationRequirementService.deleteById(id);
         try {
-            emailService.sendMailTo(patient, subject, message);
+            emailService.sendMailTo(req.getEmail(), subject, message);
         } catch (Exception e) {
             System.out.println("Mail send error!");
         }
@@ -109,6 +116,15 @@ public class ClinicCenterAdministratorService {
 
     public String registerClinic(ClinicRequestDTO clinicRequestDTO) {
         return "";
+    }
+
+    public String activateAccount(Long id, HttpServletResponse httpServletResponse) {
+        Patient patient = this.patientService.findById(id);
+        patient.setActivated(true);
+        patient = this.patientService.save(patient);
+
+        httpServletResponse.setHeader("Location", "http://localhost:3000/login");
+        return "Account is activated!";
     }
 
 }
