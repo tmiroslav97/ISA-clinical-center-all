@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Tab, Nav, Col } from 'react-bootstrap';
-import PasswordChange from './PasswordChange';
-import UpdateProfile from './UpdateProfile';
+import PasswordChanger from '../PasswordChanger';
+import UpdateProfile from '../UpdateProfile';
 
 function Profile(){
     return(
@@ -23,7 +23,7 @@ function Profile(){
                             <UpdateProfile/>
                         </Tab.Pane>
                         <Tab.Pane eventKey="second">
-                            <PasswordChange/>
+                            <PasswordChanger/>
                         </Tab.Pane>
                     </Tab.Content>
                 </Col>
