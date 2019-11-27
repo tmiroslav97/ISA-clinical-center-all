@@ -23,7 +23,7 @@ public class Doctor extends Personnel {
     private Integer cntRating;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<AppRequirement> appReqs;
+    private Set<AppointmentRequirement> appReqs;
 
     public Doctor() {
         // TODO: implement

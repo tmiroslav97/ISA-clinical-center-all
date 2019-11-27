@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Table(name = DbTableConstants.APPREQUIREMENT)
-public class AppRequirement {
+public class AppointmentRequirement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +36,7 @@ public class AppRequirement {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Clinic clinic;
 
-    public AppRequirement() {
+    public AppointmentRequirement() {
 
     }
 }

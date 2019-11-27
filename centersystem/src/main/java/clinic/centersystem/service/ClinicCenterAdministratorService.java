@@ -1,20 +1,16 @@
 package clinic.centersystem.service;
 
 import clinic.centersystem.converter.ClinicCenterAdminConverter;
+import clinic.centersystem.converter.ClinicConverter;
 import clinic.centersystem.converter.PatientConverter;
 import clinic.centersystem.converter.RegistrationRequirementConverter;
 import clinic.centersystem.dto.request.CCARegReqDTO;
 import clinic.centersystem.dto.request.ClinicRequestDTO;
 import clinic.centersystem.dto.response.ClinicCenterAdminResponse;
+import clinic.centersystem.dto.response.ClinicResponse;
 import clinic.centersystem.dto.response.RegistrationRequirementResponse;
-import clinic.centersystem.model.ClinicCenterAdmin;
-import clinic.centersystem.model.Patient;
-import clinic.centersystem.model.RegistrationRequirement;
-import clinic.centersystem.model.User;
-import clinic.centersystem.service.intf.ClinicCenterAdminService;
-import clinic.centersystem.service.intf.PatientService;
-import clinic.centersystem.service.intf.RegistrationRequirementService;
-import clinic.centersystem.service.intf.UserService;
+import clinic.centersystem.model.*;
+import clinic.centersystem.service.intf.*;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +43,9 @@ public class ClinicCenterAdministratorService {
 
     @Autowired
     private PatientService patientService;
+
+    @Autowired
+    private ClinicService clinicService;
 
     private static final Logger logger = LoggerFactory.getLogger(ClinicCenterAdministratorService.class);
 
@@ -115,7 +114,17 @@ public class ClinicCenterAdministratorService {
     }
 
     public String registerClinic(ClinicRequestDTO clinicRequestDTO) {
-        return "";
+        Clinic clinic = this.clinicService.save(clinicRequestDTO);
+        return "Clinic succesfully created";
+    }
+
+    public List<ClinicResponse> getClinics() {
+        List<Clinic> clinics = this.clinicService.findAll();
+        List<ClinicResponse> clinicResponses = new ArrayList<ClinicResponse>();
+        for (Clinic clinic : clinics) {
+            clinicResponses.add(ClinicConverter.toCreateClinicResponseFromClinic(clinic));
+        }
+        return clinicResponses;
     }
 
     public String activateAccount(Long id, HttpServletResponse httpServletResponse) {

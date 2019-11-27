@@ -4,7 +4,9 @@ package clinic.centersystem.controller;
 import clinic.centersystem.dto.request.CCARegReqDTO;
 import clinic.centersystem.dto.request.ClinicRequestDTO;
 import clinic.centersystem.dto.response.ClinicCenterAdminResponse;
+import clinic.centersystem.dto.response.ClinicResponse;
 import clinic.centersystem.dto.response.RegistrationRequirementResponse;
+import clinic.centersystem.model.Clinic;
 import clinic.centersystem.service.ClinicCenterAdministratorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -41,7 +43,6 @@ public class ClinicCenterAdministratorController {
     @RequestMapping(method = GET, value = "/regreqs")
     @PreAuthorize("hasRole('CCADMIN')")
     public ResponseEntity<List<RegistrationRequirementResponse>> registrationReqs() {
-        System.out.println("Stigao");
         return new ResponseEntity<>(this.clinicCenterAdministratorService.registrationRequirementList(), HttpStatus.OK);
     }
 
@@ -63,10 +64,15 @@ public class ClinicCenterAdministratorController {
         return new ResponseEntity<>(this.clinicCenterAdministratorService.registerCCA(ccaRegReqDTO, ccaId), HttpStatus.OK);
     }
 
-    @RequestMapping(method = POST, value = "/reg-clinic/")
+    @RequestMapping(method = POST, value = "/reg-clinic")
     @PreAuthorize("hasRole('CCADMIN')")
     public ResponseEntity<String> registerClinic(@RequestBody ClinicRequestDTO ccaRegReqDTO) {
         return new ResponseEntity<>(this.clinicCenterAdministratorService.registerClinic(ccaRegReqDTO), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = GET, value="/clinics")
+    public ResponseEntity<List<ClinicResponse>> getClinics(){
+        return new ResponseEntity<List<ClinicResponse>>(this.clinicCenterAdministratorService.getClinics(),HttpStatus.OK);
     }
 
     @RequestMapping(method = GET, value = "/activate-account/{id}")
