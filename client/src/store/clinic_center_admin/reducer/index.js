@@ -12,6 +12,7 @@ const initialState = {
         firstName: '',
         lastName: '',
         email: '',
+        
         role: window.localStorage.getItem('role'),
         predefined: false
     },
