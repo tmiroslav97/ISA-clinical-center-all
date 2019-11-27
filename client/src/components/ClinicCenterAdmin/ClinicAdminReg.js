@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { clinicsDataSelector } from '../../store/clinic_center_admin/selectors';
-
+import { regClinicAdmin } from '../../store/clinic_center_admin/actions';
 
 const ClinicAdminReg = () => {
     const dispatch = useDispatch();
@@ -16,7 +16,13 @@ const ClinicAdminReg = () => {
 
     const handleRegClinicAdmin = () => {
         dispatch(
-            
+            regClinicAdmin({
+                clinicId,
+                email,
+                password,
+                firstName,
+                lastName
+            })
         );
     };
 
@@ -62,6 +68,7 @@ const ClinicAdminReg = () => {
                                 <Form.Control as="select" onChange={({ currentTarget }) => {
                                         setClinicId(currentTarget.value);
                                     }} >
+                                    <option></option>
                                     {
                                         clinics.map((clinic, index) => {
                                             return (

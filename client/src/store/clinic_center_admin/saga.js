@@ -7,7 +7,8 @@ import {
     REJECT_REG_REQ,
     REG_CC_ADMIN,
     REG_CLINIC,
-    FETCH_CLINICS_DATA
+    FETCH_CLINICS_DATA,
+    REG_CLINIC_ADMIN
 } from './constants';
 
 import CCAdminService from '../../services/CCAdminService';
@@ -17,6 +18,11 @@ import {
     putRegReqsData,
     putClinicsData
 } from './actions';
+
+export function* regClinicAdmin(){
+    const { payload } = yield take(REG_CLINIC_ADMIN);
+    const { data } = yield call(CCAdminService.regClinicAdmin, payload);
+}
 
 
 export function* fetchClinicsData() {
