@@ -9,7 +9,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CCARegReqDTO {
-    private Long id;
 
     private String firstName;
 

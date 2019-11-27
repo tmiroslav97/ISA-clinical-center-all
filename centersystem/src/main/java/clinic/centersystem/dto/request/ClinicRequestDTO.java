@@ -8,9 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ClinicRequestDTO {
-
-    private Long id;
-
+    
     private String name;
 
     private String description;

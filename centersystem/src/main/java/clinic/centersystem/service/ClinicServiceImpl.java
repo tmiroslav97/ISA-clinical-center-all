@@ -1,5 +1,6 @@
 package clinic.centersystem.service;
 
+import clinic.centersystem.converter.ClinicConverter;
 import clinic.centersystem.dto.request.ClinicRequestDTO;
 import clinic.centersystem.model.Clinic;
 import clinic.centersystem.repository.ClinicRepository;
@@ -27,6 +28,9 @@ public class ClinicServiceImpl implements ClinicService {
 
     @Override
     public Clinic save(ClinicRequestDTO clinicRequestDTO) {
-        return null;
+        Clinic clinic = ClinicConverter.toCreateClinicFromRequest(clinicRequestDTO);
+        clinic = this.clinicRepository.save(clinic);
+
+        return clinic;
     }
 }
