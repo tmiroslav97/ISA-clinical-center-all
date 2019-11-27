@@ -47,6 +47,9 @@ public class CustomUserDetailsService implements UserDetailsService {
     public void changePassword(String oldPassword, String newPassword) {
 
         Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
+        if(currentUser == null){
+            System.out.println("null");
+        }
         String email = currentUser.getName();
 
         if (authenticationManager != null) {
