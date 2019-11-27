@@ -7,4 +7,5 @@ export const REJECT_REG_REQ = 'reject_reg_req';
 export const REG_CC_ADMIN = 'register_cc_admin';
 export const REG_CLINIC = 'register_clinic';
 export const FETCH_CLINICS_DATA = 'fetch_clinics_data';
-export const PUT_CLINICS_DATA = 'PUT_CLINICS_DATA';
+export const PUT_CLINICS_DATA = 'put_clinics_data';
+export const REG_CLINIC_ADMIN = 'reg_clinic_admin';

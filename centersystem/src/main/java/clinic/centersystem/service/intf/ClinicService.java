@@ -11,4 +11,6 @@ public interface ClinicService {
     List<Clinic> findAll();
 
     Clinic save(ClinicRequestDTO clinicRequestDTO);
+
+    Clinic saveClinic(Clinic clinic);
 }

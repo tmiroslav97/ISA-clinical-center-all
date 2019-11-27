@@ -1,18 +1,23 @@
-import React, { useState } from 'react';
-import { Container, Form, Button, Row, Col } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import { regCCAdmin } from '../../store/clinic_center_admin/actions';
+import React, { useState, useEffect } from 'react';
+import { Container, Row, Col, Form, Button, Table } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { clinicsDataSelector } from '../../store/clinic_center_admin/selectors';
+import { regClinicAdmin } from '../../store/clinic_center_admin/actions';
 
-const AdminReg = ({ ccaId }) => {
+const ClinicAdminReg = () => {
     const dispatch = useDispatch();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [firstName, setFirstName] = useState();
     const [lastName, setLastName] = useState();
-    const handleRegCCAdmin = () => {
+    const [clinicId, setClinicId] = useState();
+    const clinics = useSelector(clinicsDataSelector);
+
+
+    const handleRegClinicAdmin = () => {
         dispatch(
-            regCCAdmin({
-                ccaId,
+            regClinicAdmin({
+                clinicId,
                 email,
                 password,
                 firstName,
@@ -25,7 +30,7 @@ const AdminReg = ({ ccaId }) => {
         <Container>
             <Row>
                 <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <h2 className="border-bottom">Registrating new clinic center admin</h2>
+                    <h2 className="border-bottom">Registrating clinic admin</h2>
                 </Col>
             </Row>
             <Row>
@@ -59,6 +64,23 @@ const AdminReg = ({ ccaId }) => {
                                 />
                             </Form.Group>
                             <Form.Group as={Col}>
+                                <Form.Label>State</Form.Label>
+                                <Form.Control as="select" onChange={({ currentTarget }) => {
+                                        setClinicId(currentTarget.value);
+                                    }} >
+                                    <option></option>
+                                    {
+                                        clinics.map((clinic, index) => {
+                                            return (
+                                                <option key={clinic.id} value={clinic.id}>{clinic.name}</option>
+                                            );
+                                        })
+                                    }
+                                </Form.Control>
+                            </Form.Group> 
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Group as={Col} md="6">
                                 <Form.Label>Last name:</Form.Label>
                                 <Form.Control type="text" placeholder="Enter admin last name"
                                     onChange={({ currentTarget }) => {
@@ -67,14 +89,15 @@ const AdminReg = ({ ccaId }) => {
                                 />
                             </Form.Group>
                         </Form.Row>
-                        <Button variant="primary" onClick={handleRegCCAdmin}>
+                        <Button variant="primary" onClick={handleRegClinicAdmin}>
                             Register
                         </Button>
                     </Form>
                 </Col>
             </Row>
+            
         </Container>
     );
 }
 
-export default AdminReg;
+export default ClinicAdminReg;

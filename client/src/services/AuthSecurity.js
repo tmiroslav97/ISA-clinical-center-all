@@ -17,14 +17,12 @@ class AuthSecurityService extends HttpBaseClient {
             if (data.role === 'ROLE_PATIENT') {
                 history.push('/pat');
             } else if (data.role === 'ROLE_CCADMIN') {
-                history.push('/ccadmin/' + data.id);
-                /*
-                if(data.firstLog){
+                if (data.firstLog) {
                     history.push('/change-pass');
-                }else{
+                } else {
                     history.push('/ccadmin/' + data.id);
                 }
-                */
+
             } else if (data.role === 'ROLE_DOCTOR') {
                 history.push('/doc');
             } else {
@@ -52,27 +50,26 @@ class AuthSecurityService extends HttpBaseClient {
                 FINALPOINTS.REGISTRATION,
                 userData
             );
-            console.log(data);
 
             history.push('/');
 
-            return { data }
+            return { data };
         } catch (error) {
             console.log(error.response.data);
         }
     };
 
     changePassword = async payload => {
-       try{
-            const { data } = await this.getApiClient.post(
+        try {
+            const { data } = await this.getApiClient().post(
                 FINALPOINTS.CHANGE_PASSWORD,
                 payload
             );
 
             return { data };
-       }catch(error){
-           console.log(error.response.data);
-       }
+        } catch (error) {
+            console.log(error.response.data);
+        }
     };
 
 }

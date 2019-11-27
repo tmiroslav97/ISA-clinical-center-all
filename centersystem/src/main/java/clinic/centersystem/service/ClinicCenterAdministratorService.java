@@ -5,6 +5,7 @@ import clinic.centersystem.converter.ClinicConverter;
 import clinic.centersystem.converter.PatientConverter;
 import clinic.centersystem.converter.RegistrationRequirementConverter;
 import clinic.centersystem.dto.request.CCARegReqDTO;
+import clinic.centersystem.dto.request.ClinicAdminReqDTO;
 import clinic.centersystem.dto.request.ClinicRequestDTO;
 import clinic.centersystem.dto.response.ClinicCenterAdminResponse;
 import clinic.centersystem.dto.response.ClinicResponse;
@@ -46,6 +47,9 @@ public class ClinicCenterAdministratorService {
 
     @Autowired
     private ClinicService clinicService;
+
+    @Autowired
+    private ClinicAdminService clinicAdminService;
 
     private static final Logger logger = LoggerFactory.getLogger(ClinicCenterAdministratorService.class);
 
@@ -134,6 +138,19 @@ public class ClinicCenterAdministratorService {
 
         httpServletResponse.setHeader("Location", "http://localhost:3000/login");
         return "Account is activated!";
+    }
+
+    public String registerClinicAdmin(ClinicAdminReqDTO clinicAdminReqDTO) {
+        clinicAdminReqDTO.setPassword(this.passwordEncoder.encode(clinicAdminReqDTO.getPassword()));
+        ClinicAdmin clinicAdmin = this.clinicAdminService.save(clinicAdminReqDTO);
+        Clinic clinic = this.clinicService.findById(clinicAdminReqDTO.getClinicId());
+        clinic.getClinicAdmins().add(clinicAdmin);
+        clinicAdmin.setClinic(clinic);
+
+        clinicAdmin = this.clinicAdminService.saveClinicAdmin(clinicAdmin);
+        clinic = this.clinicService.saveClinic(clinic);
+
+        return "Added clinic admin";
     }
 
 }
