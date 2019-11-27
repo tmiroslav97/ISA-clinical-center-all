@@ -2,7 +2,7 @@ import React from 'react';
 import {Route, Redirect, Switch} from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
-import PatientHomePage from './components/PatientHomePage';
+import PatientHomePage from './components/Patient/PatientHomePage';
 import RegPage from './pages/RegPage';
 import DoctorHomePage from './pages/DoctorHomePage';
 import ClinicCenterAdminProfile from './components/ClinicCenterAdmin/ClinicCenterAdminProfile';
