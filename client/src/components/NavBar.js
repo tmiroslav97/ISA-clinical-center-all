@@ -13,6 +13,7 @@ export default function NavBar() {
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
                     <Nav.Link href="/">Home</Nav.Link>
+                    <Nav.Link href="/CA">Clinic admin prof</Nav.Link>
                 </Nav>
                 
                 <Nav className="ml-auto">
