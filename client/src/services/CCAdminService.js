@@ -7,10 +7,13 @@ const FINALPOINTS = {
     FETCH_REG_REQS_DATA: '/cca/regreqs',
     APPROVE_REG_REQ: '/cca/approve/%s',
     REJECT_REG_REQ: '/cca/reject/%s/%s',
-    REG_CC_ADMIN: '/cca/reg-cca/%s'
+    REG_CC_ADMIN: '/cca/reg-cca/%s',
+    REG_CLINIC: '/cca/reg-clinic',
+    FETCH_CLINICS: '/cca/clinics'
 };
 
 class CCAdminService extends HttpClient {
+    
     fetchCCAdminData = async payload => {
         try {
             const { data } = await this.getApiClient().get(
@@ -27,7 +30,8 @@ class CCAdminService extends HttpClient {
             const { data } = await this.getApiClient().get(
                 FINALPOINTS.FETCH_REG_REQS_DATA
             );
-            return { data };
+            const reqData = data;
+            return { reqData };
         } catch (error) {
             console.log(error.response.data);
         }
@@ -64,6 +68,33 @@ class CCAdminService extends HttpClient {
             );
 
             return (data);
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    };
+
+    regClinic = async payload => {
+        try {
+            const { data } = await this.getApiClient().post(
+                FINALPOINTS.REG_CLINIC,
+                payload
+            );
+
+            return { data };
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    };
+
+    fetchClinicsData = async payload => {
+        try {
+            const { data } = await this.getApiClient().get(
+                FINALPOINTS.FETCH_CLINICS
+            );
+            
+            const clinics = data;
+
+            return { clinics };
         } catch (error) {
             console.log(error.response.data);
         }

@@ -7,7 +7,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -22,7 +21,7 @@ public class Patient extends User {
     public Patient(Long id, String email, String password, String firstName, String lastName,
                    boolean enabled, RoleEnum role, boolean isFirstLog, Timestamp lastPasswordResetDate,
                    List<Authority> authorities, String address, String country, String city, String phoneNum, String unoip,
-                   Set<Clinic> clinics, MedicalRecord medicalRecord, Set<Appointment> appointments, Set<AppRequirement> appRequirements,
+                   Set<Clinic> clinics, MedicalRecord medicalRecord, Set<Appointment> appointments, Set<AppointmentRequirement> appointmentRequirements,
                    Set<Surgery> surgeries, boolean isActivated) {
         super(id, email, password, firstName, lastName, enabled, role, isFirstLog, lastPasswordResetDate, authorities);
         this.address = address;
@@ -33,7 +32,7 @@ public class Patient extends User {
         this.clinics = clinics;
         this.medicalRecord = medicalRecord;
         this.appointments = appointments;
-        this.appRequirements = appRequirements;
+        this.appointmentRequirements = appointmentRequirements;
         this.surgeries = surgeries;
         this.isActivated = isActivated;
     }
@@ -63,7 +62,7 @@ public class Patient extends User {
     private Set<Appointment> appointments;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<AppRequirement> appRequirements;
+    private Set<AppointmentRequirement> appointmentRequirements;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Surgery> surgeries;

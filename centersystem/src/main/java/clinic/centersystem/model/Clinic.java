@@ -2,14 +2,18 @@ package clinic.centersystem.model;
 
 import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.w3c.dom.views.DocumentView;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
+@Builder
 @Setter
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = DbTableConstants.CLINIC)
 public class Clinic {
@@ -40,32 +44,28 @@ public class Clinic {
     private PriceList priceList;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Doctor> doctors;
+    private Set<Doctor> doctors = new HashSet<Doctor>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Nurse> nurses;
+    private Set<Nurse> nurses = new HashSet<Nurse>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<ClinicAdmin> clinicAdmins;
+    private Set<ClinicAdmin> clinicAdmins = new HashSet<ClinicAdmin>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<SurgExRoom> surExRooms;
+    private Set<SurgExRoom> surExRooms = new HashSet<SurgExRoom>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Appointment> appointments;
+    private Set<Appointment> appointments = new HashSet<Appointment>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<AbsenceRequirement> reqAbs;
+    private Set<AbsenceRequirement> reqAbs = new HashSet<AbsenceRequirement>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<AppRequirement> appReqs;
+    private Set<AppointmentRequirement> appReqs = new HashSet<AppointmentRequirement>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<SurgeryRequirement> surReqs;
+    private Set<SurgeryRequirement> surReqs = new HashSet<SurgeryRequirement>();
 
-
-    public Clinic() {
-        // TODO: implement
-    }
 
 }

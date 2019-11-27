@@ -13,4 +13,6 @@ public interface PatientService {
     List<Patient> findAll();
 
     Patient save(RegistrationRequirement registrationRequirement);
+
+    Patient save(Patient patient);
 }

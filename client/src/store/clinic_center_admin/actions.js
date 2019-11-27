@@ -5,15 +5,31 @@ import {
     PUT_REG_REQS_DATA,
     APPROVE_REG_REQ,
     REJECT_REG_REQ,
-    REG_CC_ADMIN
+    REG_CC_ADMIN,
+    REG_CLINIC,
+    FETCH_CLINICS_DATA,
+    PUT_CLINICS_DATA
 } from './constants';
 
+export const putClinicsData = payload => ({
+    type: PUT_CLINICS_DATA,
+    payload
+});
+
+export const regClinic = payload => ({
+    type: REG_CLINIC,
+    payload
+});
+
+export const fetchClinicsData = payload => ({
+    type: FETCH_CLINICS_DATA,
+    payload
+});
 
 export const putCCAdminData = payload => ({
     type: PUT_CCADMIN_DATA,
     payload
 });
-
 
 export const fetchCCAdminData = payload => ({
     type: FETCH_CCADMIN_DATA,

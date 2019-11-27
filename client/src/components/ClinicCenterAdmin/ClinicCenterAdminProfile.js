@@ -24,10 +24,10 @@ function ClinicCenterAdminProfile({ match }) {
             <Tab eventKey="zero" title="Registration approvals">
                 <RegistrationAproval />
             </Tab>
-            <Tab eventKey="first" title="Registering cl inics">
+            <Tab eventKey="first" title="Register clinics">
                 <ClinicReg />
             </Tab>
-            <Tab eventKey="second" title="Add items">
+            <Tab eventKey="second" title="Record items">
                 <Items />
             </Tab>
             <Tab eventKey="third" title="Add clinic center administrator">

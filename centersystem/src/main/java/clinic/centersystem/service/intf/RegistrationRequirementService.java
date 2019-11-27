@@ -12,4 +12,6 @@ public interface RegistrationRequirementService {
     List<RegistrationRequirement> findAll();
 
     RegistrationRequirement save(RegistrationRequirementDTO registrationRequirement);
+
+    Long deleteById(Long id);
 }
