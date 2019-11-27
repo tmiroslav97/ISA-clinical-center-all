@@ -23,21 +23,26 @@ export function* fetchCCAdminData() {
 
 export function* fetchRegReqsData() {
     const { payload } = yield take(FETCH_REG_REQS_DATA);
-    const { data } = yield call(CCAdminService.fetchRegReqsData, payload);
-    yield put(putRegReqsData(data));
+    const { reqData } = yield call(CCAdminService.fetchRegReqsData, payload);
+    yield put(putRegReqsData(reqData));
 }
 
 export function* approveRegReq() {
     const { payload } = yield take(APPROVE_REG_REQ);
     // eslint-disable-next-line
     const { data } = yield call(CCAdminService.approveRegReq, payload);
+    const { reqData } = yield call(CCAdminService.fetchRegReqsData, {});
+    yield put(putRegReqsData(reqData));
 }
 
 export function* rejectRegReq() {
     const { payload } = yield take(REJECT_REG_REQ);
     // eslint-disable-next-line
     const { data } = yield call(CCAdminService.rejectRegReq, payload);
+    const { reqData } = yield call(CCAdminService.fetchRegReqsData, {});
+    yield put(putRegReqsData(reqData));
 }
+
 
 export function* regCCAdmin() {
     const { payload } = yield take(REG_CC_ADMIN);

@@ -27,7 +27,8 @@ class CCAdminService extends HttpClient {
             const { data } = await this.getApiClient().get(
                 FINALPOINTS.FETCH_REG_REQS_DATA
             );
-            return { data };
+            const reqData  = data;
+            return { reqData };
         } catch (error) {
             console.log(error.response.data);
         }

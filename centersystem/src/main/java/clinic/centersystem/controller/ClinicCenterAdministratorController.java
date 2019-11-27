@@ -41,6 +41,7 @@ public class ClinicCenterAdministratorController {
     @RequestMapping(method = GET, value = "/regreqs")
     @PreAuthorize("hasRole('CCADMIN')")
     public ResponseEntity<List<RegistrationRequirementResponse>> registrationReqs() {
+        System.out.println("Stigao");
         return new ResponseEntity<>(this.clinicCenterAdministratorService.registrationRequirementList(), HttpStatus.OK);
     }
 
