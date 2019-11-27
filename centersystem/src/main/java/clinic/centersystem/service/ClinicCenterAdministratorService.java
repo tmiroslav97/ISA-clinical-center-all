@@ -145,7 +145,10 @@ public class ClinicCenterAdministratorService {
         Clinic clinic = this.clinicService.findById(clinicAdminReqDTO.getClinicId());
         clinic.getClinicAdmins().add(clinicAdmin);
         clinicAdmin.setClinic(clinic);
-        
+
+        clinicAdmin = this.clinicAdminService.saveClinicAdmin(clinicAdmin);
+        clinic = this.clinicService.saveClinic(clinic);
+
         return "Added clinic admin";
     }
 

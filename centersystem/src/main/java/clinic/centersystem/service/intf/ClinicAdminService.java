@@ -13,4 +13,5 @@ public interface ClinicAdminService {
 
     ClinicAdmin save(ClinicAdminReqDTO clinicAdminReqDTO);
 
+    ClinicAdmin saveClinicAdmin(ClinicAdmin clinicAdmin);
 }

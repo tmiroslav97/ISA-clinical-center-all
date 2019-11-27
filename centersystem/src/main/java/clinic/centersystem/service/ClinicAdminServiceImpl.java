@@ -36,4 +36,11 @@ public class ClinicAdminServiceImpl implements ClinicAdminService {
 
         return clinicAdmin;
     }
+
+    @Override
+    public ClinicAdmin saveClinicAdmin(ClinicAdmin clinicAdmin) {
+        clinicAdmin = this.clinicAdminRepository.save(clinicAdmin);
+
+        return clinicAdmin;
+    }
 }

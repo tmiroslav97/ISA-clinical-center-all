@@ -33,4 +33,11 @@ public class ClinicServiceImpl implements ClinicService {
 
         return clinic;
     }
+
+    @Override
+    public Clinic saveClinic(Clinic clinic) {
+        clinic = this.clinicRepository.save(clinic);
+
+        return clinic;
+    }
 }
