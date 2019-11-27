@@ -8,8 +8,14 @@ import {
     REG_CC_ADMIN,
     REG_CLINIC,
     FETCH_CLINICS_DATA,
-    PUT_CLINICS_DATA
+    PUT_CLINICS_DATA,
+    REG_CLINIC_ADMIN
 } from './constants';
+
+export const regClinicAdmin = payload => ({
+    type: REG_CLINIC_ADMIN,
+    payload
+});
 
 export const putClinicsData = payload => ({
     type: PUT_CLINICS_DATA,

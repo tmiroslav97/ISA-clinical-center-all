@@ -42,10 +42,14 @@ VALUES (true, 1);
 
 INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
                                       phone_num, unoip)
-VALUES ('Safarikova', 'Bijeljina', 'Bosna', 'miroslavtomic@outlook.com', 'Pero', 'Peric', '123', '123', '065987654', '1234543');
+VALUES ('Safarikova', 'Bijeljina', 'Bosna', 'miroslavtomic@outlook.com', 'Pero', 'Peric', '123', '123', '065987654',
+        '1234543');
 
 INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
                                       phone_num, unoip)
-VALUES ('Safarikova', 'Bijeljina', 'Bosna', 'roncevic1996@gmail.com', 'Pajo', 'Pajic', '321', '321', '345435345', '432132');
+VALUES ('Safarikova', 'Bijeljina', 'Bosna', 'roncevic1996@gmail.com', 'Pajo', 'Pajic', '321', '321', '345435345',
+        '432132');
 
+INSERT INTO clinic (address, cnt_rating, description, name, sum_rating)
+VALUES ('Safarikova 15', 0, 'Dobra kao bog', 'Klinika 1', 0);
 
