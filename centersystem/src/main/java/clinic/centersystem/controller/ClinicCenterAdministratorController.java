@@ -2,8 +2,11 @@ package clinic.centersystem.controller;
 
 
 import clinic.centersystem.dto.request.CCARegReqDTO;
+import clinic.centersystem.dto.request.ClinicRequestDTO;
 import clinic.centersystem.dto.response.ClinicCenterAdminResponse;
+import clinic.centersystem.dto.response.ClinicResponse;
 import clinic.centersystem.dto.response.RegistrationRequirementResponse;
+import clinic.centersystem.model.Clinic;
 import clinic.centersystem.service.ClinicCenterAdministratorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -58,6 +62,22 @@ public class ClinicCenterAdministratorController {
     @PreAuthorize("hasRole('CCADMIN')")
     public ResponseEntity<String> registerCCA(@PathVariable Long ccaId, @RequestBody CCARegReqDTO ccaRegReqDTO) {
         return new ResponseEntity<>(this.clinicCenterAdministratorService.registerCCA(ccaRegReqDTO, ccaId), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = POST, value = "/reg-clinic")
+    @PreAuthorize("hasRole('CCADMIN')")
+    public ResponseEntity<String> registerClinic(@RequestBody ClinicRequestDTO ccaRegReqDTO) {
+        return new ResponseEntity<>(this.clinicCenterAdministratorService.registerClinic(ccaRegReqDTO), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = GET, value="/clinics")
+    public ResponseEntity<List<ClinicResponse>> getClinics(){
+        return new ResponseEntity<List<ClinicResponse>>(this.clinicCenterAdministratorService.getClinics(),HttpStatus.OK);
+    }
+
+    @RequestMapping(method = GET, value = "/activate-account/{id}")
+    public ResponseEntity<String> activateAccount(@PathVariable Long id, HttpServletResponse httpServletResponse) {
+        return new ResponseEntity<>(this.clinicCenterAdministratorService.activateAccount(id, httpServletResponse), HttpStatus.TEMPORARY_REDIRECT);
     }
 
 }

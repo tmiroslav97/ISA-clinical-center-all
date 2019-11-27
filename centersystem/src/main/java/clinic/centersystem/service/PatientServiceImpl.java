@@ -43,4 +43,9 @@ public class PatientServiceImpl implements PatientService {
 
         return patient;
     }
+
+    @Override
+    public Patient save(Patient patient) {
+        return this.patientRepository.save(patient);
+    }
 }

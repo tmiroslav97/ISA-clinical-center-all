@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchRegReqsData, approveRegReq, rejectRegReq } from '../../store/clinic_center_admin/actions';
 import { regReqsDataSelector } from '../../store/clinic_center_admin/selectors';
 
-function RegistrationAproval() {
+const RegistrationAproval = () => {
     const [show, setShow] = useState(false);
     const [reqId, setReqId] = useState(0);
     const [message, setMessage] = useState('');

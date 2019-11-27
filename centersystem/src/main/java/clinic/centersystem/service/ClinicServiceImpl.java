@@ -1,13 +1,16 @@
 package clinic.centersystem.service;
 
+import clinic.centersystem.converter.ClinicConverter;
 import clinic.centersystem.dto.request.ClinicRequestDTO;
 import clinic.centersystem.model.Clinic;
 import clinic.centersystem.repository.ClinicRepository;
 import clinic.centersystem.service.intf.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ClinicServiceImpl implements ClinicService {
 
     @Autowired
@@ -25,6 +28,9 @@ public class ClinicServiceImpl implements ClinicService {
 
     @Override
     public Clinic save(ClinicRequestDTO clinicRequestDTO) {
-        return null;
+        Clinic clinic = ClinicConverter.toCreateClinicFromRequest(clinicRequestDTO);
+        clinic = this.clinicRepository.save(clinic);
+
+        return clinic;
     }
 }

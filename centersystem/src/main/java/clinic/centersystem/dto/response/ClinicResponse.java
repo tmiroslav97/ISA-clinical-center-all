@@ -1,4 +1,5 @@
-package clinic.centersystem.dto.request;
+package clinic.centersystem.dto.response;
+
 
 import lombok.*;
 
@@ -7,8 +8,10 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClinicRequestDTO {
-    
+public class ClinicResponse {
+
+    private Long id;
+
     private String name;
 
     private String description;

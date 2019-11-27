@@ -35,4 +35,10 @@ public class RegistrationRequirementServiceImpl implements RegistrationRequireme
         return registrationRequirement;
     }
 
+    @Override
+    public Long deleteById(Long id) {
+        this.registrationRequirementRepository.deleteById(id);
+        return id;
+    }
+
 }

@@ -1,19 +1,16 @@
 package clinic.centersystem.service;
 
 import clinic.centersystem.converter.ClinicCenterAdminConverter;
+import clinic.centersystem.converter.ClinicConverter;
 import clinic.centersystem.converter.PatientConverter;
 import clinic.centersystem.converter.RegistrationRequirementConverter;
 import clinic.centersystem.dto.request.CCARegReqDTO;
+import clinic.centersystem.dto.request.ClinicRequestDTO;
 import clinic.centersystem.dto.response.ClinicCenterAdminResponse;
+import clinic.centersystem.dto.response.ClinicResponse;
 import clinic.centersystem.dto.response.RegistrationRequirementResponse;
-import clinic.centersystem.model.ClinicCenterAdmin;
-import clinic.centersystem.model.Patient;
-import clinic.centersystem.model.RegistrationRequirement;
-import clinic.centersystem.model.User;
-import clinic.centersystem.service.intf.ClinicCenterAdminService;
-import clinic.centersystem.service.intf.PatientService;
-import clinic.centersystem.service.intf.RegistrationRequirementService;
-import clinic.centersystem.service.intf.UserService;
+import clinic.centersystem.model.*;
+import clinic.centersystem.service.intf.*;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +44,9 @@ public class ClinicCenterAdministratorService {
     @Autowired
     private PatientService patientService;
 
+    @Autowired
+    private ClinicService clinicService;
+
     private static final Logger logger = LoggerFactory.getLogger(ClinicCenterAdministratorService.class);
 
     public ClinicCenterAdminResponse clinicCenterAdmin(Long id) {
@@ -64,12 +65,19 @@ public class ClinicCenterAdministratorService {
 
     public String approveRegistrationRequest(Long id) {
         RegistrationRequirement req = registrationRequirementService.findById(id);
-        String answer = "Patient account was created successfully";
-        String subject = "Account registration";
         req.setPassword(passwordEncoder.encode(req.getPassword()));
         Patient patient = this.patientService.save(req);
+        this.registrationRequirementService.deleteById(id);
+        String subject = "";
+        String answer = "";
         try {
-            emailService.sendMailTo(patient, subject, answer);
+            subject = "Account registration";
+            answer = String.format(
+                    "    Patient account was create successfully!\n" +
+                            "    Please follow this link to activate account:\n" +
+                            "    http://localhost:8080/cca/activate-account/%s"
+                    , patient.getId().toString());
+            emailService.sendMailTo(patient.getEmail(), subject, answer);
         } catch (Exception e) {
             System.out.println("Mail send error!");
         }
@@ -77,12 +85,11 @@ public class ClinicCenterAdministratorService {
     }
 
     public String rejectRegistrationRequest(Long id, String message) {
-        RegistrationRequirement req = registrationRequirementService.findById(id);
+        RegistrationRequirement req = this.registrationRequirementService.findById(id);
         String subject = "Account registration";
-        req.setPassword(passwordEncoder.encode(req.getPassword()));
-        Patient patient = PatientConverter.toCreatePatientFromRequest(req);
+        this.registrationRequirementService.deleteById(id);
         try {
-            emailService.sendMailTo(patient, subject, message);
+            emailService.sendMailTo(req.getEmail(), subject, message);
         } catch (Exception e) {
             System.out.println("Mail send error!");
         }
@@ -104,6 +111,29 @@ public class ClinicCenterAdministratorService {
         ClinicCenterAdmin newCCAdmin = this.clinicCenterAdminService.save(ccaRegReqDTO);
         msg = "Successfully added new clinic center administrator";
         return msg;
+    }
+
+    public String registerClinic(ClinicRequestDTO clinicRequestDTO) {
+        Clinic clinic = this.clinicService.save(clinicRequestDTO);
+        return "Clinic succesfully created";
+    }
+
+    public List<ClinicResponse> getClinics() {
+        List<Clinic> clinics = this.clinicService.findAll();
+        List<ClinicResponse> clinicResponses = new ArrayList<ClinicResponse>();
+        for (Clinic clinic : clinics) {
+            clinicResponses.add(ClinicConverter.toCreateClinicResponseFromClinic(clinic));
+        }
+        return clinicResponses;
+    }
+
+    public String activateAccount(Long id, HttpServletResponse httpServletResponse) {
+        Patient patient = this.patientService.findById(id);
+        patient.setActivated(true);
+        patient = this.patientService.save(patient);
+
+        httpServletResponse.setHeader("Location", "http://localhost:3000/login");
+        return "Account is activated!";
     }
 
 }

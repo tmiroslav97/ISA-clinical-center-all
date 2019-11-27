@@ -22,6 +22,7 @@ public class PatientConverter {
                 .country(registrationRequirement.getCountry())
                 .isActivated(false)
                 .enabled(true)
+                .isFirstLog(true)
                 .phoneNum(registrationRequirement.getPhoneNum())
                 .role(RoleEnum.ROLE_PATIENT)
                 .unoip(registrationRequirement.getUnoip())

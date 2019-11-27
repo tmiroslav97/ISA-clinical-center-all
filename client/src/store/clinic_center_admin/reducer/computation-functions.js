@@ -11,3 +11,10 @@ export function putRegReqsData(state, payload) {
         reqs: payload
     };
 }
+
+export function putClinicsData(state, payload) {
+    return {
+        ...state,
+        clinics: payload
+    };
+}

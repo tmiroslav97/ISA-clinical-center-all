@@ -5,15 +5,31 @@ import {
     FETCH_REG_REQS_DATA,
     APPROVE_REG_REQ,
     REJECT_REG_REQ,
-    REG_CC_ADMIN
+    REG_CC_ADMIN,
+    REG_CLINIC
 } from './constants';
 
 import CCAdminService from '../../services/CCAdminService';
 
 import {
     putCCAdminData,
-    putRegReqsData
+    putRegReqsData,
+    putClinicsData
 } from './actions';
+
+
+export function* fetchClinicsData() {
+    const { payload } = yield take(FETCH_CCADMIN_DATA);
+    const { clinics } = yield call(CCAdminService.fetchClinicsData, payload);
+    yield put(putClinicsData(clinics));
+}
+
+export function* regClinic() {
+    const { payload } = yield take(REG_CLINIC);
+    const { data } = yield call(CCAdminService.regClinic, payload);
+    const { clinics } = yield call(CCAdminService.fetchClinicsData, {});
+    yield put(putClinicsData(clinics))
+}
 
 export function* fetchCCAdminData() {
     const { payload } = yield take(FETCH_CCADMIN_DATA);
@@ -23,21 +39,26 @@ export function* fetchCCAdminData() {
 
 export function* fetchRegReqsData() {
     const { payload } = yield take(FETCH_REG_REQS_DATA);
-    const { data } = yield call(CCAdminService.fetchRegReqsData, payload);
-    yield put(putRegReqsData(data));
+    const { reqData } = yield call(CCAdminService.fetchRegReqsData, payload);
+    yield put(putRegReqsData(reqData));
 }
 
 export function* approveRegReq() {
     const { payload } = yield take(APPROVE_REG_REQ);
     // eslint-disable-next-line
     const { data } = yield call(CCAdminService.approveRegReq, payload);
+    const { reqData } = yield call(CCAdminService.fetchRegReqsData, {});
+    yield put(putRegReqsData(reqData));
 }
 
 export function* rejectRegReq() {
     const { payload } = yield take(REJECT_REG_REQ);
     // eslint-disable-next-line
     const { data } = yield call(CCAdminService.rejectRegReq, payload);
+    const { reqData } = yield call(CCAdminService.fetchRegReqsData, {});
+    yield put(putRegReqsData(reqData));
 }
+
 
 export function* regCCAdmin() {
     const { payload } = yield take(REG_CC_ADMIN);
