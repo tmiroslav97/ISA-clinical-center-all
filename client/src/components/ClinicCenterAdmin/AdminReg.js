@@ -25,7 +25,7 @@ const AdminReg = ({ ccaId }) => {
         <Container>
             <Row>
                 <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <h2 className="border-bottom">Registrating new admin</h2>
+                    <h2 className="border-bottom">Registrating new clinic center admin</h2>
                 </Col>
             </Row>
             <Row>
