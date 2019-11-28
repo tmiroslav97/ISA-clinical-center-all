@@ -1,5 +1,6 @@
 package clinic.centersystem.service;
 
+import clinic.centersystem.dto.request.DiagnoseRequestDTO;
 import clinic.centersystem.model.Diagnose;
 import clinic.centersystem.repository.DiagnoseRepository;
 import clinic.centersystem.service.intf.DiagnoseService;
@@ -25,7 +26,7 @@ public class DiagnoseServiceImpl implements DiagnoseService {
     }
 
     @Override
-    public Diagnose save() {
+    public Diagnose save(DiagnoseRequestDTO diagnoseRequestDTO) {
         return null;
     }
 }

@@ -1,5 +1,6 @@
 package clinic.centersystem.service.intf;
 
+import clinic.centersystem.dto.request.DiagnoseRequestDTO;
 import clinic.centersystem.model.Diagnose;
 
 import java.util.List;
@@ -10,6 +11,6 @@ public interface DiagnoseService {
 
     List<Diagnose> findAll();
 
-    Diagnose save();
+    Diagnose save(DiagnoseRequestDTO diagnoseRequestDTO);
 
 }
