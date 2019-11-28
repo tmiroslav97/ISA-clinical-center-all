@@ -5,7 +5,7 @@ import EditExRoom from './EditExRoom';
 import DeleteExRoom from './DeleteExRoom';
 import SearchExRoom from './SearchExRoom';
 
-function ExeminationRoom(){
+const ExeminationRoom = () => {
     return(
         <Tab.Container id="left-tabs-doc-home" >
             <Row>

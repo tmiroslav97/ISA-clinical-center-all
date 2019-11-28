@@ -1,7 +1,7 @@
 import React from 'react';
 import {Container, Row, Col,Table} from 'react-bootstrap';
 
-function RoomList(){
+const RoomList = () => {
     return(
         <Container>
             <Row >

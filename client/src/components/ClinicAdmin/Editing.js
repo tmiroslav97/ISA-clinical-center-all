@@ -3,7 +3,7 @@ import { Nav, Col, Row, Tab} from 'react-bootstrap';
 import UpdateCAprofile from './UpdateCAprofile';
 import CAPasswordChange from './CAPasswordChange';
 
-function Editing(){
+const Editing = () => {
     return(
         <Tab.Container id="left-tabs-doc-home" >
             <Row>

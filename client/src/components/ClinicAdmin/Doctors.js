@@ -4,7 +4,7 @@ import AddDoctor from './AddDoctor';
 import DeleteDoctor from './DeleteDoctor';
 import SearchDoctor from './SearchDoctor';
 
-function Doctors(){
+const Doctors = () => {
     return(
         <Tab.Container id="left-tabs-doc-home" >
             <Row>

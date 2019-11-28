@@ -1,7 +1,7 @@
 import React from 'react';
 import {Container, Form, Row, Col, Table} from 'react-bootstrap';
 
-function SearchDoctor(){
+const SearchDoctor = () => {
     return(
         <Container>
             <Row>

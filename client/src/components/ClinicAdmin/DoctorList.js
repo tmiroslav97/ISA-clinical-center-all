@@ -1,7 +1,26 @@
-import React from 'react';
+import React, {useState,useEffect} from 'react';
 import { Container, Row, Col, Table } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import {doctorsDataSelector} from '../../store/clinic_admin/selectors';
+import {addDoctor,  fetchDoctorData} from '../../store/clinic_admin/actions';
 
-function DoctorList(){
+const DoctorList = () => {
+    const dispatch = useDispatch();
+    const [firstName, setFirstName] = useState();
+    const [lastName, setLastName] = useState();
+    const [email, setEmail] = useState();
+    //const doctors = useSelector(clinicsDataSelector);
+
+    const handleAddDoctor = () => {
+        dispatch(
+            addDoctor({
+                firstName,
+                lastName,
+                email
+            })
+        );
+    };
+   
     return(
             <Container>
             <Row >
@@ -22,24 +41,7 @@ function DoctorList(){
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                            <td>1</td>
-                            <td>Cica</td>
-                            <td>Gorio</td>
-                            <td>cica@gmail.com</td>
-                            </tr>
-                            <tr>
-                            <td>2</td>
-                            <td>Vuk</td>
-                            <td>Stepski</td>
-                            <td>vuk@yahoo.com</td>
-                            </tr>
-                            <tr>
-                            <td>3</td>
-                            <td>Ana</td>
-                            <td>Karenjina</td>
-                            <td>ana@gmail.com</td>
-                            </tr>
+                        
                         </tbody>
                     </Table>
                 </Col>

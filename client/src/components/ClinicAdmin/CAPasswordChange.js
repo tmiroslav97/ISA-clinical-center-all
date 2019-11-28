@@ -2,7 +2,7 @@ import React from 'react';
 import {Container, Row, Col,Form, Button} from 'react-bootstrap';
 import PasswordChange from '../PasswordChange';
 
-function CAPasswordChange(){
+const CAPasswordChange = () => {
     return(
         <Container>
             <Row>

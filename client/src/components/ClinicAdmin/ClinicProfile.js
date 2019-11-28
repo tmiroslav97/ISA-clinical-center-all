@@ -6,7 +6,7 @@ import Pricelist from "./Pricelist";
 import FreeApointment from "./FreeApointment";
 import ClinicProfileInfo from "./ClinicsProfileInfo";
 
-function ClinicProfile(){
+const ClinicProfile = () => {
     return(
         <Tab.Container id="left-tabs-doc-home" >
             <Row>

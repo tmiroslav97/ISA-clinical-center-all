@@ -5,7 +5,7 @@ import AvgDoctorRating from './AvgDoctorRatng';
 import Graphs from './Graphs';
 import Incomes from './Incomes';
 
-function BusinessReport(){
+const BusinessReport = () => {
     return(
         <Tab.Container id="left-tabs-doc-home" >
             <Row>

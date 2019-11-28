@@ -1,7 +1,7 @@
 import React from 'react';
 import {Container, Row,Spinner} from 'react-bootstrap';
 
-function EditExRoom(){
+const EditExRoom = () => {
     return(
         <Container>
             <Row>

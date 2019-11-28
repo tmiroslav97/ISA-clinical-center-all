@@ -7,7 +7,7 @@ import ExeminationRoom from './ExeminationRoom';
 import Appointments from './Appointments';
 import Doctors from './Doctors';
 
-function CA(){
+const CA = () => {
     return(
         <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
             <Tab eventKey="Cprofile" title="Clinic Profile">

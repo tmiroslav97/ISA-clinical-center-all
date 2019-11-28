@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row , Col,Table } from 'react-bootstrap';
 
-function Pricelist(){
+const Pricelist = () => {
     return(
         <Container>
              <Row >

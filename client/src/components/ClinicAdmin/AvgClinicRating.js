@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Container, Col,Row, Form} from 'react-bootstrap';
 
-function AvgClinicRating(){
+const AvgClinicRating = () => {
     return(
         <Container>
             <Row>

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Container, Row,Spinner} from 'react-bootstrap';
 
-function AddExRoom(){
+const AddExRoom = () => {
     return(
         <Container>
             <Row>

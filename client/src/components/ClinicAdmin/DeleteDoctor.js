@@ -1,11 +1,11 @@
 import React from 'react';
 import {Container,Row, Table, Button} from 'react-bootstrap';
 
-function DeleteDoctor(){
+const DeleteDoctor = () => {
     return(
         <Container>
             <Row>
-                <h3>Approve or refuse registration requests</h3>
+                <h3>DeleteDoctor</h3>
             </Row>
             <Row>
                 <Table responsive>

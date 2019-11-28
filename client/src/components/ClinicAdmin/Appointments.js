@@ -1,7 +1,7 @@
 import React from 'react';
 import {Tab, Nav, Col, Row} from 'react-bootstrap';
 
-function Appointments(){
+const Appointments = () => {
     return(
         <Tab.Container id="left-tabs-doc-home" >
             <Row>
