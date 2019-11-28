@@ -44,7 +44,7 @@ public class DbColumnConstants {
     public static final String LASTPASSWORDRESETDATE = "lastPasswordResetDate";
     public static final String USERAUTHORITY = "user_authority";
     public static final String CALENDAR = "calendar";
-
+    public static final String CODE = "code";
 
 
 
