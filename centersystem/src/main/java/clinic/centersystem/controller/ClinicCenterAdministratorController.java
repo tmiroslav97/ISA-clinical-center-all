@@ -87,6 +87,7 @@ public class ClinicCenterAdministratorController {
         return new ResponseEntity<>(this.clinicCenterAdministratorService.registerClinicAdmin(clinicAdminReqDTO), HttpStatus.OK);
     }
 
+    @RequestMapping(method = POST, value = "/add-diagnose")
     public ResponseEntity<String> addDiagnose(@RequestBody DiagnoseRequestDTO diagnoseRequestDTO) {
         return new ResponseEntity<>(this.clinicCenterAdministratorService.addDiagnose(diagnoseRequestDTO), HttpStatus.OK);
     }
