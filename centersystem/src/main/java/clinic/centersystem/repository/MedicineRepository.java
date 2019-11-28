@@ -1,4 +1,7 @@
 package clinic.centersystem.repository;
 
-public interface MedicineRepository {
+import clinic.centersystem.model.Medicine;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MedicineRepository extends JpaRepository<Medicine, Long> {
 }
