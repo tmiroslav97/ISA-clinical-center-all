@@ -28,7 +28,6 @@ export function* login() {
 export function* changePassword() {
     const { payload } = yield take(CHANGE_PASSWORD);
     const { data } = yield call(authService.changePassword, payload);
-    console.log(data);
 }
 
 
