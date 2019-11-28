@@ -1,12 +1,10 @@
 package clinic.centersystem.model;
 
-import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Setter
@@ -20,7 +18,7 @@ public class PerscriptionRecord {
     private Long id;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Medecine> medecines;
+    private Set<Medicine> medicines;
 
 
     public PerscriptionRecord() {

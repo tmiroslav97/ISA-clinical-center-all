@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Table(name = DbTableConstants.MEDECINE)
-public class Medecine {
+public class Medicine {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +26,7 @@ public class Medecine {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private PerscriptionRecord perscriptionRecord;
 
-    public Medecine() {
+    public Medicine() {
         // TODO: implement
     }
 
