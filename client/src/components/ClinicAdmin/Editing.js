@@ -1,7 +1,7 @@
 import React from 'react';
 import { Nav, Col, Row, Tab} from 'react-bootstrap';
 import UpdateCAprofile from './UpdateCAprofile';
-import CAPasswordChange from './CAPasswordChange';
+import PasswordChanger from '../PasswordChanger';
 
 const Editing = () => {
     return(
@@ -23,7 +23,7 @@ const Editing = () => {
                     <UpdateCAprofile/>
                 </Tab.Pane>
                 <Tab.Pane eventKey="fifth">
-                    <CAPasswordChange/>
+                    <PasswordChanger/>
                 </Tab.Pane>
                 </Tab.Content>
             </Col>
