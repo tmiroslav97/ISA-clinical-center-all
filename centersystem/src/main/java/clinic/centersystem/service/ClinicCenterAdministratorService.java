@@ -7,6 +7,7 @@ import clinic.centersystem.converter.RegistrationRequirementConverter;
 import clinic.centersystem.dto.request.CCARegReqDTO;
 import clinic.centersystem.dto.request.ClinicAdminReqDTO;
 import clinic.centersystem.dto.request.ClinicRequestDTO;
+import clinic.centersystem.dto.request.DiagnoseRequestDTO;
 import clinic.centersystem.dto.response.ClinicCenterAdminResponse;
 import clinic.centersystem.dto.response.ClinicResponse;
 import clinic.centersystem.dto.response.RegistrationRequirementResponse;
@@ -50,6 +51,9 @@ public class ClinicCenterAdministratorService {
 
     @Autowired
     private ClinicAdminService clinicAdminService;
+
+    @Autowired
+    private DiagnoseService diagnoseService;
 
     private static final Logger logger = LoggerFactory.getLogger(ClinicCenterAdministratorService.class);
 
@@ -151,6 +155,12 @@ public class ClinicCenterAdministratorService {
         clinic = this.clinicService.saveClinic(clinic);
 
         return "Added clinic admin";
+    }
+
+    public String addDiagnose(DiagnoseRequestDTO diagnoseRequestDTO) {
+        Diagnose diagnose = diagnoseService.save(diagnoseRequestDTO);
+
+        return "Successfully added diagnose";
     }
 
 }
