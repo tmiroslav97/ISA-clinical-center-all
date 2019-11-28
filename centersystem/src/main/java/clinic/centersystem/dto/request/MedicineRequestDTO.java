@@ -15,5 +15,5 @@ public class MedicineRequestDTO {
     private String code;
 
     private String description;
-    
+
 }
