@@ -165,7 +165,7 @@ public class ClinicCenterAdministratorService {
 
     public String addMedicine(MedicineRequestDTO medicineRequestDTO) {
         Medicine medicine = medicineService.save(medicineRequestDTO);
-        
+
         return "Successfully added medicine";
     }
 
