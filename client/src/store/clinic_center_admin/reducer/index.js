@@ -1,7 +1,8 @@
 import {
     PUT_CCADMIN_DATA,
     PUT_REG_REQS_DATA,
-    PUT_CLINICS_DATA
+    PUT_CLINICS_DATA,
+    PUT_MEDICINE_DATA
 } from '../constants';
 
 import * as computationFunctions from './computation-functions';
@@ -16,7 +17,8 @@ const initialState = {
         predefined: false
     },
     reqs: [],
-    clinics: []
+    clinics: [],
+    medicines: []
 };
 
 const ccAdminReducer = (state = initialState, { type, payload }) => {
@@ -29,7 +31,8 @@ const ccAdminReducer = (state = initialState, { type, payload }) => {
 const actionHandler = {
     [PUT_CCADMIN_DATA]: computationFunctions.putCCAdminData,
     [PUT_REG_REQS_DATA]: computationFunctions.putRegReqsData,
-    [PUT_CLINICS_DATA]: computationFunctions.putClinicsData
+    [PUT_CLINICS_DATA]: computationFunctions.putClinicsData,
+    [PUT_MEDICINE_DATA]: computationFunctions.putMedicineData
 };
 
 export default ccAdminReducer;

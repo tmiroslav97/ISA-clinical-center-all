@@ -18,3 +18,10 @@ export function putClinicsData(state, payload) {
         clinics: payload
     };
 }
+
+export function putMedicineData(state, payload) {
+    return {
+        ...state,
+        medicines: payload
+    };
+}
