@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { addMedicine } from '../../store/clinic_center_admin/actions';
 
 
 function AddMedicine() {
@@ -9,8 +10,14 @@ function AddMedicine() {
     const [description, setDescription] = useState();
     const [code, setCode] = useState();
 
-    const handleAddMedicine = () =>{
-
+    const handleAddMedicine = () => {
+        dispatch(
+            addMedicine({
+                code,
+                name,
+                description
+            })
+        );
     };
 
     return (
@@ -40,7 +47,7 @@ function AddMedicine() {
                             />
                         </Form.Group>
                         <Form.Group as={Col}>
-                            <Form.Label>Description address:</Form.Label>
+                            <Form.Label>Description:</Form.Label>
                             <Form.Control type="textarea" placeholder="Enter medicine description"
                                 onChange={({ currentTarget }) => {
                                     setDescription(currentTarget.value);
@@ -49,7 +56,7 @@ function AddMedicine() {
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Button variant="primary" onClick={handleAddMedicine}>
-                                Register
+                                Add medicine
                             </Button>
                         </Form.Group>
                     </Form>
@@ -73,7 +80,7 @@ function AddMedicine() {
                         </thead>
                         <tbody>
                             {
-                                
+
                             }
                         </tbody>
                     </Table>
