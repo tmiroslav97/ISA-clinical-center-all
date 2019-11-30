@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import {  } from '../../store/clinic_center_admin/actions';
+import { addDiagnose } from '../../store/clinic_center_admin/actions';
 
 function AddDiagnose(){
     const dispatch = useDispatch();
@@ -10,7 +10,13 @@ function AddDiagnose(){
     const [code, setCode] = useState();
 
     const handleAddDiagnose = () => {
-        
+        dispatch(
+            addDiagnose({
+                code,
+                name,
+                description
+            })
+        );
     };
 
     return(
