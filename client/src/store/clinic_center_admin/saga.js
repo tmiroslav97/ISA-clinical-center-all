@@ -21,14 +21,14 @@ import {
     putMedicineData
 } from './actions';
 
-export function* regClinicAdmin(){
+export function* regClinicAdmin() {
     const { payload } = yield take(REG_CLINIC_ADMIN);
     const { data } = yield call(CCAdminService.regClinicAdmin, payload);
 }
 
-export function* addMedicine(){
+export function* addMedicine() {
     const { payload } = yield take(ADD_MEDICINE);
-    
+    const { data } = yield call(CCAdminService.addMedicine, payload);
 }
 
 
