@@ -10,7 +10,8 @@ const FINALPOINTS = {
     REG_CC_ADMIN: '/cca/reg-cca/%s',
     REG_CLINIC: '/cca/reg-clinic',
     FETCH_CLINICS: '/cca/clinics',
-    REG_CLINIC_ADMIN: '/cca/reg-clinic-admin'
+    REG_CLINIC_ADMIN: '/cca/reg-clinic-admin',
+    ADD_MEDICINE : '/cca/add-medicine'
 };
 
 class CCAdminService extends HttpClient {
@@ -105,6 +106,19 @@ class CCAdminService extends HttpClient {
         try {
             const { data } = await this.getApiClient().post(
                 FINALPOINTS.REG_CLINIC_ADMIN,
+                payload
+            );
+
+            return { data };
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    };
+
+    addMedicine = async payload => {
+        try {
+            const { data } = await this.getApiClient().post(
+                FINALPOINTS.ADD_MEDICINE,
                 payload
             );
 
