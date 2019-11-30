@@ -11,8 +11,20 @@ import {
     PUT_CLINICS_DATA,
     REG_CLINIC_ADMIN,
     ADD_MEDICINE,
-    PUT_MEDICINE_DATA
+    PUT_MEDICINE_DATA,
+    ADD_DIAGNOSE,
+    PUT_DIAGNOSE_DATA
 } from './constants';
+
+export const addDiagnose = payload => ({
+    type: ADD_DIAGNOSE,
+    payload
+});
+
+export const putDiagnoseData = payload => ({
+    type: PUT_DIAGNOSE_DATA,
+    payload
+});
 
 export const addMedicine = payload => ({
     type: ADD_MEDICINE,
