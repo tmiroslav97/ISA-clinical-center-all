@@ -9,3 +9,5 @@ export const REG_CLINIC = 'register_clinic';
 export const FETCH_CLINICS_DATA = 'fetch_clinics_data';
 export const PUT_CLINICS_DATA = 'put_clinics_data';
 export const REG_CLINIC_ADMIN = 'reg_clinic_admin';
+export const ADD_MEDICINE = 'add_medicine';
+export const PUT_MEDICINE_DATA = 'put_medicine_data';

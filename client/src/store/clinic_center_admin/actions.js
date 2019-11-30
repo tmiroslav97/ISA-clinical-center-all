@@ -9,8 +9,20 @@ import {
     REG_CLINIC,
     FETCH_CLINICS_DATA,
     PUT_CLINICS_DATA,
-    REG_CLINIC_ADMIN
+    REG_CLINIC_ADMIN,
+    ADD_MEDICINE,
+    PUT_MEDICINE_DATA
 } from './constants';
+
+export const addMedicine = payload => ({
+    type: ADD_MEDICINE,
+    payload
+});
+
+export const putMedicineData = payload => ({
+    type: PUT_MEDICINE_DATA,
+    payload
+});
 
 export const regClinicAdmin = payload => ({
     type: REG_CLINIC_ADMIN,
