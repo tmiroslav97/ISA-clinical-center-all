@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { addDiagnose } from '../../store/clinic_center_admin/actions';
+import { addDiagnose, fetchDiagnoseData } from '../../store/clinic_center_admin/actions';
+import { diagnoseDataSelector } from '../../store/clinic_center_admin/selectors';
 
 function AddDiagnose(){
     const dispatch = useDispatch();
     const [name, setName] = useState();
     const [description, setDescription] = useState();
     const [code, setCode] = useState();
+    const diagnoses = useSelector(diagnoseDataSelector);
 
     const handleAddDiagnose = () => {
         dispatch(
@@ -19,7 +21,11 @@ function AddDiagnose(){
         );
     };
 
-    
+    useEffect(() => {
+        dispatch(
+            fetchDiagnoseData({})
+        );
+    }, []);
 
     return(
         <Container>
@@ -81,7 +87,16 @@ function AddDiagnose(){
                         </thead>
                         <tbody>
                             {
-                                
+                                diagnoses.map((diagnose, index) => {
+                                    return (
+                                        <tr key={diagnose.id}>
+                                            <td>{index + 1}</td>
+                                            <td>{diagnose.code}</td>
+                                            <td>{diagnose.name}</td>
+                                            <td>{diagnose.description}</td>
+                                        </tr>
+                                    );
+                                })
                             }
                         </tbody>
                     </Table>
