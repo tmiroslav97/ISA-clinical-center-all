@@ -12,7 +12,8 @@ const FINALPOINTS = {
     FETCH_CLINICS: '/cca/clinics',
     REG_CLINIC_ADMIN: '/cca/reg-clinic-admin',
     ADD_MEDICINE : '/cca/add-medicine',
-    ADD_DIAGNOSE : '/cca/add-diagnose'
+    ADD_DIAGNOSE : '/cca/add-diagnose',
+    FETCH_MEDICINES_DATA : '/medic/all'
 };
 
 class CCAdminService extends HttpClient {
@@ -138,6 +139,20 @@ class CCAdminService extends HttpClient {
 
             return { data };
         } catch (error) {
+            console.log(error.response.data);
+        }
+    };
+
+    fetchMedicinesData = async payload =>{
+        try{
+            const { data } = await this.getApiClient().get(
+                FINALPOINTS.FETCH_MEDICINES_DATA
+            );
+
+            const medicines = data;
+
+            return { medicines };
+        }catch(error){
             console.log(error.response.data);
         }
     };
