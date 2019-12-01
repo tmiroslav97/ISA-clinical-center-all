@@ -16,3 +16,4 @@ export const PUT_MEDICINE_RECORD = 'put_medicine_record';
 export const FETCH_MEDICINE_RECORD = 'fetch_medicine_record';
 export const ADD_DIAGNOSE = 'add_diagnose';
 export const PUT_DIAGNOSE_DATA = 'put_diagnose_data';
+export const FETCH_DIAGNOSE_DATA = 'fetch_diagnose_data';
