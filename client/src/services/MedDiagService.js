@@ -3,7 +3,8 @@ import { history } from '../index';
 import { format } from 'util';
 
 const FINALPOINTS = {
-    FETCH_MEDICINE_DATA: '/medic/all'
+    FETCH_MEDICINE_DATA: '/medic/all',
+    FETCH_DIAGNOSE_DATA: '/diag/all'
 };
 
 class MedDiagService extends HttpClient {
@@ -15,6 +16,20 @@ class MedDiagService extends HttpClient {
 
             const medicines = data;
             return { medicines };
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    }
+
+    fetchDiagnoseData = async payload => {
+        try {
+            const { data } = await this.getApiClient().get(
+                FINALPOINTS.FETCH_DIAGNOSE_DATA
+            );
+
+            const diagnoses = data;
+
+            return { diagnoses };
         } catch (error) {
             console.log(error.response.data);
         }
