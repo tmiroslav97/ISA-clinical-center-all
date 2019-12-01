@@ -12,6 +12,7 @@ import {
     ADD_MEDICINE,
     FETCH_MEDICINE_DATA,
     ADD_DIAGNOSE,
+    FETCH_DIAGNOSE_DATA
 } from './constants';
 
 import CCAdminService from '../../services/CCAdminService';
@@ -30,9 +31,17 @@ export function* regClinicAdmin() {
     const { data } = yield call(CCAdminService.regClinicAdmin, payload);
 }
 
+export function* fetchDiagnoseData() {
+    const { payload } = yield take(FETCH_DIAGNOSE_DATA);
+    const { diagnoses } = yield call(MedDiagService.fetchDiagnoseData, {});
+    yield put(putDiagnoseData(diagnoses));
+}
+
 export function* addDiagnose() {
     const { payload } = yield take(ADD_DIAGNOSE);
     const { data } = yield call(CCAdminService.addDiagnose, payload);
+    const { diagnoses } = yield call(MedDiagService.fetchDiagnoseData, {});
+    yield put(putDiagnoseData(diagnoses));
 }
 
 export function* fetchMedicineData() {
