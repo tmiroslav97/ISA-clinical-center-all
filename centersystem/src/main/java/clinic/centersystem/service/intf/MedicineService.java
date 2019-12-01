@@ -11,5 +11,7 @@ public interface MedicineService {
 
     List<Medicine> findAll();
 
-    Medicine save(MedicineRequestDTO medicineRequestDTO);
+    Medicine saveReq(MedicineRequestDTO medicineRequestDTO);
+
+    Medicine save(Medicine medicine);
 }
