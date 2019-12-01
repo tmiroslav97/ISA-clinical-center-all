@@ -16,12 +16,12 @@ public final class DbTableConstants {
     public static final String DIAGNOSE = "diagnose";
     public static final String DIAGNOSERECORD = "diagnoseRecord";
     public static final String DOCTOR = "doctor";
-    public static final String MEDECINE = "medecine";
+    public static final String MEDICINE = "medicine";
     public static final String MEDICALRECORD = "medicalRecord";
     public static final String MEDICALREPORT = "medicalReport";
     public static final String NURSE = "nurse";
     public static final String PATIENT = "patient";
-    public static final String PERSCRIPTIONRECORD = "perscriptionRecord";
+    public static final String MEDICINERECORD = "medicineRecord";
     public static final String PERSONNEL = "personnel";
     public static final String PRICELIST = "priceList";
     public static final String PRICELISTITEM = "priceListItem";
