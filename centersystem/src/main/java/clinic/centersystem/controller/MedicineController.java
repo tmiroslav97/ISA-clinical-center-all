@@ -3,6 +3,7 @@ package clinic.centersystem.controller;
 
 import clinic.centersystem.model.Diagnose;
 import clinic.centersystem.model.Medicine;
+import clinic.centersystem.model.MedicineRecord;
 import clinic.centersystem.service.MedicineServiceCont;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,7 +16,7 @@ import java.util.List;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
-@RequestMapping(value = "/medic", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/medic")
 public class MedicineController {
 
     private final MedicineServiceCont medicineServiceCont;
@@ -25,7 +26,7 @@ public class MedicineController {
     }
 
     @RequestMapping(method = GET, value = "/all")
-    public ResponseEntity<List<Medicine>> getDiagnoses() {
+    public ResponseEntity<List<Medicine>> getMedicines() {
         return new ResponseEntity<>(this.medicineServiceCont.getMedicines(), HttpStatus.OK);
     }
 
