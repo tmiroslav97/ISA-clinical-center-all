@@ -27,9 +27,15 @@ public class MedicineServiceImpl implements MedicineService {
     }
 
     @Override
-    public Medicine save(MedicineRequestDTO medicineRequestDTO) {
+    public Medicine saveReq(MedicineRequestDTO medicineRequestDTO) {
         Medicine medicine = MedicineConverter.toCreateMedicineFromRequest(medicineRequestDTO);
         medicine = this.medicineRepository.save(medicine);
         return medicine;
     }
+
+    @Override
+    public Medicine save(Medicine medicine) {
+        return this.medicineRepository.save(medicine);
+    }
+    
 }

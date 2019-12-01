@@ -55,6 +55,9 @@ public class ClinicCenterAdministratorService {
     @Autowired
     private MedicineService medicineService;
 
+    @Autowired
+    private MedicineRecordService medicineRecordService;
+
     private static final Logger logger = LoggerFactory.getLogger(ClinicCenterAdministratorService.class);
 
     public ClinicCenterAdminResponse clinicCenterAdmin(Long id) {
@@ -164,7 +167,9 @@ public class ClinicCenterAdministratorService {
     }
 
     public String addMedicine(MedicineRequestDTO medicineRequestDTO) {
-        Medicine medicine = medicineService.save(medicineRequestDTO);
+        Medicine medicine = medicineService.saveReq(medicineRequestDTO);
+
+        
 
         return "Successfully added medicine";
     }
