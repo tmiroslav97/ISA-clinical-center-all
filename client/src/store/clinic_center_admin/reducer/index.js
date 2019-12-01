@@ -2,6 +2,7 @@ import {
     PUT_CCADMIN_DATA,
     PUT_REG_REQS_DATA,
     PUT_CLINICS_DATA,
+    PUT_MEDICINE_RECORD,
     PUT_MEDICINE_DATA
 } from '../constants';
 
@@ -18,6 +19,10 @@ const initialState = {
     },
     reqs: [],
     clinics: [],
+    medicineRecord: {
+        id: '',
+        medicines: []
+    },
     medicines: []
 };
 
@@ -32,7 +37,8 @@ const actionHandler = {
     [PUT_CCADMIN_DATA]: computationFunctions.putCCAdminData,
     [PUT_REG_REQS_DATA]: computationFunctions.putRegReqsData,
     [PUT_CLINICS_DATA]: computationFunctions.putClinicsData,
-    [PUT_MEDICINE_DATA]: computationFunctions.putMedicineData
+    [PUT_MEDICINE_RECORD]: computationFunctions.putMedicineRecordData,
+    [PUT_MEDICINE_DATA] : computationFunctions.putMedicineData
 };
 
 export default ccAdminReducer;

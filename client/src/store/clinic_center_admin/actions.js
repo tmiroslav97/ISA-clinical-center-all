@@ -11,14 +11,26 @@ import {
     PUT_CLINICS_DATA,
     REG_CLINIC_ADMIN,
     ADD_MEDICINE,
-    PUT_MEDICINE_DATA,
+    PUT_MEDICINE_RECORD,
+    FETCH_MEDICINE_RECORD,
     ADD_DIAGNOSE,
     PUT_DIAGNOSE_DATA,
-    FETCH_MEDICINES_DATA
+    PUT_MEDICINE_DATA,
+    FETCH_MEDICINE_DATA
 } from './constants';
 
-export const fetchMedicinesData = payload => ({
-    type: FETCH_MEDICINES_DATA,
+export const fetchMedicineRecord = payload => ({
+    type: FETCH_MEDICINE_RECORD,
+    payload
+});
+
+export const fetchMedicineData = payload => ({
+    type: FETCH_MEDICINE_DATA,
+    payload
+});
+
+export const putMedicineData = payload => ({
+    type: PUT_MEDICINE_DATA,
     payload
 });
 
@@ -37,8 +49,8 @@ export const addMedicine = payload => ({
     payload
 });
 
-export const putMedicineData = payload => ({
-    type: PUT_MEDICINE_DATA,
+export const putMedicineRecord = payload => ({
+    type: PUT_MEDICINE_RECORD,
     payload
 });
 

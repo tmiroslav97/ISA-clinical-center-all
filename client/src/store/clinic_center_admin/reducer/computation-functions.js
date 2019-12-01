@@ -19,6 +19,13 @@ export function putClinicsData(state, payload) {
     };
 }
 
+export function putMedicineRecordData(state, payload) {
+    return {
+        ...state,
+        medicineRecord: payload
+    };
+}
+
 export function putMedicineData(state, payload) {
     return {
         ...state,
