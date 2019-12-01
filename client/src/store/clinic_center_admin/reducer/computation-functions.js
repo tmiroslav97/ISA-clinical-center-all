@@ -32,3 +32,10 @@ export function putMedicineData(state, payload) {
         medicines: payload
     };
 }
+
+export function putDiagnoseData(state, payload) {
+    return {
+        ...state,
+        diagnoses: payload
+    };
+}
