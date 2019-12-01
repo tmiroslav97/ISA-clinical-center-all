@@ -20,7 +20,6 @@ public class PerscriptionRecord {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Medicine> medicines;
 
-
     public PerscriptionRecord() {
 
     }
