@@ -12,7 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = DbTableConstants.MEDECINE)
+@Table(name = DbTableConstants.MEDICINE)
 public class Medicine {
 
     @Id
@@ -28,6 +28,6 @@ public class Medicine {
     @Column(name = DbColumnConstants.DESCRIPTION, unique = true, nullable = false)
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private PerscriptionRecord perscriptionRecord;
+    //@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    //private MedicineRecord medicineRecord;
 }
