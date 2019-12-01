@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { addDiagnose } from '../../store/clinic_center_admin/actions';
@@ -18,6 +18,8 @@ function AddDiagnose(){
             })
         );
     };
+
+    
 
     return(
         <Container>
@@ -79,7 +81,7 @@ function AddDiagnose(){
                         </thead>
                         <tbody>
                             {
-
+                                
                             }
                         </tbody>
                     </Table>

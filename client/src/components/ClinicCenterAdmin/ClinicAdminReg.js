@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Form, Button, Table } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { clinicsDataSelector } from '../../store/clinic_center_admin/selectors';
 import { regClinicAdmin } from '../../store/clinic_center_admin/actions';

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { addMedicine } from '../../store/clinic_center_admin/actions';
+import { addMedicine, fetchMedicineData } from '../../store/clinic_center_admin/actions';
+import { medicineDataSelector } from '../../store/clinic_center_admin/selectors';
 
 
 function AddMedicine() {
@@ -9,6 +10,7 @@ function AddMedicine() {
     const [name, setName] = useState();
     const [description, setDescription] = useState();
     const [code, setCode] = useState();
+    const medicines = useSelector(medicineDataSelector);
 
     const handleAddMedicine = () => {
         dispatch(
@@ -19,6 +21,12 @@ function AddMedicine() {
             })
         );
     };
+
+    useEffect(() => {
+        dispatch(
+            fetchMedicineData({})
+        );
+    }, []);
 
     return (
         <Container>
@@ -80,7 +88,16 @@ function AddMedicine() {
                         </thead>
                         <tbody>
                             {
-
+                                medicines.map((medicine, index) => {
+                                    return (
+                                        <tr key={medicine.id}>
+                                            <td>{index + 1}</td>
+                                            <td>{medicine.code}</td>
+                                            <td>{medicine.name}</td>
+                                            <td>{medicine.description}</td>
+                                        </tr>
+                                    );
+                                })
                             }
                         </tbody>
                     </Table>
