@@ -13,3 +13,4 @@ export const ADD_MEDICINE = 'add_medicine';
 export const PUT_MEDICINE_DATA = 'put_medicine_data';
 export const ADD_DIAGNOSE = 'add_diagnose';
 export const PUT_DIAGNOSE_DATA = 'put_diagnose_data';
+export const FETCH_MEDICINES_DATA = 'fetch_medicines_data';

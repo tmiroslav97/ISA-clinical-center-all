@@ -13,8 +13,14 @@ import {
     ADD_MEDICINE,
     PUT_MEDICINE_DATA,
     ADD_DIAGNOSE,
-    PUT_DIAGNOSE_DATA
+    PUT_DIAGNOSE_DATA,
+    FETCH_MEDICINES_DATA
 } from './constants';
+
+export const fetchMedicinesData = payload => ({
+    type: FETCH_MEDICINES_DATA,
+    payload
+});
 
 export const addDiagnose = payload => ({
     type: ADD_DIAGNOSE,
