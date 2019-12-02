@@ -1,0 +1,1 @@
+export const FETCH_NURSE_DATA = 'fetch_nurse_data';
