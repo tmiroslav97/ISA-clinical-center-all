@@ -31,7 +31,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public List<Patient> findAll() {
-        return null;
+        return this.patientRepository.findAll();
     }
 
     @Override

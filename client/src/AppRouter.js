@@ -1,10 +1,11 @@
 import React from 'react';
-import {Route, Redirect, Switch} from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import PatientHomePage from './components/PatientHomePage';
 import RegPage from './pages/RegPage';
 import DoctorHomePage from './pages/DoctorHomePage';
+import NurseHomePage from './pages/NurseHomePage';
 import ClinicCenterAdminProfile from './components/ClinicCenterAdmin/ClinicCenterAdminProfile';
 import HolidayAproval from './components/HolidayAproval';
 import PasswordChanger from './components/PasswordChanger';
@@ -22,9 +23,10 @@ const AppRouter = () =>{
             <Route exact path="/ccadmin/:id" component={ClinicCenterAdminProfile}/>
             <Route exact path="/signup" component={RegPage}/>
             <Route exact path="/change-pass" component={PasswordChanger}/>
+            <Route exact path="/nurse-page" component={NurseHomePage} />
             <Route exact path="/CA" component={ClinicAdmin}/>
 
-            <Route exact path="/page-not-found" component={() => <h1>Page not found!</h1>}/>
+            <Route exact path="/page-not-found" component={() => <h1>Page not found!</h1>} />
             <Redirect from="*" to="/page-not-found" />
         </Switch>
     );
