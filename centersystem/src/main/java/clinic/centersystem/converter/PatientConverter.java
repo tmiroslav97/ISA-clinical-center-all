@@ -1,6 +1,7 @@
 package clinic.centersystem.converter;
 
 import clinic.centersystem.dto.request.RegistrationRequirementDTO;
+import clinic.centersystem.dto.response.PatientResponse;
 import clinic.centersystem.model.Authority;
 import clinic.centersystem.model.Patient;
 import clinic.centersystem.model.RegistrationRequirement;
@@ -26,6 +27,19 @@ public class PatientConverter {
                 .phoneNum(registrationRequirement.getPhoneNum())
                 .role(RoleEnum.ROLE_PATIENT)
                 .unoip(registrationRequirement.getUnoip())
+                .build();
+    }
+
+    public static PatientResponse toCreatePatientResponseFromPatient(Patient patient) {
+        return PatientResponse.builder()
+                .firstName(patient.getFirstName())
+                .lastName(patient.getLastName())
+                .email(patient.getEmail())
+                .country(patient.getCountry())
+                .city(patient.getCity())
+                .address(patient.getAddress())
+                .phoneNum(patient.getPhoneNum())
+                .unoip(patient.getUnoip())
                 .build();
     }
 }
