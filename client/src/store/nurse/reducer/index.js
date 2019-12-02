@@ -1,3 +1,5 @@
+import * as computationFunctions from './computation-functions';
+
 const initialState = {
     data: {
         id: window.localStorage.getItem('id'),
