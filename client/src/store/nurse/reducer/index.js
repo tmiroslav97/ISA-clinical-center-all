@@ -1,3 +1,8 @@
+import {
+    PUT_NURSE_DATA,
+    PUT_PATIENTS
+} from '../constants';
+
 import * as computationFunctions from './computation-functions';
 
 const initialState = {
@@ -19,7 +24,8 @@ const nurseReducer = (state = initialState, { type, payload }) => {
 };
 
 const actionHandler = {
-
+    [PUT_NURSE_DATA]: computationFunctions.putNurseData,
+    [PUT_PATIENTS]: computationFunctions.putPatients
 };
 
 export default nurseReducer;
