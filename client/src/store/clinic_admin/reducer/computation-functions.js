@@ -1,6 +1,13 @@
-export function putAddedDoctor(state, payload) {
+/*export function putAddedDoctor(state, payload) {
     return {
         ...state,
-        data: payload
+        doctors: payload
+    };
+}*/
+
+export function putRoomsData(state, payload) {
+    return {
+        ...state,
+        rooms: payload
     };
 }

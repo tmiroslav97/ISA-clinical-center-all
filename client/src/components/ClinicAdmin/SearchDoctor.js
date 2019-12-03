@@ -9,7 +9,7 @@ const SearchDoctor = () => {
                     <Form>
                         <Form.Row>
                             <Form.Group >
-                                <Form.Label>Search doctor by name: </Form.Label>
+                                <Form.Label>Search doctor by id: </Form.Label>
                             </Form.Group>
                             <Form.Group >
                                 <Form.Control type="text"/>

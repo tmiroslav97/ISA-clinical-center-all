@@ -2,7 +2,7 @@ import React, { useState, useEffect }  from 'react';
 import {Container,Form,Col,Row, Button} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {doctorsDataSelector} from '../../store/clinic_admin/selectors';
-import {addDoctor,  fetchDoctorData} from '../../store/clinic_admin/actions';
+import { fetchDoctorData} from '../../store/clinic_admin/actions';
 
 const AddDoctor = () => {
     const dispatch = useDispatch();
@@ -12,11 +12,7 @@ const AddDoctor = () => {
 
     const handleAddDoctor = () => {
         dispatch(
-            addDoctor({
-                firstName,
-                lastName,
-                email
-            })
+            
         );
     };
     useEffect(() => {

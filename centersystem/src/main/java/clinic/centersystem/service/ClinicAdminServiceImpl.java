@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ClinicAdminServiceImpl implements ClinicAdminService {
+public class  ClinicAdminServiceImpl implements ClinicAdminService {
 
     @Autowired
     private ClinicAdminRepository clinicAdminRepository;

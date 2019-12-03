@@ -1,6 +1,8 @@
 import {
     PUT_ADDED_DOCTOR, 
-    ADD_DOCTOR
+    ADD_DOCTOR,
+    FETCH_ROOMS_DATA,
+    PUT_ROOMS_DATA
 } from '../constants';
 
 import * as computationFunctions from './computation-functions';
@@ -13,12 +15,12 @@ const initialState = {
         email: '',
         role: window.localStorage.getItem('role'),
     },
-    exeminationRoom: [],
+    rooms: [],
     typeAppointment: [],
     doctors: []
 };
 
-const CAdminReducer = (state = initialState, { type, payload }) => {
+const cAdminReducer = (state = initialState, { type, payload }) => {
     if (actionHandler.hasOwnProperty(type)) {
         return actionHandler[type](state, payload);
     }
@@ -26,7 +28,7 @@ const CAdminReducer = (state = initialState, { type, payload }) => {
 };
 
 const actionHandler = {
-    [ADD_DOCTOR]: computationFunctions.putAddedDoctor
+    [PUT_ROOMS_DATA]: computationFunctions.putRoomsData
 };
 
 export default cAdminReducer;
