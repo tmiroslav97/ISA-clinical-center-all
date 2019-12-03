@@ -1,9 +1,7 @@
 package clinic.centersystem.controller;
 
 
-import clinic.centersystem.dto.request.CCARegReqDTO;
-import clinic.centersystem.dto.request.ClinicAdminReqDTO;
-import clinic.centersystem.dto.request.ClinicRequestDTO;
+import clinic.centersystem.dto.request.*;
 import clinic.centersystem.dto.response.ClinicCenterAdminResponse;
 import clinic.centersystem.dto.response.ClinicResponse;
 import clinic.centersystem.dto.response.RegistrationRequirementResponse;
@@ -81,9 +79,19 @@ public class ClinicCenterAdministratorController {
         return new ResponseEntity<>(this.clinicCenterAdministratorService.activateAccount(id, httpServletResponse), HttpStatus.TEMPORARY_REDIRECT);
     }
 
-    @RequestMapping(method = POST, value="/reg-clinic-admin")
+    @RequestMapping(method = POST, value = "/reg-clinic-admin")
     public ResponseEntity<String> registerClinicAdmin(@RequestBody ClinicAdminReqDTO clinicAdminReqDTO) {
         return new ResponseEntity<>(this.clinicCenterAdministratorService.registerClinicAdmin(clinicAdminReqDTO), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = POST, value = "/add-diagnose")
+    public ResponseEntity<String> addDiagnose(@RequestBody DiagnoseRequestDTO diagnoseRequestDTO) {
+        return new ResponseEntity<>(this.clinicCenterAdministratorService.addDiagnose(diagnoseRequestDTO), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = POST, value = "/add-medicine")
+    public ResponseEntity<String> addMedicine(@RequestBody MedicineRequestDTO medicineRequestDTO) {
+        return new ResponseEntity<>(this.clinicCenterAdministratorService.addMedicine(medicineRequestDTO), HttpStatus.OK);
     }
 
 }

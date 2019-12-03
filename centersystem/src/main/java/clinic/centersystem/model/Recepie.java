@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Setter
 @Getter
@@ -23,7 +21,7 @@ public class Recepie {
     private Nurse nurse;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Medecine medecine;
+    private Medicine medicine;
 
     @Column(name = DbColumnConstants.ISVALIDATE, unique = false, nullable = true)
     private boolean isValidate;
