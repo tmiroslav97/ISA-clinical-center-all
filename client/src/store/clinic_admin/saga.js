@@ -16,7 +16,7 @@ import {
 } from './actions';
 
 export function* fetchRoomsData() {
-    const { payload } = yield take(FETCH_CLINICS_DATA);
+    const { payload } = yield take(FETCH_ROOMS_DATA);
     const { rooms } = yield call(CAdminService.fetchRoomsData, payload);
     yield put(putRoomsData(rooms));
 }
