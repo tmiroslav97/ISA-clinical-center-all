@@ -1,66 +1,83 @@
-import React from 'react';
-import {Table, Row,Col,  InputGroup, DropdownButton, Dropdown, Container, FormControl} from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+import { Table, Row, Col, InputGroup, DropdownButton, Dropdown, Container, FormControl } from 'react-bootstrap';
+import { patientsSelector } from '../store/nurse/selectors';
+import { fetchPatients } from '../store/nurse/actions';
 
-function PatientList(){
-    return(
+const PatientList = () => {
+    const dispatch = useDispatch();
+    const patients = useSelector(patientsSelector);
+
+    useEffect(() => {
+        dispatch(
+            fetchPatients({})
+        );
+    }, []);
+
+    return (
         <Container>
             <Row >
-                <Col md={{ span:10, offset:1 }} xs={12}>
+                <Col md={{ span: 10, offset: 1 }} xs={12}>
                     <h3 className="border-bottom">Patients list</h3>
                 </Col>
             </Row>
             <Row>
-                <Col md={{span:10, offset:1}} xs={12}>
+                <Col md={{ span: 10, offset: 1 }} xs={12}>
                     <InputGroup>
-                    <FormControl
-                    placeholder="Sort patients by"
-                    aria-describedby="basic-addon2"
-                    />
+                        <FormControl
+                            placeholder="Sort patients by"
+                            aria-describedby="basic-addon2"
+                        />
 
-                    <DropdownButton
-                    as={InputGroup.Append}
-                    variant="outline-secondary"
-                    title="Options"
-                    id="input-group-dropdown-2"
-                    >
-                        <Dropdown.Item href="#">UNOIP</Dropdown.Item>
-                        <Dropdown.Item href="#">First Name</Dropdown.Item>
-                        <Dropdown.Item href="#">Last Name</Dropdown.Item>
-                    </DropdownButton>
-                </InputGroup>
+                        <DropdownButton
+                            as={InputGroup.Append}
+                            variant="outline-secondary"
+                            title="Options"
+                            id="input-group-dropdown-2"
+                        >
+                            <Dropdown.Item href="#">UNOIP</Dropdown.Item>
+                            <Dropdown.Item href="#">First Name</Dropdown.Item>
+                            <Dropdown.Item href="#">Last Name</Dropdown.Item>
+                        </DropdownButton>
+                    </InputGroup>
                 </Col>
-            
+
             </Row>
             <Row>
-                    <Col md={{span:10, offset:1}} xs={12}>
+                <Col md={{ span: 10, offset: 1 }} xs={12}>
                     <Table responsive>
                         <thead>
                             <tr>
-                            <th>UNOIP</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Email</th>
+                                <th>#</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Address</th>
+                                <th>City</th>
+                                <th>Country</th>
+                                <th>UNOIP</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                            <td>1</td>
-                            <td>Pera</td>
-                            <td>Peric</td>
-                            <td>perica@gmail.com</td>
-                            </tr>
-                            <tr>
-                            <td>2</td>
-                            <td>Ana</td>
-                            <td>Kuk</td>
-                            <td>ana@yahoo.com</td>
-                            </tr>
-                            <tr>
-                            <td>3</td>
-                            <td>Ivo</td>
-                            <td>Tot</td>
-                            <td>top@gmail.com</td>
-                            </tr>
+                            {
+                                patients.map((patient, index) => {
+                                    return (
+                                        <tr key={index}>
+                                            <td>{index + 1}</td>
+                                            <td>{patient.firstName}</td>
+                                            <td>{patient.lastName}</td>
+                                            <td>{patient.email}</td>
+                                            <td>{patient.phoneNum}</td>
+                                            <td>{patient.address}</td>
+                                            <td>{patient.city}</td>
+                                            <td>{patient.country}</td>
+                                            <td>{patient.unoip}</td>
+
+                                        </tr>
+                                    );
+                                })
+                            }
                         </tbody>
                     </Table>
                 </Col>

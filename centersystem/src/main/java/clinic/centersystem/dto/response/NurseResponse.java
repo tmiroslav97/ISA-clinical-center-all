@@ -5,11 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PatientResponse {
+public class NurseResponse {
+
+    private Long id;
 
     private String firstName;
 
@@ -17,13 +19,5 @@ public class PatientResponse {
 
     private String email;
 
-    private String address;
-
-    private String country;
-
-    private String city;
-
-    private String unoip;
-
-    private String phoneNum;
+    private String role;
 }

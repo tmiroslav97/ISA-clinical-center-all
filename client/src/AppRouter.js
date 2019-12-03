@@ -12,8 +12,8 @@ import PasswordChanger from './components/PasswordChanger';
 import ClinicAdmin from './components/ClinicAdmin/CA';
 import RoomAllAtOnce from './components/ClinicAdmin/RoomAllAtOnce';
 
-const AppRouter = () =>{
-    return(
+const AppRouter = () => {
+    return (
         <Switch>
             <Route exact path="/" component={HomePage}/>
             <Route exact path="/login" component={LoginPage}/>

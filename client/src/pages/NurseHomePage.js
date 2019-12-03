@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchNurseData } from '../store/nurse/actions';
 import { Tabs, Tab } from 'react-bootstrap';
 import UserProfile from '../components/UserProfile';
 import PatientList from '../components/PatientList';
@@ -6,27 +8,41 @@ import WorkCalendar from '../components/WorkCalendar';
 import HolidayRequest from '../components/HolidayRequest';
 import BookingDoc from '../components/BookingDoc';
 import ApointmentInfo from '../components/ApointmentInfo';
+import { nurseDataSelector } from '../store/nurse/selectors';
 
-function NurseHomePage(){
-    return(
+const NurseHomePage = ({ match }) => {
+    const dispatch = useDispatch();
+    const nurseId = match.params.id;
+    const data = useSelector(nurseDataSelector);
+
+
+    useEffect(() => {
+        dispatch(
+            fetchNurseData({
+                nurseId
+            })
+        );
+    }, []);
+
+    return (
         <Tabs id="left-tabs-doc-home" >
-            <Tab  eventKey="zero" title="Patients list">
-                <PatientList/>
+            <Tab eventKey="zero" title="Patients list">
+                <PatientList />
             </Tab>
             <Tab eventKey="first" title="ApointmentInfo">
-                <ApointmentInfo/>
+                <ApointmentInfo />
             </Tab>
             <Tab eventKey="second" title="WorkCalendar">
-                <WorkCalendar/>
+                <WorkCalendar />
             </Tab>
             <Tab eventKey="third" title="Holiday requests">
-                <HolidayRequest/>
+                <HolidayRequest />
             </Tab>
             <Tab eventKey="fourth" title=" User Profile">
-                <UserProfile/>
+                <UserProfile data={data} />
             </Tab>
             <Tab eventKey="fifth" title="Booking">
-                <BookingDoc/> 
+                <BookingDoc />
             </Tab>
         </Tabs>
     );
