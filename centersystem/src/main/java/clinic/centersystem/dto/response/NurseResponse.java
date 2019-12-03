@@ -18,4 +18,6 @@ public class NurseResponse {
     private String lastName;
 
     private String email;
+
+    private String role;
 }
