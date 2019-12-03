@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchNurseData } from '../store/nurse/actions';
 import { Tabs, Tab } from 'react-bootstrap';
 import UserProfile from '../components/UserProfile';
@@ -8,10 +8,13 @@ import WorkCalendar from '../components/WorkCalendar';
 import HolidayRequest from '../components/HolidayRequest';
 import BookingDoc from '../components/BookingDoc';
 import ApointmentInfo from '../components/ApointmentInfo';
+import { nurseDataSelector } from '../store/nurse/selectors';
 
 const NurseHomePage = ({ match }) => {
     const dispatch = useDispatch();
     const nurseId = match.params.id;
+    const data = useSelector(nurseDataSelector);
+
 
     useEffect(() => {
         dispatch(
@@ -36,7 +39,7 @@ const NurseHomePage = ({ match }) => {
                 <HolidayRequest />
             </Tab>
             <Tab eventKey="fourth" title=" User Profile">
-                <UserProfile />
+                <UserProfile data={data} />
             </Tab>
             <Tab eventKey="fifth" title="Booking">
                 <BookingDoc />
