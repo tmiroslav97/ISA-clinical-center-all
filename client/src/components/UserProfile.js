@@ -1,10 +1,7 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Row, Tab, Nav, Col, Container, Table } from 'react-bootstrap';
-import { nurseDataSelector } from '../store/nurse/selectors';
 
-function UserProfile() {
-    const data = useSelector(nurseDataSelector);
+const UserProfile = ({ data }) => {
 
     return (
         <Container>
