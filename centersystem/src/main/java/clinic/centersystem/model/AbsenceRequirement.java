@@ -2,13 +2,15 @@ package clinic.centersystem.model;
 
 import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
+@Builder
 @Setter
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = DbTableConstants.ABSENCEREQUIREMENT)
 public class AbsenceRequirement {
@@ -32,7 +34,4 @@ public class AbsenceRequirement {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Clinic clinic;
 
-    public AbsenceRequirement() {
-
-    }
 }
