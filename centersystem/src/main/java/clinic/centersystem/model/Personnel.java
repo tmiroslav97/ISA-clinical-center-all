@@ -35,7 +35,7 @@ public class Personnel extends User {
         this.appointments = appointments;
     }
 
-    @Column(name = DbColumnConstants.CALENDAR, nullable = false)
+    @Column(name = DbColumnConstants.CALENDAR, nullable = true)
     private Calendar calendar;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

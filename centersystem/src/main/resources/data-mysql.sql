@@ -26,6 +26,16 @@ INSERT INTO user (id, first_name, last_name, email, enabled, first_log,
 VALUES (3, 'Nevena', 'Djukin', 'nvndjukin97@gmail.com', true, false, '2019-11-20 11:30:00',
         '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra',
         'ROLE_DOCTOR');
+INSERT INTO user (id, first_name, last_name, email, enabled, first_log,
+                  last_password_reset_date, password, role)
+VALUES (4, 'Nevena', 'Djukin', 'nvn@gmail.com', true, false, '2019-11-20 11:30:00',
+        '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra',
+        'ROLE_NURSE');
+INSERT INTO personnel(calendar, id, clinic_id)
+VALUES (NULL, 4, 1);
+
+INSERT INTO nurse(id)
+VALUES (4);
 
 INSERT INTO user_authority (user_id, authority_id)
 VALUES (1, 1);
