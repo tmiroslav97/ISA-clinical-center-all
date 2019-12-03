@@ -12,7 +12,8 @@ import CAdminService from '../../services/CAdminServise';
 
 import {
     addDoctor,
-    putDocData
+    putDocData,
+    putRoomsData
 } from './actions';
 
 export function* fetchRoomsData() {
