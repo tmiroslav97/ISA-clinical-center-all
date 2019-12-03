@@ -1,34 +1,39 @@
 import React from 'react';
-import { Row, Tab, Nav, Col } from 'react-bootstrap';
-import PasswordChanger from './PasswordChanger';
-import UpdateProfile from './UpdateProfile';
+import { Row, Tab, Nav, Col, Container, Table } from 'react-bootstrap';
 
-function UserProfile(){
-    return(
-        <Tab.Container id="left-tabs" defaultActiveKey="first">
+const UserProfile = ({ data }) => {
+
+    return (
+        <Container>
             <Row>
-                <Col md={2} xs={12}>
-                    <Nav variant="pills" className="flex-column">
-                        <Nav.Item>
-                            <Nav.Link eventKey="first">Update the profile</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link eventKey="second">Change the password</Nav.Link>
-                        </Nav.Item>
-                    </Nav>
-                </Col>
-                <Col md={10} xs={12}>
-                    <Tab.Content>
-                        <Tab.Pane eventKey="first">
-                            <UpdateProfile/>
-                        </Tab.Pane>
-                        <Tab.Pane eventKey="second">
-                            <PasswordChanger/>
-                        </Tab.Pane>
-                    </Tab.Content>
+                <Col md={{ span: 10, offset: 1 }} xs={12}>
+                    <h2 className="border-bottom">User profile</h2>
                 </Col>
             </Row>
-        </Tab.Container>
+            <Row>
+                <Col md={{ span: 10, offset: 1 }} xs={12}>
+                    <Table responsive>
+                        <tr>
+                            <th>First name</th>
+                            <td align="right">{data.firstName}</td>
+                        </tr>
+                        <tr>
+                            <th>Last name</th>
+                            <td align="right">{data.lastName}</td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td align="right">{data.email}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="/change-pass">Change password</a>
+                            </td>
+                        </tr>
+                    </Table>
+                </Col>
+            </Row>
+        </Container>
     );
 }
 
