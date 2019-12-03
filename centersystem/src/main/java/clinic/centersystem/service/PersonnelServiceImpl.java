@@ -4,9 +4,11 @@ import clinic.centersystem.model.Personnel;
 import clinic.centersystem.repository.PersonnelRepository;
 import clinic.centersystem.service.intf.PersonnelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class PersonnelServiceImpl implements PersonnelService {
 
     @Autowired
