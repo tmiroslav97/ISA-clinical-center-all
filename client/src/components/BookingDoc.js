@@ -1,27 +1,27 @@
 import React from 'react';
-import {Form, Row,Col, Button} from 'react-bootstrap';
+import { Form, Row, Col, Button } from 'react-bootstrap';
 
-function BookingDoc(){
-    return(
-        
-        <Form>
+function BookingDoc() {
+    return (
+
+        <>
             <Row>
-                <Col md={{ span:3, offset:2 }} xs={12}>
+                <Col md={{ span: 3, offset: 2 }} xs={12}>
                     <Form>
                         <Form.Group as={Col}>
-                            <h3  className="border-bottom">Booking an apointment</h3>
+                            <h3 className="border-bottom">Booking an apointment</h3>
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Form.Label>Choose a date for your apointment:</Form.Label>
                         </Form.Group>
                         <Form.Group as={Col}>
-                            <Form.Control type="date"  />
+                            <Form.Control type="date" />
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Form.Label>Choose a time for your apointment:</Form.Label>
                         </Form.Group>
                         <Form.Group as={Col}>
-                            <Form.Control type="time"  />
+                            <Form.Control type="time" />
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Button>
@@ -29,10 +29,10 @@ function BookingDoc(){
                             </Button>
                         </Form.Group>
                     </Form>
-                    
+
                 </Col>
-                <Col md={{ span:3, offset:1 }} xs={12}>
-                <Form>
+                <Col md={{ span: 3, offset: 1 }} xs={12}>
+                    <Form>
                         <Form.Group as={Col}>
                             <h3 className="border-bottom">Booking a surgery</h3>
                         </Form.Group>
@@ -40,13 +40,13 @@ function BookingDoc(){
                             <Form.Label>Choose a date for your surgery:</Form.Label>
                         </Form.Group>
                         <Form.Group as={Col}>
-                            <Form.Control type="date"  />
+                            <Form.Control type="date" />
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Form.Label>Choose a time for your surgery:</Form.Label>
                         </Form.Group>
                         <Form.Group as={Col}>
-                            <Form.Control type="time"  />
+                            <Form.Control type="time" />
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Button>
@@ -56,7 +56,7 @@ function BookingDoc(){
                     </Form>
                 </Col>
             </Row>
-        </Form>
+        </>
     );
 }
 
