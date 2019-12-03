@@ -44,6 +44,9 @@ VALUES (2, 5);
 INSERT INTO user_authority (user_id, authority_id)
 VALUES (3, 3);
 
+INSERT INTO user_authority (user_id, authority_id)
+VALUES (3, 4);
+
 INSERT INTO patient (address, city, country, is_activated, phone_num, unoip, id, medical_record_id)
 VALUES ('Ilije Bircanina', 'Vlasenica', 'Bosna i Hercegovina', true, '065987544', '1234567890', 2, 1);
 
