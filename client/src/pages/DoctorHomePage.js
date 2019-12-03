@@ -3,7 +3,7 @@ import { Tabs, Tab } from 'react-bootstrap';
 import UserProfile from '../components/UserProfile';
 import PatientList from '../components/PatientList';
 import WorkCalendar from '../components/WorkCalendar';
-import HolidayRequest from '../components/HolidayRequest';
+import HolAbsRequest from '../components/HolAbsRequest';
 import BookingDoc from '../components/BookingDoc';
 import ApointmentInfo from '../components/ApointmentInfo';
 
@@ -19,8 +19,8 @@ function DoctorHomePage(){
             <Tab eventKey="second" title="WorkCalendar">
                 <WorkCalendar/>
             </Tab>
-            <Tab eventKey="third" title="Holiday requests">
-                <HolidayRequest/>
+            <Tab eventKey="third" title="Holiday/absence requests">
+                <HolAbsRequest/>
             </Tab>
             <Tab eventKey="fourth" title=" User Profile">
                 <UserProfile/>
