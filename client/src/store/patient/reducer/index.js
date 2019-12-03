@@ -1,4 +1,12 @@
-const initialState = {
+import {
+    PUT_PATIENT_DATA,
+    PUT_DOCTORS_DATA
+} from '../constants';
+
+import * as computationFunctions from './computation-functions';
+
+
+    const initialState = {
     data: {
         id: window.localStorage.getItem('id'),
         firstName: '',
@@ -12,7 +20,7 @@ const initialState = {
         role: window.localStorage.getItem('role'),
 
     },
-    clinics: []
+    doctors:[]
 };
 
 const patientReducer = (state = initialState, { type, payload }) => {
@@ -23,7 +31,8 @@ const patientReducer = (state = initialState, { type, payload }) => {
 };
 
 const actionHandler = {
-
+    //[PUT_PATIENT_DATA]: computationFunctions.putPatientData,
+    [PUT_DOCTORS_DATA]: computationFunctions.putDoctorsData
 };
 
 export default patientReducer;
