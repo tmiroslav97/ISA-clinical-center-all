@@ -2,14 +2,29 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Form, Col, Button, Container, Table } from 'react-bootstrap';
 import moment from 'moment';
+import { recepiesDataSelector } from '../store/nurse/selectors';
+import { rewriteRecepie, fetchRecepies } from '../store/nurse/actions';
 
 const RewriteRecepie = ({ nurseId }) => {
     const dispatch = useDispatch();
-    const recepies = [];
+    const recepies = useSelector(recepiesDataSelector);
 
-    const handleRewrite = () => {
-
+    const handleRewrite = (recepieId) => {
+        dispatch(
+            rewriteRecepie({
+                nurseId,
+                recepieId
+            })
+        );
     };
+
+    useEffect(() => {
+        if (nurseId == null) {
+            dispatch(
+                fetchRecepies({})
+            );
+        }
+    }, [nurseId]);
 
     return (
         <Container>
