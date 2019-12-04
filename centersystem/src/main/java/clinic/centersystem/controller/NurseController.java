@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 @RestController
 @RequestMapping(value = "/nurse", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -28,6 +29,11 @@ public class NurseController {
     @RequestMapping(method = GET, value = "/{nurseId}")
     public ResponseEntity<NurseResponse> getNurseById(@PathVariable Long nurseId) {
         return new ResponseEntity<>(this.nurseServiceCont.getNurseById(nurseId), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = PUT, value = "/rewrite/{nurseId}/{recepie}")
+    public ResponseEntity<String> rewriteRecepie(@PathVariable Long nurseId, @PathVariable Long recepieId) {
+        return new ResponseEntity<>(this.nurseServiceCont.rewriteRecepie(nurseId, recepieId), HttpStatus.OK);
     }
 
 }
