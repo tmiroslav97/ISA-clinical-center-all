@@ -1,27 +1,49 @@
-import React from 'react';
-import {Container, Spinner,Row, Col} from 'react-bootstrap'
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Container, Spinner, Row, Col } from 'react-bootstrap';
+import { Calendar, momentLocalizer } from 'react-big-calendar';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+import moment from 'moment'
+import { fetchCalendar } from '../store/nurse/actions';
+import { calendarDataSelector } from '../store/nurse/selectors';
 
-function WorkCalendar(){
-    return(
+const localizer = momentLocalizer(moment)
+
+const WorkCalendar = ({ personnelId }) => {
+    const dispatch = useDispatch();
+    const calendar = useSelector(calendarDataSelector);
+
+    useEffect(() => {
+        if (personnelId != null) {
+            dispatch(
+                fetchCalendar({
+                    personnelId
+                })
+            );
+        }
+    }, [personnelId]);
+
+    return (
         <Container>
-            <Col md={{span:4, offset:3}} xs={12}>
-            <Row >
-                
-                <h3>Work calendar - in progress</h3>
-               
+            <Row>
+                <Col md={{ span: 10, offset: 1 }} xs={12}>
+                    <h3 align="center" className="border-bottom">Work calendar - in progress</h3>
+                </Col>
+
             </Row>
             <Row>
-                
-                <Spinner animation="grow" variant="primary" />
-                <Spinner animation="grow" variant="secondary" />
-                <Spinner animation="grow" variant="success" />
-                <Spinner animation="grow" variant="danger" />
-                <Spinner animation="grow" variant="warning" />
-                <Spinner animation="grow" variant="info" />
-                <Spinner animation="grow" variant="light" />
-                <Spinner animation="grow" variant="dark" />
+                <Col md={{ span: 10, offset: 1 }} xs={12}>
+                    <Calendar
+                        localizer={localizer}
+                        events={calendar.calendarItemResponses}
+                        startAccessor="start"
+                        endAccessor="end"
+                        style={{ height: 600 }}
+                    />
+                </Col>
             </Row>
-            </Col>
+
+
         </Container>
     );
 }

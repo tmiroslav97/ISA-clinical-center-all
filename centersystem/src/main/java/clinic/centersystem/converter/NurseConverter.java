@@ -12,6 +12,7 @@ public class NurseConverter {
                 .lastName(nurse.getLastName())
                 .email(nurse.getEmail())
                 .role(nurse.getRole().name())
+                .clinicId(nurse.getClinic().getId())
                 .build();
     }
 }
