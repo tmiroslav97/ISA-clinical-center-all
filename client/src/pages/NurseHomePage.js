@@ -14,8 +14,7 @@ const NurseHomePage = ({ match }) => {
     const dispatch = useDispatch();
     const nurseId = match.params.id;
     const data = useSelector(nurseDataSelector);
-
-
+    
     useEffect(() => {
         dispatch(
             fetchNurseData({
@@ -29,9 +28,6 @@ const NurseHomePage = ({ match }) => {
             <Tab eventKey="zero" title="Patients list">
                 <PatientList />
             </Tab>
-            <Tab eventKey="first" title="ApointmentInfo">
-                <ApointmentInfo />
-            </Tab>
             <Tab eventKey="second" title="WorkCalendar">
                 <WorkCalendar />
             </Tab>
@@ -40,9 +36,6 @@ const NurseHomePage = ({ match }) => {
             </Tab>
             <Tab eventKey="fourth" title=" User Profile">
                 <UserProfile data={data} />
-            </Tab>
-            <Tab eventKey="fifth" title="Booking">
-                <BookingDoc />
             </Tab>
         </Tabs>
     );
