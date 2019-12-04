@@ -12,7 +12,7 @@ public class CalendarConverter {
     public static CalendarResponse toCreateCalendarResponseFromCalendar(Calendar calendar) {
         return CalendarResponse.builder()
                 .id(calendar.getId())
-                .calendarItemResponseSet(new HashSet<CalendarItemResponse>())
+                .calendarItemResponses(new HashSet<CalendarItemResponse>())
                 .build();
     }
 

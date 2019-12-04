@@ -14,5 +14,5 @@ public class CalendarResponse {
 
     private Long id;
 
-    private Set<CalendarItemResponse> calendarItemResponseSet;
+    private Set<CalendarItemResponse> calendarItemResponses;
 }
