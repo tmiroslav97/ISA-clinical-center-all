@@ -13,15 +13,11 @@ export default function NavBar() {
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
                     <Nav.Link href="/">Home</Nav.Link>
-                    <Nav.Link href="/adminc">Clinic adm</Nav.Link>
-                    <Nav.Link href="/probs">Proba</Nav.Link>
                 </Nav>
                 
                 <Nav className="ml-auto">
                     <Nav.Link href="/login">Login</Nav.Link>
                     <Nav.Link href="/signup">Sign Up</Nav.Link>
-                    <Nav.Link href = "/search">Search</Nav.Link>
-                    <Nav.Link href = "/test">Test</Nav.Link>
                 </Nav>
                 
                 
