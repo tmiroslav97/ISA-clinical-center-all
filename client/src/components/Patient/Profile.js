@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Tab, Nav, Col } from 'react-bootstrap';
-import PasswordChanger from './PasswordChanger';
-import UpdateProfile from './UpdateProfile';
+import PasswordChanger from '../PasswordChanger';
+import UpdateProfile from '../UpdateProfile';
 
 function Profile(){
     return(

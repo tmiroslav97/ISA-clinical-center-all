@@ -1,6 +1,5 @@
-import {
-    PUT_ADDED_DOCTOR, 
-    ADD_DOCTOR
+import { 
+    PUT_DOCTORS_DATA
 } from '../constants';
 
 import * as computationFunctions from './computation-functions';
@@ -26,7 +25,7 @@ const CAdminReducer = (state = initialState, { type, payload }) => {
 };
 
 const actionHandler = {
-    [ADD_DOCTOR]: computationFunctions.putAddedDoctor
+    [PUT_DOCTORS_DATA]: computationFunctions.putAddedDoctor
 };
 
 export default cAdminReducer;
