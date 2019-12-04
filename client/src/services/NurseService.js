@@ -36,7 +36,7 @@ class NurseService extends HttpClient {
 
     rewriteRecepie = async payload => {
         try {
-            const { data } = await this.getApiClient().put(
+            const { data } = await this.getApiClient().post(
                 format(FINALPOINTS.REWRITE_RECEPIE, payload.nurseId, payload.recepieId)
             );
 
