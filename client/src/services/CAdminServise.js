@@ -22,19 +22,7 @@ class CAdminService extends HttpClient{
         }
     };
 
-    fetchRoomsData = async payload => {
-        try {
-            const { data } = await this.getApiClient().get(
-                FINALPOINTS.FETCH_ROOMS_DATA
-            );
-
-            const rooms = data;
-
-            return { rooms };
-        } catch (error) {
-            console.log(error.response.data);
-        }
-    };
+    
 
 }
 

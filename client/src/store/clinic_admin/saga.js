@@ -8,7 +8,7 @@ import {
 
 
 
-import CAdminService from '../../services/CAdminServise';
+import CAdminService from '../../services/RoomService';
 
 import {
     addDoctor,
