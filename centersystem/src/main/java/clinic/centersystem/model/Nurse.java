@@ -4,6 +4,7 @@ package clinic.centersystem.model;
 import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
 import clinic.centersystem.model.enumeration.RoleEnum;
+import clinic.centersystem.model.Calendar;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,7 +13,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
