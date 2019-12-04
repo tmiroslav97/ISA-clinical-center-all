@@ -3,7 +3,7 @@ import { Tab, Tabs} from 'react-bootstrap';
 import ClinicProfile from './ClinicProfile';
 import BusinessReport from './BusinessReport';
 import Editing from './Editing';
-import ExeminationRoom from './ExeminationRoom';
+import ExeminationRoom from './RoomAllAtOnce';
 import Appointments from './Appointments';
 import Doctors from './Doctors';
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Table, Button, Col, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { roomsDataSelector } from '../../store/clinic_admin/selectors'
-import {fetchRoomsData} from '../../store/clinic_admin/actions';
+import { fetchRoomsData } from '../../store/clinic_admin/actions';
 
 const RoomAllAtOnce = () => {
     const dispatch = useDispatch();
@@ -10,7 +10,7 @@ const RoomAllAtOnce = () => {
 
     const handleDelitingRooms = () => {
         dispatch(
-            
+
         );
     };
 
@@ -30,14 +30,31 @@ const RoomAllAtOnce = () => {
 
                     <Form.Group as={Row} >
 
-                        <Form.Label>Search:</Form.Label>
+                        <Form.Label>Add new surgery room:</Form.Label>
                         <Col>
-                            <Form.Control type="text" placeholder="Search surgery rooms" />
+                            <Button>Add </Button>
+                        </Col>
+                    </Form.Group>
+
+                    <Form.Group as={Row} >
+
+                        <Form.Label>Search surgery rooms:</Form.Label>
+                        <Col>
+                            <Form.Control type="text" placeholder="Search " />
+                        </Col>
+                    </Form.Group>
+
+                    <Form.Group as={Row} controlId="formGridState">
+                        <Form.Label>Filter data by</Form.Label>
+                        <Col>
+                            <Form.Control as="select">
+                                <option>Choose...</option>
+                                <option>...</option>
+                            </Form.Control>
                         </Col>
                     </Form.Group>
 
 
-                    
                 </Form>
 
             </Row>
