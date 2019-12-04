@@ -8,8 +8,14 @@ import {
     FETCH_ABS_HOL_REQUEST,
     FETCH_RECEPIES,
     PUT_RECEPIES_DATA,
-    REWRITE_RECEPIE
+    REWRITE_RECEPIE,
+    FETCH_PATIENTS_BY_CLINIC_ID
 } from './constants';
+
+export const fetchPatientsByClinicId = payload => ({
+    type: FETCH_PATIENTS_BY_CLINIC_ID,
+    payload
+});
 
 export const fetchRecepies = payload => ({
     type: FETCH_RECEPIES,
