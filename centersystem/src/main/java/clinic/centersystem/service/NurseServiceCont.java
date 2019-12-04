@@ -31,7 +31,7 @@ public class NurseServiceCont {
         return nurseResponse;
     }
 
-    public String rewriteRecepie(Long recepieId, Long nurseId) {
+    public String rewriteRecepie(Long nurseId, Long recepieId) {
         Nurse nurse = nurseService.findById(nurseId);
         Recepie recepie = recepieService.findById(recepieId);
 
@@ -49,7 +49,9 @@ public class NurseServiceCont {
         List<Recepie> recepies = this.recepieService.findAll();
         List<RecepieResponse> recepieResponses = new ArrayList<RecepieResponse>();
         for (Recepie recepie : recepies) {
-            recepieResponses.add(RecepieConverter.toCreateRecepieResponseFromRecepie(recepie));
+            if (!recepie.isValidate()) {
+                recepieResponses.add(RecepieConverter.toCreateRecepieResponseFromRecepie(recepie));
+            }
         }
 
         return recepieResponses;
