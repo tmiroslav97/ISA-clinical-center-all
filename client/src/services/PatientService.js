@@ -14,6 +14,20 @@ const FINALPOINTS = {
 
 class PatientService extends HttpClient{
 
+    fetchPatientsByClinicId = async payload => {
+        try {
+            console.log(payload);
+            const { data } = await this.getApiClient().get(
+                format(FINALPOINTS.FETCH_PATIENTS_BY_CLINIC_ID,payload.clinicId)
+            );
+            console.log(data);
+            const patients = data;
+            return { patients };
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    };
+
     fetchDoctorsData = async payload => {
         try {
             const { data } = await this.getApiClient().get(
@@ -67,6 +81,7 @@ class PatientService extends HttpClient{
             console.log(error.response.data);
         }
     };
+
     searchDoctorsData = async payload => {
         try {
             const { data } = await this.getApiClient().get(
@@ -79,20 +94,8 @@ class PatientService extends HttpClient{
             console.log(error.response.data);
         }
     };
+
     
-
-    fetchPatientsByClinicId = async payload => {
-        try {
-            const { data } = await this.getApiClient().get(
-                format(FINALPOINTS.FETCH_PATIENTS_BY_CLINIC_ID,payload.clinicId)
-            );
-
-            const patients = data;
-            return { patients };
-        } catch (error) {
-            console.log(error.response.data);
-        }
-    };
 }
 
-export default PatientService;
+export default new PatientService();

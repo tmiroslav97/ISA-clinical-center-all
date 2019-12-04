@@ -14,11 +14,13 @@ const RoomAllAtOnce = () => {
         );
     };
 
+    /*
     useEffect(() => {
         dispatch(
             fetchRoomsData({})
         );
     }, []);
+    */
 
     const [show1r, setShow1r] = useState(false);
     const [show2r, setShow2r] = useState(false);

@@ -26,7 +26,7 @@ const AppRouter = () => {
             <Route exact path="/ccadmin/:id" component={ClinicCenterAdminProfile}/>
             <Route exact path="/signup" component={RegPage}/>
             <Route exact path="/change-pass" component={PasswordChanger}/>
-            <Route exact path="/nurse-page" component={NurseHomePage} />
+            <Route exact path="/nurse-page/:id" component={NurseHomePage} />
             <Route exact path="/adminc" component={ClinicAdmin}/>
             <Route exact path="/probs" component={DoctorAllAtOnce}/>
             <Route exact path="/CA" component={ClinicAdmin}/>
