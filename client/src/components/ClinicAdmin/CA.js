@@ -4,8 +4,10 @@ import ClinicProfile from './ClinicProfile';
 import BusinessReport from './BusinessReport';
 import Editing from './Editing';
 import ExeminationRoom from './RoomAllAtOnce';
-import Appointments from './Appointments';
+import Appointments from './AppointmentTypeAllAtOnce';
 import Doctors from './DoctorAllAtOnce';
+import FreeAppointment from './FreeApointment';
+import PriceList from './Pricelist';
 
 const CA = () => {
     return(
@@ -22,11 +24,17 @@ const CA = () => {
             <Tab eventKey="exeminationRoom" title="Exemination room" >
                 <ExeminationRoom/>
             </Tab>
-            <Tab eventKey="appointments" title="Appointments" >
+            <Tab eventKey="appointmentType" title="Appointment types" >
                 <Appointments/>
             </Tab>
             <Tab eventKey="doctors" title="Doctors" >
                 <Doctors/>
+            </Tab>
+            <Tab eventKey="appointments" title="Free appointments" >
+                <FreeAppointment/>
+            </Tab>
+            <Tab eventKey="priceList" title="Pricelist" >
+                <PriceList/>
             </Tab>
         </Tabs>
     );
