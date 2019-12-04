@@ -14,7 +14,7 @@ const initialState = {
         lastName: '',
         email: '',
         role: window.localStorage.getItem('role'),
-        clinicId: ''
+        clinicId: null
     },
     patients: [],
     absholrequests: [],
