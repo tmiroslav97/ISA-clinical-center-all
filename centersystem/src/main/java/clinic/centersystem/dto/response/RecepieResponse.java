@@ -5,21 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Builder
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class NurseResponse {
+public class RecepieResponse {
 
     private Long id;
 
-    private String firstName;
-
-    private String lastName;
-
-    private String email;
-
-    private String role;
-
-    private Long clinicId;
 }

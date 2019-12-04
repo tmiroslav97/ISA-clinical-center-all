@@ -6,9 +6,10 @@ const FINALPOINTS = {
     FETCH_PATIENT_DATA: '/pat/patient',
     FETCH_DOCTORS_DATA: '/pat/doctors',
     FETCH_CLINICS_DATA: '/pat/clinics',
-    SEARCH_DOCTORS_DATA: '/pat/search-doctors/%s%s',
-    SEARCH_CLINICS_DATA: '/pat/search-clinics/%s%s'
-    
+    SEARCH_DOCTORS_DATA: '/pat/search-doctors/%s/%s',
+    SEARCH_CLINICS_DATA: '/pat/search-clinics/%s/%s',
+    FETCH_PATIENTS: '/pat/all',
+    FETCH_PATIENTS_BY_CLINIC_ID: '/pat/all/%s'
 };
 
 class PatientService extends HttpClient{
@@ -53,6 +54,7 @@ class PatientService extends HttpClient{
             console.log(error.response.data);
         }
     };
+
     searchClinicsData = async payload => {
         try {
             const { data } = await this.getApiClient().get(
@@ -73,6 +75,20 @@ class PatientService extends HttpClient{
 
             const doctors = data;
             return { doctors };
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    };
+    
+
+    fetchPatientsByClinicId = async payload => {
+        try {
+            const { data } = await this.getApiClient().get(
+                format(FINALPOINTS.FETCH_PATIENTS_BY_CLINIC_ID,payload.clinicId)
+            );
+
+            const patients = data;
+            return { patients };
         } catch (error) {
             console.log(error.response.data);
         }

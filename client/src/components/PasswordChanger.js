@@ -8,8 +8,9 @@ const PasswordChanger = () => {
     const dispatch = useDispatch();
     const [oldPassword, setOldPassword] = useState();
     const [newPassword, setNewPassword] = useState();
+    const [confNewPassword, setConfNewPassword] = useState();
 
-    const handleChange = () =>{
+    const handleChange = () => {
         dispatch(
             changePassword({
                 oldPassword,
@@ -21,30 +22,45 @@ const PasswordChanger = () => {
     return (
         <Container>
             <Row>
-                <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <h1 className="border-bottom">Change password:</h1>
+                <Col md={{ span: 5, offset: 3 }} xs={12}>
+                    <h1 align="center" className="border-bottom">Change password</h1>
                 </Col>
             </Row>
             <Row>
-                <Col md={{ span: 5, offset: 1 }} xs={12}>
+                <Col md={{ span: 3, offset: 4 }} xs={12}>
                     <Form>
                         <Form.Group as={Col} controlId="formOld">
-                            <Form.Label>Old password:</Form.Label>
+                            <div align="center">
+                                <Form.Label>Old password:</Form.Label>
+                            </div>
                             <Form.Control type="password" placeholder="Enter old password"
                                 onChange={({ currentTarget }) => {
                                     setOldPassword(currentTarget.value);
-                            }} />
+                                }} />
                         </Form.Group>
                         <Form.Group as={Col} controlId="formNew">
-                            <Form.Label>New password</Form.Label>
+                            <div align="center">
+                                <Form.Label>New password:</Form.Label>
+                            </div>
                             <Form.Control type="password" placeholder="Enter new password"
-                                onChange={({ currentTarget }) => { 
-                                    setNewPassword(currentTarget.value); 
-                            }} />
+                                onChange={({ currentTarget }) => {
+                                    setNewPassword(currentTarget.value);
+                                }} />
                         </Form.Group>
-                        <Button variant="primary" onClick={handleChange}>
-                            Change
+                        <Form.Group as={Col} controlId="formNew">
+                            <div align="center">
+                                <Form.Label>Confirm new password:</Form.Label>
+                            </div>
+                            <Form.Control type="password" placeholder="Confirm new password"
+                                onChange={({ currentTarget }) => {
+                                    setConfNewPassword(currentTarget.value);
+                                }} />
+                        </Form.Group>
+                        <div align="center">
+                            <Button variant="primary" onClick={handleChange}>
+                                Change
                         </Button>
+                        </div>
                     </Form>
                 </Col>
             </Row>
