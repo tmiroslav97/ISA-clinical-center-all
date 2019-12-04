@@ -4,8 +4,14 @@ import {
     FETCH_PATIENTS,
     PUT_PATIENTS,
     ABS_HOL_REQUEST,
-    PUT_ABS_HOL_REQUEST
+    PUT_ABS_HOL_REQUEST,
+    FETCH_ABS_HOL_REQUEST
 } from './constants';
+
+export const fetchAbsHolRequest = payload => ({
+    type: FETCH_ABS_HOL_REQUEST,
+    payload
+});
 
 export const absHolRequest = payload => ({
     type: ABS_HOL_REQUEST,
