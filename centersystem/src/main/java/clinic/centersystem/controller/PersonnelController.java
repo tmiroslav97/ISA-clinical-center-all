@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -33,7 +34,7 @@ public class PersonnelController {
     }
 
     @RequestMapping(method = GET, value = "/my-abs-hol/{personnelId}")
-    public ResponseEntity<List<AbsenceRequirement>> getMyRequirements(@PathVariable Long personnelId) {
+    public ResponseEntity<Set<AbsenceRequirement>> getMyRequirements(@PathVariable Long personnelId) {
         return new ResponseEntity<>(this.personnelServiceCont.getMyRequirements(personnelId), HttpStatus.OK);
     }
 

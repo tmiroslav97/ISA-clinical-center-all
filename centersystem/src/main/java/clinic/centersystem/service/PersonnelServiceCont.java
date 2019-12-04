@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @NoArgsConstructor
@@ -44,9 +45,9 @@ public class PersonnelServiceCont {
         return "Successfullt created absence requirement";
     }
 
-    public List<AbsenceRequirement> getMyRequirements(Long personnelId) {
+    public Set<AbsenceRequirement> getMyRequirements(Long personnelId) {
         Personnel personnel = this.personnelService.findById(personnelId);
-        List<AbsenceRequirement> absenceRequirements = (List<AbsenceRequirement>) personnel.getAbsenceRequirements();
+        Set<AbsenceRequirement> absenceRequirements = personnel.getAbsenceRequirements();
 
         return absenceRequirements;
     }
