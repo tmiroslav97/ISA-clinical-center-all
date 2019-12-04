@@ -24,7 +24,7 @@ class PersonnelService extends HttpClient {
     fetchAbsHolRequests = async payload => {
         try {
             const { data } = await this.getApiClient().get(
-                format(FINALPOINTS.ABS_HOL_REQUEST, personnelId)
+                format(FINALPOINTS.ABS_HOL_REQUEST, payload.personnelId)
             );
 
             const absholrequests = data;
