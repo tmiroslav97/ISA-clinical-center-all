@@ -68,3 +68,6 @@ VALUES ('Safarikova 15', 0, 'Dobra kao bog', 'Klinika 1', 0);
 
 INSERT INTO clinic_nurses(clinic_id, nurses_id)
 VALUES (1, 4);
+
+INSERT INTO recepie(id, is_validate, medical_report_id, medicine_id, nurse_id)
+VALUES (1, FALSE, 1, 1, NULL);
