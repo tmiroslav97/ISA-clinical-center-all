@@ -5,7 +5,7 @@ import { Row, Form, Col, Button, Container } from 'react-bootstrap';
 import moment from 'moment';
 import { absHolRequest } from '../store/nurse/actions';
 
-const HolAbsRequest = ({ personnelId }) => {
+const HolAbsRequest = ({ personnelId, clinicId }) => {
     const dispatch = useDispatch();
     const [today, setToday] = useState(moment().format('YYYY-MM-DD'));
     const [startDate, setStartDate] = useState();
@@ -19,10 +19,8 @@ const HolAbsRequest = ({ personnelId }) => {
     });
     
     const [type, setType] = useState('Absence');
-    const clinicId = 1;
 
     const handleSubmit = () => {
-
         dispatch(
             absHolRequest({
                 startDate,
