@@ -1,27 +1,33 @@
 import React from 'react';
-import {Container, Spinner,Row, Col} from 'react-bootstrap'
+import { Container, Spinner, Row, Col } from 'react-bootstrap';
+import { Calendar, momentLocalizer } from 'react-big-calendar';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+import moment from 'moment'
 
-function WorkCalendar(){
-    return(
+const localizer = momentLocalizer(moment)
+
+function WorkCalendar() {
+    return (
         <Container>
-            <Col md={{span:4, offset:3}} xs={12}>
-            <Row >
-                
-                <h3>Work calendar - in progress</h3>
-               
+            <Row>
+                <Col md={{ span: 10, offset: 1 }} xs={12}>
+                    <h3 align="center" className="border-bottom">Work calendar - in progress</h3>
+                </Col>
+
             </Row>
             <Row>
-                
-                <Spinner animation="grow" variant="primary" />
-                <Spinner animation="grow" variant="secondary" />
-                <Spinner animation="grow" variant="success" />
-                <Spinner animation="grow" variant="danger" />
-                <Spinner animation="grow" variant="warning" />
-                <Spinner animation="grow" variant="info" />
-                <Spinner animation="grow" variant="light" />
-                <Spinner animation="grow" variant="dark" />
+                <Col md={{ span: 10, offset: 1 }} xs={12}>
+                    <Calendar
+                        localizer={localizer}
+                        events={[]}
+                        startAccessor="start"
+                        endAccessor="end"
+                        style={{ height: 600 }}
+                    />
+                </Col>
             </Row>
-            </Col>
+
+
         </Container>
     );
 }
