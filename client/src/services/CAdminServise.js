@@ -3,7 +3,8 @@ import { history } from '../index';
 import { format } from 'util';
 
 const FINALPOINTS = {
-    ADD_DOCTOR: '/ca/AddDoctor'
+    ADD_DOCTOR: '/adminc/AddDoctor',
+    DELETE_DOCTOR: '/adminc/delete/%s'
 };
 
 class CAdminService extends HttpClient{

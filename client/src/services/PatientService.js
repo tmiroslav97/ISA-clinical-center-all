@@ -3,9 +3,12 @@ import { history } from '../index';
 import { format } from 'util';
 
 const FINALPOINTS = {
-    FETCH_PATIENT_DATA: '/pa/patient',
-    FETCH_DOCTORS_DATA: '/pa/doctors',
-    FETCH_CLINICS_DATA: '/pa/clinics'
+    FETCH_PATIENT_DATA: '/pat/patient',
+    FETCH_DOCTORS_DATA: '/pat/doctors',
+    FETCH_CLINICS_DATA: '/pat/clinics',
+    SEARCH_DOCTORS_DATA: '/pat/search-doctors/%s%s',
+    SEARCH_CLINICS_DATA: '/pat/search-clinics/%s%s'
+    
 };
 
 class PatientService extends HttpClient{

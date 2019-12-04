@@ -3,7 +3,9 @@ import { take, put, call } from 'redux-saga/effects';
 import {
     FETCH_PATIENT_DATA,
     FETCH_DOCTORS_DATA,
-    FETCH_CLINICS_DATA
+    FETCH_CLINICS_DATA,
+    SEARCH_CLINICS_DATA,
+    SEARCH_DOCTORS_DATA
 } from './constants';
 
 import PatientService from '../../services/PatientService';
@@ -32,3 +34,16 @@ export function* fetchClinicsData() {
     yield put(putClinicsData(clinics));
 }
 
+export function* searchClinicsData() {
+    const { payload } = yield take(SEARCH_CLINICS_DATA);
+    const { data } = yield call(PatientService.searchClinicsData, payload);
+    const { clinics } = yield call(PatientService.searchClinicsData, {});
+    yield put(putClinicsData(clinics));
+}
+
+export function* searchDoctorsData() {
+    const { payload } = yield take(SEARCH_DOCTORS_DATA);
+    const { data } = yield call(PatientService.searchDoctorsData, payload);
+    const { doctors } = yield call(PatientService.searchDoctorsData, {});
+    yield put(putClinicsData(doctors));
+}
