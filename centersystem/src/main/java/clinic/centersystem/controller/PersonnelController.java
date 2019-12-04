@@ -2,16 +2,19 @@ package clinic.centersystem.controller;
 
 import clinic.centersystem.dto.request.AbsenceRequirementDTO;
 import clinic.centersystem.dto.response.PatientResponse;
+import clinic.centersystem.model.AbsenceRequirement;
 import clinic.centersystem.service.PersonnelServiceCont;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
@@ -27,6 +30,11 @@ public class PersonnelController {
     @RequestMapping(method = POST, value = "/abs-hol")
     public ResponseEntity<String> submitAbsenceRequirement(@RequestBody AbsenceRequirementDTO absenceRequirementDTO) {
         return new ResponseEntity<>(this.personnelServiceCont.submitAbsenceRequirement(absenceRequirementDTO), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = GET, value = "/my-abs-hol/{personnelId}")
+    public ResponseEntity<List<AbsenceRequirement>> getMyRequirements(@PathVariable Long personnelId) {
+        return new ResponseEntity<>(this.personnelServiceCont.getMyRequirements(personnelId), HttpStatus.OK);
     }
 
 }
