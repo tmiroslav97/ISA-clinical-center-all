@@ -12,5 +12,7 @@ export const EDIT_ROOMS_DATA = "edit_rooms_data";
 
 export const FETCH_APPOINTMENT_TYPE = "fetch_appointment_type";
 export const PUT_APPOINTMENT_TYPE = "put_appointment_type";
-export const DELETE_APPOINTMENT_DATA = "delete_appointment_data";
+export const DELETE_APPOINTMENT_TYPE = "delete_appointment_data";
 export const SEARCH_APPOINTMENT_TYPE="search_appointment_type";
+export const EDIT_APPOINTMENT_TYPE = "edit_appointment_type";
+export const ADD_APPOINTMENT_TYPE = "add_appointment_type";

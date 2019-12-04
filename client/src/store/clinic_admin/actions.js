@@ -6,16 +6,16 @@ import {
     PUT_ROOMS_DATA,
     DELETE_ROOMS_DATA,
     ADD_ROOMS_DATA,
+    EDIT_ROOMS_DATA,
     SEARCH_ROOMS_DATA,
     FETCH_APPOINTMENT_TYPE,
     PUT_APPOINTMENT_TYPE,
-    DELETE_APPOINTMENT_DATA
+    DELETE_APPOINTMENT_TYPE,
+    SEARCH_APPOINTMENT_TYPE,
+    EDIT_APPOINTMENT_TYPE,
+    ADD_APPOINTMENT_TYPE
 } from './constants';
 
-/*export const addDoctor = payload => ({
-    type: ADD_DOCTOR,
-    payload
-});*/
 
 export const fetchDoctorData = payload => ({
     type: FETCH_DOCTOR_DATA,
@@ -53,6 +53,11 @@ export const addRoomsData = payload => ({
     payload
 });
 
+export const editRoomsData = payload => ({
+    type: EDIT_ROOMS_DATA,
+    payload
+});
+
 export const searchRoomsData = payload => ({
     type: SEARCH_ROOMS_DATA,
     payload
@@ -65,5 +70,25 @@ export const fetchAppointmentType = payload => ({
 
 export const putAppointmentType = payload => ({
     type: PUT_APPOINTMENT_TYPE,
+    payload
+});
+
+export const deleteAppointmentType = payload => ({
+    type: DELETE_APPOINTMENT_TYPE,
+    payload
+});
+
+export const searchAppointmentType = payload => ({
+    type: SEARCH_APPOINTMENT_TYPE,
+    payload
+});
+
+export const editAppointmentType = payload => ({
+    type: EDIT_APPOINTMENT_TYPE,
+    payload
+});
+
+export const addAppointmentType = payload => ({
+    type: ADD_APPOINTMENT_TYPE,
     payload
 });

@@ -11,3 +11,4 @@ export function putAppointmentType(state, payload) {
         appointmentType: payload
     };
 }
+
