@@ -20,4 +20,6 @@ public class NurseResponse {
     private String email;
 
     private String role;
+
+    private String clinicId;
 }
