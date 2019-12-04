@@ -26,6 +26,16 @@ INSERT INTO user (id, first_name, last_name, email, enabled, first_log,
 VALUES (3, 'Nevena', 'Djukin', 'nvndjukin97@gmail.com', true, false, '2019-11-20 11:30:00',
         '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra',
         'ROLE_DOCTOR');
+INSERT INTO user (id, first_name, last_name, email, enabled, first_log,
+                  last_password_reset_date, password, role)
+VALUES (4, 'Nevena', 'Djukin', 'nvn@gmail.com', true, false, '2019-11-20 11:30:00',
+        '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra',
+        'ROLE_NURSE');
+INSERT INTO personnel(calendar, id, clinic_id)
+VALUES (NULL, 4, 1);
+
+INSERT INTO nurse(id)
+VALUES (4);
 
 INSERT INTO user_authority (user_id, authority_id)
 VALUES (1, 1);
@@ -33,6 +43,9 @@ INSERT INTO user_authority (user_id, authority_id)
 VALUES (2, 5);
 INSERT INTO user_authority (user_id, authority_id)
 VALUES (3, 3);
+
+INSERT INTO user_authority (user_id, authority_id)
+VALUES (3, 4);
 
 INSERT INTO patient (address, city, country, is_activated, phone_num, unoip, id, medical_record_id)
 VALUES ('Ilije Bircanina', 'Vlasenica', 'Bosna i Hercegovina', true, '065987544', '1234567890', 2, 1);
@@ -52,3 +65,9 @@ VALUES ('Safarikova', 'Bijeljina', 'Bosna', 'roncevic1996@gmail.com', 'Pajo', 'P
 
 INSERT INTO clinic (address, cnt_rating, description, name, sum_rating)
 VALUES ('Safarikova 15', 0, 'Dobra kao bog', 'Klinika 1', 0);
+
+INSERT INTO clinic_nurses(clinic_id, nurses_id)
+VALUES (1, 4);
+
+INSERT INTO recepie(id, is_validate, medical_report_id, medicine_id, nurse_id)
+VALUES (1, FALSE, 1, 1, NULL);
