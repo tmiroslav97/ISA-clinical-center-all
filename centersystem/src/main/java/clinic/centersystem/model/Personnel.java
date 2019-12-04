@@ -11,7 +11,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -36,7 +35,8 @@ public class Personnel extends User {
         this.appointments = appointments;
     }
 
-    @Column(name = DbColumnConstants.CALENDAR, nullable = true)
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Calendar calendar;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -48,7 +48,6 @@ public class Personnel extends User {
     @JsonBackReference
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<AbsenceRequirement> absenceRequirements;
-
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Appointment> appointments;

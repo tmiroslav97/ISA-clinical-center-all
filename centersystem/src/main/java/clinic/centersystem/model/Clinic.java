@@ -60,6 +60,10 @@ public class Clinic {
     private Set<Appointment> appointments = new HashSet<Appointment>();
 
     @JsonBackReference
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Patient> patients = new HashSet<Patient>();
+
+    @JsonBackReference
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<AbsenceRequirement> reqAbs = new HashSet<AbsenceRequirement>();
 

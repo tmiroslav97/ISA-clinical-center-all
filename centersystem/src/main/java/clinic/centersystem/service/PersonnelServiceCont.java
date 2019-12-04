@@ -1,10 +1,10 @@
 package clinic.centersystem.service;
 
 import clinic.centersystem.converter.AbsenceRequirementConverter;
+import clinic.centersystem.converter.CalendarConverter;
 import clinic.centersystem.dto.request.AbsenceRequirementDTO;
-import clinic.centersystem.model.AbsenceRequirement;
-import clinic.centersystem.model.Clinic;
-import clinic.centersystem.model.Personnel;
+import clinic.centersystem.dto.response.CalendarResponse;
+import clinic.centersystem.model.*;
 import clinic.centersystem.service.intf.AbsenceRequirementService;
 import clinic.centersystem.service.intf.ClinicService;
 import clinic.centersystem.service.intf.PersonnelService;
@@ -50,6 +50,17 @@ public class PersonnelServiceCont {
         Set<AbsenceRequirement> absenceRequirements = personnel.getAbsenceRequirements();
 
         return absenceRequirements;
+    }
+
+    public CalendarResponse getMyCalendar(Long personnelId){
+        Personnel personnel = this.personnelService.findById(personnelId);
+        Calendar calendar = personnel.getCalendar();
+        CalendarResponse calendarResponse = CalendarConverter.toCreateCalendarResponseFromCalendar(calendar);
+        for(CalendarItem calendarItem : calendar.getCalendarItems()){
+            calendarResponse.getCalendarItemResponses().add(CalendarConverter.toCreateCalendarItemResponseFromCalendarItem(calendarItem));
+        }
+
+        return  calendarResponse;
     }
 
 }

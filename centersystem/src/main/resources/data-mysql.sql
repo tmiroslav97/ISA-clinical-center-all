@@ -31,8 +31,8 @@ INSERT INTO user (id, first_name, last_name, email, enabled, first_log,
 VALUES (4, 'Nevena', 'Djukin', 'nvn@gmail.com', true, false, '2019-11-20 11:30:00',
         '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra',
         'ROLE_NURSE');
-INSERT INTO personnel(calendar, id, clinic_id)
-VALUES (NULL, 4, 1);
+INSERT INTO personnel(id, clinic_id)
+VALUES (4, 1);
 
 INSERT INTO nurse(id)
 VALUES (4);
@@ -69,5 +69,28 @@ VALUES ('Safarikova 15', 0, 'Dobra kao bog', 'Klinika 1', 0);
 INSERT INTO clinic_nurses(clinic_id, nurses_id)
 VALUES (1, 4);
 
+INSERT INTO clinic_patients(clinic_id, patients_id)
+VALUES (1, 2);
+
 INSERT INTO recepie(id, is_validate, medical_report_id, medicine_id, nurse_id)
 VALUES (1, FALSE, 1, 1, NULL);
+
+INSERT INTO calendar_item(end, start, title, udi, id, calendar_id)
+VALUES ('2019-12-04 10:00', '2019-12-04 09:00', 'Prvi pregled', 'N', 1, 1);
+
+INSERT INTO calendar_item(end, start, title, udi, id, calendar_id)
+VALUES ('2019-12-05 10:00', '2019-12-05 09:00', 'Drugi pregled', 'N', 2, 1);
+
+INSERT INTO calendar(id, personnel_id)
+VALUES (1, 4);
+
+INSERT INTO calendar_calendar_items(calendar_id, calendar_items_id)
+VALUES (1, 1);
+
+INSERT INTO calendar_calendar_items(calendar_id, calendar_items_id)
+VALUES (1, 2);
+
+UPDATE personnel
+SET calendar_id =1
+WHERE id = 4;
+

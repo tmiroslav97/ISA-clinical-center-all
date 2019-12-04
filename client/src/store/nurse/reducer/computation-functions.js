@@ -25,3 +25,10 @@ export function putRecepiesData(state, payload) {
         recepies: payload
     };
 }
+
+export function putCalendarData(state, payload) {
+    return {
+        ...state,
+        calendar: payload
+    };
+}

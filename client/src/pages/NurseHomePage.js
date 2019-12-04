@@ -27,7 +27,7 @@ const NurseHomePage = ({ match }) => {
     return (
         <Tabs id="left-tabs-doc-home" >
             <Tab eventKey="zero" title="Patients list">
-                <PatientList />
+                <PatientList clinicId={data.clinicId}/>
             </Tab>
             <Tab eventKey="second" title="Holiday/absence requests">
                 <HolAbsRequest personnelId={data.id} clinicId={data.clinicId} />
@@ -36,7 +36,7 @@ const NurseHomePage = ({ match }) => {
                 <RewriteRecepie nurseId={data.id} />
             </Tab>
             <Tab eventKey="fourth" title="WorkCalendar">
-                <WorkCalendar />
+                <WorkCalendar personnelId={data.id} />
             </Tab>
             <Tab eventKey="fifth" title=" User Profile">
                 <UserProfile data={data} />

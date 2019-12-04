@@ -3,6 +3,7 @@ package clinic.centersystem.model;
 import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
 import clinic.centersystem.model.enumeration.RoleEnum;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -52,7 +53,8 @@ public class Patient extends User {
     @Column(name = DbColumnConstants.UNOIP, nullable = false)
     private String unoip;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Clinic> clinics;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
