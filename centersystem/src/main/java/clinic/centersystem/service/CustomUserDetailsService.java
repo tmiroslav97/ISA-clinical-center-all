@@ -49,6 +49,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
         if(currentUser == null){
             System.out.println("null");
+            return;
         }
         String email = currentUser.getName();
 

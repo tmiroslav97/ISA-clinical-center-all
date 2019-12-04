@@ -18,8 +18,6 @@ export default function NavBar() {
                 <Nav className="ml-auto">
                     <Nav.Link href="/login">Login</Nav.Link>
                     <Nav.Link href="/signup">Sign Up</Nav.Link>
-                    <Nav.Link href = "/search">Search</Nav.Link>
-                    <Nav.Link href = "/test">Test</Nav.Link>
                 </Nav>
                 
                 

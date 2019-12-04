@@ -27,6 +27,8 @@ class AuthSecurityService extends HttpBaseClient {
                 history.push('/doc');
             } else if (data.role === 'ROLE_NURSE') {
                 history.push('/nurse-page/' + data.id);
+            } else if (data.role === 'ROLE_ADMINC') {
+                history.push('/adminc');
             } else {
                 alert('Nije odobren pristup sistemu!');
             }

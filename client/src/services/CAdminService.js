@@ -3,8 +3,8 @@ import { history } from '../index';
 import { format } from 'util';
 
 const FINALPOINTS = {
-    ADD_DOCTOR: '/adminc/AddDoctor',
-    DELETE_DOCTOR: '/adminc/delete/%s'
+    ADD_DOCTOR: '/adm-cli/add-doctor',
+    DELETE_DOCTOR: '/adm-cli/delete/%s'
 };
 
 class CAdminService extends HttpClient{
@@ -20,6 +20,7 @@ class CAdminService extends HttpClient{
             console.log(error.response.data);
         }
     };
+    
 
     deleteDoctorsData = async payload => {
         try {
@@ -35,4 +36,4 @@ class CAdminService extends HttpClient{
     };
 }
 
-export default CAdminService;
+export default new CAdminService();

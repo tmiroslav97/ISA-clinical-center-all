@@ -10,6 +10,7 @@ import ClinicCenterAdminProfile from './components/ClinicCenterAdmin/ClinicCente
 import HolidayAproval from './components/HolidayAproval';
 import PasswordChanger from './components/PasswordChanger';
 import ClinicAdmin from './components/ClinicAdmin/CA';
+import DoctorAllAtOnce from './components/ClinicAdmin/DoctorAllAtOnce';
 import DoctorSearch from './components/Patient/DoctorSearch';
 import ClinicSearch from './components/Patient/ClinicSearch';
 
@@ -26,6 +27,8 @@ const AppRouter = () => {
             <Route exact path="/signup" component={RegPage}/>
             <Route exact path="/change-pass" component={PasswordChanger}/>
             <Route exact path="/nurse-page" component={NurseHomePage} />
+            <Route exact path="/adminc" component={ClinicAdmin}/>
+            <Route exact path="/probs" component={DoctorAllAtOnce}/>
             <Route exact path="/CA" component={ClinicAdmin}/>
             <Route exact path = "/search" component={DoctorSearch}/>
             <Route exact path = "/test" component={ClinicSearch}/>
