@@ -59,8 +59,7 @@ public class Clinic {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Appointment> appointments = new HashSet<Appointment>();
 
-
-    @JsonBackReference(value="abs_ref")
+    @JsonBackReference
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<AbsenceRequirement> reqAbs = new HashSet<AbsenceRequirement>();
 

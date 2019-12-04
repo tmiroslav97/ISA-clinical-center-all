@@ -45,7 +45,7 @@ public class Personnel extends User {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Clinic clinic;
 
-    @JsonBackReference(value="absence_ref")
+    @JsonBackReference
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<AbsenceRequirement> absenceRequirements;
 
