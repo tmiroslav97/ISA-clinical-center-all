@@ -2,6 +2,7 @@ package clinic.centersystem.model;
 
 import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -31,9 +32,11 @@ public class AbsenceRequirement {
     @Column(name = DbColumnConstants.ENDDATE, unique = false, nullable = false)
     private Long endDate;
 
+    @JsonBackReference(value="personnel_ref")
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Personnel personnel;
 
+    @JsonBackReference(value="clinic_ref")
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Clinic clinic;
 

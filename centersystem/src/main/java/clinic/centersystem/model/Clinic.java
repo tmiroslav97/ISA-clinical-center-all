@@ -2,6 +2,7 @@ package clinic.centersystem.model;
 
 import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.w3c.dom.views.DocumentView;
 
@@ -58,6 +59,8 @@ public class Clinic {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Appointment> appointments = new HashSet<Appointment>();
 
+
+    @JsonBackReference(value="abs_ref")
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<AbsenceRequirement> reqAbs = new HashSet<AbsenceRequirement>();
 
