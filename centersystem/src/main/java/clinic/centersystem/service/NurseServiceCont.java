@@ -2,13 +2,18 @@ package clinic.centersystem.service;
 
 
 import clinic.centersystem.converter.NurseConverter;
+import clinic.centersystem.converter.RecepieConverter;
 import clinic.centersystem.dto.response.NurseResponse;
+import clinic.centersystem.dto.response.RecepieResponse;
 import clinic.centersystem.model.Nurse;
 import clinic.centersystem.model.Recepie;
 import clinic.centersystem.service.intf.RecepieService;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @NoArgsConstructor
@@ -38,6 +43,16 @@ public class NurseServiceCont {
         recepie = recepieService.save(recepie);
 
         return "Successfullt rewrite recepie";
+    }
+
+    public List<RecepieResponse> getRecepies() {
+        List<Recepie> recepies = this.recepieService.findAll();
+        List<RecepieResponse> recepieResponses = new ArrayList<RecepieResponse>();
+        for (Recepie recepie : recepies) {
+            recepieResponses.add(RecepieConverter.toCreateRecepieResponseFromRecepie(recepie));
+        }
+
+        return recepieResponses;
     }
 
 }
