@@ -4,6 +4,7 @@ import { format } from 'util';
 
 const FINALPOINTS = {
     ABS_HOL_REQUEST: '/personnel/abs-hol',
+    FETCH_ABS_HOL_REQUEST: '/personnel/my-abs-hol/%s'
 };
 
 class PersonnelService extends HttpClient {
@@ -15,6 +16,19 @@ class PersonnelService extends HttpClient {
             );
 
             return { data };
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    }
+
+    fetchAbsHolRequests = async payload => {
+        try {
+            const { data } = await this.getApiClient().get(
+                format(FINALPOINTS.ABS_HOL_REQUEST, personnelId)
+            );
+
+            const absholrequests = data;
+            return { absholrequests };
         } catch (error) {
             console.log(error.response.data);
         }
