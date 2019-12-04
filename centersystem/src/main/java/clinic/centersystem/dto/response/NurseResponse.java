@@ -21,5 +21,5 @@ public class NurseResponse {
 
     private String role;
 
-    private String clinicId;
+    private Long clinicId;
 }
