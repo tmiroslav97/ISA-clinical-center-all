@@ -18,3 +18,10 @@ export function putAbsHolRequest(state, payload) {
         absholrequests: payload
     };
 }
+
+export function putRecepiesData(state, payload) {
+    return {
+        ...state,
+        recepies: payload
+    };
+}
