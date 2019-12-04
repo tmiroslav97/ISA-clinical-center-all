@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @NoArgsConstructor
 public class PersonnelServiceCont {
@@ -40,6 +42,13 @@ public class PersonnelServiceCont {
         personnel = this.personnelService.save(personnel);
 
         return "Successfullt created absence requirement";
+    }
+
+    public List<AbsenceRequirement> getMyRequirements(Long personnelId) {
+        Personnel personnel = this.personnelService.findById(personnelId);
+        List<AbsenceRequirement> absenceRequirements = (List<AbsenceRequirement>) personnel.getAbsenceRequirements();
+
+        return absenceRequirements;
     }
 
 }
