@@ -9,8 +9,7 @@ import NurseHomePage from './pages/NurseHomePage';
 import ClinicCenterAdminProfile from './components/ClinicCenterAdmin/ClinicCenterAdminProfile';
 import HolidayAproval from './components/HolidayAproval';
 import PasswordChanger from './components/PasswordChanger';
-import ClinicAdmin from './components/ClinicAdmin/CA'
-import SearchDoctor from './components/ClinicAdmin/SearchDoctor';
+import ClinicAdmin from './components/ClinicAdmin/CA';
 import DoctorSearch from './components/Patient/DoctorSearch';
 import ClinicSearch from './components/Patient/ClinicSearch';
 

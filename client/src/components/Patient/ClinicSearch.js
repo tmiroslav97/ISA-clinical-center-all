@@ -13,7 +13,7 @@ const ClinicSearch = () => {
         <Container>
             <Row>
                 
-                <h2 className="border-bottom">Clinicss List</h2>
+                <h2 className="border-bottom">Clinics List</h2>
                 
             </Row>
             <Row>
@@ -28,6 +28,15 @@ const ClinicSearch = () => {
                         <Form.Label>Filter clinics by</Form.Label>
                         <Col>
                             <Form.Control as="select">
+                                <option>Choose...</option>
+                                <option>...</option>
+                            </Form.Control>
+                        </Col>
+                    </Form.Group>
+                    <Form.Group as = {Row} controlId="formGridState">
+                        <Form.Label>Sort clinics by</Form.Label>
+                        <Col>
+                            <Form.Control as = "select">
                                 <option>Choose...</option>
                                 <option>...</option>
                             </Form.Control>

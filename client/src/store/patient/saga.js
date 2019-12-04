@@ -14,6 +14,12 @@ import {
     putClinicsData
 } from './actions';
 
+export function* fetchPatientData() {
+    const { payload } = yield take(FETCH_PATIENT_DATA);
+    const { data } = yield call(PatientService.fetchPatientData, payload);
+    yield put(putPatientData(data));
+}
+
 export function* fetchDoctorsData() {
     const {payload} = yield take(FETCH_DOCTORS_DATA);
     const {doctors} = yield call(PatientService.fetchDoctorsData, payload);

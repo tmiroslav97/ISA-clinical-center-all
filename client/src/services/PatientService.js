@@ -3,12 +3,14 @@ import { history } from '../index';
 import { format } from 'util';
 
 const FINALPOINTS = {
-    FETCH_DOCTORS_DATA: '/pa/doctors'
+    FETCH_PATIENT_DATA: '/pa/patient',
+    FETCH_DOCTORS_DATA: '/pa/doctors',
+    FETCH_CLINICS_DATA: '/pa/clinics'
 };
 
 class PatientService extends HttpClient{
 
-    fetchDoctor = async payload => {
+    fetchDoctorsData = async payload => {
         try {
             const { data } = await this.getApiClient().get(
                 FINALPOINTS.FETCH_DOCTORS_DATA
@@ -22,7 +24,7 @@ class PatientService extends HttpClient{
         }
     };
 
-    fetchClinic = async payload => {
+    fetchClinicsData = async payload => {
         try {
             const { data } = await this.getApiClient().get(
                 FINALPOINTS.FETCH_CLINICS_DATA
@@ -36,10 +38,10 @@ class PatientService extends HttpClient{
         }
     };
     
-    fetchPatients = async payload => {
+    fetchPatientData = async payload => {
         try {
             const { data } = await this.getApiClient().get(
-                FINALPOINTS.FETCH_PATIENTS
+                FINALPOINTS.FETCH_PATIENT_DATA
             );
 
             const patients = data;

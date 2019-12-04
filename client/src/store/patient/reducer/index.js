@@ -33,7 +33,7 @@ const patientReducer = (state = initialState, { type, payload }) => {
 };
 
 const actionHandler = {
-    //[PUT_PATIENT_DATA]: computationFunctions.putPatientData,
+    [PUT_PATIENT_DATA]: computationFunctions.putPatientData,
     [PUT_DOCTORS_DATA]: computationFunctions.putDoctorsData,
     [PUT_CLINICS_DATA]: computationFunctions.putClinicsData
 };
