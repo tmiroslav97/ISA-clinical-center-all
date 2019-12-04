@@ -4,7 +4,7 @@ import {
     FETCH_NURSE_DATA,
     FETCH_PATIENTS,
     ABS_HOL_REQUEST,
-    PUT_ABS_HOL_REQUEST
+    FETCH_ABS_HOL_REQUEST
 } from './constants';
 
 import PatientService from '../../services/PatientService';
@@ -17,9 +17,17 @@ import {
     putAbsHolRequest
 } from './actions';
 
+export function* fetchAbsHolRequest() {
+    const { payload } = yield take(FETCH_ABS_HOL_REQUEST);
+    const { absholrequests } = yield call(PersonnelService.fetchAbsHolRequests, payload);
+    yield put(putAbsHolRequest(absholrequests));
+}
+
 export function* absHolRequest() {
     const { payload } = yield take(ABS_HOL_REQUEST);
     const { data } = yield call(PersonnelService.absHolRequest, payload);
+    const { absholrequests } = yield call(PersonnelService.fetchAbsHolRequests, payload);
+    yield put(putAbsHolRequest(absholrequests));
 }
 
 export function* fetchNurseData() {
