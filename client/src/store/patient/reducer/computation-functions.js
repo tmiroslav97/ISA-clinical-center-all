@@ -1,9 +1,10 @@
-export function putRoomsData(state, payload) {
+export function putPatientData(state, payload) {
     return {
         ...state,
-        rooms: payload
+        data: payload
     };
 }
+
 export function putDoctorsData(state, payload) {
     return {
         ...state,
@@ -11,10 +12,9 @@ export function putDoctorsData(state, payload) {
     };
 }
 
-export function putAppointmentType(state, payload) {
+export function putClinicsData(state, payload) {
     return {
         ...state,
-        appointmentType: payload
+        clinics: payload
     };
 }
-
