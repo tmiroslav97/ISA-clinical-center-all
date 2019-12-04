@@ -52,16 +52,15 @@ public class PersonnelServiceCont {
         return absenceRequirements;
     }
 
-    public CalendarResponse getMyCalendar(Long personnelId) {
+    public CalendarResponse getMyCalendar(Long personnelId){
         Personnel personnel = this.personnelService.findById(personnelId);
         Calendar calendar = personnel.getCalendar();
         CalendarResponse calendarResponse = CalendarConverter.toCreateCalendarResponseFromCalendar(calendar);
-        
-        for (CalendarItem calendarItem : calendar.getCalendarItems()) {
+        for(CalendarItem calendarItem : calendar.getCalendarItems()){
             calendarResponse.getCalendarItemResponses().add(CalendarConverter.toCreateCalendarItemResponseFromCalendarItem(calendarItem));
         }
 
-        return calendarResponse;
+        return  calendarResponse;
     }
 
 }

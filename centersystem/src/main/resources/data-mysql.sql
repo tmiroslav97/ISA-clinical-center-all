@@ -74,3 +74,23 @@ VALUES (1, 2);
 
 INSERT INTO recepie(id, is_validate, medical_report_id, medicine_id, nurse_id)
 VALUES (1, FALSE, 1, 1, NULL);
+
+INSERT INTO calendar_item(end, start, title, udi, id, calendar_id)
+VALUES ('2019-12-04 10:00', '2019-12-04 09:00', 'Prvi pregled', 'N', 1, 1);
+
+INSERT INTO calendar_item(end, start, title, udi, id, calendar_id)
+VALUES ('2019-12-05 10:00', '2019-12-05 09:00', 'Drugi pregled', 'N', 2, 1);
+
+INSERT INTO calendar(id, personnel_id)
+VALUES (1, 4);
+
+INSERT INTO calendar_calendar_items(calendar_id, calendar_items_id)
+VALUES (1, 1);
+
+INSERT INTO calendar_calendar_items(calendar_id, calendar_items_id)
+VALUES (1, 2);
+
+UPDATE personnel
+SET calendar_id =1
+WHERE id = 4;
+
