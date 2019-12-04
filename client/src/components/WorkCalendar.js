@@ -1,12 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Container, Spinner, Row, Col } from 'react-bootstrap';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import moment from 'moment'
+import { fetchCalendar } from '../store/nurse/actions';
+import { calendarDataSelector } from '../store/nurse/selectors';
 
 const localizer = momentLocalizer(moment)
 
-function WorkCalendar() {
+const WorkCalendar = ({ personnelId }) => {
+    const dispatch = useDispatch();
+    const calendar = useSelector(calendarDataSelector);
+
+    useEffect(() => {
+        if (personnelId != null) {
+            dispatch(
+                fetchCalendar({
+                    personnelId
+                })
+            );
+        }
+    }, [personnelId]);
+
     return (
         <Container>
             <Row>
@@ -19,7 +35,7 @@ function WorkCalendar() {
                 <Col md={{ span: 10, offset: 1 }} xs={12}>
                     <Calendar
                         localizer={localizer}
-                        events={[]}
+                        events={calendar.calendarItemResponses}
                         startAccessor="start"
                         endAccessor="end"
                         style={{ height: 600 }}

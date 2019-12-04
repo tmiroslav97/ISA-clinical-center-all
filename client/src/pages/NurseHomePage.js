@@ -36,7 +36,7 @@ const NurseHomePage = ({ match }) => {
                 <RewriteRecepie nurseId={data.id} />
             </Tab>
             <Tab eventKey="fourth" title="WorkCalendar">
-                <WorkCalendar />
+                <WorkCalendar personnelId={data.id} />
             </Tab>
             <Tab eventKey="fifth" title=" User Profile">
                 <UserProfile data={data} />
