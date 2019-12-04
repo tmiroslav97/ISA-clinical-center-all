@@ -11,3 +11,10 @@ export function putPatients(state, payload) {
         patients: payload
     };
 }
+
+export function putAbsHolRequest(state, payload) {
+    return {
+        ...state,
+        absholrequests: payload
+    };
+}
