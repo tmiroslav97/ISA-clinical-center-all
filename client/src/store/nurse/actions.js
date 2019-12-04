@@ -2,8 +2,20 @@ import {
     FETCH_NURSE_DATA,
     PUT_NURSE_DATA,
     FETCH_PATIENTS,
-    PUT_PATIENTS
+    PUT_PATIENTS,
+    ABS_HOL_REQUEST,
+    PUT_ABS_HOL_REQUEST
 } from './constants';
+
+export const absHolRequest = payload => ({
+    type: ABS_HOL_REQUEST,
+    payload
+});
+
+export const putAbsHolRequest = payload => ({
+    type: PUT_ABS_HOL_REQUEST,
+    payload
+});
 
 export const fetchNurseData = payload => ({
     type: FETCH_NURSE_DATA,
