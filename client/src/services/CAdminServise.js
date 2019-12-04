@@ -12,10 +12,23 @@ class CAdminService extends HttpClient{
     addDoctor = async payload => {
         try {
             const { data } = await this.getApiClient().post(
-                format(FINALPOINTS.ADD_DOCTOR, payload.regReqId)
+                FINALPOINTS.ADD_DOCTOR
             );
 
             return { data };
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    };
+
+    deleteDoctorsData = async payload => {
+        try {
+            const { data } = await this.getApiClient().delete(
+                FINALPOINTS.DELETE_DOCTORS_DATA
+            );
+
+            const doctors = data;
+            return { doctors };
         } catch (error) {
             console.log(error.response.data);
         }

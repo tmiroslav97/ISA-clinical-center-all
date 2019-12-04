@@ -52,7 +52,31 @@ class PatientService extends HttpClient{
         } catch (error) {
             console.log(error.response.data);
         }
-    }
+    };
+    searchClinicsData = async payload => {
+        try {
+            const { data } = await this.getApiClient().get(
+                FINALPOINTS.SEARCH_CLINICS_DATA
+            );
+
+            const clinics = data;
+            return { clinics };
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    };
+    searchDoctorsData = async payload => {
+        try {
+            const { data } = await this.getApiClient().get(
+                FINALPOINTS.SEARCH_DOCTORS_DATA
+            );
+
+            const doctors = data;
+            return { doctors };
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    };
 }
 
 export default PatientService;
