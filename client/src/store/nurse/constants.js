@@ -9,3 +9,5 @@ export const FETCH_RECEPIES = 'fetch_recepies';
 export const PUT_RECEPIES_DATA = 'put_recepies_data';
 export const REWRITE_RECEPIE = 'rewrite_recepie';
 export const FETCH_PATIENTS_BY_CLINIC_ID = 'fetch_patients_by_clinic_id';
+export const FETCH_CALENDAR = 'fetch_calendar';
+export const PUT_CALENDAR_DATA = 'put_calendar_data';
