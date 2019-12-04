@@ -12,6 +12,7 @@ import PasswordChanger from './components/PasswordChanger';
 import ClinicAdmin from './components/ClinicAdmin/CA'
 import SearchDoctor from './components/ClinicAdmin/SearchDoctor';
 import DoctorSearch from './components/Patient/DoctorSearch';
+import ClinicSearch from './components/Patient/ClinicSearch';
 
 const AppRouter = () => {
     return (
@@ -28,6 +29,7 @@ const AppRouter = () => {
             <Route exact path="/nurse-page" component={NurseHomePage} />
             <Route exact path="/CA" component={ClinicAdmin}/>
             <Route exact path = "/search" component={DoctorSearch}/>
+            <Route exact path = "/test" component={ClinicSearch}/>
 
             <Route exact path="/page-not-found" component={() => <h1>Page not found!</h1>} />
             <Redirect from="*" to="/page-not-found" />

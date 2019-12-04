@@ -1,29 +1,31 @@
 import React from 'react';
-import {Container, Row, Col, Table, Form} from 'react-bootstrap';
+import { Container, Row, Col, Table, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { doctorsDataSelector } from '../../store/patient/selectors';
+import { clinicsDataSelector } from '../../store/patient/selectors';
 
-const DoctorSearch = () => {
+const ClinicSearch = () => {
     const dispatch = useDispatch();
-    const doctors = useSelector(doctorsDataSelector);
+    const clinics = useSelector(clinicsDataSelector);
 
 
 
     return (
         <Container>
             <Row>
-                    <h2 className="border-bottom">Doctors List</h2>
+                
+                <h2 className="border-bottom">Clinicss List</h2>
+                
             </Row>
             <Row>
                 <Form>
                     <Form.Group as={Row}>
                         <Form.Label>Search:</Form.Label>
                         <Col>
-                           <Form.Control type="text" placeholder="Search doctors"/>
-                        </Col> 
+                            <Form.Control type="text" placeholder="Search clinics" />
+                        </Col>
                     </Form.Group>
                     <Form.Group as={Row} controlId="formGridState">
-                        <Form.Label>Filter doctors by</Form.Label>
+                        <Form.Label>Filter clinics by</Form.Label>
                         <Col>
                             <Form.Control as="select">
                                 <option>Choose...</option>
@@ -34,33 +36,37 @@ const DoctorSearch = () => {
                 </Form>
             </Row>
             <Row>
+                
                     <Table responsive>
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
+                                <th>Name</th>
+                                <th>Address</th>
                                 <th>Average rating</th>
+                                <th>Price</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                doctors.map((doctor, index) => {
+                                clinics.map((clinic, index) => {
                                     return (
-                                        <tr key={doctor.id}>
-                                            <td>{doctor.firstName}</td>
-                                            <td>{doctor.lastName}</td>
-                                            <td>{doctor.sumRating/doctor.cntRating}</td>
+                                        <tr key={clinic.id}>
+                                            <td>{clinic.name}</td>
+                                            <td>{clinic.address}</td>
+                                            <td>{clinic.sumRating / clinic.cntRating}</td>
+                                            <td>{clinic.priceList}</td>
                                         </tr>
                                     );
                                 })
                             }
                         </tbody>
                     </Table>
+                
             </Row>
         </Container>
     )
 
 }
 
-export default DoctorSearch;
+export default ClinicSearch;

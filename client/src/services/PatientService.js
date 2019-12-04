@@ -21,6 +21,21 @@ class PatientService extends HttpClient{
             console.log(error.response.data);
         }
     };
+
+    fetchClinic = async payload => {
+        try {
+            const { data } = await this.getApiClient().get(
+                FINALPOINTS.FETCH_CLINICS_DATA
+            );
+
+            const clinics = data;
+
+            return { clinics };
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    };
+    
     fetchPatients = async payload => {
         try {
             const { data } = await this.getApiClient().get(

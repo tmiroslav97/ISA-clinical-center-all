@@ -1,6 +1,7 @@
 import {
     PUT_PATIENT_DATA,
-    PUT_DOCTORS_DATA
+    PUT_DOCTORS_DATA,
+    PUT_CLINICS_DATA
 } from '../constants';
 
 import * as computationFunctions from './computation-functions';
@@ -20,7 +21,8 @@ import * as computationFunctions from './computation-functions';
         role: window.localStorage.getItem('role'),
 
     },
-    doctors:[]
+    doctors:[],
+    clinics:[]
 };
 
 const patientReducer = (state = initialState, { type, payload }) => {
@@ -32,7 +34,8 @@ const patientReducer = (state = initialState, { type, payload }) => {
 
 const actionHandler = {
     //[PUT_PATIENT_DATA]: computationFunctions.putPatientData,
-    [PUT_DOCTORS_DATA]: computationFunctions.putDoctorsData
+    [PUT_DOCTORS_DATA]: computationFunctions.putDoctorsData,
+    [PUT_CLINICS_DATA]: computationFunctions.putClinicsData
 };
 
 export default patientReducer;
