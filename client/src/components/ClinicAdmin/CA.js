@@ -5,7 +5,7 @@ import BusinessReport from './BusinessReport';
 import Editing from './Editing';
 import ExeminationRoom from './RoomAllAtOnce';
 import Appointments from './Appointments';
-import Doctors from './Doctors';
+import Doctors from './DoctorAllAtOnce';
 
 const CA = () => {
     return(
