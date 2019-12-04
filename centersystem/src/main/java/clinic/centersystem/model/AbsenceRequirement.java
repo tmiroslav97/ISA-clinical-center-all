@@ -22,6 +22,9 @@ public class AbsenceRequirement {
     @Column(name = DbColumnConstants.TYPE, unique = false, nullable = false)
     private String type;
 
+    @Column(name = DbColumnConstants.STATUS, unique = false, nullable = false)
+    private String status;
+
     @Column(name = DbColumnConstants.STARTDATE, unique = false, nullable = false)
     private Long startDate;
 
