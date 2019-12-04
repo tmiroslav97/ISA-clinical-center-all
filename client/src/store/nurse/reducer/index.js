@@ -13,6 +13,7 @@ const initialState = {
         lastName: '',
         email: '',
         role: window.localStorage.getItem('role'),
+        clinicId: ''
     },
     patients: [],
     absholrequests: []
