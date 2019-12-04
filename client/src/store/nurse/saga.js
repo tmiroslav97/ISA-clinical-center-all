@@ -7,7 +7,8 @@ import {
     FETCH_ABS_HOL_REQUEST,
     FETCH_RECEPIES,
     REWRITE_RECEPIE,
-    FETCH_PATIENTS_BY_CLINIC_ID
+    FETCH_PATIENTS_BY_CLINIC_ID,
+    FETCH_CALENDAR,
 } from './constants';
 
 import PatientService from '../../services/PatientService';
@@ -18,8 +19,15 @@ import {
     putNurseData,
     putPatients,
     putAbsHolRequest,
-    putRecepiesData
+    putRecepiesData,
+    putCalendarData
 } from './actions';
+
+export function* fetchCalendar() {
+    const { payload } = yield take(FETCH_CALENDAR);
+    const { calendar } = yield call(PersonnelService.fetchCalendar, payload);
+    yield put(putCalendarData(calendar));
+}
 
 export function* rewriteRecepie() {
     const { payload } = yield take(REWRITE_RECEPIE);
