@@ -1,11 +1,39 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import useStateWithCallback from 'use-state-with-callback';
 import { Row, Form, Col, Button, Container } from 'react-bootstrap';
 import moment from 'moment';
+import { absHolRequest } from '../store/nurse/actions';
 
-const HolAbsRequest = () => {
-    const [requestType, setRequestType] = useState();
-    const [yesterday, setYesterday] = useState(moment().format('YYYY-MM-DD'));
-    console.log(yesterday);
+const HolAbsRequest = ({ personnelId }) => {
+    const dispatch = useDispatch();
+    const [today, setToday] = useState(moment().format('YYYY-MM-DD'));
+    const [startDate, setStartDate] = useState();
+    const [endDate, setEndDate] = useState();
+    const [startDateString, setStartDateString] = useStateWithCallback(moment().format('YYYY-MM-DD'),sdString=>{
+        setStartDate((new Date(sdString)).getTime() / 1000 |0);
+
+    });
+    const [endDateString, setEndDateString] = useStateWithCallback(moment().format('YYYY-MM-DD'),edString=>{
+        setEndDate((new Date(edString)).getTime() / 1000| 0);
+    });
+    
+    const [type, setType] = useState('Absence');
+    const clinicId = 1;
+
+    const handleSubmit = () => {
+
+        dispatch(
+            absHolRequest({
+                startDate,
+                endDate,
+                type,
+                personnelId,
+                clinicId
+            })
+        );
+    };
+
     return (
         <Container>
             <Row>
@@ -21,10 +49,10 @@ const HolAbsRequest = () => {
                                 <Form.Label>Type of request</Form.Label>
                             </div>
                             <Form.Control as="select" onChange={({ currentTarget }) => {
-                                setRequestType(currentTarget.value);
+                                setType(currentTarget.value);
                             }} >
-                                <option value="Absence">Absence</option>
-                                <option value="Holiday">Holiday</option>
+                                <option key="0" value="Absence">Absence</option>
+                                <option key="1" value="Holiday">Holiday</option>
 
                             </Form.Control>
                         </Form.Group>
@@ -32,18 +60,25 @@ const HolAbsRequest = () => {
                             <div align="center">
                                 <Form.Label>Choose start date:</Form.Label>
                             </div>
-                            <Form.Control type="date" min={yesterday}/>
+                            <Form.Control type="date" min={today} value={startDateString} id="date1"
+                                onChange={({ currentTarget }) => {
+                                    setStartDateString(currentTarget.value);
+                                }} />
 
                         </Form.Group>
                         <Form.Group as={Col} >
                             <div align="center">
                                 <Form.Label>Choose end date:</Form.Label>
                             </div>
-                            <Form.Control type="date" min={yesterday}/>
+                            <Form.Control type="date" min={today} value={endDateString} id="date2"
+                                onChange={({ currentTarget }) => {
+                                    setEndDateString(currentTarget.value);
+                                }}
+                            />
                         </Form.Group>
                         <Form.Group as={Col}>
                             <div align="center">
-                                <Button variant="primary">
+                                <Button variant="primary" onClick={handleSubmit}>
                                     Submit
                                 </Button>
                             </div>
