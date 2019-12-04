@@ -46,7 +46,10 @@ public class DbColumnConstants {
     public static final String CALENDAR = "calendar";
     public static final String CODE = "code";
     public static final String STATUS = "status";
-
+    public static final String TITLE = "title";
+    public static final String START = "start";
+    public static final String END = "end";
+    public static final String UDI = "udi";
 
 
 }
