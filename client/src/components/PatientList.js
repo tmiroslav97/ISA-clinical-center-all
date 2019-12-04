@@ -2,17 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Table, Row, Col, InputGroup, DropdownButton, Dropdown, Container, FormControl } from 'react-bootstrap';
 import { patientsSelector } from '../store/nurse/selectors';
-import { fetchPatients } from '../store/nurse/actions';
+import { fetchPatients, fetchPatientsByClinicId } from '../store/nurse/actions';
 
-const PatientList = () => {
+const PatientList = ({ clinicId }) => {
     const dispatch = useDispatch();
     const patients = useSelector(patientsSelector);
 
     useEffect(() => {
-        dispatch(
-            fetchPatients({})
-        );
-    }, []);
+        if (clinicId != null) {
+            dispatch(
+                fetchPatientsByClinicId({clinicId})
+            );
+        }
+    }, [clinicId]);
 
     return (
         <Container>
