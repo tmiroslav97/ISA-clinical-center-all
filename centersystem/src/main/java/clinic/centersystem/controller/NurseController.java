@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.PUT;
+import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @RestController
 @RequestMapping(value = "/nurse", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -32,7 +31,7 @@ public class NurseController {
         return new ResponseEntity<>(this.nurseServiceCont.getNurseById(nurseId), HttpStatus.OK);
     }
 
-    @RequestMapping(method = PUT, value = "/rewrite/{nurseId}/{recepie}")
+    @RequestMapping(method = POST, value = "/rewrite/{nurseId}/{recepieId}")
     public ResponseEntity<String> rewriteRecepie(@PathVariable Long nurseId, @PathVariable Long recepieId) {
         return new ResponseEntity<>(this.nurseServiceCont.rewriteRecepie(nurseId, recepieId), HttpStatus.OK);
     }
