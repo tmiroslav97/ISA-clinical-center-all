@@ -1,6 +1,7 @@
 package clinic.centersystem.controller;
 
 import clinic.centersystem.dto.request.AbsenceRequirementDTO;
+import clinic.centersystem.dto.response.CalendarResponse;
 import clinic.centersystem.dto.response.PatientResponse;
 import clinic.centersystem.model.AbsenceRequirement;
 import clinic.centersystem.service.PersonnelServiceCont;
@@ -38,4 +39,9 @@ public class PersonnelController {
         return new ResponseEntity<>(this.personnelServiceCont.getMyRequirements(personnelId), HttpStatus.OK);
     }
 
+
+    @RequestMapping(method = GET, value = "/my-cal/{personnelId}")
+    public ResponseEntity<CalendarResponse> getMyCalendar(@PathVariable Long personnelId) {
+        return new ResponseEntity<>(this.personnelServiceCont.getMyCalendar(personnelId), HttpStatus.OK);
+    }
 }
