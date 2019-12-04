@@ -10,6 +10,7 @@ public class AbsenceRequirementConverter {
                 .type(absenceRequirementDTO.getType())
                 .startDate(absenceRequirementDTO.getStartDate())
                 .endDate(absenceRequirementDTO.getEndDate())
+                .status("REQUESTED")
                 .build();
     }
 }
