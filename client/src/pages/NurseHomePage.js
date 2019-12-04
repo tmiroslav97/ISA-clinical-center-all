@@ -8,13 +8,14 @@ import WorkCalendar from '../components/WorkCalendar';
 import HolAbsRequest from '../components/HolAbsRequest';
 import BookingDoc from '../components/BookingDoc';
 import ApointmentInfo from '../components/ApointmentInfo';
+import RewriteRecepie from '../components/RewriteRecepie';
 import { nurseDataSelector } from '../store/nurse/selectors';
 
 const NurseHomePage = ({ match }) => {
     const dispatch = useDispatch();
     const nurseId = match.params.id;
     const data = useSelector(nurseDataSelector);
-    
+
     useEffect(() => {
         dispatch(
             fetchNurseData({
@@ -28,13 +29,16 @@ const NurseHomePage = ({ match }) => {
             <Tab eventKey="zero" title="Patients list">
                 <PatientList />
             </Tab>
-            <Tab eventKey="second" title="WorkCalendar">
+            <Tab eventKey="second" title="Holiday/absence requests">
+                <HolAbsRequest personnelId={data.id} clinicId={data.clinicId} />
+            </Tab>
+            <Tab eventKey="third" title="Recepie">
+                <RewriteRecepie nurseId={data.id} />
+            </Tab>
+            <Tab eventKey="fourth" title="WorkCalendar">
                 <WorkCalendar />
             </Tab>
-            <Tab eventKey="third" title="Holiday/absence requests">
-                <HolAbsRequest personnelId={data.id} clinicId={data.clinicId}/>
-            </Tab>
-            <Tab eventKey="fourth" title=" User Profile">
+            <Tab eventKey="fifth" title=" User Profile">
                 <UserProfile data={data} />
             </Tab>
         </Tabs>
