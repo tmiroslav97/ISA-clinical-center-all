@@ -6,7 +6,8 @@ import {
     ABS_HOL_REQUEST,
     FETCH_ABS_HOL_REQUEST,
     FETCH_RECEPIES,
-    REWRITE_RECEPIE
+    REWRITE_RECEPIE,
+    FETCH_PATIENTS_BY_CLINIC_ID
 } from './constants';
 
 import PatientService from '../../services/PatientService';
@@ -54,7 +55,7 @@ export function* fetchNurseData() {
 }
 
 export function* fetchPatients() {
-    const { payload } = yield take(FETCH_PATIENTS);
-    const { patients } = yield call(PatientService.fetchPatients, {});
+    const { payload } = yield take(FETCH_PATIENTS_BY_CLINIC_ID);
+    const { patients } = yield call(PatientService.fetchPatientsByClinicId, payload);
     yield put(putPatients(patients));
 }
