@@ -3,17 +3,14 @@ package clinic.centersystem.controller;
 import clinic.centersystem.authentication.JwtAuthenticationRequest;
 import clinic.centersystem.dto.request.RegistrationRequirementDTO;
 import clinic.centersystem.dto.response.LoginUserResponse;
-import clinic.centersystem.model.PasswordChanger;
+import clinic.centersystem.dto.request.PasswordChangerRequestDTO;
 import clinic.centersystem.service.AuthenticationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import sun.rmi.runtime.Log;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping(value = "/sec", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -42,10 +39,10 @@ public class AuthenticationController {
     }
 
     @RequestMapping(value = "/change-password", method = RequestMethod.POST)
-    public ResponseEntity<?> changePassword(@RequestBody PasswordChanger passwordChanger) {
-        boolean flag = authenticationService.changePassword(passwordChanger);
-        if (flag) {
-            return new ResponseEntity<>("Successfully changed password!", HttpStatus.OK);
+    public ResponseEntity<?> changePassword(@RequestBody PasswordChangerRequestDTO passwordChangerRequestDTO) {
+        LoginUserResponse loginUserResponse = authenticationService.changePassword(passwordChangerRequestDTO);
+        if (loginUserResponse != null) {
+            return new ResponseEntity<>(loginUserResponse, HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Password couldn't be changed!", HttpStatus.OK);
         }

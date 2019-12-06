@@ -12,7 +12,7 @@ public class UserConverter {
                 .email(user.getEmail())
                 .token(jwt)
                 .role(user.getRole().name())
-                .isFirstLog(true)
+                .isFirstLog(user.isFirstLog())
                 .build();
     }
 }
