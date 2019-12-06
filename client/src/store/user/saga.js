@@ -1,4 +1,5 @@
 import { take, put, call } from 'redux-saga/effects';
+import { history } from '../../index';
 
 import {
     LOGIN,
@@ -23,6 +24,24 @@ export function* login() {
     const { data } = yield call(authService.login, payload);
     yield put(putUserData(data));
     yield put(putUserToken(data.token));
+    if (data.role === 'ROLE_PATIENT') {
+        history.push('/pat');
+    } else if (data.role === 'ROLE_CCADMIN') {
+        if (data.firstLog) {
+            history.push('/change-pass');
+        } else {
+            history.push('/ccadmin/' + data.id);
+        }
+
+    } else if (data.role === 'ROLE_DOCTOR') {
+        history.push('/doc');
+    } else if (data.role === 'ROLE_NURSE') {
+        history.push('/nurse-page/' + data.id);
+    } else if (data.role === 'ROLE_ADMINC') {
+        history.push('/adminc');
+    } else {
+        alert('Nije odobren pristup sistemu!');
+    }
 }
 
 export function* changePassword() {
