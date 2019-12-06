@@ -13,7 +13,7 @@ VALUES ('ROLE_PERSONNEL');
 
 INSERT INTO user (id, first_name, last_name, email, enabled, first_log,
                   last_password_reset_date, password, role)
-VALUES (1, 'Miroslav', 'Tomic', 'tomic.miroslav97@gmail.com', true, false, '2019-11-20 11:00:00',
+VALUES (1, 'Miroslav', 'Tomic', 'tomic.miroslav97@gmail.com', true, true, '2019-11-20 11:00:00',
         '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra',
         'ROLE_CCADMIN');
 INSERT INTO user (id, first_name, last_name, email, enabled, first_log,

@@ -80,9 +80,13 @@ public class AuthenticationService {
         return true;
     }
 
-    public boolean changePassword(PasswordChangerRequestDTO passwordChangerRequestDTO) {
-        this.customUserDetailsService.changePassword(passwordChangerRequestDTO.getOldPassword(), passwordChangerRequestDTO.getNewPassword());
-        return true;
+    public LoginUserResponse changePassword(PasswordChangerRequestDTO passwordChangerRequestDTO) {
+        User user = this.customUserDetailsService.changePassword(passwordChangerRequestDTO.getOldPassword(), passwordChangerRequestDTO.getNewPassword());
+        String jwt = tokenUtils.generateToken(user.getEmail());
+
+        LoginUserResponse loginUserResponse = UserConverter.toCreateUserLoginResponse(user, jwt);
+
+        return loginUserResponse;
     }
 
 }

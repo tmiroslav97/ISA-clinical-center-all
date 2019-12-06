@@ -40,9 +40,9 @@ public class AuthenticationController {
 
     @RequestMapping(value = "/change-password", method = RequestMethod.POST)
     public ResponseEntity<?> changePassword(@RequestBody PasswordChangerRequestDTO passwordChangerRequestDTO) {
-        boolean flag = authenticationService.changePassword(passwordChangerRequestDTO);
-        if (flag) {
-            return new ResponseEntity<>("Successfully changed password!", HttpStatus.OK);
+        LoginUserResponse loginUserResponse = authenticationService.changePassword(passwordChangerRequestDTO);
+        if (loginUserResponse != null) {
+            return new ResponseEntity<>(loginUserResponse, HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Password couldn't be changed!", HttpStatus.OK);
         }
