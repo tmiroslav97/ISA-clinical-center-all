@@ -3,8 +3,8 @@ import {
     FETCH_PATIENT_DATA,
     PUT_DOCTORS_DATA,
     FETCH_DOCTORS_DATA,
-    PUT_CLINICS_DATA,
-    FETCH_CLINICS_DATA
+    //PUT_CLINICS_DATA,
+    //FETCH_CLINICS_DATA
 } from './constants';
     
 export const putPatientData = payload => ({
@@ -26,7 +26,7 @@ export const fetchDoctorsData = payload => ({
     type: FETCH_DOCTORS_DATA,
     payload
 });
-
+/*
 export const putClinicsData = payload => ({
     type: PUT_CLINICS_DATA,
     payload
@@ -36,4 +36,5 @@ export const fetchClinicsData = payload => ({
     type: FETCH_CLINICS_DATA,
     payload
 });
+*/
 
