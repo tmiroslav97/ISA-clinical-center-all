@@ -71,7 +71,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers(HttpMethod.POST, "/sec/login");
         web.ignoring().antMatchers(HttpMethod.POST, "/sec/registration");
-        web.ignoring().antMatchers(HttpMethod.POST, "/sec/change-password");
         web.ignoring().antMatchers(HttpMethod.GET, "/cca/activate-account/*");
         web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html",
                 "/**/*.css", "/**/*.js", "/**/assets/**");
