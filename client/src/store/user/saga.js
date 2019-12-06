@@ -4,7 +4,8 @@ import { history } from '../../index';
 import {
     LOGIN,
     REGISTRATION,
-    CHANGE_PASSWORD
+    CHANGE_PASSWORD,
+    SIGN_OUT
 } from './constants';
 import authService from '../../services/AuthSecurity';
 
@@ -12,6 +13,14 @@ import {
     putUserData,
     putUserToken
 } from './actions';
+
+export function* signOut() {
+    const { payload } = yield take(SIGN_OUT);
+    localStorage.clear();
+    yield put(putUserData(payload));
+    yield put(putUserToken(''));
+    history.push('/');
+}
 
 export function* registration() {
     const { payload } = yield take(REGISTRATION);
