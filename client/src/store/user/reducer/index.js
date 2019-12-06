@@ -12,7 +12,7 @@ const initialState = {
         lastName: '',
         email: '',
         firstLog: '',
-        role: window.localStorage.getItem('role')
+        role: 'ROLE_USER'
     },
     token: window.localStorage.getItem('token')
 };
