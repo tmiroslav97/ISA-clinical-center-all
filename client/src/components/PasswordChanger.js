@@ -14,7 +14,8 @@ const PasswordChanger = () => {
         dispatch(
             changePassword({
                 oldPassword,
-                newPassword
+                newPassword,
+                confNewPassword
             })
         );
     };
