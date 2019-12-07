@@ -3,8 +3,14 @@ import {
     REGISTRATION,
     PUT_USER_DATA,
     PUT_USER_TOKEN,
-    CHANGE_PASSWORD
+    CHANGE_PASSWORD,
+    SIGN_OUT
 } from './constants';
+
+export const signOut = payload => ({
+    type: SIGN_OUT,
+    payload
+});
 
 export const loginUser = payload => ({
     type: LOGIN,
