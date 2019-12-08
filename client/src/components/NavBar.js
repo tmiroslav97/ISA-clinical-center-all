@@ -1,11 +1,28 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Navbar, Nav, } from 'react-bootstrap';
-import {userDataSelector} from '../store/user/selectors';
-import {useSelector} from 'react-redux';
+import { userDataSelector } from '../store/user/selectors';
+import { useSelector } from 'react-redux';
+import { signOut } from '../store/user/actions';
 
 export default function NavBar() {
-    // esling-disable-next-line
+    const dispatch = useDispatch();
     const user = useSelector(userDataSelector);
+    const role = user.role;
+
+    const handleSignOut = () => {
+        dispatch(
+            signOut({
+                'id': '',
+                'firstName': '',
+                'lastName': '',
+                'email': '',
+                'firstLog': '',
+                'role': 'ROLE_USER'
+            })
+        );
+    };
+
     return (
         <Navbar bg="light" expand="lg">
             <Navbar.Brand href="/">Clinic Center</Navbar.Brand>
@@ -13,17 +30,18 @@ export default function NavBar() {
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
                     <Nav.Link href="/">Home</Nav.Link>
+                    {role === 'ROLE_CCADMIN' && <Nav.Link href={'/ccadmin/' + user.id}>Profile</Nav.Link>}
+                    {role === 'ROLE_NURSE' && <Nav.Link href={'/nurse-page/' + user.id}>Nurse homepage</Nav.Link>}
                 </Nav>
-                
                 <Nav className="ml-auto">
-                    <Nav.Link href="/login">Login</Nav.Link>
-                    <Nav.Link href="/signup">Sign Up</Nav.Link>
+                    {role === 'ROLE_USER' && <Nav.Link href="/login">Login</Nav.Link>}
+                    {role === 'ROLE_USER' && <Nav.Link href="/signup">Sign Up</Nav.Link>}
+                    {role !== 'ROLE_USER' && <Nav.Link href="#" onClick={() => handleSignOut()}>Sign out</Nav.Link>}
                 </Nav>
-                
-                
+
             </Navbar.Collapse>
         </Navbar>
 
     );
-  }
- 
+}
+

@@ -4,11 +4,9 @@ import clinic.centersystem.authentication.JwtAuthenticationRequest;
 import clinic.centersystem.converter.UserConverter;
 import clinic.centersystem.dto.request.RegistrationRequirementDTO;
 import clinic.centersystem.dto.response.LoginUserResponse;
-import clinic.centersystem.model.PasswordChanger;
-import clinic.centersystem.model.Patient;
+import clinic.centersystem.dto.request.PasswordChangerRequestDTO;
 import clinic.centersystem.model.RegistrationRequirement;
 import clinic.centersystem.model.User;
-import clinic.centersystem.model.enumeration.RoleEnum;
 import clinic.centersystem.security.TokenUtils;
 import clinic.centersystem.service.intf.PatientService;
 import clinic.centersystem.service.intf.RegistrationRequirementService;
@@ -82,9 +80,13 @@ public class AuthenticationService {
         return true;
     }
 
-    public boolean changePassword(PasswordChanger passwordChanger) {
-        this.customUserDetailsService.changePassword(passwordChanger.getOldPassword(), passwordChanger.getNewPassword());
-        return true;
+    public LoginUserResponse changePassword(PasswordChangerRequestDTO passwordChangerRequestDTO) {
+        User user = this.customUserDetailsService.changePassword(passwordChangerRequestDTO.getOldPassword(), passwordChangerRequestDTO.getNewPassword());
+        String jwt = tokenUtils.generateToken(user.getEmail());
+
+        LoginUserResponse loginUserResponse = UserConverter.toCreateUserLoginResponse(user, jwt);
+
+        return loginUserResponse;
     }
 
 }

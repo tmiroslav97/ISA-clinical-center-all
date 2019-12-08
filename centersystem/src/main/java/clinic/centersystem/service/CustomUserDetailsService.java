@@ -44,13 +44,10 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
     }
 
-    public void changePassword(String oldPassword, String newPassword) {
+    public User changePassword(String oldPassword, String newPassword) {
 
         Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
-        if(currentUser == null){
-            System.out.println("null");
-            return;
-        }
+
         String email = currentUser.getName();
 
         if (authenticationManager != null) {
@@ -60,7 +57,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         } else {
             LOGGER.debug("No authentication manager set. can't change Password!");
 
-            return;
+            return null;
         }
 
         LOGGER.debug("Changing password for user '" + email + "'");
@@ -70,7 +67,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         user.setPassword(passwordEncoder.encode(newPassword));
         user.setFirstLog(false);
         user.setLastPasswordResetDate(new Timestamp(System.currentTimeMillis()));
-        userRepository.save(user);
-
+        user = userRepository.save(user);
+        return user;
     }
 }
