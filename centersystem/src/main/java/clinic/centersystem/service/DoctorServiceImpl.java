@@ -24,4 +24,9 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public Doctor save(Doctor doctor){return this.doctorRepository.save(doctor);}
+
+    public void remove(Long id){this.doctorRepository.deleteById(id);}
+
+
+
 }

@@ -1,6 +1,7 @@
 package clinic.centersystem.service;
 
 
+import clinic.centersystem.converter.DoctorConverter;
 import clinic.centersystem.dto.response.DoctorResponse;
 import clinic.centersystem.model.Doctor;
 import clinic.centersystem.repository.DoctorRepository;
@@ -15,7 +16,13 @@ public class DoctorServiceCont {
     @Autowired
     private DoctorService doctorService;
 
-    private DoctorResponse getDoctorById(Long id){
+    public DoctorResponse getDoctorById(Long id){
         Doctor doctor = this.doctorService.findById(id);
+        DoctorResponse doctorResponse = DoctorConverter.toCreateDoctorResponseFromDoctor(doctor);
+        return doctorResponse;
+    }
+
+    public String addDoctor(Long id){
+        Doctor doctor = this.doctorService.findById(id)
     }
 }

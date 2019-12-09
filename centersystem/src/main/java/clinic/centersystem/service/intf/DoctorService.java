@@ -12,4 +12,6 @@ public interface DoctorService {
     List<Doctor> findAllOnClinic(Long clinicId);
 
     Doctor save(Doctor doctor);
+
+    public void remove(Long id);
 }
