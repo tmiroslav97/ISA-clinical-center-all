@@ -19,6 +19,7 @@ import { userDataSelector } from './store/user/selectors';
 const AppRouter = () => {
     const user = useSelector(userDataSelector);
     const role = user.role;
+    const fristLog = user.fristLog;
     return (
         <Switch>
             <Route exact path="/" component={HomePage} />
@@ -27,10 +28,10 @@ const AppRouter = () => {
             <Route exact path="/signup" component={RegPage} />
             <Route exact path="/doc" component={DoctorHomePage} />
             <Route exact path="/prob" component={HolidayAproval} />
-            <Route exact path="/ccadmin/:id" render={(props) => (role === 'ROLE_CCADMIN' ? (<ClinicCenterAdminProfile match={props.match} />) : (<Redirect to="/page-not-found" />))} />
+            <Route exact path="/ccadmin/:id" render={(props) => ((role === 'ROLE_CCADMIN' && !fristLog) ? (<ClinicCenterAdminProfile match={props.match} />) : (<Redirect to="/page-not-found" />))} />
             <Route exact path="/signup" component={RegPage} />
             <Route exact path="/change-pass" component={PasswordChanger} />
-            <Route exact path="/nurse-page/:id" render={(props) => (role === 'ROLE_NURSE' ? (<NurseHomePage match={props.match} />) : (<Redirect to="/page-not-found" />))} />
+            <Route exact path="/nurse-page/:id" render={(props) => ((role === 'ROLE_NURSE' && !fristLog) ? (<NurseHomePage match={props.match} />) : (<Redirect to="/page-not-found" />))} />
             <Route exact path="/adminc" component={ClinicAdmin} />
             <Route exact path="/probs" component={DoctorAllAtOnce} />
             <Route exact path="/CA" component={ClinicAdmin} />
