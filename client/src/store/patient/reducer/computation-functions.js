@@ -12,11 +12,10 @@ export function putDoctorsData(state, payload) {
     };
 }
 
-/*
-export function putClinicsData(state, payload) {
+
+export function putClinicsDataPatient(state, payload) {
     return {
         ...state,
         clinics: payload
     };
 }
-*/
