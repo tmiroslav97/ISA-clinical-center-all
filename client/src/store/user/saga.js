@@ -56,6 +56,22 @@ export function* login() {
 export function* changePassword() {
     const { payload } = yield take(CHANGE_PASSWORD);
     const { data } = yield call(authService.changePassword, payload);
+    yield put(putUserData(data));
+    yield put(putUserToken(data.token));
+    
+    if (data.role === 'ROLE_PATIENT') {
+        history.push('/pat');
+    } else if (data.role === 'ROLE_CCADMIN') {
+        history.push('/ccadmin/' + data.id);
+    } else if (data.role === 'ROLE_DOCTOR') {
+        history.push('/doc');
+    } else if (data.role === 'ROLE_NURSE') {
+        history.push('/nurse-page/' + data.id);
+    } else if (data.role === 'ROLE_ADMINC') {
+        history.push('/adminc');
+    } else {
+        alert('Nije odobren pristup sistemu!');
+    }
 }
 
 
