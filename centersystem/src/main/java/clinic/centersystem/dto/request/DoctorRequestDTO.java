@@ -8,8 +8,9 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DoctorRequestDTO {
-    private Long id;
+    private String email;
     private String firstName;
     private String lastName;
-    private String email;
+    private String password1;
+    private String password2;
 }
