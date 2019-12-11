@@ -20,14 +20,13 @@ const AppRouter = () => {
     const user = useSelector(userDataSelector);
     const role = user.role;
     const firstLog = user.firstLog;
-    console.log(firstLog);
     return (
         <Switch>
             <Route exact path="/" component={HomePage} />
             <Route exact path="/login" component={LoginPage} />
             <Route exact path="/pat" component={PatientHomePage} />
             <Route exact path="/signup" component={RegPage} />
-            <Route exact path="/doc" component={DoctorHomePage} />
+            <Route exact path="/doc/:id" render={(props) => ((role === 'ROLE_DOCTOR' && !firstLog) ? (<DoctorHomePage match={props.match} />) : (<Redirect to="/page-not-found" />))} />
             <Route exact path="/prob" component={HolidayAproval} />
             <Route exact path="/ccadmin/:id" render={(props) => ((role === 'ROLE_CCADMIN' && !firstLog) ? (<ClinicCenterAdminProfile match={props.match} />) : (<Redirect to="/page-not-found" />))} />
             <Route exact path="/signup" component={RegPage} />

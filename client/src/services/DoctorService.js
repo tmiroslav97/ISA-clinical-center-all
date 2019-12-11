@@ -9,7 +9,7 @@ class DoctorService extends HttpClient {
     fetchDoctorData = async payload => {
         try {
             const { data } = await this.getApiClient().get(
-                format(FINALPOINTS.FETCH_DOCTOR_DATA, payload.doctorId)
+                format(FINALPOINTS.FETCH_DOCTOR_DATA, payload.id)
             );
 
             return { data };
