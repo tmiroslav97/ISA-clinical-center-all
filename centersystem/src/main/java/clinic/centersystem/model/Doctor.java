@@ -4,6 +4,7 @@ package clinic.centersystem.model;
 import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
 import clinic.centersystem.model.enumeration.RoleEnum;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -30,6 +31,7 @@ public class Doctor extends Personnel {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<AppointmentRequirement> appReqs;
 
+    @Builder(builderMethodName = "doctorBuilder")
     public Doctor(Long id, String email, String password, String firstName, String lastName,
                   boolean enabled, RoleEnum role, boolean isFirstLog, Timestamp lastPasswordResetDate,
                   List<Authority> authorities, Set<Patient> patients, Clinic clinic, Calendar calendar,
