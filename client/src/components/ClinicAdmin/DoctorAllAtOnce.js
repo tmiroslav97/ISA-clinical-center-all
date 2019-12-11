@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import { Container, Row, Form, Col, Button, Table, Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import {addDoctor, fetchDoctorData, deleteDoctor} from '../../store/clinic_admin/actions';
+import {addDoctor, fetchDoctorData, deleteDoctor,searchDoctorByName} from '../../store/clinic_admin/actions';
 import { doctorDataSelector } from '../../store/clinic_admin/selectors';
 
 
@@ -14,6 +14,7 @@ const DoctorAllAtOnce = () => {
     const [password2, setPassword2] = useState();
     const [firstName, setFirstName] = useState();
     const [lastName, setLastName] = useState();
+    const [name, setName] = useState();
     const doctors = useSelector(doctorDataSelector);
 
     const handleAddDoctor = () => {
@@ -24,6 +25,13 @@ const DoctorAllAtOnce = () => {
                 password2,
                 firstName,
                 lastName
+            })
+        );
+    };
+    const handleSearch = () => {
+        dispatch(
+            searchDoctorByName({
+                name
             })
         );
     };
@@ -111,7 +119,7 @@ const DoctorAllAtOnce = () => {
 
                         <Form.Label>Search doctors:</Form.Label>
                         <Col>
-                            <Form.Control type="text" placeholder="Search " />
+                            <Form.Control type="text" placeholder="Search by name" onChange={handleSearch}/>
                         </Col>
                     </Form.Group>
 
