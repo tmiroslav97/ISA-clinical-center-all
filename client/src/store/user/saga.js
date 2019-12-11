@@ -43,7 +43,7 @@ export function* login() {
         }
 
     } else if (data.role === 'ROLE_DOCTOR') {
-        history.push('/doc');
+        history.push('/doc/'+data.id);
     } else if (data.role === 'ROLE_NURSE') {
         history.push('/nurse-page/' + data.id);
     } else if (data.role === 'ROLE_ADMINC') {

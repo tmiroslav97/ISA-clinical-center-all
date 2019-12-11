@@ -12,7 +12,7 @@ class NurseService extends HttpClient {
     fetchNurseData = async payload => {
         try {
             const { data } = await this.getApiClient().get(
-                format(FINALPOINTS.FETCH_NURSE_DATA, payload.nurseId)
+                format(FINALPOINTS.FETCH_NURSE_DATA, payload.id)
             );
 
             return { data };
