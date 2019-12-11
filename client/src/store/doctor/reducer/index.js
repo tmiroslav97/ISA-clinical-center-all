@@ -26,4 +26,4 @@ const doctorReducer = (state = initialState, { type, payload }) => {
 const actionHandler = {
 };
 
-export default nurseReducer;
+export default doctorReducer;
