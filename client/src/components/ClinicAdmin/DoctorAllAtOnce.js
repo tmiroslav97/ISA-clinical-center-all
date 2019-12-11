@@ -1,19 +1,20 @@
 import React,{useState, useEffect} from 'react';
 import { Container, Row, Form, Col, Button, Table, Modal } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import {addDoctor, fetchDoctorData} from '../../store/clinic_admin/actions';
-
+import { useDispatch, useSelector } from 'react-redux';
+import {addDoctor, fetchDoctorData, deleteDoctor} from '../../store/clinic_admin/actions';
+import { doctorDataSelector } from '../../store/clinic_admin/selectors';
 
 
 
 const DoctorAllAtOnce = () => {
     const dispatch = useDispatch();
-    
+    const [id, setId] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [password2, setPassword2] = useState();
     const [firstName, setFirstName] = useState();
     const [lastName, setLastName] = useState();
+    const doctors = useSelector(doctorDataSelector);
 
     const handleAddDoctor = () => {
         dispatch(
@@ -23,6 +24,13 @@ const DoctorAllAtOnce = () => {
                 password2,
                 firstName,
                 lastName
+            })
+        );
+    };
+    const handleDeleteDoctor = () => {
+        dispatch(
+            deleteDoctor({
+                id
             })
         );
     };
@@ -132,10 +140,19 @@ const DoctorAllAtOnce = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {
-
-                        }
-                    </tbody>
+                            {
+                                doctors.map((doctor, index) => {
+                                    return (
+                                        <tr key={doctor.id}>
+                                            <td>{index + 1}</td>
+                                            <td>{doctor.firstName}</td>
+                                            <td>{doctor.lastName}</td>
+                                            <td><Button variant="danger" onClick={handleDeleteDoctor} >Delete</Button></td>
+                                        </tr>
+                                    );
+                                })
+                            }
+                        </tbody>
                 </Table>
             </Row>
 

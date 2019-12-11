@@ -25,6 +25,12 @@ public class ClinicAdministratorService {
 
         return "Successfully added doctor";
     }
+    public String deleteDoctor(Long id) {
+        List<Doctor>doctors=this.doctorService.findAll();
+        Doctor doctor=this.doctorService.findById(id);
+        doctors.remove(doctor);
+        return "Successfully deleted doctor";
+    }
 
     public List<DoctorResponse> getDoctors(){
         List<Doctor>doctors=this.doctorService.findAll();
