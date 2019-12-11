@@ -1,12 +1,18 @@
 import React from 'react';
 import { Container, Row, Col, Table, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchClinicsDataPatient } from '../../store/patient/actions';
 import { clinicsDataSelector } from '../../store/patient/selectors';
 
 const ClinicSearch = () => {
     const dispatch = useDispatch();
     const clinics = useSelector(clinicsDataSelector);
 
+    useEffect(() => {
+        dispatch(
+            fetchClinicsDataPatient({})
+        );
+    }, []);
 
 
     return (

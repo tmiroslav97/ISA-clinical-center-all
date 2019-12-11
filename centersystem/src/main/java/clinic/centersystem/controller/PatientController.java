@@ -45,6 +45,15 @@ public class PatientController {
         return new ResponseEntity<List<ClinicResponse>>(this.patientServiceCont.getClinics(), HttpStatus.OK);
     }
 
+    /*@RequestMapping(method = GET, value = "/search-clinics")
+    public ResponseEntity<List<ClinicResponse>> searchClinics() {
+        return new ResponseEntity<List<ClinicResponse>>(this.patientServiceCont.searchClinics(), HttpStatus.OK);
+    }
+
+    /*@RequestMapping(method = GET, value = "/search-doctors")
+    public ResponseEntity<List<DoctorResponse>> searchDoctors() {
+        return new ResponseEntity<List<DoctorResponse>>(this.patientServiceCont.searchDoctors(), HttpStatus.OK)
+    }*/
 
 
     @RequestMapping(method = GET, value = "/all")

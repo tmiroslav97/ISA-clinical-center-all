@@ -58,6 +58,21 @@ public class PatientServiceCont {
         return clinicResponses;
     }
 
+    /*public List<ClinicResponse> searchClinics() {
+        List<Clinic> clinics = this.clinicService.findAll();
+        List<ClinicResponse> clinicResponses = new ArrayList<ClinicResponse>();
+        for(Clinic clinic : clinics) {
+            clinicResponses.add(ClinicConverter.toCreateClinicResponseFromClinic(clinic)
+        }
+        return  clinicResponses;
+    }*/
+
+    /*public List<DoctorResponse> searchDoctors() {
+
+    }*/
+
+
+
     public List<PatientResponse> getPatients() {
         List<Patient> patients = this.patientService.findAll();
         List<PatientResponse> patientResponses = new ArrayList<PatientResponse>();
