@@ -15,7 +15,7 @@ import {
     putDoctorData
 } from './actions';
 
-export function* fetchNurseData() {
+export function* fetchDoctorData() {
     const { payload } = yield take(FETCH_DOCTOR_DATA);
     const { data } = yield call(DoctorService.fetchDoctorData, payload);
     yield put(putDoctorData(data));
