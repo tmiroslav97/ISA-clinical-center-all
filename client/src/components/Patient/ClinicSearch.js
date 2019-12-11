@@ -1,12 +1,27 @@
-import React from 'react';
+import React, {useEffect,useState } from 'react';
 import { Container, Row, Col, Table, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchClinicsDataPatient,searchClinicsDataPatient } from '../../store/patient/actions';
 import { clinicsDataSelector } from '../../store/patient/selectors';
 
 const ClinicSearch = () => {
     const dispatch = useDispatch();
     const clinics = useSelector(clinicsDataSelector);
+    const [name, setName] = useState();
 
+    const handleSearch = () => {
+        dispatch(
+            searchClinicsDataPatient({
+                name
+            })
+        );
+    };
+
+    useEffect(() => {
+        dispatch(
+            fetchClinicsDataPatient({})
+        );
+    }, []);
 
 
     return (
@@ -21,7 +36,7 @@ const ClinicSearch = () => {
                     <Form.Group as={Row}>
                         <Form.Label>Search:</Form.Label>
                         <Col>
-                            <Form.Control type="text" placeholder="Search clinics" />
+                            <Form.Control type="text" placeholder="Search clinics by name" onChange = {handleSearch}/>
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} controlId="formGridState">

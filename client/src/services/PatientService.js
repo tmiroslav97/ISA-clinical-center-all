@@ -4,10 +4,10 @@ import { format } from 'util';
 
 const FINALPOINTS = {
     FETCH_PATIENT_DATA: '/pat/%s',
-    FETCH_DOCTORS_DATA: '/pat/doctors',
-    FETCH_CLINICS_DATA: '/pat/clinics',
-    SEARCH_DOCTORS_DATA: '/pat/search-doctors/%s/%s',
-    SEARCH_CLINICS_DATA: '/pat/search-clinics/%s/%s',
+    FETCH_DOCTORS_DATA_PATIENT: '/pat/doctors',
+    FETCH_CLINICS_DATA_PATIENT: '/pat/clinics',
+    SEARCH_DOCTORS_DATA_PATIENT: '/pat/search-doctors',
+    SEARCH_CLINICS_DATA_PATIENT: '/pat/search-clinics',
     FETCH_PATIENTS: '/pat/all',
     FETCH_PATIENTS_BY_CLINIC_ID: '/pat/all/%s'
 };
@@ -28,10 +28,10 @@ class PatientService extends HttpClient{
         }
     };
 
-    fetchDoctorsData = async payload => {
+    fetchDoctorsDataPatient = async payload => {
         try {
             const { data } = await this.getApiClient().get(
-                FINALPOINTS.FETCH_DOCTORS_DATA
+                FINALPOINTS.FETCH_DOCTORS_DATA_PATIENT
             );
 
             const doctors = data;
@@ -42,10 +42,10 @@ class PatientService extends HttpClient{
         }
     };
 
-    fetchClinicsData = async payload => {
+    fetchClinicsDataPatient = async payload => {
         try {
             const { data } = await this.getApiClient().get(
-                FINALPOINTS.FETCH_CLINICS_DATA
+                FINALPOINTS.FETCH_CLINICS_DATA_PATIENT
             );
 
             const clinics = data;
@@ -69,10 +69,10 @@ class PatientService extends HttpClient{
         }
     };
 
-    searchClinicsData = async payload => {
+    searchClinicsDataPatient = async payload => {
         try {
             const { data } = await this.getApiClient().get(
-                FINALPOINTS.SEARCH_CLINICS_DATA
+                FINALPOINTS.SEARCH_CLINICS_DATA_PATIENT
             );
 
             const clinics = data;
@@ -82,10 +82,10 @@ class PatientService extends HttpClient{
         }
     };
 
-    searchDoctorsData = async payload => {
+    searchDoctorsDataPatient = async payload => {
         try {
             const { data } = await this.getApiClient().get(
-                FINALPOINTS.SEARCH_DOCTORS_DATA
+                FINALPOINTS.SEARCH_DOCTORS_DATA_PATIENT
             );
 
             const doctors = data;
