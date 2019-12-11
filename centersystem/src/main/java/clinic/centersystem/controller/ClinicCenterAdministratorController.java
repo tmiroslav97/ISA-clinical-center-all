@@ -7,6 +7,7 @@ import clinic.centersystem.dto.response.ClinicResponse;
 import clinic.centersystem.dto.response.RegistrationRequirementResponse;
 import clinic.centersystem.exception.CCANotPredefinedException;
 import clinic.centersystem.exception.UserExistsException;
+import clinic.centersystem.exception.UserNotFoundException;
 import clinic.centersystem.model.Clinic;
 import clinic.centersystem.service.ClinicCenterAdministratorService;
 import org.springframework.http.HttpStatus;
@@ -69,6 +70,8 @@ public class ClinicCenterAdministratorController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (CCANotPredefinedException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } catch (UserNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 

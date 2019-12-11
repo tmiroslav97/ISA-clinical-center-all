@@ -10,6 +10,7 @@ import clinic.centersystem.dto.response.ClinicResponse;
 import clinic.centersystem.dto.response.RegistrationRequirementResponse;
 import clinic.centersystem.exception.CCANotPredefinedException;
 import clinic.centersystem.exception.UserExistsException;
+import clinic.centersystem.exception.UserNotFoundException;
 import clinic.centersystem.model.*;
 import clinic.centersystem.service.intf.*;
 import lombok.RequiredArgsConstructor;
@@ -111,6 +112,9 @@ public class ClinicCenterAdministratorService {
 
     public String registerCCA(CCARegReqDTO ccaRegReqDTO, Long id) {
         ClinicCenterAdmin clinicCenterAdmin = this.clinicCenterAdminService.findById(id);
+        if(clinicCenterAdmin == null){
+            throw new UserNotFoundException();
+        }
         if (!clinicCenterAdmin.isPredefined()) {
             throw new CCANotPredefinedException();
         }
