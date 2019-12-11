@@ -5,6 +5,8 @@ import clinic.centersystem.dto.request.*;
 import clinic.centersystem.dto.response.ClinicCenterAdminResponse;
 import clinic.centersystem.dto.response.ClinicResponse;
 import clinic.centersystem.dto.response.RegistrationRequirementResponse;
+import clinic.centersystem.exception.CCANotPredefinedException;
+import clinic.centersystem.exception.UserExistsException;
 import clinic.centersystem.model.Clinic;
 import clinic.centersystem.service.ClinicCenterAdministratorService;
 import org.springframework.http.HttpStatus;
@@ -66,7 +68,14 @@ public class ClinicCenterAdministratorController {
     @RequestMapping(method = POST, value = "/reg-clinic")
     @PreAuthorize("hasRole('CCADMIN')")
     public ResponseEntity<String> registerClinic(@RequestBody ClinicRequestDTO ccaRegReqDTO) {
-        return new ResponseEntity<>(this.clinicCenterAdministratorService.registerClinic(ccaRegReqDTO), HttpStatus.OK);
+        try {
+            String msg = this.clinicCenterAdministratorService.registerClinic(ccaRegReqDTO);
+            return new ResponseEntity<>(msg, HttpStatus.OK);
+        } catch (UserExistsException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } catch (CCANotPredefinedException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @RequestMapping(method = GET, value = "/clinics")
