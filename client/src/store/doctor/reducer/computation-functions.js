@@ -4,3 +4,10 @@ export function putDoctorData(state, payload) {
         data: payload
     };
 }
+
+export function putDoctorCalendarData(state, payload) {
+    return {
+        ...state,
+        calendar: payload
+    };
+}
