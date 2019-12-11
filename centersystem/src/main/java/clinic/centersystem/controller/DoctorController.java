@@ -1,6 +1,7 @@
 package clinic.centersystem.controller;
 
 import clinic.centersystem.dto.response.DoctorResponse;
+import clinic.centersystem.model.Doctor;
 import clinic.centersystem.service.DoctorServiceCont;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -9,6 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
@@ -20,6 +24,12 @@ public class DoctorController {
     public DoctorController(DoctorServiceCont doctorServiceCont){
         this.doctorServiceCont = doctorServiceCont;
     }
+
+    @RequestMapping(method = GET, value = "/all")
+    public ResponseEntity<List<Doctor>> getMedicines() {
+        return new ResponseEntity<>(this.doctorServiceCont.getDoctors(), HttpStatus.OK);
+    }
+
 
     @RequestMapping(method = POST, value = "/add")
     public ResponseEntity<DoctorResponse> getDoctorById(@PathVariable Long doctorId) {

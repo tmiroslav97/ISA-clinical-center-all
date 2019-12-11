@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @NoArgsConstructor
 public class DoctorServiceCont {
@@ -22,7 +24,14 @@ public class DoctorServiceCont {
         return doctorResponse;
     }
 
-    public String addDoctor(Long id){
-        Doctor doctor = this.doctorService.findById(id)
+    public List<Doctor> getDoctors() {
+        return doctorService.findAll();
     }
+
+    public String addDoctor(Doctor d) {
+        Doctor doctor = this.doctorService.save(d);
+        return "Doctor succesfully created";
+    }
+
+
 }
