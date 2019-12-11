@@ -1,7 +1,8 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import { Container, Row, Form, Col, Button, Table, Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import {addDoctor} from '../../store/clinic_admin/actions'
+import {addDoctor, fetchDoctorData} from '../../store/clinic_admin/actions';
+
 
 
 
@@ -25,6 +26,11 @@ const DoctorAllAtOnce = () => {
             })
         );
     };
+    useEffect(() => {
+        dispatch(
+            fetchDoctorData({})
+        );
+    }, []);
 
 
     const [show, setShow] = useState(false);
