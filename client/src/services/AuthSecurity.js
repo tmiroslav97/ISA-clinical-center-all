@@ -55,21 +55,7 @@ class AuthSecurityService extends HttpBaseClient {
 
             //putting new token in local storage
             localStorage.setItem('token', data.token);
-
-            if (data.role === 'ROLE_PATIENT') {
-                history.push('/pat');
-            } else if (data.role === 'ROLE_CCADMIN') {
-                history.push('/ccadmin/' + data.id);
-            } else if (data.role === 'ROLE_DOCTOR') {
-                history.push('/doc');
-            } else if (data.role === 'ROLE_NURSE') {
-                history.push('/nurse-page/' + data.id);
-            } else if (data.role === 'ROLE_ADMINC') {
-                history.push('/adminc');
-            } else {
-                alert('Nije odobren pristup sistemu!');
-            }
-
+            
             return { data };
         } catch (error) {
             console.log(error.response.data);
