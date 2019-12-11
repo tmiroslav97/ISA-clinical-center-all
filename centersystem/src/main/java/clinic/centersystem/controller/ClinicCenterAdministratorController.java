@@ -62,20 +62,20 @@ public class ClinicCenterAdministratorController {
     @RequestMapping(method = POST, value = "/reg-cca/{ccaId}")
     @PreAuthorize("hasRole('CCADMIN')")
     public ResponseEntity<String> registerCCA(@PathVariable Long ccaId, @RequestBody CCARegReqDTO ccaRegReqDTO) {
-        return new ResponseEntity<>(this.clinicCenterAdministratorService.registerCCA(ccaRegReqDTO, ccaId), HttpStatus.OK);
-    }
-
-    @RequestMapping(method = POST, value = "/reg-clinic")
-    @PreAuthorize("hasRole('CCADMIN')")
-    public ResponseEntity<String> registerClinic(@RequestBody ClinicRequestDTO ccaRegReqDTO) {
         try {
-            String msg = this.clinicCenterAdministratorService.registerClinic(ccaRegReqDTO);
+            String msg = this.clinicCenterAdministratorService.registerCCA(ccaRegReqDTO, ccaId);
             return new ResponseEntity<>(msg, HttpStatus.OK);
         } catch (UserExistsException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } catch (CCANotPredefinedException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @RequestMapping(method = POST, value = "/reg-clinic")
+    @PreAuthorize("hasRole('CCADMIN')")
+    public ResponseEntity<String> registerClinic(@RequestBody ClinicRequestDTO ccaRegReqDTO) {
+        return new ResponseEntity<>(this.clinicCenterAdministratorService.registerClinic(ccaRegReqDTO), HttpStatus.OK);
     }
 
     @RequestMapping(method = GET, value = "/clinics")
