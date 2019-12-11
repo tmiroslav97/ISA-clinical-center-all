@@ -1,6 +1,7 @@
 package clinic.centersystem.controller;
 
 import clinic.centersystem.dto.response.DoctorResponse;
+import clinic.centersystem.dto.response.NurseResponse;
 import clinic.centersystem.model.Doctor;
 import clinic.centersystem.service.DoctorServiceCont;
 import org.springframework.http.HttpStatus;
@@ -25,14 +26,22 @@ public class DoctorController {
         this.doctorServiceCont = doctorServiceCont;
     }
 
+
+    @RequestMapping(method = GET, value = "/{doctorId}")
+    public ResponseEntity<DoctorResponse> getDoctorById(@PathVariable Long doctorId) {
+        return new ResponseEntity<>(this.doctorServiceCont.getDoctorById(doctorId), HttpStatus.OK);
+    }
+
     @RequestMapping(method = GET, value = "/all")
     public ResponseEntity<List<Doctor>> getMedicines() {
         return new ResponseEntity<>(this.doctorServiceCont.getDoctors(), HttpStatus.OK);
     }
 
-
+    /*
+    Can't understand what this method is for
     @RequestMapping(method = POST, value = "/add")
     public ResponseEntity<DoctorResponse> getDoctorById(@PathVariable Long doctorId) {
         return new ResponseEntity<>(this.doctorServiceCont.getDoctorById(doctorId), HttpStatus.OK);
     }
+     */
 }
