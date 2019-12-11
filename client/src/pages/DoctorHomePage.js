@@ -30,7 +30,7 @@ const DoctorHomePage = ({ match }) => {
                 <ApointmentInfo />
             </Tab>
             <Tab eventKey="second" title="WorkCalendar">
-                <WorkCalendar />
+                <WorkCalendar personnelId={data.id}/>
             </Tab>
             <Tab eventKey="third" title="Holiday/absence requests">
                 <HolAbsRequest />
