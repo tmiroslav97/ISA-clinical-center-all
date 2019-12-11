@@ -8,6 +8,7 @@ import lombok.*;
 
 import javax.persistence.*;
 
+@Builder
 @Setter
 @Getter
 @NoArgsConstructor
@@ -33,7 +34,7 @@ public class CalendarItem {
     private String type;
 
     @Column(name = DbColumnConstants.TYPEID, unique = false, nullable = true)
-    private String typeId;
+    private Long typeId;
 
     @Column(name = DbColumnConstants.UDI, unique = false, nullable = false)
     private String up_down_ind;
