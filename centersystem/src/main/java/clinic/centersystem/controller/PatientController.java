@@ -3,6 +3,7 @@ package clinic.centersystem.controller;
 import clinic.centersystem.dto.response.ClinicResponse;
 import clinic.centersystem.dto.response.DoctorResponse;
 import clinic.centersystem.dto.response.PatientResponse;
+import clinic.centersystem.model.Doctor;
 import clinic.centersystem.service.DoctorServiceCont;
 import clinic.centersystem.service.PatientServiceCont;
 import org.springframework.http.HttpStatus;
@@ -45,15 +46,12 @@ public class PatientController {
         return new ResponseEntity<List<ClinicResponse>>(this.patientServiceCont.getClinics(), HttpStatus.OK);
     }
 
-    /*@RequestMapping(method = GET, value = "/search-clinics")
-    public ResponseEntity<List<ClinicResponse>> searchClinics() {
-        return new ResponseEntity<List<ClinicResponse>>(this.patientServiceCont.searchClinics(), HttpStatus.OK);
-    }
 
-    /*@RequestMapping(method = GET, value = "/search-doctors")
-    public ResponseEntity<List<DoctorResponse>> searchDoctors() {
-        return new ResponseEntity<List<DoctorResponse>>(this.patientServiceCont.searchDoctors(), HttpStatus.OK)
-    }*/
+
+    @RequestMapping(method = GET, value = "/search-doctors")
+    public ResponseEntity<List<Doctor>> searchDoctors(@PathVariable String name) {
+        return new ResponseEntity<List<Doctor>>(this.patientServiceCont.searchDoctors(name), HttpStatus.OK);
+    }
 
 
     @RequestMapping(method = GET, value = "/all")

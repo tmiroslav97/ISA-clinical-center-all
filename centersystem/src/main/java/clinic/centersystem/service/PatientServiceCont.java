@@ -4,6 +4,7 @@ package clinic.centersystem.service;
 import clinic.centersystem.converter.ClinicConverter;
 import clinic.centersystem.converter.DoctorConverter;
 import clinic.centersystem.converter.PatientConverter;
+import clinic.centersystem.dto.request.DoctorRequestDTO;
 import clinic.centersystem.dto.response.ClinicResponse;
 import clinic.centersystem.dto.response.DoctorResponse;
 import clinic.centersystem.dto.response.PatientResponse;
@@ -58,19 +59,16 @@ public class PatientServiceCont {
         return clinicResponses;
     }
 
-    /*public List<ClinicResponse> searchClinics() {
-        List<Clinic> clinics = this.clinicService.findAll();
-        List<ClinicResponse> clinicResponses = new ArrayList<ClinicResponse>();
-        for(Clinic clinic : clinics) {
-            clinicResponses.add(ClinicConverter.toCreateClinicResponseFromClinic(clinic)
+    public List<Doctor> searchDoctors(String name)  {
+        List<Doctor> listDoctors = new ArrayList<>();
+        List<Doctor> doctors = this.doctorService.findAll();
+        for (Doctor doctor : doctors) {
+            if(doctor.getFirstName().contains(name)) {
+                listDoctors.add(doctor);
+            }
         }
-        return  clinicResponses;
-    }*/
-
-    /*public List<DoctorResponse> searchDoctors() {
-
-    }*/
-
+        return listDoctors;
+    }
 
 
     public List<PatientResponse> getPatients() {
