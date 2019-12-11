@@ -1,5 +1,6 @@
 import {
-    PUT_DOCTOR_DATA
+    PUT_DOCTOR_DATA,
+    PUT_DOCTOR_CALENDAR_DATA
 } from '../constants';
 
 import * as computationFunctions from './computation-functions';
@@ -30,7 +31,8 @@ const doctorReducer = (state = initialState, { type, payload }) => {
 };
 
 const actionHandler = {
-    [PUT_DOCTOR_DATA]: computationFunctions.putDoctorData
+    [PUT_DOCTOR_DATA]: computationFunctions.putDoctorData,
+    [PUT_DOCTOR_CALENDAR_DATA]: computationFunctions.putDoctorCalendarData
 };
 
 export default doctorReducer;

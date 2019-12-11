@@ -11,7 +11,6 @@ VALUES ('ROLE_PATIENT');
 INSERT INTO authority (name)
 VALUES ('ROLE_PERSONNEL');
 
-#Clinic Center Admin
 INSERT INTO user (id, first_name, last_name, email, enabled, first_log,
                   last_password_reset_date, password, role)
 VALUES (1, 'Miroslav', 'Tomic', 'tomic.miroslav97@gmail.com', true, false, '2019-11-20 11:00:00',
@@ -24,7 +23,6 @@ VALUES (1, 1);
 INSERT INTO clinic_center_admin (predefined, id)
 VALUES (true, 1);
 
-#Patient
 INSERT INTO user (id, first_name, last_name, email, enabled, first_log,
                   last_password_reset_date, password, role)
 VALUES (2, 'Jovana', 'Lakic', 'jovana.lakic8@gmail.com', true, false, '2019-11-20 11:25:00',
@@ -37,7 +35,6 @@ VALUES (2, 5);
 INSERT INTO patient (address, city, country, is_activated, phone_num, unoip, id, medical_record_id)
 VALUES ('Ilije Bircanina', 'Vlasenica', 'Bosna i Hercegovina', true, '065987544', '1234567890', 2, 1);
 
-#Clinic Admin
 INSERT INTO user (id, first_name, last_name, email, enabled, first_log,
                   last_password_reset_date, password, role)
 VALUES (5, 'Jecko', 'Pecko', 'jecko@gmail.com', true, false, '2019-11-20 11:25:00',
@@ -47,7 +44,7 @@ VALUES (5, 'Jecko', 'Pecko', 'jecko@gmail.com', true, false, '2019-11-20 11:25:0
 INSERT INTO user_authority (user_id, authority_id)
 VALUES (5, 2);
 
-#Doctor
+
 INSERT INTO user (id, first_name, last_name, email, enabled, first_log,
                   last_password_reset_date, password, role)
 VALUES (3, 'Nevena', 'Djukin', 'nvndjukin97@gmail.com', true, false, '2019-11-20 11:30:00',
@@ -58,7 +55,7 @@ INSERT INTO personnel(id, clinic_id)
 VALUES (3, 1);
 
 INSERT INTO doctor(cnt_rating, sum_rating, id)
-VALUES (0,0,3);
+VALUES (0, 0, 3);
 
 INSERT INTO user_authority (user_id, authority_id)
 VALUES (3, 3);
@@ -66,7 +63,6 @@ VALUES (3, 3);
 INSERT INTO user_authority (user_id, authority_id)
 VALUES (3, 4);
 
-#Nurse
 INSERT INTO user (id, first_name, last_name, email, enabled, first_log,
                   last_password_reset_date, password, role)
 VALUES (4, 'Nevena', 'Djukin', 'nvn@gmail.com', true, false, '2019-11-20 11:30:00',
@@ -80,7 +76,6 @@ VALUES (4);
 
 
 
-#Registration requirement
 INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
                                       phone_num, unoip)
 VALUES ('Safarikova', 'Bijeljina', 'Bosna', 'miroslavtomic@outlook.com', 'Pero', 'Peric', '123', '123', '065987654',
@@ -91,7 +86,6 @@ INSERT INTO registration_requirement (address, city, country, email, first_name,
 VALUES ('Safarikova', 'Bijeljina', 'Bosna', 'roncevic1996@gmail.com', 'Pajo', 'Pajic', '321', '321', '345435345',
         '432132');
 
-#Clinic
 INSERT INTO clinic (address, cnt_rating, description, name, sum_rating)
 VALUES ('Safarikova 15', 0, 'Dobra kao bog', 'Klinika 1', 0);
 
@@ -102,11 +96,9 @@ INSERT INTO clinic_patients(clinic_id, patients_id)
 VALUES (1, 2);
 
 
-#Recepie
 INSERT INTO recepie(id, is_validate, medical_report_id, medicine_id, nurse_id)
 VALUES (1, FALSE, 1, 1, NULL);
 
-#Calendar
 INSERT INTO calendar_item(end, start, title, udi, id, calendar_id)
 VALUES ('2019-12-04 10:00', '2019-12-04 09:00', 'Prvi pregled', 'N', 1, 1);
 
@@ -122,7 +114,26 @@ VALUES (1, 1);
 INSERT INTO calendar_calendar_items(calendar_id, calendar_items_id)
 VALUES (1, 2);
 
+INSERT INTO calendar(id, personnel_id)
+VALUES (2, 3);
+
+INSERT INTO calendar_item(end, start, title, udi, id, calendar_id, type, typeid)
+VALUES ('2019-12-04 10:00', '2019-12-04 09:00', 'Prvi pregled', 'N', 3, 2, 'Appointment', 1);
+
+INSERT INTO calendar_item(end, start, title, udi, id, calendar_id, type, typeid)
+VALUES ('2019-12-05 10:00', '2019-12-05 09:00', 'Drugi pregled', 'N', 4, 2, 'Surgery', 1);
+
+INSERT INTO calendar_calendar_items(calendar_id, calendar_items_id)
+VALUES (2, 3);
+
+INSERT INTO calendar_calendar_items(calendar_id, calendar_items_id)
+VALUES (2, 4);
+
 UPDATE personnel
 SET calendar_id =1
 WHERE id = 4;
+
+UPDATE personnel
+SET calendar_id =2
+WHERE id = 3;
 
