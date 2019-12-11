@@ -43,7 +43,7 @@ public class CalendarConverter {
                 .end(endDateString)
                 .title(appointment.getType().getType())
                 .up_down_ind("Y")
-                .type("app")
+                .type("Appointment")
                 .typeId(appointment.getId())
                 .build();
 
