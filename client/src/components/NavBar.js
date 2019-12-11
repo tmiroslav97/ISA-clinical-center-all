@@ -17,8 +17,8 @@ export default function NavBar() {
                 'firstName': '',
                 'lastName': '',
                 'email': '',
-                'firstLog': '',
-                'role': 'ROLE_USER'
+                'firstLog': true,
+                'role': null
             })
         );
     };
@@ -34,9 +34,9 @@ export default function NavBar() {
                     {role === 'ROLE_NURSE' && <Nav.Link href={'/nurse-page/' + user.id}>Nurse homepage</Nav.Link>}
                 </Nav>
                 <Nav className="ml-auto">
-                    {role === 'ROLE_USER' && <Nav.Link href="/login">Login</Nav.Link>}
-                    {role === 'ROLE_USER' && <Nav.Link href="/signup">Sign Up</Nav.Link>}
-                    {role !== 'ROLE_USER' && <Nav.Link href="#" onClick={() => handleSignOut()}>Sign out</Nav.Link>}
+                    {role == null && <Nav.Link href="/login">Login</Nav.Link>}
+                    {role == null && <Nav.Link href="/signup">Sign Up</Nav.Link>}
+                    {role != null && <Nav.Link href="#" onClick={() => handleSignOut()}>Sign out</Nav.Link>}
                 </Nav>
 
             </Navbar.Collapse>
