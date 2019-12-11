@@ -13,13 +13,13 @@ import { nurseDataSelector } from '../store/nurse/selectors';
 
 const NurseHomePage = ({ match }) => {
     const dispatch = useDispatch();
-    const nurseId = match.params.id;
+    const id = match.params.id;
     const data = useSelector(nurseDataSelector);
 
     useEffect(() => {
         dispatch(
             fetchNurseData({
-                nurseId
+                id
             })
         );
     }, []);
