@@ -29,6 +29,12 @@ public class CalendarItem {
     @Column(name = DbColumnConstants.END, unique = false, nullable = false)
     private String end;
 
+    @Column(name = DbColumnConstants.TYPE, unique = false, nullable = true)
+    private String type;
+
+    @Column(name = DbColumnConstants.TYPEID, unique = false, nullable = true)
+    private String typeId;
+
     @Column(name = DbColumnConstants.UDI, unique = false, nullable = false)
     private String up_down_ind;
 

@@ -50,6 +50,6 @@ public class DbColumnConstants {
     public static final String START = "start";
     public static final String END = "end";
     public static final String UDI = "udi";
-
+    public static final String TYPEID = "typeid";
 
 }
