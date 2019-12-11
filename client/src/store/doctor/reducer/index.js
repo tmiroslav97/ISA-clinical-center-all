@@ -1,3 +1,9 @@
+import {
+    PUT_DOCTOR_DATA
+} from '../constants';
+
+import * as computationFunctions from './computation-functions';
+
 const initialState = {
     data: {
         id: window.localStorage.getItem('id'),
@@ -24,6 +30,7 @@ const doctorReducer = (state = initialState, { type, payload }) => {
 };
 
 const actionHandler = {
+    [PUT_DOCTOR_DATA]: computationFunctions.putDoctorData
 };
 
 export default doctorReducer;
