@@ -45,6 +45,8 @@ public class PatientController {
         return new ResponseEntity<List<ClinicResponse>>(this.patientServiceCont.getClinics(), HttpStatus.OK);
     }
 
+
+
     @RequestMapping(method = GET, value = "/all")
     public ResponseEntity<List<PatientResponse>> getPatients() {
         return new ResponseEntity<>(this.patientServiceCont.getPatients(), HttpStatus.OK);

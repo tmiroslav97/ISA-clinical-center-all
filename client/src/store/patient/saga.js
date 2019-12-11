@@ -2,17 +2,17 @@ import { take, put, call } from 'redux-saga/effects';
 
 import {
     FETCH_PATIENT_DATA,
-    FETCH_DOCTORS_DATA,
+    FETCH_DOCTORS_DATA_PATIENT,
     FETCH_CLINICS_DATA_PATIENT,
     SEARCH_CLINICS_DATA_PATIENT,
-    SEARCH_DOCTORS_DATA
+    SEARCH_DOCTORS_DATA_PATIENT
 } from './constants';
 
 import PatientService from '../../services/PatientService';
 
 import {
     putPatientData,
-    putDoctorsData,
+    putDoctorsDataPatient,
     putClinicsDataPatient
 } from './actions';
 
@@ -22,10 +22,10 @@ export function* fetchPatientData() {
     yield put(putPatientData(data));
 }
 
-export function* fetchDoctorsData() {
-    const {payload} = yield take(FETCH_DOCTORS_DATA);
-    const {doctors} = yield call(PatientService.fetchDoctorsData, payload);
-    yield put(putDoctorsData(doctors));
+export function* fetchDoctorsDataPatient() {
+    const {payload} = yield take(FETCH_DOCTORS_DATA_PATIENT);
+    const {doctors} = yield call(PatientService.fetchDoctorsDataPatient, payload);
+    yield put(putDoctorsDataPatient(doctors));
 }
 
 
@@ -45,11 +45,11 @@ export function* searchClinicsDataPatient() {
 }
 
 
-/*
-export function* searchDoctorsData() {
-    const { payload } = yield take(SEARCH_DOCTORS_DATA);
-    const { data } = yield call(PatientService.searchDoctorsData, payload);
-    const { doctors } = yield call(PatientService.searchDoctorsData, {});
-    yield put(putClinicsData(doctors));
+
+export function* searchDoctorsDataPatient() {
+    const { payload } = yield take(SEARCH_DOCTORS_DATA_PATIENT);
+    const { data } = yield call(PatientService.searchDoctorsDataPatient, payload);
+    const { doctors } = yield call(PatientService.searchDoctorsDataPatient, {});
+    yield put(putDoctorsDataPatient(doctors));
 }
-*/
+
