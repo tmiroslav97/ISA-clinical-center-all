@@ -3,6 +3,7 @@ package clinic.centersystem.controller;
 import clinic.centersystem.dto.response.ClinicResponse;
 import clinic.centersystem.dto.response.DoctorResponse;
 import clinic.centersystem.dto.response.PatientResponse;
+import clinic.centersystem.model.Clinic;
 import clinic.centersystem.model.Doctor;
 import clinic.centersystem.service.DoctorServiceCont;
 import clinic.centersystem.service.PatientServiceCont;
@@ -53,6 +54,10 @@ public class PatientController {
         return new ResponseEntity<List<Doctor>>(this.patientServiceCont.searchDoctors(name), HttpStatus.OK);
     }
 
+    @RequestMapping(method = GET, value = "/search-clinics")
+    public ResponseEntity<List<Clinic>> searchClinics(@PathVariable String name) {
+        return new ResponseEntity<List<Clinic>>(this.patientServiceCont.searchClinics(name), HttpStatus.OK);
+    }
 
     @RequestMapping(method = GET, value = "/all")
     public ResponseEntity<List<PatientResponse>> getPatients() {

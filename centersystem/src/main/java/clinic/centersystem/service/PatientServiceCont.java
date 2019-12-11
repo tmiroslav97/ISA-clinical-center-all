@@ -63,12 +63,24 @@ public class PatientServiceCont {
         List<Doctor> listDoctors = new ArrayList<>();
         List<Doctor> doctors = this.doctorService.findAll();
         for (Doctor doctor : doctors) {
-            if(doctor.getFirstName().contains(name)) {
+            if(doctor.getFirstName().toLowerCase().contains(name.toLowerCase())) {
                 listDoctors.add(doctor);
             }
         }
         return listDoctors;
     }
+
+    public List<Clinic> searchClinics(String name) {
+        List<Clinic> listClinics = new ArrayList<>();
+        List<Clinic> clinics = this.clinicService.findAll();
+        for(Clinic clinic : clinics) {
+            if(clinic.getName().toLowerCase().contains(name.toLowerCase())) {
+                listClinics.add(clinic);
+            }
+        }
+        return listClinics;
+    }
+
 
 
     public List<PatientResponse> getPatients() {

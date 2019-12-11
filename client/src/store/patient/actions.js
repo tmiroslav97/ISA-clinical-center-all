@@ -4,7 +4,9 @@ import {
     PUT_DOCTORS_DATA_PATIENT,
     FETCH_DOCTORS_DATA_PATIENT,
     PUT_CLINICS_DATA_PATIENT,
-    FETCH_CLINICS_DATA_PATIENT
+    FETCH_CLINICS_DATA_PATIENT,
+    SEARCH_DOCTORS_DATA_PATIENT,
+    SEARCH_CLINICS_DATA_PATIENT
 } from './constants';
     
 export const putPatientData = payload => ({
@@ -37,4 +39,13 @@ export const fetchClinicsDataPatient = payload => ({
     payload
 });
 
+export const searchDoctorsDataPatient = payload => ({
+    type: SEARCH_DOCTORS_DATA_PATIENT,
+    payload
+});
+
+export const searchClinicsDataPatient = payload => ({
+    type: SEARCH_CLINICS_DATA_PATIENT,
+    payload
+});
 

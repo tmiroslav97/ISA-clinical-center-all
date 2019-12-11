@@ -6,8 +6,8 @@ const FINALPOINTS = {
     FETCH_PATIENT_DATA: '/pat/%s',
     FETCH_DOCTORS_DATA_PATIENT: '/pat/doctors',
     FETCH_CLINICS_DATA_PATIENT: '/pat/clinics',
-    SEARCH_DOCTORS_DATA_PATIENT: '/pat/search-doctors/%s/%s',
-    SEARCH_CLINICS_DATA_PATIENT: '/pat/search-clinics/%s/%s',
+    SEARCH_DOCTORS_DATA_PATIENT: '/pat/search-doctors',
+    SEARCH_CLINICS_DATA_PATIENT: '/pat/search-clinics',
     FETCH_PATIENTS: '/pat/all',
     FETCH_PATIENTS_BY_CLINIC_ID: '/pat/all/%s'
 };
