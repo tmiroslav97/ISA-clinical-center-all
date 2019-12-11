@@ -26,6 +26,8 @@ public class CalendarConverter {
                 .start(calendarItem.getStart())
                 .end(calendarItem.getEnd())
                 .title(calendarItem.getTitle())
+                .type(calendarItem.getType())
+                .typeId(calendarItem.getTypeId())
                 .up_down_ind(calendarItem.getUp_down_ind())
                 .build();
     }
