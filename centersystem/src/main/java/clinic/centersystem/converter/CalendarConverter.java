@@ -5,6 +5,7 @@ import clinic.centersystem.dto.response.CalendarResponse;
 import clinic.centersystem.model.Appointment;
 import clinic.centersystem.model.Calendar;
 import clinic.centersystem.model.CalendarItem;
+import clinic.centersystem.model.Surgery;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -40,7 +41,25 @@ public class CalendarConverter {
                 .end(endDateString)
                 .title(appointment.getType().getType())
                 .up_down_ind("Y")
+                .type("app")
                 .typeId(appointment.getId())
+                .build();
+
+    }
+
+    public static CalendarItem toCreateCalendarItemFromSurgery(Surgery surgery){
+        Date startDate = new java.util.Date(surgery.getStartTime()*1000L);
+        Date endDate = new java.util.Date(surgery.getEndTime()*1000L);
+        SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String startDateString = sdf.format(startDate);
+        String endDateString = sdf.format(endDate);
+        return CalendarItem.builder()
+                .start(startDateString)
+                .end(endDateString)
+                .title("Surgery")
+                .up_down_ind("Y")
+                .typeId(surgery.getId())
+                .type("sur")
                 .build();
 
     }
