@@ -48,7 +48,7 @@ const PasswordChanger = () => {
                                     setNewPassword(currentTarget.value);
                                 }} />
                         </Form.Group>
-                        <Form.Group as={Col} controlId="formNew">
+                        <Form.Group as={Col} controlId="formConfNew">
                             <div align="center">
                                 <Form.Label>Confirm new password:</Form.Label>
                             </div>

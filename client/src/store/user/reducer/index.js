@@ -11,8 +11,8 @@ const initialState = {
         firstName: '',
         lastName: '',
         email: '',
-        firstLog: '',
-        role: 'ROLE_USER'
+        firstLog: true,
+        role: localStorage.getItem('role')
     },
     token: window.localStorage.getItem('token')
 };
