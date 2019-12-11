@@ -28,10 +28,7 @@ public class DoctorServiceCont {
         return doctorService.findAll();
     }
 
-    public String addDoctor(Doctor d) {
-        Doctor doctor = this.doctorService.save(d);
-        return "Doctor succesfully created";
-    }
+
 
 
 }
