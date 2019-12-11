@@ -2,8 +2,11 @@ package clinic.centersystem.controller;
 
 
 import clinic.centersystem.dto.request.CCARegReqDTO;
+import clinic.centersystem.exception.CCANotPredefinedException;
+import clinic.centersystem.exception.UserExistsException;
 import clinic.centersystem.exception.UserNotFoundException;
 import clinic.centersystem.service.ClinicCenterAdministratorService;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,17 +28,55 @@ public class ClinicCenterAdministratorControllerTest {
     @MockBean
     private ClinicCenterAdministratorService clinicCenterAdministratorServiceMock;
 
-    private static final String REG_CA_ENDPOINT = "/cca/reg-cca/2";
-    private static final Long ADMIN_ID = Long.valueOf(2);
-    private static final CCARegReqDTO ccaRegReqDTO = new CCARegReqDTO("Mirosalv","Tomic","tomic@gmail.com","123");
+    private static final String REG_CA_ENDPOINT_NOT_VALID = "/cca/reg-cca/2";
+    private static final Long ADMIN_ID_NOT_VALID = Long.valueOf(2);
+    private static final CCARegReqDTO ccaRegReqDTONotValid = new CCARegReqDTO("Mirosalv","Tomic","tomic.miroslav97@gmail.com","123");
+    private static final String REG_CA_ENDPOINT_VALID = "/cca/reg-cca/1";
+    private static final Long ADMIN_ID_VALID = Long.valueOf(1);
+    private static final CCARegReqDTO ccaRegReqDTOValid = new CCARegReqDTO("Mirosalv","Tomic","tomic@gmail.com","123");
 
+
+    @Test
     public void registerCCAShouldReturnNotFoundWhenUserNotFoundExceptionIsThrown(){
-        when(clinicCenterAdministratorServiceMock.registerCCA(ccaRegReqDTO, ADMIN_ID)).thenThrow(UserNotFoundException.class);
+        when(clinicCenterAdministratorServiceMock.registerCCA(ccaRegReqDTONotValid, ADMIN_ID_NOT_VALID)).thenThrow(UserNotFoundException.class);
 
-        ResponseEntity<String> responseEntity = testRestTemplate.postForEntity(REG_CA_ENDPOINT, ccaRegReqDTO, String.class);
+        ResponseEntity<String> responseEntity = testRestTemplate.postForEntity(REG_CA_ENDPOINT_NOT_VALID, ccaRegReqDTONotValid, String.class);
 
         String success = responseEntity.getBody();
         assertEquals("Http status is NOT_FOUND.", HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
         assertNull("Response does not contain body.", success);
+    }
+
+    @Test
+    public void registerCCAShouldReturnBadRequestWhenCCANotPredefinedExceptionIsThrown(){
+        when(clinicCenterAdministratorServiceMock.registerCCA(ccaRegReqDTOValid, ADMIN_ID_VALID)).thenThrow(CCANotPredefinedException.class);
+
+        ResponseEntity<String> responseEntity = testRestTemplate.postForEntity(REG_CA_ENDPOINT_VALID, ccaRegReqDTOValid, String.class);
+
+        String success = responseEntity.getBody();
+        assertEquals("Http status is BAD_REQUEST.", HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
+        assertNull("Response does not contain body.", success);
+    }
+
+    @Test
+    public void registerCCAShouldReturnBadRequestWhenUserExistsExceptionIsThrown(){
+        when(clinicCenterAdministratorServiceMock.registerCCA(ccaRegReqDTOValid, ADMIN_ID_VALID)).thenThrow(UserExistsException.class);
+
+        ResponseEntity<String> responseEntity = testRestTemplate.postForEntity(REG_CA_ENDPOINT_VALID, ccaRegReqDTONotValid, String.class);
+
+        String success = responseEntity.getBody();
+        assertEquals("Http status is BAD_REQUEST.", HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
+        assertNull("Response does not contain body.", success);
+    }
+
+    @Test
+    public void registerCCAShouldReturnOkAndMessageWhenRegisterIsSuccessful(){
+        when(clinicCenterAdministratorServiceMock.registerCCA(ccaRegReqDTOValid, ADMIN_ID_VALID)).thenReturn("Successfully added new clinic center administrator");
+
+        ResponseEntity<String> responseEntity = testRestTemplate.postForEntity(REG_CA_ENDPOINT_VALID, ccaRegReqDTOValid, String.class);
+
+        String success = responseEntity.getBody();
+        assertEquals("Http status is OK.", HttpStatus.OK, responseEntity.getStatusCode());
+        assertNull("Response body is successfully added new clinic center administrator.", success);
     }
 }
