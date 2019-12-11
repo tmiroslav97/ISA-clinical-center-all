@@ -3,7 +3,7 @@ import { history } from '../index';
 import { format } from 'util';
 
 const FINALPOINTS = {
-    ADD_DOCTOR: '/adm-cli/add-doctor',
+    ADD_DOCTOR: '/doctor/add',
     DELETE_DOCTOR: '/adm-cli/delete/%s'
 };
 

@@ -1,8 +1,40 @@
 import React,{useState} from 'react';
 import { Container, Row, Form, Col, Button, Table, Modal } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import {addDoctor} from '../../store/clinic_admin/actions'
+
 
 
 const DoctorAllAtOnce = () => {
+    const dispatch = useDispatch();
+    
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    const [password2, setPassword2] = useState();
+    const [firstName, setFirstName] = useState();
+    const [lastName, setLastName] = useState();
+    const [address, setAddress] = useState();
+    const [country, setCountry] = useState();
+    const [city, setCity] = useState();
+    const [phoneNum, setPhoneNum] = useState();
+
+    const handleAddDoctor = () => {
+        dispatch(
+            addDoctor({
+                email,
+                password,
+                password2,
+                firstName,
+                lastName,
+                address,
+                city,
+                country,
+                phoneNum
+            })
+        );
+    };
+
+
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -18,48 +50,48 @@ const DoctorAllAtOnce = () => {
                     <Form.Row>
                         <Form.Group as={Col} >
                             <Form.Label>E-mail address</Form.Label>
-                            <Form.Control type="email" placeholder="E-mail" />
+                            <Form.Control type="email" placeholder="E-mail"   onChange={({ currentTarget }) => { setEmail(currentTarget.value); }} />
                         </Form.Group>
                         <Form.Group as={Col} controlId="formCity">
                             <Form.Label>City</Form.Label>
-                            <Form.Control type="text" placeholder="City" />
+                            <Form.Control type="text" placeholder="City"   onChange={({ currentTarget }) => { setCity(currentTarget.value); }} />
                         </Form.Group>
                     </Form.Row>
                     <Form.Row>
                         <Form.Group as={Col}>
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" />
+                            <Form.Control type="password" placeholder="Password"  onChange={({ currentTarget }) => { setPassword(currentTarget.value); }} />
                         </Form.Group>
                         <Form.Group as={Col} >
                             <Form.Label>Confirm password</Form.Label>
-                            <Form.Control type="password" placeholder="Confirm your password" />
+                            <Form.Control type="password" placeholder="Confirm your password"  onChange={({ currentTarget }) => { setPassword2(currentTarget.value); }}  />
                         </Form.Group>
 
                     </Form.Row>
                     <Form.Row>
                         <Form.Group as={Col} >
                             <Form.Label>Address</Form.Label>
-                            <Form.Control type="text" placeholder="Address" />
+                            <Form.Control type="text" placeholder="Address"  onChange={({ currentTarget }) => { setAddress(currentTarget.value); }}  />
                         </Form.Group>
                         <Form.Group as={Col} >
                             <Form.Label>Country</Form.Label>
-                            <Form.Control type="text" placeholder="Country" />
+                            <Form.Control type="text" placeholder="Country"  onChange={({ currentTarget }) => { setCountry(currentTarget.value); }}  />
                         </Form.Group>
                     </Form.Row>
                     <Form.Row>
                         <Form.Group as={Col}>
                             <Form.Label>First name</Form.Label>
-                            <Form.Control type="text" placeholder="First name" />
+                            <Form.Control type="text" placeholder="First name"  onChange={({ currentTarget }) => { setFirstName(currentTarget.value); }} />
                         </Form.Group>
                         <Form.Group as={Col} >
                             <Form.Label>Contact</Form.Label>
-                            <Form.Control type="text" placeholder="Contact" />
+                            <Form.Control type="text" placeholder="Contact"  onChange={({ currentTarget }) => { setPhoneNum(currentTarget.value); }}  />
                         </Form.Group>
                     </Form.Row>
                     <Form.Row>
                         <Form.Group as={Col} >
                             <Form.Label>Last name</Form.Label>
-                            <Form.Control type="text" placeholder="Last name" />
+                            <Form.Control type="text" placeholder="Last name"  onChange={({ currentTarget }) => { setLastName(currentTarget.value); }} />
                         </Form.Group>
 
                     </Form.Row>
@@ -67,7 +99,7 @@ const DoctorAllAtOnce = () => {
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="primary" onClick={handleClose}>
+                <Button variant="primary" onClick={handleAddDoctor}>
                     Add
                 </Button>
             </Modal.Footer>
