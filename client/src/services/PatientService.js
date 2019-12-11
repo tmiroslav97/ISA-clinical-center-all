@@ -3,7 +3,7 @@ import { history } from '../index';
 import { format } from 'util';
 
 const FINALPOINTS = {
-    FETCH_PATIENT_DATA: '/pat/patient',
+    FETCH_PATIENT_DATA: '/pat/%s',
     FETCH_DOCTORS_DATA: '/pat/doctors',
     FETCH_CLINICS_DATA: '/pat/clinics',
     SEARCH_DOCTORS_DATA: '/pat/search-doctors/%s/%s',

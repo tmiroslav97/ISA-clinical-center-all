@@ -5,6 +5,7 @@ import clinic.centersystem.service.PatientServiceCont;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +24,17 @@ public class PatientController {
     public PatientController(PatientServiceCont patientServiceCont) {
         this.patientServiceCont = patientServiceCont;
     }
+
+    @RequestMapping(method = GET, value = "/{patId}")
+    @PreAuthorize("hasRole('PATIENT')")
+    public ResponseEntity<PatientResponse> patient(@PathVariable Long patId) {
+        return new ResponseEntity<>(this.patientServiceCont.patient(patId), HttpStatus.CREATED);
+    }
+
+    /*@RequestMapping(method = GET, value = "/doctors")
+    public ResponseEntity<List<DoctorResponse>> getDoctors() {
+        return new ResponseEntity<>(this.doctorServiceCont.getDoctors(), HttpStatus.OK);
+    }*/
 
     @RequestMapping(method = GET, value = "/all")
     public ResponseEntity<List<PatientResponse>> getPatients() {
