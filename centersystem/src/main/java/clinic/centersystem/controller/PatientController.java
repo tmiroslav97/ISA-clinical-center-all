@@ -1,6 +1,11 @@
 package clinic.centersystem.controller;
 
+import clinic.centersystem.dto.response.ClinicResponse;
+import clinic.centersystem.dto.response.DoctorResponse;
 import clinic.centersystem.dto.response.PatientResponse;
+import clinic.centersystem.model.Clinic;
+import clinic.centersystem.model.Doctor;
+import clinic.centersystem.service.DoctorServiceCont;
 import clinic.centersystem.service.PatientServiceCont;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,6 +26,7 @@ public class PatientController {
 
     private final PatientServiceCont patientServiceCont;
 
+
     public PatientController(PatientServiceCont patientServiceCont) {
         this.patientServiceCont = patientServiceCont;
     }
@@ -31,10 +37,27 @@ public class PatientController {
         return new ResponseEntity<>(this.patientServiceCont.patient(patId), HttpStatus.CREATED);
     }
 
-    /*@RequestMapping(method = GET, value = "/doctors")
+    @RequestMapping(method = GET, value = "/doctors")
     public ResponseEntity<List<DoctorResponse>> getDoctors() {
-        return new ResponseEntity<>(this.doctorServiceCont.getDoctors(), HttpStatus.OK);
-    }*/
+        return new ResponseEntity<List<DoctorResponse>>(this.patientServiceCont.getDoctors(), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = GET, value = "/clinics")
+    public ResponseEntity<List<ClinicResponse>> getClinics() {
+        return new ResponseEntity<List<ClinicResponse>>(this.patientServiceCont.getClinics(), HttpStatus.OK);
+    }
+
+
+
+    @RequestMapping(method = GET, value = "/search-doctors")
+    public ResponseEntity<List<Doctor>> searchDoctors(@PathVariable String name) {
+        return new ResponseEntity<List<Doctor>>(this.patientServiceCont.searchDoctors(name), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = GET, value = "/search-clinics")
+    public ResponseEntity<List<Clinic>> searchClinics(@PathVariable String name) {
+        return new ResponseEntity<List<Clinic>>(this.patientServiceCont.searchClinics(name), HttpStatus.OK);
+    }
 
     @RequestMapping(method = GET, value = "/all")
     public ResponseEntity<List<PatientResponse>> getPatients() {

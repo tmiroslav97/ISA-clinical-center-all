@@ -39,6 +39,10 @@ export const addDoctor = payload => ({
     payload
 });
 
+export const searchDoctorByName = payload => ({
+    type:SEARCH_DOCTOR,
+    payload
+});
 
 export const fetchRoomsData = payload => ({
     type: FETCH_ROOMS_DATA,

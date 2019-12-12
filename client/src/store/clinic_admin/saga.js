@@ -12,6 +12,7 @@ import {
     DELETE_APPOINTMENT_TYPE,
     SEARCH_APPOINTMENT_TYPE,
     ADD_DOCTOR,
+    SEARCH_DOCTOR,
     FETCH_DOCTOR_DATA,
     DELETE_DOCTOR,
 } from './constants';
@@ -42,6 +43,12 @@ export function* fetchDoctorData() {
 /*export function* deleteDoctor() {
     const { payload } = yield take(DELETE_DOCTOR);
     const { data } = yield call(CAdminService.deleteDoctor, payload);
+    const { doctors } = yield call(CAdminService.fetchDoctorData, {});
+    yield put(putDoctorsData(doctors));
+}
+export function* searchDoctorByName() {
+    const { payload } = yield take(SEARCH_DOCTOR);
+    const { data } = yield call(CAdminService.searchDoctorByName, payload);
     const { doctors } = yield call(CAdminService.fetchDoctorData, {});
     yield put(putDoctorsData(doctors));
 }*/
