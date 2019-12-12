@@ -30,6 +30,6 @@ public final class DbTableConstants {
     public static final String SURGERY = "surgery";
     public static final String SURGERYREQUIREMENT = "surgeryRequirement";
     public static final String SURGEXROOM = "surgExRoom";
-    public static final String USER = "user";
+    public static final String USERS = "users";
     public static final String CALENDARITEM = "calendarItem";
 }

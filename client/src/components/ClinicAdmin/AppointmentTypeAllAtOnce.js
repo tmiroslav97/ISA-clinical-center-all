@@ -1,7 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table, Container, Col, Row, Form, Button, Modal } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+//import { addAppointmentType, fetchAppointmentType } from '../../store/clinic_admin/actions';
+//import { appointmentTypeSelector } from '../../store/clinic_admin/selectors';
+
 
 const AppointmentTypAllAtOnce = () => {
+    const dispatch = useDispatch();
+    //const[appointmentType, setAppointmentType] = useState();
+
+    //const appointmentTypes = useSelector(appointmentTypeSelector)
+
     const [show1, setShow1] = useState(false);
     const [show2, setShow2] = useState(false);
 
@@ -9,6 +18,20 @@ const AppointmentTypAllAtOnce = () => {
     const handleShow1 = () => setShow1(true);
     const handleClose2 = () => setShow2(false);
     const handleShow2 = () => setShow2(true);
+
+    const handleAddAppointmentType = () => {
+        dispatch(
+            //addAppointmentType({
+              //  appointmentType
+            //})
+        );
+    };
+    /*useEffect(() => {
+        dispatch(
+            fetchAppointmentType({})
+        );
+    }, []);*/
+
     return (
         <>
             <Modal show={show1} onHide={handleClose1} animation={false}>
@@ -38,12 +61,12 @@ const AppointmentTypAllAtOnce = () => {
                     <Form>
                         <Form.Group as={Col}>
                             <Form.Label>Type:</Form.Label>
-                            <Form.Control type="text" placeholder="Enter a new type" />
+                            <Form.Control type="text" placeholder="Enter a new type"   />
                         </Form.Group>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" onClick={handleClose2}>
+                    <Button variant="primary" >
                         Add
           </Button>
                 </Modal.Footer>
@@ -108,6 +131,7 @@ const AppointmentTypAllAtOnce = () => {
                         </thead>
                         <tbody>
                             {
+                                
 
                             }
                         </tbody>

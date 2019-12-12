@@ -3,10 +3,12 @@ import { history } from '../index';
 import { format } from 'util';
 
 const FINALPOINTS = {
-    FETCH_APPOINTMENT_TYPE: 'admi-cli/appType',
+    FETCH_APPOINTMENT_TYPE: 'admi-cli/fetchAppointmentType',
     SEARCH_APPOINTMENT_TYPE: 'admi-cli/appType/search/%s/%s',
     DELETE_ROOMS_DATA: 'admi-cli/appType/delete/%s',
-    EDIT_APPOINTMENT_TYPE: 'admi-cli/appType/edit/%s'
+    EDIT_APPOINTMENT_TYPE: 'admi-cli/appType/edit/%s',
+    ADD_APPOINTMENT_TYPE: 'adm-cli/add-appointment-type'
+
     
 };
 

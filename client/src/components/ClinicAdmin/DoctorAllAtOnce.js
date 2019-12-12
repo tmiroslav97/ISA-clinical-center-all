@@ -1,7 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import { Container, Row, Form, Col, Button, Table, Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import {addDoctor, fetchDoctorData, deleteDoctor,searchDoctorByName} from '../../store/clinic_admin/actions';
 import { doctorDataSelector } from '../../store/clinic_admin/selectors';
 
 
@@ -19,32 +18,32 @@ const DoctorAllAtOnce = () => {
 
     const handleAddDoctor = () => {
         dispatch(
-            addDoctor({
+            /*addDoctor({
                 email,
                 password,
                 password2,
                 firstName,
                 lastName
-            })
+            })*/
         );
     };
     const handleSearch = () => {
         dispatch(
-            searchDoctorByName({
+           /* searchDoctorByName({
                 name
-            })
+            })*/
         );
     };
     const handleDeleteDoctor = () => {
         dispatch(
-            deleteDoctor({
+            /*deleteDoctor({
                 id
-            })
+            })*/
         );
     };
     useEffect(() => {
         dispatch(
-            fetchDoctorData({})
+            //fetchDoctorData({})
         );
     }, []);
 
@@ -64,35 +63,35 @@ const DoctorAllAtOnce = () => {
                     <Form.Row>
                         <Form.Group as={Col} >
                             <Form.Label>E-mail address</Form.Label>
-                            <Form.Control type="email" placeholder="E-mail"   onChange={({ currentTarget }) => { setEmail(currentTarget.value); }} />
+                            <Form.Control type="email" placeholder="E-mail"    />
                         </Form.Group>
                     </Form.Row>
                     <Form.Row>
                         <Form.Group as={Col}>
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password"  onChange={({ currentTarget }) => { setPassword(currentTarget.value); }} />
+                            <Form.Control type="password" placeholder="Password"   />
                         </Form.Group>
                         <Form.Group as={Col} >
                             <Form.Label>Confirm password</Form.Label>
-                            <Form.Control type="password" placeholder="Confirm your password"  onChange={({ currentTarget }) => { setPassword2(currentTarget.value); }}  />
+                            <Form.Control type="password" placeholder="Confirm your password"   />
                         </Form.Group>
 
                     </Form.Row>
                     <Form.Row>
                         <Form.Group as={Col}>
                             <Form.Label>First name</Form.Label>
-                            <Form.Control type="text" placeholder="First name"  onChange={({ currentTarget }) => { setFirstName(currentTarget.value); }} />
+                            <Form.Control type="text" placeholder="First name"   />
                         </Form.Group>
                         <Form.Group as={Col} >
                             <Form.Label>Last name</Form.Label>
-                            <Form.Control type="text" placeholder="Last name"  onChange={({ currentTarget }) => { setLastName(currentTarget.value); }}  />
+                            <Form.Control type="text" placeholder="Last name"   />
                         </Form.Group>
                     </Form.Row>
                     
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="primary" onClick={handleAddDoctor}>
+                <Button variant="primary" >
                     Add
                 </Button>
             </Modal.Footer>
@@ -119,7 +118,7 @@ const DoctorAllAtOnce = () => {
 
                         <Form.Label>Search doctors:</Form.Label>
                         <Col>
-                            <Form.Control type="text" placeholder="Search by name" onChange={handleSearch}/>
+                            <Form.Control type="text" placeholder="Search by name" />
                         </Col>
                     </Form.Group>
 
@@ -142,23 +141,14 @@ const DoctorAllAtOnce = () => {
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
-                            <th>Number</th>
+                            <th>First name</th>
+                            <th>Last name</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
                             {
-                                doctors.map((doctor, index) => {
-                                    return (
-                                        <tr key={doctor.id}>
-                                            <td>{index + 1}</td>
-                                            <td>{doctor.firstName}</td>
-                                            <td>{doctor.lastName}</td>
-                                            <td><Button variant="danger" onClick={handleDeleteDoctor} >Delete</Button></td>
-                                        </tr>
-                                    );
-                                })
+                               
                             }
                         </tbody>
                 </Table>
