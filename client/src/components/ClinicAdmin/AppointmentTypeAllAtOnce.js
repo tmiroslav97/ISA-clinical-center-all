@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table, Container, Col, Row, Form, Button, Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { addAppointmentType } from '../../store/clinic_admin/actions';
+import { addAppointmentType, fetchAppointmentType } from '../../store/clinic_admin/actions';
+import { appointmentTypeSelector } from '../../store/clinic_admin/selectors';
+
 
 const AppointmentTypAllAtOnce = () => {
     const dispatch = useDispatch();
     const[appointmentType, setAppointmentType] = useState();
+
+    const appointmentTypes = useSelector(appointmentTypeSelector)
 
     const [show1, setShow1] = useState(false);
     const [show2, setShow2] = useState(false);
@@ -22,6 +26,11 @@ const AppointmentTypAllAtOnce = () => {
             })
         );
     };
+    useEffect(() => {
+        dispatch(
+            fetchAppointmentType({})
+        );
+    }, []);
 
     return (
         <>
@@ -122,6 +131,16 @@ const AppointmentTypAllAtOnce = () => {
                         </thead>
                         <tbody>
                             {
+                                appointmentTypes.map((appointmentType, index) => {
+                                    return (
+                                        <tr key={appointmentType.id}>
+                                            <td>{index + 1}</td>
+                                            <td>{appointmentType.type}</td>
+                                            <td><Button variant="success"  >Edit</Button></td>
+                                            <td><Button variant="danger" >Delete</Button></td>
+                                        </tr>
+                                    );
+                                })
 
                             }
                         </tbody>

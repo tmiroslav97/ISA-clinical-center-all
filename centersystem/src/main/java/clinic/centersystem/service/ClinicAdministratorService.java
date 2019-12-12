@@ -4,6 +4,7 @@ import clinic.centersystem.converter.AppointmentTypeConverter;
 import clinic.centersystem.converter.DoctorConverter;
 import clinic.centersystem.dto.request.AppointmentTypeRequestDTO;
 import clinic.centersystem.dto.request.DoctorRequestDTO;
+import clinic.centersystem.dto.response.AppointmentTypeResponse;
 import clinic.centersystem.dto.response.DoctorResponse;
 import clinic.centersystem.model.AppointmentType;
 import clinic.centersystem.model.Doctor;
@@ -52,6 +53,15 @@ public class ClinicAdministratorService {
             doctorResponses.add(DoctorConverter.toCreateDoctorResponseFromDoctor(doctor));
         }
         return doctorResponses;
+    }
+
+    public List<AppointmentTypeResponse> getAppointmentTypes(){
+        List<AppointmentType> appointmentTypes = this.appointmentTypeService.findAll();
+        List<AppointmentTypeResponse> appointmentTypeResponses = new ArrayList<AppointmentTypeResponse>();
+        for(AppointmentType appointmentType : appointmentTypes){
+            appointmentTypeResponses.add(AppointmentTypeConverter.toCreateAppointmentTypeFromAppointmentType(appointmentType));
+        }
+        return appointmentTypeResponses;
     }
 
 }

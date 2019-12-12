@@ -2,6 +2,7 @@ package clinic.centersystem.controller;
 
 import clinic.centersystem.dto.request.AppointmentTypeRequestDTO;
 import clinic.centersystem.dto.request.DoctorRequestDTO;
+import clinic.centersystem.dto.response.AppointmentTypeResponse;
 import clinic.centersystem.dto.response.DoctorResponse;
 import clinic.centersystem.service.ClinicAdministratorService;
 import org.springframework.http.HttpStatus;
@@ -38,6 +39,11 @@ public class ClinicAdminController {
     @PreAuthorize("hasRole('ADMINC')")
     public ResponseEntity<List<DoctorResponse>> getDoctors() {
         return new ResponseEntity<List<DoctorResponse>>(this.clinicAdministratorService.getDoctors(), HttpStatus.OK);
+    }
+    @RequestMapping(method = GET, value = "/fetchAppointmentType")
+    @PreAuthorize("hasRole('ADMINC')")
+    public ResponseEntity<List<AppointmentTypeResponse>> getAppointmentTypes() {
+        return new ResponseEntity<List<AppointmentTypeResponse>>(this.clinicAdministratorService.getAppointmentTypes(), HttpStatus.OK);
     }
 
 
