@@ -43,7 +43,7 @@ public class ClinicAdministratorService {
         doctors.remove(doctor);
         return "Successfully deleted doctor";
     }
-    
+
 
     public List<DoctorResponse> getDoctors(){
         List<Doctor>doctors=this.doctorService.findAll();
