@@ -1,7 +1,7 @@
 import {
-    PUT_ROOMS_DATA, 
-    PUT_APPOINTMENT_TYPE,
-    PUT_DOCTORS_DATA
+    //PUT_ROOMS_DATA, 
+    //PUT_APPOINTMENT_TYPE,
+    PUT_DOCTOR_DATA
 } from '../constants';
 
 import * as computationFunctions from './computation-functions';
@@ -27,8 +27,9 @@ const cAdminReducer = (state = initialState, { type, payload }) => {
 };
 
 const actionHandler = {
-    [PUT_ROOMS_DATA]: computationFunctions.putRoomsData,
-    [PUT_APPOINTMENT_TYPE]:computationFunctions.putAppointmentType,
+    [PUT_DOCTOR_DATA]:computationFunctions.putDoctorsData
+    //[PUT_ROOMS_DATA]: computationFunctions.putRoomsData,
+   // [PUT_APPOINTMENT_TYPE]:computationFunctions.putAppointmentType,
 };
 
 export default cAdminReducer;

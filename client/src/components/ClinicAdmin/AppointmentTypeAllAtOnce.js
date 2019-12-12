@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Container, Col, Row, Form, Button, Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { addAppointmentType, fetchAppointmentType } from '../../store/clinic_admin/actions';
-import { appointmentTypeSelector } from '../../store/clinic_admin/selectors';
+//import { addAppointmentType, fetchAppointmentType } from '../../store/clinic_admin/actions';
+//import { appointmentTypeSelector } from '../../store/clinic_admin/selectors';
 
 
 const AppointmentTypAllAtOnce = () => {
     const dispatch = useDispatch();
-    const[appointmentType, setAppointmentType] = useState();
+    //const[appointmentType, setAppointmentType] = useState();
 
-    const appointmentTypes = useSelector(appointmentTypeSelector)
+    //const appointmentTypes = useSelector(appointmentTypeSelector)
 
     const [show1, setShow1] = useState(false);
     const [show2, setShow2] = useState(false);
@@ -21,16 +21,16 @@ const AppointmentTypAllAtOnce = () => {
 
     const handleAddAppointmentType = () => {
         dispatch(
-            addAppointmentType({
-                appointmentType
-            })
+            //addAppointmentType({
+              //  appointmentType
+            //})
         );
     };
-    useEffect(() => {
+    /*useEffect(() => {
         dispatch(
             fetchAppointmentType({})
         );
-    }, []);
+    }, []);*/
 
     return (
         <>
@@ -42,7 +42,7 @@ const AppointmentTypAllAtOnce = () => {
                     <Form>
                         <Form.Group as={Col}>
                             <Form.Label>Type:</Form.Label>
-                            <Form.Control type="text" onChange={({ currentTarget }) => { setAppointmentType(currentTarget.value); }}/>
+                            <Form.Control type="text" />
                         </Form.Group>
                     </Form>
                 </Modal.Body>
@@ -61,12 +61,12 @@ const AppointmentTypAllAtOnce = () => {
                     <Form>
                         <Form.Group as={Col}>
                             <Form.Label>Type:</Form.Label>
-                            <Form.Control type="text" placeholder="Enter a new type"  onChange={({ currentTarget }) => { setAppointmentType(currentTarget.value); }} />
+                            <Form.Control type="text" placeholder="Enter a new type"   />
                         </Form.Group>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" onClick={handleAddAppointmentType}>
+                    <Button variant="primary" >
                         Add
           </Button>
                 </Modal.Footer>
@@ -131,16 +131,7 @@ const AppointmentTypAllAtOnce = () => {
                         </thead>
                         <tbody>
                             {
-                                appointmentTypes.map((appointmentType, index) => {
-                                    return (
-                                        <tr key={appointmentType.id}>
-                                            <td>{index + 1}</td>
-                                            <td>{appointmentType.type}</td>
-                                            <td><Button variant="success"  >Edit</Button></td>
-                                            <td><Button variant="danger" >Delete</Button></td>
-                                        </tr>
-                                    );
-                                })
+                                
 
                             }
                         </tbody>

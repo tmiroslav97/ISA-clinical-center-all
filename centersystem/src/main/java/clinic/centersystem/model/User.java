@@ -21,7 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @ToString
-@Table(name = DbTableConstants.USER)
+@Table(name = DbTableConstants.USERS)
 @Inheritance(strategy = JOINED)
 public class User implements UserDetails {
 

@@ -1,13 +1,18 @@
 package clinic.centersystem.service;
 
 import clinic.centersystem.converter.AppointmentTypeConverter;
+import clinic.centersystem.converter.ClinicAdminConverter;
+import clinic.centersystem.converter.ClinicCenterAdminConverter;
 import clinic.centersystem.converter.DoctorConverter;
 import clinic.centersystem.dto.request.AppointmentTypeRequestDTO;
 import clinic.centersystem.dto.request.DoctorRequestDTO;
 import clinic.centersystem.dto.response.AppointmentTypeResponse;
+import clinic.centersystem.dto.response.ClinicAdministratoreResponse;
 import clinic.centersystem.dto.response.DoctorResponse;
 import clinic.centersystem.model.AppointmentType;
+import clinic.centersystem.model.ClinicAdmin;
 import clinic.centersystem.model.Doctor;
+import clinic.centersystem.service.intf.ClinicAdminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,11 +24,17 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ClinicAdministratorService {
     @Autowired
-    private ClinicAdministratorService clinicAdministratorService;
+    private ClinicAdminService clinicAdministratorService;
     @Autowired
     private DoctorServiceImpl doctorService;
     @Autowired
     private AppointmentTypeServiceImpl appointmentTypeService;
+
+    public ClinicAdministratoreResponse clinicAdministrator(Long id) {
+        ClinicAdmin clinicAdmin = this.clinicAdministratorService.findById(id);
+        return ClinicAdminConverter.toCreateClinicAdminResponse(clinicAdmin);
+    }
+
 
     public String addDoctor(DoctorRequestDTO doctorRequestDTO) {
         Doctor doc = DoctorConverter.toCreateDoctorFromDoctorRequest(doctorRequestDTO);
@@ -45,6 +56,12 @@ public class ClinicAdministratorService {
         return "Successfully deleted doctor";
     }
 
+    public String deleteAppointmentType(Long id) {
+        List<AppointmentType>appointmentTypes=this.appointmentTypeService.findAll();
+        AppointmentType appointmentType = this.appointmentTypeService.findById(id);
+        appointmentTypes.remove(appointmentType);
+        return "Successfully deleted doctor";
+    }
 
     public List<DoctorResponse> getDoctors(){
         List<Doctor>doctors=this.doctorService.findAll();
@@ -63,5 +80,6 @@ public class ClinicAdministratorService {
         }
         return appointmentTypeResponses;
     }
+
 
 }
