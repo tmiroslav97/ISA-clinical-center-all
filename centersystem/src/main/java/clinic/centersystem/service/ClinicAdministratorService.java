@@ -1,8 +1,11 @@
 package clinic.centersystem.service;
 
+import clinic.centersystem.converter.AppointmentTypeConverter;
 import clinic.centersystem.converter.DoctorConverter;
+import clinic.centersystem.dto.request.AppointmentTypeRequestDTO;
 import clinic.centersystem.dto.request.DoctorRequestDTO;
 import clinic.centersystem.dto.response.DoctorResponse;
+import clinic.centersystem.model.AppointmentType;
 import clinic.centersystem.model.Doctor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,8 @@ public class ClinicAdministratorService {
     private ClinicAdministratorService clinicAdministratorService;
     @Autowired
     private DoctorServiceImpl doctorService;
+    @Autowired
+    private AppointmentTypeServiceImpl appointmentTypeService;
 
     public String addDoctor(DoctorRequestDTO doctorRequestDTO) {
         Doctor doc = DoctorConverter.toCreateDoctorFromDoctorRequest(doctorRequestDTO);
@@ -25,12 +30,20 @@ public class ClinicAdministratorService {
 
         return "Successfully added doctor";
     }
+
+    public String addAppointmentType(AppointmentTypeRequestDTO appointmentTypeRequestDTO){
+        AppointmentType appointment = AppointmentTypeConverter.toCreateAppointmentTypeFromRequest(appointmentTypeRequestDTO);
+        AppointmentType appointmentType = appointmentTypeService.save(appointment);
+
+        return  "Successfully added appointment type";
+    }
     public String deleteDoctor(Long id) {
         List<Doctor>doctors=this.doctorService.findAll();
         Doctor doctor=this.doctorService.findById(id);
         doctors.remove(doctor);
         return "Successfully deleted doctor";
     }
+    
 
     public List<DoctorResponse> getDoctors(){
         List<Doctor>doctors=this.doctorService.findAll();
