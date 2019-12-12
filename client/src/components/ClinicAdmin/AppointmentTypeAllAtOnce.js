@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import { Table, Container, Col, Row, Form, Button, Modal } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { addAppointmentType } from '../../store/clinic_admin/actions';
 
 const AppointmentTypAllAtOnce = () => {
+    const dispatch = useDispatch();
+    const[appointmentType, setAppointmentType] = useState();
+
     const [show1, setShow1] = useState(false);
     const [show2, setShow2] = useState(false);
 
@@ -9,6 +14,15 @@ const AppointmentTypAllAtOnce = () => {
     const handleShow1 = () => setShow1(true);
     const handleClose2 = () => setShow2(false);
     const handleShow2 = () => setShow2(true);
+
+    const handleAddAppointmentType = () => {
+        dispatch(
+            addAppointmentType({
+                appointmentType
+            })
+        );
+    };
+
     return (
         <>
             <Modal show={show1} onHide={handleClose1} animation={false}>
@@ -19,7 +33,7 @@ const AppointmentTypAllAtOnce = () => {
                     <Form>
                         <Form.Group as={Col}>
                             <Form.Label>Type:</Form.Label>
-                            <Form.Control type="text" />
+                            <Form.Control type="text" onChange={({ currentTarget }) => { setAppointmentType(currentTarget.value); }}/>
                         </Form.Group>
                     </Form>
                 </Modal.Body>
@@ -38,12 +52,12 @@ const AppointmentTypAllAtOnce = () => {
                     <Form>
                         <Form.Group as={Col}>
                             <Form.Label>Type:</Form.Label>
-                            <Form.Control type="text" placeholder="Enter a new type" />
+                            <Form.Control type="text" placeholder="Enter a new type"  onChange={({ currentTarget }) => { setAppointmentType(currentTarget.value); }} />
                         </Form.Group>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" onClick={handleClose2}>
+                    <Button variant="primary" onClick={handleAddAppointmentType}>
                         Add
           </Button>
                 </Modal.Footer>
