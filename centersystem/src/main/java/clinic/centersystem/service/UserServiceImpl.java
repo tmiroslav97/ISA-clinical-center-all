@@ -1,6 +1,7 @@
 package clinic.centersystem.service;
 
 import clinic.centersystem.dto.request.RegistrationRequirementDTO;
+import clinic.centersystem.exception.UserNotFoundException;
 import clinic.centersystem.model.Authority;
 import clinic.centersystem.model.User;
 import clinic.centersystem.model.enumeration.RoleEnum;
@@ -25,15 +26,13 @@ public class UserServiceImpl implements UserService {
     private AuthorityService authorityService;
 
     @Override
-    public User findByUsername(String email) throws UsernameNotFoundException {
-        User u = userRepository.findByEmail(email);
-        return u;
+    public User findByUsername(String email) throws UserNotFoundException {
+       return userRepository.findByEmail(email);
     }
 
     @Override
-    public User findById(Long id) throws AccessDeniedException {
-        User u = userRepository.findById(id).orElseGet(null);
-        return u;
+    public User findById(Long id) {
+        return userRepository.findById(id).orElseThrow(UserNotFoundException::new);
     }
 
     @Override
