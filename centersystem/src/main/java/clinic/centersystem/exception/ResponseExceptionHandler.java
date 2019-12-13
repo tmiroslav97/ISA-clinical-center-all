@@ -39,6 +39,7 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = {Exception.class})
     protected ResponseEntity<Object> handleException(RuntimeException ex, WebRequest request) {
         String bodyOfResponse = "Service unavailable";
+        System.out.println("Exception in app occurred");
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.SERVICE_UNAVAILABLE, request);
     }
 }
