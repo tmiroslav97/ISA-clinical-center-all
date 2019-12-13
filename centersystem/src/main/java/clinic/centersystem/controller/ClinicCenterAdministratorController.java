@@ -50,11 +50,8 @@ public class ClinicCenterAdministratorController {
     @RequestMapping(method = POST, value = "/approve/{reqId}")
     @PreAuthorize("hasRole('CCADMIN')")
     public ResponseEntity<String> approveRegistrationRequest(@PathVariable Long reqId) {
-        try {
-            return new ResponseEntity<>(this.clinicCenterAdminServiceCont.approveRegistrationRequest(reqId), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Mail sent error", HttpStatus.SERVICE_UNAVAILABLE);
-        }
+        return new ResponseEntity<>(this.clinicCenterAdminServiceCont.approveRegistrationRequest(reqId), HttpStatus.OK);
+
     }
 
     @RequestMapping(method = POST, value = "/reject/{reqId}/{msg}")
@@ -66,16 +63,8 @@ public class ClinicCenterAdministratorController {
     @RequestMapping(method = POST, value = "/reg-cca/{ccaId}")
     @PreAuthorize("hasRole('CCADMIN')")
     public ResponseEntity<String> registerCCA(@PathVariable Long ccaId, @RequestBody CCARegReqDTO ccaRegReqDTO) {
-        try {
-            String msg = this.clinicCenterAdminServiceCont.registerCCA(ccaRegReqDTO, ccaId);
-            return new ResponseEntity<>(msg, HttpStatus.OK);
-        } catch (UserExistsException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        } catch (CCANotPredefinedException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        } catch (UserNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        String msg = this.clinicCenterAdminServiceCont.registerCCA(ccaRegReqDTO, ccaId);
+        return new ResponseEntity<>(msg, HttpStatus.OK);
     }
 
     @RequestMapping(method = POST, value = "/reg-clinic")
