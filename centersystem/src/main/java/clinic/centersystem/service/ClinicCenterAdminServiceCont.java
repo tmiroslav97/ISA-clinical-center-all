@@ -96,12 +96,10 @@ public class ClinicCenterAdminServiceCont {
         RegistrationRequirement req = this.registrationRequirementService.findById(id);
         String subject = "Account registration";
         this.registrationRequirementService.deleteById(id);
-        try {
-            emailService.sendMailTo(req.getEmail(), subject, message);
-        } catch (Exception e) {
-            System.out.println("Mail send error!");
-        }
-        return message;
+
+        emailService.sendMailTo(req.getEmail(), subject, message);
+
+        return "Patient registration rejected";
     }
 
     public String registerCCA(CCARegReqDTO ccaRegReqDTO, Long id) {
