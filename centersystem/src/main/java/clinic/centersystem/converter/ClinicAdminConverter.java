@@ -15,6 +15,8 @@ public class ClinicAdminConverter {
                 .firstName(clinicAdminReqDTO.getFirstName())
                 .lastName(clinicAdminReqDTO.getLastName())
                 .role(RoleEnum.ROLE_ADMINC)
+                .password(clinicAdminReqDTO.getPassword())
+                .enabled(true)
                 .build();
     }
     public static ClinicAdministratoreResponse toCreateClinicAdminResponse(ClinicAdmin clinicAdmin) {
