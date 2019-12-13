@@ -2,6 +2,7 @@ package clinic.centersystem.service;
 
 import clinic.centersystem.converter.RegistrationRequirementConverter;
 import clinic.centersystem.dto.request.RegistrationRequirementDTO;
+import clinic.centersystem.exception.RegistrationRequirementNotFoundException;
 import clinic.centersystem.model.RegistrationRequirement;
 import clinic.centersystem.repository.RegistrationRequirementRepository;
 import clinic.centersystem.service.intf.RegistrationRequirementService;
@@ -19,7 +20,7 @@ public class RegistrationRequirementServiceImpl implements RegistrationRequireme
 
     @Override
     public RegistrationRequirement findById(Long id) {
-        return this.registrationRequirementRepository.findById(id).orElseGet(null);
+        return this.registrationRequirementRepository.findById(id).orElseThrow(RegistrationRequirementNotFoundException::new);
     }
 
     @Override
