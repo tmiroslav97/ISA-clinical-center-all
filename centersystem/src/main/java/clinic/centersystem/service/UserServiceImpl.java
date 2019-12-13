@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByUsername(String email) throws UserNotFoundException {
-       return userRepository.findByEmail(email);
+        return userRepository.findByEmail(email);
     }
 
     @Override
@@ -44,5 +44,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User save() {
         return null;
+    }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
     }
 }

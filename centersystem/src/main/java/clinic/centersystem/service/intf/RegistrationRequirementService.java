@@ -13,5 +13,5 @@ public interface RegistrationRequirementService {
 
     RegistrationRequirement save(RegistrationRequirementDTO registrationRequirement);
 
-    Long deleteById(Long id);
+    void deleteById(Long id);
 }

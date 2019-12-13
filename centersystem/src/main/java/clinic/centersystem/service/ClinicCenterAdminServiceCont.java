@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -68,45 +69,37 @@ public class ClinicCenterAdminServiceCont {
     }
 
     public List<RegistrationRequirementResponse> registrationRequirementList() {
-        List<RegistrationRequirement> reqs = registrationRequirementService.findAll();
-        List<RegistrationRequirementResponse> registrationRequirementResponses = new ArrayList<>();
-        for (RegistrationRequirement req : reqs) {
-            registrationRequirementResponses.add(RegistrationRequirementConverter.toCreateRegistrationRequirementResponse(req));
-        }
-        return registrationRequirementResponses;
+        return registrationRequirementService.findAll().stream().map(RegistrationRequirementConverter::toCreateRegistrationRequirementResponse).collect(Collectors.toList());
     }
 
     public String approveRegistrationRequest(Long id) {
         RegistrationRequirement req = registrationRequirementService.findById(id);
         req.setPassword(passwordEncoder.encode(req.getPassword()));
+        if (this.userService.existsByEmail(req.getEmail())) {
+            throw new UserExistsException();
+        }
         Patient patient = this.patientService.save(req);
         this.registrationRequirementService.deleteById(id);
-        String subject = "";
-        String answer = "";
-        try {
-            subject = "Account registration";
-            answer = String.format(
-                    "    Patient account was create successfully!\n" +
-                            "    Please follow this link to activate account:\n" +
-                            "    http://localhost:8080/cca/activate-account/%s"
-                    , patient.getId().toString());
-            emailService.sendMailTo(patient.getEmail(), subject, answer);
-        } catch (Exception e) {
-            System.out.println("Mail send error!");
-        }
-        return answer;
+        String subject = "Account registration";
+        String answer = String.format(
+                "    Patient account was create successfully!\n" +
+                        "    Please follow this link to activate account:\n" +
+                        "    http://localhost:8080/cca/activate-account/%s"
+                , patient.getId().toString());
+
+        emailService.sendMailTo(patient.getEmail(), subject, answer);
+
+        return "Patient registration approved";
     }
 
     public String rejectRegistrationRequest(Long id, String message) {
         RegistrationRequirement req = this.registrationRequirementService.findById(id);
         String subject = "Account registration";
         this.registrationRequirementService.deleteById(id);
-        try {
-            emailService.sendMailTo(req.getEmail(), subject, message);
-        } catch (Exception e) {
-            System.out.println("Mail send error!");
-        }
-        return message;
+
+        emailService.sendMailTo(req.getEmail(), subject, message);
+
+        return "Patient registration rejected";
     }
 
     public String registerCCA(CCARegReqDTO ccaRegReqDTO, Long id) {
@@ -169,7 +162,6 @@ public class ClinicCenterAdminServiceCont {
     public String addMedicine(MedicineRequestDTO medicineRequestDTO) {
         Medicine medicine = medicineService.saveReq(medicineRequestDTO);
 
-        
 
         return "Successfully added medicine";
     }
