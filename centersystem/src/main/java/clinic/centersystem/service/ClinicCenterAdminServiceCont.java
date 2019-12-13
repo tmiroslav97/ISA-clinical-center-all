@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -68,12 +69,7 @@ public class ClinicCenterAdminServiceCont {
     }
 
     public List<RegistrationRequirementResponse> registrationRequirementList() {
-        List<RegistrationRequirement> reqs = registrationRequirementService.findAll();
-        List<RegistrationRequirementResponse> registrationRequirementResponses = new ArrayList<>();
-        for (RegistrationRequirement req : reqs) {
-            registrationRequirementResponses.add(RegistrationRequirementConverter.toCreateRegistrationRequirementResponse(req));
-        }
-        return registrationRequirementResponses;
+        return registrationRequirementService.findAll().stream().map(RegistrationRequirementConverter::toCreateRegistrationRequirementResponse).collect(Collectors.toList());
     }
 
     public String approveRegistrationRequest(Long id) {
@@ -169,7 +165,6 @@ public class ClinicCenterAdminServiceCont {
     public String addMedicine(MedicineRequestDTO medicineRequestDTO) {
         Medicine medicine = medicineService.saveReq(medicineRequestDTO);
 
-        
 
         return "Successfully added medicine";
     }
