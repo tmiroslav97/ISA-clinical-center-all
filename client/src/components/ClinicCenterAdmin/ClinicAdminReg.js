@@ -64,7 +64,7 @@ const ClinicAdminReg = () => {
                                 />
                             </Form.Group>
                             <Form.Group as={Col}>
-                                <Form.Label>State</Form.Label>
+                                <Form.Label>Clinic</Form.Label>
                                 <Form.Control as="select" onChange={({ currentTarget }) => {
                                         setClinicId(currentTarget.value);
                                     }} >
