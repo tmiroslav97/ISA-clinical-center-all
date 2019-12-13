@@ -147,15 +147,20 @@ public class ClinicCenterAdminServiceCont {
 
     public String registerClinicAdmin(ClinicAdminReqDTO clinicAdminReqDTO) {
         clinicAdminReqDTO.setPassword(this.passwordEncoder.encode(clinicAdminReqDTO.getPassword()));
+        if (this.userService.existsByEmail(clinicAdminReqDTO.getEmail())) {
+            throw new UserExistsException();
+        }
         ClinicAdmin clinicAdmin = this.clinicAdminService.save(clinicAdminReqDTO);
+
         Clinic clinic = this.clinicService.findById(clinicAdminReqDTO.getClinicId());
+
         clinic.getClinicAdmins().add(clinicAdmin);
         clinicAdmin.setClinic(clinic);
 
         clinicAdmin = this.clinicAdminService.saveClinicAdmin(clinicAdmin);
         clinic = this.clinicService.saveClinic(clinic);
 
-        return "Added clinic admin";
+        return "Clinic admin successfully added";
     }
 
     public String addDiagnose(DiagnoseRequestDTO diagnoseRequestDTO) {

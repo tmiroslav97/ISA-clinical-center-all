@@ -77,6 +77,11 @@ public class ClinicCenterAdministratorController {
         }
     }
 
+    @RequestMapping(method = POST, value = "/reg-clinic-admin")
+    public ResponseEntity<String> registerClinicAdmin(@RequestBody ClinicAdminReqDTO clinicAdminReqDTO) {
+        return new ResponseEntity<>(this.clinicCenterAdminServiceCont.registerClinicAdmin(clinicAdminReqDTO), HttpStatus.OK);
+    }
+
     @RequestMapping(method = GET, value = "/clinics")
     public ResponseEntity<List<ClinicResponse>> getClinics() {
         return new ResponseEntity<List<ClinicResponse>>(this.clinicCenterAdminServiceCont.getClinics(), HttpStatus.OK);
@@ -85,11 +90,6 @@ public class ClinicCenterAdministratorController {
     @RequestMapping(method = GET, value = "/activate-account/{id}")
     public ResponseEntity<String> activateAccount(@PathVariable Long id, HttpServletResponse httpServletResponse) {
         return new ResponseEntity<>(this.clinicCenterAdminServiceCont.activateAccount(id, httpServletResponse), HttpStatus.TEMPORARY_REDIRECT);
-    }
-
-    @RequestMapping(method = POST, value = "/reg-clinic-admin")
-    public ResponseEntity<String> registerClinicAdmin(@RequestBody ClinicAdminReqDTO clinicAdminReqDTO) {
-        return new ResponseEntity<>(this.clinicCenterAdminServiceCont.registerClinicAdmin(clinicAdminReqDTO), HttpStatus.OK);
     }
 
     @RequestMapping(method = POST, value = "/add-diagnose")
