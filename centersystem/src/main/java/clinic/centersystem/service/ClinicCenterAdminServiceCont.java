@@ -117,9 +117,23 @@ public class ClinicCenterAdminServiceCont {
         return msg;
     }
 
-    public String registerClinic(ClinicRequestDTO clinicRequestDTO) {
+    public String activateAccount(Long id, HttpServletResponse httpServletResponse) {
+        Patient patient = this.patientService.findById(id);
+        patient.setActivated(true);
+        patient = this.patientService.save(patient);
+
+        httpServletResponse.setHeader("Location", "http://localhost:3000/login");
+        return "Account is activated!";
+    }
+
+    public boolean registerClinic(ClinicRequestDTO clinicRequestDTO) {
+        if (this.clinicService.existsByName(clinicRequestDTO.getName())) {
+            return false;
+        }
+
         Clinic clinic = this.clinicService.save(clinicRequestDTO);
-        return "Clinic succesfully created";
+
+        return true;
     }
 
     public List<ClinicResponse> getClinics() {
@@ -129,15 +143,6 @@ public class ClinicCenterAdminServiceCont {
             clinicResponses.add(ClinicConverter.toCreateClinicResponseFromClinic(clinic));
         }
         return clinicResponses;
-    }
-
-    public String activateAccount(Long id, HttpServletResponse httpServletResponse) {
-        Patient patient = this.patientService.findById(id);
-        patient.setActivated(true);
-        patient = this.patientService.save(patient);
-
-        httpServletResponse.setHeader("Location", "http://localhost:3000/login");
-        return "Account is activated!";
     }
 
     public String registerClinicAdmin(ClinicAdminReqDTO clinicAdminReqDTO) {
