@@ -77,20 +77,17 @@ public class ClinicCenterAdminServiceCont {
         req.setPassword(passwordEncoder.encode(req.getPassword()));
         Patient patient = this.patientService.save(req);
         this.registrationRequirementService.deleteById(id);
-        String subject = "";
-        String answer = "";
-        try {
-            subject = "Account registration";
-            answer = String.format(
-                    "    Patient account was create successfully!\n" +
-                            "    Please follow this link to activate account:\n" +
-                            "    http://localhost:8080/cca/activate-account/%s"
-                    , patient.getId().toString());
-            emailService.sendMailTo(patient.getEmail(), subject, answer);
-        } catch (Exception e) {
-            System.out.println("Mail send error!");
-        }
-        return answer;
+
+        String subject = "Account registration";
+        String answer = String.format(
+                "    Patient account was create successfully!\n" +
+                        "    Please follow this link to activate account:\n" +
+                        "    http://localhost:8080/cca/activate-account/%s"
+                , patient.getId().toString());
+
+        emailService.sendMailTo(patient.getEmail(), subject, answer);
+
+        return "Patient registration approved";
     }
 
     public String rejectRegistrationRequest(Long id, String message) {

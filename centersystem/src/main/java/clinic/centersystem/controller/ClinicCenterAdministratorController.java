@@ -50,7 +50,11 @@ public class ClinicCenterAdministratorController {
     @RequestMapping(method = POST, value = "/approve/{reqId}")
     @PreAuthorize("hasRole('CCADMIN')")
     public ResponseEntity<String> approveRegistrationRequest(@PathVariable Long reqId) {
-        return new ResponseEntity<>(this.clinicCenterAdminServiceCont.approveRegistrationRequest(reqId), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(this.clinicCenterAdminServiceCont.approveRegistrationRequest(reqId), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Mail sent error", HttpStatus.SERVICE_UNAVAILABLE);
+        }
     }
 
     @RequestMapping(method = POST, value = "/reject/{reqId}/{msg}")
