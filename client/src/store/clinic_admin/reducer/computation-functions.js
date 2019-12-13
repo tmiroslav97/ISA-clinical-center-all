@@ -4,7 +4,7 @@
         rooms: payload
     };
 }*/
-export function putDoctorsData(state, payload) {
+export function putDoctorData(state, payload) {
     return {
         ...state,
         doctors: payload

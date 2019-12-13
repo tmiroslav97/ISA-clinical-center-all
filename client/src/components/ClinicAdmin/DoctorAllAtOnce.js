@@ -41,11 +41,11 @@ const DoctorAllAtOnce = () => {
             })*/
         );
     };
-    useEffect(() => {
+    /*useEffect(() => {
         dispatch(
             //fetchDoctorData({})
         );
-    }, []);
+    }, []);*/
 
 
     const [show, setShow] = useState(false);
@@ -119,6 +119,9 @@ const DoctorAllAtOnce = () => {
                         <Form.Label>Search doctors:</Form.Label>
                         <Col>
                             <Form.Control type="text" placeholder="Search by name" />
+                        </Col>
+                        <Col>
+                            <Button>Search</Button>
                         </Col>
                     </Form.Group>
 

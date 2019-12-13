@@ -24,21 +24,21 @@ import CAdminService from '../../services/CAdminService';
 import {
     putRoomsData,
     putAppointmentType,
-    putDoctorsData    
+    putDoctorData    
 } from './actions';
 
 export function* fetchDoctorData() {
     const { payload } = yield take(FETCH_DOCTOR_DATA);
     const { doctors } = yield call(CAdminService.fetchDoctorData, {});
-    yield put(putDoctorsData(doctors));
+    yield put(putDoctorData(doctors));
 }
 
-/*export function* addDoctor() {
+export function* addDoctor() {
     const { payload } = yield take(ADD_DOCTOR);
     const { data } = yield call(CAdminService.addDoctor, payload);
     const { doctors } = yield call(CAdminService.fetchDoctorData, {});
-    yield put(putDoctorsData(doctors));
-}*/
+    yield put(putDoctorData(doctors));
+}
 
 /*export function* deleteDoctor() {
     const { payload } = yield take(DELETE_DOCTOR);

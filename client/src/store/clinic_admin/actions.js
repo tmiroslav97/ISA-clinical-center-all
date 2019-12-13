@@ -1,7 +1,8 @@
 import {
    // DELETE_DOCTOR,
     FETCH_DOCTOR_DATA,
-   // ADD_DOCTOR,
+    PUT_DOCTOR_DATA,
+    ADD_DOCTOR
     //SEARCH_DOCTOR,
     //FETCH_ROOMS_DATA,
     //PUT_ROOMS_DATA,
@@ -15,7 +16,7 @@ import {
     //SEARCH_APPOINTMENT_TYPE,
     //EDIT_APPOINTMENT_TYPE,
     //ADD_APPOINTMENT_TYPE,
-    PUT_DOCTOR_DATA
+    
 } from './constants';
 
 
@@ -24,8 +25,13 @@ export const fetchDoctorData = payload => ({
     payload
 });
 
-export const putDoctorsData = payload => ({
+export const putDoctorData = payload => ({
     type: PUT_DOCTOR_DATA,
+    payload
+});
+
+export const addDoctor = payload => ({
+    type: ADD_DOCTOR,
     payload
 });
 /*
@@ -34,10 +40,7 @@ export const deleteDoctor = payload => ({
     payload
 });
 
-export const addDoctor = payload => ({
-    type: ADD_DOCTOR,
-    payload
-});
+
 
 export const searchDoctorByName = payload => ({
     type:SEARCH_DOCTOR,

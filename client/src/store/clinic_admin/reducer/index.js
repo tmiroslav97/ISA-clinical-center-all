@@ -27,7 +27,7 @@ const cAdminReducer = (state = initialState, { type, payload }) => {
 };
 
 const actionHandler = {
-    [PUT_DOCTOR_DATA]:computationFunctions.putDoctorsData
+    [PUT_DOCTOR_DATA]:computationFunctions.putDoctorData
     //[PUT_ROOMS_DATA]: computationFunctions.putRoomsData,
    // [PUT_APPOINTMENT_TYPE]:computationFunctions.putAppointmentType,
 };
