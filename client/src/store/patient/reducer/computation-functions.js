@@ -5,18 +5,17 @@ export function putPatientData(state, payload) {
     };
 }
 
-export function putDoctorsData(state, payload) {
+export function putDoctorsDataPatient(state, payload) {
     return {
         ...state,
         doctors: payload
     };
 }
 
-/*
-export function putClinicsData(state, payload) {
+
+export function putClinicsDataPatient(state, payload) {
     return {
         ...state,
         clinics: payload
     };
 }
-*/

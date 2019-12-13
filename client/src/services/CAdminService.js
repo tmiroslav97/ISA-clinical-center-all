@@ -3,26 +3,42 @@ import { history } from '../index';
 import { format } from 'util';
 
 const FINALPOINTS = {
-    ADD_DOCTOR: '/doctor/add',
-    DELETE_DOCTOR: '/adm-cli/delete/%s'
+    //ADD_DOCTOR: '/adm-cli/add-doctor',
+    //DELETE_DOCTOR: '/adm-cli/delete',
+    FETCH_DOCTOR_DATA: '/adm-cli/fetch'
 };
 
 class CAdminService extends HttpClient{
 
-    addDoctor = async payload => {
+
+
+    /*addDoctor = async payload => {
         try {
             const { data } = await this.getApiClient().post(
-                FINALPOINTS.ADD_DOCTOR
+                FINALPOINTS.ADD_DOCTOR, 
+                payload
             );
 
             return { data };
         } catch (error) {
             console.log(error.response.data);
         }
+    };*/
+
+    fetchDoctorData = async payload => {
+        try {
+            const { data } = await this.getApiClient().get(
+                FINALPOINTS.FETCH_DOCTOR_DATA
+            );
+            const doctor = data;
+            return { doctor };
+        } catch (error) {
+            console.log(error.response.data);
+        }
     };
     
 
-    deleteDoctorsData = async payload => {
+    /*deleteDoctorsData = async payload => {
         try {
             const { data } = await this.getApiClient().delete(
                 FINALPOINTS.DELETE_DOCTORS_DATA
@@ -33,7 +49,7 @@ class CAdminService extends HttpClient{
         } catch (error) {
             console.log(error.response.data);
         }
-    };
+    };*/
 }
 
 export default new CAdminService();
