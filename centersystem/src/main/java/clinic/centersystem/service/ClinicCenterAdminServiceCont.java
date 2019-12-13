@@ -76,12 +76,10 @@ public class ClinicCenterAdminServiceCont {
         RegistrationRequirement req = registrationRequirementService.findById(id);
         req.setPassword(passwordEncoder.encode(req.getPassword()));
         if (this.userService.existsByEmail(req.getEmail())) {
-            System.out.println("exists");
             throw new UserExistsException();
         }
         Patient patient = this.patientService.save(req);
         this.registrationRequirementService.deleteById(id);
-
         String subject = "Account registration";
         String answer = String.format(
                 "    Patient account was create successfully!\n" +
