@@ -2,7 +2,6 @@ package clinic.centersystem.service;
 
 import clinic.centersystem.converter.ClinicCenterAdminConverter;
 import clinic.centersystem.converter.ClinicConverter;
-import clinic.centersystem.converter.PatientConverter;
 import clinic.centersystem.converter.RegistrationRequirementConverter;
 import clinic.centersystem.dto.request.*;
 import clinic.centersystem.dto.response.ClinicCenterAdminResponse;
@@ -26,7 +25,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ClinicCenterAdministratorService {
+public class ClinicCenterAdminServiceCont {
 
     @Autowired
     private ClinicCenterAdminService clinicCenterAdminService;
@@ -61,7 +60,7 @@ public class ClinicCenterAdministratorService {
     @Autowired
     private MedicineRecordService medicineRecordService;
 
-    private static final Logger logger = LoggerFactory.getLogger(ClinicCenterAdministratorService.class);
+    private static final Logger logger = LoggerFactory.getLogger(ClinicCenterAdminServiceCont.class);
 
     public ClinicCenterAdminResponse clinicCenterAdmin(Long id) {
         ClinicCenterAdmin clinicCenterAdmin = this.clinicCenterAdminService.findById(id);
