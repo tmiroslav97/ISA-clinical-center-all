@@ -2,6 +2,7 @@ package clinic.centersystem.service;
 
 import clinic.centersystem.converter.ClinicCenterAdminConverter;
 import clinic.centersystem.dto.request.CCARegReqDTO;
+import clinic.centersystem.exception.UserNotFoundException;
 import clinic.centersystem.model.Authority;
 import clinic.centersystem.model.Clinic;
 import clinic.centersystem.model.ClinicCenterAdmin;
@@ -24,8 +25,7 @@ public class ClinicCenterAdminServiceImpl implements ClinicCenterAdminService {
 
     @Override
     public ClinicCenterAdmin findById(Long id) {
-        ClinicCenterAdmin clinicCenterAdmin = this.clinicCenterAdminRepository.findById(id).orElseGet(null);
-        return clinicCenterAdmin;
+        return this.clinicCenterAdminRepository.findById(id).orElseThrow(UserNotFoundException::new);
     }
 
     @Override
