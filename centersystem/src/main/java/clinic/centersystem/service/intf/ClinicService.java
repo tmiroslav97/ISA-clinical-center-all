@@ -13,4 +13,6 @@ public interface ClinicService {
     Clinic save(ClinicRequestDTO clinicRequestDTO);
 
     Clinic saveClinic(Clinic clinic);
+
+    boolean existsByName(String name);
 }
