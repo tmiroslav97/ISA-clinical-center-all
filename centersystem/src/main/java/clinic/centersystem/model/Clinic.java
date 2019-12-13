@@ -23,7 +23,7 @@ public class Clinic {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = DbColumnConstants.NAME, unique = false, nullable = false)
+    @Column(name = DbColumnConstants.NAME, unique = true, nullable = false)
     private String name;
 
     @Column(name = DbColumnConstants.ADDRESS, unique = false, nullable = false)

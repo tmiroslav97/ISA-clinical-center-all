@@ -51,7 +51,6 @@ public class ClinicCenterAdministratorController {
     @PreAuthorize("hasRole('CCADMIN')")
     public ResponseEntity<String> approveRegistrationRequest(@PathVariable Long reqId) {
         return new ResponseEntity<>(this.clinicCenterAdminServiceCont.approveRegistrationRequest(reqId), HttpStatus.OK);
-
     }
 
     @RequestMapping(method = POST, value = "/reject/{reqId}/{msg}")
@@ -70,7 +69,17 @@ public class ClinicCenterAdministratorController {
     @RequestMapping(method = POST, value = "/reg-clinic")
     @PreAuthorize("hasRole('CCADMIN')")
     public ResponseEntity<String> registerClinic(@RequestBody ClinicRequestDTO ccaRegReqDTO) {
-        return new ResponseEntity<>(this.clinicCenterAdminServiceCont.registerClinic(ccaRegReqDTO), HttpStatus.OK);
+        boolean flag = this.clinicCenterAdminServiceCont.registerClinic(ccaRegReqDTO);
+        if (flag) {
+            return new ResponseEntity<>("Clinic successfuly added", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Clinic with this name already exists", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @RequestMapping(method = POST, value = "/reg-clinic-admin")
+    public ResponseEntity<String> registerClinicAdmin(@RequestBody ClinicAdminReqDTO clinicAdminReqDTO) {
+        return new ResponseEntity<>(this.clinicCenterAdminServiceCont.registerClinicAdmin(clinicAdminReqDTO), HttpStatus.OK);
     }
 
     @RequestMapping(method = GET, value = "/clinics")
@@ -81,11 +90,6 @@ public class ClinicCenterAdministratorController {
     @RequestMapping(method = GET, value = "/activate-account/{id}")
     public ResponseEntity<String> activateAccount(@PathVariable Long id, HttpServletResponse httpServletResponse) {
         return new ResponseEntity<>(this.clinicCenterAdminServiceCont.activateAccount(id, httpServletResponse), HttpStatus.TEMPORARY_REDIRECT);
-    }
-
-    @RequestMapping(method = POST, value = "/reg-clinic-admin")
-    public ResponseEntity<String> registerClinicAdmin(@RequestBody ClinicAdminReqDTO clinicAdminReqDTO) {
-        return new ResponseEntity<>(this.clinicCenterAdminServiceCont.registerClinicAdmin(clinicAdminReqDTO), HttpStatus.OK);
     }
 
     @RequestMapping(method = POST, value = "/add-diagnose")

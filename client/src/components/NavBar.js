@@ -23,6 +23,9 @@ export default function NavBar() {
         );
     };
 
+    window.addEventListener("unload", handleSignOut);
+
+
     return (
         <Navbar bg="light" expand="lg">
             <Navbar.Brand href="/">Clinic Center</Navbar.Brand>

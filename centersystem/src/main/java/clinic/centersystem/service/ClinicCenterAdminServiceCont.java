@@ -117,9 +117,23 @@ public class ClinicCenterAdminServiceCont {
         return msg;
     }
 
-    public String registerClinic(ClinicRequestDTO clinicRequestDTO) {
+    public String activateAccount(Long id, HttpServletResponse httpServletResponse) {
+        Patient patient = this.patientService.findById(id);
+        patient.setActivated(true);
+        patient = this.patientService.save(patient);
+
+        httpServletResponse.setHeader("Location", "http://localhost:3000/login");
+        return "Account is activated!";
+    }
+
+    public boolean registerClinic(ClinicRequestDTO clinicRequestDTO) {
+        if (this.clinicService.existsByName(clinicRequestDTO.getName())) {
+            return false;
+        }
+
         Clinic clinic = this.clinicService.save(clinicRequestDTO);
-        return "Clinic succesfully created";
+
+        return true;
     }
 
     public List<ClinicResponse> getClinics() {
@@ -131,26 +145,22 @@ public class ClinicCenterAdminServiceCont {
         return clinicResponses;
     }
 
-    public String activateAccount(Long id, HttpServletResponse httpServletResponse) {
-        Patient patient = this.patientService.findById(id);
-        patient.setActivated(true);
-        patient = this.patientService.save(patient);
-
-        httpServletResponse.setHeader("Location", "http://localhost:3000/login");
-        return "Account is activated!";
-    }
-
     public String registerClinicAdmin(ClinicAdminReqDTO clinicAdminReqDTO) {
         clinicAdminReqDTO.setPassword(this.passwordEncoder.encode(clinicAdminReqDTO.getPassword()));
+        if (this.userService.existsByEmail(clinicAdminReqDTO.getEmail())) {
+            throw new UserExistsException();
+        }
         ClinicAdmin clinicAdmin = this.clinicAdminService.save(clinicAdminReqDTO);
+
         Clinic clinic = this.clinicService.findById(clinicAdminReqDTO.getClinicId());
+
         clinic.getClinicAdmins().add(clinicAdmin);
         clinicAdmin.setClinic(clinic);
 
         clinicAdmin = this.clinicAdminService.saveClinicAdmin(clinicAdmin);
         clinic = this.clinicService.saveClinic(clinic);
 
-        return "Added clinic admin";
+        return "Clinic admin successfully added";
     }
 
     public String addDiagnose(DiagnoseRequestDTO diagnoseRequestDTO) {
