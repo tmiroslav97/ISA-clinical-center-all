@@ -33,8 +33,8 @@ public class ClinicAdminController {
     }
     @RequestMapping(method = GET, value = "/{admCliId}")
     @PreAuthorize("hasRole('ADMINC')")
-    public ResponseEntity<ClinicAdministratoreResponse> clinicAdministrator(@PathVariable Long patId) {
-        return new ResponseEntity<>(this.clinicAdministratorService.clinicAdministrator(patId), HttpStatus.CREATED);
+    public ResponseEntity<ClinicAdministratoreResponse> clinicAdministrator(@PathVariable Long admCliId) {
+        return new ResponseEntity<>(this.clinicAdministratorService.clinicAdministrator(admCliId), HttpStatus.CREATED);
     }
 
 
@@ -42,6 +42,11 @@ public class ClinicAdminController {
     public ResponseEntity<String>addDoctor(@RequestBody DoctorRequestDTO doctorRequestDTO){
         return new ResponseEntity<>(this.clinicAdministratorService.addDoctor(doctorRequestDTO), HttpStatus.OK);
     }
+    /*@RequestMapping(method = POST, value = "/add-medicine")
+    public ResponseEntity<String> addMedicine(@RequestBody MedicineRequestDTO medicineRequestDTO) {
+        return new ResponseEntity<>(this.clinicCenterAdminServiceCont.addMedicine(medicineRequestDTO), HttpStatus.OK);
+    }*/
+
     @RequestMapping(method = POST, value="/add-appointment-type")
     public ResponseEntity<String>addAppointmentType(@RequestBody AppointmentTypeRequestDTO appointmentTypeRequestDTO){
         return new ResponseEntity<>(this.clinicAdministratorService.addAppointmentType(appointmentTypeRequestDTO), HttpStatus.OK);

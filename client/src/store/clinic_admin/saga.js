@@ -1,20 +1,9 @@
 import{take, put, call} from 'redux-saga/effects';
 
 import {
-    FETCH_ROOMS_DATA,
-    DELETE_ROOMS_DATA,
-    ADD_ROOMS_DATA,
-    SEARCH_ROOMS_DATA,
-    FETCH_APPOINTMENT_TYPE,
-    EDIT_APPOINTMENT_TYPE,
-    EDIT_ROOMS_DATA,
-    ADD_APPOINTMENT_TYPE,
-    DELETE_APPOINTMENT_TYPE,
-    SEARCH_APPOINTMENT_TYPE,
     ADD_DOCTOR,
-    SEARCH_DOCTOR,
     FETCH_DOCTOR_DATA,
-    DELETE_DOCTOR,
+    FETCH_CADMIN_DATA
 } from './constants';
 
 import AppointmentTypeService from '../../services/AppointmentTypeService';
@@ -24,8 +13,15 @@ import CAdminService from '../../services/CAdminService';
 import {
     putRoomsData,
     putAppointmentType,
-    putDoctorData    
+    putDoctorData,
+    putCAdminData 
 } from './actions';
+
+export function* fetchCAdminData() {
+    const { payload } = yield take(FETCH_CADMIN_DATA);
+    const { data } = yield call(CAdminService.fetchCAdminData, payload);
+    yield put(putCAdminData(data));
+}
 
 export function* fetchDoctorData() {
     const { payload } = yield take(FETCH_DOCTOR_DATA);

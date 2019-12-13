@@ -1,6 +1,8 @@
 export const FETCH_DOCTOR_DATA = 'fetch_doctor_data';//1.sa back na front pa put koja stavlja u store
 export const PUT_DOCTOR_DATA = 'put_doctor';
 export const ADD_DOCTOR = 'add_doctor';
+export const FETCH_CADMIN_DATA = 'fetch_cadmin_data';
+export const PUT_CADMIN_DATA = 'put_cadmin_data';
 /*export const DELETE_DOCTOR = 'delete_doctor';
 export const SEARCH_DOCTOR = 'search_doctor';
 export const FETCH_ROOMS_DATA ='fetch_rooms_data';//preuzima sa backa podatke na front

@@ -2,29 +2,28 @@ import React,{useState, useEffect} from 'react';
 import { Container, Row, Form, Col, Button, Table, Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { doctorDataSelector } from '../../store/clinic_admin/selectors';
-
+import { addDoctor ,fetchDoctorData} from '../../store/clinic_admin/actions';
 
 
 const DoctorAllAtOnce = () => {
     const dispatch = useDispatch();
-    const [id, setId] = useState();
     const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
+    const [password1, setPassword1] = useState();
     const [password2, setPassword2] = useState();
     const [firstName, setFirstName] = useState();
     const [lastName, setLastName] = useState();
-    const [name, setName] = useState();
     const doctors = useSelector(doctorDataSelector);
 
     const handleAddDoctor = () => {
+        
         dispatch(
-            /*addDoctor({
+            addDoctor({
                 email,
-                password,
+                password1,
                 password2,
                 firstName,
                 lastName
-            })*/
+            })
         );
     };
     const handleSearch = () => {
@@ -41,11 +40,11 @@ const DoctorAllAtOnce = () => {
             })*/
         );
     };
-    /*useEffect(() => {
+    useEffect(() => {
         dispatch(
-            //fetchDoctorData({})
+            fetchDoctorData({})
         );
-    }, []);*/
+    }, []);
 
 
     const [show, setShow] = useState(false);
@@ -63,35 +62,45 @@ const DoctorAllAtOnce = () => {
                     <Form.Row>
                         <Form.Group as={Col} >
                             <Form.Label>E-mail address</Form.Label>
-                            <Form.Control type="email" placeholder="E-mail"    />
+                            <Form.Control type="email" placeholder="E-mail" onChange={( { currentTarget } ) => {
+                                    setEmail(currentTarget.value);
+                            }}   />
                         </Form.Group>
                     </Form.Row>
                     <Form.Row>
                         <Form.Group as={Col}>
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password"   />
+                            <Form.Control type="password" placeholder="Password"  onChange={( { currentTarget } ) => {
+                                    setPassword1(currentTarget.value);
+                            }} />
                         </Form.Group>
                         <Form.Group as={Col} >
                             <Form.Label>Confirm password</Form.Label>
-                            <Form.Control type="password" placeholder="Confirm your password"   />
+                            <Form.Control type="password" placeholder="Confirm your password"  onChange={( { currentTarget } ) => {
+                                    setPassword2(currentTarget.value);
+                            }} />
                         </Form.Group>
 
                     </Form.Row>
                     <Form.Row>
                         <Form.Group as={Col}>
                             <Form.Label>First name</Form.Label>
-                            <Form.Control type="text" placeholder="First name"   />
+                            <Form.Control type="text" placeholder="First name" onChange={( { currentTarget } ) => {
+                                    setFirstName(currentTarget.value);
+                            }}  />
                         </Form.Group>
                         <Form.Group as={Col} >
                             <Form.Label>Last name</Form.Label>
-                            <Form.Control type="text" placeholder="Last name"   />
+                            <Form.Control type="text" placeholder="Last name"   onChange={( { currentTarget } ) => {
+                                    setLastName(currentTarget.value);
+                            }}/>
                         </Form.Group>
                     </Form.Row>
                     
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="primary" >
+                <Button variant="primary" onClick={handleAddDoctor} >
                     Add
                 </Button>
             </Modal.Footer>
@@ -150,8 +159,18 @@ const DoctorAllAtOnce = () => {
                         </tr>
                     </thead>
                     <tbody>
-                            {
-                               
+                            {/*
+                               doctors.map((doctor, index) => {
+                                return (
+                                    <tr key={doctor.id}>
+                                        <td>{index + 1}</td>
+                                        <td>{doctor.firstName}</td>
+                                        <td>{doctor.lastName}</td>
+                                        
+                                    </tr>
+                                );
+                            })
+                            */
                             }
                         </tbody>
                 </Table>
