@@ -111,9 +111,6 @@ public class ClinicCenterAdminServiceCont {
 
     public String registerCCA(CCARegReqDTO ccaRegReqDTO, Long id) {
         ClinicCenterAdmin clinicCenterAdmin = this.clinicCenterAdminService.findById(id);
-        if(clinicCenterAdmin == null){
-            throw new UserNotFoundException();
-        }
         if (!clinicCenterAdmin.isPredefined()) {
             throw new CCANotPredefinedException();
         }
