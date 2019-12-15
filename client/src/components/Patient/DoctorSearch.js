@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Container, Row, Col, Table, Form} from 'react-bootstrap';
+import {Container, Row, Col, Table, Form, Button} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchDoctorsDataPatient, searchDoctorsDataPatient } from '../../store/patient/actions';
 import { doctorsDataSelector } from '../../store/patient/selectors';
@@ -34,8 +34,11 @@ const DoctorSearch = () => {
                     <Form.Group as={Row}>
                         <Form.Label>Search:</Form.Label>
                         <Col>
-                           <Form.Control type="text" placeholder="Search doctors by name" onChange={handleSearch}/>
-                        </Col> 
+                           <Form.Control type="text" placeholder="Search doctors"/>
+                        </Col>
+                        <Button variant="primary" onClick={handleSearch}>
+                            Search
+                        </Button> 
                     </Form.Group>
                     <Form.Group as={Row} controlId="formGridState">
                         <Form.Label>Filter doctors by</Form.Label>
@@ -60,6 +63,7 @@ const DoctorSearch = () => {
                         </thead>
                         <tbody>
                             {
+                                /*
                                 doctors.map((doctor, index) => {
                                     return (
                                         <tr key={doctor.id}>
@@ -69,6 +73,7 @@ const DoctorSearch = () => {
                                         </tr>
                                     );
                                 })
+                                */
                             }
                         </tbody>
                     </Table>

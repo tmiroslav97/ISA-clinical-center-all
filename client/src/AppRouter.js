@@ -24,7 +24,7 @@ const AppRouter = () => {
         <Switch>
             <Route exact path="/" component={HomePage} />
             <Route exact path="/login" component={LoginPage} />
-            <Route exact path="/pat" component={PatientHomePage} />
+            <Route exact path="/pat" render={(props) => ((role === 'ROLE_PATIENT' && !firstLog) ? (<PatientHomePage  />) : (<Redirect to="/page-not-found" />))} />
             <Route exact path="/signup" component={RegPage} />
             <Route exact path="/doc/:id" render={(props) => ((role === 'ROLE_DOCTOR' && !firstLog) ? (<DoctorHomePage match={props.match} />) : (<Redirect to="/page-not-found" />))} />
             <Route exact path="/prob" component={HolidayAproval} />

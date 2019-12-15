@@ -3,7 +3,7 @@ import {Container, Col, Row} from 'react-bootstrap';
 
 function MedicalRecord(){
     return(
-        <Container id="left-tabs-example" defaultActiveKey="first">
+        <Container>
            
            <Row >
                 <Col md={{ span:12 }} xs={12}>

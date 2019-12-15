@@ -125,7 +125,7 @@ const RegPage = () => {
                                     }} />
                             </Form.Group>
                         </Form.Row>
-                        <Button variant="primary" onClick={handleRegister}>
+                        <Button variant="primary" className="mb-4" onClick={handleRegister}>
                             Sign-up
                         </Button>
                     </Form>
