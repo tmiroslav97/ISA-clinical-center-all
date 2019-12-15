@@ -20,7 +20,12 @@ const LoginPage = () => {
     return (
         <Container>
             <Row>
-                <Col md={{ span:3, offset: 3 }} xs={12}>
+                <Col md={{ span: 3, offset: 4 }} xs={12}>
+                    <h2 className="border-bottom">Login</h2>
+                </Col>
+            </Row>
+            <Row>
+                <Col md={{ span:3, offset: 4 }} xs={12}>
                     <Form>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
@@ -28,9 +33,6 @@ const LoginPage = () => {
                                 onChange={( { currentTarget } ) => {
                                     setUsername(currentTarget.value);
                             }} />
-                            <Form.Text className="text-muted">
-                                We'll never share your email with anyone else.
-                            </Form.Text>
                         </Form.Group>
 
                         <Form.Group controlId="formBasicPassword">
