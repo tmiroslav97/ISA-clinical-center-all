@@ -40,4 +40,9 @@ public class ClinicServiceImpl implements ClinicService {
 
         return clinic;
     }
+
+    @Override
+    public boolean existsByName(String name) {
+        return clinicRepository.existsByName(name);
+    }
 }

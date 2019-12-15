@@ -22,30 +22,23 @@ const RoomAllAtOnce = () => {
     }, []);
     */
 
-    const [show1r, setShow1r] = useState(false);
-    const [show2r, setShow2r] = useState(false);
+    const [show1rEdit, setShow1rEdit] = useState(false);
+    const [show2rAdd, setShow2rAdd] = useState(false);
 
-    const handleClose1r = () => setShow1r(false);
-    const handleShow1r = () => setShow1r(true);
-    const handleClose2r = () => setShow2r(false);
-    const handleShow2r = () => setShow2r(true);
+    const handleClose1rEdit = () => setShow1rEdit(false);
+    const handleShow1rEdit = () => setShow1rEdit(true);
+    const handleClose2rAdd = () => setShow2rAdd(false);
+    const handleShow2rAdd = () => setShow2rAdd(true);
 
     return (
         <>
-            <Modal show={show1r} onHide={handleClose1r} animation={false}>
+            <Modal show={show1rEdit} onHide={handleClose1rEdit} animation={false}>
                 <Modal.Header closeButton>
                     <Modal.Title>Edit data:</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
                         <Form.Group as={Row}>
-                            <Form.Label>Choose clinic:</Form.Label>
-                            <Col>
-
-                                <Form.Control type="text" disabled="true" />
-                            </Col>
-                        </Form.Group>
-                        <Form.Group as={Row}>
                             <Form.Label>Enter name of the room:</Form.Label>
                             <Col>
                                 <Form.Control type="text" placeholder="Name " />
@@ -60,29 +53,19 @@ const RoomAllAtOnce = () => {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" onClick={handleClose1r}>
+                    <Button variant="primary" onClick={handleClose1rEdit}>
                         Edit
           </Button>
                 </Modal.Footer>
             </Modal>
 
-            <Modal show={show2r} onHide={handleClose2r} animation={false}>
+            <Modal show={show2rAdd} onHide={handleClose2rAdd} animation={false}>
                 <Modal.Header closeButton>
                     <Modal.Title>Add data:</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
                         <Form.Group as={Row}>
-                            <Form.Label>Choose clinic:</Form.Label>
-                            <Col>
-
-                                <Form.Control as="select" >
-                                    <option>Choose...</option>
-                                    <option>...</option>
-                                </Form.Control>
-                            </Col>
-                        </Form.Group>
-                        <Form.Group as={Row}>
                             <Form.Label>Enter name of the room:</Form.Label>
                             <Col>
                                 <Form.Control type="text" placeholder="Name " />
@@ -97,7 +80,7 @@ const RoomAllAtOnce = () => {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" onClick={handleClose2r}>
+                    <Button variant="primary" onClick={handleClose2rAdd}>
                         Add
           </Button>
                 </Modal.Footer>
@@ -113,7 +96,7 @@ const RoomAllAtOnce = () => {
 
                             <Form.Label>PROBA_TEST:</Form.Label>
                             <Col>
-                                <Button onClick={handleShow1r}>ProbaJadna </Button>
+                                <Button onClick={handleShow1rEdit}>ProbaJadna </Button>
                             </Col>
                         </Form.Group>
 
@@ -122,7 +105,7 @@ const RoomAllAtOnce = () => {
 
                             <Form.Label>Add new surgery room:</Form.Label>
                             <Col>
-                                <Button onClick={handleShow2r}>Add </Button>
+                                <Button onClick={handleShow2rAdd}>Add </Button>
                             </Col>
                         </Form.Group>
 
@@ -167,7 +150,7 @@ const RoomAllAtOnce = () => {
                                             <td>{room.name}</td>
                                             <td>{room.number}</td>
                                             <td>
-                                                <Button onClick={handleShow1r}>Edit</Button>
+                                                <Button onClick={handleShow1rEdit}>Edit</Button>
                                             </td>
                                             <td>
                                                 <Button onClick={handleDelitingRooms}>Delete</Button>

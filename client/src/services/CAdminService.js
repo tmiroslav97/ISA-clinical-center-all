@@ -3,10 +3,12 @@ import { history } from '../index';
 import { format } from 'util';
 
 const FINALPOINTS = {
+    FETCH_ADMINC_DARA: '/adm-cli/%s',
     ADD_DOCTOR: '/adm-cli/add-doctor',
-    DELETE_DOCTOR: '/adm-cli/delete/%s',
-    FETCH_DOCTOR_DATA: '/adm-cli/fetch'
+    ADD_APPOINTMENT_TYPE: 'adm-cli/add-appointment-type',
+    FETCH_DOCTORS_DATA: '/adm-cli/doctors'
 };
+
 
 class CAdminService extends HttpClient{
 
@@ -25,7 +27,45 @@ class CAdminService extends HttpClient{
         }
     };
 
-    fetchDoctorData = async payload => {
+    addAppointmentType = async payload => {
+        try {
+            const { data } = await this.getApiClient().post(
+                FINALPOINTS.ADD_APPOINTMENT_TYPE,
+                payload
+            );
+
+            return { data };
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    };
+    
+    fetchCAdminData = async payload => {
+        try {
+            const { data } = await this.getApiClient().get(
+                format(FINALPOINTS.FETCH_ADMINC_DATA, payload.cAdminId)
+            );
+            return { data };
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    };
+
+    fetchDoctorsData = async payload => {
+        try {
+            const { data } = await this.getApiClient().get(
+                FINALPOINTS.FETCH_DOCTORS_DATA
+            );
+
+            const doctors = data;
+
+            return { doctors };
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    }; 
+
+   /* fetchDoctorData = async payload => {
         try {
             const { data } = await this.getApiClient().get(
                 FINALPOINTS.FETCH_DOCTOR_DATA
@@ -35,10 +75,12 @@ class CAdminService extends HttpClient{
         } catch (error) {
             console.log(error.response.data);
         }
-    };
+    };*/
+
+    
     
 
-    deleteDoctorsData = async payload => {
+    /*deleteDoctorsData = async payload => {
         try {
             const { data } = await this.getApiClient().delete(
                 FINALPOINTS.DELETE_DOCTORS_DATA
@@ -49,7 +91,7 @@ class CAdminService extends HttpClient{
         } catch (error) {
             console.log(error.response.data);
         }
-    };
+    };*/
 }
 
 export default new CAdminService();

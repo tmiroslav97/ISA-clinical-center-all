@@ -1,61 +1,60 @@
 import React,{useState, useEffect} from 'react';
 import { Container, Row, Form, Col, Button, Table, Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import {addDoctor, fetchDoctorData, deleteDoctor,searchDoctorByName} from '../../store/clinic_admin/actions';
 import { doctorDataSelector } from '../../store/clinic_admin/selectors';
-
-
+import { addDoctor } from '../../store/clinic_admin/actions';
+import {fetchDoctorsData} from '../../store/clinic_admin/actions';
 
 const DoctorAllAtOnce = () => {
     const dispatch = useDispatch();
-    const [id, setId] = useState();
     const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
+    const [password1, setPassword1] = useState();
     const [password2, setPassword2] = useState();
     const [firstName, setFirstName] = useState();
     const [lastName, setLastName] = useState();
-    const [name, setName] = useState();
     const doctors = useSelector(doctorDataSelector);
 
     const handleAddDoctor = () => {
+        
         dispatch(
             addDoctor({
                 email,
-                password,
+                password1,
                 password2,
                 firstName,
                 lastName
             })
         );
+        setShow(false);
     };
     const handleSearch = () => {
         dispatch(
-            searchDoctorByName({
+           /* searchDoctorByName({
                 name
-            })
+            })*/
         );
     };
     const handleDeleteDoctor = () => {
         dispatch(
-            deleteDoctor({
+            /*deleteDoctor({
                 id
-            })
+            })*/
         );
     };
     useEffect(() => {
-        dispatch(
-            fetchDoctorData({})
+       dispatch(
+            fetchDoctorsData({})
         );
     }, []);
 
 
     const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
+   // const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     return (
         <>
-        <Modal show={show} onHide={handleClose} animation={false}>
+        <Modal show={show} onHide={handleAddDoctor} animation={false}>
             <Modal.Header closeButton>
                 <Modal.Title>Add data:</Modal.Title>
             </Modal.Header>
@@ -64,35 +63,45 @@ const DoctorAllAtOnce = () => {
                     <Form.Row>
                         <Form.Group as={Col} >
                             <Form.Label>E-mail address</Form.Label>
-                            <Form.Control type="email" placeholder="E-mail"   onChange={({ currentTarget }) => { setEmail(currentTarget.value); }} />
+                            <Form.Control type="email" placeholder="E-mail" onChange={( { currentTarget } ) => {
+                                    setEmail(currentTarget.value);
+                            }}   />
                         </Form.Group>
                     </Form.Row>
                     <Form.Row>
                         <Form.Group as={Col}>
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password"  onChange={({ currentTarget }) => { setPassword(currentTarget.value); }} />
+                            <Form.Control type="password" placeholder="Password"  onChange={( { currentTarget } ) => {
+                                    setPassword1(currentTarget.value);
+                            }} />
                         </Form.Group>
                         <Form.Group as={Col} >
                             <Form.Label>Confirm password</Form.Label>
-                            <Form.Control type="password" placeholder="Confirm your password"  onChange={({ currentTarget }) => { setPassword2(currentTarget.value); }}  />
+                            <Form.Control type="password" placeholder="Confirm your password"  onChange={( { currentTarget } ) => {
+                                    setPassword2(currentTarget.value);
+                            }} />
                         </Form.Group>
 
                     </Form.Row>
                     <Form.Row>
                         <Form.Group as={Col}>
                             <Form.Label>First name</Form.Label>
-                            <Form.Control type="text" placeholder="First name"  onChange={({ currentTarget }) => { setFirstName(currentTarget.value); }} />
+                            <Form.Control type="text" placeholder="First name" onChange={( { currentTarget } ) => {
+                                    setFirstName(currentTarget.value);
+                            }}  />
                         </Form.Group>
                         <Form.Group as={Col} >
                             <Form.Label>Last name</Form.Label>
-                            <Form.Control type="text" placeholder="Last name"  onChange={({ currentTarget }) => { setLastName(currentTarget.value); }}  />
+                            <Form.Control type="text" placeholder="Last name"   onChange={( { currentTarget } ) => {
+                                    setLastName(currentTarget.value);
+                            }}/>
                         </Form.Group>
                     </Form.Row>
                     
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="primary" onClick={handleAddDoctor}>
+                <Button variant="primary" onClick={handleAddDoctor} >
                     Add
                 </Button>
             </Modal.Footer>
@@ -119,7 +128,10 @@ const DoctorAllAtOnce = () => {
 
                         <Form.Label>Search doctors:</Form.Label>
                         <Col>
-                            <Form.Control type="text" placeholder="Search by name" onChange={handleSearch}/>
+                            <Form.Control type="text" placeholder="Search by name" />
+                        </Col>
+                        <Col>
+                            <Button>Search</Button>
                         </Col>
                     </Form.Group>
 
@@ -142,23 +154,25 @@ const DoctorAllAtOnce = () => {
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
-                            <th>Number</th>
+                            <th>First name</th>
+                            <th>Last name</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
                             {
-                                doctors.map((doctor, index) => {
-                                    return (
-                                        <tr key={doctor.id}>
-                                            <td>{index + 1}</td>
-                                            <td>{doctor.firstName}</td>
-                                            <td>{doctor.lastName}</td>
-                                            <td><Button variant="danger" onClick={handleDeleteDoctor} >Delete</Button></td>
-                                        </tr>
-                                    );
-                                })
+                               doctors.map((doctor, index) => {
+                                return (
+                                    <tr key={doctor.id}>
+                                        <td>{index + 1}</td>
+                                        <td>{doctor.firstName}</td>
+                                        <td>{doctor.lastName}</td>
+                                        <td><Button>Delete</Button></td>
+                                        
+                                    </tr>
+                                );
+                            })
+                            
                             }
                         </tbody>
                 </Table>

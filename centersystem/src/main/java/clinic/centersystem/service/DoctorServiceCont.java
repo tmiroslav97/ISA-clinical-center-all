@@ -23,12 +23,16 @@ public class DoctorServiceCont {
 
     public DoctorResponse getDoctorById(Long id){
         Doctor doctor = this.doctorService.findById(id);
-        DoctorResponse doctorResponse = DoctorConverter.toCreateDoctorResponseFromDoctor(doctor);
-        return doctorResponse;
+        return DoctorConverter.toCreateDoctorResponseFromDoctor(doctor);
     }
 
-    public List<Doctor> getDoctors() {
-        return doctorService.findAll();
+    public List<DoctorResponse> getDoctors() {
+        List<Doctor> doctors = this.doctorService.findAll();
+        List<DoctorResponse> doctorResponses = new ArrayList<DoctorResponse>();
+        for (Doctor doctor : doctors) {
+            doctorResponses.add(DoctorConverter.toCreateDoctorResponseFromDoctor(doctor));
+        }
+        return doctorResponses;
     }
 
     public List<Doctor> searchDoctorByName(String name){

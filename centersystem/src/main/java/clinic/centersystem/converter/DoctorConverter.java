@@ -3,6 +3,7 @@ package clinic.centersystem.converter;
 import clinic.centersystem.dto.request.DoctorRequestDTO;
 import clinic.centersystem.dto.response.DoctorResponse;
 import clinic.centersystem.model.Doctor;
+import clinic.centersystem.model.enumeration.RoleEnum;
 
 
 public class DoctorConverter {
@@ -12,8 +13,6 @@ public class DoctorConverter {
                 .firstName(doctor.getFirstName())
                 .lastName(doctor.getLastName())
                 .email(doctor.getEmail())
-                .role(doctor.getRole().name())
-                .clinicId(doctor.getClinic().getId())
                 .build();
     }
 
@@ -23,6 +22,11 @@ public class DoctorConverter {
                 .firstName(doctorRequestDTO.getFirstName())
                 .lastName(doctorRequestDTO.getLastName())
                 .password(doctorRequestDTO.getPassword1())
+                .role(RoleEnum.ROLE_DOCTOR)
+                .isFirstLog(true)
+                .enabled(true)
+                .cntRating(0)
+                .sumRating(Float.valueOf(0))
                 .build();
     }
 }

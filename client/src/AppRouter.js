@@ -32,9 +32,8 @@ const AppRouter = () => {
             <Route exact path="/signup" component={RegPage} />
             <Route exact path="/change-pass" component={PasswordChanger} />
             <Route exact path="/nurse-page/:id" render={(props) => ((role === 'ROLE_NURSE' && !firstLog) ? (<NurseHomePage match={props.match} />) : (<Redirect to="/page-not-found" />))} />
-            <Route exact path="/adminc" component={ClinicAdmin} />
+            <Route exact path="/adminc" render={() => ((role === 'ROLE_ADMINC' && !firstLog) ? (<ClinicAdmin />) : (<Redirect to="/page-not-found" />))} />
             <Route exact path="/probs" component={DoctorAllAtOnce} />
-            <Route exact path="/CA" component={ClinicAdmin} />
             <Route exact path="/search" component={DoctorSearch} />
             <Route exact path="/test" component={ClinicSearch} />
             <Route exact path="/page-not-found" component={() => <h1>Page not found!</h1>} />

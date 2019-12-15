@@ -2,14 +2,14 @@ import HttpClient from './HttpBaseClient';
 import { format } from 'util';
 
 const FINALPOINTS = {
-    FETCH_DOCTOR_DATA: '/doctor/%s',
+    FETCH_DOCTORS_DATA: '/doctor/all',
 };
 
 class DoctorService extends HttpClient {
-    fetchDoctorData = async payload => {
+    fetchDoctorsData = async payload => {
         try {
             const { data } = await this.getApiClient().get(
-                format(FINALPOINTS.FETCH_DOCTOR_DATA, payload.id)
+                format(FINALPOINTS.FETCH_DOCTORS_DATA, payload.id)
             );
 
             return { data };

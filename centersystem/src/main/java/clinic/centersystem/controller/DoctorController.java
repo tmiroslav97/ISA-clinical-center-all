@@ -33,7 +33,7 @@ public class DoctorController {
     }
 
     @RequestMapping(method = GET, value = "/all")
-    public ResponseEntity<List<Doctor>> getMedicines() {
+    public ResponseEntity<List<DoctorResponse>> getDoctors() {
         return new ResponseEntity<>(this.doctorServiceCont.getDoctors(), HttpStatus.OK);
     }
 

@@ -2,12 +2,14 @@ package clinic.centersystem.service;
 
 import clinic.centersystem.converter.ClinicCenterAdminConverter;
 import clinic.centersystem.converter.ClinicConverter;
-import clinic.centersystem.converter.PatientConverter;
 import clinic.centersystem.converter.RegistrationRequirementConverter;
 import clinic.centersystem.dto.request.*;
 import clinic.centersystem.dto.response.ClinicCenterAdminResponse;
 import clinic.centersystem.dto.response.ClinicResponse;
 import clinic.centersystem.dto.response.RegistrationRequirementResponse;
+import clinic.centersystem.exception.CCANotPredefinedException;
+import clinic.centersystem.exception.UserExistsException;
+import clinic.centersystem.exception.UserNotFoundException;
 import clinic.centersystem.model.*;
 import clinic.centersystem.service.intf.*;
 import lombok.RequiredArgsConstructor;
@@ -20,10 +22,11 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class ClinicCenterAdministratorService {
+public class ClinicCenterAdminServiceCont {
 
     @Autowired
     private ClinicCenterAdminService clinicCenterAdminService;
@@ -58,7 +61,7 @@ public class ClinicCenterAdministratorService {
     @Autowired
     private MedicineRecordService medicineRecordService;
 
-    private static final Logger logger = LoggerFactory.getLogger(ClinicCenterAdministratorService.class);
+    private static final Logger logger = LoggerFactory.getLogger(ClinicCenterAdminServiceCont.class);
 
     public ClinicCenterAdminResponse clinicCenterAdmin(Long id) {
         ClinicCenterAdmin clinicCenterAdmin = this.clinicCenterAdminService.findById(id);
@@ -66,76 +69,52 @@ public class ClinicCenterAdministratorService {
     }
 
     public List<RegistrationRequirementResponse> registrationRequirementList() {
-        List<RegistrationRequirement> reqs = registrationRequirementService.findAll();
-        List<RegistrationRequirementResponse> registrationRequirementResponses = new ArrayList<>();
-        for (RegistrationRequirement req : reqs) {
-            registrationRequirementResponses.add(RegistrationRequirementConverter.toCreateRegistrationRequirementResponse(req));
-        }
-        return registrationRequirementResponses;
+        return registrationRequirementService.findAll().stream().map(RegistrationRequirementConverter::toCreateRegistrationRequirementResponse).collect(Collectors.toList());
     }
 
     public String approveRegistrationRequest(Long id) {
         RegistrationRequirement req = registrationRequirementService.findById(id);
         req.setPassword(passwordEncoder.encode(req.getPassword()));
+        if (this.userService.existsByEmail(req.getEmail())) {
+            throw new UserExistsException();
+        }
         Patient patient = this.patientService.save(req);
         this.registrationRequirementService.deleteById(id);
-        String subject = "";
-        String answer = "";
-        try {
-            subject = "Account registration";
-            answer = String.format(
-                    "    Patient account was create successfully!\n" +
-                            "    Please follow this link to activate account:\n" +
-                            "    http://localhost:8080/cca/activate-account/%s"
-                    , patient.getId().toString());
-            emailService.sendMailTo(patient.getEmail(), subject, answer);
-        } catch (Exception e) {
-            System.out.println("Mail send error!");
-        }
-        return answer;
+        String subject = "Account registration";
+        String answer = String.format(
+                "    Patient account was create successfully!\n" +
+                        "    Please follow this link to activate account:\n" +
+                        "    http://localhost:8080/cca/activate-account/%s"
+                , patient.getId().toString());
+
+        emailService.sendMailTo(patient.getEmail(), subject, answer);
+
+        return "Patient registration approved";
     }
 
     public String rejectRegistrationRequest(Long id, String message) {
         RegistrationRequirement req = this.registrationRequirementService.findById(id);
         String subject = "Account registration";
         this.registrationRequirementService.deleteById(id);
-        try {
-            emailService.sendMailTo(req.getEmail(), subject, message);
-        } catch (Exception e) {
-            System.out.println("Mail send error!");
-        }
-        return message;
+
+        emailService.sendMailTo(req.getEmail(), subject, message);
+
+        return "Patient registration rejected";
     }
 
     public String registerCCA(CCARegReqDTO ccaRegReqDTO, Long id) {
         ClinicCenterAdmin clinicCenterAdmin = this.clinicCenterAdminService.findById(id);
-        String msg = "";
         if (!clinicCenterAdmin.isPredefined()) {
-            msg = "You are not predefined clinic center administrator, you don't have rights to create new";
-            return msg;
+            throw new CCANotPredefinedException();
         }
         User user = this.userService.findByUsername(ccaRegReqDTO.getEmail());
         if (user != null) {
-            msg = "Email is already taken by another user";
+            throw new UserExistsException();
         }
         ccaRegReqDTO.setPassword(this.passwordEncoder.encode(ccaRegReqDTO.getPassword()));
         ClinicCenterAdmin newCCAdmin = this.clinicCenterAdminService.save(ccaRegReqDTO);
-        msg = "Successfully added new clinic center administrator";
+        String msg = "Successfully added new clinic center administrator";
         return msg;
-    }
-
-    public String registerClinic(ClinicRequestDTO clinicRequestDTO) {
-        Clinic clinic = this.clinicService.save(clinicRequestDTO);
-        return "Clinic succesfully created";
-    }
-
-    public List<ClinicResponse> getClinics() {
-        List<Clinic> clinics = this.clinicService.findAll();
-        List<ClinicResponse> clinicResponses = new ArrayList<ClinicResponse>();
-        for (Clinic clinic : clinics) {
-            clinicResponses.add(ClinicConverter.toCreateClinicResponseFromClinic(clinic));
-        }
-        return clinicResponses;
     }
 
     public String activateAccount(Long id, HttpServletResponse httpServletResponse) {
@@ -147,17 +126,41 @@ public class ClinicCenterAdministratorService {
         return "Account is activated!";
     }
 
+    public boolean registerClinic(ClinicRequestDTO clinicRequestDTO) {
+        if (this.clinicService.existsByName(clinicRequestDTO.getName())) {
+            return false;
+        }
+
+        Clinic clinic = this.clinicService.save(clinicRequestDTO);
+
+        return true;
+    }
+
+    public List<ClinicResponse> getClinics() {
+        List<Clinic> clinics = this.clinicService.findAll();
+        List<ClinicResponse> clinicResponses = new ArrayList<ClinicResponse>();
+        for (Clinic clinic : clinics) {
+            clinicResponses.add(ClinicConverter.toCreateClinicResponseFromClinic(clinic));
+        }
+        return clinicResponses;
+    }
+
     public String registerClinicAdmin(ClinicAdminReqDTO clinicAdminReqDTO) {
         clinicAdminReqDTO.setPassword(this.passwordEncoder.encode(clinicAdminReqDTO.getPassword()));
+        if (this.userService.existsByEmail(clinicAdminReqDTO.getEmail())) {
+            throw new UserExistsException();
+        }
         ClinicAdmin clinicAdmin = this.clinicAdminService.save(clinicAdminReqDTO);
+
         Clinic clinic = this.clinicService.findById(clinicAdminReqDTO.getClinicId());
+
         clinic.getClinicAdmins().add(clinicAdmin);
         clinicAdmin.setClinic(clinic);
 
         clinicAdmin = this.clinicAdminService.saveClinicAdmin(clinicAdmin);
         clinic = this.clinicService.saveClinic(clinic);
 
-        return "Added clinic admin";
+        return "Clinic admin successfully added";
     }
 
     public String addDiagnose(DiagnoseRequestDTO diagnoseRequestDTO) {
@@ -169,7 +172,6 @@ public class ClinicCenterAdministratorService {
     public String addMedicine(MedicineRequestDTO medicineRequestDTO) {
         Medicine medicine = medicineService.saveReq(medicineRequestDTO);
 
-        
 
         return "Successfully added medicine";
     }
