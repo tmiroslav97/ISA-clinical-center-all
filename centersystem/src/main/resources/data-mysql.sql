@@ -57,8 +57,8 @@ VALUES (3, 'Nevena', 'Djukin', 'nvndjukin97@gmail.com', true, false, '2019-11-20
 INSERT INTO personnel(id, clinic_id)
 VALUES (3, 1);
 
-INSERT INTO doctor(cnt_rating, sum_rating, id)
-VALUES (0, 0, 3);
+INSERT INTO doctor(cnt_rating, sum_rating,start_time,end_time, id)
+VALUES (0, 0,8,16, 3);
 
 INSERT INTO user_authority (user_id, authority_id)
 VALUES (3, 3);

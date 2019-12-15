@@ -78,10 +78,13 @@ const AppointmentTypAllAtOnce = () => {
 
 
             <Container>
-                <Row>
-                    <h3>Appointment type- adding, deliting, editing and searching</h3>
+                <Row >
+                    <Col md={{ span:10, offset:1  }} xs={12}>
+                        <h3 className="border-bottom">Appointment types</h3>
+                    </Col>
                 </Row>
-                <Row>
+                <Row >
+                    <Col md={{ span:5, offset:1  }} xs={12}>
                     <Form>
                         <Form.Group as={Row} >
 
@@ -97,6 +100,9 @@ const AppointmentTypAllAtOnce = () => {
                             <Col>
                                 <Form.Control type="text" placeholder="Search " />
                             </Col>
+                            <Col>
+                            <Button>Search</Button>
+                        </Col>
                         </Form.Group>
 
                         <Form.Group as={Row} controlId="formGridState1">
@@ -111,9 +117,10 @@ const AppointmentTypAllAtOnce = () => {
 
 
                     </Form>
-
+                    </Col>
                 </Row>
-                <Row>
+                <Row  >
+                    <Col md={{ span:10, offset:1  }} xs={12}>
                     <Table responsive>
                         <thead>
                             <tr>
@@ -130,14 +137,15 @@ const AppointmentTypAllAtOnce = () => {
                                         <tr key={appointment.id}>
                                             <td>{index + 1}</td>
                                             <td>{appointment.type}</td>
-                                            <td><Button>Edit</Button></td>
-                                            <td><Button>Delete</Button></td>
+                                            <td><Button variant="success">Edit</Button></td>
+                                            <td><Button variant="danger">Delete</Button></td>
                                         </tr>
                                     );
                                 })
                             }
                         </tbody>
                     </Table>
+                    </Col>
                 </Row>
             </Container >
         </>

@@ -87,19 +87,13 @@ const RoomAllAtOnce = () => {
             </Modal>
             <Container>
                 <Row>
-                    <h3>Examination and surgery room - adding, deliting, editing and searching</h3>
+                <Col md={{ span:10, offset:1  }} xs={12}>
+                    <h3  className="border-bottom">Examination and surgery rooms</h3>
+                    </Col>
                 </Row>
                 <Row>
+                <Col md={{ span:10, offset:1  }} xs={12}>
                     <Form>
-
-                        <Form.Group as={Row} >
-
-                            <Form.Label>PROBA_TEST:</Form.Label>
-                            <Col>
-                                <Button onClick={handleShow1rEdit}>ProbaJadna </Button>
-                            </Col>
-                        </Form.Group>
-
 
                         <Form.Group as={Row} >
 
@@ -115,6 +109,9 @@ const RoomAllAtOnce = () => {
                             <Col>
                                 <Form.Control type="text" placeholder="Search " />
                             </Col>
+                            <Col>
+                                <Button>Search</Button>
+                            </Col>
                         </Form.Group>
 
                         <Form.Group as={Row} controlId="formGridState">
@@ -129,9 +126,10 @@ const RoomAllAtOnce = () => {
 
 
                     </Form>
-
+                </Col>
                 </Row>
                 <Row>
+                <Col md={{ span:10, offset:1  }} xs={12}>
                     <Table responsive>
                         <thead>
                             <tr>
@@ -161,6 +159,7 @@ const RoomAllAtOnce = () => {
                             }
                         </tbody>
                     </Table>
+                    </Col>
                 </Row>
             </Container >
         </>

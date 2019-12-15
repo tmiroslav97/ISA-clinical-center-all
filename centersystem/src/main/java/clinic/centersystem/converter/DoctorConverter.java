@@ -13,6 +13,8 @@ public class DoctorConverter {
                 .firstName(doctor.getFirstName())
                 .lastName(doctor.getLastName())
                 .email(doctor.getEmail())
+                .startTime(doctor.getStartTime())
+                .endTime(doctor.getEndTime())
                 .build();
     }
 
@@ -27,6 +29,8 @@ public class DoctorConverter {
                 .enabled(true)
                 .cntRating(0)
                 .sumRating(Float.valueOf(0))
+                .startTime(doctorRequestDTO.getStartTime())
+                .endTime(doctorRequestDTO.getEndTime())
                 .build();
     }
 }
