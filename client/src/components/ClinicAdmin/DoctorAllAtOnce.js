@@ -12,6 +12,8 @@ const DoctorAllAtOnce = () => {
     const [password2, setPassword2] = useState();
     const [firstName, setFirstName] = useState();
     const [lastName, setLastName] = useState();
+    const [startTime, setStartTime] = useState();
+    const [endTime, setEndTime] = useState();
     const doctors = useSelector(doctorDataSelector);
 
     const handleAddDoctor = () => {
@@ -22,7 +24,9 @@ const DoctorAllAtOnce = () => {
                 password1,
                 password2,
                 firstName,
-                lastName
+                lastName,
+                startTime,
+                endTime
             })
         );
         setShow(false);
@@ -97,6 +101,20 @@ const DoctorAllAtOnce = () => {
                             }}/>
                         </Form.Group>
                     </Form.Row>
+                    <Form.Row>
+                        <Form.Group as={Col}>
+                            <Form.Label>Start time</Form.Label>
+                            <Form.Control type="number" placeholder="Start time" onChange={( { currentTarget } ) => {
+                                    setStartTime(currentTarget.value);
+                            }}  />
+                        </Form.Group>
+                        <Form.Group as={Col} >
+                            <Form.Label>End time</Form.Label>
+                            <Form.Control type="number" placeholder="End time"   onChange={( { currentTarget } ) => {
+                                    setEndTime(currentTarget.value);
+                            }}/>
+                        </Form.Group>
+                    </Form.Row>
                     
                 </Form>
             </Modal.Body>
@@ -110,10 +128,13 @@ const DoctorAllAtOnce = () => {
 
         <Container>
             <Row>
-                <h3>Doctors - adding, deliting and searching</h3>
+                <Col md={{ span:10, offset:1  }} xs={12}>
+                    <h3  className="border-bottom" >Doctors</h3>
+                </Col>
             </Row>
 
             <Row>
+                <Col md={{ span:5, offset:1  }} xs={12}>
                 <Form>
 
                     <Form.Group as={Row} >
@@ -147,9 +168,11 @@ const DoctorAllAtOnce = () => {
 
 
                 </Form>
+                </Col>
             </Row>
 
             <Row>
+                <Col md={{ span:10, offset:1  }} xs={12}>
                 <Table responsive>
                     <thead>
                         <tr>
@@ -167,7 +190,7 @@ const DoctorAllAtOnce = () => {
                                         <td>{index + 1}</td>
                                         <td>{doctor.firstName}</td>
                                         <td>{doctor.lastName}</td>
-                                        <td><Button>Delete</Button></td>
+                                        <td><Button variant="danger">Delete</Button></td>
                                         
                                     </tr>
                                 );
@@ -176,6 +199,7 @@ const DoctorAllAtOnce = () => {
                             }
                         </tbody>
                 </Table>
+                </Col>
             </Row>
 
 
