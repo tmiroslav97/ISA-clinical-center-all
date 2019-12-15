@@ -6,8 +6,7 @@ const FINALPOINTS = {
     FETCH_ADMINC_DARA: '/adm-cli/%s',
     ADD_DOCTOR: '/adm-cli/add-doctor',
     ADD_APPOINTMENT_TYPE: 'adm-cli/add-appointment-type',
-    FETCH_DOCTORS_DATA: '/adm-cli/doctors',
-    FETCH_APPOINTMENT_TYPE: '/adm-cli/appointment-type'
+    FETCH_DOCTORS_DATA: '/adm-cli/doctors'
 };
 
 

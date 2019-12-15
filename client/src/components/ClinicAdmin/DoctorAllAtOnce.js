@@ -42,9 +42,9 @@ const DoctorAllAtOnce = () => {
         );
     };
     useEffect(() => {
-       /* dispatch(
-            //fetchDoctorsData({})
-        );*/
+       dispatch(
+            fetchDoctorsData({})
+        );
     }, []);
 
 
@@ -160,18 +160,19 @@ const DoctorAllAtOnce = () => {
                         </tr>
                     </thead>
                     <tbody>
-                            {/*
+                            {
                                doctors.map((doctor, index) => {
                                 return (
                                     <tr key={doctor.id}>
                                         <td>{index + 1}</td>
                                         <td>{doctor.firstName}</td>
                                         <td>{doctor.lastName}</td>
+                                        <td><Button>Delete</Button></td>
                                         
                                     </tr>
                                 );
                             })
-                            */
+                            
                             }
                         </tbody>
                 </Table>

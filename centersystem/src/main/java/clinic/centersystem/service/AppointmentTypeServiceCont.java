@@ -14,5 +14,5 @@ public class AppointmentTypeServiceCont {
     @Autowired
     private AppointmentTypeService appointmentTypeService;
 
-    public List<AppointmentType> getAppointmentType(){ return appointmentTypeService.findAll();}
+    public List<AppointmentType> getAppointmentType(){ return this.appointmentTypeService.findAll();}
 }

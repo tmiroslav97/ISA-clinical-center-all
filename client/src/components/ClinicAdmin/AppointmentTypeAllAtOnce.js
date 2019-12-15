@@ -7,15 +7,15 @@ import { appointmentTypeSelector } from '../../store/clinic_admin/selectors';
 
 const AppointmentTypAllAtOnce = () => {
     const dispatch = useDispatch();
-    const[type, setType] = useState();
-    const appointmentTypes = useSelector(appointmentTypeSelector)
+    const [type, setType] = useState();
+    const appointmentTypes = useSelector(appointmentTypeSelector);
 
     const [show1, setShow1] = useState(false);
     const [show2, setShow2] = useState(false);
 
     const handleClose1 = () => setShow1(false);
     const handleShow1 = () => setShow1(true);
-    //const handleClose2 = () => setShow2(false);
+
     const handleShow2 = () => setShow2(true);
 
     const handleAddAppointmentType = () => {
@@ -31,6 +31,7 @@ const AppointmentTypAllAtOnce = () => {
             fetchAppointmentType({})
         );
     }, []);
+
 
     return (
         <>
@@ -62,8 +63,8 @@ const AppointmentTypAllAtOnce = () => {
                         <Form.Group as={Col}>
                             <Form.Label>Type:</Form.Label>
                             <Form.Control type="text" placeholder="Enter a new type" onChange={({ currentTarget }) => {
-                                    setType(currentTarget.value);
-                                }}  />
+                                setType(currentTarget.value);
+                            }} />
                         </Form.Group>
                     </Form>
                 </Modal.Body>
@@ -84,15 +85,6 @@ const AppointmentTypAllAtOnce = () => {
                     <Form>
                         <Form.Group as={Row} >
 
-                            <Form.Label>PROBA_TEST:</Form.Label>
-                            <Col>
-                                <Button onClick={handleShow1}>ProbaJadna </Button>
-                            </Col>
-                        </Form.Group>
-
-
-                        <Form.Group as={Row} >
-
                             <Form.Label>Add new appointment type:</Form.Label>
                             <Col>
                                 <Button onClick={handleShow2} >Add </Button>
@@ -107,7 +99,7 @@ const AppointmentTypAllAtOnce = () => {
                             </Col>
                         </Form.Group>
 
-                        <Form.Group as={Row} controlId="formGridState">
+                        <Form.Group as={Row} controlId="formGridState1">
                             <Form.Label>Filter data by</Form.Label>
                             <Col>
                                 <Form.Control as="select">
@@ -132,7 +124,18 @@ const AppointmentTypAllAtOnce = () => {
                             </tr>
                         </thead>
                         <tbody>
-                           
+                            {
+                                appointmentTypes.map((appointment, index) => {
+                                    return (
+                                        <tr key={appointment.id}>
+                                            <td>{index + 1}</td>
+                                            <td>{appointment.type}</td>
+                                            <td><Button>Edit</Button></td>
+                                            <td><Button>Delete</Button></td>
+                                        </tr>
+                                    );
+                                })
+                            }
                         </tbody>
                     </Table>
                 </Row>
