@@ -11,30 +11,30 @@ import PriceList from './Pricelist';
 
 const CA = () => {
     return(
-        <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+        <Tabs defaultActiveKey="appointmentType" id="uncontrolled-tab-example">
+        <Tab eventKey="appointmentType" title="Appointment types" >
+                <Appointments/>
+            </Tab>
+            <Tab eventKey="doctors" title="Doctors" >
+                <Doctors/>
+            </Tab>
             <Tab eventKey="Cprofile" title="Clinic Profile">
                 <ClinicProfile />
             </Tab>
             <Tab eventKey="business" title="Business Report">
                 <BusinessReport/>
             </Tab>
-            <Tab eventKey="editing" title="Editing Profile" >
-                <Editing />
-            </Tab>
             <Tab eventKey="exeminationRoom" title="Exemination room" >
                 <ExeminationRoom/>
-            </Tab>
-            <Tab eventKey="appointmentType" title="Appointment types" >
-                <Appointments/>
-            </Tab>
-            <Tab eventKey="doctors" title="Doctors" >
-                <Doctors/>
             </Tab>
             <Tab eventKey="appointments" title="Free appointments" >
                 <FreeAppointment/>
             </Tab>
             <Tab eventKey="priceList" title="Pricelist" >
                 <PriceList/>
+            </Tab>
+            <Tab eventKey="editing" title="Profile" >
+                <Editing />
             </Tab>
         </Tabs>
     );

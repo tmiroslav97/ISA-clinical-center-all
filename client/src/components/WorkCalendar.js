@@ -9,7 +9,7 @@ import { calendarDataSelector } from '../store/nurse/selectors';
 
 const localizer = momentLocalizer(moment)
 
-const WorkCalendar = ({ personnelId }) => {
+const WorkCalendar = ({ personnelId, role }) => {
     const dispatch = useDispatch();
     const calendar = useSelector(calendarDataSelector);
     const [event, setEvent] = useState({
@@ -54,44 +54,48 @@ const WorkCalendar = ({ personnelId }) => {
                     />
                 </Col>
             </Row>
-            <Row>
-                <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <h2 className="border-bottom">Selected event: </h2>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <Table responsive>
-                        <tbody>
-                            <tr>
-                                <th>Title</th>
-                                <td align="right">{event.title}</td>
-                            </tr>
-                            <tr>
-                                <th>Type</th>
-                                <td align="right">{event.type}</td>
-                            </tr>
-                            <tr>
-                                <th>Start date</th>
-                                <td align="right">{event.start}</td>
-                            </tr>
-                            <tr>
-                                <th>End date</th>
-                                <td align="right">{event.end}</td>
-                            </tr>
-                            {
-                                event.type === 'Appointment' &&
+            {role === 'ROLE_DOCTOR' &&
+                <Row>
+                    <Col md={{ span: 10, offset: 1 }} xs={12}>
+                        <h2 className="border-bottom">Selected event: </h2>
+                    </Col>
+                </Row>
+            }
+            {role === 'ROLE_DOCTOR' &&
+                <Row>
+                    <Col md={{ span: 10, offset: 1 }} xs={12}>
+                        <Table responsive>
+                            <tbody>
                                 <tr>
-                                    <th>Start appointment</th>
-                                    <td colSpan="2" align="right">
-                                        <Button>Start</Button>
-                                    </td>
+                                    <th>Title</th>
+                                    <td align="right">{event.title}</td>
                                 </tr>
-                            }
-                        </tbody>
-                    </Table>
-                </Col>
-            </Row>
+                                <tr>
+                                    <th>Type</th>
+                                    <td align="right">{event.type}</td>
+                                </tr>
+                                <tr>
+                                    <th>Start date</th>
+                                    <td align="right">{event.start}</td>
+                                </tr>
+                                <tr>
+                                    <th>End date</th>
+                                    <td align="right">{event.end}</td>
+                                </tr>
+                                {
+                                    event.type === 'Appointment' &&
+                                    <tr>
+                                        <th>Start appointment</th>
+                                        <td colSpan="2" align="right">
+                                            <Button>Start</Button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </Table>
+                    </Col>
+                </Row>
+            }
         </Container>
     );
 }

@@ -15,6 +15,8 @@ public class DoctorConverter {
                 .email(doctor.getEmail())
                 .startTime(doctor.getStartTime())
                 .endTime(doctor.getEndTime())
+                .role(doctor.getRole().name())
+                .clinicId(doctor.getClinic().getId())
                 .build();
     }
 

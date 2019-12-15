@@ -32,11 +32,11 @@ const NurseHomePage = ({ match }) => {
             <Tab eventKey="second" title="Holiday/absence requests">
                 <HolAbsRequest personnelId={data.id} clinicId={data.clinicId} />
             </Tab>
-            <Tab eventKey="third" title="Recepie">
+            <Tab eventKey="third" title="Perscriptions">
                 <RewriteRecepie nurseId={data.id} />
             </Tab>
             <Tab eventKey="fourth" title="WorkCalendar">
-                <WorkCalendar personnelId={data.id} />
+                <WorkCalendar personnelId={data.id} role={data.role} />
             </Tab>
             <Tab eventKey="fifth" title=" User Profile">
                 <UserProfile data={data} />

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { Table, Row, Col, InputGroup, DropdownButton, Dropdown, Container, FormControl } from 'react-bootstrap';
+import { Table, Row, Col, Form, Container, FormControl } from 'react-bootstrap';
 import { patientsSelector } from '../store/nurse/selectors';
 import { fetchPatients, fetchPatientsByClinicId } from '../store/nurse/actions';
 
@@ -24,24 +24,19 @@ const PatientList = ({ clinicId }) => {
                 </Col>
             </Row>
             <Row>
-                <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <InputGroup>
-                        <FormControl
-                            placeholder="Sort patients by"
-                            aria-describedby="basic-addon2"
-                        />
-
-                        <DropdownButton
-                            as={InputGroup.Append}
-                            variant="outline-secondary"
-                            title="Options"
-                            id="input-group-dropdown-2"
-                        >
-                            <Dropdown.Item href="#">UNOIP</Dropdown.Item>
-                            <Dropdown.Item href="#">First Name</Dropdown.Item>
-                            <Dropdown.Item href="#">Last Name</Dropdown.Item>
-                        </DropdownButton>
-                    </InputGroup>
+                <Col md={{ span: 3, offset: 1 }} xs={12}>
+                    <Form>
+                        <Form.Group as={Col}>
+                            <Form.Label>Sort by:</Form.Label>
+                                <Form.Control as="select" >
+                                    <option>Choose...</option>
+                                    <option>Name A-Z</option>
+                                    <option>Name Z-A</option>
+                                    <option>UNOIP A-Z</option>
+                                    <option>UNOIP Z-A</option>
+                            </Form.Control>
+                        </Form.Group>
+                    </Form>
                 </Col>
 
             </Row>

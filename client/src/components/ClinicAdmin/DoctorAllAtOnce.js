@@ -157,7 +157,7 @@ const DoctorAllAtOnce = () => {
                     </Form.Group>
 
                     <Form.Group as={Row} controlId="formGridState">
-                        <Form.Label>Filter data by</Form.Label>
+                        <Form.Label>Filter data by:</Form.Label>
                         <Col>
                             <Form.Control as="select">
                                 <option>Choose...</option>

@@ -15,7 +15,7 @@ INSERT INTO clinic (address, cnt_rating, description, name, sum_rating)
 VALUES ('Safarikova 15', 0, 'Dobra kao bog', 'Klinika 1', 0);
 
 INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
-                  last_password_reset_date, password, role)
+                   last_password_reset_date, password, role)
 VALUES (1, 'Miroslav', 'Tomic', 'tomic.miroslav97@gmail.com', true, false, '2019-11-20 11:00:00',
         '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra',
         'ROLE_CCADMIN');
@@ -27,7 +27,7 @@ INSERT INTO clinic_center_admin (predefined, id)
 VALUES (true, 1);
 
 INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
-                  last_password_reset_date, password, role)
+                   last_password_reset_date, password, role)
 VALUES (2, 'Jovana', 'Lakic', 'jovana.lakic8@gmail.com', true, false, '2019-11-20 11:25:00',
         '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra',
         'ROLE_PATIENT');
@@ -39,7 +39,7 @@ INSERT INTO patient (address, city, country, is_activated, phone_num, unoip, id)
 VALUES ('Ilije Bircanina', 'Vlasenica', 'Bosna i Hercegovina', true, '065987544', '1234567890', 2);
 
 INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
-                  last_password_reset_date, password, role)
+                   last_password_reset_date, password, role)
 VALUES (5, 'Jecko', 'Pecko', 'jecko@gmail.com', true, false, '2019-11-20 11:25:00',
         '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra',
         'ROLE_ADMINC');
@@ -47,9 +47,14 @@ VALUES (5, 'Jecko', 'Pecko', 'jecko@gmail.com', true, false, '2019-11-20 11:25:0
 INSERT INTO user_authority (user_id, authority_id)
 VALUES (5, 2);
 
+INSERT INTO clinic_admin(id, clinic_id)
+VALUES (5, 1);
+INSERT INTO clinic_clinic_admins(clinic_id, clinic_admins_id)
+VALUES (1, 5);
+
 
 INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
-                  last_password_reset_date, password, role)
+                   last_password_reset_date, password, role)
 VALUES (3, 'Nevena', 'Djukin', 'nvndjukin97@gmail.com', true, false, '2019-11-20 11:30:00',
         '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra',
         'ROLE_DOCTOR');
@@ -57,8 +62,8 @@ VALUES (3, 'Nevena', 'Djukin', 'nvndjukin97@gmail.com', true, false, '2019-11-20
 INSERT INTO personnel(id, clinic_id)
 VALUES (3, 1);
 
-INSERT INTO doctor(cnt_rating, sum_rating,start_time,end_time, id)
-VALUES (0, 0,8,16, 3);
+INSERT INTO doctor(cnt_rating, sum_rating, start_time, end_time, id)
+VALUES (0, 0, 8, 16, 3);
 
 INSERT INTO user_authority (user_id, authority_id)
 VALUES (3, 3);
@@ -67,7 +72,7 @@ INSERT INTO user_authority (user_id, authority_id)
 VALUES (3, 4);
 
 INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
-                  last_password_reset_date, password, role)
+                   last_password_reset_date, password, role)
 VALUES (4, 'Nevena', 'Djukin', 'nvn@gmail.com', true, false, '2019-11-20 11:30:00',
         '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra',
         'ROLE_NURSE');

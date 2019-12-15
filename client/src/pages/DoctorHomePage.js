@@ -13,6 +13,7 @@ const DoctorHomePage = ({ match }) => {
     const dispatch = useDispatch();
     const id = match.params.id;
     const data = useSelector(doctorDataSelector);
+    console.log(data);
     useEffect(() => {
         dispatch(
             fetchDoctorData({
@@ -30,7 +31,7 @@ const DoctorHomePage = ({ match }) => {
                 <ApointmentInfo />
             </Tab>
             <Tab eventKey="second" title="WorkCalendar">
-                <WorkCalendar personnelId={data.id}/>
+                <WorkCalendar personnelId={data.id} role={data.role}/>
             </Tab>
             <Tab eventKey="third" title="Holiday/absence requests">
                 <HolAbsRequest />
