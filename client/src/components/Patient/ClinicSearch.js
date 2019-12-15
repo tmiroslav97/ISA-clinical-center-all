@@ -1,18 +1,22 @@
-import React, {useEffect,useState } from 'react';
-import { Container, Row, Col, Table, Form } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+//import useStateWithCallback from 'use-state-with-callback';
+import { Container, Row, Col, Table, Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchClinicsDataPatient,searchClinicsDataPatient } from '../../store/patient/actions';
+import { fetchClinicsDataPatient, searchClinicsDataPatient } from '../../store/patient/actions';
 import { clinicsDataSelector } from '../../store/patient/selectors';
 
 const ClinicSearch = () => {
     const dispatch = useDispatch();
     const clinics = useSelector(clinicsDataSelector);
-    const [name, setName] = useState();
+    const [date, setDate] = useState();
+    const [type, setType] = useState();
+
 
     const handleSearch = () => {
         dispatch(
             searchClinicsDataPatient({
-                name
+                date,
+                type
             })
         );
     };
@@ -27,40 +31,50 @@ const ClinicSearch = () => {
     return (
         <Container>
             <Row>
-                
-                <h2 className="border-bottom">Clinics List</h2>
-                
+                <Col md={{ span: 10, offset: 1 }} xs={12}>
+                    <h2 className="border-bottom">Clinics List</h2>
+                </Col>
             </Row>
             <Row>
-                <Form>
-                    <Form.Group as={Row}>
-                        <Form.Label>Search:</Form.Label>
-                        <Col>
-                            <Form.Control type="text" placeholder="Search clinics by name" onChange = {handleSearch}/>
-                        </Col>
-                    </Form.Group>
-                    <Form.Group as={Row} controlId="formGridState">
-                        <Form.Label>Filter clinics by</Form.Label>
-                        <Col>
+                <Col md={{ span: 3, offset: 1 }} xs={12}>
+                    <Form>
+                        <Form.Group as={Col}>
+                            <Form.Label>Date:</Form.Label>
+                            <Form.Control type="date" />
+                            <Form.Label>Type:</Form.Label>
+                            <Form.Control as="select" onChange = {({ currentTarget }) => {
+                                setType(currentTarget.value);
+                            }} >
+                                <option>Choose...</option>
+                                <option>Tip1</option>
+                                <option>Tip2</option>
+                            </Form.Control>
+                            <Button variant="primary" className="mt-2" onClick={handleSearch}>
+                                Search
+                            </Button>
+                        </Form.Group>
+                        <Form.Group as={Col} >
+                            <Form.Label>Filter clinics by</Form.Label>
+
                             <Form.Control as="select">
                                 <option>Choose...</option>
-                                <option>...</option>
+                                <option>Price</option>
+                                <option>Rating</option>
                             </Form.Control>
-                        </Col>
-                    </Form.Group>
-                    <Form.Group as = {Row} controlId="formGridState">
-                        <Form.Label>Sort clinics by</Form.Label>
-                        <Col>
-                            <Form.Control as = "select">
+                        </Form.Group>
+                        <Form.Group as={Col} >
+                            <Form.Label>Sort clinics by</Form.Label>
+                            <Form.Control as="select">
                                 <option>Choose...</option>
-                                <option>...</option>
+                                <option>Name A-Z</option>
+                                <option>Name Z-A</option>
                             </Form.Control>
-                        </Col>
-                    </Form.Group>
-                </Form>
+                        </Form.Group>
+                    </Form>
+                </Col>
             </Row>
             <Row>
-                
+                <Col md={{ span: 10, offset: 1 }} xs={12}>
                     <Table responsive>
                         <thead>
                             <tr>
@@ -73,6 +87,7 @@ const ClinicSearch = () => {
                         </thead>
                         <tbody>
                             {
+                                /*
                                 clinics.map((clinic, index) => {
                                     return (
                                         <tr key={clinic.id}>
@@ -83,10 +98,11 @@ const ClinicSearch = () => {
                                         </tr>
                                     );
                                 })
+                                */
                             }
                         </tbody>
                     </Table>
-                
+                </Col>
             </Row>
         </Container>
     )

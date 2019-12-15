@@ -10,20 +10,20 @@ import DoctorSearch from './DoctorSearch';
 function PatientHomePage(){
     return(
         <Tabs id="left-tabs-example" defaultActiveKey="first">
-            <Tab eventKey="second" title="History">
-                <History/>
-            </Tab>
-            <Tab eventKey="third" title="Medical Record">
-                <MedicalRecord/>
-            </Tab>
-            <Tab eventKey="fourth" title="Profile">
-                <Profile/>
-            </Tab>
-            <Tab eventKey="fifth" title="Search Clinic">
+            <Tab eventKey="first" title="Search Clinics">
                 <ClinicSearch/>
             </Tab>
-            <Tab eventKey="sixth" title="Search Doctor">
+            <Tab eventKey="second" title="Search Doctors">
                 <DoctorSearch/>
+            </Tab>
+            <Tab eventKey="third" title="History">
+                <History/>
+            </Tab>
+            <Tab eventKey="fourth" title="Medical Record">
+                <MedicalRecord/>
+            </Tab>
+            <Tab eventKey="fifth" title="Profile">
+                <Profile/>
             </Tab>
                     
         </Tabs>
