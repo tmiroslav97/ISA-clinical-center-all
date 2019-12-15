@@ -128,10 +128,13 @@ const DoctorAllAtOnce = () => {
 
         <Container>
             <Row>
-                <h3>Doctors - adding, deliting and searching</h3>
+                <Col md={{ span:10, offset:1  }} xs={12}>
+                    <h3  className="border-bottom">Doctors - adding, deliting and searching</h3>
+                </Col>
             </Row>
 
             <Row>
+                <Col md={{ span:5, offset:1  }} xs={12}>
                 <Form>
 
                     <Form.Group as={Row} >
@@ -165,9 +168,11 @@ const DoctorAllAtOnce = () => {
 
 
                 </Form>
+                </Col>
             </Row>
 
             <Row>
+                <Col md={{ span:10, offset:1  }} xs={12}>
                 <Table responsive>
                     <thead>
                         <tr>
@@ -185,7 +190,7 @@ const DoctorAllAtOnce = () => {
                                         <td>{index + 1}</td>
                                         <td>{doctor.firstName}</td>
                                         <td>{doctor.lastName}</td>
-                                        <td><Button>Delete</Button></td>
+                                        <td><Button variant="danger">Delete</Button></td>
                                         
                                     </tr>
                                 );
@@ -194,6 +199,7 @@ const DoctorAllAtOnce = () => {
                             }
                         </tbody>
                 </Table>
+                </Col>
             </Row>
 
 
