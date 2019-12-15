@@ -25,6 +25,7 @@ const DoctorAllAtOnce = () => {
                 lastName
             })
         );
+        setShow(false);
     };
     const handleSearch = () => {
         dispatch(
@@ -49,11 +50,11 @@ const DoctorAllAtOnce = () => {
 
     const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
+   // const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     return (
         <>
-        <Modal show={show} onHide={handleClose} animation={false}>
+        <Modal show={show} onHide={handleAddDoctor} animation={false}>
             <Modal.Header closeButton>
                 <Modal.Title>Add data:</Modal.Title>
             </Modal.Header>

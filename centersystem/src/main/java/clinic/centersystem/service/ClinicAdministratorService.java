@@ -53,7 +53,7 @@ public class ClinicAdministratorService {
         List<Authority> auths = this.authorityService.findByName("ROLE_DOCTOR");
         doc.setAuthorities(auths);
 
-        Doctor doctor = doctorService.save(doc);
+        Doctor doctor = this.doctorService.save(doc);
 
         return "Successfully added doctor";
     }
