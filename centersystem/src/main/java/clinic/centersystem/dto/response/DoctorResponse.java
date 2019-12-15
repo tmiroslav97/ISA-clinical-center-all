@@ -17,4 +17,6 @@ public class DoctorResponse {
     private String email;
     private String role;
     private Long clinicId;
+    private Integer startTime;
+    private Integer endTime;
 }

@@ -94,15 +94,6 @@ const RoomAllAtOnce = () => {
 
                         <Form.Group as={Row} >
 
-                            <Form.Label>PROBA_TEST:</Form.Label>
-                            <Col>
-                                <Button onClick={handleShow1rEdit}>ProbaJadna </Button>
-                            </Col>
-                        </Form.Group>
-
-
-                        <Form.Group as={Row} >
-
                             <Form.Label>Add new surgery room:</Form.Label>
                             <Col>
                                 <Button onClick={handleShow2rAdd}>Add </Button>
@@ -114,6 +105,9 @@ const RoomAllAtOnce = () => {
                             <Form.Label>Search surgery rooms:</Form.Label>
                             <Col>
                                 <Form.Control type="text" placeholder="Search " />
+                            </Col>
+                            <Col>
+                                <Button>Search</Button>
                             </Col>
                         </Form.Group>
 

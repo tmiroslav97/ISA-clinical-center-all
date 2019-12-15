@@ -97,6 +97,9 @@ const AppointmentTypAllAtOnce = () => {
                             <Col>
                                 <Form.Control type="text" placeholder="Search " />
                             </Col>
+                            <Col>
+                            <Button>Search</Button>
+                        </Col>
                         </Form.Group>
 
                         <Form.Group as={Row} controlId="formGridState1">

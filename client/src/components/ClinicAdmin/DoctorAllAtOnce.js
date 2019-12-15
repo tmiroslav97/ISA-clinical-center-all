@@ -12,6 +12,8 @@ const DoctorAllAtOnce = () => {
     const [password2, setPassword2] = useState();
     const [firstName, setFirstName] = useState();
     const [lastName, setLastName] = useState();
+    const [startTime, setStartTime] = useState();
+    const [endTime, setEndTime] = useState();
     const doctors = useSelector(doctorDataSelector);
 
     const handleAddDoctor = () => {
@@ -22,7 +24,9 @@ const DoctorAllAtOnce = () => {
                 password1,
                 password2,
                 firstName,
-                lastName
+                lastName,
+                startTime,
+                endTime
             })
         );
         setShow(false);
@@ -94,6 +98,20 @@ const DoctorAllAtOnce = () => {
                             <Form.Label>Last name</Form.Label>
                             <Form.Control type="text" placeholder="Last name"   onChange={( { currentTarget } ) => {
                                     setLastName(currentTarget.value);
+                            }}/>
+                        </Form.Group>
+                    </Form.Row>
+                    <Form.Row>
+                        <Form.Group as={Col}>
+                            <Form.Label>Start time</Form.Label>
+                            <Form.Control type="number" placeholder="Start time" onChange={( { currentTarget } ) => {
+                                    setStartTime(currentTarget.value);
+                            }}  />
+                        </Form.Group>
+                        <Form.Group as={Col} >
+                            <Form.Label>End time</Form.Label>
+                            <Form.Control type="number" placeholder="End time"   onChange={( { currentTarget } ) => {
+                                    setEndTime(currentTarget.value);
                             }}/>
                         </Form.Group>
                     </Form.Row>

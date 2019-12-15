@@ -13,4 +13,6 @@ public class DoctorRequestDTO {
     private String lastName;
     private String password1;
     private String password2;
+    private Integer startTime;
+    private Integer endTime;
 }
