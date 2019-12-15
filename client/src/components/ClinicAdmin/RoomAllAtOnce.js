@@ -88,7 +88,7 @@ const RoomAllAtOnce = () => {
             <Container>
                 <Row>
                 <Col md={{ span:10, offset:1  }} xs={12}>
-                    <h3  className="border-bottom">Examination and surgery room - adding, deliting, editing and searching</h3>
+                    <h3  className="border-bottom">Examination and surgery rooms</h3>
                     </Col>
                 </Row>
                 <Row>

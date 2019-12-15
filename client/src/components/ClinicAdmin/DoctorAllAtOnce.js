@@ -129,7 +129,7 @@ const DoctorAllAtOnce = () => {
         <Container>
             <Row>
                 <Col md={{ span:10, offset:1  }} xs={12}>
-                    <h3  className="border-bottom">Doctors - adding, deliting and searching</h3>
+                    <h3  className="border-bottom" >Doctors</h3>
                 </Col>
             </Row>
 
