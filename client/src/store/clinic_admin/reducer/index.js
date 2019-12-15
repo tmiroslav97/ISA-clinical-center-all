@@ -1,6 +1,6 @@
 import {
     //PUT_ROOMS_DATA, 
-    //PUT_APPOINTMENT_TYPE,
+    PUT_APPOINTMENT_TYPES,
     PUT_DOCTOR_DATA
 } from '../constants';
 
@@ -15,7 +15,7 @@ const initialState = {
         role: window.localStorage.getItem('role'),
     },
     rooms: [],
-    typeAppointment: [],
+    appointmentTypes: [],
     doctors: []
 };
 
@@ -27,9 +27,9 @@ const cAdminReducer = (state = initialState, { type, payload }) => {
 };
 
 const actionHandler = {
-    [PUT_DOCTOR_DATA]:computationFunctions.putDoctorsData
+    [PUT_DOCTOR_DATA]:computationFunctions.putDoctorData,
     //[PUT_ROOMS_DATA]: computationFunctions.putRoomsData,
-   // [PUT_APPOINTMENT_TYPE]:computationFunctions.putAppointmentType,
+    [PUT_APPOINTMENT_TYPES]:computationFunctions.putAppointmentTypes
 };
 
 export default cAdminReducer;

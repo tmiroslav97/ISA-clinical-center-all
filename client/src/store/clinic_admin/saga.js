@@ -1,45 +1,54 @@
 import{take, put, call} from 'redux-saga/effects';
 
 import {
-    FETCH_ROOMS_DATA,
-    DELETE_ROOMS_DATA,
-    ADD_ROOMS_DATA,
-    SEARCH_ROOMS_DATA,
-    FETCH_APPOINTMENT_TYPE,
-    EDIT_APPOINTMENT_TYPE,
-    EDIT_ROOMS_DATA,
-    ADD_APPOINTMENT_TYPE,
-    DELETE_APPOINTMENT_TYPE,
-    SEARCH_APPOINTMENT_TYPE,
     ADD_DOCTOR,
-    SEARCH_DOCTOR,
-    FETCH_DOCTOR_DATA,
-    DELETE_DOCTOR,
+    FETCH_DOCTORS_DATA,
+    FETCH_CADMIN_DATA,
+    FETCH_APPOINTMENT_TYPE,
+    ADD_APPOINTMENT_TYPE
 } from './constants';
 
 import AppointmentTypeService from '../../services/AppointmentTypeService';
 import RoomService from '../../services/RoomService';
 import CAdminService from '../../services/CAdminService';
+import DoctorService from '../../services/DoctorService';
 
 import {
     putRoomsData,
-    putAppointmentType,
-    putDoctorsData    
+    putAppointmentTypes,
+    putDoctorData,
+    putCAdminData 
 } from './actions';
 
-export function* fetchDoctorData() {
-    const { payload } = yield take(FETCH_DOCTOR_DATA);
-    const { doctors } = yield call(CAdminService.fetchDoctorData, {});
-    yield put(putDoctorsData(doctors));
+export function* fetchCAdminData() {
+    const { payload } = yield take(FETCH_CADMIN_DATA);
+    const { data } = yield call(CAdminService.fetchCAdminData, payload);
+    yield put(putCAdminData(data));
 }
 
-/*export function* addDoctor() {
+export function* fetchDoctorsData() {
+    const { payload } = yield take(FETCH_DOCTORS_DATA);
+    const { doctors } = yield call(CAdminService.fetchDoctorsData, {});
+    yield put(putDoctorData(doctors));
+}
+
+export function* addDoctor() {
     const { payload } = yield take(ADD_DOCTOR);
     const { data } = yield call(CAdminService.addDoctor, payload);
-    const { doctors } = yield call(CAdminService.fetchDoctorData, {});
-    yield put(putDoctorsData(doctors));
-}*/
-
+    const { doctors } = yield call(CAdminService.fetchDoctorsData, {});
+    yield put(putDoctorData(doctors));
+}
+export function* fetchAppointmentType() {
+    const { payload } = yield take(FETCH_APPOINTMENT_TYPE);
+    const { appointmentTypes } = yield call(AppointmentTypeService.fetchAppointmentType, payload);
+    yield put(putAppointmentTypes(appointmentTypes));
+}
+export function* addAppointmentType() {
+    const { payload } = yield take(ADD_APPOINTMENT_TYPE);
+    const { data } = yield call(CAdminService.addAppointmentType, payload);
+    const { appointmentTypes } = yield call(AppointmentTypeService.fetchAppointmentType, {});
+    yield put(putAppointmentTypes(appointmentTypes));
+}
 /*export function* deleteDoctor() {
     const { payload } = yield take(DELETE_DOCTOR);
     const { data } = yield call(CAdminService.deleteDoctor, payload);

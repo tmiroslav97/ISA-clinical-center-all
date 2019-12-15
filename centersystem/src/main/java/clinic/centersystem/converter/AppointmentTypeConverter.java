@@ -6,15 +6,11 @@ import clinic.centersystem.model.AppointmentType;
 
 public class AppointmentTypeConverter {
     public static AppointmentType toCreateAppointmentTypeFromRequest(AppointmentTypeRequestDTO appointmentTypeRequestDTO){
-        return AppointmentType.appointmentTypeBuilder()
+        return  AppointmentType.builder()
                 .type(appointmentTypeRequestDTO.getType())
                 .build();
     }
-    public static AppointmentTypeResponse toCreateAppointmentTypeFromAppointmentType(AppointmentType appointmentType){
-        return AppointmentTypeResponse.builder()
-                .type(appointmentType.getType())
-                .build();
-    }
+
 
 
 }

@@ -16,11 +16,11 @@ public class ClinicAdminConverter {
                 .lastName(clinicAdminReqDTO.getLastName())
                 .role(RoleEnum.ROLE_ADMINC)
                 .password(clinicAdminReqDTO.getPassword())
-                .enabled(true)
                 .build();
     }
     public static ClinicAdministratoreResponse toCreateClinicAdminResponse(ClinicAdmin clinicAdmin) {
         return ClinicAdministratoreResponse.builder()
+                .id(clinicAdmin.getId())
                 .email(clinicAdmin.getEmail())
                 .firstName(clinicAdmin.getFirstName())
                 .lastName(clinicAdmin.getLastName())

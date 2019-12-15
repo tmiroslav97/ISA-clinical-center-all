@@ -9,6 +9,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class ClinicAdministratoreResponse {
 
+    private Long id;
+
     private String email;
 
     private String firstName;

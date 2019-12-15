@@ -22,6 +22,8 @@ import java.util.Set;
 public class Doctor extends Personnel {
 
 
+
+
     @Column(name = DbColumnConstants.SUMRATING, unique = false, nullable = false)
     private Float sumRating;
 
