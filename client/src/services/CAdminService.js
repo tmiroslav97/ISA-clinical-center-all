@@ -5,9 +5,9 @@ import { format } from 'util';
 const FINALPOINTS = {
     FETCH_ADMINC_DARA: '/adm-cli/%s',
     ADD_DOCTOR: '/adm-cli/add-doctor',
-    //DELETE_DOCTOR: '/adm-cli/delete',
-    FETCH_DOCTOR_DATA: '/adm-cli/fetch'
-    
+    ADD_APPOINTMENT_TYPE: 'adm-cli/add-appointment-type',
+    FETCH_DOCTORS_DATA: '/adm-cli/doctors',
+    FETCH_APPOINTMENT_TYPE: '/adm-cli/appointment-type'
 };
 
 
@@ -19,6 +19,19 @@ class CAdminService extends HttpClient{
         try {
             const { data } = await this.getApiClient().post(
                 FINALPOINTS.ADD_DOCTOR, 
+                payload
+            );
+
+            return { data };
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    };
+
+    addAppointmentType = async payload => {
+        try {
+            const { data } = await this.getApiClient().post(
+                FINALPOINTS.ADD_APPOINTMENT_TYPE,
                 payload
             );
 
@@ -39,7 +52,21 @@ class CAdminService extends HttpClient{
         }
     };
 
-    fetchDoctorData = async payload => {
+    fetchDoctorsData = async payload => {
+        try {
+            const { data } = await this.getApiClient().get(
+                FINALPOINTS.FETCH_DOCTORS_DATA
+            );
+
+            const doctors = data;
+
+            return { doctors };
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    }; 
+
+   /* fetchDoctorData = async payload => {
         try {
             const { data } = await this.getApiClient().get(
                 FINALPOINTS.FETCH_DOCTOR_DATA
@@ -49,7 +76,9 @@ class CAdminService extends HttpClient{
         } catch (error) {
             console.log(error.response.data);
         }
-    };
+    };*/
+
+    
     
 
     /*deleteDoctorsData = async payload => {

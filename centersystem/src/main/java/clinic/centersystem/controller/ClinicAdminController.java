@@ -42,30 +42,31 @@ public class ClinicAdminController {
     public ResponseEntity<String>addDoctor(@RequestBody DoctorRequestDTO doctorRequestDTO){
         return new ResponseEntity<>(this.clinicAdministratorService.addDoctor(doctorRequestDTO), HttpStatus.OK);
     }
-    /*@RequestMapping(method = POST, value = "/add-medicine")
-    public ResponseEntity<String> addMedicine(@RequestBody MedicineRequestDTO medicineRequestDTO) {
-        return new ResponseEntity<>(this.clinicCenterAdminServiceCont.addMedicine(medicineRequestDTO), HttpStatus.OK);
-    }*/
+
 
     @RequestMapping(method = POST, value="/add-appointment-type")
     public ResponseEntity<String>addAppointmentType(@RequestBody AppointmentTypeRequestDTO appointmentTypeRequestDTO){
         return new ResponseEntity<>(this.clinicAdministratorService.addAppointmentType(appointmentTypeRequestDTO), HttpStatus.OK);
     }
-    @RequestMapping(method = GET, value = "/fetch")
-    @PreAuthorize("hasRole('ADMINC')")
+    @RequestMapping(method = GET, value = "/doctors")
     public ResponseEntity<List<DoctorResponse>> getDoctors() {
         return new ResponseEntity<List<DoctorResponse>>(this.clinicAdministratorService.getDoctors(), HttpStatus.OK);
     }
-    @RequestMapping(method = GET, value = "/fetchAppointmentType")
+    /*@RequestMapping(method = GET, value = "/fetch")
+    @PreAuthorize("hasRole('ADMINC')")
+    public ResponseEntity<List<DoctorResponse>> getDoctors() {
+        return new ResponseEntity<List<DoctorResponse>>(this.clinicAdministratorService.getDoctors(), HttpStatus.OK);
+    }*/
+    /*@RequestMapping(method = GET, value = "/fetchAppointmentType")
     @PreAuthorize("hasRole('ADMINC')")
     public ResponseEntity<List<AppointmentTypeResponse>> getAppointmentTypes() {
         return new ResponseEntity<List<AppointmentTypeResponse>>(this.clinicAdministratorService.getAppointmentTypes(), HttpStatus.OK);
-    }
+    }*/
 
 
-    @RequestMapping(method = GET, value = "/searchDoctors")
+    /*@RequestMapping(method = GET, value = "/searchDoctors")
     @PreAuthorize("hasRole('ADMINC')")
     public ResponseEntity<List<Doctor>> searchDoctorByName(@PathVariable String name) {
         return new ResponseEntity<List<Doctor>>(this.doctorServiceCont.searchDoctorByName(name), HttpStatus.OK);
-    }
+    }*/
 }

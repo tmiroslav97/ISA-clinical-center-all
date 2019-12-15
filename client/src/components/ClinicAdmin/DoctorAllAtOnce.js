@@ -2,8 +2,8 @@ import React,{useState, useEffect} from 'react';
 import { Container, Row, Form, Col, Button, Table, Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { doctorDataSelector } from '../../store/clinic_admin/selectors';
-import { addDoctor ,fetchDoctorData} from '../../store/clinic_admin/actions';
-
+import { addDoctor } from '../../store/clinic_admin/actions';
+import {fetchDoctorsData} from '../../store/clinic_admin/actions';
 
 const DoctorAllAtOnce = () => {
     const dispatch = useDispatch();
@@ -41,9 +41,9 @@ const DoctorAllAtOnce = () => {
         );
     };
     useEffect(() => {
-        dispatch(
-            fetchDoctorData({})
-        );
+       /* dispatch(
+            //fetchDoctorsData({})
+        );*/
     }, []);
 
 

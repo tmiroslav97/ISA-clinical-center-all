@@ -9,6 +9,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Set;
 
+@Builder
 @Setter
 @Getter
 @Entity
@@ -25,10 +26,10 @@ public class AppointmentType {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Appointment> appointments;
 
-    @Builder(builderMethodName = "appointmentTypeBuilder")
+    /*@Builder(builderMethodName = "appointmentTypeBuilder")
     public AppointmentType(Long id, String type, Set<Appointment>appointments) {
         this.id=id;
         this.type=type;
         this.appointments=appointments;
-    }
+    }*/
 }

@@ -2,13 +2,16 @@ import{take, put, call} from 'redux-saga/effects';
 
 import {
     ADD_DOCTOR,
-    FETCH_DOCTOR_DATA,
-    FETCH_CADMIN_DATA
+    FETCH_DOCTORS_DATA,
+    FETCH_CADMIN_DATA,
+    FETCH_APPOINTMENT_TYPE,
+    ADD_APPOINTMENT_TYPE
 } from './constants';
 
 import AppointmentTypeService from '../../services/AppointmentTypeService';
 import RoomService from '../../services/RoomService';
 import CAdminService from '../../services/CAdminService';
+import DoctorService from '../../services/DoctorService';
 
 import {
     putRoomsData,
@@ -23,9 +26,9 @@ export function* fetchCAdminData() {
     yield put(putCAdminData(data));
 }
 
-export function* fetchDoctorData() {
-    const { payload } = yield take(FETCH_DOCTOR_DATA);
-    const { doctors } = yield call(CAdminService.fetchDoctorData, {});
+export function* fetchDoctorsData() {
+    const { payload } = yield take(FETCH_DOCTORS_DATA);
+    const { doctors } = yield call(CAdminService.fetchDoctorsData, {});
     yield put(putDoctorData(doctors));
 }
 
@@ -35,7 +38,17 @@ export function* addDoctor() {
     const { doctors } = yield call(CAdminService.fetchDoctorData, {});
     yield put(putDoctorData(doctors));
 }
-
+export function* fetchAppointmentType() {
+    const { payload } = yield take(FETCH_APPOINTMENT_TYPE);
+    const { appointmentTypes } = yield call(AppointmentTypeService.fetchAppointmentType, payload);
+    yield put(putAppointmentType(appointmentTypes));
+}
+export function* addAppointmentType() {
+    const { payload } = yield take(ADD_APPOINTMENT_TYPE);
+    const { data } = yield call(CAdminService.addAppointmentType, payload);
+    const { appointmentTypes } = yield call(AppointmentTypeService.ADD_APPOINTMENT_TYPE, {});
+    yield put(putDoctorData(appointmentTypes));
+}
 /*export function* deleteDoctor() {
     const { payload } = yield take(DELETE_DOCTOR);
     const { data } = yield call(CAdminService.deleteDoctor, payload);

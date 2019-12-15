@@ -1,36 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Container, Col, Row, Form, Button, Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-//import { addAppointmentType, fetchAppointmentType } from '../../store/clinic_admin/actions';
-//import { appointmentTypeSelector } from '../../store/clinic_admin/selectors';
+import { addAppointmentType, fetchAppointmentType } from '../../store/clinic_admin/actions';
+import { appointmentTypeSelector } from '../../store/clinic_admin/selectors';
 
 
 const AppointmentTypAllAtOnce = () => {
     const dispatch = useDispatch();
-    //const[appointmentType, setAppointmentType] = useState();
-
-    //const appointmentTypes = useSelector(appointmentTypeSelector)
+    const[type, setType] = useState();
+    const appointmentTypes = useSelector(appointmentTypeSelector)
 
     const [show1, setShow1] = useState(false);
     const [show2, setShow2] = useState(false);
 
     const handleClose1 = () => setShow1(false);
     const handleShow1 = () => setShow1(true);
-    const handleClose2 = () => setShow2(false);
+    //const handleClose2 = () => setShow2(false);
     const handleShow2 = () => setShow2(true);
 
     const handleAddAppointmentType = () => {
         dispatch(
-            //addAppointmentType({
-              //  appointmentType
-            //})
+            addAppointmentType({
+                type
+            })
         );
+        setShow2(false);
     };
-    /*useEffect(() => {
+    useEffect(() => {
         dispatch(
             fetchAppointmentType({})
         );
-    }, []);*/
+    }, []);
 
     return (
         <>
@@ -53,7 +53,7 @@ const AppointmentTypAllAtOnce = () => {
                 </Modal.Footer>
             </Modal>
 
-            <Modal show={show2} onHide={handleClose2} animation={false}>
+            <Modal show={show2} onHide={handleAddAppointmentType} animation={false}>
                 <Modal.Header closeButton>
                     <Modal.Title>Add data:</Modal.Title>
                 </Modal.Header>
@@ -61,12 +61,14 @@ const AppointmentTypAllAtOnce = () => {
                     <Form>
                         <Form.Group as={Col}>
                             <Form.Label>Type:</Form.Label>
-                            <Form.Control type="text" placeholder="Enter a new type"   />
+                            <Form.Control type="text" placeholder="Enter a new type" onChange={({ currentTarget }) => {
+                                    setType(currentTarget.value);
+                                }}  />
                         </Form.Group>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" >
+                    <Button variant="primary" onClick={handleAddAppointmentType} >
                         Add
           </Button>
                 </Modal.Footer>
@@ -130,10 +132,7 @@ const AppointmentTypAllAtOnce = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {
-                                
-
-                            }
+                           
                         </tbody>
                     </Table>
                 </Row>

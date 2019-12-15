@@ -3,11 +3,11 @@ import { history } from '../index';
 import { format } from 'util';
 
 const FINALPOINTS = {
-    FETCH_APPOINTMENT_TYPE: 'admi-cli/fetchAppointmentType',
-    SEARCH_APPOINTMENT_TYPE: 'admi-cli/appType/search/%s/%s',
-    DELETE_ROOMS_DATA: 'admi-cli/appType/delete/%s',
-    EDIT_APPOINTMENT_TYPE: 'admi-cli/appType/edit/%s',
-    ADD_APPOINTMENT_TYPE: 'adm-cli/add-appointment-type'
+    FETCH_APPOINTMENT_TYPE: '/appointment-type/all',
+    //SEARCH_APPOINTMENT_TYPE: 'admi-cli/appType/search/%s/%s',
+   // DELETE_ROOMS_DATA: 'admi-cli/appType/delete/%s',
+    //EDIT_APPOINTMENT_TYPE: 'admi-cli/appType/edit/%s',
+    //ADD_APPOINTMENT_TYPE: 'adm-cli/add-appointment-type'
 
     
 };
@@ -19,15 +19,15 @@ class AppointmentTypeService extends HttpClient{
                 FINALPOINTS.FETCH_APPOINTMENT_TYPE
             );
 
-            const appointmentType = data;
+            const appointmentTypes = data;
 
-            return { appointmentType };
+            return { appointmentTypes };
         } catch (error) {
             console.log(error.response.data);
         }
     };
 
-    editAppointmentType = async payload => {
+    /*editAppointmentType = async payload => {
         try {
             const { data } = await this.getApiClient().put(
                 FINALPOINTS.EDIT_APPOINTMENT_TYPE
@@ -75,6 +75,6 @@ class AppointmentTypeService extends HttpClient{
         } catch (error) {
             console.log(error.response.data);
         }
-    };
+    };*/
 }
 export default new AppointmentTypeService();

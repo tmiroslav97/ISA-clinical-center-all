@@ -64,6 +64,11 @@ public class ClinicAdministratorService {
 
         return "Successfully added appointment type";
     }
+    /*public String addAppointmentType(AppointmentTypeRequestDTO diagnoseRequestDTO) {
+        AppointmentType appointment = diagnoseService.save(diagnoseRequestDTO);
+
+        return "Successfully added apType;
+    }*/
 
     public String deleteDoctor(Long id) {
         List<Doctor> doctors = this.doctorService.findAll();
@@ -88,14 +93,14 @@ public class ClinicAdministratorService {
         return doctorResponses;
     }
 
-    public List<AppointmentTypeResponse> getAppointmentTypes() {
+    /*public List<AppointmentTypeResponse> getAppointmentTypes() {
         List<AppointmentType> appointmentTypes = this.appointmentTypeService.findAll();
         List<AppointmentTypeResponse> appointmentTypeResponses = new ArrayList<AppointmentTypeResponse>();
         for (AppointmentType appointmentType : appointmentTypes) {
             appointmentTypeResponses.add(AppointmentTypeConverter.toCreateAppointmentTypeFromAppointmentType(appointmentType));
         }
         return appointmentTypeResponses;
-    }
+    }*/
 
 
 }

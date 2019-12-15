@@ -2,9 +2,13 @@ import {
    // DELETE_DOCTOR,
     PUT_CADMIN_DATA,
     FETCH_CADMIN_DATA,
-    FETCH_DOCTOR_DATA,
+    FETCH_DOCTORS_DATA,
     PUT_DOCTOR_DATA,
-    ADD_DOCTOR
+    ADD_DOCTOR,
+    PUT_APPOINTMENT_TYPE,
+    FETCH_APPOINTMENT_TYPE,
+    ADD_APPOINTMENT_TYPE
+
     //SEARCH_DOCTOR,
     //FETCH_ROOMS_DATA,
     //PUT_ROOMS_DATA,
@@ -36,8 +40,8 @@ export const putDoctorData = payload => ({
     payload
 });
 
-export const fetchDoctorData = payload => ({
-    type: FETCH_DOCTOR_DATA,
+export const fetchDoctorsData = payload => ({
+    type: FETCH_DOCTORS_DATA,
     payload
 });
 
@@ -45,6 +49,22 @@ export const addDoctor = payload => ({
     type: ADD_DOCTOR,
     payload
 });
+
+export const fetchAppointmentType = payload => ({
+    type: FETCH_APPOINTMENT_TYPE,
+    payload
+});
+
+export const putAppointmentType = payload => ({
+    type: PUT_APPOINTMENT_TYPE,
+    payload
+});
+
+export const addAppointmentType = payload => ({
+    type: ADD_APPOINTMENT_TYPE,
+    payload
+});
+
 /*
 export const deleteDoctor = payload => ({
     type: DELETE_DOCTOR,
@@ -90,10 +110,7 @@ export const searchRoomsData = payload => ({
 
 
 
-export const fetchAppointmentType = payload => ({
-    type: FETCH_APPOINTMENT_TYPE,
-    payload
-});
+
 
 export const putAppointmentType = payload => ({
     type: PUT_APPOINTMENT_TYPE,
@@ -115,7 +132,4 @@ export const editAppointmentType = payload => ({
     payload
 });
 
-export const addAppointmentType = payload => ({
-    type: ADD_APPOINTMENT_TYPE,
-    payload
-});*/
+*/
