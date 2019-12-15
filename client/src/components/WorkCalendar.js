@@ -36,7 +36,7 @@ const WorkCalendar = ({ personnelId, role }) => {
         <Container>
             <Row>
                 <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <h3 align="center" className="border-bottom">Work calendar - in progress</h3>
+                    <h3 align="center" className="border-bottom">Work calendar</h3>
                 </Col>
 
             </Row>
