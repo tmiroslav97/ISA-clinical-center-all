@@ -25,7 +25,9 @@ jobs:
           path: ~/repo
 
       - run:
-          command: ls -a
+          command: ls
+      - run:
+          command: echo "Miroslav"
 
       - run: mvn validate
 
