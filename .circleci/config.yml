@@ -28,7 +28,7 @@ jobs:
           paths:
             - ~/repo/TheClinicalSystem/centersystem
           keys:
-            - v1-app-cache-{{ checksum "pom.xml" }}
+            - v1-app-cache-{{ checksum "TheClinicalSystem/centersystem/pom.xml" }}
             # fallback to using the latest cache if no exact match is found
 
       - run: mvn dependency:go-offline
@@ -36,7 +36,7 @@ jobs:
       - save_cache:
           paths:
             - ~/.m2
-          key: v1-app-cache-{{ checksum "pom.xml" }}
+          key: v1-app-cache-{{ checksum "TheClinicalSystem/centersystem/pom.xml" }}
 
       - run: mvn clean package
 
