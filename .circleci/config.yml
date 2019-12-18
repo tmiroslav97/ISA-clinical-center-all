@@ -24,10 +24,12 @@ jobs:
       - checkout:
           path: ~/repo
 
-      - run: sudo apt-get install tree
+      - run: sudo add-apt-repository universe
+      - run: sudo apt update
+      - run: sudo apt install tree
 
-      - run: tree
-      
+      - run: tree -a
+
       - run: mvn validate
 
       # Download and cache dependencies
