@@ -24,11 +24,8 @@ jobs:
       - checkout:
           path: ~/repo
 
-      - run: sudo add-apt-repository universe
-      - run: sudo apt update
-      - run: sudo apt install tree
-
-      - run: tree -a
+      - run: cd ..
+      - run: ls -a
 
       - run: mvn validate
 
