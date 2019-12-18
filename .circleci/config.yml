@@ -24,8 +24,11 @@ jobs:
       - checkout:
           path: ~/repo
 
+      - run:
+          command: ls -a
+
       - run: mvn validate
-      
+
       # Download and cache dependencies
       - restore_cache:
           keys:
