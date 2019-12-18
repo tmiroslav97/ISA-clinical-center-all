@@ -24,9 +24,6 @@ jobs:
       - checkout:
           path: ~/repo
 
-      - run: cd ..
-      - run: ls -a
-
       - run: mvn validate
 
       # Download and cache dependencies
