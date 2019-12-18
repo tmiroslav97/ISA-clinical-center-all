@@ -24,10 +24,10 @@ jobs:
       - checkout:
           path: ~/repo
 
-      - run:
-          command: pwd
-      
+      - run: sudo apt-get install tree
 
+      - run: tree
+      
       - run: mvn validate
 
       # Download and cache dependencies
