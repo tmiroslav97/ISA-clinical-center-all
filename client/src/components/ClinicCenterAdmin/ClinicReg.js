@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { clinicsDataSelector } from '../../store/clinic_center_admin/selectors';
-import { regClinic, fetchClinicsData } from '../../store/clinic_center_admin/actions';
+import { clinicsDataSelector } from '../../store/user/selectors';
+import { regClinic, fetchClinicsData } from '../../store/user/actions';
 
 
 const ClinicReg = () => {
@@ -87,6 +87,7 @@ const ClinicReg = () => {
                         </thead>
                         <tbody>
                             {
+                                clinics!=undefined &&
                                 clinics.map((clinic, index) => {
                                     return (
                                         <tr key={clinic.id}>

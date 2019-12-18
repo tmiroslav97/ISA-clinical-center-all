@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Table, Button, Modal, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchRegReqsData, approveRegReq, rejectRegReq } from '../../store/clinic_center_admin/actions';
-import { regReqsDataSelector } from '../../store/clinic_center_admin/selectors';
+import { fetchRegReqsData, approveRegReq, rejectRegReq } from '../../store/user/actions';
+import { regReqsDataSelector } from '../../store/user/selectors';
 
 const RegistrationAproval = () => {
     const [show, setShow] = useState(false);
@@ -10,6 +10,13 @@ const RegistrationAproval = () => {
     const [message, setMessage] = useState('');
     const dispatch = useDispatch();
     const regReqs = useSelector(regReqsDataSelector);
+
+    useEffect(() => {       
+        dispatch(
+            fetchRegReqsData({})
+        );
+    }, []);
+
 
     const handleApprove = (regReqId) => {
         dispatch(
@@ -34,11 +41,7 @@ const RegistrationAproval = () => {
         setReqId(regReqId);
     };
 
-    useEffect(() => {
-        dispatch(
-            fetchRegReqsData({})
-        );
-    }, []);
+    
 
     return (
         <div>
@@ -77,6 +80,7 @@ const RegistrationAproval = () => {
                     </thead>
                     <tbody>
                         {
+                            regReqs!=undefined &&
                             regReqs.map((req, index) => {
                                 return (
                                     <tr key={req.id}>
@@ -97,6 +101,7 @@ const RegistrationAproval = () => {
                                     </tr>
                                 );
                             })
+                            
                         }
                     </tbody>
                 </Table>

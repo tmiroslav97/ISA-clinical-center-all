@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { clinicsDataSelector } from '../../store/clinic_center_admin/selectors';
-import { regClinicAdmin } from '../../store/clinic_center_admin/actions';
+import { clinicsDataSelector } from '../../store/user/selectors';
+import { regClinicAdmin } from '../../store/user/actions';
 
 const ClinicAdminReg = () => {
     const dispatch = useDispatch();
@@ -70,6 +70,7 @@ const ClinicAdminReg = () => {
                                     }} >
                                     <option></option>
                                     {
+                                        clinics!=undefined &&
                                         clinics.map((clinic, index) => {
                                             return (
                                                 <option key={clinic.id} value={clinic.id}>{clinic.name}</option>

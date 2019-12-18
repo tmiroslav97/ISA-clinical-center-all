@@ -26,6 +26,7 @@ import {
 export function* fetchCalendar() {
     const { payload } = yield take(FETCH_CALENDAR);
     const { calendar } = yield call(PersonnelService.fetchCalendar, payload);
+    
     yield put(putCalendarData(calendar));
 }
 

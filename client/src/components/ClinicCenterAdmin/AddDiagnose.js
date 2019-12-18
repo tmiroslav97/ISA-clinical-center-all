@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { addDiagnose, fetchDiagnoseData } from '../../store/clinic_center_admin/actions';
-import { diagnoseDataSelector } from '../../store/clinic_center_admin/selectors';
+import { addDiagnose, fetchDiagnoseData } from '../../store/user/actions';
+import { diagnoseDataSelector } from '../../store/user/selectors';
 
 function AddDiagnose(){
     const dispatch = useDispatch();
@@ -87,6 +87,7 @@ function AddDiagnose(){
                         </thead>
                         <tbody>
                             {
+                                diagnoses!=undefined &&
                                 diagnoses.map((diagnose, index) => {
                                     return (
                                         <tr key={diagnose.id}>

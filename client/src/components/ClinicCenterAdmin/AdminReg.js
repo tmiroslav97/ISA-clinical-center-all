@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { regCCAdmin } from '../../store/clinic_center_admin/actions';
+import { regCCAdmin } from '../../store/user/actions';
 
 const AdminReg = ({ ccaId }) => {
     const dispatch = useDispatch();

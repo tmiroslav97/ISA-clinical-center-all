@@ -17,6 +17,7 @@ class AuthSecurityService extends HttpBaseClient {
             
 
             localStorage.setItem('token', data.token);
+            //brisi dole
             localStorage.setItem('email', data.email);
             localStorage.setItem('role', data.role);
             localStorage.setItem('userID', data.id);

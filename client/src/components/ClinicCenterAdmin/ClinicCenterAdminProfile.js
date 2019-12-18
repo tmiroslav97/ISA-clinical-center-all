@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Tab, Tabs } from 'react-bootstrap';
 import RegistrationAproval from './RegistrationAproval';
-import { fetchCCAdminData } from '../../store/clinic_center_admin/actions';
+import { fetchCCAdminData } from '../../store/user/actions';
 import ClinicReg from './ClinicReg';
 import ClinicAdminReg from './ClinicAdminReg';
 import Items from './Items';
@@ -18,7 +18,8 @@ function ClinicCenterAdminProfile({ match }) {
                 ccAdminId
             })
         );
-    });
+    }, [ccAdminId]);
+
 
     return (
         <Tabs id="left-tabs-doc-home" >
@@ -35,7 +36,7 @@ function ClinicCenterAdminProfile({ match }) {
                 <Items />
             </Tab>
             <Tab eventKey="fourth" title="Add clinic center administrator">
-                <AdminReg ccaId={ccAdminId}/>
+                <AdminReg ccaId={ccAdminId} />
             </Tab>
         </Tabs>
     );
