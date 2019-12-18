@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Table, Button, Modal, Form } from 'react-bootstrap';
+import { Container, Row, Table, Button, Modal, Form, Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchRegReqsData, approveRegReq, rejectRegReq } from '../../store/user/actions';
-import { regReqsDataSelector } from '../../store/user/selectors';
+import { fetchRegReqsData, approveRegReq, rejectRegReq } from '../../store/reg_req/actions';
+import { regReqsDataSelector, isFetchRegReqs } from '../../store/reg_req/selectors';
 
 const RegistrationAproval = () => {
     const [show, setShow] = useState(false);
     const [reqId, setReqId] = useState(0);
     const [message, setMessage] = useState('');
     const dispatch = useDispatch();
+    const isFetchRegReq = useSelector(isFetchRegReqs);
     const regReqs = useSelector(regReqsDataSelector);
 
-    useEffect(() => {       
+    useEffect(() => {
         dispatch(
             fetchRegReqsData({})
         );
@@ -41,7 +42,13 @@ const RegistrationAproval = () => {
         setReqId(regReqId);
     };
 
-    
+    if (!isFetchRegReq) {
+        return <div className="d-flex justify-content-center">
+                    <Spinner animation="border" role="status">
+                        <span className="sr-only">Loading...</span>
+                    </Spinner>
+                </div>;
+    }
 
     return (
         <div>
@@ -57,57 +64,57 @@ const RegistrationAproval = () => {
                     />
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" onClick={() => {handleReject(); handleClose()}}>
+                    <Button variant="primary" onClick={() => { handleReject(); handleClose() }}>
                         Send
                 </Button>
                 </Modal.Footer>
             </Modal>
-        <Container>
-            <Row>
-                <h3>Approve or refuse registration requests</h3>
-            </Row>
-            <Row>
-                <Table responsive>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>E-mail</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Approve</th>
-                            <th>Refuse</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            regReqs!=undefined &&
-                            regReqs.map((req, index) => {
-                                return (
-                                    <tr key={req.id}>
-                                        <td>{index + 1}</td>
-                                        <td>{req.email}</td>
-                                        <td>{req.firstName}</td>
-                                        <td>{req.lastName}</td>
-                                        <td>
-                                            <Button variant="success" onClick={() => handleApprove(req.id)}>
-                                                Approve
+            <Container>
+                <Row>
+                    <h3>Approve or refuse registration requests</h3>
+                </Row>
+                <Row>
+                    <Table responsive>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>E-mail</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Approve</th>
+                                <th>Refuse</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                regReqs != undefined &&
+                                regReqs.map((req, index) => {
+                                    return (
+                                        <tr key={req.id}>
+                                            <td>{index + 1}</td>
+                                            <td>{req.email}</td>
+                                            <td>{req.firstName}</td>
+                                            <td>{req.lastName}</td>
+                                            <td>
+                                                <Button variant="success" onClick={() => handleApprove(req.id)}>
+                                                    Approve
                                                 </Button>
-                                        </td>
-                                        <td>
-                                            <Button variant="danger" type="primary" onClick={() => handleShow(req.id)}>
-                                                Refuse
+                                            </td>
+                                            <td>
+                                                <Button variant="danger" type="primary" onClick={() => handleShow(req.id)}>
+                                                    Refuse
                                                 </Button>
-                                        </td>
-                                    </tr>
-                                );
-                            })
-                            
-                        }
-                    </tbody>
-                </Table>
+                                            </td>
+                                        </tr>
+                                    );
+                                })
 
-            </Row>
-        </Container>
+                            }
+                        </tbody>
+                    </Table>
+
+                </Row>
+            </Container>
         </div >
     );
 }
