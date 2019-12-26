@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Table, Row, Col, Form, Container, FormControl } from 'react-bootstrap';
-import { patientsSelector } from '../store/nurse/selectors';
-import { fetchPatients, fetchPatientsByClinicId } from '../store/nurse/actions';
+import { patientsSelector } from '../store/patients/selectors';
+import { fetchPatientsDataByClinicId } from '../store/patients/actions';
 
 const PatientList = ({ clinicId }) => {
     const dispatch = useDispatch();
@@ -11,7 +11,7 @@ const PatientList = ({ clinicId }) => {
     useEffect(() => {
         if (clinicId != null) {
             dispatch(
-                fetchPatientsByClinicId({clinicId})
+                fetchPatientsDataByClinicId({clinicId})
             );
         }
     }, [clinicId]);

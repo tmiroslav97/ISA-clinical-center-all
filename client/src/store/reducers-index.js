@@ -5,10 +5,12 @@ import cAdminReducer from './clinic_admin/reducer';
 import patientReducer from './patient/reducer';
 import nurseReducer from './nurse/reducer';
 import doctorReducer from './doctor/reducer';
+import patientsReducer from './patients/reducer';
 
 const rootReducer = combineReducers({
     userReducer,
     regReqsReducer,
+    patientsReducer,
     cAdminReducer,
     patientReducer,
     nurseReducer,

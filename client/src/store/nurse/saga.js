@@ -2,22 +2,18 @@ import { take, put, call } from 'redux-saga/effects';
 
 import {
     FETCH_NURSE_DATA,
-    FETCH_PATIENTS,
     ABS_HOL_REQUEST,
     FETCH_ABS_HOL_REQUEST,
     FETCH_RECEPIES,
     REWRITE_RECEPIE,
-    FETCH_PATIENTS_BY_CLINIC_ID,
     FETCH_CALENDAR,
 } from './constants';
 
-import PatientService from '../../services/PatientService';
 import NurseService from '../../services/NurseService';
 import PersonnelService from '../../services/PersonnelService';
 
 import {
     putNurseData,
-    putPatients,
     putAbsHolRequest,
     putRecepiesData,
     putCalendarData
@@ -61,10 +57,4 @@ export function* fetchNurseData() {
     const { payload } = yield take(FETCH_NURSE_DATA);
     const { data } = yield call(NurseService.fetchNurseData, payload);
     yield put(putNurseData(data));
-}
-
-export function* fetchPatients() {
-    const { payload } = yield take(FETCH_PATIENTS_BY_CLINIC_ID);
-    const { patients } = yield call(PatientService.fetchPatientsByClinicId, payload);
-    yield put(putPatients(patients));
 }

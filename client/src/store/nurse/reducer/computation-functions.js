@@ -5,13 +5,6 @@ export function putNurseData(state, payload) {
     };
 }
 
-export function putPatients(state, payload) {
-    return {
-        ...state,
-        patients: payload
-    };
-}
-
 export function putAbsHolRequest(state, payload) {
     return {
         ...state,

@@ -17,7 +17,6 @@ const initialState = {
         role: window.localStorage.getItem('role'),
         clinicId: null
     },
-    patients: [],
     absholrequests: [],
     recepies: [],
     calendar: {
@@ -35,7 +34,6 @@ const nurseReducer = (state = initialState, { type, payload }) => {
 
 const actionHandler = {
     [PUT_NURSE_DATA]: computationFunctions.putNurseData,
-    [PUT_PATIENTS]: computationFunctions.putPatients,
     [PUT_ABS_HOL_REQUEST]: computationFunctions.putAbsHolRequest,
     [PUT_RECEPIES_DATA]: computationFunctions.putRecepiesData,
     [PUT_CALENDAR_DATA]: computationFunctions.putCalendarData

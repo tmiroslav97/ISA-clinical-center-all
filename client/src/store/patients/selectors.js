@@ -1,4 +1,4 @@
 const reducer = 'patientsReducer';
 
-export const regReqsDataSelector = state => state[reducer].patients;
-export const isFetchRegReqs = state => state[reducer].isFetchPatients;
+export const patientsSelector = state => state[reducer].patients;
+export const isFetchPatientsSelector = state => state[reducer].isFetchPatients;
