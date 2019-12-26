@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Entity
-@Table(name = DbTableConstants.APPOINT)
+@Table(name = DbTableConstants.APPOINTMENT)
 public class Appointment {
 
     @Id

@@ -4,7 +4,7 @@ public final class DbTableConstants {
 
     public static final String CLINIC = "clinic";
     public static final String ABSENCEREQUIREMENT = "absenceRequirement";
-    public static final String APPOINT = "appoint";
+    public static final String APPOINTMENT = "appointment";
     public static final String APPOINTMENTTYPE = "appointmentType";
     public static final String APPREQUIREMENT = "appRequirement";
     public static final String AUTHORITY = "authority";
