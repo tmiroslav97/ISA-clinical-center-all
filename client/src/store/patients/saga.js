@@ -2,8 +2,7 @@ import { take, put, call } from 'redux-saga/effects';
 import { history } from '../../index';
 
 import {
-    FETCH_PATIENTS_DATA,
-
+    FETCH_PATIENTS_DATA
 } from './constants';
 
 import PatientService from '../../services/PatientService';
