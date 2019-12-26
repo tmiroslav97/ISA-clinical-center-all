@@ -12,13 +12,6 @@ export function putUserToken(state, payload) {
     };
 }
 
-export function putRegReqsData(state, payload) {
-    return {
-        ...state,
-        reqs: payload
-    };
-}
-
 export function putClinicsData(state, payload) {
     return {
         ...state,
