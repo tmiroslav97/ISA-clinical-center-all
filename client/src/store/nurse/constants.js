@@ -6,5 +6,3 @@ export const FETCH_ABS_HOL_REQUEST = 'fetch_abs_hol_request';
 export const FETCH_RECEPIES = 'fetch_recepies';
 export const PUT_RECEPIES_DATA = 'put_recepies_data';
 export const REWRITE_RECEPIE = 'rewrite_recepie';
-export const FETCH_CALENDAR = 'fetch_calendar';
-export const PUT_CALENDAR_DATA = 'put_calendar_data';

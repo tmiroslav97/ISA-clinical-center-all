@@ -4,14 +4,16 @@ import { Container, Spinner, Row, Col, Table, Button } from 'react-bootstrap';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import moment from 'moment'
-import { fetchCalendar } from '../store/nurse/actions';
-import { calendarDataSelector } from '../store/nurse/selectors';
+import { fetchCalendar } from '../store/calendar/actions';
+import { calendarDataSelector, isFetchCalendarSelector } from '../store/calendar/selectors';
 
 const localizer = momentLocalizer(moment)
 
 const WorkCalendar = ({ personnelId, role }) => {
     const dispatch = useDispatch();
     const calendar = useSelector(calendarDataSelector);
+    const isFetchCalendar = useSelector(isFetchCalendarSelector);
+
     const [event, setEvent] = useState({
         title: '',
         type: '',
@@ -31,6 +33,14 @@ const WorkCalendar = ({ personnelId, role }) => {
     const handleCalendarClick = (calEvent) => {
         setEvent(calEvent);
     };
+
+    if (!isFetchCalendar) {
+        return <div className="d-flex justify-content-center">
+            <Spinner animation="border" role="status">
+                <span className="sr-only">Loading...</span>
+            </Spinner>
+        </div>;
+    } 
 
     return (
         <Container>

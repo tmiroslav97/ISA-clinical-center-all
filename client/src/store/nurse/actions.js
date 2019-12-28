@@ -7,19 +7,7 @@ import {
     FETCH_RECEPIES,
     PUT_RECEPIES_DATA,
     REWRITE_RECEPIE,
-    FETCH_CALENDAR,
-    PUT_CALENDAR_DATA
 } from './constants';
-
-export const fetchCalendar = payload => ({
-    type: FETCH_CALENDAR,
-    payload
-});
-
-export const putCalendarData = payload => ({
-    type: PUT_CALENDAR_DATA,
-    payload
-});
 
 export const fetchRecepies = payload => ({
     type: FETCH_RECEPIES,
