@@ -11,25 +11,18 @@ import {
     REG_CLINIC,
     FETCH_CLINICS_DATA,
     REG_CLINIC_ADMIN,
-    ADD_MEDICINE,
-    FETCH_MEDICINE_DATA,
-    ADD_DIAGNOSE,
-    FETCH_DIAGNOSE_DATA,
     FETCH_NURSE_DATA
 } from './constants';
 
 import authService from '../../services/AuthSecurity';
 import CCAdminService from '../../services/CCAdminService';
-import MedDiagService from '../../services/MedDiagService';
 import NurseService from '../../services/NurseService';
 
 
 import {
     putUserData,
     putUserToken,
-    putClinicsData,
-    putMedicineData,
-    putDiagnoseData
+    putClinicsData
 } from './actions';
 
 
@@ -44,32 +37,6 @@ export function* fetchNurseData() {
 export function* regClinicAdmin() {
     const { payload } = yield take(REG_CLINIC_ADMIN);
     const { data } = yield call(CCAdminService.regClinicAdmin, payload);
-}
-
-export function* fetchDiagnoseData() {
-    const { payload } = yield take(FETCH_DIAGNOSE_DATA);
-    const { diagnoses } = yield call(MedDiagService.fetchDiagnoseData, {});
-    yield put(putDiagnoseData(diagnoses));
-}
-
-export function* addDiagnose() {
-    const { payload } = yield take(ADD_DIAGNOSE);
-    const { data } = yield call(CCAdminService.addDiagnose, payload);
-    const { diagnoses } = yield call(MedDiagService.fetchDiagnoseData, {});
-    yield put(putDiagnoseData(diagnoses));
-}
-
-export function* fetchMedicineData() {
-    const { payload } = yield take(FETCH_MEDICINE_DATA);
-    const { medicines } = yield call(MedDiagService.fetchMedicineData, {});
-    yield put(putMedicineData(medicines));
-}
-
-export function* addMedicine() {
-    const { payload } = yield take(ADD_MEDICINE);
-    const { data } = yield call(CCAdminService.addMedicine, payload);
-    const { medicines } = yield call(MedDiagService.fetchMedicineData, {});
-    yield put(putMedicineData(medicines));
 }
 
 export function* fetchClinicsData() {

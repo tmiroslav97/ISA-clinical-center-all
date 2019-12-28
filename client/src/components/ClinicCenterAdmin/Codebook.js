@@ -1,32 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { addMedicine, fetchMedicineData } from '../../store/user/actions';
-import { medicineDataSelector } from '../../store/user/selectors';
+import { addCode,  } from '../../store/medicine_diagnose/actions';
+import MedicineDiagnose from './MedicineDiagnose';
 
-
-function AddMedicine() {
+function Codebook() {
     const dispatch = useDispatch();
     const [name, setName] = useState();
     const [description, setDescription] = useState();
     const [code, setCode] = useState();
-    const medicines = useSelector(medicineDataSelector);
+    const [type, setType] = useState('Medicine');
 
     const handleAddMedicine = () => {
         dispatch(
             addMedicine({
                 code,
                 name,
-                description
+                description,
+                type
             })
         );
     };
 
-    useEffect(() => {
-        dispatch(
-            fetchMedicineData({})
-        );
-    }, []);
 
     return (
         <Container>
@@ -63,6 +58,18 @@ function AddMedicine() {
                             />
                         </Form.Group>
                         <Form.Group as={Col}>
+                            <div align="center">
+                                <Form.Label>Type of code</Form.Label>
+                            </div>
+                            <Form.Control as="select" onChange={({ currentTarget }) => {
+                                setType(currentTarget.value);
+                            }} >
+                                <option key="0" value="Medicine">Medicine</option>
+                                <option key="1" value="Diagnose">Diagnose</option>
+
+                            </Form.Control>
+                        </Form.Group>
+                        <Form.Group as={Col}>
                             <Button variant="primary" onClick={handleAddMedicine}>
                                 Add medicine
                             </Button>
@@ -70,42 +77,9 @@ function AddMedicine() {
                     </Form>
                 </Col>
             </Row>
-            <Row>
-                <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <h3>Clinics list</h3>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <Table responsive>
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Code</th>
-                                <th>Name</th>
-                                <th>Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                medicines!=undefined &&
-                                medicines.map((medicine, index) => {
-                                    return (
-                                        <tr key={medicine.id}>
-                                            <td>{index + 1}</td>
-                                            <td>{medicine.code}</td>
-                                            <td>{medicine.name}</td>
-                                            <td>{medicine.description}</td>
-                                        </tr>
-                                    );
-                                })
-                            }
-                        </tbody>
-                    </Table>
-                </Col>
-            </Row>
+            <MedicineDiagnose/>
         </Container>
     );
 }
 
-export default AddMedicine;
+export default Codebook;
