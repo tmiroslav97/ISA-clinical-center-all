@@ -6,11 +6,13 @@ import patientReducer from './patient/reducer';
 import nurseReducer from './nurse/reducer';
 import doctorReducer from './doctor/reducer';
 import patientsReducer from './patients/reducer';
+import calendarReducer from './calendar/reducer';
 
 const rootReducer = combineReducers({
     userReducer,
     regReqsReducer,
     patientsReducer,
+    calendarReducer,
     cAdminReducer,
     patientReducer,
     nurseReducer,
