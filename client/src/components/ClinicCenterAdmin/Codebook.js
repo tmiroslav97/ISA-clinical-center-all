@@ -42,7 +42,7 @@ function Codebook() {
                             />
                         </Form.Group>
                         <Form.Group as={Col}>
-                            <Form.Label>Name::</Form.Label>
+                            <Form.Label>Name:</Form.Label>
                             <Form.Control type="text" placeholder="Enter name"
                                 onChange={({ currentTarget }) => {
                                     setName(currentTarget.value);

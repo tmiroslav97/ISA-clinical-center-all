@@ -4,7 +4,7 @@ import { format } from 'util';
 
 const FINALPOINTS = {
     FETCH_CODEBOOK_DATA: '/med-diag/all',
-    ADD_CODE: '/medi-diag/add'
+    ADD_CODE: '/med-diag/add'
 };
 
 class MedDiagService extends HttpClient {
@@ -24,15 +24,14 @@ class MedDiagService extends HttpClient {
     addCode = async payload => {
         try {
             const { data } = await this.getApiClient().post(
-                FINALPOINTS.ADD_MEDICINE,
+                FINALPOINTS.ADD_CODE,
                 payload
             );
-
             return { data };
         } catch (error) {
             console.log(error.response.data);
         }
-    };
+    }
 
 }
 

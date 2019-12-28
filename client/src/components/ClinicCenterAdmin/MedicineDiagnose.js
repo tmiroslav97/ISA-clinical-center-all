@@ -36,7 +36,6 @@ function MedicineDiagnose() {
                     <Table responsive>
                         <thead>
                             <tr>
-                                <th>#</th>
                                 <th>Code</th>
                                 <th>Name</th>
                                 <th>Description</th>
@@ -48,7 +47,6 @@ function MedicineDiagnose() {
                                     if (medicine.type == 'Medicine') {
                                         return (
                                             <tr key={medicine.id}>
-                                                <td>{index + 1}</td>
                                                 <td>{medicine.code}</td>
                                                 <td>{medicine.name}</td>
                                                 <td>{medicine.description}</td>
@@ -71,7 +69,6 @@ function MedicineDiagnose() {
                     <Table responsive>
                         <thead>
                             <tr>
-                                <th>#</th>
                                 <th>Code</th>
                                 <th>Name</th>
                                 <th>Description</th>
@@ -83,7 +80,6 @@ function MedicineDiagnose() {
                                     if (diagnose.type == 'Diagnose') {
                                         return (
                                             <tr key={diagnose.id}>
-                                                <td>{index + 1}</td>
                                                 <td>{diagnose.code}</td>
                                                 <td>{diagnose.name}</td>
                                                 <td>{diagnose.description}</td>
