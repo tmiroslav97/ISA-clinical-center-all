@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useStateWithCallback from 'use-state-with-callback';
-import { Row, Form, Col, Button, Container, Table } from 'react-bootstrap';
+import { Row, Form, Col, Button, Container, Table, Spinner } from 'react-bootstrap';
 import moment from 'moment';
-import { absHolRequest, fetchAbsHolRequest } from '../store/nurse/actions';
-import { absHolRequestDataSelector, nurseDataSelector } from '../store/nurse/selectors';
+import { absHolRequest, fetchAbsHolRequests } from '../store/absence_holiday/actions';
+import { absHolRequestDataSelector, isFetchAbsHolRequestsSelector  } from '../store/absence_holiday/selectors';
 
 const HolAbsRequest = ({ personnelId, clinicId }) => {
     const dispatch = useDispatch();
     const [today, setToday] = useState(moment().format('YYYY-MM-DD'));
     const absholrequests = useSelector(absHolRequestDataSelector);
-    const data = useSelector(nurseDataSelector);
+    const isFetchAbsHolRequests = useSelector(isFetchAbsHolRequestsSelector);
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const [startDateString, setStartDateString] = useStateWithCallback(moment().format('YYYY-MM-DD'), sdString => {
@@ -25,7 +25,7 @@ const HolAbsRequest = ({ personnelId, clinicId }) => {
     useEffect(() => {
         if (personnelId != null) {
             dispatch(
-                fetchAbsHolRequest({
+                fetchAbsHolRequests({
                     personnelId
                 })
             );
@@ -43,6 +43,14 @@ const HolAbsRequest = ({ personnelId, clinicId }) => {
             })
         );
     };
+
+    if (!isFetchAbsHolRequests) {
+        return <div className="d-flex justify-content-center">
+            <Spinner animation="border" role="status">
+                <span className="sr-only">Loading...</span>
+            </Spinner>
+        </div>;
+    } 
 
     return (
         <Container>

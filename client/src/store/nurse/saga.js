@@ -2,18 +2,14 @@ import { take, put, call } from 'redux-saga/effects';
 
 import {
     FETCH_NURSE_DATA,
-    ABS_HOL_REQUEST,
-    FETCH_ABS_HOL_REQUEST,
     FETCH_RECEPIES,
     REWRITE_RECEPIE,
 } from './constants';
 
 import NurseService from '../../services/NurseService';
-import PersonnelService from '../../services/PersonnelService';
 
 import {
     putNurseData,
-    putAbsHolRequest,
     putRecepiesData,
 } from './actions';
 
@@ -25,24 +21,10 @@ export function* rewriteRecepie() {
     yield put(putRecepiesData(recepies));
 }
 
-
 export function* fetchRecepies() {
     const { payload } = yield take(FETCH_RECEPIES);
     const { recepies } = yield call(NurseService.fetchRecepies, payload);
     yield put(putRecepiesData(recepies));
-}
-
-export function* fetchAbsHolRequest() {
-    const { payload } = yield take(FETCH_ABS_HOL_REQUEST);
-    const { absholrequests } = yield call(PersonnelService.fetchAbsHolRequests, payload);
-    yield put(putAbsHolRequest(absholrequests));
-}
-
-export function* absHolRequest() {
-    const { payload } = yield take(ABS_HOL_REQUEST);
-    const { data } = yield call(PersonnelService.absHolRequest, payload);
-    const { absholrequests } = yield call(PersonnelService.fetchAbsHolRequests, payload);
-    yield put(putAbsHolRequest(absholrequests));
 }
 
 export function* fetchNurseData() {

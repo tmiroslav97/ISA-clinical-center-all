@@ -1,9 +1,6 @@
 import {
     FETCH_NURSE_DATA,
     PUT_NURSE_DATA,
-    ABS_HOL_REQUEST,
-    PUT_ABS_HOL_REQUEST,
-    FETCH_ABS_HOL_REQUEST,
     FETCH_RECEPIES,
     PUT_RECEPIES_DATA,
     REWRITE_RECEPIE,
@@ -21,21 +18,6 @@ export const putRecepiesData = payload => ({
 
 export const rewriteRecepie = payload => ({
     type: REWRITE_RECEPIE,
-    payload
-});
-
-export const fetchAbsHolRequest = payload => ({
-    type: FETCH_ABS_HOL_REQUEST,
-    payload
-});
-
-export const absHolRequest = payload => ({
-    type: ABS_HOL_REQUEST,
-    payload
-});
-
-export const putAbsHolRequest = payload => ({
-    type: PUT_ABS_HOL_REQUEST,
     payload
 });
 

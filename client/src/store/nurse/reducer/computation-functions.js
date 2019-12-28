@@ -5,13 +5,6 @@ export function putNurseData(state, payload) {
     };
 }
 
-export function putAbsHolRequest(state, payload) {
-    return {
-        ...state,
-        absholrequests: payload
-    };
-}
-
 export function putRecepiesData(state, payload) {
     return {
         ...state,

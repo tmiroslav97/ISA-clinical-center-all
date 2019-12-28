@@ -1,6 +1,5 @@
 import {
     PUT_NURSE_DATA,
-    PUT_ABS_HOL_REQUEST,
     PUT_RECEPIES_DATA,
 } from '../constants';
 
@@ -15,7 +14,6 @@ const initialState = {
         role: window.localStorage.getItem('role'),
         clinicId: null
     },
-    absholrequests: [],
     recepies: [],
 };
 
@@ -28,8 +26,7 @@ const nurseReducer = (state = initialState, { type, payload }) => {
 
 const actionHandler = {
     [PUT_NURSE_DATA]: computationFunctions.putNurseData,
-    [PUT_ABS_HOL_REQUEST]: computationFunctions.putAbsHolRequest,
-    [PUT_RECEPIES_DATA]: computationFunctions.putRecepiesData,
+    [PUT_RECEPIES_DATA]: computationFunctions.putRecepiesData
 };
 
 export default nurseReducer;
