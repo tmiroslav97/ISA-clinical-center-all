@@ -18,7 +18,7 @@ const medicineDiagnoseReducer = (state = initialState, { type, payload })=>{
 };
 
 const actionHandler = {
-    [PUT_CODEBOOK_DATA]: computationFunctions.putMedicineRecordData,
+    [PUT_CODEBOOK_DATA]: computationFunctions.putCodebookData,
     [PUT_IS_FETCH_CODEBOOK]: computationFunctions.putIsFetchCodebook
   };
 

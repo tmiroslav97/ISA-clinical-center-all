@@ -9,6 +9,7 @@ import * as patientsSaga from './patients/saga';
 import * as calendarSaga from './calendar/saga';
 import * as absenceHolidaySaga from './absence_holiday/saga';
 import * as prescriptionSaga from './prescriptions/saga';
+import * as medicineDiagnoseSaga from './medicine_diagnose/saga';
 
 export default function* rootSaga() {
   let sagas = flatten(
@@ -19,6 +20,7 @@ export default function* rootSaga() {
       calendarSaga, 
       absenceHolidaySaga,
       prescriptionSaga, 
+      medicineDiagnoseSaga,
       patientSaga, 
       cAdminSaga, 
       doctorSaga]

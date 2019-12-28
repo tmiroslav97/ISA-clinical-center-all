@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Table } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addCode,  } from '../../store/medicine_diagnose/actions';
 import MedicineDiagnose from './MedicineDiagnose';
 
@@ -13,7 +13,7 @@ function Codebook() {
 
     const handleAddMedicine = () => {
         dispatch(
-            addMedicine({
+            addCode({
                 code,
                 name,
                 description,
@@ -27,7 +27,7 @@ function Codebook() {
         <Container>
             <Row>
                 <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <h2 className="border-bottom">Add medicine</h2>
+                    <h2 className="border-bottom">Add code</h2>
                 </Col>
             </Row>
             <Row>
@@ -35,7 +35,7 @@ function Codebook() {
                     <Form>
                         <Form.Group as={Col}>
                             <Form.Label>Code:</Form.Label>
-                            <Form.Control type="text" placeholder="Enter medicine code"
+                            <Form.Control type="text" placeholder="Enter code"
                                 onChange={({ currentTarget }) => {
                                     setCode(currentTarget.value);
                                 }}
@@ -43,7 +43,7 @@ function Codebook() {
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Form.Label>Name::</Form.Label>
-                            <Form.Control type="text" placeholder="Enter medicine name"
+                            <Form.Control type="text" placeholder="Enter name"
                                 onChange={({ currentTarget }) => {
                                     setName(currentTarget.value);
                                 }}
@@ -51,7 +51,7 @@ function Codebook() {
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Form.Label>Description:</Form.Label>
-                            <Form.Control type="textarea" placeholder="Enter medicine description"
+                            <Form.Control type="textarea" placeholder="Enter description"
                                 onChange={({ currentTarget }) => {
                                     setDescription(currentTarget.value);
                                 }}
