@@ -91,15 +91,5 @@ public class ClinicCenterAdministratorController {
     public ResponseEntity<String> activateAccount(@PathVariable Long id, HttpServletResponse httpServletResponse) {
         return new ResponseEntity<>(this.clinicCenterAdminServiceCont.activateAccount(id, httpServletResponse), HttpStatus.TEMPORARY_REDIRECT);
     }
-
-    @RequestMapping(method = POST, value = "/add-diagnose")
-    public ResponseEntity<String> addDiagnose(@RequestBody DiagnoseRequestDTO diagnoseRequestDTO) {
-        return new ResponseEntity<>(this.clinicCenterAdminServiceCont.addDiagnose(diagnoseRequestDTO), HttpStatus.OK);
-    }
-
-    @RequestMapping(method = POST, value = "/add-medicine")
-    public ResponseEntity<String> addMedicine(@RequestBody MedicineRequestDTO medicineRequestDTO) {
-        return new ResponseEntity<>(this.clinicCenterAdminServiceCont.addMedicine(medicineRequestDTO), HttpStatus.OK);
-    }
-
+    
 }

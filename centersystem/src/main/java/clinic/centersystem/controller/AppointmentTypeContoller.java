@@ -1,7 +1,6 @@
 package clinic.centersystem.controller;
 
 import clinic.centersystem.model.AppointmentType;
-import clinic.centersystem.model.Medicine;
 import clinic.centersystem.service.AppointmentTypeServiceCont;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

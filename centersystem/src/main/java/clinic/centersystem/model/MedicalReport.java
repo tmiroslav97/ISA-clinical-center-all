@@ -22,8 +22,8 @@ public class MedicalReport {
     @Column(name = DbColumnConstants.DESCRIPTION, unique = false, nullable = false)
     private String description;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Diagnose> diagnoses;
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private Set<Diagnose> diagnoses;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Recepie> recepies;
