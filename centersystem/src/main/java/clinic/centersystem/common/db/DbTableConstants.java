@@ -27,4 +27,5 @@ public final class DbTableConstants {
     public static final String SURGEXROOM = "surgExRoom";
     public static final String USERS = "users";
     public static final String CALENDARITEM = "calendarItem";
+    public static final String CODEBOOK = "codebook";
 }
