@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { Table, Row, Col, Form, Container, FormControl } from 'react-bootstrap';
-import { patientsSelector } from '../store/patients/selectors';
+import { Table, Row, Col, Form, Container, FormControl, Spinner } from 'react-bootstrap';
+import { patientsSelector, isFetchPatientsSelector } from '../store/patients/selectors';
 import { fetchPatientsDataByClinicId } from '../store/patients/actions';
 
 const PatientList = ({ clinicId }) => {
     const dispatch = useDispatch();
     const patients = useSelector(patientsSelector);
+    const isFetchPatients = useSelector(isFetchPatientsSelector);
 
     useEffect(() => {
         if (clinicId != null) {
@@ -15,6 +16,14 @@ const PatientList = ({ clinicId }) => {
             );
         }
     }, [clinicId]);
+
+    if (!isFetchPatients) {
+        return <div className="d-flex justify-content-center">
+            <Spinner animation="border" role="status">
+                <span className="sr-only">Loading...</span>
+            </Spinner>
+        </div>;
+    } 
 
     return (
         <Container>
