@@ -1,5 +1,6 @@
 import {
-    PUT_CALENDAR_DATA
+    PUT_CALENDAR_DATA,
+    PUT_IS_FETCH_CALENDAR
 } from '../constants';
 
 import * as computationFunctions from './computation-functions';
@@ -20,7 +21,8 @@ const calendarReducer = (state = initialState, { type, payload }) => {
 };
 
 const actionHandler = {
-    [PUT_CALENDAR_DATA]: computationFunctions.putCalendarData
+    [PUT_CALENDAR_DATA]: computationFunctions.putCalendarData,
+    [PUT_IS_FETCH_CALENDAR]: computationFunctions.putIsFetchCalendar
 };
 
 export default calendarReducer;

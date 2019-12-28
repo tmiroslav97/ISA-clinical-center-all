@@ -5,7 +5,7 @@ export function putCalendarData(state, payload) {
     };
 }
 
-export function putIsCalendarFetch(state, payload) {
+export function putIsFetchCalendar(state, payload) {
     return {
         ...state,
         isFetchCalendar: payload
