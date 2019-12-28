@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import useStateWithCallback from 'use-state-with-callback';
-import { Row, Form, Col, Button, Container, Table } from 'react-bootstrap';
+import { Row, Form, Col, Button, Container, Table, Spinner } from 'react-bootstrap';
 import moment from 'moment';
-import { absHolRequest, fetchAbsHolRequest } from '../store/nurse/actions';
-import { absHolRequestDataSelector, nurseDataSelector } from '../store/nurse/selectors';
+import HolAbsRequestsTable from './HolAbsRequestsTable';
+import { absHolRequest } from '../store/absence_holiday/actions';
 
 const HolAbsRequest = ({ personnelId, clinicId }) => {
     const dispatch = useDispatch();
     const [today, setToday] = useState(moment().format('YYYY-MM-DD'));
-    const absholrequests = useSelector(absHolRequestDataSelector);
-    const data = useSelector(nurseDataSelector);
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const [startDateString, setStartDateString] = useStateWithCallback(moment().format('YYYY-MM-DD'), sdString => {
@@ -22,15 +20,7 @@ const HolAbsRequest = ({ personnelId, clinicId }) => {
     });
 
     const [type, setType] = useState('Absence');
-    useEffect(() => {
-        if (personnelId != null) {
-            dispatch(
-                fetchAbsHolRequest({
-                    personnelId
-                })
-            );
-        }
-    }, [personnelId]);
+   
 
     const handleSubmit = () => {
         dispatch(
@@ -96,76 +86,7 @@ const HolAbsRequest = ({ personnelId, clinicId }) => {
                     </Form>
                 </Col>
             </Row>
-            <Row>
-                <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <h3>Pending absence and holiday requests</h3>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <Table responsive>
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Type</th>
-                                <th>Start date</th>
-                                <th>End date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                absholrequests.map((req, index) => {
-                                    if (req.status === 'REQUESTED') {
-                                        return (
-                                            <tr key={index}>
-                                                <td>{index + 1}</td>
-                                                <td>{req.type}</td>
-                                                <td>{moment.unix(req.startDate).format('DD/MM/YYYY')}</td>
-                                                <td>{moment.unix(req.endDate).format('DD/MM/YYYY')}</td>
-                                            </tr>
-                                        );
-                                    }
-                                })
-                            }
-                        </tbody>
-                    </Table>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <h3>Approved absence and holiday requests</h3>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <Table responsive>
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Type</th>
-                                <th>Start date</th>
-                                <th>End date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                absholrequests.map((req, index) => {
-                                    if (req.status === 'APPROVED') {
-                                        return (
-                                            <tr key={index}>
-                                                <td>{index + 1}</td>
-                                                <td>{req.type}</td>
-                                                <td>{moment.unix(req.startDate).format('DD/MM/YYYY')}</td>
-                                                <td>{moment.unix(req.endDate).format('DD/MM/YYYY')}</td>
-                                            </tr>
-                                        );
-                                    }
-                                })
-                            }
-                        </tbody>
-                    </Table>
-                </Col>
-            </Row>
+            <HolAbsRequestsTable personnelId={personnelId}/>
         </Container>
     );
 }
