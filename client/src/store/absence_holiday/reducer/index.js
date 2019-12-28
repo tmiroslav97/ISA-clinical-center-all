@@ -18,7 +18,7 @@ const absenceHolidayReducer = (state = initialState, { type, payload }) => {
 };
 
 const actionHandler = {
-    [PUT_ABS_HOL_REQUESTS]: computationFunctions.putAbsHolRequest,
+    [PUT_ABS_HOL_REQUESTS]: computationFunctions.putAbsHolRequests,
     [PUT_IS_FETCH_ABS_HOL_REQUESTS]: computationFunctions.putIsFetchAbsHolRequests
 };
 

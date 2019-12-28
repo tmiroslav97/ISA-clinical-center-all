@@ -8,11 +8,12 @@ import * as patientSaga from './patient/saga';
 import * as doctorSaga from './doctor/saga';
 import * as patientsSaga from './patients/saga';
 import * as calendarSaga from './calendar/saga';
+import * as absenceHolidaySaga from './absence_holiday/saga';
 
 export default function* rootSaga() {
   let sagas = flatten(
     //za sad prazne uglaste tu stavljamo sve "sage"
-    [userSaga, regReqsSaga, patientsSaga, calendarSaga, patientSaga, nurseSaga, cAdminSaga, doctorSaga].map(saga => Object.keys(saga).map(sagaFunctionName => saga[sagaFunctionName]))
+    [userSaga, regReqsSaga, patientsSaga, calendarSaga, absenceHolidaySaga, patientSaga, nurseSaga, cAdminSaga, doctorSaga].map(saga => Object.keys(saga).map(sagaFunctionName => saga[sagaFunctionName]))
   );
 
   yield all(
