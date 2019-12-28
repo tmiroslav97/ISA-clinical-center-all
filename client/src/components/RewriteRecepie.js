@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Form, Col, Button, Container, Table } from 'react-bootstrap';
 import moment from 'moment';
-import { recepiesDataSelector } from '../store/nurse/selectors';
-import { rewriteRecepie, fetchRecepies } from '../store/nurse/actions';
+import { prescriptionsDataSelector } from '../store/prescriptions/selectors';
+import { fetchPrescriptions, rewritePrescription } from '../store/prescriptions/actions';
 
 const RewriteRecepie = ({ nurseId }) => {
     const dispatch = useDispatch();
-    const recepies = useSelector(recepiesDataSelector);
+    const prescriptions = useSelector(prescriptionsDataSelector);
 
     const handleRewrite = (recepieId) => {
         dispatch(
-            rewriteRecepie({
+            rewritePrescription({
                 nurseId,
                 recepieId
             })
@@ -21,7 +21,7 @@ const RewriteRecepie = ({ nurseId }) => {
     useEffect(() => {
         if (nurseId == null) {
             dispatch(
-                fetchRecepies({})
+                fetchPrescriptions({})
             );
         }
     }, [nurseId]);
@@ -30,7 +30,7 @@ const RewriteRecepie = ({ nurseId }) => {
         <Container>
             <Row>
                 <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <h3>Recepies for rewrite (only test for rewrite)</h3>
+                    <h3>Prescriptions for rewrite (only test for rewrite)</h3>
                 </Col>
             </Row>
             <Row>
@@ -44,12 +44,12 @@ const RewriteRecepie = ({ nurseId }) => {
                         </thead>
                         <tbody>
                             {
-                                recepies.map((recepie, index) => {
+                                prescriptions.map((prescription, index) => {
                                     return (
                                         <tr key={index}>
                                             <td>{index + 1}</td>
                                             <td>
-                                                <Button variant="primary" onClick={() => handleRewrite(recepie.id)}>
+                                                <Button variant="primary" onClick={() => handleRewrite(prescription.id)}>
                                                     Rewrite
                                                     </Button>
                                             </td>

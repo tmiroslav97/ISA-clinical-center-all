@@ -18,7 +18,7 @@ export function* rewritePrescription() {
     const { data } = yield call(NurseService.rewriteRecepie, payload);
     put(putIsFetchPrescriptions(false));
     const { recepies } = yield call(NurseService.fetchRecepies, {});
-    yield put(putRecepiesData(recepies));
+    yield put(putPrescriptionsData(recepies));
     put(putIsFetchPrescriptions(true));
 
 }
@@ -27,7 +27,7 @@ export function* fetchPrescriptions() {
     const { payload } = yield take(FETCH_PRESCRIPTIONS);
     put(putIsFetchPrescriptions(false));
     const { recepies } = yield call(NurseService.fetchRecepies, payload);
-    yield put(putRecepiesData(recepies));
+    yield put(putPrescriptionsData(recepies));
     put(putIsFetchPrescriptions(true));
 }
 

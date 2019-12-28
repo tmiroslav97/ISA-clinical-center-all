@@ -1,6 +1,5 @@
 import {
     PUT_NURSE_DATA,
-    PUT_RECEPIES_DATA,
 } from '../constants';
 
 import * as computationFunctions from './computation-functions';
@@ -13,8 +12,7 @@ const initialState = {
         email: '',
         role: window.localStorage.getItem('role'),
         clinicId: null
-    },
-    recepies: [],
+    }
 };
 
 const nurseReducer = (state = initialState, { type, payload }) => {
@@ -25,8 +23,7 @@ const nurseReducer = (state = initialState, { type, payload }) => {
 };
 
 const actionHandler = {
-    [PUT_NURSE_DATA]: computationFunctions.putNurseData,
-    [PUT_RECEPIES_DATA]: computationFunctions.putRecepiesData
+    [PUT_NURSE_DATA]: computationFunctions.putNurseData
 };
 
 export default nurseReducer;
