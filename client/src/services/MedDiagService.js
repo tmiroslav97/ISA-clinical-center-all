@@ -3,37 +3,36 @@ import { history } from '../index';
 import { format } from 'util';
 
 const FINALPOINTS = {
-    FETCH_MEDICINE_DATA: '/medic/all',
-    FETCH_DIAGNOSE_DATA: '/diag/all'
+    FETCH_CODEBOOK_DATA: '/med-diag/all',
+    ADD_CODE: '/med-diag/add'
 };
 
 class MedDiagService extends HttpClient {
-    fetchMedicineData = async payload => {
+    fetchCodebook = async payload => {
         try {
             const { data } = await this.getApiClient().get(
-                FINALPOINTS.FETCH_MEDICINE_DATA
+                FINALPOINTS.FETCH_CODEBOOK_DATA
             );
 
-            const medicines = data;
-            return { medicines };
+            const codebook = data;
+            return { codebook };
         } catch (error) {
             console.log(error.response.data);
         }
     }
 
-    fetchDiagnoseData = async payload => {
+    addCode = async payload => {
         try {
-            const { data } = await this.getApiClient().get(
-                FINALPOINTS.FETCH_DIAGNOSE_DATA
+            const { data } = await this.getApiClient().post(
+                FINALPOINTS.ADD_CODE,
+                payload
             );
-
-            const diagnoses = data;
-
-            return { diagnoses };
+            return { data };
         } catch (error) {
             console.log(error.response.data);
         }
     }
+
 }
 
 export default new MedDiagService();

@@ -11,14 +11,6 @@ import {
     FETCH_CLINICS_DATA,
     PUT_CLINICS_DATA,
     REG_CLINIC_ADMIN,
-    ADD_MEDICINE,
-    PUT_MEDICINE_RECORD,
-    FETCH_MEDICINE_RECORD,
-    ADD_DIAGNOSE,
-    PUT_DIAGNOSE_DATA,
-    PUT_MEDICINE_DATA,
-    FETCH_MEDICINE_DATA,
-    FETCH_DIAGNOSE_DATA,
     FETCH_NURSE_DATA
 } from './constants';
 
@@ -30,46 +22,6 @@ export const fetchNurseData = payload => ({
 });
 
 //clinic center admin actions
-export const fetchMedicineRecord = payload => ({
-    type: FETCH_MEDICINE_RECORD,
-    payload
-});
-
-export const addMedicine = payload => ({
-    type: ADD_MEDICINE,
-    payload
-});
-
-export const fetchMedicineData = payload => ({
-    type: FETCH_MEDICINE_DATA,
-    payload
-});
-
-export const putMedicineData = payload => ({
-    type: PUT_MEDICINE_DATA,
-    payload
-});
-
-export const addDiagnose = payload => ({
-    type: ADD_DIAGNOSE,
-    payload
-});
-
-export const putDiagnoseData = payload => ({
-    type: PUT_DIAGNOSE_DATA,
-    payload
-});
-
-export const fetchDiagnoseData = payload => ({
-    type: FETCH_DIAGNOSE_DATA,
-    payload
-});
-
-export const putMedicineRecord = payload => ({
-    type: PUT_MEDICINE_RECORD,
-    payload
-});
-
 export const regClinicAdmin = payload => ({
     type: REG_CLINIC_ADMIN,
     payload
@@ -90,12 +42,10 @@ export const fetchClinicsData = payload => ({
     payload
 });
 
-
 export const fetchCCAdminData = payload => ({
     type: FETCH_CCADMIN_DATA,
     payload
 });
-
 
 export const regCCAdmin = payload => ({
     type: REG_CC_ADMIN,

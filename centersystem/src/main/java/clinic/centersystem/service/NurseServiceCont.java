@@ -6,8 +6,8 @@ import clinic.centersystem.converter.RecepieConverter;
 import clinic.centersystem.dto.response.NurseResponse;
 import clinic.centersystem.dto.response.RecepieResponse;
 import clinic.centersystem.model.Nurse;
-import clinic.centersystem.model.Recepie;
-import clinic.centersystem.service.intf.RecepieService;
+import clinic.centersystem.model.Prescription;
+import clinic.centersystem.service.intf.PrescriptionService;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class NurseServiceCont {
     private NurseServiceImpl nurseService;
 
     @Autowired
-    private RecepieService recepieService;
+    private PrescriptionService prescriptionService;
 
     public NurseResponse getNurseById(Long id) {
         Nurse nurse = this.nurseService.findById(id);
@@ -33,24 +33,24 @@ public class NurseServiceCont {
 
     public String rewriteRecepie(Long nurseId, Long recepieId) {
         Nurse nurse = nurseService.findById(nurseId);
-        Recepie recepie = recepieService.findById(recepieId);
+        Prescription prescription = prescriptionService.findById(recepieId);
 
-        recepie.setValidate(true);
-        nurse.getRecepies().add(recepie);
-        recepie.setNurse(nurse);
+        prescription.setValidate(true);
+        nurse.getRecepies().add(prescription);
+        prescription.setNurse(nurse);
 
         nurse = nurseService.save(nurse);
-        recepie = recepieService.save(recepie);
+        prescription = prescriptionService.save(prescription);
 
         return "Successfullt rewrite recepie";
     }
 
     public List<RecepieResponse> getRecepies() {
-        List<Recepie> recepies = this.recepieService.findAll();
+        List<Prescription> recepies = this.prescriptionService.findAll();
         List<RecepieResponse> recepieResponses = new ArrayList<RecepieResponse>();
-        for (Recepie recepie : recepies) {
-            if (!recepie.isValidate()) {
-                recepieResponses.add(RecepieConverter.toCreateRecepieResponseFromRecepie(recepie));
+        for (Prescription prescription : recepies) {
+            if (!prescription.isValidate()) {
+                recepieResponses.add(RecepieConverter.toCreateRecepieResponseFromRecepie(prescription));
             }
         }
 

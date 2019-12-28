@@ -18,24 +18,3 @@ export function putClinicsData(state, payload) {
         clinics: payload
     };
 }
-
-export function putMedicineRecordData(state, payload) {
-    return {
-        ...state,
-        medicineRecord: payload
-    };
-}
-
-export function putMedicineData(state, payload) {
-    return {
-        ...state,
-        medicines: payload
-    };
-}
-
-export function putDiagnoseData(state, payload) {
-    return {
-        ...state,
-        diagnoses: payload
-    };
-}

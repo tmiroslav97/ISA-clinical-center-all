@@ -5,8 +5,8 @@ import RegistrationAproval from './RegistrationAproval';
 import { fetchCCAdminData } from '../../store/user/actions';
 import ClinicReg from './ClinicReg';
 import ClinicAdminReg from './ClinicAdminReg';
-import Items from './Items';
 import AdminReg from './AdminReg';
+import Codebook from './Codebook';
 
 
 function ClinicCenterAdminProfile({ match }) {
@@ -32,8 +32,8 @@ function ClinicCenterAdminProfile({ match }) {
             <Tab eventKey="second" title="Register clinic admin">
                 <ClinicAdminReg />
             </Tab>
-            <Tab eventKey="third" title="Record items">
-                <Items />
+            <Tab eventKey="third" title="Codebook">
+                <Codebook />
             </Tab>
             <Tab eventKey="fourth" title="Add clinic center administrator">
                 <AdminReg ccaId={ccAdminId} />
