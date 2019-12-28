@@ -18,9 +18,16 @@ import {
     PUT_DIAGNOSE_DATA,
     PUT_MEDICINE_DATA,
     FETCH_MEDICINE_DATA,
-    FETCH_DIAGNOSE_DATA
+    FETCH_DIAGNOSE_DATA,
+    FETCH_NURSE_DATA
 } from './constants';
 
+
+//nurse actions
+export const fetchNurseData = payload => ({
+    type: FETCH_NURSE_DATA,
+    payload
+});
 
 //clinic center admin actions
 export const fetchMedicineRecord = payload => ({

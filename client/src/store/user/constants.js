@@ -20,3 +20,6 @@ export const FETCH_MEDICINE_RECORD = 'fetch_medicine_record';
 export const ADD_DIAGNOSE = 'add_diagnose';
 export const PUT_DIAGNOSE_DATA = 'put_diagnose_data';
 export const FETCH_DIAGNOSE_DATA = 'fetch_diagnose_data';
+//nurse constants
+export const FETCH_NURSE_DATA = 'fetch_nurse_data';
+

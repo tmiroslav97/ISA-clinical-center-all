@@ -14,12 +14,15 @@ import {
     ADD_MEDICINE,
     FETCH_MEDICINE_DATA,
     ADD_DIAGNOSE,
-    FETCH_DIAGNOSE_DATA
+    FETCH_DIAGNOSE_DATA,
+    FETCH_NURSE_DATA
 } from './constants';
 
 import authService from '../../services/AuthSecurity';
 import CCAdminService from '../../services/CCAdminService';
 import MedDiagService from '../../services/MedDiagService';
+import NurseService from '../../services/NurseService';
+
 
 import {
     putUserData,
@@ -29,8 +32,15 @@ import {
     putDiagnoseData
 } from './actions';
 
-//clinic center admin sagas
 
+//nurse sagas
+export function* fetchNurseData() {
+    const { payload } = yield take(FETCH_NURSE_DATA);
+    const { data } = yield call(NurseService.fetchNurseData, payload);
+    yield put(putUserData(data));
+}
+
+//clinic center admin sagas
 export function* regClinicAdmin() {
     const { payload } = yield take(REG_CLINIC_ADMIN);
     const { data } = yield call(CCAdminService.regClinicAdmin, payload);
