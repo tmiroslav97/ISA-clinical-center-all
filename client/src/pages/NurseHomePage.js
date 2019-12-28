@@ -6,7 +6,7 @@ import UserProfile from '../components/UserProfile';
 import PatientList from '../components/PatientList';
 import WorkCalendar from '../components/WorkCalendar';
 import HolAbsRequest from '../components/HolAbsRequest';
-import RewriteRecepie from '../components/RewriteRecepie';
+import RewritePrescription from '../components/RewritePrescription';
 import { userDataSelector } from '../store/user/selectors';
 
 const NurseHomePage = ({ match }) => {
@@ -31,7 +31,7 @@ const NurseHomePage = ({ match }) => {
                 <HolAbsRequest personnelId={data.id} clinicId={data.clinicId} />
             </Tab>
             <Tab eventKey="third" title="Perscriptions">
-                <RewriteRecepie nurseId={data.id} />
+                <RewritePrescription nurseId={data.id} />
             </Tab>
             <Tab eventKey="fourth" title="WorkCalendar">
                 <WorkCalendar personnelId={data.id} role={data.role} />

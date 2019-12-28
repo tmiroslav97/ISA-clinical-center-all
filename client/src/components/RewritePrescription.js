@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Row, Form, Col, Button, Container, Table } from 'react-bootstrap';
-import moment from 'moment';
+import { Row, Col, Button, Container, Table } from 'react-bootstrap';
 import { prescriptionsDataSelector } from '../store/prescriptions/selectors';
 import { fetchPrescriptions, rewritePrescription } from '../store/prescriptions/actions';
 
-const RewriteRecepie = ({ nurseId }) => {
+const RewritePrescription = ({ nurseId }) => {
     const dispatch = useDispatch();
     const prescriptions = useSelector(prescriptionsDataSelector);
 
@@ -19,7 +18,7 @@ const RewriteRecepie = ({ nurseId }) => {
     };
 
     useEffect(() => {
-        if (nurseId == null) {
+        if (nurseId != null) {
             dispatch(
                 fetchPrescriptions({})
             );
@@ -65,4 +64,4 @@ const RewriteRecepie = ({ nurseId }) => {
     );
 }
 
-export default RewriteRecepie;
+export default RewritePrescription;

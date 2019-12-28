@@ -21,20 +21,20 @@ class NurseService extends HttpClient {
         }
     }
 
-    fetchRecepies = async payload => {
+    fetchPrescriptions = async payload => {
         try {
             const { data } = await this.getApiClient().get(
                 FINALPOINTS.FETCH_RECEPIES
             );
-
-            const recepies = data;
-            return { recepies };
+            
+            const prescriptions = data;
+            return { prescriptions };
         } catch (error) {
             console.log(error.response.data);
         }
     }
 
-    rewriteRecepie = async payload => {
+    reweritePrescription = async payload => {
         try {
             const { data } = await this.getApiClient().post(
                 format(FINALPOINTS.REWRITE_RECEPIE, payload.nurseId, payload.recepieId)

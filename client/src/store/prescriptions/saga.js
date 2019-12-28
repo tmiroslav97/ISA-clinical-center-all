@@ -15,10 +15,10 @@ import {
 
 export function* rewritePrescription() {
     const { payload } = yield take(REWRITE_PRESCRIPTION);
-    const { data } = yield call(NurseService.rewriteRecepie, payload);
+    const { data } = yield call(NurseService.reweritePrescription, payload);
     put(putIsFetchPrescriptions(false));
-    const { recepies } = yield call(NurseService.fetchRecepies, {});
-    yield put(putPrescriptionsData(recepies));
+    const { prescriptions } = yield call(NurseService.fetchPrescriptions, {});
+    yield put(putPrescriptionsData(prescriptions));
     put(putIsFetchPrescriptions(true));
 
 }
@@ -26,8 +26,8 @@ export function* rewritePrescription() {
 export function* fetchPrescriptions() {
     const { payload } = yield take(FETCH_PRESCRIPTIONS);
     put(putIsFetchPrescriptions(false));
-    const { recepies } = yield call(NurseService.fetchRecepies, payload);
-    yield put(putPrescriptionsData(recepies));
+    const { prescriptions } = yield call(NurseService.fetchPrescriptions, payload);
+    yield put(putPrescriptionsData(prescriptions));
     put(putIsFetchPrescriptions(true));
 }
 
