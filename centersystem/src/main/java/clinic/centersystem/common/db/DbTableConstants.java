@@ -20,7 +20,7 @@ public final class DbTableConstants {
     public static final String PERSONNEL = "personnel";
     public static final String PRICELIST = "priceList";
     public static final String PRICELISTITEM = "priceListItem";
-    public static final String RECEPIE = "recepie";
+    public static final String PRESCRIPTION = "prescription";
     public static final String REGISTRATIONREQUIREMENT = "registrationRequirement";
     public static final String SURGERY = "surgery";
     public static final String SURGERYREQUIREMENT = "surgeryRequirement";

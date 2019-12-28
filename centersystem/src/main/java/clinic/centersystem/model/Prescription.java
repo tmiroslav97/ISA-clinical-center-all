@@ -13,8 +13,8 @@ import javax.persistence.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = DbTableConstants.RECEPIE)
-public class Recepie {
+@Table(name = DbTableConstants.PRESCRIPTION)
+public class Prescription {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

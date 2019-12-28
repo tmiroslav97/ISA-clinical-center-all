@@ -26,7 +26,7 @@ public class MedicalReport {
 //    private Set<Diagnose> diagnoses;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Recepie> recepies;
+    private Set<Prescription> recepies;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Appointment appointment;

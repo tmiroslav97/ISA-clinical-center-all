@@ -193,7 +193,7 @@ INSERT INTO clinic_patients(clinic_id, patients_id)
 VALUES (1, 6);
 
 
-INSERT INTO recepie(id, is_validate, nurse_id)
+INSERT INTO prescription(id, is_validate, nurse_id)
 VALUES (1, FALSE, NULL);
 
 INSERT INTO calendar(id, personnel_id)
