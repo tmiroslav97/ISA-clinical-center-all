@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Form, Button, Table } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { clinicsDataSelector } from '../../store/user/selectors';
-import { regClinic, fetchClinicsData } from '../../store/user/actions';
+import React, { useState } from 'react';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { regClinic } from '../../store/clinics/actions';
+import ClinicTable from './ClinicTable';
 
 
 const ClinicReg = () => {
@@ -10,7 +10,6 @@ const ClinicReg = () => {
     const [name, setName] = useState();
     const [description, setDescription] = useState();
     const [address, setAddress] = useState();
-    const clinics = useSelector(clinicsDataSelector);
 
     const handleClinicReg = () => {
         dispatch(
@@ -22,11 +21,7 @@ const ClinicReg = () => {
         );
     };
 
-    useEffect(() => {
-        dispatch(
-            fetchClinicsData({})
-        );
-    }, []);
+   
     return (
         <Container>
             <Row>
@@ -69,40 +64,7 @@ const ClinicReg = () => {
                     </Form>
                 </Col>
             </Row>
-            <Row>
-                <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <h3>Clinics list</h3>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <Table responsive>
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>Address</th>
-                                <th>Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                clinics!=undefined &&
-                                clinics.map((clinic, index) => {
-                                    return (
-                                        <tr key={clinic.id}>
-                                            <td>{index + 1}</td>
-                                            <td>{clinic.name}</td>
-                                            <td>{clinic.address}</td>
-                                            <td>{clinic.description}</td>
-                                        </tr>
-                                    );
-                                })
-                            }
-                        </tbody>
-                    </Table>
-                </Col>
-            </Row>
+            <ClinicTable/>
         </Container>
     );
 }

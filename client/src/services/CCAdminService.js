@@ -10,9 +10,6 @@ const FINALPOINTS = {
     REG_CC_ADMIN: '/cca/reg-cca/%s',
     REG_CLINIC: '/cca/reg-clinic',
     FETCH_CLINICS: '/cca/clinics',
-    REG_CLINIC_ADMIN: '/cca/reg-clinic-admin',
-    ADD_MEDICINE: '/cca/add-medicine',
-    ADD_DIAGNOSE: '/cca/add-diagnose',
 };
 
 class CCAdminService extends HttpClient {
@@ -76,20 +73,6 @@ class CCAdminService extends HttpClient {
         }
     };
 
-    regClinic = async payload => {
-        try {
-            const { data } = await this.getApiClient().post(
-                FINALPOINTS.REG_CLINIC,
-                payload
-            );
-
-            return { data };
-        } catch (error) {
-            console.log(error.response.data);
-            alert(error.response.data);
-        }
-    };
-
     fetchClinicsData = async payload => {
         try {
             const { data } = await this.getApiClient().get(
@@ -99,45 +82,6 @@ class CCAdminService extends HttpClient {
             const clinics = data;
 
             return { clinics };
-        } catch (error) {
-            console.log(error.response.data);
-        }
-    };
-
-    regClinicAdmin = async payload => {
-        try {
-            const { data } = await this.getApiClient().post(
-                FINALPOINTS.REG_CLINIC_ADMIN,
-                payload
-            );
-
-            return { data };
-        } catch (error) {
-            console.log(error.response.data);
-        }
-    };
-
-    addMedicine = async payload => {
-        try {
-            const { data } = await this.getApiClient().post(
-                FINALPOINTS.ADD_MEDICINE,
-                payload
-            );
-
-            return { data };
-        } catch (error) {
-            console.log(error.response.data);
-        }
-    };
-
-    addDiagnose = async payload => {
-        try {
-            const { data } = await this.getApiClient().post(
-                FINALPOINTS.ADD_DIAGNOSE,
-                payload
-            );
-
-            return { data };
         } catch (error) {
             console.log(error.response.data);
         }

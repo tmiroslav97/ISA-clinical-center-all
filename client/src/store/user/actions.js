@@ -7,10 +7,6 @@ import {
     SIGN_OUT,
     FETCH_CCADMIN_DATA,
     REG_CC_ADMIN,
-    REG_CLINIC,
-    FETCH_CLINICS_DATA,
-    PUT_CLINICS_DATA,
-    REG_CLINIC_ADMIN,
     FETCH_NURSE_DATA
 } from './constants';
 
@@ -22,26 +18,6 @@ export const fetchNurseData = payload => ({
 });
 
 //clinic center admin actions
-export const regClinicAdmin = payload => ({
-    type: REG_CLINIC_ADMIN,
-    payload
-});
-
-export const putClinicsData = payload => ({
-    type: PUT_CLINICS_DATA,
-    payload
-});
-
-export const regClinic = payload => ({
-    type: REG_CLINIC,
-    payload
-});
-
-export const fetchClinicsData = payload => ({
-    type: FETCH_CLINICS_DATA,
-    payload
-});
-
 export const fetchCCAdminData = payload => ({
     type: FETCH_CCADMIN_DATA,
     payload

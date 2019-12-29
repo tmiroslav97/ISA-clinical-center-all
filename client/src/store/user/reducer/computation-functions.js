@@ -12,9 +12,3 @@ export function putUserToken(state, payload) {
     };
 }
 
-export function putClinicsData(state, payload) {
-    return {
-        ...state,
-        clinics: payload
-    };
-}

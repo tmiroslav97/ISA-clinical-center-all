@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { clinicsDataSelector } from '../../store/user/selectors';
-import { regClinicAdmin } from '../../store/user/actions';
+import { clinicsDataSelector } from '../../store/clinics/selectors';
+import { regClinicAdmin } from '../../store/clinics/actions';
 
 const ClinicAdminReg = () => {
     const dispatch = useDispatch();
