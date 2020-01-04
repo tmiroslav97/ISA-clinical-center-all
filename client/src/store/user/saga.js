@@ -8,9 +8,6 @@ import {
     SIGN_OUT,
     FETCH_CCADMIN_DATA,
     REG_CC_ADMIN,
-    REG_CLINIC,
-    FETCH_CLINICS_DATA,
-    REG_CLINIC_ADMIN,
     FETCH_NURSE_DATA
 } from './constants';
 
@@ -21,8 +18,7 @@ import NurseService from '../../services/NurseService';
 
 import {
     putUserData,
-    putUserToken,
-    putClinicsData
+    putUserToken
 } from './actions';
 
 
@@ -34,24 +30,6 @@ export function* fetchNurseData() {
 }
 
 //clinic center admin sagas
-export function* regClinicAdmin() {
-    const { payload } = yield take(REG_CLINIC_ADMIN);
-    const { data } = yield call(CCAdminService.regClinicAdmin, payload);
-}
-
-export function* fetchClinicsData() {
-    const { payload } = yield take(FETCH_CLINICS_DATA);
-    const { clinics } = yield call(CCAdminService.fetchClinicsData, payload);
-    yield put(putClinicsData(clinics));
-}
-
-export function* regClinic() {
-    const { payload } = yield take(REG_CLINIC);
-    const { data } = yield call(CCAdminService.regClinic, payload);
-    const { clinics } = yield call(CCAdminService.fetchClinicsData, {});
-    yield put(putClinicsData(clinics))
-}
-
 export function* fetchCCAdminData() {
     const { payload } = yield take(FETCH_CCADMIN_DATA);
     const { data } = yield call(CCAdminService.fetchCCAdminData, payload);
@@ -96,7 +74,7 @@ export function* login() {
         }
 
     } else if (data.role === 'ROLE_DOCTOR') {
-        history.push('/doc/'+data.id);
+        history.push('/doc/' + data.id);
     } else if (data.role === 'ROLE_NURSE') {
         history.push('/nurse-page/' + data.id);
     } else if (data.role === 'ROLE_ADMINC') {
@@ -111,7 +89,7 @@ export function* changePassword() {
     const { data } = yield call(authService.changePassword, payload);
     yield put(putUserData(data));
     yield put(putUserToken(data.token));
-    
+
     if (data.role === 'ROLE_PATIENT') {
         history.push('/pat');
     } else if (data.role === 'ROLE_CCADMIN') {

@@ -1,7 +1,6 @@
 import {
     PUT_USER_DATA,
     PUT_USER_TOKEN,
-    PUT_CLINICS_DATA
 } from '../constants';
 
 import * as computationFunctions from './computation-functions';
@@ -27,8 +26,7 @@ const userReducer = (state = initialState, { type, payload })=>{
 
 const actionHandler = {
     [PUT_USER_DATA]: computationFunctions.putUserData,
-    [PUT_USER_TOKEN]: computationFunctions.putUserToken,
-    [PUT_CLINICS_DATA]: computationFunctions.putClinicsData
+    [PUT_USER_TOKEN]: computationFunctions.putUserToken
   };
 
 export default userReducer;
