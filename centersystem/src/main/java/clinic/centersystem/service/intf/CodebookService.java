@@ -12,4 +12,6 @@ public interface CodebookService {
 
     Codebook save(Codebook codebook);
 
+    void add(Codebook codebook);
+
 }

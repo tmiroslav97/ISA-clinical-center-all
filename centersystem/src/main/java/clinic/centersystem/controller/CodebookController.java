@@ -1,7 +1,7 @@
 package clinic.centersystem.controller;
 
 import clinic.centersystem.model.Codebook;
-import clinic.centersystem.service.CodebookServiceCont;
+import clinic.centersystem.service.CodebookServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,22 +17,22 @@ import java.util.List;
 @RequestMapping(value = "/med-diag", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CodebookController {
 
-    private final CodebookServiceCont codebookServiceCont;
+    private final CodebookServiceImpl codebookService;
 
-    public CodebookController(CodebookServiceCont codebookServiceCont) {
-        this.codebookServiceCont = codebookServiceCont;
+    public CodebookController(CodebookServiceImpl codebookService) {
+        this.codebookService = codebookService;
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity<List<Codebook>> getCodebook() {
-        List<Codebook> codebooks = this.codebookServiceCont.getAll();
+        List<Codebook> codebooks = this.codebookService.findAll();
         return new ResponseEntity<>(codebooks, HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('CCADMIN')")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<String> addCodebook(@RequestBody Codebook codebook) {
-        this.codebookServiceCont.add(codebook);
+        this.codebookService.add(codebook);
         return new ResponseEntity<>("Code successfuly added", HttpStatus.OK);
     }
 }
