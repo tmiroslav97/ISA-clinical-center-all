@@ -10,7 +10,8 @@ import {
     REG_CC_ADMIN,
     FETCH_NURSE_DATA,
     FETCH_CADMIN_DATA,
-    FETCH_PATIENT_DATA
+    FETCH_PATIENT_DATA,
+    FETCH_DOCTOR_DATA
 } from './constants';
 
 import authService from '../../services/AuthSecurity';
@@ -18,6 +19,7 @@ import CCAdminService from '../../services/CCAdminService';
 import NurseService from '../../services/NurseService';
 import CAdminService from '../../services/CAdminService';
 import PatientService from '../../services/PatientService';
+import DoctorService from '../../services/DoctorService';
 
 
 import {
@@ -38,6 +40,13 @@ export function* fetchCAdminData() {
     const { data } = yield call(CAdminService.fetchCAdminData, payload);
     yield put(putUserData(data));
 }
+//doctor sagas
+export function* fetchDoctorData() {
+    const { payload } = yield take(FETCH_DOCTOR_DATA);
+    const { data } = yield call(DoctorService.fetchDoctorData, payload);
+    yield put(putUserData(data));
+}
+
 
 //nurse sagas
 export function* fetchNurseData() {
