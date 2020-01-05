@@ -2,12 +2,10 @@ package clinic.centersystem.controller;
 
 import clinic.centersystem.dto.request.AppointmentTypeRequestDTO;
 import clinic.centersystem.dto.request.DoctorRequestDTO;
-import clinic.centersystem.dto.response.AppointmentTypeResponse;
 import clinic.centersystem.dto.response.ClinicAdministratoreResponse;
 import clinic.centersystem.dto.response.DoctorResponse;
-import clinic.centersystem.model.Doctor;
 import clinic.centersystem.service.ClinicAdministratorService;
-import clinic.centersystem.service.DoctorServiceCont;
+import clinic.centersystem.service.DoctorServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -25,11 +23,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @RequestMapping(value = "/adm-cli", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ClinicAdminController {
     private final ClinicAdministratorService clinicAdministratorService;
-    private final DoctorServiceCont doctorServiceCont;
 
-    public ClinicAdminController(ClinicAdministratorService clinicAdministratorService, DoctorServiceCont doctorServiceCont) {
+
+    public ClinicAdminController(ClinicAdministratorService clinicAdministratorService) {
         this.clinicAdministratorService = clinicAdministratorService;
-        this.doctorServiceCont = doctorServiceCont;
+
     }
     @RequestMapping(method = GET, value = "/{admCliId}")
     @PreAuthorize("hasRole('ADMINC')")

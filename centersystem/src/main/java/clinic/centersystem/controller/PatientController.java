@@ -5,7 +5,6 @@ import clinic.centersystem.dto.response.DoctorResponse;
 import clinic.centersystem.dto.response.PatientResponse;
 import clinic.centersystem.model.Clinic;
 import clinic.centersystem.model.Doctor;
-import clinic.centersystem.service.DoctorServiceCont;
 import clinic.centersystem.service.PatientServiceCont;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
