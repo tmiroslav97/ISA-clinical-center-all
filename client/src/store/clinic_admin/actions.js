@@ -5,10 +5,6 @@ import {
     FETCH_DOCTORS_DATA,
     PUT_DOCTOR_DATA,
     ADD_DOCTOR,
-    PUT_APPOINTMENT_TYPES,
-    FETCH_APPOINTMENT_TYPE,
-    ADD_APPOINTMENT_TYPE
-
     //SEARCH_DOCTOR,
     //FETCH_ROOMS_DATA,
     //PUT_ROOMS_DATA,
@@ -47,21 +43,6 @@ export const fetchDoctorsData = payload => ({
 
 export const addDoctor = payload => ({
     type: ADD_DOCTOR,
-    payload
-});
-
-export const fetchAppointmentType = payload => ({
-    type: FETCH_APPOINTMENT_TYPE,
-    payload
-});
-
-export const putAppointmentTypes = payload => ({
-    type: PUT_APPOINTMENT_TYPES,
-    payload
-});
-
-export const addAppointmentType = payload => ({
-    type: ADD_APPOINTMENT_TYPE,
     payload
 });
 

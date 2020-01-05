@@ -10,6 +10,7 @@ import absenceHolidayReducer from './absence_holiday/reducer';
 import prescriptionReducer from './prescriptions/reducer';
 import medicineDiagnoseReducer from './medicine_diagnose/reducer';
 import clinicReducer from './clinics/reducer';
+import appointmentReducer from './appointments/reducer';
 
 const rootReducer = combineReducers({
     userReducer,
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
     prescriptionReducer,
     medicineDiagnoseReducer,
     clinicReducer,
+    appointmentReducer,
     cAdminReducer,
     patientReducer,
     doctorReducer

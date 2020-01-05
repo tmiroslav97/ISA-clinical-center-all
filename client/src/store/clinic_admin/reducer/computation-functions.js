@@ -11,10 +11,5 @@ export function putDoctorData(state, payload) {
     };
 }
 
-export function putAppointmentTypes(state, payload) {
-    return {
-        ...state,
-        appointmentTypes: payload
-    };
-}
+
 
