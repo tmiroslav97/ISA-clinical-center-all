@@ -10,22 +10,10 @@ import DoctorService from '../../services/DoctorService';
 
 import {
     putRoomsData,
-    putDoctorData,
 } from './actions';
 
 
-export function* fetchDoctorsData() {
-    const { payload } = yield take(FETCH_DOCTORS_DATA);
-    const { doctors } = yield call(CAdminService.fetchDoctorsData, {});
-    yield put(putDoctorData(doctors));
-}
 
-export function* addDoctor() {
-    const { payload } = yield take(ADD_DOCTOR);
-    const { data } = yield call(CAdminService.addDoctor, payload);
-    const { doctors } = yield call(CAdminService.fetchDoctorsData, {});
-    yield put(putDoctorData(doctors));
-}
 
 /*export function* deleteDoctor() {
     const { payload } = yield take(DELETE_DOCTOR);

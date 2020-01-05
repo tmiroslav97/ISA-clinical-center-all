@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Table, Button, Col, Form, Modal } from 'react-bootstrap';
+import { Container, Row, Table, Button, Col, Form, Modal, Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { roomsDataSelector } from '../../store/clinic_admin/selectors'
 import { fetchRoomsData } from '../../store/clinic_admin/actions';
 
 const RoomAllAtOnce = () => {
     const dispatch = useDispatch();
-    const rooms = useSelector(roomsDataSelector);
+    //const rooms = useSelector(roomsDataSelector);
+    const rooms = [];
 
     const handleDelitingRooms = () => {
         dispatch(
@@ -29,6 +30,14 @@ const RoomAllAtOnce = () => {
     const handleShow1rEdit = () => setShow1rEdit(true);
     const handleClose2rAdd = () => setShow2rAdd(false);
     const handleShow2rAdd = () => setShow2rAdd(true);
+
+    if (true) {
+        return <div className="d-flex justify-content-center">
+            <Spinner animation="border" role="status">
+                <span className="sr-only">Loading...</span>
+            </Spinner>
+        </div>;
+    }
 
     return (
         <>

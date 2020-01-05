@@ -1,8 +1,5 @@
 import {
    // DELETE_DOCTOR,
-    FETCH_DOCTORS_DATA,
-    PUT_DOCTOR_DATA,
-    ADD_DOCTOR,
     //SEARCH_DOCTOR,
     //FETCH_ROOMS_DATA,
     //PUT_ROOMS_DATA,
@@ -18,22 +15,6 @@ import {
     //ADD_APPOINTMENT_TYPE,
     
 } from './constants';
-
-
-export const putDoctorData = payload => ({
-    type: PUT_DOCTOR_DATA,
-    payload
-});
-
-export const fetchDoctorsData = payload => ({
-    type: FETCH_DOCTORS_DATA,
-    payload
-});
-
-export const addDoctor = payload => ({
-    type: ADD_DOCTOR,
-    payload
-});
 
 /*
 export const deleteDoctor = payload => ({

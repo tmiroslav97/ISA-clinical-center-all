@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
 import userReducer from './user/reducer';
 import regReqsReducer from './reg_req/reducer';
-import cAdminReducer from './clinic_admin/reducer';
 import patientReducer from './patient/reducer';
 import doctorReducer from './doctor/reducer';
 import patientsReducer from './patients/reducer';
@@ -11,6 +10,7 @@ import prescriptionReducer from './prescriptions/reducer';
 import medicineDiagnoseReducer from './medicine_diagnose/reducer';
 import clinicReducer from './clinics/reducer';
 import appointmentReducer from './appointments/reducer';
+import doctorsReducer from './doctors/reducer';
 
 const rootReducer = combineReducers({
     userReducer,
@@ -22,7 +22,7 @@ const rootReducer = combineReducers({
     medicineDiagnoseReducer,
     clinicReducer,
     appointmentReducer,
-    cAdminReducer,
+    doctorsReducer,
     patientReducer,
     doctorReducer
 });

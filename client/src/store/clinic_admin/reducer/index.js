@@ -1,20 +1,11 @@
 import {
     //PUT_ROOMS_DATA, 
-    PUT_DOCTOR_DATA
 } from '../constants';
 
 import * as computationFunctions from './computation-functions';
 
 const initialState = {
-    data: {
-        id: window.localStorage.getItem('id'),
-        firstName: '',
-        lastName: '',
-        email: '',
-        role: window.localStorage.getItem('role'),
-    },
-    rooms: [],
-    doctors: []
+    rooms: []
 };
 
 const cAdminReducer = (state = initialState, { type, payload }) => {
@@ -25,7 +16,6 @@ const cAdminReducer = (state = initialState, { type, payload }) => {
 };
 
 const actionHandler = {
-    [PUT_DOCTOR_DATA]:computationFunctions.putDoctorData,
     //[PUT_ROOMS_DATA]: computationFunctions.putRoomsData,
 };
 
