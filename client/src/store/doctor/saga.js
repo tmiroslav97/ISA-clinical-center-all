@@ -1,7 +1,7 @@
 import { take, put, call } from 'redux-saga/effects';
 
 import {
-    FETCH_DOCTOR_DATA,
+    
     FETCH_DOCTOR_CALENDAR
 } from './constants';
 
@@ -19,8 +19,3 @@ export function* fetchDoctorCalendar(){
     yield put(putDoctorCalendarData(calendar));
 }
 
-export function* fetchDoctorData() {
-    const { payload } = yield take(FETCH_DOCTOR_DATA);
-    const { data } = yield call(DoctorService.fetchDoctorData, payload);
-    yield put(putDoctorData(data));
-}
