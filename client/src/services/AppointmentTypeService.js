@@ -4,15 +4,14 @@ import { format } from 'util';
 
 const FINALPOINTS = {
     FETCH_APPOINTMENT_TYPE: '/appointment-type/all',
+    ADD_APPOINTMENT_TYPE: '/adm-cli/add-appointment-type',
     //SEARCH_APPOINTMENT_TYPE: 'admi-cli/appType/search/%s/%s',
-   // DELETE_ROOMS_DATA: 'admi-cli/appType/delete/%s',
+    // DELETE_ROOMS_DATA: 'admi-cli/appType/delete/%s',
     //EDIT_APPOINTMENT_TYPE: 'admi-cli/appType/edit/%s',
     //ADD_APPOINTMENT_TYPE: 'adm-cli/add-appointment-type'
-
-    
 };
 
-class AppointmentTypeService extends HttpClient{
+class AppointmentTypeService extends HttpClient {
     fetchAppointmentType = async payload => {
         try {
             const { data } = await this.getApiClient().get(
@@ -22,6 +21,19 @@ class AppointmentTypeService extends HttpClient{
             const appointmentTypes = data;
 
             return { appointmentTypes };
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    };
+
+    addAppointmentType = async payload => {
+        try {
+            const { data } = await this.getApiClient().post(
+                FINALPOINTS.ADD_APPOINTMENT_TYPE,
+                payload
+            );
+
+            return { data };
         } catch (error) {
             console.log(error.response.data);
         }

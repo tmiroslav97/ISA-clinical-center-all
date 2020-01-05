@@ -5,7 +5,6 @@ import { format } from 'util';
 const FINALPOINTS = {
     FETCH_ADMINC_DARA: '/adm-cli/%s',
     ADD_DOCTOR: '/adm-cli/add-doctor',
-    ADD_APPOINTMENT_TYPE: 'adm-cli/add-appointment-type',
     FETCH_DOCTORS_DATA: '/adm-cli/doctors'
 };
 
@@ -27,18 +26,7 @@ class CAdminService extends HttpClient{
         }
     };
 
-    addAppointmentType = async payload => {
-        try {
-            const { data } = await this.getApiClient().post(
-                FINALPOINTS.ADD_APPOINTMENT_TYPE,
-                payload
-            );
-
-            return { data };
-        } catch (error) {
-            console.log(error.response.data);
-        }
-    };
+    
     
     fetchCAdminData = async payload => {
         try {

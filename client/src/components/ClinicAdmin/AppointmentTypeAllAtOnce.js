@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Container, Col, Row, Form, Button, Modal } from 'react-bootstrap';
+import { Table, Container, Col, Row, Form, Button, Modal, Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { addAppointmentType, fetchAppointmentType } from '../../store/clinic_admin/actions';
-import { appointmentTypeSelector } from '../../store/clinic_admin/selectors';
+import { addAppointmentType, fetchAppointmentType } from '../../store/appointments/actions';
+import { appointmentTypeSelector, isFetchAppointmentTypeSelector } from '../../store/appointments/selectors';
 
 
 const AppointmentTypAllAtOnce = () => {
     const dispatch = useDispatch();
     const [type, setType] = useState();
     const appointmentTypes = useSelector(appointmentTypeSelector);
+    const isFetchAppointmentTypes = useSelector(isFetchAppointmentTypeSelector);
 
     const [show1, setShow1] = useState(false);
     const [show2, setShow2] = useState(false);
@@ -26,12 +27,20 @@ const AppointmentTypAllAtOnce = () => {
         );
         setShow2(false);
     };
+
     useEffect(() => {
         dispatch(
             fetchAppointmentType({})
         );
     }, []);
 
+    if (!isFetchAppointmentTypes) {
+        return <div className="d-flex justify-content-center">
+            <Spinner animation="border" role="status">
+                <span className="sr-only">Loading...</span>
+            </Spinner>
+        </div>;
+    }
 
     return (
         <>
@@ -79,72 +88,72 @@ const AppointmentTypAllAtOnce = () => {
 
             <Container>
                 <Row >
-                    <Col md={{ span:10, offset:1  }} xs={12}>
+                    <Col md={{ span: 10, offset: 1 }} xs={12}>
                         <h3 className="border-bottom">Appointment types</h3>
                     </Col>
                 </Row>
                 <Row >
-                    <Col md={{ span:5, offset:1  }} xs={12}>
-                    <Form>
-                        <Form.Group as={Row} >
+                    <Col md={{ span: 5, offset: 1 }} xs={12}>
+                        <Form>
+                            <Form.Group as={Row} >
 
-                            <Form.Label>Add new appointment type:</Form.Label>
-                            <Col>
-                                <Button onClick={handleShow2} >Add </Button>
-                            </Col>
-                        </Form.Group>
+                                <Form.Label>Add new appointment type:</Form.Label>
+                                <Col>
+                                    <Button onClick={handleShow2} >Add </Button>
+                                </Col>
+                            </Form.Group>
 
-                        <Form.Group as={Row} >
+                            <Form.Group as={Row} >
 
-                            <Form.Label>Search appointment types:</Form.Label>
-                            <Col>
-                                <Form.Control type="text" placeholder="Search " />
-                            </Col>
-                            <Col>
-                            <Button>Search</Button>
-                        </Col>
-                        </Form.Group>
+                                <Form.Label>Search appointment types:</Form.Label>
+                                <Col>
+                                    <Form.Control type="text" placeholder="Search " />
+                                </Col>
+                                <Col>
+                                    <Button>Search</Button>
+                                </Col>
+                            </Form.Group>
 
-                        <Form.Group as={Row} controlId="formGridState1">
-                            <Form.Label>Filter data by</Form.Label>
-                            <Col>
-                                <Form.Control as="select">
-                                    <option>Choose...</option>
-                                    <option>...</option>
-                                </Form.Control>
-                            </Col>
-                        </Form.Group>
+                            <Form.Group as={Row} controlId="formGridState1">
+                                <Form.Label>Filter data by</Form.Label>
+                                <Col>
+                                    <Form.Control as="select">
+                                        <option>Choose...</option>
+                                        <option>...</option>
+                                    </Form.Control>
+                                </Col>
+                            </Form.Group>
 
 
-                    </Form>
+                        </Form>
                     </Col>
                 </Row>
                 <Row  >
-                    <Col md={{ span:10, offset:1  }} xs={12}>
-                    <Table responsive>
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Type</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                appointmentTypes.map((appointment, index) => {
-                                    return (
-                                        <tr key={appointment.id}>
-                                            <td>{index + 1}</td>
-                                            <td>{appointment.type}</td>
-                                            <td><Button variant="success">Edit</Button></td>
-                                            <td><Button variant="danger">Delete</Button></td>
-                                        </tr>
-                                    );
-                                })
-                            }
-                        </tbody>
-                    </Table>
+                    <Col md={{ span: 10, offset: 1 }} xs={12}>
+                        <Table responsive>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Type</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    appointmentTypes.map((appointment, index) => {
+                                        return (
+                                            <tr key={appointment.id}>
+                                                <td>{index + 1}</td>
+                                                <td>{appointment.type}</td>
+                                                <td><Button variant="success">Edit</Button></td>
+                                                <td><Button variant="danger">Delete</Button></td>
+                                            </tr>
+                                        );
+                                    })
+                                }
+                            </tbody>
+                        </Table>
                     </Col>
                 </Row>
             </Container >
