@@ -57,13 +57,13 @@ public class NurseServiceImpl implements NurseService {
         Prescription prescription = prescriptionService.findById(recepieId);
 
         prescription.setValidate(true);
-        nurse.getRecepies().add(prescription);
+        nurse.getPrescriptions().add(prescription);
         prescription.setNurse(nurse);
 
         nurse = this.save(nurse);
         prescription = prescriptionService.save(prescription);
 
-        return "Successfullt rewrite recepie";
+        return "Successfully rewrite recepie";
     }
 
     @Override
