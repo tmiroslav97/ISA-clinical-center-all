@@ -17,7 +17,6 @@ export function* fetchDoctorsData() {
     const { payload } = yield take(FETCH_DOCTORS_DATA);
     yield put(putIsFetchDoctors(false));
     const { doctors } = yield call(DoctorService.fetchDoctorsData, {});
-    console.log(doctors);
     yield put(putDoctorsData(doctors));
     yield put(putIsFetchDoctors(true));
 }

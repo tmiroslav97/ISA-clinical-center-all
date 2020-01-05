@@ -11,6 +11,7 @@ import medicineDiagnoseReducer from './medicine_diagnose/reducer';
 import clinicReducer from './clinics/reducer';
 import appointmentReducer from './appointments/reducer';
 import doctorsReducer from './doctors/reducer';
+import roomsReducer from './rooms/reducer';
 
 const rootReducer = combineReducers({
     userReducer,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
     clinicReducer,
     appointmentReducer,
     doctorsReducer,
+    roomsReducer,
     patientReducer,
     doctorReducer
 });
