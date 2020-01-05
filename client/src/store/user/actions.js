@@ -8,10 +8,17 @@ import {
     FETCH_CCADMIN_DATA,
     REG_CC_ADMIN,
     FETCH_NURSE_DATA,
-    FETCH_CADMIN_DATA
+    FETCH_CADMIN_DATA,
+    FETCH_PATIENT_DATA
 } from './constants';
 
-//cadmin sagas
+//patient actions
+export const fetchPatientData = payload => ({
+    type: FETCH_PATIENT_DATA,
+    payload
+});
+
+//cadmin actions
 export const fetchCAdminData = payload => ({
     type: FETCH_CADMIN_DATA,
     payload

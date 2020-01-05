@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
 import userReducer from './user/reducer';
 import regReqsReducer from './reg_req/reducer';
-import patientReducer from './patient/reducer';
 import doctorReducer from './doctor/reducer';
 import patientsReducer from './patients/reducer';
 import calendarReducer from './calendar/reducer';
@@ -25,7 +24,6 @@ const rootReducer = combineReducers({
     appointmentReducer,
     doctorsReducer,
     roomsReducer,
-    patientReducer,
     doctorReducer
 });
 

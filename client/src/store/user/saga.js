@@ -9,19 +9,28 @@ import {
     FETCH_CCADMIN_DATA,
     REG_CC_ADMIN,
     FETCH_NURSE_DATA,
-    FETCH_CADMIN_DATA
+    FETCH_CADMIN_DATA,
+    FETCH_PATIENT_DATA
 } from './constants';
 
 import authService from '../../services/AuthSecurity';
 import CCAdminService from '../../services/CCAdminService';
 import NurseService from '../../services/NurseService';
 import CAdminService from '../../services/CAdminService';
+import PatientService from '../../services/PatientService';
 
 
 import {
     putUserData,
     putUserToken
 } from './actions';
+
+//patient sagas
+export function* fetchPatientData() {
+    const { payload } = yield take(FETCH_PATIENT_DATA);
+    const { data } = yield call(PatientService.fetchPatientData, payload);
+    yield put(putUserData(data));
+}
 
 //cadmin sagas
 export function* fetchCAdminData() {

@@ -12,3 +12,5 @@ export const REG_CC_ADMIN = 'register_cc_admin';
 export const FETCH_NURSE_DATA = 'fetch_nurse_data';
 //clinic admin constants
 export const FETCH_CADMIN_DATA = 'fetch_cadmin_data';
+//patient constants
+export const FETCH_PATIENT_DATA = 'fetch_patient_data';
