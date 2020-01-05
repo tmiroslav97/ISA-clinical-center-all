@@ -29,4 +29,9 @@ public class CodebookServiceImpl implements CodebookService {
     public Codebook save(Codebook codebook) {
         return codebookRepository.save(codebook);
     }
+
+    @Override
+    public void add(Codebook codebook) {
+        this.save(codebook);
+    }
 }
