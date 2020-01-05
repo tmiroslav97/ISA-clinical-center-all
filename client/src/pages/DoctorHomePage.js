@@ -7,7 +7,7 @@ import HolAbsRequest from '../components/HolAbsRequest';
 import BookingDoc from '../components/BookingDoc';
 import ApointmentInfo from '../components/ApointmentInfo';
 import { doctorDataSelector } from '../store/doctor/selectors';
-import { fetchDoctorData } from '../store/doctor/actions';
+import { fetchDoctorData } from '../store/user/actions';
 
 const DoctorHomePage = ({ match }) => {
     const dispatch = useDispatch();

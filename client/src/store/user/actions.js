@@ -7,9 +7,17 @@ import {
     SIGN_OUT,
     FETCH_CCADMIN_DATA,
     REG_CC_ADMIN,
-    FETCH_NURSE_DATA
+    FETCH_NURSE_DATA,
+    FETCH_DOCTOR_DATA,
+    PUT_DOCTOR_CALENDAR_DATA,
+    FETCH_DOCTOR_CALENDAR
 } from './constants';
 
+//doctor actions
+export const fetchDoctorData = payload => ({
+    type: FETCH_DOCTOR_DATA,
+    payload
+});
 
 //nurse actions
 export const fetchNurseData = payload => ({
