@@ -3,24 +3,16 @@ import { take, put, call } from 'redux-saga/effects';
 import {
     ADD_DOCTOR,
     FETCH_DOCTORS_DATA,
-    FETCH_CADMIN_DATA,
 } from './constants';
 
-import RoomService from '../../services/RoomService';
 import CAdminService from '../../services/CAdminService';
 import DoctorService from '../../services/DoctorService';
 
 import {
     putRoomsData,
     putDoctorData,
-    putCAdminData
 } from './actions';
 
-export function* fetchCAdminData() {
-    const { payload } = yield take(FETCH_CADMIN_DATA);
-    const { data } = yield call(CAdminService.fetchCAdminData, payload);
-    yield put(putCAdminData(data));
-}
 
 export function* fetchDoctorsData() {
     const { payload } = yield take(FETCH_DOCTORS_DATA);

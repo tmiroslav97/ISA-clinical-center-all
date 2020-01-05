@@ -1,7 +1,5 @@
 import {
    // DELETE_DOCTOR,
-    PUT_CADMIN_DATA,
-    FETCH_CADMIN_DATA,
     FETCH_DOCTORS_DATA,
     PUT_DOCTOR_DATA,
     ADD_DOCTOR,
@@ -21,15 +19,6 @@ import {
     
 } from './constants';
 
-export const putCAdminData = payload => ({
-    type: PUT_CADMIN_DATA,
-    payload
-});
-
-export const fetchCAdminData = payload => ({
-    type: FETCH_CADMIN_DATA,
-    payload
-});
 
 export const putDoctorData = payload => ({
     type: PUT_DOCTOR_DATA,

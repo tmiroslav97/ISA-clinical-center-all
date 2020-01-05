@@ -8,12 +8,14 @@ import {
     SIGN_OUT,
     FETCH_CCADMIN_DATA,
     REG_CC_ADMIN,
-    FETCH_NURSE_DATA
+    FETCH_NURSE_DATA,
+    FETCH_CADMIN_DATA
 } from './constants';
 
 import authService from '../../services/AuthSecurity';
 import CCAdminService from '../../services/CCAdminService';
 import NurseService from '../../services/NurseService';
+import CAdminService from '../../services/CAdminService';
 
 
 import {
@@ -21,6 +23,12 @@ import {
     putUserToken
 } from './actions';
 
+//cadmin sagas
+export function* fetchCAdminData() {
+    const { payload } = yield take(FETCH_CADMIN_DATA);
+    const { data } = yield call(CAdminService.fetchCAdminData, payload);
+    yield put(putUserData(data));
+}
 
 //nurse sagas
 export function* fetchNurseData() {
