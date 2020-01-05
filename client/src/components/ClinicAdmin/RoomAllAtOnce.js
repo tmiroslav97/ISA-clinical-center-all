@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Table, Button, Col, Form, Modal } from 'react-bootstrap';
+import { Container, Row, Table, Button, Col, Form, Modal, Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { roomsDataSelector } from '../../store/clinic_admin/selectors'
-import { fetchRoomsData } from '../../store/clinic_admin/actions';
+import { roomsDataSelector, isFetchRoomsSelector } from '../../store/rooms/selectors'
+import { fetchRoomsData } from '../../store/rooms/actions';
 
 const RoomAllAtOnce = () => {
     const dispatch = useDispatch();
     const rooms = useSelector(roomsDataSelector);
+    const isFetchRooms = useSelector(isFetchRoomsSelector);
 
     const handleDelitingRooms = () => {
         dispatch(
@@ -29,6 +30,14 @@ const RoomAllAtOnce = () => {
     const handleShow1rEdit = () => setShow1rEdit(true);
     const handleClose2rAdd = () => setShow2rAdd(false);
     const handleShow2rAdd = () => setShow2rAdd(true);
+
+    if (!isFetchRooms) {
+        return <div className="d-flex justify-content-center">
+            <Spinner animation="border" role="status">
+                <span className="sr-only">Loading...</span>
+            </Spinner>
+        </div>;
+    }
 
     return (
         <>
@@ -87,78 +96,78 @@ const RoomAllAtOnce = () => {
             </Modal>
             <Container>
                 <Row>
-                <Col md={{ span:10, offset:1  }} xs={12}>
-                    <h3  className="border-bottom">Examination and surgery rooms</h3>
+                    <Col md={{ span: 10, offset: 1 }} xs={12}>
+                        <h3 className="border-bottom">Examination and surgery rooms</h3>
                     </Col>
                 </Row>
                 <Row>
-                <Col md={{ span:10, offset:1  }} xs={12}>
-                    <Form>
+                    <Col md={{ span: 10, offset: 1 }} xs={12}>
+                        <Form>
 
-                        <Form.Group as={Row} >
+                            <Form.Group as={Row} >
 
-                            <Form.Label>Add new surgery room:</Form.Label>
-                            <Col>
-                                <Button onClick={handleShow2rAdd}>Add </Button>
-                            </Col>
-                        </Form.Group>
+                                <Form.Label>Add new surgery room:</Form.Label>
+                                <Col>
+                                    <Button onClick={handleShow2rAdd}>Add </Button>
+                                </Col>
+                            </Form.Group>
 
-                        <Form.Group as={Row} >
+                            <Form.Group as={Row} >
 
-                            <Form.Label>Search surgery rooms:</Form.Label>
-                            <Col>
-                                <Form.Control type="text" placeholder="Search " />
-                            </Col>
-                            <Col>
-                                <Button>Search</Button>
-                            </Col>
-                        </Form.Group>
+                                <Form.Label>Search surgery rooms:</Form.Label>
+                                <Col>
+                                    <Form.Control type="text" placeholder="Search " />
+                                </Col>
+                                <Col>
+                                    <Button>Search</Button>
+                                </Col>
+                            </Form.Group>
 
-                        <Form.Group as={Row} controlId="formGridState">
-                            <Form.Label>Filter data by</Form.Label>
-                            <Col>
-                                <Form.Control as="select">
-                                    <option>Choose...</option>
-                                    <option>...</option>
-                                </Form.Control>
-                            </Col>
-                        </Form.Group>
+                            <Form.Group as={Row} controlId="formGridState">
+                                <Form.Label>Filter data by</Form.Label>
+                                <Col>
+                                    <Form.Control as="select">
+                                        <option>Choose...</option>
+                                        <option>...</option>
+                                    </Form.Control>
+                                </Col>
+                            </Form.Group>
 
 
-                    </Form>
-                </Col>
+                        </Form>
+                    </Col>
                 </Row>
                 <Row>
-                <Col md={{ span:10, offset:1  }} xs={12}>
-                    <Table responsive>
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>Number</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                rooms.map((room, index) => {
-                                    return (
-                                        <tr key={room.id}>
-                                            <td>{room.name}</td>
-                                            <td>{room.number}</td>
-                                            <td>
-                                                <Button onClick={handleShow1rEdit}>Edit</Button>
-                                            </td>
-                                            <td>
-                                                <Button onClick={handleDelitingRooms}>Delete</Button>
-                                            </td>
-                                        </tr>
-                                    );
-                                })
-                            }
-                        </tbody>
-                    </Table>
+                    <Col md={{ span: 10, offset: 1 }} xs={12}>
+                        <Table responsive>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Number</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    rooms.map((room, index) => {
+                                        return (
+                                            <tr key={room.id}>
+                                                <td>{room.name}</td>
+                                                <td>{room.number}</td>
+                                                <td>
+                                                    <Button onClick={handleShow1rEdit}>Edit</Button>
+                                                </td>
+                                                <td>
+                                                    <Button onClick={handleDelitingRooms}>Delete</Button>
+                                                </td>
+                                            </tr>
+                                        );
+                                    })
+                                }
+                            </tbody>
+                        </Table>
                     </Col>
                 </Row>
             </Container >

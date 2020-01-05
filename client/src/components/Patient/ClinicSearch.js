@@ -3,8 +3,8 @@ import useStateWithCallback from 'use-state-with-callback';
 import { Container, Row, Col, Table, Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-import { fetchClinicsDataPatient, searchClinicsDataPatient } from '../../store/patient/actions';
-import { clinicsDataSelector } from '../../store/patient/selectors';
+import { fetchClinicsData } from '../../store/clinics/actions';
+import { clinicsDataSelector } from '../../store/clinics/selectors';
 
 const ClinicSearch = () => {
     const dispatch = useDispatch();
@@ -19,17 +19,12 @@ const ClinicSearch = () => {
 
 
     const handleSearch = () => {
-        dispatch(
-            searchClinicsDataPatient({
-                date,
-                type
-            })
-        );
+
     };
 
     useEffect(() => {
         dispatch(
-            fetchClinicsDataPatient({})
+            fetchClinicsData({})
         );
     }, []);
 
@@ -51,7 +46,7 @@ const ClinicSearch = () => {
                                     setDateString(currentTarget.value);
                                 }} />
                             <Form.Label>Type:</Form.Label>
-                            <Form.Control as="select" onChange = {({ currentTarget }) => {
+                            <Form.Control as="select" onChange={({ currentTarget }) => {
                                 setType(currentTarget.value);
                             }} >
                                 <option>Choose...</option>
@@ -96,10 +91,11 @@ const ClinicSearch = () => {
                         </thead>
                         <tbody>
                             {
-                                /*
+
                                 clinics.map((clinic, index) => {
                                     return (
                                         <tr key={clinic.id}>
+                                            <td>{index + 1}</td>
                                             <td>{clinic.name}</td>
                                             <td>{clinic.address}</td>
                                             <td>{clinic.sumRating / clinic.cntRating}</td>
@@ -107,7 +103,7 @@ const ClinicSearch = () => {
                                         </tr>
                                     );
                                 })
-                                */
+
                             }
                         </tbody>
                     </Table>

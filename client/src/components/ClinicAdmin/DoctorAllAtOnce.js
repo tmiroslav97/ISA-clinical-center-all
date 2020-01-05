@@ -1,9 +1,9 @@
 import React,{useState, useEffect} from 'react';
-import { Container, Row, Form, Col, Button, Table, Modal } from 'react-bootstrap';
+import { Container, Row, Form, Col, Button, Table, Modal, Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { doctorDataSelector } from '../../store/clinic_admin/selectors';
-import { addDoctor } from '../../store/clinic_admin/actions';
-import {fetchDoctorsData} from '../../store/clinic_admin/actions';
+import { doctorsDataSelector, isFetchDoctorsSelector } from '../../store/doctors/selectors';
+import { addDoctor } from '../../store/doctors/actions';
+import { fetchDoctorsData } from '../../store/doctors/actions';
 
 const DoctorAllAtOnce = () => {
     const dispatch = useDispatch();
@@ -14,7 +14,8 @@ const DoctorAllAtOnce = () => {
     const [lastName, setLastName] = useState();
     const [startTime, setStartTime] = useState();
     const [endTime, setEndTime] = useState();
-    const doctors = useSelector(doctorDataSelector);
+    const doctors = useSelector(doctorsDataSelector);
+    const isFetchDoctors = useSelector(isFetchDoctorsSelector);
 
     const handleAddDoctor = () => {
         
@@ -56,6 +57,15 @@ const DoctorAllAtOnce = () => {
 
    // const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    if (!isFetchDoctors) {
+        return <div className="d-flex justify-content-center">
+            <Spinner animation="border" role="status">
+                <span className="sr-only">Loading...</span>
+            </Spinner>
+        </div>;
+    }
+
     return (
         <>
         <Modal show={show} onHide={handleAddDoctor} animation={false}>

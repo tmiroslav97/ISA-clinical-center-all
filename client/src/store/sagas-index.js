@@ -2,9 +2,6 @@ import { all, spawn, call, put } from 'redux-saga/effects';
 import flatten from 'lodash/flatten';
 import * as userSaga from './user/saga';
 import * as regReqsSaga from './reg_req/saga';
-import * as cAdminSaga from './clinic_admin/saga';
-import * as patientSaga from './patient/saga';
-import * as doctorSaga from './doctor/saga';
 import * as patientsSaga from './patients/saga';
 import * as calendarSaga from './calendar/saga';
 import * as absenceHolidaySaga from './absence_holiday/saga';
@@ -12,22 +9,23 @@ import * as prescriptionSaga from './prescriptions/saga';
 import * as medicineDiagnoseSaga from './medicine_diagnose/saga';
 import * as clinicSaga from './clinics/saga';
 import * as appointmentsSaga from './appointments/saga';
+import * as doctorsSaga from './doctors/saga';
+import * as roomsSaga from './rooms/saga';
 
 export default function* rootSaga() {
   let sagas = flatten(
     //za sad prazne uglaste tu stavljamo sve "sage"
-    [userSaga, 
-      regReqsSaga, 
-      patientsSaga, 
-      calendarSaga, 
+    [userSaga,
+      regReqsSaga,
+      patientsSaga,
+      calendarSaga,
       absenceHolidaySaga,
-      prescriptionSaga, 
+      prescriptionSaga,
       medicineDiagnoseSaga,
       clinicSaga,
       appointmentsSaga,
-      patientSaga, 
-      cAdminSaga, 
-      doctorSaga]
+      doctorsSaga,
+      roomsSaga]
       .map(saga => Object.keys(saga).map(sagaFunctionName => saga[sagaFunctionName]))
   );
 

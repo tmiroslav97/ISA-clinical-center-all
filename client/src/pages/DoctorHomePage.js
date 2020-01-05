@@ -1,18 +1,19 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux'; import { Tabs, Tab } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux'; 
+import { Tabs, Tab } from 'react-bootstrap';
 import UserProfile from '../components/UserProfile';
 import PatientList from '../components/PatientList';
 import WorkCalendar from '../components/WorkCalendar';
 import HolAbsRequest from '../components/HolAbsRequest';
 import BookingDoc from '../components/BookingDoc';
 import ApointmentInfo from '../components/ApointmentInfo';
-import { doctorDataSelector } from '../store/doctor/selectors';
+import { userDataSelector } from '../store/user/selectors';
 import { fetchDoctorData } from '../store/user/actions';
 
 const DoctorHomePage = ({ match }) => {
     const dispatch = useDispatch();
     const id = match.params.id;
-    const data = useSelector(doctorDataSelector);
+    const data = useSelector(userDataSelector);
     console.log(data);
     useEffect(() => {
         dispatch(

@@ -3,30 +3,12 @@ import { history } from '../index';
 import { format } from 'util';
 
 const FINALPOINTS = {
-    FETCH_ADMINC_DARA: '/adm-cli/%s',
-    ADD_DOCTOR: '/adm-cli/add-doctor',
-    FETCH_DOCTORS_DATA: '/adm-cli/doctors'
+    FETCH_ADMINC_DARA: '/adm-cli/%s'
 };
 
 
 class CAdminService extends HttpClient{
 
-
-
-    addDoctor = async payload => {
-        try {
-            const { data } = await this.getApiClient().post(
-                FINALPOINTS.ADD_DOCTOR, 
-                payload
-            );
-
-            return { data };
-        } catch (error) {
-            console.log(error.response.data);
-        }
-    };
-
-    
     
     fetchCAdminData = async payload => {
         try {
@@ -39,19 +21,7 @@ class CAdminService extends HttpClient{
         }
     };
 
-    fetchDoctorsData = async payload => {
-        try {
-            const { data } = await this.getApiClient().get(
-                FINALPOINTS.FETCH_DOCTORS_DATA
-            );
-
-            const doctors = data;
-
-            return { doctors };
-        } catch (error) {
-            console.log(error.response.data);
-        }
-    }; 
+    
 
    /* fetchDoctorData = async payload => {
         try {
