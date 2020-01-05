@@ -17,21 +17,21 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @RequestMapping(value = "/doctor", produces = MediaType.APPLICATION_JSON_VALUE)
 public class DoctorController {
 
-    private final DoctorServiceImpl doctorServiceImpl;
+    private final DoctorServiceImpl doctorService;
 
-    public DoctorController(DoctorServiceImpl doctorServiceImpl){
-        this.doctorServiceImpl = doctorServiceImpl;
+    public DoctorController(DoctorServiceImpl doctorService){
+        this.doctorService = doctorService;
     }
 
 
     @RequestMapping(method = GET, value = "/{doctorId}")
     public ResponseEntity<DoctorResponse> getDoctorById(@PathVariable Long doctorId) {
-        return new ResponseEntity<>(this.doctorServiceImpl.getDoctorById(doctorId), HttpStatus.OK);
+        return new ResponseEntity<>(this.doctorService.getDoctorById(doctorId), HttpStatus.OK);
     }
 
     @RequestMapping(method = GET, value = "/all")
     public ResponseEntity<List<DoctorResponse>> getDoctors() {
-        return new ResponseEntity<>(this.doctorServiceImpl.getDoctors(), HttpStatus.OK);
+        return new ResponseEntity<>(this.doctorService.getDoctors(), HttpStatus.OK);
     }
 
     /*

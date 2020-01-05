@@ -23,11 +23,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @RequestMapping(value = "/adm-cli", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ClinicAdminController {
     private final ClinicAdministratorService clinicAdministratorService;
-    private final DoctorServiceImpl doctorServiceImpl;
 
-    public ClinicAdminController(ClinicAdministratorService clinicAdministratorService, DoctorServiceImpl doctorServiceImpl) {
+
+    public ClinicAdminController(ClinicAdministratorService clinicAdministratorService) {
         this.clinicAdministratorService = clinicAdministratorService;
-        this.doctorServiceImpl = doctorServiceImpl;
+
     }
     @RequestMapping(method = GET, value = "/{admCliId}")
     @PreAuthorize("hasRole('ADMINC')")

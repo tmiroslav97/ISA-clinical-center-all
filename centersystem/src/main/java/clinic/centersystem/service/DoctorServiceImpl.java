@@ -17,9 +17,6 @@ public class DoctorServiceImpl implements DoctorService {
     @Autowired
     private DoctorRepository doctorRepository;
 
-    @Autowired
-    private DoctorService doctorService;
-
     @Override
     public Doctor findById(Long id){return this.doctorRepository.findById(id).orElseGet(null);}
 
@@ -44,13 +41,13 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public DoctorResponse getDoctorById(Long id){
-        Doctor doctor = this.doctorService.findById(id);
+        Doctor doctor = this.findById(id);
         return DoctorConverter.toCreateDoctorResponseFromDoctor(doctor);
     }
 
     @Override
     public List<DoctorResponse> getDoctors() {
-        List<Doctor> doctors = this.doctorService.findAll();
+        List<Doctor> doctors = this.findAll();
         List<DoctorResponse> doctorResponses = new ArrayList<DoctorResponse>();
         for (Doctor doctor : doctors) {
             doctorResponses.add(DoctorConverter.toCreateDoctorResponseFromDoctor(doctor));
@@ -61,7 +58,7 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public List<Doctor> searchDoctorByName(String name){
         List<Doctor> listDoctors = new ArrayList<>();
-        List<Doctor>doctors= this.doctorService.findAll();
+        List<Doctor>doctors= this.findAll();
         for (Doctor doctor:doctors){
             if(doctor.getFirstName().toLowerCase().contains(name.toLowerCase())){
                 listDoctors.add(doctor);
