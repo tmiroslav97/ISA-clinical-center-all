@@ -23,8 +23,8 @@ export default function NavBar() {
         );
     };
 
-    window.addEventListener("unload", handleSignOut);
-
+    //ne postoji razlik izmedju refresh page i close tab pa ako ovo radi onda prilikom refresha se takodje okine ova funkcija sto nije dobro 
+    //window.addEventListener("unload", handleSignOut);
 
     return (
         <Navbar bg="light" expand="lg">

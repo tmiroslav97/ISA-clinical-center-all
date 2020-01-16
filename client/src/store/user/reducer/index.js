@@ -7,10 +7,10 @@ import * as computationFunctions from './computation-functions';
 
 const initialState = {
     data:{
-        id: window.localStorage.getItem('id'),
+        id: window.localStorage.getItem('userID'),
         firstName: '',
         lastName: '',
-        email: '',
+        email: window.localStorage.getItem('email'),
         firstLog: true,
         role: localStorage.getItem('role')
     },
