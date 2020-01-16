@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { userDataSelector, userTokenSelector } from "./../../store/user/selectors";
+import { userDataSelector, userTokenSelector } from "../store/user/selectors";
 
 const PrivateRoute = ({ component: Component, accessRole = null, ...rest }) => {
     const userData = useSelector(userDataSelector);
@@ -12,7 +12,7 @@ const PrivateRoute = ({ component: Component, accessRole = null, ...rest }) => {
             return true;
         }
 
-        return accessRole === userData.role;
+        return accessRole === userData.role && !userDataSelector.firstLog;
     }
 
     return (
