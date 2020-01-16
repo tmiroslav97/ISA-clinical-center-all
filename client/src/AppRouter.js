@@ -14,25 +14,24 @@ import ClinicAdmin from './components/ClinicAdmin/CA';
 import DoctorAllAtOnce from './components/ClinicAdmin/DoctorAllAtOnce';
 import DoctorSearch from './components/Patient/DoctorSearch';
 import ClinicSearch from './components/Patient/ClinicSearch';
-import { userDataSelector } from './store/user/selectors';
+import PrivateRoute from './components/PrivateRoute';
+
+
 
 const AppRouter = () => {
-    const user = useSelector(userDataSelector);
-    const role = user.role;
-    const firstLog = user.firstLog;
     return (
         <Switch>
             <Route exact path="/" component={HomePage} />
             <Route exact path="/login" component={LoginPage} />
-            <Route exact path="/pat" render={(props) => ((role === 'ROLE_PATIENT' && !firstLog) ? (<PatientHomePage  />) : (<Redirect to="/page-not-found" />))} />
+            <PrivateRoute exact path="/pat" component={PatientHomePage} accessRole="ROLE_PATIENT" />
             <Route exact path="/signup" component={RegPage} />
-            <Route exact path="/doc/:id" render={(props) => ((role === 'ROLE_DOCTOR' && !firstLog) ? (<DoctorHomePage match={props.match} />) : (<Redirect to="/page-not-found" />))} />
+            <PrivateRoute exact path="/doc/:id" component={DoctorHomePage} accessRole="ROLE_DOCTOR" />
             <Route exact path="/prob" component={HolidayAproval} />
-            <Route exact path="/ccadmin/:id" render={(props) => ((true) ? (<ClinicCenterAdminProfile match={props.match} />) : (<Redirect to="/page-not-found" />))} />
+            <PrivateRoute exact path="/ccadmin/:id" component={ClinicCenterAdminProfile} accessRole="ROLE_CCADMIN" />
             <Route exact path="/signup" component={RegPage} />
             <Route exact path="/change-pass" component={PasswordChanger} />
-            <Route exact path="/nurse-page/:id" render={(props) => ((role === 'ROLE_NURSE' && !firstLog) ? (<NurseHomePage match={props.match} />) : (<Redirect to="/page-not-found" />))} />
-            <Route exact path="/adminc" render={() => ((role === 'ROLE_ADMINC' && !firstLog) ? (<ClinicAdmin />) : (<Redirect to="/page-not-found" />))} />
+            <PrivateRoute exact path="/nurse-page/:id" component={NurseHomePage} accessRole="ROLE_NURSE" />
+            <PrivateRoute exact path="/adminc" component={ClinicAdmin} accessRole="ROLE_ADMINC" />
             <Route exact path="/probs" component={DoctorAllAtOnce} />
             <Route exact path="/search" component={DoctorSearch} />
             <Route exact path="/test" component={ClinicSearch} />
