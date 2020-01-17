@@ -19,17 +19,10 @@ jobs:
     steps:
       - checkout
 
-      - run:
-          name: Navigate to backend project;
-          command: |
-            pwd 
-            ls -a 
-            cd centersystem
-
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "pom.xml" }}
+            - v1-dependencies-{{ checksum "centersystem/pom.xml" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
@@ -38,9 +31,13 @@ jobs:
       - save_cache:
           paths:
             - ~/.m2
-          key: v1-dependencies-{{ checksum "pom.xml" }}
-      - run: pwd 
-      - run: mvn compile -T4
+          key: v1-dependencies-{{ checksum "centersystem/pom.xml" }}
+      - run: 
+          name: Compile app
+          command: |
+            cd centersystem
+            pwd
+            mvn compile -T4
 
   test:
     docker:
@@ -62,16 +59,10 @@ jobs:
     steps:
       - checkout
 
-      - run:
-          name: Navigate to backend project;
-          command: |
-            pwd 
-            ls -a 
-            cd centersystem
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "pom.xml" }}
+            - v1-dependencies-{{ checksum "centersystem/pom.xml" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
@@ -80,7 +71,7 @@ jobs:
       - save_cache:
           paths:
             - ~/.m2
-          key: v1-dependencies-{{ checksum "pom.xml" }}
+          key: v1-dependencies-{{ checksum "centersystem/pom.xml" }}
 
       - run:
       # Our primary container isn't MYSQL so run a sleep command until it's ready.
@@ -96,11 +87,14 @@ jobs:
       - run:
           name: Install MySQL CLI; Import dummy data; 
           command: |
-            pwd
             sudo apt update
             sudo apt install mysql-client
 
-      - run: mvn test
+      - run: 
+          name: Run tests
+          command: |
+            cd centersystem
+            mvn test
 
 workflows:
   version: 2
