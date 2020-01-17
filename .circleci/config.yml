@@ -101,6 +101,7 @@ jobs:
           command: |
             cd centersystem
             mvn test
+
   build_front:
     docker:
       # specify the version you desire here
@@ -122,16 +123,16 @@ jobs:
       - restore_cache:
           key: dependency-cache-{{ checksum "client/package-lock.json" }}
       - run:
-          name: Install npm wee
+          name: Install npm packages
           command: |
             cd client
             npm install
       - save_cache:
           key: dependency-cache-{{ checksum "client/package-lock.json" }}
           paths:
-            - node_modules
+            - client/node_modules
 
-      
+      - run: npm start
 
 workflows:
   version: 2
