@@ -5,7 +5,7 @@
 version: 2
 
 jobs:
-  build:
+  build_backend:
     docker:
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk
@@ -42,7 +42,7 @@ jobs:
             pwd
             mvn compile -T4
 
-  test:
+  test_backend:
     docker:
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk
@@ -123,7 +123,7 @@ jobs:
       - restore_cache:
           key: dependency-cache-{{ checksum "client/package-lock.json" }}
       - run:
-          name: Install npm packages
+          name: Install node modules
           command: |
             cd client
             npm install
@@ -132,14 +132,13 @@ jobs:
           paths:
             - client/node_modules
 
-      - run: npm start
-
 workflows:
   version: 2
   build_and_test:
     jobs:
-      - build
-      - test:
-          requires:
-            - build
+      - build_backend
+      # dok ne skontamo kako da napravimo da radi za unit testove ovo dole ostaje zakomentarisano (ptreba kreirati bazu podataka prije ubacivanja podataka, ali ona se tek kreira kad se pokrene app odnosno testovi)
+      #- test_backend:
+          #requires:
+            #- build
       - build_front
