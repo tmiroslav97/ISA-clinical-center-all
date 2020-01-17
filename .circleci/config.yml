@@ -24,9 +24,12 @@ jobs:
           keys:
             - v1-dependencies-{{ checksum "centersystem/pom.xml" }}
             # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
 
-      - run: mvn dependency:go-offline
+      - run: 
+          name: Go offline 
+          command: |
+            cd centersystem
+            mvn dependency:go-offline
 
       - save_cache:
           paths:
@@ -64,9 +67,12 @@ jobs:
           keys:
             - v1-dependencies-{{ checksum "centersystem/pom.xml" }}
             # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
 
-      - run: mvn dependency:go-offline
+      - run:
+          name: Go offline 
+          command: |
+            cd centersystem
+            mvn dependency:go-offline
 
       - save_cache:
           paths:
