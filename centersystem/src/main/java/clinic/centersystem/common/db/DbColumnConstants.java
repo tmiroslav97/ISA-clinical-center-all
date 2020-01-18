@@ -51,5 +51,6 @@ public class DbColumnConstants {
     public static final String END = "end";
     public static final String UDI = "udi";
     public static final String TYPEID = "typeid";
-
+    public static final String ROOMTYPE = "room_type";
+    public static final String RESERVED = "reserved";
 }

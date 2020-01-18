@@ -37,7 +37,7 @@ public class Appointment {
     private Long duration;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private SurgExRoom surgExRoom;
+    private Room room;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Personnel personnel;
