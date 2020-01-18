@@ -70,7 +70,7 @@ const ClinicAdminReg = () => {
                                     }} >
                                     <option></option>
                                     {
-                                        clinics!=undefined &&
+                                        clinics!==undefined &&
                                         clinics.map((clinic, index) => {
                                             return (
                                                 <option key={clinic.id} value={clinic.id}>{clinic.name}</option>

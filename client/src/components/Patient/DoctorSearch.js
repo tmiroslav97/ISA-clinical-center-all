@@ -7,6 +7,7 @@ import { doctorsDataSelector } from '../../store/doctors/selectors';
 const DoctorSearch = () => {
     const dispatch = useDispatch();
     const doctors = useSelector(doctorsDataSelector);
+    //eslint-disable-next-line
     const [name, setName] = useState();
 
     const handleSearch = () => {
