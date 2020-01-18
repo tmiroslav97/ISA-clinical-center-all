@@ -31,7 +31,7 @@ const AppRouter = () => {
             <Route exact path="/signup" component={RegPage} />
             <Route exact path="/change-pass" component={PasswordChanger} />
             <PrivateRoute exact path="/nurse-page/:id" component={NurseHomePage} accessRole="ROLE_NURSE" />
-            <PrivateRoute exact path="/adminc" component={ClinicAdmin} accessRole="ROLE_ADMINC" />
+            <PrivateRoute exact path="/adminc/:id" component={ClinicAdmin} accessRole="ROLE_ADMINC" />
             <Route exact path="/probs" component={DoctorAllAtOnce} />
             <Route exact path="/search" component={DoctorSearch} />
             <Route exact path="/test" component={ClinicSearch} />

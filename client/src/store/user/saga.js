@@ -104,7 +104,7 @@ export function* login() {
     } else if (data.role === 'ROLE_NURSE') {
         history.push('/nurse-page/' + data.id);
     } else if (data.role === 'ROLE_ADMINC') {
-        history.push('/adminc');
+        history.push('/adminc/' + data.id);
     } else {
         alert('Nije odobren pristup sistemu!');
     }
@@ -125,7 +125,7 @@ export function* changePassword() {
     } else if (data.role === 'ROLE_NURSE') {
         history.push('/nurse-page/' + data.id);
     } else if (data.role === 'ROLE_ADMINC') {
-        history.push('/adminc');
+        history.push('/adminc/' + data.id);
     } else {
         alert('Nije odobren pristup sistemu!');
     }

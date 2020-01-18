@@ -3,7 +3,7 @@ import { history } from '../index';
 import { format } from 'util';
 
 const FINALPOINTS = {
-    FETCH_ADMINC_DARA: '/adm-cli/%s'
+    FETCH_ADMINC_DATA: '/adm-cli/%s'
 };
 
 
@@ -13,7 +13,7 @@ class CAdminService extends HttpClient{
     fetchCAdminData = async payload => {
         try {
             const { data } = await this.getApiClient().get(
-                format(FINALPOINTS.FETCH_ADMINC_DATA, payload.cAdminId)
+                format(FINALPOINTS.FETCH_ADMINC_DATA, payload.id)
             );
             return { data };
         } catch (error) {

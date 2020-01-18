@@ -4,6 +4,7 @@ import clinic.centersystem.model.Room;
 import clinic.centersystem.service.RoomServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +24,7 @@ public class RoomController {
     }
 
     @RequestMapping(method = GET, value = "/all/{clinicId}")
-    public ResponseEntity<List<Room>> getClinicRooms(@PathParam("clinicId") Long clinicId) {
+    public ResponseEntity<List<Room>> getClinicRooms(@PathVariable Long clinicId) {
         return new ResponseEntity<>(roomService.findByClinic(clinicId), HttpStatus.OK);
     }
 }
