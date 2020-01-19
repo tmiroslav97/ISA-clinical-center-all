@@ -11,6 +11,7 @@ import FreeAppointment from './FreeApointment';
 import PriceList from './Pricelist';
 import { userDataSelector } from '../../store/user/selectors';
 import { fetchCAdminData } from '../../store/user/actions';
+import RoomList from '../Room/RoomList';
 
 const CA = ({ match }) => {
     const dispatch = useDispatch();
@@ -41,6 +42,9 @@ const CA = ({ match }) => {
             </Tab>
             <Tab eventKey="exeminationRoom" title="Exemination room" >
                 <ExeminationRoom />
+            </Tab>
+            <Tab eventKey="roomList" title="Room list">
+                <RoomList/>
             </Tab>
             <Tab eventKey="appointments" title="Free appointments" >
                 <FreeAppointment />
