@@ -23,7 +23,8 @@ class CAdminService extends HttpClient{
 
     
 
-   /* fetchDoctorData = async payload => {
+   /* fetchDoctorData = async payload => {//eslint-disable-next-line
+
         try {
             const { data } = await this.getApiClient().get(
                 FINALPOINTS.FETCH_DOCTOR_DATA

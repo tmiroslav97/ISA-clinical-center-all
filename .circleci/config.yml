@@ -6,6 +6,9 @@ version: 2
 
 jobs:
   build_backend:
+    branches:
+      only:
+        -master
     docker:
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk
@@ -25,7 +28,7 @@ jobs:
             - v1-dependencies-{{ checksum "centersystem/pom.xml" }}
             # fallback to using the latest cache if no exact match is found
 
-      - run: 
+      - run:
           name: Save maven dependencies
           command: |
             cd centersystem
@@ -35,14 +38,16 @@ jobs:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "centersystem/pom.xml" }}
-      - run: 
+      - run:
           name: Compile app
           command: |
             cd centersystem
-            pwd
             mvn compile -T4
 
   test_backend:
+    branches:
+        only:
+          -master
     docker:
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk
@@ -51,7 +56,6 @@ jobs:
         environment:
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: clinic_center
-          
 
     working_directory: ~/repo
 
@@ -80,7 +84,7 @@ jobs:
           key: v1-dependencies-{{ checksum "centersystem/pom.xml" }}
 
       - run:
-      # Our primary container isn't MYSQL so run a sleep command until it's ready.
+          # Our primary container isn't MYSQL so run a sleep command until it's ready.
           name: Waiting for MySQL to be ready
           command: |
             for i in `seq 1 30`;
@@ -91,18 +95,21 @@ jobs:
             done
             echo Failed waiting for MySQL && exit 1
       - run:
-          name: Install MySQL CLI; Import dummy data; 
+          name: Install MySQL CLI; Import dummy data;
           command: |
             sudo apt update
             sudo apt install mysql-client
 
-      - run: 
+      - run:
           name: Run tests
           command: |
             cd centersystem
             mvn test
 
   build_front:
+    branches:
+      only:
+        -master
     docker:
       # specify the version you desire here
       - image: circleci/node:12.14.0
@@ -118,7 +125,7 @@ jobs:
 
       - run:
           name: Update npm
-          command: 'sudo npm install -g npm@latest'
+          command: "sudo npm install -g npm@latest"
       # Download and cache dependencies
       - restore_cache:
           key: dependency-cache-{{ checksum "client/package-lock.json" }}
@@ -139,6 +146,6 @@ workflows:
       - build_backend
       # dok ne skontamo kako da napravimo da radi za unit testove ovo dole ostaje zakomentarisano (ptreba kreirati bazu podataka prije ubacivanja podataka, ali ona se tek kreira kad se pokrene app odnosno testovi)
       #- test_backend:
-          #requires:
-            #- build
+      #requires:
+      #- build
       - build_front
