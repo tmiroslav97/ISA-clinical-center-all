@@ -18,4 +18,6 @@ public class ClinicAdministratoreResponse {
     private String lastName;
 
     private String role;
+
+    private Long clinicId;
 }

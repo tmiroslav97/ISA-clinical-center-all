@@ -44,7 +44,7 @@ const CA = ({ match }) => {
                 <ExeminationRoom />
             </Tab>
             <Tab eventKey="roomList" title="Room list">
-                <RoomList/>
+                <RoomList clinicId={data.clinicId}/>
             </Tab>
             <Tab eventKey="appointments" title="Free appointments" >
                 <FreeAppointment />

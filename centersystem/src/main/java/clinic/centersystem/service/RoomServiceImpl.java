@@ -21,7 +21,7 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public List<Room> findByClinic(Long id) {
-        return roomRepository.findByClinic(id);
+        return roomRepository.findByClinicId(id);
     }
 
     @Override

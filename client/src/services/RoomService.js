@@ -16,7 +16,7 @@ class RoomService extends HttpClient {
             const { data } = await this.getApiClient().get(
                 format(FINALPOINTS.FETCH_ROOMS_DATA, payload.clinicId)
             );
-
+            
             const rooms = data;
 
             return { rooms };

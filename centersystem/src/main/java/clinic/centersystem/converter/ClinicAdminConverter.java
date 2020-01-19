@@ -25,6 +25,7 @@ public class ClinicAdminConverter {
                 .firstName(clinicAdmin.getFirstName())
                 .lastName(clinicAdmin.getLastName())
                 .role(clinicAdmin.getRole().name())
+                .clinicId(clinicAdmin.getClinic().getId())
                 .build();
     }
 }

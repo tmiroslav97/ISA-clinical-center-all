@@ -6,16 +6,16 @@ import { clinicsDataSelector } from '../../store/clinics/selectors';
 import { fetchRoomsData } from '../../store/rooms/actions';
 
 
-const RoomList = () => {
+const RoomList = ({ clinicId }) => {
     const dispatch = useDispatch();
     const rooms = useSelector(roomsDataSelector);
     const isFetchRoomsData = useSelector(isFetchRoomsSelector);
 
     useEffect(() => {
         dispatch(
-            fetchRoomsData({})
+            fetchRoomsData({ clinicId })
         );
-    }, []);
+    }, [clinicId]);
 
     if (!isFetchRoomsData) {
         return <div className="d-flex justify-content-center">
