@@ -33,4 +33,9 @@ public class RoomServiceImpl implements RoomService {
     public Room save(Room room) {
         return roomRepository.save(room);
     }
+
+    @Override
+    public List<Room> searchRooms(String name, Long clinicId) {
+        return roomRepository.searchRooms(name,clinicId);
+    }
 }

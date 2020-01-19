@@ -27,4 +27,9 @@ public class RoomController {
     public ResponseEntity<List<Room>> getClinicRooms(@PathVariable Long clinicId) {
         return new ResponseEntity<>(roomService.findByClinic(clinicId), HttpStatus.OK);
     }
+
+    @RequestMapping(method = GET, value = "/search/{clinicId}/{name}/{date}")
+    public ResponseEntity<List<Room>> getClinicRooms(@PathVariable Long clinicId, @PathVariable String name, @PathVariable Long date) {
+        return new ResponseEntity<>(roomService.searchRooms(name, clinicId), HttpStatus.OK);
+    }
 }

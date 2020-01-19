@@ -14,4 +14,6 @@ public interface RoomService {
     List<Room> findAll();
 
     Room save(Room room);
+
+    List<Room> searchRooms(String name, Long clinicId);
 }
