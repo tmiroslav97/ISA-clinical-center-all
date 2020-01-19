@@ -6,12 +6,6 @@ version: 2
 
 jobs:
   build_backend:
-    branches:
-      only:
-        -master
-      ignore:
-        -feature-*
-        -bugfix-*
     docker:
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk
@@ -48,12 +42,6 @@ jobs:
             mvn compile -T4
 
   test_backend:
-    branches:
-        only:
-          -master
-        ignore:
-          -feature-*
-          -bugfix-*
     docker:
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk
@@ -113,12 +101,6 @@ jobs:
             mvn test
 
   build_front:
-    branches:
-      only:
-        -master
-      ignore:
-        -feature-*
-        -bugfix-*
     docker:
       # specify the version you desire here
       - image: circleci/node:12.14.0
@@ -152,9 +134,26 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - build_backend
+      - build_backend:
+          filters:
+            branches:
+              only: -master
+              ignore: -feature-*
+                -bugfix-*
       # dok ne skontamo kako da napravimo da radi za unit testove ovo dole ostaje zakomentarisano (ptreba kreirati bazu podataka prije ubacivanja podataka, ali ona se tek kreira kad se pokrene app odnosno testovi)
       #- test_backend:
       #requires:
       #- build
-      - build_front
+      #filters:
+      #branches:
+      #only:
+      #-master
+      #ignore:
+      #-feature-*
+      #-bugfix-*
+      - build_front:
+          filters:
+            branches:
+              only: -master
+              ignore: -feature-*
+                -bugfix-*
