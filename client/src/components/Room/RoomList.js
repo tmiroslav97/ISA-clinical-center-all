@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Spinner, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { clinicsDataSelector, isFetchClinicsDataSelector } from '../../store/clinics/selectors';
-import { fetchClinicsData } from '../../store/clinics/actions';
+import { roomsDataSelector, isFetchRoomsSelector } from '../../store/rooms/selectors';
+import { clinicsDataSelector } from '../../store/clinics/selectors';
+import { fetchRoomsData } from '../../store/rooms/actions';
 
 
 const RoomList = () => {
-    /*
     const dispatch = useDispatch();
-    const rooms = useSelector(clinicsDataSelector);
-    const isFetchClinicsData = useSelector(isFetchClinicsDataSelector);
+    const rooms = useSelector(roomsDataSelector);
+    const isFetchRoomsData = useSelector(isFetchRoomsSelector);
 
     useEffect(() => {
         dispatch(
-            fetchClinicsData({})
+            fetchRoomsData({})
         );
     }, []);
 
-    if (!isFetchClinicsData) {
+    if (!isFetchRoomsData) {
         return <div className="d-flex justify-content-center">
             <Spinner animation="border" role="status">
                 <span className="sr-only">Loading...</span>
@@ -39,19 +39,17 @@ const RoomList = () => {
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
-                                <th>Address</th>
-                                <th>Description</th>
+                                <th>Type</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                clinics.map((clinic, index) => {
+                                rooms.map((room, index) => {
                                     return (
-                                        <tr key={clinic.id}>
+                                        <tr key={room.id}>
                                             <td>{index + 1}</td>
-                                            <td>{clinic.name}</td>
-                                            <td>{clinic.address}</td>
-                                            <td>{clinic.description}</td>
+                                            <td>{room.name}</td>
+                                            <td>{room.type}</td>
                                         </tr>
                                     );
                                 })
@@ -62,10 +60,6 @@ const RoomList = () => {
             </Row>
         </Container>
     );
-    */
-   return(
-       <div></div>
-   );
 }
 
 export default RoomList;

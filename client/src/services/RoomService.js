@@ -3,18 +3,18 @@ import { history } from '../index';
 import { format } from 'util';
 
 const FINALPOINTS = {
-    FETCH_ROOMS_DATA: 'admi-cli/rooms',
-    SEARCH_ROOMS_DATA: 'admi-cli/rooms/search/%s/%s',
-    DELETE_ROOMS_DATA: 'admi-cli/rooms/delete/%s'
-    
+    FETCH_ROOMS_DATA: '/room/all/%s',
+    SEARCH_ROOMS_DATA: '/room/search/%s/%s',
+    DELETE_ROOMS_DATA: '/room/delete/%s'
+
 };
 
-class RoomService extends HttpClient{
+class RoomService extends HttpClient {
 
     fetchRoomsData = async payload => {
         try {
             const { data } = await this.getApiClient().get(
-                FINALPOINTS.FETCH_ROOMS_DATA
+                format(FINALPOINTS.FETCH_ROOMS_DATA, payload.clinicId)
             );
 
             const rooms = data;

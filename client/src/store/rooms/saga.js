@@ -4,6 +4,7 @@ import {
     FETCH_ROOMS_DATA
 } from './constants';
 
+import RoomService from '../../services/RoomService';
 
 import {
     putRoomsData,
@@ -11,11 +12,13 @@ import {
 } from './actions';
 
 
-/*export function* fetchRoomsData() {
+export function* fetchRoomsData() {
     const { payload } = yield take(FETCH_ROOMS_DATA);
+    yield put(putIsFetchRooms(false));
     const { rooms } = yield call(RoomService.fetchRoomsData, payload);
     yield put(putRoomsData(rooms));
-}*/
+    yield put(putIsFetchRooms(true));
+}
 
 /*export function* deleteRoomsData(){
     const { payload } = yield take (DELETE_ROOMS_DATA);
