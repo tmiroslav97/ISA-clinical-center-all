@@ -11,7 +11,7 @@ VALUES ('ROLE_PATIENT');
 INSERT INTO authority (name)
 VALUES ('ROLE_PERSONNEL');
 
-INSERT INTO clinic (address, cnt_rating, description, name, sum_rating)
+INSERT INTO clinic (address, cnt_rating, description, name , sum_rating)
 VALUES ('Vlasenica 15', 0, 'Clinic for cardiovascular disease', 'Clinic 1', 0);
 
 INSERT INTO users (id, first_name, last_name, email, enabled, first_log,

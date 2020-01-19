@@ -9,8 +9,11 @@ import { clinicsDataSelector } from '../../store/clinics/selectors';
 const ClinicSearch = () => {
     const dispatch = useDispatch();
     const clinics = useSelector(clinicsDataSelector);
+    //eslint-disable-next-line
     const [today, setToday] = useState(moment().format('YYYY-MM-DD'));
+    //eslint-disable-next-line
     const [date, setDate] = useState();
+    //eslint-disable-next-line
     const [type, setType] = useState();
     const [dateString, setDateString] = useStateWithCallback(moment().format('YYYY-MM-DD'), sdString => {
         setDate((new Date(sdString)).getTime() / 1000 | 0);

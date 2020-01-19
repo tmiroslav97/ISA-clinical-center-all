@@ -28,10 +28,10 @@ public class ClinicAdminController {
         this.clinicAdminService = clinicAdminService;
 
     }
-    @RequestMapping(method = GET, value = "/{admCliId}")
+    @RequestMapping(method = GET, value = "/{id}")
     @PreAuthorize("hasRole('ADMINC')")
-    public ResponseEntity<ClinicAdministratoreResponse> clinicAdministrator(@PathVariable Long admCliId) {
-        return new ResponseEntity<>(this.clinicAdminService.clinicAdministrator(admCliId), HttpStatus.CREATED);
+    public ResponseEntity<ClinicAdministratoreResponse> clinicAdministrator(@PathVariable Long id) {
+        return new ResponseEntity<>(this.clinicAdminService.clinicAdministrator(id), HttpStatus.CREATED);
     }
 
 

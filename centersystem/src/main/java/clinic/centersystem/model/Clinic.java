@@ -4,7 +4,6 @@ import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
-import org.w3c.dom.views.DocumentView;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -54,7 +53,7 @@ public class Clinic {
     private Set<ClinicAdmin> clinicAdmins = new HashSet<ClinicAdmin>();
 
     @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<SurgExRoom> surExRooms = new HashSet<SurgExRoom>();
+    private Set<Room> rooms = new HashSet<Room>();
 
     @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Appointment> appointments = new HashSet<Appointment>();

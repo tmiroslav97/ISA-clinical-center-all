@@ -1,5 +1,7 @@
 import HttpClient from './HttpBaseClient';
+//eslint-disable-next-line
 import { history } from '../index';
+//eslint-disable-next-line
 import { format } from 'util';
 
 const FINALPOINTS = {

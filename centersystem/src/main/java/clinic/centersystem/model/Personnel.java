@@ -35,7 +35,7 @@ public class Personnel extends User {
     }
 
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Calendar calendar;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

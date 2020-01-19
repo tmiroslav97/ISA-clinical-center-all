@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import useStateWithCallback from 'use-state-with-callback';
-import { Row, Form, Col, Button, Container, Table, Spinner } from 'react-bootstrap';
+import { Row, Form, Col, Button, Container } from 'react-bootstrap';
 import moment from 'moment';
 import HolAbsRequestsTable from './HolAbsRequestsTable';
 import { absHolRequest } from '../store/absence_holiday/actions';
 
 const HolAbsRequest = ({ personnelId, clinicId }) => {
     const dispatch = useDispatch();
+    //eslint-disable-next-line
     const [today, setToday] = useState(moment().format('YYYY-MM-DD'));
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();

@@ -14,6 +14,7 @@ import {
 
 
 export function* fetchDoctorsData() {
+    //eslint-disable-next-line
     const { payload } = yield take(FETCH_DOCTORS_DATA);
     yield put(putIsFetchDoctors(false));
     const { doctors } = yield call(DoctorService.fetchDoctorsData, {});
@@ -24,6 +25,7 @@ export function* fetchDoctorsData() {
 export function* addDoctor() {
     const { payload } = yield take(ADD_DOCTOR);
     yield put(putIsFetchDoctors(false));
+    //eslint-disable-next-line
     const { data } = yield call(DoctorService.addDoctor, payload);
     const { doctors } = yield call(DoctorService.fetchDoctorsData, {});
     yield put(putDoctorsData(doctors));

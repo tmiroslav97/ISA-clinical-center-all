@@ -32,6 +32,7 @@ const DoctorAllAtOnce = () => {
         );
         setShow(false);
     };
+    //eslint-disable-next-line
     const handleSearch = () => {
         dispatch(
            /* searchDoctorByName({
@@ -39,6 +40,7 @@ const DoctorAllAtOnce = () => {
             })*/
         );
     };
+    //eslint-disable-next-line
     const handleDeleteDoctor = () => {
         dispatch(
             /*deleteDoctor({

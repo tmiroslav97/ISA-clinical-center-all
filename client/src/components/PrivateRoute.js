@@ -6,7 +6,7 @@ import { userDataSelector, userTokenSelector } from "../store/user/selectors";
 const PrivateRoute = ({ component: Component, accessRole = null, ...rest }) => {
     const userData = useSelector(userDataSelector);
     const userToken = useSelector(userTokenSelector);
-
+    
     function hasRightRole() {
         if (!accessRole) {
             return true;
