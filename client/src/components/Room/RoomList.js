@@ -29,7 +29,7 @@ const RoomList = ({ clinicId }) => {
         <Container>
             <Row>
                 <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <h3>Clinics list</h3>
+                    <h3>Rooms list</h3>
                 </Col>
             </Row>
             <Row>
