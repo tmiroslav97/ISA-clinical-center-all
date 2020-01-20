@@ -65,9 +65,8 @@ class RoomService extends HttpClient {
                 FINALPOINTS.SEARCH_ROOMS_DATA,
                 payload
             );
-            const rooms = data;
 
-            return { rooms };
+            return { data };
         } catch (error) {
             console.log(error.response.data);
         }

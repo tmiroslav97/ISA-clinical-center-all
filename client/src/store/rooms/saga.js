@@ -26,8 +26,9 @@ export function* fetchRoomsData() {
 export function* searchRoomsData(){
     const { payload } = yield take (SEARCH_ROOMS_DATA);
     yield put(putIsFetchRooms(false));
-    const { rooms } = yield call(RoomService.searchRoomsData, payload);
-    yield put(putRoomsData(rooms));
+    const { data } = yield call(RoomService.searchRoomsData, payload);
+    yield put(putRoomsData(data.rooms));
+    yield put(putPageCount(data.pageCount));
     yield put(putIsFetchRooms(true));
 }
 
