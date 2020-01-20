@@ -33,7 +33,7 @@ public class RoomController {
     }
 
     @RequestMapping(method = POST, value = "/search")
-    public ResponseEntity<List<Room>> getClinicRooms(@RequestBody RoomSearchDTO roomSearchDTO) {
+    public ResponseEntity<RoomResponseDTO> getClinicRooms(@RequestBody RoomSearchDTO roomSearchDTO) {
         return new ResponseEntity<>(roomService.searchRooms(roomSearchDTO), HttpStatus.OK);
     }
 }

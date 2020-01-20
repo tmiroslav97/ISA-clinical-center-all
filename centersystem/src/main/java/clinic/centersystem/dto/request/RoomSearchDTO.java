@@ -14,4 +14,6 @@ public class RoomSearchDTO {
 
     private Long date;
 
+    private Integer pageCnt;
+
 }

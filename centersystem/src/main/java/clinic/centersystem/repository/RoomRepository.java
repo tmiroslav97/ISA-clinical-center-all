@@ -11,7 +11,7 @@ import java.util.List;
 public interface RoomRepository extends JpaRepository<Room, Long> {
 
     @Query("select r from Room r where lower(r.name) like lower(?1) and r.clinic.id=(?2)")
-    List<Room> searchRooms(String name, Long clinicId);
+    Page<Room> searchRooms(String name, Long clinicId, Pageable pageable);
 
     Page<Room> findByClinicId(Long id, Pageable pageable);
 }

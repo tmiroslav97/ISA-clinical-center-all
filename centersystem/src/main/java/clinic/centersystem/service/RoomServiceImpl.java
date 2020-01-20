@@ -47,7 +47,13 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public List<Room> searchRooms(RoomSearchDTO roomSearchDTO) {
-        return roomRepository.searchRooms(roomSearchDTO.getName(), roomSearchDTO.getClinicId());
+    public RoomResponseDTO searchRooms(RoomSearchDTO roomSearchDTO) {
+        Pageable pageable = PageRequest.of(roomSearchDTO.getPageCnt(), 10);
+        Page<Room> rooms = roomRepository.searchRooms(roomSearchDTO.getName(),roomSearchDTO.getClinicId(),pageable);
+        RoomResponseDTO roomResponseDTO = new RoomResponseDTO();
+        roomResponseDTO.setRooms(rooms.getContent());
+        roomResponseDTO.setPageCount(rooms.getTotalPages());
+
+        return roomResponseDTO;
     }
 }

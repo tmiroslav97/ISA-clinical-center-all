@@ -17,5 +17,5 @@ public interface RoomService {
 
     Room save(Room room);
 
-    List<Room> searchRooms(RoomSearchDTO roomSearchDTO);
+    RoomResponseDTO searchRooms(RoomSearchDTO roomSearchDTO);
 }
