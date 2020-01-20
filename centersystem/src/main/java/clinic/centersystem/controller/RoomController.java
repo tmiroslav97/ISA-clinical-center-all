@@ -1,6 +1,7 @@
 package clinic.centersystem.controller;
 
 import clinic.centersystem.dto.request.RoomSearchDTO;
+import clinic.centersystem.dto.response.RoomResponseDTO;
 import clinic.centersystem.model.Room;
 import clinic.centersystem.service.RoomServiceImpl;
 import org.springframework.http.HttpStatus;
@@ -26,9 +27,9 @@ public class RoomController {
         this.roomService = roomService;
     }
 
-    @RequestMapping(method = GET, value = "/all/{clinicId}")
-    public ResponseEntity<List<Room>> getClinicRooms(@PathVariable Long clinicId) {
-        return new ResponseEntity<>(roomService.findByClinic(clinicId), HttpStatus.OK);
+    @RequestMapping(method = GET, value = "/all/{clinicId}/{pageCnt}")
+    public ResponseEntity<RoomResponseDTO> getClinicRooms(@PathVariable Long clinicId, @PathVariable Integer pageCnt) {
+        return new ResponseEntity<>(roomService.findByClinic(clinicId, pageCnt), HttpStatus.OK);
     }
 
     @RequestMapping(method = POST, value = "/search")

@@ -1,11 +1,16 @@
 package clinic.centersystem.service;
 
 import clinic.centersystem.dto.request.RoomSearchDTO;
+import clinic.centersystem.dto.response.RoomResponseDTO;
 import clinic.centersystem.model.Room;
 import clinic.centersystem.repository.RoomRepository;
 import clinic.centersystem.service.intf.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -21,8 +26,14 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public List<Room> findByClinic(Long id) {
-        return roomRepository.findByClinicId(id);
+    public RoomResponseDTO findByClinic(Long id, Integer pageCnt) {
+        Pageable pageable = PageRequest.of(pageCnt, 10);
+        Page<Room> rooms = roomRepository.findByClinicId(id, pageable);
+        RoomResponseDTO roomResponseDTO = new RoomResponseDTO();
+        roomResponseDTO.setRooms(rooms.getContent());
+        roomResponseDTO.setPageCount(rooms.getTotalPages());
+
+        return roomResponseDTO;
     }
 
     @Override

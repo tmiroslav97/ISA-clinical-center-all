@@ -12,3 +12,9 @@ export function putUserToken(state, payload) {
     };
 }
 
+export function putIsFetchUserData(state, payload) {
+    return {
+        ...state,
+        isFetchUserData: payload
+    };
+}

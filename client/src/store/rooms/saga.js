@@ -9,15 +9,17 @@ import RoomService from '../../services/RoomService';
 
 import {
     putRoomsData,
-    putIsFetchRooms
+    putIsFetchRooms,
+    putPageCount
 } from './actions';
 
 
 export function* fetchRoomsData() {
     const { payload } = yield take(FETCH_ROOMS_DATA);
     yield put(putIsFetchRooms(false));
-    const { rooms } = yield call(RoomService.fetchRoomsData, payload);
-    yield put(putRoomsData(rooms));
+    const { data } = yield call(RoomService.fetchRoomsData, payload);
+    yield put(putRoomsData(data.rooms));
+    yield put(putPageCount(data.pageCount));
     yield put(putIsFetchRooms(true));
 }
 

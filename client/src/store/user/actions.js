@@ -10,7 +10,8 @@ import {
     FETCH_NURSE_DATA,
     FETCH_CADMIN_DATA,
     FETCH_PATIENT_DATA,
-    FETCH_DOCTOR_DATA
+    FETCH_DOCTOR_DATA,
+    PUT_IS_FETCH_USER_DATA
 } from './constants';
 
 //patient actions
@@ -49,6 +50,11 @@ export const regCCAdmin = payload => ({
 });
 
 //user actions
+export const putIsFetchUserData = payload => ({
+    type: PUT_IS_FETCH_USER_DATA,
+    payload
+});
+
 export const signOut = payload => ({
     type: SIGN_OUT,
     payload

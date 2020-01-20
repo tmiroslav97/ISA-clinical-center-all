@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Tab, Tabs } from 'react-bootstrap';
+import { Tab, Tabs, Spinner} from 'react-bootstrap';
 import ClinicProfile from './ClinicProfile';
 import BusinessReport from './BusinessReport';
 import UserProfile from '../UserProfile';
@@ -9,7 +9,7 @@ import Appointments from './AppointmentTypeAllAtOnce';
 import Doctors from './DoctorAllAtOnce';
 import FreeAppointment from './FreeApointment';
 import PriceList from './Pricelist';
-import { userDataSelector } from '../../store/user/selectors';
+import { userDataSelector, isFetchUserDataSelector } from '../../store/user/selectors';
 import { fetchCAdminData } from '../../store/user/actions';
 import RoomList from '../Room/RoomList';
 import RoomSearch from '../Room/RoomSearch';
@@ -18,6 +18,7 @@ const CA = ({ match }) => {
     const dispatch = useDispatch();
     const id = match.params.id;
     const data = useSelector(userDataSelector);
+    const isFetchUserData = useSelector(isFetchUserDataSelector);
 
     useEffect(() => {
         dispatch(
@@ -26,6 +27,14 @@ const CA = ({ match }) => {
             })
         );
     }, [id]);
+
+    if (!isFetchUserData) {
+        return <div className="d-flex justify-content-center">
+            <Spinner animation="border" role="status">
+                <span className="sr-only">Loading...</span>
+            </Spinner>
+        </div>;
+    }
 
     return (
         <Tabs defaultActiveKey="appointmentType" id="uncontrolled-tab-example">

@@ -3,7 +3,7 @@ import { history } from '../index';
 import { format } from 'util';
 
 const FINALPOINTS = {
-    FETCH_ROOMS_DATA: '/room/all/%s',
+    FETCH_ROOMS_DATA: '/room/all/%s/%s',
     SEARCH_ROOMS_DATA: '/room/search',
     DELETE_ROOMS_DATA: '/room/delete/%s'
 
@@ -14,12 +14,10 @@ class RoomService extends HttpClient {
     fetchRoomsData = async payload => {
         try {
             const { data } = await this.getApiClient().get(
-                format(FINALPOINTS.FETCH_ROOMS_DATA, payload.clinicId)
+                format(FINALPOINTS.FETCH_ROOMS_DATA, payload.clinicId, payload.pageCnt)
             );
 
-            const rooms = data;
-
-            return { rooms };
+            return { data };
         } catch (error) {
             console.log(error.response.data);
         }

@@ -5,3 +5,4 @@ export const ADD_ROOM = "add_room";
 export const SEARCH_ROOMS_DATA = "search_rooms_data";
 export const EDIT_ROOM = "edit_room";
 export const PUT_IS_FETCH_ROOMS = "put_is_fetch_rooms";
+export const PUT_PAGE_COUNT = "put_page_count";

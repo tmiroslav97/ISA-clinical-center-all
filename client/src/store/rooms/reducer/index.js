@@ -1,13 +1,15 @@
 import {
     PUT_ROOMS_DATA, 
-    PUT_IS_FETCH_ROOMS
+    PUT_IS_FETCH_ROOMS,
+    PUT_PAGE_COUNT
 } from '../constants';
 
 import * as computationFunctions from './computation-functions';
 
 const initialState = {
     rooms: [],
-    isFetchRooms: false
+    isFetchRooms: false,
+    pageCount: 0
 };
 
 const roomsReducer = (state = initialState, { type, payload }) => {
@@ -19,7 +21,8 @@ const roomsReducer = (state = initialState, { type, payload }) => {
 
 const actionHandler = {
     [PUT_ROOMS_DATA]: computationFunctions.putRoomsData,
-    [PUT_IS_FETCH_ROOMS]: computationFunctions.putIsFetchRooms
+    [PUT_IS_FETCH_ROOMS]: computationFunctions.putIsFetchRooms,
+    [PUT_PAGE_COUNT]: computationFunctions.putPageCount
 };
 
 export default roomsReducer;

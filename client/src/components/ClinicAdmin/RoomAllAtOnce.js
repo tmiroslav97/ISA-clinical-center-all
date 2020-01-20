@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Table, Button, Col, Form, Modal, Spinner } from 'react-bootstrap';
+import { Container, Row, Table, Button, Col, Form, Modal, Spinner, Pagination, PageItem } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { roomsDataSelector, isFetchRoomsSelector } from '../../store/rooms/selectors'
+import { roomsDataSelector, isFetchRoomsSelector, pageCountSelector } from '../../store/rooms/selectors'
 import { fetchRoomsData } from '../../store/rooms/actions';
 
 const RoomAllAtOnce = ({ clinicId }) => {
     const dispatch = useDispatch();
     const rooms = useSelector(roomsDataSelector);
-    const isFetchRooms = useSelector(isFetchRoomsSelector);
+    const isFetchRoomsData = useSelector(isFetchRoomsSelector);
+    const pageCount = useSelector(pageCountSelector);
+    const [pageCnt, setPageCnt] = useState(0);
 
     const handleDelitingRooms = () => {
         dispatch(
@@ -18,9 +20,21 @@ const RoomAllAtOnce = ({ clinicId }) => {
 
     useEffect(() => {
         dispatch(
-            fetchRoomsData({ clinicId })
+            fetchRoomsData({
+                clinicId,
+                pageCnt
+            })
         );
     }, [clinicId]);
+
+    let items = [];
+    for (let number = 1; number <= pageCount; number++) {
+        items.push(
+            <Pagination.Item key={number} active={number == (pageCnt + 1)}>
+                {number}
+            </Pagination.Item>
+        );
+    }
 
 
     const [show1rEdit, setShow1rEdit] = useState(false);
@@ -31,7 +45,7 @@ const RoomAllAtOnce = ({ clinicId }) => {
     const handleClose2rAdd = () => setShow2rAdd(false);
     const handleShow2rAdd = () => setShow2rAdd(true);
 
-    if (!isFetchRooms) {
+    if (!isFetchRoomsData) {
         return <div className="d-flex justify-content-center">
             <Spinner animation="border" role="status">
                 <span className="sr-only">Loading...</span>
@@ -169,6 +183,17 @@ const RoomAllAtOnce = ({ clinicId }) => {
                                 }
                             </tbody>
                         </Table>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={{ span: 10, offset: 1 }} xs={12}>
+                        <Pagination>
+                            <Pagination.First />
+                            <Pagination.Prev />
+                            {items}
+                            <Pagination.Next />
+                            <Pagination.Last />
+                        </Pagination>
                     </Col>
                 </Row>
             </Container >
