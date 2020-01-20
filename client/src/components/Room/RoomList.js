@@ -11,7 +11,7 @@ const RoomList = ({ clinicId }) => {
     const rooms = useSelector(roomsDataSelector);
     const isFetchRoomsData = useSelector(isFetchRoomsSelector);
     const pageCount = useSelector(pageCountSelector);
-    let pageCnt = 0;
+    const [pageCnt, setPageCnt] = useState(0);
 
     useEffect(() => {
         dispatch(
@@ -20,7 +20,7 @@ const RoomList = ({ clinicId }) => {
                 pageCnt
             })
         );
-    }, [clinicId]);
+    }, [pageCnt]);
 
     let items = [];
     for (let number = 1; number <= pageCount; number++) {
@@ -32,27 +32,24 @@ const RoomList = ({ clinicId }) => {
     }
 
     const handlePagination = (e) => {
+        e.preventDefault();
         let event = e.target.text;
         if (event != undefined) {
             if (event.includes('First')) {
-                this.pageCnt = 0;
+                setPageCnt(0);
             } else if (event.includes('Last')) {
-                this.pageCnt = pageCount - 1;
+                setPageCnt(pageCount - 1);
             } else if (event.includes('Next')) {
                 if (pageCnt < pageCount - 1) {
-                    this.pageCnt = pageCnt + 1;
+                    setPageCnt(pageCnt + 1);
                 }
             } else if (event.includes('Previous')) {
                 if (pageCnt > 0) {
-                    this.pageCnt = pageCnt - 1;
+                    setPageCnt(pageCnt - 1);
                 }
+            }else{
+                setPageCnt(event-1);
             }
-            dispatch(
-                fetchRoomsData({
-                    clinicId,
-                    pageCnt
-                })
-            );
         }
     };
 

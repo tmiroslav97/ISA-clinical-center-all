@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import useStateWithCallback from 'use-state-with-callback';
-import { Container, Row, Col, Table, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import { searchRoomsData } from '../../store/rooms/actions';

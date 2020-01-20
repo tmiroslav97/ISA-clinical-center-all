@@ -4,7 +4,7 @@ import { Tab, Tabs, Spinner} from 'react-bootstrap';
 import ClinicProfile from './ClinicProfile';
 import BusinessReport from './BusinessReport';
 import UserProfile from '../UserProfile';
-import ExeminationRoom from './RoomAllAtOnce';
+import ExeminationRoom from '../Room/RoomAllAtOnce';
 import Appointments from './AppointmentTypeAllAtOnce';
 import Doctors from './DoctorAllAtOnce';
 import FreeAppointment from './FreeApointment';

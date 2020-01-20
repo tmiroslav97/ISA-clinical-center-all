@@ -12,9 +12,6 @@ const RoomAllAtOnce = ({ clinicId }) => {
     const [pageCnt, setPageCnt] = useState(0);
 
     const handleDelitingRooms = () => {
-        dispatch(
-
-        );
     };
 
 
@@ -25,7 +22,7 @@ const RoomAllAtOnce = ({ clinicId }) => {
                 pageCnt
             })
         );
-    }, [clinicId]);
+    }, [pageCnt]);
 
     let items = [];
     for (let number = 1; number <= pageCount; number++) {
@@ -35,6 +32,28 @@ const RoomAllAtOnce = ({ clinicId }) => {
             </Pagination.Item>
         );
     }
+
+    const handlePagination = (e) => {
+        e.preventDefault();
+        let event = e.target.text;
+        if (event != undefined) {
+            if (event.includes('First')) {
+                setPageCnt(0);
+            } else if (event.includes('Last')) {
+                setPageCnt(pageCount - 1);
+            } else if (event.includes('Next')) {
+                if (pageCnt < pageCount - 1) {
+                    setPageCnt(pageCnt + 1);
+                }
+            } else if (event.includes('Previous')) {
+                if (pageCnt > 0) {
+                    setPageCnt(pageCnt - 1);
+                }
+            }else{
+                setPageCnt(event-1);
+            }
+        }
+    };
 
 
     const [show1rEdit, setShow1rEdit] = useState(false);
@@ -137,7 +156,7 @@ const RoomAllAtOnce = ({ clinicId }) => {
                                 </Col>
                             </Form.Group>
 
-                            <Form.Group as={Row} controlId="formGridState">
+                            <Form.Group as={Row} controlId="formGridStateRoom">
                                 <Form.Label>Filter data by</Form.Label>
                                 <Col>
                                     <Form.Control as="select">
@@ -168,7 +187,7 @@ const RoomAllAtOnce = ({ clinicId }) => {
                                     rooms.map((room, index) => {
                                         return (
                                             <tr key={room.id}>
-                                                <td>{index}</td>
+                                                <td>{index+1}</td>
                                                 <td>{room.name}</td>
                                                 <td>{room.number}</td>
                                                 <td>
@@ -187,7 +206,7 @@ const RoomAllAtOnce = ({ clinicId }) => {
                 </Row>
                 <Row>
                     <Col md={{ span: 10, offset: 1 }} xs={12}>
-                        <Pagination>
+                        <Pagination onClick={handlePagination}>
                             <Pagination.First />
                             <Pagination.Prev />
                             {items}
