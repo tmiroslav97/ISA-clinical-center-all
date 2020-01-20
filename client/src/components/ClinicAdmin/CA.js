@@ -42,7 +42,7 @@ const CA = ({ match }) => {
                 <BusinessReport />
             </Tab>
             <Tab eventKey="exeminationRoom" title="Exemination room" >
-                <ExeminationRoom />
+                <ExeminationRoom clinicId={data.clinicId}/>
             </Tab>
             <Tab eventKey="roomList" title="Room list">
                 <RoomSearch clinicId={data.clinicId}/>

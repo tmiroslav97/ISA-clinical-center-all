@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { roomsDataSelector, isFetchRoomsSelector } from '../../store/rooms/selectors'
 import { fetchRoomsData } from '../../store/rooms/actions';
 
-const RoomAllAtOnce = () => {
+const RoomAllAtOnce = ({ clinicId }) => {
     const dispatch = useDispatch();
     const rooms = useSelector(roomsDataSelector);
     const isFetchRooms = useSelector(isFetchRoomsSelector);
@@ -15,13 +15,13 @@ const RoomAllAtOnce = () => {
         );
     };
 
-    /*
+
     useEffect(() => {
         dispatch(
-            fetchRoomsData({})
+            fetchRoomsData({ clinicId })
         );
-    }, []);
-    */
+    }, [clinicId]);
+
 
     const [show1rEdit, setShow1rEdit] = useState(false);
     const [show2rAdd, setShow2rAdd] = useState(false);
@@ -154,6 +154,7 @@ const RoomAllAtOnce = () => {
                                     rooms.map((room, index) => {
                                         return (
                                             <tr key={room.id}>
+                                                <td>{index}</td>
                                                 <td>{room.name}</td>
                                                 <td>{room.number}</td>
                                                 <td>
