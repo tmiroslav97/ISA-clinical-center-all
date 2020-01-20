@@ -222,3 +222,5 @@ WHERE id = 3;
 INSERT INTO appointment_type(id, type) VALUES (1,'General examination');
 
 INSERT INTO appointment_type(id, type) VALUES (2,'Heart examination');
+
+INSERT INTO room(id,reserved,room_type,name,clinic_id) VALUES (1,FALSE ,'SUR','For heart',1);

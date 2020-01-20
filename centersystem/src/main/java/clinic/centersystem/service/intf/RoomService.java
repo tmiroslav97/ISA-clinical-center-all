@@ -1,6 +1,7 @@
 package clinic.centersystem.service.intf;
 
 
+import clinic.centersystem.dto.request.RoomSearchDTO;
 import clinic.centersystem.model.Room;
 
 import java.util.List;
@@ -15,5 +16,5 @@ public interface RoomService {
 
     Room save(Room room);
 
-    List<Room> searchRooms(String name, Long clinicId);
+    List<Room> searchRooms(RoomSearchDTO roomSearchDTO);
 }

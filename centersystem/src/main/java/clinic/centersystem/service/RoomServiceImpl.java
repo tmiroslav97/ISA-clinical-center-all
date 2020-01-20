@@ -1,5 +1,6 @@
 package clinic.centersystem.service;
 
+import clinic.centersystem.dto.request.RoomSearchDTO;
 import clinic.centersystem.model.Room;
 import clinic.centersystem.repository.RoomRepository;
 import clinic.centersystem.service.intf.RoomService;
@@ -35,7 +36,7 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public List<Room> searchRooms(String name, Long clinicId) {
-        return roomRepository.searchRooms(name,clinicId);
+    public List<Room> searchRooms(RoomSearchDTO roomSearchDTO) {
+        return roomRepository.searchRooms(roomSearchDTO.getName(), roomSearchDTO.getClinicId());
     }
 }

@@ -4,7 +4,7 @@ import { format } from 'util';
 
 const FINALPOINTS = {
     FETCH_ROOMS_DATA: '/room/all/%s',
-    SEARCH_ROOMS_DATA: '/room/search/%s/%s/%s',
+    SEARCH_ROOMS_DATA: '/room/search',
     DELETE_ROOMS_DATA: '/room/delete/%s'
 
 };
@@ -60,10 +60,12 @@ class RoomService extends HttpClient {
             console.log(error.response.data);
         }
     };
+
     searchRoomsData = async payload => {
         try {
-            const { data } = await this.getApiClient().get(
-                format(FINALPOINTS.SEARCH_ROOMS_DATA, payload.clinicId, payload.name, payload.date),
+            const { data } = await this.getApiClient().post(
+                FINALPOINTS.SEARCH_ROOMS_DATA,
+                payload
             );
             const rooms = data;
 
