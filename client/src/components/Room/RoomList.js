@@ -64,7 +64,7 @@ const RoomList = ({ clinicId }) => {
 
     return (
         <Container>
-            <RoomSearch clinicId={clinicId,pageCnt}/>
+            <RoomSearch clinicId={clinicId} pageCnt={pageCnt}/>
             <Row>
                 <Col md={{ span: 10, offset: 1 }} xs={12}>
                     <h3>Rooms list</h3>
