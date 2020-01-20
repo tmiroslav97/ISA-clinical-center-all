@@ -6,7 +6,7 @@ import moment from 'moment';
 import { searchRoomsData } from '../../store/rooms/actions';
 
 
-const RoomSearch = ({ clinicId }) => {
+const RoomSearch = ({ clinicId,pageCnt }) => {
     const dispatch = useDispatch();
     const [today, setToday] = useState(moment().format('YYYY-MM-DD'));
     const [date, setDate] = useState();
@@ -21,7 +21,8 @@ const RoomSearch = ({ clinicId }) => {
             searchRoomsData({
                 name,
                 date,
-                clinicId
+                clinicId,
+                pageCnt
             })
         );
     };

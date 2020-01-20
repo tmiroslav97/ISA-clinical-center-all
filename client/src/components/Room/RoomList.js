@@ -4,6 +4,7 @@ import { Container, Row, Col, Spinner, Table, Pagination, PageItem } from 'react
 import { useDispatch, useSelector } from 'react-redux';
 import { roomsDataSelector, isFetchRoomsSelector, pageCountSelector } from '../../store/rooms/selectors';
 import { fetchRoomsData } from '../../store/rooms/actions';
+import RoomSearch from './RoomSearch';
 
 
 const RoomList = ({ clinicId }) => {
@@ -63,6 +64,7 @@ const RoomList = ({ clinicId }) => {
 
     return (
         <Container>
+            <RoomSearch clinicId={clinicId,pageCnt}/>
             <Row>
                 <Col md={{ span: 10, offset: 1 }} xs={12}>
                     <h3>Rooms list</h3>
