@@ -1,21 +1,58 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Spinner, Table } from 'react-bootstrap';
+import useStateWithCallback from 'use-state-with-callback';
+import { Container, Row, Col, Spinner, Table, Pagination, PageItem } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { roomsDataSelector, isFetchRoomsSelector } from '../../store/rooms/selectors';
-import { clinicsDataSelector } from '../../store/clinics/selectors';
+import { roomsDataSelector, isFetchRoomsSelector, pageCountSelector } from '../../store/rooms/selectors';
 import { fetchRoomsData } from '../../store/rooms/actions';
+import RoomSearch from './RoomSearch';
 
 
 const RoomList = ({ clinicId }) => {
     const dispatch = useDispatch();
     const rooms = useSelector(roomsDataSelector);
     const isFetchRoomsData = useSelector(isFetchRoomsSelector);
+    const pageCount = useSelector(pageCountSelector);
+    const [pageCnt, setPageCnt] = useState(0);
 
     useEffect(() => {
         dispatch(
-            fetchRoomsData({ clinicId })
+            fetchRoomsData({
+                clinicId,
+                pageCnt
+            })
         );
-    }, [clinicId]);
+    }, [pageCnt]);
+
+    let items = [];
+    for (let number = 1; number <= pageCount; number++) {
+        items.push(
+            <Pagination.Item key={number} active={number == (pageCnt + 1)}>
+                {number}
+            </Pagination.Item>
+        );
+    }
+
+    const handlePagination = (e) => {
+        e.preventDefault();
+        let event = e.target.text;
+        if (event != undefined) {
+            if (event.includes('First')) {
+                setPageCnt(0);
+            } else if (event.includes('Last')) {
+                setPageCnt(pageCount - 1);
+            } else if (event.includes('Next')) {
+                if (pageCnt < pageCount - 1) {
+                    setPageCnt(pageCnt + 1);
+                }
+            } else if (event.includes('Previous')) {
+                if (pageCnt > 0) {
+                    setPageCnt(pageCnt - 1);
+                }
+            }else{
+                setPageCnt(event-1);
+            }
+        }
+    };
 
     if (!isFetchRoomsData) {
         return <div className="d-flex justify-content-center">
@@ -27,9 +64,10 @@ const RoomList = ({ clinicId }) => {
 
     return (
         <Container>
+            <RoomSearch clinicId={clinicId} pageCnt={pageCnt}/>
             <Row>
                 <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <h3>Clinics list</h3>
+                    <h3>Rooms list</h3>
                 </Col>
             </Row>
             <Row>
@@ -56,6 +94,17 @@ const RoomList = ({ clinicId }) => {
                             }
                         </tbody>
                     </Table>
+                </Col>
+            </Row>
+            <Row>
+                <Col md={{ span: 10, offset: 1 }} xs={12}>
+                    <Pagination onClick={handlePagination}>
+                        <Pagination.First />
+                        <Pagination.Prev />
+                        {items}
+                        <Pagination.Next />
+                        <Pagination.Last />
+                    </Pagination>
                 </Col>
             </Row>
         </Container>

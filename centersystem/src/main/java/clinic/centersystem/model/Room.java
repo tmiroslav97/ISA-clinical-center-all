@@ -31,6 +31,7 @@ public class Room {
     @Column(name = DbColumnConstants.RESERVED, nullable = false)
     private Boolean reserved = false;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Clinic clinic;
 

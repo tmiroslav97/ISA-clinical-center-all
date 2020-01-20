@@ -1,22 +1,34 @@
 import { take, put, call } from 'redux-saga/effects';
 
 import {
-    FETCH_ROOMS_DATA
+    FETCH_ROOMS_DATA,
+    SEARCH_ROOMS_DATA
 } from './constants';
 
 import RoomService from '../../services/RoomService';
 
 import {
     putRoomsData,
-    putIsFetchRooms
+    putIsFetchRooms,
+    putPageCount
 } from './actions';
 
 
 export function* fetchRoomsData() {
     const { payload } = yield take(FETCH_ROOMS_DATA);
     yield put(putIsFetchRooms(false));
-    const { rooms } = yield call(RoomService.fetchRoomsData, payload);
-    yield put(putRoomsData(rooms));
+    const { data } = yield call(RoomService.fetchRoomsData, payload);
+    yield put(putRoomsData(data.rooms));
+    yield put(putPageCount(data.pageCount));
+    yield put(putIsFetchRooms(true));
+}
+
+export function* searchRoomsData(){
+    const { payload } = yield take (SEARCH_ROOMS_DATA);
+    yield put(putIsFetchRooms(false));
+    const { data } = yield call(RoomService.searchRoomsData, payload);
+    yield put(putRoomsData(data.rooms));
+    yield put(putPageCount(data.pageCount));
     yield put(putIsFetchRooms(true));
 }
 
@@ -39,9 +51,3 @@ export function* fetchRoomsData() {
     yield put(putRoomsData(rooms));
 }*/
 
-/*export function* searchRoomsData(){
-    const { payload } = yield take (SEARCH_ROOMS_DATA);
-    const { data } = yield call(RoomService.searchRoomsData, payload);
-    const { rooms } = yield call(RoomService.fetchRoomsData, {});
-    yield put(putRoomsData(rooms));
-}*/

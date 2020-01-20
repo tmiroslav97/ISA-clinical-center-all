@@ -24,7 +24,8 @@ import DoctorService from '../../services/DoctorService';
 
 import {
     putUserData,
-    putUserToken
+    putUserToken,
+    putIsFetchUserData
 } from './actions';
 
 //patient sagas
@@ -37,8 +38,10 @@ export function* fetchPatientData() {
 //cadmin sagas
 export function* fetchCAdminData() {
     const { payload } = yield take(FETCH_CADMIN_DATA);
+    yield put(putIsFetchUserData(false));
     const { data } = yield call(CAdminService.fetchCAdminData, payload);
     yield put(putUserData(data));
+    yield put(putIsFetchUserData(true));
 }
 //doctor sagas
 export function* fetchDoctorData() {

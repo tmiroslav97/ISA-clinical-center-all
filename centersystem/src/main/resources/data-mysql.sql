@@ -222,3 +222,26 @@ WHERE id = 3;
 INSERT INTO appointment_type(id, type) VALUES (1,'General examination');
 
 INSERT INTO appointment_type(id, type) VALUES (2,'Heart examination');
+
+INSERT INTO room(id,reserved,room_type,name,clinic_id) VALUES (1,FALSE ,'SUR','For heart',1);
+
+INSERT INTO room(id,reserved,room_type,name,clinic_id) VALUES (2,FALSE ,'SUR','For head',1);
+
+INSERT INTO room(id,reserved,room_type,name,clinic_id) VALUES (3,FALSE ,'SUR','For brain',1);
+
+INSERT INTO room(id,reserved,room_type,name,clinic_id) VALUES (4,FALSE ,'SUR','For skin',1);
+
+INSERT INTO room(id,reserved,room_type,name,clinic_id) VALUES (5,FALSE ,'SUR','For legs',1);
+
+INSERT INTO room(id,reserved,room_type,name,clinic_id) VALUES (6,FALSE ,'SUR','For old',1);
+
+INSERT INTO room(id,reserved,room_type,name,clinic_id) VALUES (7,FALSE ,'SUR','For surgery',1);
+
+INSERT INTO room(id,reserved,room_type,name,clinic_id) VALUES (8,FALSE ,'SUR','For Ah1',1);
+
+INSERT INTO room(id,reserved,room_type,name,clinic_id) VALUES (9,FALSE ,'SUR','For Ah2',1);
+
+INSERT INTO room(id,reserved,room_type,name,clinic_id) VALUES (10,FALSE ,'SUR','For Ah3',1);
+
+INSERT INTO room(id,reserved,room_type,name,clinic_id) VALUES (11,FALSE ,'SUR','For Ah4',1);
+

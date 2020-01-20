@@ -1,27 +1,60 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Table, Button, Col, Form, Modal, Spinner } from 'react-bootstrap';
+import { Container, Row, Table, Button, Col, Form, Modal, Spinner, Pagination, PageItem } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { roomsDataSelector, isFetchRoomsSelector } from '../../store/rooms/selectors'
+import { roomsDataSelector, isFetchRoomsSelector, pageCountSelector } from '../../store/rooms/selectors'
 import { fetchRoomsData } from '../../store/rooms/actions';
 
-const RoomAllAtOnce = () => {
+const RoomAllAtOnce = ({ clinicId }) => {
     const dispatch = useDispatch();
     const rooms = useSelector(roomsDataSelector);
-    const isFetchRooms = useSelector(isFetchRoomsSelector);
+    const isFetchRoomsData = useSelector(isFetchRoomsSelector);
+    const pageCount = useSelector(pageCountSelector);
+    const [pageCnt, setPageCnt] = useState(0);
 
     const handleDelitingRooms = () => {
-        dispatch(
-
-        );
     };
 
-    /*
+
     useEffect(() => {
         dispatch(
-            fetchRoomsData({})
+            fetchRoomsData({
+                clinicId,
+                pageCnt
+            })
         );
-    }, []);
-    */
+    }, [pageCnt]);
+
+    let items = [];
+    for (let number = 1; number <= pageCount; number++) {
+        items.push(
+            <Pagination.Item key={number} active={number == (pageCnt + 1)}>
+                {number}
+            </Pagination.Item>
+        );
+    }
+
+    const handlePagination = (e) => {
+        e.preventDefault();
+        let event = e.target.text;
+        if (event != undefined) {
+            if (event.includes('First')) {
+                setPageCnt(0);
+            } else if (event.includes('Last')) {
+                setPageCnt(pageCount - 1);
+            } else if (event.includes('Next')) {
+                if (pageCnt < pageCount - 1) {
+                    setPageCnt(pageCnt + 1);
+                }
+            } else if (event.includes('Previous')) {
+                if (pageCnt > 0) {
+                    setPageCnt(pageCnt - 1);
+                }
+            }else{
+                setPageCnt(event-1);
+            }
+        }
+    };
+
 
     const [show1rEdit, setShow1rEdit] = useState(false);
     const [show2rAdd, setShow2rAdd] = useState(false);
@@ -31,7 +64,7 @@ const RoomAllAtOnce = () => {
     const handleClose2rAdd = () => setShow2rAdd(false);
     const handleShow2rAdd = () => setShow2rAdd(true);
 
-    if (!isFetchRooms) {
+    if (!isFetchRoomsData) {
         return <div className="d-flex justify-content-center">
             <Spinner animation="border" role="status">
                 <span className="sr-only">Loading...</span>
@@ -123,7 +156,7 @@ const RoomAllAtOnce = () => {
                                 </Col>
                             </Form.Group>
 
-                            <Form.Group as={Row} controlId="formGridState">
+                            <Form.Group as={Row} controlId="formGridStateRoom">
                                 <Form.Label>Filter data by</Form.Label>
                                 <Col>
                                     <Form.Control as="select">
@@ -154,6 +187,7 @@ const RoomAllAtOnce = () => {
                                     rooms.map((room, index) => {
                                         return (
                                             <tr key={room.id}>
+                                                <td>{index+1}</td>
                                                 <td>{room.name}</td>
                                                 <td>{room.number}</td>
                                                 <td>
@@ -168,6 +202,17 @@ const RoomAllAtOnce = () => {
                                 }
                             </tbody>
                         </Table>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={{ span: 10, offset: 1 }} xs={12}>
+                        <Pagination onClick={handlePagination}>
+                            <Pagination.First />
+                            <Pagination.Prev />
+                            {items}
+                            <Pagination.Next />
+                            <Pagination.Last />
+                        </Pagination>
                     </Col>
                 </Row>
             </Container >

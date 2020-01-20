@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Tab, Tabs } from 'react-bootstrap';
+import { Tab, Tabs, Spinner} from 'react-bootstrap';
 import ClinicProfile from './ClinicProfile';
 import BusinessReport from './BusinessReport';
 import UserProfile from '../UserProfile';
-import ExeminationRoom from './RoomAllAtOnce';
+import ExeminationRoom from '../Room/RoomAllAtOnce';
 import Appointments from './AppointmentTypeAllAtOnce';
 import Doctors from './DoctorAllAtOnce';
 import FreeAppointment from './FreeApointment';
 import PriceList from './Pricelist';
-import { userDataSelector } from '../../store/user/selectors';
+import { userDataSelector, isFetchUserDataSelector } from '../../store/user/selectors';
 import { fetchCAdminData } from '../../store/user/actions';
 import RoomList from '../Room/RoomList';
 
@@ -17,6 +17,7 @@ const CA = ({ match }) => {
     const dispatch = useDispatch();
     const id = match.params.id;
     const data = useSelector(userDataSelector);
+    const isFetchUserData = useSelector(isFetchUserDataSelector);
 
     useEffect(() => {
         dispatch(
@@ -25,6 +26,14 @@ const CA = ({ match }) => {
             })
         );
     }, [id]);
+
+    if (!isFetchUserData) {
+        return <div className="d-flex justify-content-center">
+            <Spinner animation="border" role="status">
+                <span className="sr-only">Loading...</span>
+            </Spinner>
+        </div>;
+    }
 
     return (
         <Tabs defaultActiveKey="appointmentType" id="uncontrolled-tab-example">
@@ -41,7 +50,7 @@ const CA = ({ match }) => {
                 <BusinessReport />
             </Tab>
             <Tab eventKey="exeminationRoom" title="Exemination room" >
-                <ExeminationRoom />
+                <ExeminationRoom clinicId={data.clinicId}/>
             </Tab>
             <Tab eventKey="roomList" title="Room list">
                 <RoomList clinicId={data.clinicId}/>

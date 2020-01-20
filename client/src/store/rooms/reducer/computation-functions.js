@@ -11,3 +11,10 @@ export function putIsFetchRooms(state, payload) {
         isFetchRooms: payload
     };
 }
+
+export function putPageCount(state, payload) {
+    return {
+        ...state,
+        pageCount: payload
+    };
+}
