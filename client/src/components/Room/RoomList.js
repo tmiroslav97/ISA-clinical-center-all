@@ -3,24 +3,33 @@ import useStateWithCallback from 'use-state-with-callback';
 import { Container, Row, Col, Spinner, Table, Pagination, PageItem } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { roomsDataSelector, isFetchRoomsSelector, pageCountSelector } from '../../store/rooms/selectors';
-import { fetchRoomsData } from '../../store/rooms/actions';
-import RoomSearch from './RoomSearch';
+import { fetchRoomsData, searchRoomsData } from '../../store/rooms/actions';
 
 
-const RoomList = ({ clinicId }) => {
+const RoomList = ({ clinicId, flag, name, date, cnt }) => {
     const dispatch = useDispatch();
     const rooms = useSelector(roomsDataSelector);
     const isFetchRoomsData = useSelector(isFetchRoomsSelector);
     const pageCount = useSelector(pageCountSelector);
-    const [pageCnt, setPageCnt] = useState(0);
+    const [pageCnt, setPageCnt] = useState(cnt);
 
     useEffect(() => {
-        dispatch(
-            fetchRoomsData({
+        if (flag) {
+            searchRoomsData({
+                name,
+                date,
                 clinicId,
                 pageCnt
             })
-        );
+        } else {
+            dispatch(
+                fetchRoomsData({
+                    clinicId,
+                    pageCnt
+                })
+            );
+        }
+
     }, [pageCnt]);
 
     let items = [];
@@ -35,7 +44,8 @@ const RoomList = ({ clinicId }) => {
     const handlePagination = (e) => {
         e.preventDefault();
         let event = e.target.text;
-        if (event != undefined) {
+        console.log(event);
+        if (event != undefined && pageCount > 0) {
             if (event.includes('First')) {
                 setPageCnt(0);
             } else if (event.includes('Last')) {
@@ -48,8 +58,8 @@ const RoomList = ({ clinicId }) => {
                 if (pageCnt > 0) {
                     setPageCnt(pageCnt - 1);
                 }
-            }else{
-                setPageCnt(event-1);
+            } else {
+                setPageCnt(event - 1);
             }
         }
     };
@@ -64,7 +74,6 @@ const RoomList = ({ clinicId }) => {
 
     return (
         <Container>
-            <RoomSearch clinicId={clinicId} pageCnt={pageCnt}/>
             <Row>
                 <Col md={{ span: 10, offset: 1 }} xs={12}>
                     <h3>Rooms list</h3>
@@ -78,6 +87,7 @@ const RoomList = ({ clinicId }) => {
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Type</th>
+                                <th>Number</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -85,9 +95,10 @@ const RoomList = ({ clinicId }) => {
                                 rooms.map((room, index) => {
                                     return (
                                         <tr key={room.id}>
-                                            <td>{index + 1}</td>
+                                            <td>{pageCnt * 10 + index + 1}</td>
                                             <td>{room.name}</td>
                                             <td>{room.type}</td>
+                                            <td>{room.roomNum}</td>
                                         </tr>
                                     );
                                 })
@@ -98,7 +109,7 @@ const RoomList = ({ clinicId }) => {
             </Row>
             <Row>
                 <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <Pagination onClick={handlePagination}>
+                    <Pagination onClick={handlePagination} className="pagination justify-content-center mb-5">
                         <Pagination.First />
                         <Pagination.Prev />
                         {items}

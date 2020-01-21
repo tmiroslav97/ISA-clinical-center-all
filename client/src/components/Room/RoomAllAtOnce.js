@@ -177,6 +177,7 @@ const RoomAllAtOnce = ({ clinicId }) => {
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
+                                    <th>Type</th>
                                     <th>Number</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
@@ -189,7 +190,8 @@ const RoomAllAtOnce = ({ clinicId }) => {
                                             <tr key={room.id}>
                                                 <td>{index+1}</td>
                                                 <td>{room.name}</td>
-                                                <td>{room.number}</td>
+                                                <td>{room.type}</td>
+                                                <td>{room.roomNum}</td>
                                                 <td>
                                                     <Button onClick={handleShow1rEdit}>Edit</Button>
                                                 </td>
@@ -206,7 +208,7 @@ const RoomAllAtOnce = ({ clinicId }) => {
                 </Row>
                 <Row>
                     <Col md={{ span: 10, offset: 1 }} xs={12}>
-                        <Pagination onClick={handlePagination}>
+                        <Pagination onClick={handlePagination} className="pagination justify-content-center mb-5">
                             <Pagination.First />
                             <Pagination.Prev />
                             {items}

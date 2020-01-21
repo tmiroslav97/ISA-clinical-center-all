@@ -3,24 +3,38 @@ import useStateWithCallback from 'use-state-with-callback';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
-import { searchRoomsData } from '../../store/rooms/actions';
+import { searchRoomsData, fetchRoomsData } from '../../store/rooms/actions';
+import RoomList from './RoomList';
 
 
-const RoomSearch = ({ clinicId,pageCnt }) => {
+const RoomSearch = ({ clinicId }) => {
     const dispatch = useDispatch();
     const [today, setToday] = useState(moment().format('YYYY-MM-DD'));
     const [date, setDate] = useState();
     const [name, setName] = useState('');
+    const [pageCnt, setPageCnt] = useState(0);
+    const [flag, setFlag] = useState(false);
     const [dateString, setDateString] = useStateWithCallback(moment().format('YYYY-MM-DD'), sdString => {
         setDate((new Date(sdString)).getTime() / 1000 | 0);
 
     });
 
     const handleRoomsSearch = () => {
+        setFlag(true);
         dispatch(
             searchRoomsData({
                 name,
                 date,
+                clinicId,
+                pageCnt
+            })
+        );
+    };
+
+    const handleFetchAll = () => {
+        setFlag(false);
+        dispatch(
+            fetchRoomsData({
                 clinicId,
                 pageCnt
             })
@@ -56,9 +70,18 @@ const RoomSearch = ({ clinicId,pageCnt }) => {
                         <Button variant="primary" className="mb-4" onClick={handleRoomsSearch}>
                             Search
                         </Button>
+
                     </Form>
                 </Col>
             </Row>
+            <Row>
+                <Col md={{ span: 10, offset: 1 }} xs={12}>
+                    <Button variant="primary" className="mb-4" onClick={handleFetchAll}>
+                        Fetch all
+                    </Button>
+                </Col>
+            </Row>
+            <RoomList clinicId={clinicId} searchFlag={flag} name={name} date={date} cnt={pageCnt} />
         </Container>
     );
 

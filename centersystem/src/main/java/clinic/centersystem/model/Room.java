@@ -28,6 +28,9 @@ public class Room {
     @Column(name = DbColumnConstants.ROOMTYPE, nullable = false)
     private String type;
 
+    @Column(name = DbColumnConstants.ROOMNUMBER, nullable = false, unique = true)
+    private Integer roomNum;
+
     @Column(name = DbColumnConstants.RESERVED, nullable = false)
     private Boolean reserved = false;
 

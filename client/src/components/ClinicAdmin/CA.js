@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Tab, Tabs, Spinner} from 'react-bootstrap';
+import { Tab, Tabs, Spinner } from 'react-bootstrap';
 import ClinicProfile from './ClinicProfile';
 import BusinessReport from './BusinessReport';
 import UserProfile from '../UserProfile';
@@ -11,7 +11,7 @@ import FreeAppointment from './FreeApointment';
 import PriceList from './Pricelist';
 import { userDataSelector, isFetchUserDataSelector } from '../../store/user/selectors';
 import { fetchCAdminData } from '../../store/user/actions';
-import RoomList from '../Room/RoomList';
+import RoomSearch from '../Room/RoomSearch';
 
 const CA = ({ match }) => {
     const dispatch = useDispatch();
@@ -50,10 +50,10 @@ const CA = ({ match }) => {
                 <BusinessReport />
             </Tab>
             <Tab eventKey="exeminationRoom" title="Exemination room" >
-                <ExeminationRoom clinicId={data.clinicId}/>
+                <ExeminationRoom clinicId={data.clinicId} />
             </Tab>
-            <Tab eventKey="roomList" title="Room list">
-                <RoomList clinicId={data.clinicId}/>
+            <Tab eventKey="roomSearch" title="Room search">
+                <RoomSearch clinicId={data.clinicId} />
             </Tab>
             <Tab eventKey="appointments" title="Free appointments" >
                 <FreeAppointment />
