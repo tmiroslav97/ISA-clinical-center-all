@@ -27,7 +27,7 @@ public class RoomCalendar {
     private Long id;
 
     @Column(name = DbColumnConstants.DATE, nullable = false)
-    @Type(type="org.joda.time.contrib.hibernate.PersistentLocalDate")
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     private LocalDate date;
 
     @Column(name = DbColumnConstants.TERMIN, nullable = false)
