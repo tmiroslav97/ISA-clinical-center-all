@@ -6,7 +6,7 @@ import { roomsDataSelector, isFetchRoomsSelector, pageCountSelector } from '../.
 import { fetchRoomsData, searchRoomsData } from '../../store/rooms/actions';
 
 
-const RoomList = ({ clinicId, flag, name, date, cnt }) => {
+const RoomList = ({ clinicId, filterTerm, name, date, cnt }) => {
     const dispatch = useDispatch();
     const rooms = useSelector(roomsDataSelector);
     const isFetchRoomsData = useSelector(isFetchRoomsSelector);
@@ -14,22 +14,14 @@ const RoomList = ({ clinicId, flag, name, date, cnt }) => {
     const [pageCnt, setPageCnt] = useState(cnt);
 
     useEffect(() => {
-        if (flag) {
+        dispatch(
             searchRoomsData({
                 name,
                 date,
                 clinicId,
                 pageCnt
             })
-        } else {
-            dispatch(
-                fetchRoomsData({
-                    clinicId,
-                    pageCnt
-                })
-            );
-        }
-
+        );
     }, [pageCnt]);
 
     let items = [];
@@ -91,7 +83,7 @@ const RoomList = ({ clinicId, flag, name, date, cnt }) => {
                         </thead>
                         <tbody>
                             {
-                                rooms.map((room, index) => {
+                                rooms.filter(room=>room.type.includes(filterTerm)).map((room, index) => {
                                     return (
                                         <tr key={room.id}>
                                             <td>{pageCnt * 10 + index + 1}</td>

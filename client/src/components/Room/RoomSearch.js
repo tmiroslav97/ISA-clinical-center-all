@@ -14,14 +14,13 @@ const RoomSearch = ({ match }) => {
     const [date, setDate] = useState();
     const [name, setName] = useState('');
     const [pageCnt, setPageCnt] = useState(0);
-    const [flag, setFlag] = useState(false);
+    const [filterTerm, setFilterTerm] = useState('');
     const [dateString, setDateString] = useStateWithCallback(moment().format('YYYY-MM-DD'), sdString => {
         setDate((new Date(sdString)).getTime() / 1000 | 0);
 
     });
 
     const handleRoomsSearch = () => {
-        setFlag(true);
         dispatch(
             searchRoomsData({
                 name,
@@ -32,15 +31,6 @@ const RoomSearch = ({ match }) => {
         );
     };
 
-    const handleFetchAll = () => {
-        setFlag(false);
-        dispatch(
-            fetchRoomsData({
-                clinicId,
-                pageCnt
-            })
-        );
-    };
 
     return (
         <Container>
@@ -76,13 +66,20 @@ const RoomSearch = ({ match }) => {
                 </Col>
             </Row>
             <Row>
-                <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <Button variant="primary" className="mb-4" onClick={handleFetchAll}>
-                        Fetch all
-                    </Button>
+                <Col md={{ span: 3, offset: 1 }} xs={12}>
+                    <Form>
+                        <Form.Label>Filter by:</Form.Label>
+                        <Form.Control as="select" onChange={({ currentTarget }) => {
+                            setFilterTerm(currentTarget.value);
+                        }} >
+                            <option value=""></option>
+                            <option value="SUR">type: surgery</option>
+                            <option value="EXE">type: exemination</option>
+                        </Form.Control>
+                    </Form>
                 </Col>
             </Row>
-            <RoomList clinicId={clinicId} searchFlag={flag} name={name} date={date} cnt={pageCnt} />
+            <RoomList clinicId={clinicId} name={name} date={date} cnt={pageCnt} filterTerm={filterTerm} />
         </Container>
     );
 
