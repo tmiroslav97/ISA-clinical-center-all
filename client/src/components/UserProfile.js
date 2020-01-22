@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 
 const UserProfile = ({ }) => {
     const data = useSelector(userDataSelector);
-    //napraviti user controller sa metodom whoiam i ovdje da se poziva na osnovu id-a
     return (
         <Container>
             <Row>

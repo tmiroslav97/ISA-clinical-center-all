@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Spinner, Card, Button, Col, Row, Container } from 'react-bootstrap';
 import { userDataSelector, isFetchUserDataSelector } from '../../store/user/selectors';
 import { fetchCAdminData } from '../../store/user/actions';
+import { history } from '../../index';
+
 
 const CA = ({ match }) => {
     const dispatch = useDispatch();
@@ -41,7 +43,7 @@ const CA = ({ match }) => {
                             <Card.Text>
                                 You can acces doctors.
                             </Card.Text>
-                            <Button variant="primary" href={'/adminc/doc/' + data.clinicId}>Doctors</Button>
+                            <Button variant="primary" onClick={() => { history.push('/adminc/doc/' + data.clinicId); }}>Doctors</Button>
                         </Card.Body>
                     </Card>
                 </Col>
@@ -52,7 +54,7 @@ const CA = ({ match }) => {
                             <Card.Text>
                                 You can acces clinic profile
                             </Card.Text>
-                            <Button variant="primary" href={'/adminc/cli-prof/' + data.clinicId}>Clinic profile</Button>
+                            <Button variant="primary" onClick={() => { history.push('/adminc/cli-prof/' + data.clinicId); }}>Clinic profile</Button>
                         </Card.Body>
                     </Card>
                 </Col>
@@ -63,7 +65,7 @@ const CA = ({ match }) => {
                             <Card.Text>
                                 You can access appointment types.
                             </Card.Text>
-                            <Button variant="primary" href={'/adminc/app-type/' + data.clinicId}>Type</Button>
+                            <Button variant="primary" onClick={() => { history.push('/adminc/app-type/' + data.clinicId); }}>Type</Button>
                         </Card.Body>
                     </Card>
                 </Col>
@@ -76,7 +78,7 @@ const CA = ({ match }) => {
                             <Card.Text>
                                 You can acces exemination room.
                             </Card.Text>
-                            <Button variant="primary" href={'/adminc/exe-room/' + data.clinicId}>Rooms</Button>
+                            <Button variant="primary" onClick={() => { history.push('/adminc/exe-room/' + data.clinicId); }} >Rooms</Button>
                         </Card.Body>
                     </Card>
                 </Col>
@@ -87,7 +89,7 @@ const CA = ({ match }) => {
                             <Card.Text>
                                 You can easily search rooms.
                             </Card.Text>
-                            <Button variant="primary" href={'/adminc/room-search/' + data.clinicId}>Search rooms</Button>
+                            <Button variant="primary" onClick={() => { history.push('/adminc/room-search/' + data.clinicId); }}>Search rooms</Button>
                         </Card.Body>
                     </Card>
                 </Col>
@@ -98,7 +100,7 @@ const CA = ({ match }) => {
                             <Card.Text>
                                 You can easily create free apointmets.
                             </Card.Text>
-                            <Button variant="primary" href={'/adminc/free-app/' + data.clinicId}>Appointments</Button>
+                            <Button variant="primary" onClick={() => { history.push('/adminc/free-app/' + data.clinicId); }}>Appointments</Button>
                         </Card.Body>
                     </Card>
                 </Col>
@@ -111,7 +113,7 @@ const CA = ({ match }) => {
                             <Card.Text>
                                 You can acces price list.
                             </Card.Text>
-                            <Button variant="primary" href={'/adminc/price-list/' + data.clinicId}>List</Button>
+                            <Button variant="primary" onClick={() => { history.push('/adminc/price-list/' + data.clinicId); }}>List</Button>
                         </Card.Body>
                     </Card>
                 </Col>
@@ -122,7 +124,7 @@ const CA = ({ match }) => {
                             <Card.Text>
                                 You can access business report.
                             </Card.Text>
-                            <Button variant="primary" href={'/adminc/bus-rep/' + data.clinicId}>Business</Button>
+                            <Button variant="primary" onClick={() => { history.push('/adminc/bus-rep/' + data.clinicId); }}>Business</Button>
                         </Card.Body>
                     </Card>
                 </Col>
@@ -133,7 +135,7 @@ const CA = ({ match }) => {
                             <Card.Text>
                                 You can easily acces yours profile
                             </Card.Text>
-                            <Button variant="primary" href={'/user-prof'}>Profile</Button>
+                            <Button variant="primary" onClick={() => { history.push('/user-prof'); }}>Profile</Button>
                         </Card.Body>
                     </Card>
                 </Col>
