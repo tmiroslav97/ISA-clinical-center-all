@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { roomsDataSelector, isFetchRoomsSelector, pageCountSelector } from '../../store/rooms/selectors'
 import { fetchRoomsData } from '../../store/rooms/actions';
 
-const RoomAllAtOnce = ({ clinicId }) => {
+const RoomAllAtOnce = ({ match }) => {
     const dispatch = useDispatch();
+    const clinicId = match.params.clinicId;
     const rooms = useSelector(roomsDataSelector);
     const isFetchRoomsData = useSelector(isFetchRoomsSelector);
     const pageCount = useSelector(pageCountSelector);

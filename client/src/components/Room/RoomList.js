@@ -44,7 +44,6 @@ const RoomList = ({ clinicId, flag, name, date, cnt }) => {
     const handlePagination = (e) => {
         e.preventDefault();
         let event = e.target.text;
-        console.log(event);
         if (event != undefined && pageCount > 0) {
             if (event.includes('First')) {
                 setPageCnt(0);

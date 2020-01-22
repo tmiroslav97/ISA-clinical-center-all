@@ -7,8 +7,9 @@ import { searchRoomsData, fetchRoomsData } from '../../store/rooms/actions';
 import RoomList from './RoomList';
 
 
-const RoomSearch = ({ clinicId }) => {
+const RoomSearch = ({ match }) => {
     const dispatch = useDispatch();
+    const clinicId = match.params.clinicId;
     const [today, setToday] = useState(moment().format('YYYY-MM-DD'));
     const [date, setDate] = useState();
     const [name, setName] = useState('');
