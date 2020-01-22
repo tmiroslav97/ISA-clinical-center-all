@@ -23,7 +23,7 @@ import UserProfile from './components/UserProfile';
 import FreeAppointment from './components/ClinicAdmin/FreeApointment';
 import AppointmentTypAllAtOnce from './components/ClinicAdmin/AppointmentTypeAllAtOnce';
 import Pricelist from './components/ClinicAdmin/Pricelist';
-
+import Unauthorized from './components/Unauthorized';
 
 
 const AppRouter = () => {
@@ -54,6 +54,7 @@ const AppRouter = () => {
             <Route exact path="/search" component={DoctorSearch} />
             <Route exact path="/test" component={ClinicSearch} />
             <Route exact path="/page-not-found" component={() => <h1>Page not found!</h1>} />
+            <Route exact path="/unauthorized" component={Unauthorized} />
             <Redirect from="*" to="/page-not-found" />
         </Switch>
     );
