@@ -1,8 +1,11 @@
 import React from 'react';
-import { Row, Tab, Nav, Col, Container, Table, Button } from 'react-bootstrap';
+import { Row, Col, Container, Table, Button } from 'react-bootstrap';
+import { userDataSelector } from '../store/user/selectors';
+import { useSelector } from 'react-redux';
 
-const UserProfile = ({ data }) => {
-
+const UserProfile = ({ }) => {
+    const data = useSelector(userDataSelector);
+    //napraviti user controller sa metodom whoiam i ovdje da se poziva na osnovu id-a
     return (
         <Container>
             <Row>

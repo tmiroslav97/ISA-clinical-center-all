@@ -15,6 +15,7 @@ class CAdminService extends HttpClient{
             const { data } = await this.getApiClient().get(
                 format(FINALPOINTS.FETCH_ADMINC_DATA, payload.id)
             );
+            console.log(data);
             return { data };
         } catch (error) {
             console.log(error.response.data);

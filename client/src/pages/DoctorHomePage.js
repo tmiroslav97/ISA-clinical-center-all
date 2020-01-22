@@ -41,7 +41,7 @@ const DoctorHomePage = ({ match }) => {
                 <BookingDoc />
             </Tab>
             <Tab eventKey="fifth" title=" User Profile">
-                <UserProfile data={data} />
+                <UserProfile />
             </Tab>
         </Tabs>
     );
