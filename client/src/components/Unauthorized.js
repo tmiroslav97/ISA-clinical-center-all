@@ -6,21 +6,24 @@ const Unauthorized = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-
-        dispatch(
-            signOut({
-                'id': '',
-                'firstName': '',
-                'lastName': '',
-                'email': '',
-                'firstLog': true,
-                'role': null
-            })
-        );
+        setTimeout(() => {
+            dispatch(
+                signOut({
+                    'id': '',
+                    'firstName': '',
+                    'lastName': '',
+                    'email': '',
+                    'firstLog': true,
+                    'role': null
+                })
+            );
+        }, 5000);
     }, []);
 
     return (
         <div>
+            <h2>You are not authorized ERROR 401 please login!</h2>
+            <p>You will be redirected to home page in 5 seconds...</p>
         </div>
     );
 }
