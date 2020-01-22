@@ -7,7 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.joda.time.DateTime;
+import org.hibernate.annotations.Type;
+import org.joda.time.LocalDate;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -25,11 +26,12 @@ public class RoomCalendar {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = DbColumnConstants.DATETIME, nullable = false)
-    private DateTime date;
+    @Column(name = DbColumnConstants.DATE, nullable = false)
+    @Type(type="org.joda.time.contrib.hibernate.PersistentLocalDate")
+    private LocalDate date;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Termin> usedTermins = new HashSet<>();
+    @Column(name = DbColumnConstants.TERMIN, nullable = false)
+    private Integer termin;
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

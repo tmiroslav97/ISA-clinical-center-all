@@ -56,4 +56,6 @@ public class DbColumnConstants {
     public static final String ROOMNUMBER = "room_num";
     public static final String ROOM = "room";
     public static final String HOUR = "hour";
+    public static final String DATE = "date";
+    public static final String TERMIN = "termin";
 }

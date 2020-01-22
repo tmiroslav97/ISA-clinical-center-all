@@ -11,16 +11,14 @@ const RoomSearch = ({ match }) => {
     const dispatch = useDispatch();
     const clinicId = match.params.clinicId;
     const [today, setToday] = useState(moment().format('YYYY-MM-DD'));
-    const [date, setDate] = useState();
+    const [date, setDate] = useState(moment().format('YYYY-MM-DD'));
     const [name, setName] = useState('');
     const [pageCnt, setPageCnt] = useState(0);
+    const [searchFlag, setSearchFlag] = useState(false);
     const [filterTerm, setFilterTerm] = useState('');
-    const [dateString, setDateString] = useStateWithCallback(moment().format('YYYY-MM-DD'), sdString => {
-        setDate((new Date(sdString)).getTime() / 1000 | 0);
-
-    });
 
     const handleRoomsSearch = () => {
+        console.log(date);
         dispatch(
             searchRoomsData({
                 name,
@@ -52,9 +50,9 @@ const RoomSearch = ({ match }) => {
                             </Form.Group>
                             <Form.Group as={Col} >
                                 <Form.Label>Date:</Form.Label>
-                                <Form.Control type="date" min={today} value={dateString} id="date1"
+                                <Form.Control type="date" min={today} value={date} id="date1"
                                     onChange={({ currentTarget }) => {
-                                        setDateString(currentTarget.value);
+                                        setDate(currentTarget.value);
                                     }} />
                             </Form.Group>
                         </Form.Row>

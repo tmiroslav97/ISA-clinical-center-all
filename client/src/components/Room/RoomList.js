@@ -82,7 +82,7 @@ const RoomList = ({ clinicId, filterTerm, name, date, cnt }) => {
                         </thead>
                         <tbody>
                             {
-                                rooms.filter(room=>room.type.includes(filterTerm)).map((room, index) => {
+                                rooms.filter(room => room.type.includes(filterTerm)).map((room, index) => {
                                     return (
                                         <tr key={room.id}>
                                             <td>{pageCnt * 10 + index + 1}</td>

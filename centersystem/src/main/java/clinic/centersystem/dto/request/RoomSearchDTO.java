@@ -1,6 +1,7 @@
 package clinic.centersystem.dto.request;
 
 import lombok.*;
+import org.joda.time.DateTime;
 
 @Getter
 @Setter
@@ -12,7 +13,7 @@ public class RoomSearchDTO {
 
     private String name;
 
-    private Long date;
+    private String date;
 
     private Integer pageCnt;
 

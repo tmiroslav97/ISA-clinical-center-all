@@ -38,6 +38,7 @@ public class Room {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Clinic clinic;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<RoomCalendar> roomCalendars = new HashSet<>();
 
