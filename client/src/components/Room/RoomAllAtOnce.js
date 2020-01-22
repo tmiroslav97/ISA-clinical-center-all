@@ -178,7 +178,6 @@ const RoomAllAtOnce = ({ match }) => {
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
-                                    <th>Type</th>
                                     <th>Number</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
@@ -191,7 +190,6 @@ const RoomAllAtOnce = ({ match }) => {
                                             <tr key={room.id}>
                                                 <td>{index+1}</td>
                                                 <td>{room.name}</td>
-                                                <td>{room.type}</td>
                                                 <td>{room.roomNum}</td>
                                                 <td>
                                                     <Button onClick={handleShow1rEdit}>Edit</Button>

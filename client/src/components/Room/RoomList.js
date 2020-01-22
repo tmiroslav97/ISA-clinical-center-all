@@ -77,7 +77,6 @@ const RoomList = ({ clinicId, filterTerm, name, date, cnt }) => {
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
-                                <th>Type</th>
                                 <th>Number</th>
                             </tr>
                         </thead>
@@ -88,7 +87,6 @@ const RoomList = ({ clinicId, filterTerm, name, date, cnt }) => {
                                         <tr key={room.id}>
                                             <td>{pageCnt * 10 + index + 1}</td>
                                             <td>{room.name}</td>
-                                            <td>{room.type}</td>
                                             <td>{room.roomNum}</td>
                                         </tr>
                                     );

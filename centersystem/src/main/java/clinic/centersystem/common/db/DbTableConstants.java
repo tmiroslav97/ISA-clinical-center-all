@@ -28,4 +28,6 @@ public final class DbTableConstants {
     public static final String USERS = "users";
     public static final String CALENDARITEM = "calendarItem";
     public static final String CODEBOOK = "codebook";
+    public static final String ROOMCALENDAR = "roomcalendar";
+    public static final String TERMIN = "termin";
 }

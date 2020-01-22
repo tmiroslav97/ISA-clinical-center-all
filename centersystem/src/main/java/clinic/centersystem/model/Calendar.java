@@ -24,9 +24,6 @@ public class Calendar {
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Personnel personnel;
 
-    @JsonBackReference
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Room room;
 
     @JsonBackReference
     @OneToMany(mappedBy = "calendar", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
