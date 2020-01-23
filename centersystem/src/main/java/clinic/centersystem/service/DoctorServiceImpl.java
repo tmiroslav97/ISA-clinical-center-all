@@ -3,10 +3,13 @@ package clinic.centersystem.service;
 import clinic.centersystem.converter.DoctorConverter;
 import clinic.centersystem.dto.request.DoctorRequestDTO;
 import clinic.centersystem.dto.response.DoctorResponse;
+import clinic.centersystem.model.Authority;
 import clinic.centersystem.model.Doctor;
 import clinic.centersystem.repository.DoctorRepository;
+import clinic.centersystem.service.intf.AuthorityService;
 import clinic.centersystem.service.intf.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,6 +19,12 @@ import java.util.List;
 public class DoctorServiceImpl implements DoctorService {
     @Autowired
     private DoctorRepository doctorRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private AuthorityService authorityService;
 
     @Override
     public Doctor findById(Long id){return this.doctorRepository.findById(id).orElseGet(null);}
@@ -67,5 +76,28 @@ public class DoctorServiceImpl implements DoctorService {
         return listDoctors;
     }
 
+    public List<Doctor> searchDoctors(String name)  {
+        List<Doctor> listDoctors = new ArrayList<>();
+        List<Doctor> doctors = this.doctorRepository.findAll();
+        for (Doctor doctor : doctors) {
+            if(doctor.getFirstName().toLowerCase().contains(name.toLowerCase())) {
+                listDoctors.add(doctor);
+            }
+        }
+        return listDoctors;
+    }
+
+    public String addDoctor(DoctorRequestDTO doctorRequestDTO) {
+        doctorRequestDTO.setPassword1(passwordEncoder.encode(doctorRequestDTO.getPassword1()));
+
+        Doctor doc = DoctorConverter.toCreateDoctorFromDoctorRequest(doctorRequestDTO);
+
+        List<Authority> auths = this.authorityService.findByName("ROLE_DOCTOR");
+        doc.setAuthorities(auths);
+
+        Doctor doctor = this.doctorRepository.save(doc);
+
+        return "Successfully added doctor";
+    }
 
 }

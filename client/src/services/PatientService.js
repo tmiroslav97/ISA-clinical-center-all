@@ -4,10 +4,10 @@ import { format } from 'util';
 
 const FINALPOINTS = {
     FETCH_PATIENT_DATA: '/pat/%s',
-    FETCH_DOCTORS_DATA_PATIENT: '/pat/doctors',
-    FETCH_CLINICS_DATA_PATIENT: '/pat/clinics',
-    SEARCH_DOCTORS_DATA_PATIENT: '/pat/search-doctors',
-    SEARCH_CLINICS_DATA_PATIENT: '/pat/search-clinics',
+    FETCH_DOCTORS_DATA_PATIENT: '/doctor/doctors',
+    FETCH_CLINICS_DATA_PATIENT: '/clinic/clinics',
+    SEARCH_DOCTORS_DATA_PATIENT: '/doctor/search-doctors',
+    SEARCH_CLINICS_DATA_PATIENT: '/clinic/search-clinics',
     FETCH_PATIENTS: '/pat/all',
     FETCH_PATIENTS_BY_CLINIC_ID: '/pat/all/%s'
 };

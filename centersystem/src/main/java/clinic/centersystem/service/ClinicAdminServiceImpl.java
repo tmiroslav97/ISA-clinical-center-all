@@ -8,13 +8,13 @@ import clinic.centersystem.dto.request.ClinicAdminReqDTO;
 import clinic.centersystem.dto.request.DoctorRequestDTO;
 import clinic.centersystem.dto.response.ClinicAdministratoreResponse;
 import clinic.centersystem.dto.response.DoctorResponse;
-import clinic.centersystem.model.AppointmentType;
-import clinic.centersystem.model.Authority;
-import clinic.centersystem.model.ClinicAdmin;
-import clinic.centersystem.model.Doctor;
+import clinic.centersystem.exception.UserExistsException;
+import clinic.centersystem.model.*;
 import clinic.centersystem.repository.ClinicAdminRepository;
 import clinic.centersystem.service.intf.AuthorityService;
 import clinic.centersystem.service.intf.ClinicAdminService;
+import clinic.centersystem.service.intf.ClinicService;
+import clinic.centersystem.service.intf.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,14 +30,23 @@ public class  ClinicAdminServiceImpl implements ClinicAdminService {
 
     @Autowired
     private DoctorServiceImpl doctorService;
+
     @Autowired
     private AppointmentTypeServiceImpl appointmentTypeService;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private AuthorityService authorityService;
+    private ClinicService clinicService;
+
+    @Autowired
+    private ClinicAdminService clinicAdminService;
+
+
 
     @Override
     public ClinicAdmin findById(Long id) {
@@ -73,25 +82,9 @@ public class  ClinicAdminServiceImpl implements ClinicAdminService {
     }
 
 
-    public String addDoctor(DoctorRequestDTO doctorRequestDTO) {
-        doctorRequestDTO.setPassword1(passwordEncoder.encode(doctorRequestDTO.getPassword1()));
 
-        Doctor doc = DoctorConverter.toCreateDoctorFromDoctorRequest(doctorRequestDTO);
 
-        List<Authority> auths = this.authorityService.findByName("ROLE_DOCTOR");
-        doc.setAuthorities(auths);
 
-        Doctor doctor = this.doctorService.save(doc);
-
-        return "Successfully added doctor";
-    }
-
-    public String addAppointmentType(AppointmentTypeRequestDTO appointmentTypeRequestDTO) {
-        AppointmentType appointment = AppointmentTypeConverter.toCreateAppointmentTypeFromRequest(appointmentTypeRequestDTO);
-        AppointmentType appointmentType = appointmentTypeService.save(appointment);
-
-        return "Successfully added appointment type";
-    }
     /*public String addAppointmentType(AppointmentTypeRequestDTO diagnoseRequestDTO) {
         AppointmentType appointment = diagnoseService.save(diagnoseRequestDTO);
 
@@ -112,13 +105,23 @@ public class  ClinicAdminServiceImpl implements ClinicAdminService {
         return "Successfully deleted doctor";
     }
 
-    public List<DoctorResponse> getDoctors() {
-        List<Doctor> doctors = this.doctorService.findAll();
-        List<DoctorResponse> doctorResponses = new ArrayList<DoctorResponse>();
-        for (Doctor doctor : doctors) {
-            doctorResponses.add(DoctorConverter.toCreateDoctorResponseFromDoctor(doctor));
+    @Override
+    public String registerClinicAdmin(ClinicAdminReqDTO clinicAdminReqDTO) {
+        clinicAdminReqDTO.setPassword(this.passwordEncoder.encode(clinicAdminReqDTO.getPassword()));
+        if (this.userService.existsByEmail(clinicAdminReqDTO.getEmail())) {
+            throw new UserExistsException();
         }
-        return doctorResponses;
+        ClinicAdmin clinicAdmin = this.clinicAdminService.save(clinicAdminReqDTO);
+
+        Clinic clinic = this.clinicService.findById(clinicAdminReqDTO.getClinicId());
+
+        clinic.getClinicAdmins().add(clinicAdmin);
+        clinicAdmin.setClinic(clinic);
+
+        clinicAdmin = this.clinicAdminService.saveClinicAdmin(clinicAdmin);
+        clinic = this.clinicService.saveClinic(clinic);
+
+        return "Clinic admin successfully added";
     }
 
 

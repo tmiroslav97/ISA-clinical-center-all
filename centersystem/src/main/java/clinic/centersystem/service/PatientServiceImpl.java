@@ -68,45 +68,9 @@ public class PatientServiceImpl implements PatientService {
         return PatientConverter.toCreatePatientResponseFromPatient(patient);
     }
 
-    public List<DoctorResponse> getDoctors() {
-        List<Doctor> doctors = this.doctorService.findAll();
-        List<DoctorResponse> doctorResponses = new ArrayList<DoctorResponse>();
-        for (Doctor doctor : doctors) {
-            doctorResponses.add(DoctorConverter.toCreateDoctorResponseFromDoctor(doctor));
-        }
-        return doctorResponses;
-    }
 
-    public List<ClinicResponse> getClinics() {
-        List<Clinic> clinics = this.clinicService.findAll();
-        List<ClinicResponse> clinicResponses = new ArrayList<ClinicResponse>();
-        for (Clinic clinic : clinics) {
-            clinicResponses.add(ClinicConverter.toCreateClinicResponseFromClinic(clinic));
-        }
-        return clinicResponses;
-    }
 
-    public List<Doctor> searchDoctors(String name)  {
-        List<Doctor> listDoctors = new ArrayList<>();
-        List<Doctor> doctors = this.doctorService.findAll();
-        for (Doctor doctor : doctors) {
-            if(doctor.getFirstName().toLowerCase().contains(name.toLowerCase())) {
-                listDoctors.add(doctor);
-            }
-        }
-        return listDoctors;
-    }
 
-    public List<Clinic> searchClinics(String name) {
-        List<Clinic> listClinics = new ArrayList<>();
-        List<Clinic> clinics = this.clinicService.findAll();
-        for(Clinic clinic : clinics) {
-            if(clinic.getName().toLowerCase().contains(name.toLowerCase())) {
-                listClinics.add(clinic);
-            }
-        }
-        return listClinics;
-    }
 
 
 
