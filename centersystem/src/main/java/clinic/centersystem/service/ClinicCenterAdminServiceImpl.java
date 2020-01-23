@@ -110,27 +110,6 @@ public class ClinicCenterAdminServiceImpl implements ClinicCenterAdminService {
     }
 
     @Override
-    public boolean registerClinic(ClinicRequestDTO clinicRequestDTO) {
-        if (this.clinicService.existsByName(clinicRequestDTO.getName())) {
-            return false;
-        }
-
-        Clinic clinic = this.clinicService.save(clinicRequestDTO);
-
-        return true;
-    }
-
-    @Override
-    public List<ClinicResponse> getClinics() {
-        List<Clinic> clinics = this.clinicService.findAll();
-        List<ClinicResponse> clinicResponses = new ArrayList<ClinicResponse>();
-        for (Clinic clinic : clinics) {
-            clinicResponses.add(ClinicConverter.toCreateClinicResponseFromClinic(clinic));
-        }
-        return clinicResponses;
-    }
-
-    @Override
     public String registerClinicAdmin(ClinicAdminReqDTO clinicAdminReqDTO) {
         clinicAdminReqDTO.setPassword(this.passwordEncoder.encode(clinicAdminReqDTO.getPassword()));
         if (this.userService.existsByEmail(clinicAdminReqDTO.getEmail())) {

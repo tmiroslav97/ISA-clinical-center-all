@@ -48,25 +48,9 @@ public class ClinicCenterAdministratorController {
         return new ResponseEntity<>(msg, HttpStatus.OK);
     }
 
-    @RequestMapping(method = POST, value = "/reg-clinic")
-    @PreAuthorize("hasRole('CCADMIN')")
-    public ResponseEntity<String> registerClinic(@RequestBody ClinicRequestDTO ccaRegReqDTO) {
-        boolean flag = this.clinicCenterAdminService.registerClinic(ccaRegReqDTO);
-        if (flag) {
-            return new ResponseEntity<>("Clinic successfuly added", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Clinic with this name already exists", HttpStatus.BAD_REQUEST);
-        }
-    }
-
     @RequestMapping(method = POST, value = "/reg-clinic-admin")
     public ResponseEntity<String> registerClinicAdmin(@RequestBody ClinicAdminReqDTO clinicAdminReqDTO) {
         return new ResponseEntity<>(this.clinicCenterAdminService.registerClinicAdmin(clinicAdminReqDTO), HttpStatus.OK);
-    }
-
-    @RequestMapping(method = GET, value = "/clinics")
-    public ResponseEntity<List<ClinicResponse>> getClinics() {
-        return new ResponseEntity<List<ClinicResponse>>(this.clinicCenterAdminService.getClinics(), HttpStatus.OK);
     }
 
     @RequestMapping(method = GET, value = "/activate-account/{id}")

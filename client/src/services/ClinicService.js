@@ -3,8 +3,8 @@ import { history } from '../index';
 import { format } from 'util';
 
 const FINALPOINTS = {
-    REG_CLINIC: '/cca/reg-clinic',
-    FETCH_CLINICS: '/cca/clinics',
+    REG_CLINIC: '/clinic/reg-clinic',
+    FETCH_CLINICS: '/clinic/clinics',
     REG_CLINIC_ADMIN: '/cca/reg-clinic-admin',
 };
 

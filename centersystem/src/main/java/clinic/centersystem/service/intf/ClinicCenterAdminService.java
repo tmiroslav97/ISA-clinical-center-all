@@ -25,9 +25,9 @@ public interface ClinicCenterAdminService {
 
     String activateAccount(Long id, HttpServletResponse httpServletResponse);
 
-    boolean registerClinic(ClinicRequestDTO clinicRequestDTO);
+    //boolean registerClinic(ClinicRequestDTO clinicRequestDTO);
 
-    List<ClinicResponse> getClinics();
+    //List<ClinicResponse> getClinics();
 
     String registerClinicAdmin(ClinicAdminReqDTO clinicAdminReqDTO);
 
