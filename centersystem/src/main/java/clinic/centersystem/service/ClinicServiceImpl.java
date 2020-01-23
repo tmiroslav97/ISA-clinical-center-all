@@ -48,13 +48,35 @@ public class ClinicServiceImpl implements ClinicService {
         return clinicRepository.existsByName(name);
     }
 
+    @Override
     public List<ClinicResponse> getClinics() {
-        List<Clinic> clinics = this.findAll();
+        List<Clinic> clinics = this.clinicRepository.findAll();
         List<ClinicResponse> clinicResponses = new ArrayList<ClinicResponse>();
-        for(Clinic clinic : clinics) {
+        for (Clinic clinic : clinics) {
             clinicResponses.add(ClinicConverter.toCreateClinicResponseFromClinic(clinic));
         }
-
         return clinicResponses;
+    }
+
+    @Override
+    public boolean registerClinic(ClinicRequestDTO clinicRequestDTO) {
+        if (this.clinicRepository.existsByName(clinicRequestDTO.getName())) {
+            return false;
+        }
+
+        Clinic clinic = this.save(clinicRequestDTO);
+
+        return true;
+    }
+
+    public List<Clinic> searchClinics(String name) {
+        List<Clinic> listClinics = new ArrayList<>();
+        List<Clinic> clinics = this.clinicRepository.findAll();
+        for(Clinic clinic : clinics) {
+            if(clinic.getName().toLowerCase().contains(name.toLowerCase())) {
+                listClinics.add(clinic);
+            }
+        }
+        return listClinics;
     }
 }

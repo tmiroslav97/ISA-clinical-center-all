@@ -3,8 +3,8 @@ import { format } from 'util';
 
 const FINALPOINTS = {
     FETCH_DOCTOR_DATA:'/doctor/%s',
-    ADD_DOCTOR: '/adm-cli/add-doctor',
-    FETCH_DOCTORS_DATA: '/adm-cli/doctors'
+    ADD_DOCTOR: '/doctor/add-doctor',
+    FETCH_DOCTORS_DATA: '/doctor/doctors'
 };
 
 class DoctorService extends HttpClient {

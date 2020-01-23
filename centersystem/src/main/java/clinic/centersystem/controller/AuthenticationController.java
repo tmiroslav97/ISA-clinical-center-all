@@ -11,6 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
 @RequestMapping(value = "/sec", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -46,6 +49,11 @@ public class AuthenticationController {
         } else {
             return new ResponseEntity<>("Password couldn't be changed!", HttpStatus.OK);
         }
+    }
+
+    @RequestMapping(method = GET, value = "/activate-account/{id}")
+    public ResponseEntity<String> activateAccount(@PathVariable Long id, HttpServletResponse httpServletResponse) {
+        return new ResponseEntity<>(this.authenticationService.activateAccount(id, httpServletResponse), HttpStatus.TEMPORARY_REDIRECT);
     }
 
 }

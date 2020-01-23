@@ -36,28 +36,6 @@ public class PatientController {
         return new ResponseEntity<>(this.patientService.patient(patId), HttpStatus.CREATED);
     }
 
-    @RequestMapping(method = GET, value = "/doctors")
-    public ResponseEntity<List<DoctorResponse>> getDoctors() {
-        return new ResponseEntity<List<DoctorResponse>>(this.patientService.getDoctors(), HttpStatus.OK);
-    }
-
-    @RequestMapping(method = GET, value = "/clinics")
-    public ResponseEntity<List<ClinicResponse>> getClinics() {
-        return new ResponseEntity<List<ClinicResponse>>(this.patientService.getClinics(), HttpStatus.OK);
-    }
-
-
-
-    @RequestMapping(method = GET, value = "/search-doctors")
-    public ResponseEntity<List<Doctor>> searchDoctors(@PathVariable String name) {
-        return new ResponseEntity<List<Doctor>>(this.patientService.searchDoctors(name), HttpStatus.OK);
-    }
-
-    @RequestMapping(method = GET, value = "/search-clinics")
-    public ResponseEntity<List<Clinic>> searchClinics(@PathVariable String name) {
-        return new ResponseEntity<List<Clinic>>(this.patientService.searchClinics(name), HttpStatus.OK);
-    }
-
     @RequestMapping(method = GET, value = "/all")
     public ResponseEntity<List<PatientResponse>> getPatients() {
         return new ResponseEntity<>(this.patientService.getPatients(), HttpStatus.OK);
