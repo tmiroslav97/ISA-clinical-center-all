@@ -23,13 +23,13 @@ public interface ClinicCenterAdminService {
 
     String registerCCA(CCARegReqDTO ccaRegReqDTO, Long id);
 
-    String activateAccount(Long id, HttpServletResponse httpServletResponse);
+    //String activateAccount(Long id, HttpServletResponse httpServletResponse);
 
     //boolean registerClinic(ClinicRequestDTO clinicRequestDTO);
 
     //List<ClinicResponse> getClinics();
 
-    String registerClinicAdmin(ClinicAdminReqDTO clinicAdminReqDTO);
+    //String registerClinicAdmin(ClinicAdminReqDTO clinicAdminReqDTO);
 
 
 }

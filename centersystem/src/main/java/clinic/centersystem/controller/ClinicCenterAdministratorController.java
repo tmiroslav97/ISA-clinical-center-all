@@ -48,14 +48,8 @@ public class ClinicCenterAdministratorController {
         return new ResponseEntity<>(msg, HttpStatus.OK);
     }
 
-    @RequestMapping(method = POST, value = "/reg-clinic-admin")
-    public ResponseEntity<String> registerClinicAdmin(@RequestBody ClinicAdminReqDTO clinicAdminReqDTO) {
-        return new ResponseEntity<>(this.clinicCenterAdminService.registerClinicAdmin(clinicAdminReqDTO), HttpStatus.OK);
-    }
 
-    @RequestMapping(method = GET, value = "/activate-account/{id}")
-    public ResponseEntity<String> activateAccount(@PathVariable Long id, HttpServletResponse httpServletResponse) {
-        return new ResponseEntity<>(this.clinicCenterAdminService.activateAccount(id, httpServletResponse), HttpStatus.TEMPORARY_REDIRECT);
-    }
+
+
     
 }

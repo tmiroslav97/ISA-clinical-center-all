@@ -99,32 +99,7 @@ public class ClinicCenterAdminServiceImpl implements ClinicCenterAdminService {
         return msg;
     }
 
-    @Override
-    public String activateAccount(Long id, HttpServletResponse httpServletResponse) {
-        Patient patient = this.patientService.findById(id);
-        patient.setActivated(true);
-        patient = this.patientService.save(patient);
 
-        httpServletResponse.setHeader("Location", "http://localhost:3000/login");
-        return "Account is activated!";
-    }
 
-    @Override
-    public String registerClinicAdmin(ClinicAdminReqDTO clinicAdminReqDTO) {
-        clinicAdminReqDTO.setPassword(this.passwordEncoder.encode(clinicAdminReqDTO.getPassword()));
-        if (this.userService.existsByEmail(clinicAdminReqDTO.getEmail())) {
-            throw new UserExistsException();
-        }
-        ClinicAdmin clinicAdmin = this.clinicAdminService.save(clinicAdminReqDTO);
 
-        Clinic clinic = this.clinicService.findById(clinicAdminReqDTO.getClinicId());
-
-        clinic.getClinicAdmins().add(clinicAdmin);
-        clinicAdmin.setClinic(clinic);
-
-        clinicAdmin = this.clinicAdminService.saveClinicAdmin(clinicAdmin);
-        clinic = this.clinicService.saveClinic(clinic);
-
-        return "Clinic admin successfully added";
-    }
 }

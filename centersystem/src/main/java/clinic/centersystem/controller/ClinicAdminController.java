@@ -1,6 +1,7 @@
 package clinic.centersystem.controller;
 
 import clinic.centersystem.dto.request.AppointmentTypeRequestDTO;
+import clinic.centersystem.dto.request.ClinicAdminReqDTO;
 import clinic.centersystem.dto.request.DoctorRequestDTO;
 import clinic.centersystem.dto.response.ClinicAdministratoreResponse;
 import clinic.centersystem.dto.response.DoctorResponse;
@@ -35,7 +36,10 @@ public class ClinicAdminController {
         return new ResponseEntity<>(this.clinicAdminService.clinicAdministrator(id), HttpStatus.CREATED);
     }
 
-
+    @RequestMapping(method = POST, value = "/reg-clinic-admin")
+    public ResponseEntity<String> registerClinicAdmin(@RequestBody ClinicAdminReqDTO clinicAdminReqDTO) {
+        return new ResponseEntity<>(this.clinicAdminService.registerClinicAdmin(clinicAdminReqDTO), HttpStatus.OK);
+    }
 
     /*@RequestMapping(method = GET, value = "/fetch")
     @PreAuthorize("hasRole('ADMINC')")

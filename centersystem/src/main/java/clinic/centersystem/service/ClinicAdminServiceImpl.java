@@ -8,13 +8,13 @@ import clinic.centersystem.dto.request.ClinicAdminReqDTO;
 import clinic.centersystem.dto.request.DoctorRequestDTO;
 import clinic.centersystem.dto.response.ClinicAdministratoreResponse;
 import clinic.centersystem.dto.response.DoctorResponse;
-import clinic.centersystem.model.AppointmentType;
-import clinic.centersystem.model.Authority;
-import clinic.centersystem.model.ClinicAdmin;
-import clinic.centersystem.model.Doctor;
+import clinic.centersystem.exception.UserExistsException;
+import clinic.centersystem.model.*;
 import clinic.centersystem.repository.ClinicAdminRepository;
 import clinic.centersystem.service.intf.AuthorityService;
 import clinic.centersystem.service.intf.ClinicAdminService;
+import clinic.centersystem.service.intf.ClinicService;
+import clinic.centersystem.service.intf.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,8 +30,21 @@ public class  ClinicAdminServiceImpl implements ClinicAdminService {
 
     @Autowired
     private DoctorServiceImpl doctorService;
+
     @Autowired
     private AppointmentTypeServiceImpl appointmentTypeService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private ClinicService clinicService;
+
+    @Autowired
+    private ClinicAdminService clinicAdminService;
 
 
 
@@ -92,6 +105,24 @@ public class  ClinicAdminServiceImpl implements ClinicAdminService {
         return "Successfully deleted doctor";
     }
 
+    @Override
+    public String registerClinicAdmin(ClinicAdminReqDTO clinicAdminReqDTO) {
+        clinicAdminReqDTO.setPassword(this.passwordEncoder.encode(clinicAdminReqDTO.getPassword()));
+        if (this.userService.existsByEmail(clinicAdminReqDTO.getEmail())) {
+            throw new UserExistsException();
+        }
+        ClinicAdmin clinicAdmin = this.clinicAdminService.save(clinicAdminReqDTO);
+
+        Clinic clinic = this.clinicService.findById(clinicAdminReqDTO.getClinicId());
+
+        clinic.getClinicAdmins().add(clinicAdmin);
+        clinicAdmin.setClinic(clinic);
+
+        clinicAdmin = this.clinicAdminService.saveClinicAdmin(clinicAdmin);
+        clinic = this.clinicService.saveClinic(clinic);
+
+        return "Clinic admin successfully added";
+    }
 
 
 }

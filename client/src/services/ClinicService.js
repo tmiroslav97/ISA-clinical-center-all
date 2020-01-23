@@ -5,7 +5,7 @@ import { format } from 'util';
 const FINALPOINTS = {
     REG_CLINIC: '/clinic/reg-clinic',
     FETCH_CLINICS: '/clinic/clinics',
-    REG_CLINIC_ADMIN: '/cca/reg-clinic-admin',
+    REG_CLINIC_ADMIN: '/adm-cli/reg-clinic-admin',
 };
 
 class ClinicService extends HttpClient {
