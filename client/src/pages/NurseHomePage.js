@@ -37,7 +37,7 @@ const NurseHomePage = ({ match }) => {
                 <WorkCalendar personnelId={data.id} role={data.role} />
             </Tab>
             <Tab eventKey="fifth" title=" User Profile">
-                <UserProfile data={data} />
+                <UserProfile />
             </Tab>
         </Tabs>
     );

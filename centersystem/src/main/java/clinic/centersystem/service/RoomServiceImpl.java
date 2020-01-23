@@ -5,6 +5,8 @@ import clinic.centersystem.dto.response.RoomResponseDTO;
 import clinic.centersystem.model.Room;
 import clinic.centersystem.repository.RoomRepository;
 import clinic.centersystem.service.intf.RoomService;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -49,7 +51,9 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public RoomResponseDTO searchRooms(RoomSearchDTO roomSearchDTO) {
         Pageable pageable = PageRequest.of(roomSearchDTO.getPageCnt(), 10);
-        Page<Room> rooms = roomRepository.searchRooms(roomSearchDTO.getName(),roomSearchDTO.getClinicId(),pageable);
+        LocalDate dt = new LocalDate(roomSearchDTO.getDate());
+        System.out.println(dt);
+        Page<Room> rooms = roomRepository.searchRooms(roomSearchDTO.getName(), roomSearchDTO.getClinicId(),dt, pageable);
         RoomResponseDTO roomResponseDTO = new RoomResponseDTO();
         roomResponseDTO.setRooms(rooms.getContent());
         roomResponseDTO.setPageCount(rooms.getTotalPages());

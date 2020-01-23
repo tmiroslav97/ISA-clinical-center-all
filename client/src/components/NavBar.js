@@ -35,7 +35,7 @@ export default function NavBar() {
                     <Nav.Link href="/">Home</Nav.Link>
                     {role === 'ROLE_CCADMIN' && <Nav.Link href={'/ccadmin/' + user.id}>Clinic center admin profile</Nav.Link>}
                     {role === 'ROLE_NURSE' && <Nav.Link href={'/nurse-page/' + user.id}>Nurse homepage</Nav.Link>}
-                    {role === 'ROLE_ADMINC' && <Nav.Link href={'/adminc'}>Clinic admin profile</Nav.Link>}
+                    {role === 'ROLE_ADMINC' && <Nav.Link href={'/adminc/' + user.id}>Clinic admin profile</Nav.Link>}
                     {role === 'ROLE_DOCTOR' && <Nav.Link href={'/doc/' + user.id}>Doctor homepage</Nav.Link>}
                     {role === 'ROLE_PATIENT' && <Nav.Link href={'/pat'}>Patient homepage</Nav.Link>}
                 </Nav>

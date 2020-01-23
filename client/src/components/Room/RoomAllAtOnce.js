@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { roomsDataSelector, isFetchRoomsSelector, pageCountSelector } from '../../store/rooms/selectors'
 import { fetchRoomsData } from '../../store/rooms/actions';
 
-const RoomAllAtOnce = ({ clinicId }) => {
+const RoomAllAtOnce = ({ match }) => {
     const dispatch = useDispatch();
+    const clinicId = match.params.clinicId;
     const rooms = useSelector(roomsDataSelector);
     const isFetchRoomsData = useSelector(isFetchRoomsSelector);
     const pageCount = useSelector(pageCountSelector);
@@ -189,7 +190,7 @@ const RoomAllAtOnce = ({ clinicId }) => {
                                             <tr key={room.id}>
                                                 <td>{index+1}</td>
                                                 <td>{room.name}</td>
-                                                <td>{room.number}</td>
+                                                <td>{room.roomNum}</td>
                                                 <td>
                                                     <Button onClick={handleShow1rEdit}>Edit</Button>
                                                 </td>
@@ -206,7 +207,7 @@ const RoomAllAtOnce = ({ clinicId }) => {
                 </Row>
                 <Row>
                     <Col md={{ span: 10, offset: 1 }} xs={12}>
-                        <Pagination onClick={handlePagination}>
+                        <Pagination onClick={handlePagination} className="pagination justify-content-center mb-5">
                             <Pagination.First />
                             <Pagination.Prev />
                             {items}

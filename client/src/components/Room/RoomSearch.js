@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
-import useStateWithCallback from 'use-state-with-callback';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { Container, Row, Col, Form, Button, Pagination } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { searchRoomsData } from '../../store/rooms/actions';
+import { pageCountSelector } from '../../store/rooms/selectors';
+import RoomList from './RoomList';
 
 
-const RoomSearch = ({ clinicId,pageCnt }) => {
+const RoomSearch = ({ match }) => {
     const dispatch = useDispatch();
+    const clinicId = match.params.clinicId;
+    const pageCount = useSelector(pageCountSelector);
     const [today, setToday] = useState(moment().format('YYYY-MM-DD'));
-    const [date, setDate] = useState();
+    const [date, setDate] = useState(moment().format('YYYY-MM-DD'));
     const [name, setName] = useState('');
-    const [dateString, setDateString] = useStateWithCallback(moment().format('YYYY-MM-DD'), sdString => {
-        setDate((new Date(sdString)).getTime() / 1000 | 0);
-
-    });
+    const [pageCnt, setPageCnt] = useState(0);
+    const [filterTerm, setFilterTerm] = useState('');
 
     const handleRoomsSearch = () => {
         dispatch(
@@ -25,6 +26,48 @@ const RoomSearch = ({ clinicId,pageCnt }) => {
                 pageCnt
             })
         );
+    };
+
+    useEffect(() => {
+        dispatch(
+            searchRoomsData({
+                name,
+                date,
+                clinicId,
+                pageCnt
+            })
+        );
+    }, [pageCnt]);
+
+    let items = [];
+    for (let number = 1; number <= pageCount; number++) {
+        items.push(
+            <Pagination.Item key={number} active={number == (pageCnt + 1)}>
+                {number}
+            </Pagination.Item>
+        );
+    }
+
+    const handlePagination = (e) => {
+        e.preventDefault();
+        let event = e.target.text;
+        if (event != undefined && pageCount > 0) {
+            if (event.includes('First')) {
+                setPageCnt(0);
+            } else if (event.includes('Last')) {
+                setPageCnt(pageCount - 1);
+            } else if (event.includes('Next')) {
+                if (pageCnt < pageCount - 1) {
+                    setPageCnt(pageCnt + 1);
+                }
+            } else if (event.includes('Previous')) {
+                if (pageCnt > 0) {
+                    setPageCnt(pageCnt - 1);
+                }
+            } else {
+                setPageCnt(event - 1);
+            }
+        }
     };
 
     return (
@@ -47,16 +90,43 @@ const RoomSearch = ({ clinicId,pageCnt }) => {
                             </Form.Group>
                             <Form.Group as={Col} >
                                 <Form.Label>Date:</Form.Label>
-                                <Form.Control type="date" min={today} value={dateString} id="date1"
+                                <Form.Control type="date" min={today} value={date} id="date1"
                                     onChange={({ currentTarget }) => {
-                                        setDateString(currentTarget.value);
+                                        setDate(currentTarget.value);
                                     }} />
                             </Form.Group>
                         </Form.Row>
                         <Button variant="primary" className="mb-4" onClick={handleRoomsSearch}>
                             Search
                         </Button>
+
                     </Form>
+                </Col>
+            </Row>
+            <Row>
+                <Col md={{ span: 3, offset: 1 }} xs={12}>
+                    <Form>
+                        <Form.Label>Filter by:</Form.Label>
+                        <Form.Control as="select" onChange={({ currentTarget }) => {
+                            setFilterTerm(currentTarget.value);
+                        }} >
+                            <option value=""></option>
+                            <option value="SUR">type: surgery</option>
+                            <option value="EXE">type: exemination</option>
+                        </Form.Control>
+                    </Form>
+                </Col>
+            </Row>
+            <RoomList cnt={pageCnt} filterTerm={filterTerm} />
+            <Row>
+                <Col md={{ span: 10, offset: 1 }} xs={12}>
+                    <Pagination onClick={handlePagination} className="pagination justify-content-center mb-5">
+                        <Pagination.First />
+                        <Pagination.Prev />
+                        {items}
+                        <Pagination.Next />
+                        <Pagination.Last />
+                    </Pagination>
                 </Col>
             </Row>
         </Container>

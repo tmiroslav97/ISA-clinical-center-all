@@ -28,6 +28,9 @@ public class Room {
     @Column(name = DbColumnConstants.ROOMTYPE, nullable = false)
     private String type;
 
+    @Column(name = DbColumnConstants.ROOMNUMBER, nullable = false, unique = true)
+    private Integer roomNum;
+
     @Column(name = DbColumnConstants.RESERVED, nullable = false)
     private Boolean reserved = false;
 
@@ -36,15 +39,13 @@ public class Room {
     private Clinic clinic;
 
     @JsonBackReference
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Calendar calendar;
+    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<RoomCalendar> roomCalendars = new HashSet<>();
 
     @OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Surgery> surgeries = new HashSet<>();
 
     @OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Appointment> appointments = new HashSet<>();
-
-
 
 }
