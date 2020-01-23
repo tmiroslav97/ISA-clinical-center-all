@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class RoomResponseTerminPageDTO {
 
-    private List<RoomResponseTerminDTO> roomTermins;
+    private List<RoomResponseTerminDTO> rooms;
 
     private Integer pageCount;
 }

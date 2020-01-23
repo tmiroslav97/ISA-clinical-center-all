@@ -61,13 +61,37 @@ public class RoomServiceImpl implements RoomService {
         Pageable pageable = PageRequest.of(roomSearchDTO.getPageCnt(), 10);
         LocalDate dt = new LocalDate(roomSearchDTO.getDate());
         Page<Room> rooms = roomRepository.searchRooms(roomSearchDTO.getName(), roomSearchDTO.getClinicId(), pageable);
-
         RoomResponseTerminPageDTO roomResponseTerminPageDTO = new RoomResponseTerminPageDTO();
+        List<RoomResponseTerminDTO> roomResponseTerminDTO = new ArrayList<>();
+        roomResponseTerminPageDTO.setRooms(roomResponseTerminDTO);
         roomResponseTerminPageDTO.setPageCount(rooms.getTotalPages());
-        for(Room room : rooms.getContent()){
-            RoomResponseTerminDTO roomResponseTerminDTO = new RoomResponseTerminDTO();
-            roomResponseTerminDTO.setRoom(room);
-            roomResponseTerminDTO.setTermins(roomCalendarService.findByRoomAndDate(room.getId(),dt));
+
+        for (Room room : rooms.getContent()) {
+            RoomResponseTerminDTO rrtDTO = new RoomResponseTerminDTO();
+            rrtDTO.setRoom(room);
+            rrtDTO.setTermins(roomCalendarService.findByRoomAndDate(room.getId(), dt));
+            roomResponseTerminDTO.add(rrtDTO);
+            if (rrtDTO.getTermins().size() == 4) {
+                boolean flag = true;
+                while (flag) {
+                    dt = dt.plusDays(1);
+                    List<Integer> termins = roomCalendarService.findByRoomAndDate(room.getId(), dt);
+                    for (int i = 7; i <= 16; i += 3) {
+                        if (!termins.contains(i)) {
+                            rrtDTO.setFirstFreeTermin(dt.toString() + " " + String.valueOf(i) + "-" + String.valueOf(i + 3));
+                            flag = false;
+                            break;
+                        }
+                    }
+                }
+            } else {
+                for (int i = 7; i <= 16; i += 3) {
+                    if (!rrtDTO.getTermins().contains(i)) {
+                        rrtDTO.setFirstFreeTermin(dt.toString() + " " + String.valueOf(i) + "-" + String.valueOf(i + 3));
+                        break;
+                    }
+                }
+            }
         }
 
         return roomResponseTerminPageDTO;

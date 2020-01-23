@@ -247,4 +247,7 @@ INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (11,FALSE
 
 
 INSERT INTO roomcalendar(date, termin, room_id) VALUES ('2020-01-22',7,1);
+INSERT INTO roomcalendar(date, termin, room_id) VALUES ('2020-01-22',10,1);
+INSERT INTO roomcalendar(date, termin, room_id) VALUES ('2020-01-22',16,1);
+
 
