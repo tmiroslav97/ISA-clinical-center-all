@@ -220,31 +220,24 @@ SET calendar_id =2
 WHERE id = 3;
 
 INSERT INTO appointment_type(id, type) VALUES (1,'General examination');
-
 INSERT INTO appointment_type(id, type) VALUES (2,'Heart examination');
 
 INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (1,FALSE ,'SUR','For heart',1,1);
-
 INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (2,FALSE ,'SUR','For head',2,1);
-
 INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (3,FALSE ,'SUR','For brain',3,1);
-
 INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (4,FALSE ,'SUR','For skin',4,1);
-
 INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (5,FALSE ,'SUR','For legs',5,1);
-
 INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (6,FALSE ,'SUR','For old',6,1);
-
 INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (7,FALSE ,'SUR','For surgery',7,1);
-
 INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (8,FALSE ,'SUR','For Ah1',8,1);
-
-INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (9,FALSE ,'SUR','For Ah2',9,1);
-
+INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (9,FALSE ,'SUR','For heart',9,1);
 INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (10,FALSE ,'SUR','For Ah3',10,1);
-
-INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (11,FALSE ,'SUR','For Ah4',11,1);
-
+INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (11,FALSE ,'SUR','For heart',11,1);
 
 INSERT INTO roomcalendar(date, termin, room_id) VALUES ('2020-01-22',7,1);
+INSERT INTO roomcalendar(date, termin, room_id) VALUES ('2020-01-22',10,1);
+INSERT INTO roomcalendar(date, termin, room_id) VALUES ('2020-01-22',16,1);
 
+INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id)VALUES ('2020-01-23',7,1,2);
+INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id)VALUES ('2020-01-24',10,1,2);
+INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id)VALUES ('2020-01-25',13,1,2);

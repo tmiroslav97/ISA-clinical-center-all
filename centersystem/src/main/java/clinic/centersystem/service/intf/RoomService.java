@@ -3,6 +3,7 @@ package clinic.centersystem.service.intf;
 
 import clinic.centersystem.dto.request.RoomSearchDTO;
 import clinic.centersystem.dto.response.RoomResponseDTO;
+import clinic.centersystem.dto.response.RoomResponseTerminPageDTO;
 import clinic.centersystem.model.Room;
 
 import java.util.List;
@@ -17,5 +18,5 @@ public interface RoomService {
 
     Room save(Room room);
 
-    RoomResponseDTO searchRooms(RoomSearchDTO roomSearchDTO);
+    RoomResponseTerminPageDTO searchRooms(RoomSearchDTO roomSearchDTO);
 }
