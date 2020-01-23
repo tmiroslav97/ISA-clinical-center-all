@@ -2,8 +2,12 @@ package clinic.centersystem.service;
 
 import clinic.centersystem.dto.request.RoomSearchDTO;
 import clinic.centersystem.dto.response.RoomResponseDTO;
+import clinic.centersystem.dto.response.RoomResponseTerminDTO;
+import clinic.centersystem.dto.response.RoomResponseTerminPageDTO;
 import clinic.centersystem.model.Room;
+import clinic.centersystem.model.RoomCalendar;
 import clinic.centersystem.repository.RoomRepository;
+import clinic.centersystem.service.intf.RoomCalendarService;
 import clinic.centersystem.service.intf.RoomService;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
@@ -14,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import org.springframework.data.domain.Pageable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,6 +26,9 @@ public class RoomServiceImpl implements RoomService {
 
     @Autowired
     private RoomRepository roomRepository;
+
+    @Autowired
+    private RoomCalendarService roomCalendarService;
 
     @Override
     public Room findById(Long id) {
@@ -49,15 +57,19 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public RoomResponseDTO searchRooms(RoomSearchDTO roomSearchDTO) {
+    public RoomResponseTerminPageDTO searchRooms(RoomSearchDTO roomSearchDTO) {
         Pageable pageable = PageRequest.of(roomSearchDTO.getPageCnt(), 10);
         LocalDate dt = new LocalDate(roomSearchDTO.getDate());
-        System.out.println(dt);
-        Page<Room> rooms = roomRepository.searchRooms(roomSearchDTO.getName(), roomSearchDTO.getClinicId(),dt, pageable);
-        RoomResponseDTO roomResponseDTO = new RoomResponseDTO();
-        roomResponseDTO.setRooms(rooms.getContent());
-        roomResponseDTO.setPageCount(rooms.getTotalPages());
+        Page<Room> rooms = roomRepository.searchRooms(roomSearchDTO.getName(), roomSearchDTO.getClinicId(), pageable);
 
-        return roomResponseDTO;
+        RoomResponseTerminPageDTO roomResponseTerminPageDTO = new RoomResponseTerminPageDTO();
+        roomResponseTerminPageDTO.setPageCount(rooms.getTotalPages());
+        for(Room room : rooms.getContent()){
+            RoomResponseTerminDTO roomResponseTerminDTO = new RoomResponseTerminDTO();
+            roomResponseTerminDTO.setRoom(room);
+            roomResponseTerminDTO.setTermins(roomCalendarService.findByRoomAndDate(room.getId(),dt));
+        }
+
+        return roomResponseTerminPageDTO;
     }
 }

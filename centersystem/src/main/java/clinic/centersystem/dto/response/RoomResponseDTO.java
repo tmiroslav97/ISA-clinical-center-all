@@ -14,4 +14,5 @@ public class RoomResponseDTO {
     private List<Room> rooms;
 
     private Integer pageCount;
+
 }

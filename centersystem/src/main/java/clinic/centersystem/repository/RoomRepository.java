@@ -10,8 +10,8 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface RoomRepository extends JpaRepository<Room, Long> {
 
-    @Query("select r from Room r join r.roomCalendars rc where lower(r.name) like lower(?1) and r.clinic.id=(?2) and rc.date>=(?3)")
-    Page<Room> searchRooms(String name, Long clinicId, LocalDate dt, Pageable pageable);
+    @Query("select r from Room r where lower(r.name) like lower(?1) and r.clinic.id=(?2)")
+    Page<Room> searchRooms(String name, Long clinicId, Pageable pageable);
 
     Page<Room> findByClinicId(Long id, Pageable pageable);
 }
