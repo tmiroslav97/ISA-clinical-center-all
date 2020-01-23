@@ -68,4 +68,15 @@ public class ClinicServiceImpl implements ClinicService {
 
         return true;
     }
+
+    public List<Clinic> searchClinics(String name) {
+        List<Clinic> listClinics = new ArrayList<>();
+        List<Clinic> clinics = this.clinicRepository.findAll();
+        for(Clinic clinic : clinics) {
+            if(clinic.getName().toLowerCase().contains(name.toLowerCase())) {
+                listClinics.add(clinic);
+            }
+        }
+        return listClinics;
+    }
 }

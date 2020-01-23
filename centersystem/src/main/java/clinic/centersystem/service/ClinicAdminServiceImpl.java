@@ -33,11 +33,7 @@ public class  ClinicAdminServiceImpl implements ClinicAdminService {
     @Autowired
     private AppointmentTypeServiceImpl appointmentTypeService;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private AuthorityService authorityService;
 
     @Override
     public ClinicAdmin findById(Long id) {
@@ -73,25 +69,9 @@ public class  ClinicAdminServiceImpl implements ClinicAdminService {
     }
 
 
-    public String addDoctor(DoctorRequestDTO doctorRequestDTO) {
-        doctorRequestDTO.setPassword1(passwordEncoder.encode(doctorRequestDTO.getPassword1()));
 
-        Doctor doc = DoctorConverter.toCreateDoctorFromDoctorRequest(doctorRequestDTO);
 
-        List<Authority> auths = this.authorityService.findByName("ROLE_DOCTOR");
-        doc.setAuthorities(auths);
 
-        Doctor doctor = this.doctorService.save(doc);
-
-        return "Successfully added doctor";
-    }
-
-    public String addAppointmentType(AppointmentTypeRequestDTO appointmentTypeRequestDTO) {
-        AppointmentType appointment = AppointmentTypeConverter.toCreateAppointmentTypeFromRequest(appointmentTypeRequestDTO);
-        AppointmentType appointmentType = appointmentTypeService.save(appointment);
-
-        return "Successfully added appointment type";
-    }
     /*public String addAppointmentType(AppointmentTypeRequestDTO diagnoseRequestDTO) {
         AppointmentType appointment = diagnoseService.save(diagnoseRequestDTO);
 
@@ -112,14 +92,6 @@ public class  ClinicAdminServiceImpl implements ClinicAdminService {
         return "Successfully deleted doctor";
     }
 
-    public List<DoctorResponse> getDoctors() {
-        List<Doctor> doctors = this.doctorService.findAll();
-        List<DoctorResponse> doctorResponses = new ArrayList<DoctorResponse>();
-        for (Doctor doctor : doctors) {
-            doctorResponses.add(DoctorConverter.toCreateDoctorResponseFromDoctor(doctor));
-        }
-        return doctorResponses;
-    }
 
 
 }

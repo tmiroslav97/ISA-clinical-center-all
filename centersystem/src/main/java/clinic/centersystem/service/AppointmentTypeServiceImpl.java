@@ -1,5 +1,7 @@
 package clinic.centersystem.service;
 
+import clinic.centersystem.converter.AppointmentTypeConverter;
+import clinic.centersystem.dto.request.AppointmentTypeRequestDTO;
 import clinic.centersystem.model.AppointmentType;
 import clinic.centersystem.repository.AppointmentTypeRepository;
 import clinic.centersystem.service.intf.AppointmentTypeService;
@@ -28,5 +30,12 @@ public class AppointmentTypeServiceImpl implements AppointmentTypeService {
 
     @Override
     public List<AppointmentType> getAppointmentType(){ return this.findAll();}
+
+    public String addAppointmentType(AppointmentTypeRequestDTO appointmentTypeRequestDTO) {
+        AppointmentType appointment = AppointmentTypeConverter.toCreateAppointmentTypeFromRequest(appointmentTypeRequestDTO);
+        AppointmentType appointmentType = appointmentTypeRepository.save(appointment);
+
+        return "Successfully added appointment type";
+    }
 
 }
