@@ -21,12 +21,6 @@ public interface ClinicCenterAdminService {
 
     ClinicCenterAdminResponse clinicCenterAdmin(Long id);
 
-    List<RegistrationRequirementResponse> registrationRequirementList();
-
-    String approveRegistrationRequest(Long id);
-
-    String rejectRegistrationRequest(Long id, String message);
-
     String registerCCA(CCARegReqDTO ccaRegReqDTO, Long id);
 
     String activateAccount(Long id, HttpServletResponse httpServletResponse);

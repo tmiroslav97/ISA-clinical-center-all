@@ -84,43 +84,6 @@ public class ClinicCenterAdminServiceImpl implements ClinicCenterAdminService {
     }
 
     @Override
-    public List<RegistrationRequirementResponse> registrationRequirementList() {
-        return registrationRequirementService.findAll().stream().map(RegistrationRequirementConverter::toCreateRegistrationRequirementResponse).collect(Collectors.toList());
-    }
-
-    @Override
-    public String approveRegistrationRequest(Long id) {
-        RegistrationRequirement req = registrationRequirementService.findById(id);
-        req.setPassword(passwordEncoder.encode(req.getPassword()));
-        if (this.userService.existsByEmail(req.getEmail())) {
-            throw new UserExistsException();
-        }
-        Patient patient = this.patientService.save(req);
-        this.registrationRequirementService.deleteById(id);
-        String subject = "Account registration";
-        String answer = String.format(
-                "    Patient account was create successfully!\n" +
-                        "    Please follow this link to activate account:\n" +
-                        "    http://localhost:8080/cca/activate-account/%s"
-                , patient.getId().toString());
-
-        emailService.sendMailTo(patient.getEmail(), subject, answer);
-
-        return "Patient registration approved";
-    }
-
-    @Override
-    public String rejectRegistrationRequest(Long id, String message) {
-        RegistrationRequirement req = this.registrationRequirementService.findById(id);
-        String subject = "Account registration";
-        this.registrationRequirementService.deleteById(id);
-
-        emailService.sendMailTo(req.getEmail(), subject, message);
-
-        return "Patient registration rejected";
-    }
-
-    @Override
     public String registerCCA(CCARegReqDTO ccaRegReqDTO, Long id) {
         ClinicCenterAdmin clinicCenterAdmin = this.findById(id);
         if (!clinicCenterAdmin.isPredefined()) {

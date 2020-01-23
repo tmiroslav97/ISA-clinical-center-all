@@ -41,24 +41,6 @@ public class ClinicCenterAdministratorController {
         return new ResponseEntity<>(this.clinicCenterAdminService.clinicCenterAdmin(ccaId), HttpStatus.CREATED);
     }
 
-    @RequestMapping(method = GET, value = "/regreqs")
-    @PreAuthorize("hasRole('CCADMIN')")
-    public ResponseEntity<List<RegistrationRequirementResponse>> registrationReqs() {
-        return new ResponseEntity<>(this.clinicCenterAdminService.registrationRequirementList(), HttpStatus.OK);
-    }
-
-    @RequestMapping(method = POST, value = "/approve/{reqId}")
-    @PreAuthorize("hasRole('CCADMIN')")
-    public ResponseEntity<String> approveRegistrationRequest(@PathVariable Long reqId) {
-        return new ResponseEntity<>(this.clinicCenterAdminService.approveRegistrationRequest(reqId), HttpStatus.OK);
-    }
-
-    @RequestMapping(method = POST, value = "/reject/{reqId}/{msg}")
-    @PreAuthorize("hasRole('CCADMIN')")
-    public ResponseEntity<String> rejectRegistrationRequest(@PathVariable Long reqId, @PathVariable String msg) {
-        return new ResponseEntity<>(this.clinicCenterAdminService.rejectRegistrationRequest(reqId, msg), HttpStatus.OK);
-    }
-
     @RequestMapping(method = POST, value = "/reg-cca/{ccaId}")
     @PreAuthorize("hasRole('CCADMIN')")
     public ResponseEntity<String> registerCCA(@PathVariable Long ccaId, @RequestBody CCARegReqDTO ccaRegReqDTO) {
