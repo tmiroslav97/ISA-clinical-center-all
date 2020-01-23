@@ -1,24 +1,23 @@
-import React, { useState } from 'react';
-import useStateWithCallback from 'use-state-with-callback';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { Container, Row, Col, Form, Button, Pagination } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-import { searchRoomsData, fetchRoomsData } from '../../store/rooms/actions';
+import { searchRoomsData } from '../../store/rooms/actions';
+import { pageCountSelector } from '../../store/rooms/selectors';
 import RoomList from './RoomList';
 
 
 const RoomSearch = ({ match }) => {
     const dispatch = useDispatch();
     const clinicId = match.params.clinicId;
+    const pageCount = useSelector(pageCountSelector);
     const [today, setToday] = useState(moment().format('YYYY-MM-DD'));
     const [date, setDate] = useState(moment().format('YYYY-MM-DD'));
     const [name, setName] = useState('');
     const [pageCnt, setPageCnt] = useState(0);
-    const [searchFlag, setSearchFlag] = useState(false);
     const [filterTerm, setFilterTerm] = useState('');
 
     const handleRoomsSearch = () => {
-        console.log(date);
         dispatch(
             searchRoomsData({
                 name,
@@ -29,6 +28,47 @@ const RoomSearch = ({ match }) => {
         );
     };
 
+    useEffect(() => {
+        dispatch(
+            searchRoomsData({
+                name,
+                date,
+                clinicId,
+                pageCnt
+            })
+        );
+    }, [pageCnt]);
+
+    let items = [];
+    for (let number = 1; number <= pageCount; number++) {
+        items.push(
+            <Pagination.Item key={number} active={number == (pageCnt + 1)}>
+                {number}
+            </Pagination.Item>
+        );
+    }
+
+    const handlePagination = (e) => {
+        e.preventDefault();
+        let event = e.target.text;
+        if (event != undefined && pageCount > 0) {
+            if (event.includes('First')) {
+                setPageCnt(0);
+            } else if (event.includes('Last')) {
+                setPageCnt(pageCount - 1);
+            } else if (event.includes('Next')) {
+                if (pageCnt < pageCount - 1) {
+                    setPageCnt(pageCnt + 1);
+                }
+            } else if (event.includes('Previous')) {
+                if (pageCnt > 0) {
+                    setPageCnt(pageCnt - 1);
+                }
+            } else {
+                setPageCnt(event - 1);
+            }
+        }
+    };
 
     return (
         <Container>
@@ -77,7 +117,18 @@ const RoomSearch = ({ match }) => {
                     </Form>
                 </Col>
             </Row>
-            <RoomList clinicId={clinicId} name={name} date={date} cnt={pageCnt} filterTerm={filterTerm} />
+            <RoomList cnt={pageCnt} filterTerm={filterTerm} />
+            <Row>
+                <Col md={{ span: 10, offset: 1 }} xs={12}>
+                    <Pagination onClick={handlePagination} className="pagination justify-content-center mb-5">
+                        <Pagination.First />
+                        <Pagination.Prev />
+                        {items}
+                        <Pagination.Next />
+                        <Pagination.Last />
+                    </Pagination>
+                </Col>
+            </Row>
         </Container>
     );
 
