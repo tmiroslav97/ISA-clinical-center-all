@@ -2,9 +2,13 @@ package clinic.centersystem.service;
 
 import clinic.centersystem.converter.DoctorConverter;
 import clinic.centersystem.dto.request.DoctorRequestDTO;
+import clinic.centersystem.dto.response.ClinicResponse;
 import clinic.centersystem.dto.response.DoctorResponse;
 import clinic.centersystem.model.Authority;
+import clinic.centersystem.model.Clinic;
+import clinic.centersystem.model.ClinicAdmin;
 import clinic.centersystem.model.Doctor;
+import clinic.centersystem.repository.ClinicRepository;
 import clinic.centersystem.repository.DoctorRepository;
 import clinic.centersystem.service.intf.AuthorityService;
 import clinic.centersystem.service.intf.DoctorService;
@@ -21,6 +25,9 @@ public class DoctorServiceImpl implements DoctorService {
     private DoctorRepository doctorRepository;
 
     @Autowired
+    private ClinicRepository clinicRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -33,7 +40,7 @@ public class DoctorServiceImpl implements DoctorService {
     public List<Doctor> findAll() {return this.doctorRepository.findAll();}
 
     @Override
-    public List<Doctor> findAllOnClinic(Long id){return null;}
+    public List<Doctor> findAllOnClinic(Long id){return this.doctorRepository.findByClinicId(id);}
 
     @Override
     public Doctor save(DoctorRequestDTO doctorRequestDTO) {
@@ -85,6 +92,16 @@ public class DoctorServiceImpl implements DoctorService {
             }
         }
         return listDoctors;
+    }
+
+    public String addDoctorOnClinic(Doctor doctor, Long id){
+        doctor.setPassword(passwordEncoder.encode(doctor.getPassword()));
+        Clinic clinic  = this.clinicRepository.getOne(id);
+        doctor.setClinic(clinic);
+        List<Authority> auths = this.authorityService.findByName("ROLE_DOCTOR");
+        doctor.setAuthorities(auths);
+        Doctor doc = this.save(doctor);
+        return "Successfully added doctor on clinic";
     }
 
     public String addDoctor(DoctorRequestDTO doctorRequestDTO) {

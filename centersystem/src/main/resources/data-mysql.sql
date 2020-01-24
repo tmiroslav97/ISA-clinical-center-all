@@ -14,6 +14,9 @@ VALUES ('ROLE_PERSONNEL');
 INSERT INTO clinic (address, cnt_rating, description, name , sum_rating)
 VALUES ('Vlasenica 15', 0, 'Clinic for cardiovascular disease', 'Clinic 1', 0);
 
+INSERT INTO clinic (address, cnt_rating, description, name , sum_rating)
+VALUES ('Zrenjanin 66', 0, 'Clinic for neurology', 'Clinic 2', 0);
+
 INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
                    last_password_reset_date, password, role)
 VALUES (1, 'Miroslav', 'Tomic', 'tomic.miroslav97@gmail.com', true, false, '2019-11-20 11:00:00',
@@ -88,6 +91,22 @@ VALUES (6, 'Stefan', 'Peric', 'stefan@stefan.com', true, false, '2019-11-20 11:2
 
 INSERT INTO user_authority (user_id, authority_id)
 VALUES (2, 6);
+
+INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
+                   last_password_reset_date, password, role)
+
+VALUES (7, 'Ana', 'Andjusic', 'ana@gmail.com', true, false, '2020-01-24 3:50:00',
+        '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra',
+        'ROLE_DOCTOR');
+
+INSERT INTO personnel(id, clinic_id)
+VALUES (7, 2);
+
+INSERT INTO user_authority (user_id, authority_id)
+VALUES (7, 3);
+
+INSERT INTO user_authority (user_id, authority_id)
+VALUES (7, 4);
 
 INSERT INTO patient (address, city, country, is_activated, phone_num, unoip, id)
 VALUES ('Masarikova', 'Novi Sad', 'Srbija', true, '065312532', '4351233', 6);

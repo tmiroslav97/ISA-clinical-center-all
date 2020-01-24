@@ -3,6 +3,7 @@ import { take, put, call } from 'redux-saga/effects';
 import {
     ADD_DOCTOR,
     FETCH_DOCTORS_DATA,
+    FETCH_DOCTORS_DATA_ON_CLINIC,
 } from './constants';
 
 import DoctorService from '../../services/DoctorService';
@@ -18,6 +19,15 @@ export function* fetchDoctorsData() {
     const { payload } = yield take(FETCH_DOCTORS_DATA);
     yield put(putIsFetchDoctors(false));
     const { doctors } = yield call(DoctorService.fetchDoctorsData, {});
+    yield put(putDoctorsData(doctors));
+    yield put(putIsFetchDoctors(true));
+}
+
+export function* fetchDoctorsDataOnClinic() {
+    //eslint-disable-next-line
+    const { payload } = yield take(FETCH_DOCTORS_DATA_ON_CLINIC);
+    yield put(putIsFetchDoctors(false));
+    const { doctors } = yield call(DoctorService.fetchDoctorsDataOnClinic, {});
     yield put(putDoctorsData(doctors));
     yield put(putIsFetchDoctors(true));
 }

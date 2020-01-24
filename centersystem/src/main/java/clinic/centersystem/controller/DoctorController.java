@@ -4,6 +4,7 @@ import clinic.centersystem.converter.DoctorConverter;
 import clinic.centersystem.dto.request.DoctorRequestDTO;
 import clinic.centersystem.dto.response.DoctorResponse;
 import clinic.centersystem.model.Authority;
+import clinic.centersystem.model.ClinicAdmin;
 import clinic.centersystem.model.Doctor;
 import clinic.centersystem.service.DoctorServiceImpl;
 import clinic.centersystem.service.intf.AuthorityService;
@@ -55,6 +56,15 @@ public class DoctorController {
         return new ResponseEntity<>(this.doctorService.addDoctor(doctorRequestDTO), HttpStatus.OK);
     }
 
+    @RequestMapping(method = POST, value="/add-doctor-on-clinic")
+    public ResponseEntity<String>addDoctor(@RequestBody Doctor doctor, Long id){
+        return new ResponseEntity<>(this.doctorService.addDoctorOnClinic(doctor, id), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = GET, value="/doctorsOnClinic")
+    public ResponseEntity<List<Doctor>>findAllOnClinic(@PathVariable Long id){
+        return new ResponseEntity<List<Doctor>>(this.doctorService.findAllOnClinic(id), HttpStatus.OK);
+    }
 
 
     /*
