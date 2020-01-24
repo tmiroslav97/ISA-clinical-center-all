@@ -3,6 +3,7 @@ package clinic.centersystem.service;
 import clinic.centersystem.model.RoomCalendar;
 import clinic.centersystem.repository.RoomCalendarRepository;
 import clinic.centersystem.service.intf.RoomCalendarService;
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class RoomCalendarServiceImpl implements RoomCalendarService {
     }
 
     @Override
-    public List<Integer> findByRoomAndDate(Long roomId, LocalDate dt) {
+    public List<Integer> findByRoomAndDate(Long roomId, DateTime dt) {
         return roomCalendarRepository.findByRoomAndDate(roomId, dt);
     }
 

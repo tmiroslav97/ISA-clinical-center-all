@@ -5,12 +5,13 @@ import clinic.centersystem.dto.response.RoomResponseDTO;
 import clinic.centersystem.dto.response.RoomResponseTerminDTO;
 import clinic.centersystem.dto.response.RoomResponseTerminPageDTO;
 import clinic.centersystem.model.Room;
-import clinic.centersystem.model.RoomCalendar;
 import clinic.centersystem.repository.RoomRepository;
 import clinic.centersystem.service.intf.RoomCalendarService;
 import clinic.centersystem.service.intf.RoomService;
 import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
+import org.joda.time.DateTimeZone;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -59,7 +60,9 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public RoomResponseTerminPageDTO searchRooms(RoomSearchDTO roomSearchDTO) {
         Pageable pageable = PageRequest.of(roomSearchDTO.getPageCnt(), 10);
-        LocalDate dt = new LocalDate(roomSearchDTO.getDate());
+        DateTime dt = new DateTime(roomSearchDTO.getDate(), DateTimeZone.UTC);
+        DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd");
+        System.out.println(dt.toString());
         Page<Room> rooms = roomRepository.searchRooms(roomSearchDTO.getName(), roomSearchDTO.getClinicId(), pageable);
         RoomResponseTerminPageDTO roomResponseTerminPageDTO = new RoomResponseTerminPageDTO();
         List<RoomResponseTerminDTO> roomResponseTerminDTO = new ArrayList<>();
@@ -70,6 +73,7 @@ public class RoomServiceImpl implements RoomService {
             RoomResponseTerminDTO rrtDTO = new RoomResponseTerminDTO();
             rrtDTO.setRoom(room);
             rrtDTO.setTermins(roomCalendarService.findByRoomAndDate(room.getId(), dt));
+            System.out.println(dt.toString());
             roomResponseTerminDTO.add(rrtDTO);
             if (rrtDTO.getTermins().size() == 4) {
                 boolean flag = true;
@@ -78,7 +82,7 @@ public class RoomServiceImpl implements RoomService {
                     List<Integer> termins = roomCalendarService.findByRoomAndDate(room.getId(), dt);
                     for (int i = 7; i <= 16; i += 3) {
                         if (!termins.contains(i)) {
-                            rrtDTO.setFirstFreeTermin(dt.toString() + " " + String.valueOf(i) + "-" + String.valueOf(i + 3));
+                            rrtDTO.setFirstFreeTermin(dtf.print(dt) + " " + String.valueOf(i) + "-" + String.valueOf(i + 3));
                             flag = false;
                             break;
                         }
@@ -87,7 +91,7 @@ public class RoomServiceImpl implements RoomService {
             } else {
                 for (int i = 7; i <= 16; i += 3) {
                     if (!rrtDTO.getTermins().contains(i)) {
-                        rrtDTO.setFirstFreeTermin(dt.toString() + " " + String.valueOf(i) + "-" + String.valueOf(i + 3));
+                        rrtDTO.setFirstFreeTermin(dtf.print(dt) + " " + String.valueOf(i) + "-" + String.valueOf(i + 3));
                         break;
                     }
                 }
