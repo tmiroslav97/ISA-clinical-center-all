@@ -18,9 +18,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DoctorServiceImpl implements DoctorService {
+
     @Autowired
     private DoctorRepository doctorRepository;
 
@@ -34,13 +36,19 @@ public class DoctorServiceImpl implements DoctorService {
     private AuthorityService authorityService;
 
     @Override
-    public Doctor findById(Long id){return this.doctorRepository.findById(id).orElseGet(null);}
+    public Doctor findById(Long id) {
+        return this.doctorRepository.findById(id).orElseGet(null);
+    }
 
     @Override
-    public List<Doctor> findAll() {return this.doctorRepository.findAll();}
+    public List<Doctor> findAll() {
+        return this.doctorRepository.findAll();
+    }
 
     @Override
-    public List<Doctor> findAllOnClinic(Long id){return this.doctorRepository.findByClinicId(id);}
+    public List<Doctor> findAllOnClinic(Long id) {
+        return null;
+    }
 
     @Override
     public Doctor save(DoctorRequestDTO doctorRequestDTO) {
@@ -50,44 +58,48 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public Doctor save(Doctor doctor){return this.doctorRepository.save(doctor);}
+    public Doctor save(Doctor doctor) {
+        return this.doctorRepository.save(doctor);
+    }
 
     @Override
-    public void remove(Long id){this.doctorRepository.deleteById(id);}
+    public void remove(Long id) {
+        this.doctorRepository.deleteById(id);
+    }
 
     @Override
-    public DoctorResponse getDoctorById(Long id){
+    public DoctorResponse getDoctorById(Long id) {
         Doctor doctor = this.findById(id);
         return DoctorConverter.toCreateDoctorResponseFromDoctor(doctor);
     }
 
     @Override
     public List<DoctorResponse> getDoctors() {
-        List<Doctor> doctors = this.findAll();
-        List<DoctorResponse> doctorResponses = new ArrayList<DoctorResponse>();
-        for (Doctor doctor : doctors) {
-            doctorResponses.add(DoctorConverter.toCreateDoctorResponseFromDoctor(doctor));
-        }
-        return doctorResponses;
+        return this.findAll().stream().map(DoctorConverter::toCreateDoctorResponseFromDoctor).collect(Collectors.toList());
     }
 
     @Override
-    public List<Doctor> searchDoctorByName(String name){
+    public List<Doctor> searchDoctorByName(String name) {
         List<Doctor> listDoctors = new ArrayList<>();
-        List<Doctor>doctors= this.findAll();
-        for (Doctor doctor:doctors){
-            if(doctor.getFirstName().toLowerCase().contains(name.toLowerCase())){
+        List<Doctor> doctors = this.findAll();
+        for (Doctor doctor : doctors) {
+            if (doctor.getFirstName().toLowerCase().contains(name.toLowerCase())) {
                 listDoctors.add(doctor);
             }
         }
         return listDoctors;
     }
 
-    public List<Doctor> searchDoctors(String name)  {
+    @Override
+    public List<DoctorResponse> findByClinicId(Long clinicId) {
+        return doctorRepository.findByClinicId(clinicId).stream().map(DoctorConverter::toCreateDoctorResponseFromDoctor).collect(Collectors.toList());
+    }
+
+    public List<Doctor> searchDoctors(String name) {
         List<Doctor> listDoctors = new ArrayList<>();
         List<Doctor> doctors = this.doctorRepository.findAll();
         for (Doctor doctor : doctors) {
-            if(doctor.getFirstName().toLowerCase().contains(name.toLowerCase())) {
+            if (doctor.getFirstName().toLowerCase().contains(name.toLowerCase())) {
                 listDoctors.add(doctor);
             }
         }

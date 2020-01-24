@@ -58,4 +58,8 @@ public class DbColumnConstants {
     public static final String HOUR = "hour";
     public static final String DATE = "date";
     public static final String TERMIN = "termin";
+    public static final String DOCTORID = "doctorId";
+    public static final String PATIENTID = "patientId";
+    public static final String PATIENTNAME = "patientName";
+    public static final String DOCTORNAME = "doctorName";
 }

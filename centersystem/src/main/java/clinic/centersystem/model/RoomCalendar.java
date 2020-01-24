@@ -8,11 +8,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -27,8 +27,12 @@ public class RoomCalendar {
     private Long id;
 
     @Column(name = DbColumnConstants.DATE, nullable = false)
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
-    private LocalDate date;
+    @Temporal(TemporalType.DATE)
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime", parameters = {
+            @org.hibernate.annotations.Parameter(name = "databaseZone", value = "UTC"),
+            @org.hibernate.annotations.Parameter(name = "javaZone", value = "UTC")
+    })
+    private DateTime date;
 
     @Column(name = DbColumnConstants.TERMIN, nullable = false)
     private Integer termin;

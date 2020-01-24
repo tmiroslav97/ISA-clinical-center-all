@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import useStateWithCallback from 'use-state-with-callback';
-import { Container, Row, Col, Spinner, Table, Pagination, PageItem } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { Container, Row, Col, Spinner, Table, Form, Button } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import { roomsDataSelector, isFetchRoomsSelector } from '../../store/rooms/selectors';
 
 
 const RoomList = ({ filterTerm, cnt }) => {
     const rooms = useSelector(roomsDataSelector);
     const isFetchRoomsData = useSelector(isFetchRoomsSelector);
-    
+    const [termin, setTermin] = useState('');
+    const [preTermins, setPreTermins] = useState([7, 10, 13, 16]);
 
     if (!isFetchRoomsData) {
         return <div className="d-flex justify-content-center">
@@ -33,16 +33,40 @@ const RoomList = ({ filterTerm, cnt }) => {
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Number</th>
+                                <th>Termins</th>
+                                <th>First free</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                rooms.filter(room => room.type.includes(filterTerm)).map((room, index) => {
+
+                                rooms.filter(roomsDto => roomsDto.room.type.includes(filterTerm)).map((roomsDto, index) => {
                                     return (
-                                        <tr key={room.id}>
+                                        <tr key={roomsDto.room.id}>
                                             <td>{cnt * 10 + index + 1}</td>
-                                            <td>{room.name}</td>
-                                            <td>{room.roomNum}</td>
+                                            <td>{roomsDto.room.name}</td>
+                                            <td>{roomsDto.room.roomNum}</td>
+                                            <td>
+                                                <Form>
+                                                    <Form.Group as={Col}>
+                                                        <Form.Label>Termins:</Form.Label>
+                                                        <Form.Control as="select" onChange={({ currentTarget }) => {
+                                                            setTermin(currentTarget.value);
+                                                        }} >
+                                                            {
+                                                                preTermins.map((termin, index) => {
+                                                                    let flag = roomsDto.termins.includes(termin);
+                                                                    return (
+                                                                        <option key={termin} disabled={flag}>{termin}-{termin + 3}</option>
+                                                                    );
+                                                                })
+                                                            }
+                                                        </Form.Control>
+                                                        <Button className="mt-2">Reserve</Button>
+                                                    </Form.Group>
+                                                </Form>
+                                            </td>
+                                            <td>{roomsDto.firstFreeTermin}<br/><Button>Reserve</Button></td>
                                         </tr>
                                     );
                                 })
@@ -50,7 +74,7 @@ const RoomList = ({ filterTerm, cnt }) => {
                         </tbody>
                     </Table>
                 </Col>
-            </Row>       
+            </Row>
         </Container>
     );
 }

@@ -2,6 +2,7 @@ package clinic.centersystem.controller;
 
 import clinic.centersystem.dto.request.RoomSearchDTO;
 import clinic.centersystem.dto.response.RoomResponseDTO;
+import clinic.centersystem.dto.response.RoomResponseTerminPageDTO;
 import clinic.centersystem.model.Room;
 import clinic.centersystem.service.RoomServiceImpl;
 import org.springframework.http.HttpStatus;
@@ -33,7 +34,7 @@ public class RoomController {
     }
 
     @RequestMapping(method = POST, value = "/search")
-    public ResponseEntity<RoomResponseDTO> getClinicRooms(@RequestBody RoomSearchDTO roomSearchDTO) {
+    public ResponseEntity<RoomResponseTerminPageDTO> getClinicRooms(@RequestBody RoomSearchDTO roomSearchDTO) {
         return new ResponseEntity<>(roomService.searchRooms(roomSearchDTO), HttpStatus.OK);
     }
 }

@@ -140,6 +140,19 @@ const CA = ({ match }) => {
                     </Card>
                 </Col>
             </Row>
+            <Row>
+                <Col md={{ span: 3, offset: 1 }} xs={12}>
+                    <Card style={{ width: '18rem' }}>
+                        <Card.Body>
+                            <Card.Title>Surgery requirement</Card.Title>
+                            <Card.Text>
+                                You can surgery requirements.
+                            </Card.Text>
+                            <Button variant="primary" onClick={() => { history.push('/adminc/sur-req/' + data.clinicId); }}>Requirements</Button>
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </Row>
         </Container>
     );
 
