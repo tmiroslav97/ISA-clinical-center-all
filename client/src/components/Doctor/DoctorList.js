@@ -2,15 +2,14 @@ import React, { useState, useEffect } from 'react';
 import useStateWithCallback from 'use-state-with-callback';
 import { Container, Row, Col, Spinner, Table, Pagination, PageItem } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { roomsDataSelector, isFetchRoomsSelector } from '../../store/rooms/selectors';
+import { doctorsDataSelector, isFetchDoctorsSelector } from '../../store/doctors/selectors';
+
+const DoctorList = ({ filterTerm, cnt }) => {
+    const doctors = useSelector(doctorsDataSelector);
+    const isFetchDoctorsData = useSelector(isFetchDoctorsSelector);
 
 
-const RoomList = ({ filterTerm, cnt }) => {
-    const rooms = useSelector(roomsDataSelector);
-    const isFetchRoomsData = useSelector(isFetchRoomsSelector);
-    
-
-    if (!isFetchRoomsData) {
+    if(!isFetchDoctorsData) {
         return <div className="d-flex justify-content-center">
             <Spinner animation="border" role="status">
                 <span className="sr-only">Loading...</span>
@@ -22,7 +21,7 @@ const RoomList = ({ filterTerm, cnt }) => {
         <Container>
             <Row>
                 <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <h3>Rooms list</h3>
+                    <h3>Doctors list</h3>
                 </Col>
             </Row>
             <Row>
@@ -31,18 +30,20 @@ const RoomList = ({ filterTerm, cnt }) => {
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
-                                <th>Number</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Average rating</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                rooms.filter(room => room.type.includes(filterTerm)).map((room, index) => {
+                                doctors.filter(doctor => doctor.type.includes(filterTerm)).map((doctor, index) => {
                                     return (
-                                        <tr key={room.id}>
+                                        <tr key={doctor.id}>
                                             <td>{cnt * 10 + index + 1}</td>
-                                            <td>{room.name}</td>
-                                            <td>{room.roomNum}</td>
+                                            <td>{doctor.firstName}</td>
+                                            <td>{doctor.lastName}</td>
+                                            <td>{doctor.averageRating}</td>
                                         </tr>
                                     );
                                 })
@@ -55,4 +56,4 @@ const RoomList = ({ filterTerm, cnt }) => {
     );
 }
 
-export default RoomList;
+export default DoctorList;

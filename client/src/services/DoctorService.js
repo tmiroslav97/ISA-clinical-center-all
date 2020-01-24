@@ -3,8 +3,9 @@ import { format } from 'util';
 
 const FINALPOINTS = {
     FETCH_DOCTOR_DATA:'/doctor/%s',
-    ADD_DOCTOR: '/doctor/add-doctor',
-    FETCH_DOCTORS_DATA: '/doctor/doctors'
+    ADD_DOCTOR: '/adm-cli/add-doctor',
+    FETCH_DOCTORS_DATA: '/adm-cli/doctors',
+    SEARCH_DOCTOR: '/pat/search-doctor'
 };
 
 class DoctorService extends HttpClient {
@@ -39,6 +40,19 @@ class DoctorService extends HttpClient {
         try {
             const { data } = await this.getApiClient().post(
                 FINALPOINTS.ADD_DOCTOR, 
+                payload
+            );
+
+            return { data };
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    };
+
+    searchDoctor = async payload => {
+        try {
+            const { data } = await this.getApiClient().post(
+                FINALPOINTS.SEARCH_DOCTOR,
                 payload
             );
 

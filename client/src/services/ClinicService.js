@@ -3,9 +3,10 @@ import { history } from '../index';
 import { format } from 'util';
 
 const FINALPOINTS = {
-    REG_CLINIC: '/clinic/reg-clinic',
-    FETCH_CLINICS: '/clinic/clinics',
-    REG_CLINIC_ADMIN: '/adm-cli/reg-clinic-admin',
+    REG_CLINIC: '/cca/reg-clinic',
+    FETCH_CLINICS: '/cca/clinics',
+    REG_CLINIC_ADMIN: '/cca/reg-clinic-admin',
+    SEARCH_CLINIC: '/pat/search-clinics'
 };
 
 class ClinicService extends HttpClient {
@@ -42,6 +43,19 @@ class ClinicService extends HttpClient {
         try {
             const { data } = await this.getApiClient().post(
                 FINALPOINTS.REG_CLINIC_ADMIN,
+                payload
+            );
+
+            return { data };
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    };
+
+    searchClinic = async payload => {
+        try {
+            const { data } = await this.getApiClient().post(
+                FINALPOINTS.SEARCH_CLINIC,
                 payload
             );
 

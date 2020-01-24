@@ -3,8 +3,8 @@ import {Tab, Tabs} from 'react-bootstrap';
 import History from './History';
 import MedicalRecord from './MedicalRecord';
 import Profile from './Profile';
-import ClinicSearch from './ClinicSearch';
-import DoctorSearch from './DoctorSearch';
+import ClinicSearch from '../Clinic/ClinicSearch';
+import DoctorSearch from '../Doctor/DoctorSearch';
 
 
 function PatientHomePage(){

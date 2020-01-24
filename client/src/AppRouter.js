@@ -11,8 +11,6 @@ import ClinicCenterAdminProfile from './components/ClinicCenterAdmin/ClinicCente
 import HolidayAproval from './components/HolidayAproval';
 import PasswordChanger from './components/PasswordChanger';
 import ClinicAdmin from './components/ClinicAdmin/CA';
-import DoctorSearch from './components/Patient/DoctorSearch';
-import ClinicSearch from './components/Patient/ClinicSearch';
 import RoomAllAtOnce from './components/Room/RoomAllAtOnce';
 import RoomSearch from './components/Room/RoomSearch';
 import PrivateRoute from './components/PrivateRoute';
@@ -51,8 +49,6 @@ const AppRouter = () => {
             <PrivateRoute exact path="/adminc/app-type/:clinicId" component={AppointmentTypAllAtOnce} accessRole="ROLE_ADMINC" />
 
             <Route exact path="/user-prof" component={UserProfile} />
-            <Route exact path="/search" component={DoctorSearch} />
-            <Route exact path="/test" component={ClinicSearch} />
             <Route exact path="/page-not-found" component={() => <h1>Page not found!</h1>} />
             <Route exact path="/unauthorized" component={Unauthorized} />
             <Redirect from="*" to="/page-not-found" />

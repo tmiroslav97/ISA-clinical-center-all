@@ -4,7 +4,7 @@ import { format } from 'util';
 
 const FINALPOINTS = {
     FETCH_APPOINTMENT_TYPE: '/appointment-type/all',
-    ADD_APPOINTMENT_TYPE: '/appointment-type/add-appointment-type',
+    ADD_APPOINTMENT_TYPE: '/adm-cli/add-appointment-type',
     //SEARCH_APPOINTMENT_TYPE: 'admi-cli/appType/search/%s/%s',
     // DELETE_ROOMS_DATA: 'admi-cli/appType/delete/%s',
     //EDIT_APPOINTMENT_TYPE: 'admi-cli/appType/edit/%s',
