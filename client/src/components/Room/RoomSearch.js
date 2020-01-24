@@ -86,13 +86,16 @@ const RoomSearch = ({ match }) => {
                                 <Form.Control type="text" placeholder="Name"
                                     onChange={({ currentTarget }) => {
                                         setName(currentTarget.value);
-                                    }} />
+                                    }}/>
                             </Form.Group>
                             <Form.Group as={Col} >
                                 <Form.Label>Date:</Form.Label>
                                 <Form.Control type="date" min={today} value={date} id="date1"
                                     onChange={({ currentTarget }) => {
                                         setDate(currentTarget.value);
+                                    }}
+                                    onKeyDown={() => {
+                                        return false;
                                     }} />
                             </Form.Group>
                         </Form.Row>

@@ -234,10 +234,10 @@ INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (9,FALSE 
 INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (10,FALSE ,'SUR','For Ah3',10,1);
 INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (11,FALSE ,'SUR','For heart',11,1);
 
-INSERT INTO roomcalendar(date, termin, room_id) VALUES ('2020-01-22',7,1);
+INSERT INTO roomcalendar(date, termin, room_id) VALUES ('2020-01-22 07:00:00',7,1);
 INSERT INTO roomcalendar(date, termin, room_id) VALUES ('2020-01-22',10,1);
 INSERT INTO roomcalendar(date, termin, room_id) VALUES ('2020-01-22',16,1);
 
-INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id)VALUES ('2020-01-23',7,1,2);
-INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id)VALUES ('2020-01-24',10,1,2);
-INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id)VALUES ('2020-01-25',13,1,2);
+INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id)VALUES ('2020-01-23',7,1,2,3);
+INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id)VALUES ('2020-01-24',10,1,2,3);
+INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id)VALUES ('2020-01-25',13,1,2,3);

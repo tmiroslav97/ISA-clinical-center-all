@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
 import javax.persistence.*;
@@ -29,15 +30,20 @@ public class SurgeryRequirement {
 
     @Column(name = DbColumnConstants.DATE, nullable = false)
     @Temporal(TemporalType.DATE)
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
-    private LocalDate date;
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime", parameters = {
+            @org.hibernate.annotations.Parameter(name = "databaseZone", value = "UTC"),
+            @org.hibernate.annotations.Parameter(name = "javaZone", value = "UTC")
+    })
+    private DateTime date;
 
     @Column(name = DbColumnConstants.TERMIN, nullable = false)
     private Integer termin;
 
-    @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Patient patient;
+    @Column(name = DbColumnConstants.PATIENTID, nullable = false)
+    private Long patientId;
+
+    @Column(name = DbColumnConstants.DOCTORID, nullable = false)
+    private Long doctorId;
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
