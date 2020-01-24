@@ -73,10 +73,6 @@ public class Patient extends User {
     @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Surgery> surgeries;
 
-    @JsonBackReference
-    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<SurgeryRequirement> surgeryRequirements;
-
     @Column(name = DbColumnConstants.ISACTIVATED, nullable = false)
     private boolean isActivated;
 

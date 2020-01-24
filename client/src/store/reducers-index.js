@@ -10,6 +10,7 @@ import clinicReducer from './clinics/reducer';
 import appointmentReducer from './appointments/reducer';
 import doctorsReducer from './doctors/reducer';
 import roomsReducer from './rooms/reducer';
+import surReqReducer from './sur-req/reducer';
 
 const rootReducer = combineReducers({
     userReducer,
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
     clinicReducer,
     appointmentReducer,
     doctorsReducer,
-    roomsReducer
+    roomsReducer,
+    surReqReducer
 });
 
 

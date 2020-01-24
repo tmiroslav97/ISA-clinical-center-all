@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
@@ -23,6 +22,7 @@ import UserProfile from './components/UserProfile';
 import FreeAppointment from './components/ClinicAdmin/FreeApointment';
 import AppointmentTypAllAtOnce from './components/ClinicAdmin/AppointmentTypeAllAtOnce';
 import Pricelist from './components/ClinicAdmin/Pricelist';
+import SurgeryReq from './components/SurgeryRequirement/SurgeryReq';
 import Unauthorized from './components/Unauthorized';
 
 
@@ -49,6 +49,7 @@ const AppRouter = () => {
             <PrivateRoute exact path="/adminc/free-app/:clinicId" component={FreeAppointment} accessRole="ROLE_ADMINC" />
             <PrivateRoute exact path="/adminc/price-list/:clinicId" component={Pricelist} accessRole="ROLE_ADMINC" />
             <PrivateRoute exact path="/adminc/app-type/:clinicId" component={AppointmentTypAllAtOnce} accessRole="ROLE_ADMINC" />
+            <PrivateRoute exact path="/adminc/sur-req/:clinicId" component={SurgeryReq} accessRole="ROLE_ADMINC" />
 
             <Route exact path="/user-prof" component={UserProfile} />
             <Route exact path="/search" component={DoctorSearch} />

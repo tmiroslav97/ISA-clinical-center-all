@@ -28,12 +28,9 @@ public class DoctorController {
 
     private final DoctorServiceImpl doctorService;
 
-
-
-    public DoctorController(DoctorServiceImpl doctorService){
+    public DoctorController(DoctorServiceImpl doctorService) {
         this.doctorService = doctorService;
     }
-
 
     @RequestMapping(method = GET, value = "/{doctorId}")
     public ResponseEntity<DoctorResponse> getDoctorById(@PathVariable Long doctorId) {
@@ -50,9 +47,14 @@ public class DoctorController {
         return new ResponseEntity<List<Doctor>>(this.doctorService.searchDoctors(name), HttpStatus.OK);
     }
 
-    @RequestMapping(method = POST, value="/add-doctor")
-    public ResponseEntity<String>addDoctor(@RequestBody DoctorRequestDTO doctorRequestDTO){
+    @RequestMapping(method = POST, value = "/add-doctor")
+    public ResponseEntity<String> addDoctor(@RequestBody DoctorRequestDTO doctorRequestDTO) {
         return new ResponseEntity<>(this.doctorService.addDoctor(doctorRequestDTO), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = GET, value = "/all/{clinicId}")
+    public ResponseEntity<List<DoctorResponse>> addDoctor(@PathVariable Long clinicId) {
+        return new ResponseEntity<>(doctorService.findByClinicId(clinicId), HttpStatus.OK);
     }
 
 
