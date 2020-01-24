@@ -42,8 +42,14 @@ public class SurgeryRequirement {
     @Column(name = DbColumnConstants.PATIENTID, nullable = false)
     private Long patientId;
 
+    @Column(name = DbColumnConstants.PATIENTNAME, nullable = false)
+    private String patientName;
+
     @Column(name = DbColumnConstants.DOCTORID, nullable = false)
     private Long doctorId;
+
+    @Column(name = DbColumnConstants.DOCTORNAME, nullable = false)
+    private String doctorName;
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
