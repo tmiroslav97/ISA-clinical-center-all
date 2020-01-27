@@ -3,6 +3,7 @@ import { Container, Row, Table, Button, Col, Spinner, Pagination } from 'react-b
 import { useDispatch, useSelector } from 'react-redux';
 import { surReqDataSelector, isFetchSurReqDataSelector, surReqPageCountSelector } from '../../store/sur-req/selectors';
 import { fetchSurReqData } from '../../store/sur-req/actions';
+import moment from 'moment'
 
 const SurgeryReq = ({ match }) => {
     const dispatch = useDispatch();
@@ -83,12 +84,13 @@ const SurgeryReq = ({ match }) => {
                         <tbody>
                             {
                                 surReqs.map((surReq, index) => {
+                                    console.log(surReq.date);
                                     return (
                                         <tr key={surReq.id}>
                                             <td>{index + 1}</td>
                                             <td>{surReq.patientName}</td>
                                             <td>{surReq.doctorName}</td>
-                                            <td></td>
+                                            <td>{surReq.date}</td>
                                             <td>{surReq.termin}-{surReq.termin + 3}</td>
                                             <td>
                                                 <Button>Reserve this</Button>

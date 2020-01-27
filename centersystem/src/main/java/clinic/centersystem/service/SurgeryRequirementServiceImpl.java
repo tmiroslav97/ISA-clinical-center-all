@@ -1,5 +1,6 @@
 package clinic.centersystem.service;
 
+import clinic.centersystem.converter.SurgeryRequirementConverter;
 import clinic.centersystem.dto.response.RoomResponseDTO;
 import clinic.centersystem.dto.response.SurgeryRequirementResponseDTO;
 import clinic.centersystem.model.Room;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SurgeryRequirementServiceImpl implements SurgeryRequirementService {
@@ -37,7 +39,7 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
         Page<SurgeryRequirement> surgeryRequirements = surgeryRequirementRepository.findByClinicId(clinicId, pageable);
         SurgeryRequirementResponseDTO surgeryRequirementResponseDTO = new SurgeryRequirementResponseDTO();
 
-        surgeryRequirementResponseDTO.setSurgeryRequirements(surgeryRequirements.getContent());
+        surgeryRequirementResponseDTO.setSurgeryRequirements(surgeryRequirements.getContent().stream().map(SurgeryRequirementConverter::fromSurReqToSurReqDTO).collect(Collectors.toList()));
         surgeryRequirementResponseDTO.setPageCount(surgeryRequirements.getTotalPages());
 
         return surgeryRequirementResponseDTO;
