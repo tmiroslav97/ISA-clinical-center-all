@@ -18,3 +18,17 @@ export function putSurReqPageCount(state, payload) {
         pageCount: payload
     };
 }
+
+export function putPickSurReq(state, payload) {
+    return {
+        ...state,
+        pickSurReq: payload
+    };
+}
+
+export function putPickedSurReq(state, payload) {
+    return {
+        ...state,
+        pickedSurReq: payload
+    };
+}
