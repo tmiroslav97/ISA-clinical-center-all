@@ -9,7 +9,8 @@ import * as computationFunctions from './computation-functions';
 const initialState = {
     surgeryReq: [],
     isFetchSurgeryReq: false,
-    pageCount: 0
+    pageCount: 0,
+    pickSurReq: false
 };
 
 const surReqReducer = (state = initialState, { type, payload }) => {

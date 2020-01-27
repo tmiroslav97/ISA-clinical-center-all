@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Table, Button, Col, Spinner, Pagination, PageItem } from 'react-bootstrap';
+import { Container, Row, Table, Button, Col, Spinner, Pagination } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { surReqDataSelector, isFetchSurReqDataSelector, surReqPageCountSelector } from '../../store/sur-req/selectors';
 import { fetchSurReqData } from '../../store/sur-req/actions';
