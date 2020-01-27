@@ -29,6 +29,7 @@ import WorkCalendar from './components/WorkCalendar';
 import HolAbsRequest from './components/HolAbsRequest';
 import BookingDoc from './components/BookingDoc';
 import AppointmentInfo from './components/ApointmentInfo';
+import SurReqDoctors from './components/SurgeryRequirement/SurReqDoctors';
 
 
 const AppRouter = () => {
@@ -51,8 +52,9 @@ const AppRouter = () => {
             <PrivateRoute exact path="/pers/hol-abs" component={HolAbsRequest} accessRole={["ROLE_NURSE", "ROLE_DOCTOR"]} />
             <PrivateRoute exact path="/pers/work-cal" component={WorkCalendar} accessRole={["ROLE_NURSE", "ROLE_DOCTOR"]} />
 
+            <PrivateRoute exact path="/adminc/pick-doc" component={SurReqDoctors} accessRole="ROLE_ADMINC" />
+            <PrivateRoute exact path="/adminc/room-search" component={RoomSearch} accessRole="ROLE_ADMINC" />
             <PrivateRoute exact path="/adminc/exe-room/:clinicId" component={RoomAllAtOnce} accessRole="ROLE_ADMINC" />
-            <PrivateRoute exact path="/adminc/room-search/:clinicId" component={RoomSearch} accessRole="ROLE_ADMINC" />
             <PrivateRoute exact path="/adminc/doc/:clinicId" component={DoctorAllAtOnce} accessRole="ROLE_ADMINC" />
             <PrivateRoute exact path="/adminc/cli-prof/:clinicId" component={ClinicProfile} accessRole="ROLE_ADMINC" />
             <PrivateRoute exact path="/adminc/bus-rep/:clinicId" component={BusinessReport} accessRole="ROLE_ADMINC" />

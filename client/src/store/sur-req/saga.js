@@ -3,7 +3,8 @@ import { history } from '../../index';
 
 import {
     FETCH_SUR_REQ_DATA,
-    FETCH_PICK_SUR_ROOM
+    FETCH_PICK_SUR_ROOM,
+    FETCH_PICK_DOC
 } from './constants';
 
 import SurgeryRequirementService from '../../services/SurgeryRequirementService';
@@ -13,7 +14,10 @@ import {
     putSurReqData,
     putSurReqPageCount,
     putPickSurReq,
-    putPickedSurReq
+    putPickedSurReq,
+    putPickTerm,
+    putPickedTerm,
+    putPickedRoom
 } from './actions';
 
 
@@ -30,5 +34,13 @@ export function* fetchPickSurRoom() {
     const { payload } = yield take(FETCH_PICK_SUR_ROOM);
     yield put(putPickedSurReq(payload.pickedSurReq));
     yield put(putPickSurReq(true));
-    history.push('/adminc/room-search/' + payload.pickedSurReq.clinicId);
+    history.push('/adminc/room-search');
+}
+
+export function* fetchPickDoc() {
+    const { payload } = yield take(FETCH_PICK_DOC);
+    yield put(putPickedRoom(payload.pickedRoom));
+    yield put(putPickedTerm(payload.pickedTerm));
+    yield put(putPickTerm(true));
+    history.push('/adminc/pick-doc');
 }

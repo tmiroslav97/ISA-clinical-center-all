@@ -32,3 +32,24 @@ export function putPickedSurReq(state, payload) {
         pickedSurReq: payload
     };
 }
+
+export function putPickTerm(state, payload) {
+    return {
+        ...state,
+        pickTerm: payload
+    };
+}
+
+export function putPickedTerm(state, payload) {
+    return {
+        ...state,
+        pickedTerm: payload
+    };
+}
+
+export function putPickedRoom(state, payload) {
+    return {
+        ...state,
+        pickedRoom: payload
+    };
+}
