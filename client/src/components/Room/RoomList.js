@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Spinner, Table, Form, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { roomsDataSelector, isFetchRoomsSelector } from '../../store/rooms/selectors';
-
+import { pickSurReqSelector } from '../../store/sur-req/selectors';
 
 const RoomList = ({ filterTerm, cnt }) => {
     const rooms = useSelector(roomsDataSelector);
     const isFetchRoomsData = useSelector(isFetchRoomsSelector);
+    const pickSurReq = useSelector(pickSurReqSelector);
     const [termin, setTermin] = useState('');
     const [preTermins, setPreTermins] = useState([7, 10, 13, 16]);
 
@@ -33,7 +34,7 @@ const RoomList = ({ filterTerm, cnt }) => {
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Number</th>
-                                <th>Termins</th>
+                                <th>Term</th>
                                 <th>First free</th>
                             </tr>
                         </thead>
@@ -49,7 +50,6 @@ const RoomList = ({ filterTerm, cnt }) => {
                                             <td>
                                                 <Form>
                                                     <Form.Group as={Col}>
-                                                        <Form.Label>Termins:</Form.Label>
                                                         <Form.Control as="select" onChange={({ currentTarget }) => {
                                                             setTermin(currentTarget.value);
                                                         }} >
@@ -62,11 +62,18 @@ const RoomList = ({ filterTerm, cnt }) => {
                                                                 })
                                                             }
                                                         </Form.Control>
-                                                        <Button className="mt-2">Reserve</Button>
+                                                        {
+                                                        pickSurReq ? <Button className="mt-2">Reserve</Button> : null                
+                                                        }
                                                     </Form.Group>
+                                                   
                                                 </Form>
                                             </td>
-                                            <td>{roomsDto.firstFreeTermin}<br/><Button>Reserve</Button></td>
+                                            <td>{roomsDto.firstFreeTermin}<br />
+                                                {
+                                                    pickSurReq ? <Button>Reserve</Button> : null                
+                                                }
+                                            </td>
                                         </tr>
                                     );
                                 })

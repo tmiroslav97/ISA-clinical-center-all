@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 public class SurgeryRequirementResponseDTO {
 
-    private List<SurgeryRequirement> surgeryRequirements;
+    private List<SurgeryRequirementDateResponseDTO> surgeryRequirements;
 
     private Integer pageCount;
 }

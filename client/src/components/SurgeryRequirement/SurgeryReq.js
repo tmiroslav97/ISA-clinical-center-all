@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Table, Button, Col, Spinner, Pagination, PageItem } from 'react-bootstrap';
+import { Container, Row, Table, Button, Col, Spinner, Pagination } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { surReqDataSelector, isFetchSurReqDataSelector, surReqPageCountSelector } from '../../store/sur-req/selectors';
-import { fetchSurReqData } from '../../store/sur-req/actions';
+import { fetchSurReqData, fetchPickSurRoom } from '../../store/sur-req/actions';
 
 const SurgeryReq = ({ match }) => {
     const dispatch = useDispatch();
@@ -20,6 +20,14 @@ const SurgeryReq = ({ match }) => {
             })
         );
     }, [pageCnt]);
+
+    const handlePickRoom = (pickedSurReq) => {
+        dispatch(
+            fetchPickSurRoom({
+                pickedSurReq
+            })
+        );
+    }
 
     let items = [];
     for (let number = 1; number <= pageCount; number++) {
@@ -76,7 +84,7 @@ const SurgeryReq = ({ match }) => {
                                 <th>Patient</th>
                                 <th>Doctor</th>
                                 <th>Required surgery date</th>
-                                <th>Termin</th>
+                                <th>Term</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -88,10 +96,10 @@ const SurgeryReq = ({ match }) => {
                                             <td>{index + 1}</td>
                                             <td>{surReq.patientName}</td>
                                             <td>{surReq.doctorName}</td>
-                                            <td></td>
+                                            <td>{surReq.date}</td>
                                             <td>{surReq.termin}-{surReq.termin + 3}</td>
                                             <td>
-                                                <Button>Reserve this</Button>
+                                                <Button onClick={(e) => handlePickRoom(surReq)}>Reserve this</Button>
                                             </td>
                                         </tr>
                                     );

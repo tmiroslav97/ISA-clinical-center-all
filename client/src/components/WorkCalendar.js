@@ -6,14 +6,18 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import moment from 'moment'
 import { fetchCalendar } from '../store/calendar/actions';
 import { calendarDataSelector, isFetchCalendarSelector } from '../store/calendar/selectors';
+import { userDataSelector } from '../store/user/selectors';
 
 const localizer = momentLocalizer(moment)
 
-const WorkCalendar = ({ personnelId, role }) => {
+const WorkCalendar = () => {
     const dispatch = useDispatch();
     const calendar = useSelector(calendarDataSelector);
     const isFetchCalendar = useSelector(isFetchCalendarSelector);
-
+    const data = useSelector(userDataSelector);
+    const personnelId = data.id;
+    const role = data.role;
+    
     const [event, setEvent] = useState({
         title: '',
         type: '',

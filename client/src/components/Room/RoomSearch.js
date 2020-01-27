@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Form, Button, Pagination } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Pagination, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { searchRoomsData } from '../../store/rooms/actions';
 import { pageCountSelector } from '../../store/rooms/selectors';
+import { pickSurReqSelector, pickedSurReqSelector } from '../../store/sur-req/selectors';
 import RoomList from './RoomList';
 
 
@@ -11,6 +12,8 @@ const RoomSearch = ({ match }) => {
     const dispatch = useDispatch();
     const clinicId = match.params.clinicId;
     const pageCount = useSelector(pageCountSelector);
+    const pickSurReq = useSelector(pickSurReqSelector);
+    const pickedSurReq = useSelector(pickedSurReqSelector);
     const [today, setToday] = useState(moment().format('YYYY-MM-DD'));
     const [date, setDate] = useState(moment().format('YYYY-MM-DD'));
     const [name, setName] = useState('');
@@ -72,6 +75,41 @@ const RoomSearch = ({ match }) => {
 
     return (
         <Container>
+            {
+                pickSurReq ?
+                    <Row>
+                        <Col md={{ span: 10, offset: 1 }} xs={12}>
+                            <h2 className="border-bottom">Chosen surgery requirement</h2>
+                        </Col>
+                    </Row> : null
+            }
+            {
+                pickSurReq ?
+                    <Row>
+                        <Col md={{ span: 10, offset: 1 }} xs={12}>
+                            <Table responsive>
+                                <thead>
+                                    <tr>
+                                        <th>Patient</th>
+                                        <th>Doctor</th>
+                                        <th>Required surgery date</th>
+                                        <th>Term</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr key={pickedSurReq.id}>
+                                        <td>{pickedSurReq.patientName}</td>
+                                        <td>{pickedSurReq.doctorName}</td>
+                                        <td>{pickedSurReq.date}</td>
+                                        <td>{pickedSurReq.termin}-{pickedSurReq.termin + 3}</td>
+                                    </tr>
+
+                                </tbody>
+                            </Table>
+                        </Col>
+                    </Row> : null
+            }
             <Row>
                 <Col md={{ span: 10, offset: 1 }} xs={12}>
                     <h2 className="border-bottom">Search rooms</h2>
@@ -86,7 +124,7 @@ const RoomSearch = ({ match }) => {
                                 <Form.Control type="text" placeholder="Name"
                                     onChange={({ currentTarget }) => {
                                         setName(currentTarget.value);
-                                    }}/>
+                                    }} />
                             </Form.Group>
                             <Form.Group as={Col} >
                                 <Form.Label>Date:</Form.Label>
