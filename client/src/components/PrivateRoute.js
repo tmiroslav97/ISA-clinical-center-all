@@ -12,7 +12,7 @@ const PrivateRoute = ({ component: Component, accessRole = null, ...rest }) => {
             return true;
         }
 
-        return accessRole === userData.role && !userDataSelector.firstLog;
+        return accessRole.includes(userData.role) && !userDataSelector.firstLog;
     }
 
     return (

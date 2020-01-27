@@ -3,11 +3,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Table, Row, Col, Form, Container, FormControl, Spinner } from 'react-bootstrap';
 import { patientsSelector, isFetchPatientsSelector } from '../store/patients/selectors';
 import { fetchPatientsDataByClinicId } from '../store/patients/actions';
+import { userDataSelector } from '../store/user/selectors';
 
-const PatientList = ({ clinicId }) => {
+
+const PatientList = ( ) => {
     const dispatch = useDispatch();
     const patients = useSelector(patientsSelector);
     const isFetchPatients = useSelector(isFetchPatientsSelector);
+    const data = useSelector(userDataSelector);
+    const clinicId = data.clinicId;
 
     useEffect(() => {
         if (clinicId != null) {

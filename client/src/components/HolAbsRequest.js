@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import useStateWithCallback from 'use-state-with-callback';
 import { Row, Form, Col, Button, Container } from 'react-bootstrap';
 import moment from 'moment';
 import HolAbsRequestsTable from './HolAbsRequestsTable';
 import { absHolRequest } from '../store/absence_holiday/actions';
+import { userDataSelector } from '../store/user/selectors';
 
-const HolAbsRequest = ({ personnelId, clinicId }) => {
+const HolAbsRequest = () => {
     const dispatch = useDispatch();
+    const data = useSelector(userDataSelector);
+    const clinicId = data.clinicId;
+    const personnelId = data.id;
     //eslint-disable-next-line
     const [today, setToday] = useState(moment().format('YYYY-MM-DD'));
     const [startDate, setStartDate] = useState();
@@ -21,7 +25,7 @@ const HolAbsRequest = ({ personnelId, clinicId }) => {
     });
 
     const [type, setType] = useState('Absence');
-   
+
 
     const handleSubmit = () => {
         dispatch(
@@ -87,7 +91,7 @@ const HolAbsRequest = ({ personnelId, clinicId }) => {
                     </Form>
                 </Col>
             </Row>
-            <HolAbsRequestsTable personnelId={personnelId}/>
+            <HolAbsRequestsTable personnelId={personnelId} />
         </Container>
     );
 }
