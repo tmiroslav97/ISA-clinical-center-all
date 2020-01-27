@@ -34,7 +34,7 @@ const RoomList = ({ filterTerm, cnt }) => {
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Number</th>
-                                <th>Termins</th>
+                                <th>Term</th>
                                 <th>First free</th>
                             </tr>
                         </thead>
@@ -62,10 +62,11 @@ const RoomList = ({ filterTerm, cnt }) => {
                                                                 })
                                                             }
                                                         </Form.Control>
-                                                    </Form.Group>
-                                                    {
+                                                        {
                                                         pickSurReq ? <Button className="mt-2">Reserve</Button> : null                
-                                                    }
+                                                        }
+                                                    </Form.Group>
+                                                   
                                                 </Form>
                                             </td>
                                             <td>{roomsDto.firstFreeTermin}<br />

@@ -84,7 +84,7 @@ const SurgeryReq = ({ match }) => {
                                 <th>Patient</th>
                                 <th>Doctor</th>
                                 <th>Required surgery date</th>
-                                <th>Termin</th>
+                                <th>Term</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -99,7 +99,7 @@ const SurgeryReq = ({ match }) => {
                                             <td>{surReq.date}</td>
                                             <td>{surReq.termin}-{surReq.termin + 3}</td>
                                             <td>
-                                                <Button onClick={ (e) => handlePickRoom(surReq)}>Reserve this</Button>
+                                                <Button onClick={(e) => handlePickRoom(surReq)}>Reserve this</Button>
                                             </td>
                                         </tr>
                                     );

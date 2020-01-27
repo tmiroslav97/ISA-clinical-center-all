@@ -28,7 +28,7 @@ export function* fetchSurReqs() {
 
 export function* fetchPickSurRoom() {
     const { payload } = yield take(FETCH_PICK_SUR_ROOM);
-    yield put(putPickedSurReq(payload));
+    yield put(putPickedSurReq(payload.pickedSurReq));
     yield put(putPickSurReq(true));
     history.push('/adminc/room-search/' + payload.pickedSurReq.clinicId);
 }
