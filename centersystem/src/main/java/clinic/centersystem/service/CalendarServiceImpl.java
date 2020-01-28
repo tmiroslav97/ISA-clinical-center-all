@@ -28,4 +28,11 @@ public class CalendarServiceImpl implements CalendarService {
     public Calendar save(Calendar calendar) {
         return this.calendarRepository.save(calendar);
     }
+
+    @Override
+    public Long findCalendarIdByPersonnelId(Long id) {
+        return calendarRepository.findCalendarIdByPersonnelId(id);
+    }
+
+
 }

@@ -18,7 +18,7 @@ public class SurgeryReservationReqDTO {
 
     private String pickedTerm;
 
-    private String pickedRoom;
+    private Long pickedRoom;
 
     private List<Integer> chosenDoc;
 }

@@ -21,19 +21,19 @@ import java.util.Set;
 @Table(name = DbTableConstants.DOCTOR)
 public class Doctor extends Personnel {
 
-    @Column(name = DbColumnConstants.SUMRATING, unique = false, nullable = false)
+    @Column(name = DbColumnConstants.SUMRATING, nullable = false)
     private Float sumRating;
 
-    @Column(name = DbColumnConstants.CNTRATING, unique = false, nullable = false)
+    @Column(name = DbColumnConstants.CNTRATING, nullable = false)
     private Integer cntRating;
 
     @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<AppointmentRequirement> appReqs;
 
-    @Column(name = DbColumnConstants.STARTTIME, unique = false, nullable = false)
+    @Column(name = DbColumnConstants.STARTTIME, nullable = false)
     private Integer startTime;
 
-    @Column(name = DbColumnConstants.ENDTIME, unique = false, nullable = false)
+    @Column(name = DbColumnConstants.ENDTIME, nullable = false)
     private Integer endTime;
 
     @Builder(builderMethodName = "doctorBuilder")
