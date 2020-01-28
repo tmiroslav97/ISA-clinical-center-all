@@ -4,6 +4,7 @@ package clinic.centersystem.service;
 import clinic.centersystem.model.CalendarItem;
 import clinic.centersystem.repository.CalendarItemRepository;
 import clinic.centersystem.service.intf.CalendarItemService;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,5 +29,10 @@ public class CalendarItemServiceImpl implements CalendarItemService {
     @Override
     public CalendarItem save(CalendarItem calendarItem) {
         return this.calendarItemRepository.save(calendarItem);
+    }
+
+    @Override
+    public List<CalendarItem> findByCalendarIdandDate(Long calId, DateTime dt) {
+        return calendarItemRepository.findByCalendarIdandDate(calId, dt);
     }
 }
