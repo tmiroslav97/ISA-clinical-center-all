@@ -4,7 +4,8 @@ import { history } from '../../index';
 import {
     FETCH_SUR_REQ_DATA,
     FETCH_PICK_SUR_ROOM,
-    FETCH_PICK_DOC
+    FETCH_PICK_DOC,
+    FETCH_FINISH_RESERVATION
 } from './constants';
 
 import SurgeryRequirementService from '../../services/SurgeryRequirementService';
@@ -20,6 +21,16 @@ import {
     putPickedRoom
 } from './actions';
 
+export function* fetchFinishReservation() {
+    const { payload } = yield take(FETCH_FINISH_RESERVATION);
+    const { data } = yield call(SurgeryRequirementService.fetchFinishReservation, payload);
+    yield put(putPickSurReq(false));
+    yield put(putPickedSurReq(null));
+    yield put(putPickTerm(false));
+    yield put(putPickedTerm(null));
+    yield put(putPickedRoom(null));
+    history.push('/adminc/sur-req/' + payload.pickedSurReq.clinicId);
+}
 
 export function* fetchSurReqs() {
     const { payload } = yield take(FETCH_SUR_REQ_DATA);

@@ -9,3 +9,4 @@ export const PUT_PICK_TERM = "put_pick_term";
 export const FETCH_PICK_DOC = "fetch_pick_doc";
 export const PUT_PICKED_TERM = "put_picked_term";
 export const PUT_PICKED_ROOM = "put_picked_room";
+export const FETCH_FINISH_RESERVATION = "fetch_finish_reservation";

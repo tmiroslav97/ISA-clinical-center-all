@@ -9,8 +9,14 @@ import {
     PUT_PICK_TERM,
     PUT_PICKED_TERM,
     FETCH_PICK_DOC,
-    PUT_PICKED_ROOM
+    PUT_PICKED_ROOM,
+    FETCH_FINISH_RESERVATION
 } from './constants';
+
+export const fetchFinishReservation = payload => ({
+    type: FETCH_FINISH_RESERVATION,
+    payload
+});
 
 export const putPickedRoom = payload => ({
     type: PUT_PICKED_ROOM,

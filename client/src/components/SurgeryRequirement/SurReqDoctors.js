@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Spinner, Table, Form, Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import PickedSurReq from './PickedSurReq';
-import { pickSurReqSelector, pickedSurReqSelector, pickTermSelector, pickedTermSelector } from '../../store/sur-req/selectors';
+import { pickSurReqSelector, pickedSurReqSelector, pickTermSelector, pickedTermSelector, pickedRoomSelector } from '../../store/sur-req/selectors';
+import { fetchFinishReservation } from '../../store/sur-req/actions';
 import { userDataSelector } from '../../store/user/selectors';
 import { doctorsDataSelector, isFetchDoctorsSelector } from '../../store/doctors/selectors';
 import { fetchDoctorsData } from '../../store/doctors/actions';
@@ -13,6 +14,7 @@ const SurReqDoctors = () => {
     const pickedSurReq = useSelector(pickedSurReqSelector);
     const pickTerm = useSelector(pickTermSelector);
     const pickedTerm = useSelector(pickedTermSelector);
+    const pickedRoom = useSelector(pickedRoomSelector);
     const data = useSelector(userDataSelector);
     const clinicId = data.clinicId;
     const doctors = useSelector(doctorsDataSelector);
@@ -28,7 +30,18 @@ const SurReqDoctors = () => {
     }, [clinicId]);
 
     const removeChosenDoc = (remId) => {
-        setChosenDoc(chosenDoc.filter(doc => doc.id !== remId));
+        setChosenDoc(chosenDoc.filter(id => id !== remId));
+    };
+
+    const handleFinishReservation = () => {
+        dispatch(
+            fetchFinishReservation({
+                pickedSurReq,
+                pickedTerm,
+                pickedRoom,
+                chosenDoc
+            })
+        );
     };
 
     if (!isFetchDoctors) {
@@ -77,19 +90,18 @@ const SurReqDoctors = () => {
                     <Form>
                         <Form.Group as={Col}>
                             <Form.Control as="select" defaultValue={"none"} onChange={({ currentTarget }) => {
-                                setChosenDoc([
-                                    ...chosenDoc,
-                                    {
-                                        id: currentTarget.value
-                                    }
-
-                                ]);
+                                let flag = chosenDoc.filter(id => id === currentTarget.value)[0];
+                                if (flag == undefined && currentTarget.value != "none") {
+                                    setChosenDoc([
+                                        ...chosenDoc,
+                                        currentTarget.value
+                                    ]);
+                                }
                             }} >
-                                <option value="none" disabled>Please choose doctor</option>
+                                <option value="none">Please choose doctor</option>
                                 {
                                     doctors.map((doctor, index) => {
-                                        const flag = chosenDoc.filter(doc => doc.id == doctor.id)[0];
-                                        if (flag == undefined) {
+                                        if (pickedSurReq.doctorId != doctor.id) {
                                             return (
                                                 <option key={index} value={doctor.id}>{doctor.firstName} {doctor.lastName}</option>
                                             );
@@ -97,8 +109,8 @@ const SurReqDoctors = () => {
                                     })
                                 }
                             </Form.Control>
+                            <Button onClick={handleFinishReservation} className="mt-2">Finish reservation</Button>
                         </Form.Group>
-
                     </Form>
                 </Col>
             </Row>
@@ -119,13 +131,13 @@ const SurReqDoctors = () => {
                         </thead>
                         <tbody>
                             {
-                                chosenDoc.map((doctor, index) => {
-                                    const findDoc = doctors.filter(doc => doc.id == doctor.id)[0];
+                                chosenDoc.map((id, index) => {
+                                    const findDoc = doctors.filter(doc => doc.id == id)[0];
                                     return (
                                         <tr key={index}>
                                             <td>{findDoc.firstName}</td>
                                             <td>{findDoc.lastName}</td>
-                                            <td><Button onClick={(e) => { removeChosenDoc(doctor.id) }}>Remove</Button></td>
+                                            <td><Button onClick={(e) => { removeChosenDoc(id) }}>Remove</Button></td>
                                         </tr>
                                     );
                                 })
