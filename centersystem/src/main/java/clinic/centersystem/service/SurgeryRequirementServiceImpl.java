@@ -1,6 +1,7 @@
 package clinic.centersystem.service;
 
 import clinic.centersystem.converter.SurgeryRequirementConverter;
+import clinic.centersystem.dto.request.SurgeryReservationReqDTO;
 import clinic.centersystem.dto.response.RoomResponseDTO;
 import clinic.centersystem.dto.response.SurgeryRequirementResponseDTO;
 import clinic.centersystem.model.Room;
@@ -44,4 +45,11 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
 
         return surgeryRequirementResponseDTO;
     }
+
+    @Override
+    public String reserveRoomForSurgery(SurgeryReservationReqDTO surgeryReservationReqDTO) {
+        return null;
+    }
+
+
 }
