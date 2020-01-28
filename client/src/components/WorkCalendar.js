@@ -8,7 +8,7 @@ import { fetchCalendar } from '../store/calendar/actions';
 import { calendarDataSelector, isFetchCalendarSelector } from '../store/calendar/selectors';
 import { userDataSelector } from '../store/user/selectors';
 
-const localizer = momentLocalizer(moment)
+const localizer = momentLocalizer(moment);
 
 const WorkCalendar = () => {
     const dispatch = useDispatch();
