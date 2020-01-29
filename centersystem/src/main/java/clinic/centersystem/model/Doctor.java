@@ -27,8 +27,8 @@ public class Doctor extends Personnel {
     @Column(name = DbColumnConstants.CNTRATING, nullable = false)
     private Integer cntRating;
 
-    @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<AppointmentRequirement> appReqs;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Surgery> surgeries;
 
     @Column(name = DbColumnConstants.STARTTIME, nullable = false)
     private Integer startTime;
@@ -41,11 +41,10 @@ public class Doctor extends Personnel {
                   boolean enabled, RoleEnum role, boolean isFirstLog, Timestamp lastPasswordResetDate,
                   List<Authority> authorities, Clinic clinic, Calendar calendar,
                   Set<AbsenceRequirement> absenceRequirements, Set<Appointment> appointments, Float sumRating,
-                  Integer cntRating, Set<AppointmentRequirement> appReqs, Integer startTime, Integer endTime) {
+                  Integer cntRating, Integer startTime, Integer endTime) {
         super(id, email, password, firstName, lastName, enabled, role, isFirstLog, lastPasswordResetDate, authorities, clinic, calendar, absenceRequirements, appointments);
         this.sumRating = sumRating;
         this.cntRating = cntRating;
-        this.appReqs = appReqs;
         this.startTime = startTime;
         this.endTime = endTime;
     }

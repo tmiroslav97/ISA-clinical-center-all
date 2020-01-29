@@ -81,16 +81,18 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
             return "Room is unavailable for desired date and term";
         }
 
+        surgeryReservationReqDTO.getChosenDoc().add(surgeryReservationReqDTO.getPickedSurReq().getDoctorId());
         boolean avDoctors = false;
-        Doctor doctor = doctorService.findById(surgeryReservationReqDTO.getPickedSurReq().getDoctorId());
-        Long calendarId = calendarService.findCalendarIdByPersonnelId(doctor.getId());
-        Integer cntCi = calendarItemService.findByCalendarIdandDate(calendarId, pickedDateStart, pickedDateEnd);
-        if (cntCi == 0) {
-            avDoctors = true;
-            //doktor ima slobodnih termina unjeti mu u kalendar sto treba
-        }
-        for (Integer docId : surgeryReservationReqDTO.getChosenDoc()) {
+        Doctor doctor;
+        Long calendarId;
+        Integer cntCi;
+        for (Long docId : surgeryReservationReqDTO.getChosenDoc()) {
             doctor = doctorService.findById(Long.valueOf(docId));
+
+            if (doctor.getStartTime() <= pickedTermStart && pickedTermEnd <= doctor.getEndTime()) {
+                //doktor ne moze da prisustvuje operaciji jer operacija nije u sklopu radnog vremena
+                continue;
+            }
             calendarId = calendarService.findCalendarIdByPersonnelId(doctor.getId());
             cntCi = calendarItemService.findByCalendarIdandDate(calendarId, pickedDateStart, pickedDateEnd);
             if (cntCi == 0) {
@@ -99,7 +101,7 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
             }
         }
 
-        if(!avDoctors){
+        if (!avDoctors) {
             return "There are no available doctors for this surgery";
         }
 

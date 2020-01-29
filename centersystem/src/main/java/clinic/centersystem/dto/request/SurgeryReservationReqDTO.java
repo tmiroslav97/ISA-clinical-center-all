@@ -21,5 +21,5 @@ public class SurgeryReservationReqDTO {
 
     private Long pickedRoom;
 
-    private List<Integer> chosenDoc = new ArrayList<>();
+    private List<Long> chosenDoc = new ArrayList<>();
 }
