@@ -39,6 +39,12 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
     @Autowired
     private CalendarItemService calendarItemService;
 
+    @Autowired
+    private PatientService patientService;
+
+    @Autowired
+    private SurgeryService surgeryService;
+
     @Override
     public SurgeryRequirement findById(Long id) {
         return surgeryRequirementRepository.findById(id).orElseGet(null);
@@ -86,10 +92,11 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
         Doctor doctor;
         Long calendarId;
         Integer cntCi;
+        Surgery surgery = null;
         for (Long docId : surgeryReservationReqDTO.getChosenDoc()) {
             doctor = doctorService.findById(Long.valueOf(docId));
 
-            if (doctor.getStartTime() <= pickedTermStart && pickedTermEnd <= doctor.getEndTime()) {
+            if (pickedTermStart < doctor.getStartTime() && doctor.getEndTime() < pickedTermEnd) {
                 //doktor ne moze da prisustvuje operaciji jer operacija nije u sklopu radnog vremena
                 continue;
             }
@@ -97,7 +104,35 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
             cntCi = calendarItemService.findByCalendarIdandDate(calendarId, pickedDateStart, pickedDateEnd);
             if (cntCi == 0) {
                 avDoctors = true;
-                //doktor ima slobodnih termina unjeti mu u kalendar sto treba
+                //doktor ima slobodnih termina unjeti mu u kalendar sta treba
+                if (surgery == null) {
+                    Patient patient = patientService.findById(surgeryReservationReqDTO.getPickedSurReq().getPatientId());
+                    Room room = roomService.findById(surgeryReservationReqDTO.getPickedRoom());
+                    RoomCalendar roomCalendar = RoomCalendar.builder()
+                            .date(pickedDate)
+                            .room(room)
+                            .termin(pickedTermStart)
+                            .build();
+                    roomCalendarService.save(roomCalendar);
+                    surgery = Surgery.builder()
+                            .startTime(pickedDateStart)
+                            .endTime(pickedDateEnd)
+                            .room(room)
+                            .patient(patient)
+                            .build();
+                    surgeryService.save(surgery);
+                }
+                Calendar calendar = calendarService.findById(calendarId);
+                CalendarItem calendarItem = CalendarItem.builder()
+                        .start(pickedDateStart)
+                        .end(pickedDateEnd)
+                        .allDay("N")
+                        .title("Surgery")
+                        .type("SUR")
+                        .calendar(calendar)
+                        .typeId(surgery.getId())
+                        .build();
+                calendarItemService.save(calendarItem);
             }
         }
 
@@ -105,9 +140,14 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
             return "There are no available doctors for this surgery";
         }
 
-        Room room = roomService.findById(surgeryReservationReqDTO.getPickedRoom());
+        this.deleteById(surgeryReservationReqDTO.getPickedSurReq().getId());
+        return "Room is reserved for surgery";
+    }
 
-        return null;
+    @Override
+    public void deleteById(Long id) {
+        surgeryRequirementRepository.deleteById(id);
+        return;
     }
 
 

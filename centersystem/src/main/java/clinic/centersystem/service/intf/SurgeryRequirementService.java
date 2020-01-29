@@ -16,4 +16,6 @@ public interface SurgeryRequirementService {
 
     String reserveRoomForSurgery(SurgeryReservationReqDTO surgeryReservationReqDTO);
 
+    void deleteById(Long id);
+
 }

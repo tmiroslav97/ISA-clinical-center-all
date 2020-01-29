@@ -3,10 +3,7 @@ package clinic.centersystem.model;
 import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
@@ -17,6 +14,7 @@ import java.util.Set;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = DbTableConstants.SURGERY)
 public class Surgery {
@@ -25,13 +23,21 @@ public class Surgery {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = DbColumnConstants.DATETIME, nullable = false)
+    @Column(name = DbColumnConstants.STARTTIME, nullable = false)
     @Temporal(TemporalType.DATE)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime", parameters = {
             @org.hibernate.annotations.Parameter(name = "databaseZone", value = "UTC"),
             @org.hibernate.annotations.Parameter(name = "javaZone", value = "UTC")
     })
-    private DateTime dateTime;
+    private DateTime startTime;
+
+    @Column(name = DbColumnConstants.ENDTIME, nullable = false)
+    @Temporal(TemporalType.DATE)
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime", parameters = {
+            @org.hibernate.annotations.Parameter(name = "databaseZone", value = "UTC"),
+            @org.hibernate.annotations.Parameter(name = "javaZone", value = "UTC")
+    })
+    private DateTime endTime;
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

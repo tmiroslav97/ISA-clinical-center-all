@@ -101,10 +101,12 @@ const SurReqDoctors = () => {
                                 <option value="none">Please choose doctor</option>
                                 {
                                     doctors.map((doctor, index) => {
-                                        if (pickedSurReq.doctorId != doctor.id) {
-                                            return (
-                                                <option key={index} value={doctor.id}>{doctor.firstName} {doctor.lastName}</option>
-                                            );
+                                        if (pickedSurReq != null) {
+                                            if (pickedSurReq.doctorId != doctor.id) {
+                                                return (
+                                                    <option key={index} value={doctor.id}>{doctor.firstName} {doctor.lastName}</option>
+                                                );
+                                            }
                                         }
                                     })
                                 }
