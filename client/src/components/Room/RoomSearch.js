@@ -5,12 +5,15 @@ import moment from 'moment';
 import { searchRoomsData } from '../../store/rooms/actions';
 import { pageCountSelector } from '../../store/rooms/selectors';
 import { pickSurReqSelector, pickedSurReqSelector } from '../../store/sur-req/selectors';
+import { userDataSelector } from '../../store/user/selectors';
 import RoomList from './RoomList';
+import PickedSurReq from '../SurgeryRequirement/PickedSurReq';
 
 
-const RoomSearch = ({ match }) => {
+const RoomSearch = () => {
     const dispatch = useDispatch();
-    const clinicId = match.params.clinicId;
+    const data = useSelector(userDataSelector);
+    const clinicId = data.clinicId;
     const pageCount = useSelector(pageCountSelector);
     const pickSurReq = useSelector(pickSurReqSelector);
     const pickedSurReq = useSelector(pickedSurReqSelector);
@@ -77,38 +80,7 @@ const RoomSearch = ({ match }) => {
         <Container>
             {
                 pickSurReq ?
-                    <Row>
-                        <Col md={{ span: 10, offset: 1 }} xs={12}>
-                            <h2 className="border-bottom">Chosen surgery requirement</h2>
-                        </Col>
-                    </Row> : null
-            }
-            {
-                pickSurReq ?
-                    <Row>
-                        <Col md={{ span: 10, offset: 1 }} xs={12}>
-                            <Table responsive>
-                                <thead>
-                                    <tr>
-                                        <th>Patient</th>
-                                        <th>Doctor</th>
-                                        <th>Required surgery date</th>
-                                        <th>Term</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <tr key={pickedSurReq.id}>
-                                        <td>{pickedSurReq.patientName}</td>
-                                        <td>{pickedSurReq.doctorName}</td>
-                                        <td>{pickedSurReq.date}</td>
-                                        <td>{pickedSurReq.termin}-{pickedSurReq.termin + 3}</td>
-                                    </tr>
-
-                                </tbody>
-                            </Table>
-                        </Col>
-                    </Row> : null
+                    <PickedSurReq pickedSurReq={pickedSurReq} /> : null
             }
             <Row>
                 <Col md={{ span: 10, offset: 1 }} xs={12}>

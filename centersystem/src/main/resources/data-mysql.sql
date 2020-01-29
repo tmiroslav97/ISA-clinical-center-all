@@ -193,22 +193,25 @@ VALUES (1, FALSE, NULL);
 INSERT INTO calendar(id, personnel_id)
 VALUES (1, 4);
 
-INSERT INTO calendar_item(end, start, title, udi, id, calendar_id)
-VALUES ('2019-12-15 10:00', '2019-12-15 09:00', 'First examination', 'N', 1, 1);
+INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type)
+VALUES ('2020-01-28 10:00:00', '2020-01-28 09:00:00', 'First examination', 'N', 1, 1,'APP');
 
-INSERT INTO calendar_item(end, start, title, udi, id, calendar_id)
-VALUES ('2019-12-16 11:00', '2019-12-16 10:00', 'Second examination', 'N', 2, 1);
+INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type)
+VALUES ('2020-01-29 11:00:00', '2020-01-29 10:00:00', 'Second examination', 'N', 2, 1,'APP');
 
 
 
 INSERT INTO calendar(id, personnel_id)
 VALUES (2, 3);
 
-INSERT INTO calendar_item(end, start, title, udi, id, calendar_id, type, typeid)
-VALUES ('2019-12-15 10:00', '2019-12-15 10:00', 'Appointment (new patient)', 'N', 3, 2, 'Appointment', 1);
+INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type)
+VALUES ('2020-01-30 11:00:00', '2020-01-30 09:00:00', 'First examination', 'N', 3, 2,'APP');
 
-INSERT INTO calendar_item(end, start, title, udi, id, calendar_id, type, typeid)
-VALUES ('2019-12-16 11:00', '2019-12-16 10:00', 'Surgery (emergent)', 'N', 4, 2, 'Surgery', 1);
+INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type)
+VALUES ('2020-01-30 12:00:00', '2020-01-30 11:00:00', 'Second examination', 'N', 4, 2,'APP');
+
+INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type)
+VALUES ('2020-01-30 14:00:00', '2020-01-30 12:00:00', 'Third examination', 'N', 5, 2,'APP');
 
 
 UPDATE personnel

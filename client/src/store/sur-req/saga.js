@@ -3,7 +3,9 @@ import { history } from '../../index';
 
 import {
     FETCH_SUR_REQ_DATA,
-    FETCH_PICK_SUR_ROOM
+    FETCH_PICK_SUR_ROOM,
+    FETCH_PICK_DOC,
+    FETCH_FINISH_RESERVATION
 } from './constants';
 
 import SurgeryRequirementService from '../../services/SurgeryRequirementService';
@@ -13,9 +15,22 @@ import {
     putSurReqData,
     putSurReqPageCount,
     putPickSurReq,
-    putPickedSurReq
+    putPickedSurReq,
+    putPickTerm,
+    putPickedTerm,
+    putPickedRoom
 } from './actions';
 
+export function* fetchFinishReservation() {
+    const { payload } = yield take(FETCH_FINISH_RESERVATION);
+    const { data } = yield call(SurgeryRequirementService.fetchFinishReservation, payload);
+    yield put(putPickSurReq(false));
+    yield put(putPickedSurReq(null));
+    yield put(putPickTerm(false));
+    yield put(putPickedTerm(null));
+    yield put(putPickedRoom(null));
+    history.push('/adminc/sur-req/' + payload.pickedSurReq.clinicId);
+}
 
 export function* fetchSurReqs() {
     const { payload } = yield take(FETCH_SUR_REQ_DATA);
@@ -30,5 +45,13 @@ export function* fetchPickSurRoom() {
     const { payload } = yield take(FETCH_PICK_SUR_ROOM);
     yield put(putPickedSurReq(payload.pickedSurReq));
     yield put(putPickSurReq(true));
-    history.push('/adminc/room-search/' + payload.pickedSurReq.clinicId);
+    history.push('/adminc/room-search');
+}
+
+export function* fetchPickDoc() {
+    const { payload } = yield take(FETCH_PICK_DOC);
+    yield put(putPickedRoom(payload.pickedRoom));
+    yield put(putPickedTerm(payload.pickedTerm));
+    yield put(putPickTerm(true));
+    history.push('/adminc/pick-doc');
 }

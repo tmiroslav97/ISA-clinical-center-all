@@ -40,8 +40,22 @@ class PersonnelService extends HttpClient {
             const { data } = await this.getApiClient().get(
                 format(FINALPOINTS.FETCH_CALENDAR, payload.personnelId)
             );
+            
+            let calendar = {
+                id: data.id,
+                calendarItemResponses: []
+            };
 
-            const calendar = data;
+            data.calendarItemResponses.forEach(element => calendar.calendarItemResponses.push({
+                id: element.id,
+                title: element.title,
+                start: new Date(element.start),
+                end: new Date(element.end),
+                type: element.type,
+                typeId: element.typeId,
+                allday: element.allday
+            }));
+
             return { calendar };
         } catch (error) {
             console.log(error.response.data);

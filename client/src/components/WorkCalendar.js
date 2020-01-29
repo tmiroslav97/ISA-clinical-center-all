@@ -8,7 +8,7 @@ import { fetchCalendar } from '../store/calendar/actions';
 import { calendarDataSelector, isFetchCalendarSelector } from '../store/calendar/selectors';
 import { userDataSelector } from '../store/user/selectors';
 
-const localizer = momentLocalizer(moment)
+const localizer = momentLocalizer(moment);
 
 const WorkCalendar = () => {
     const dispatch = useDispatch();
@@ -17,7 +17,8 @@ const WorkCalendar = () => {
     const data = useSelector(userDataSelector);
     const personnelId = data.id;
     const role = data.role;
-    
+    const [selEvent, setSelEvent] = useState(false);
+
     const [event, setEvent] = useState({
         title: '',
         type: '',
@@ -35,6 +36,7 @@ const WorkCalendar = () => {
     }, [personnelId]);
 
     const handleCalendarClick = (calEvent) => {
+        setSelEvent(true);
         setEvent(calEvent);
     };
 
@@ -44,7 +46,7 @@ const WorkCalendar = () => {
                 <span className="sr-only">Loading...</span>
             </Spinner>
         </div>;
-    } 
+    }
 
     return (
         <Container>
@@ -68,14 +70,14 @@ const WorkCalendar = () => {
                     />
                 </Col>
             </Row>
-            {role === 'ROLE_DOCTOR' &&
+            {role === 'ROLE_DOCTOR' && selEvent &&
                 <Row>
                     <Col md={{ span: 10, offset: 1 }} xs={12}>
                         <h2 className="border-bottom">Selected event: </h2>
                     </Col>
                 </Row>
             }
-            {role === 'ROLE_DOCTOR' &&
+            {role === 'ROLE_DOCTOR' && selEvent &&
                 <Row>
                     <Col md={{ span: 10, offset: 1 }} xs={12}>
                         <Table responsive>
@@ -90,14 +92,14 @@ const WorkCalendar = () => {
                                 </tr>
                                 <tr>
                                     <th>Start date</th>
-                                    <td align="right">{event.start}</td>
+                                    <td align="right">{moment(event.start).format('YYYY-MM-DD hh:mm:ss')}</td>
                                 </tr>
                                 <tr>
                                     <th>End date</th>
-                                    <td align="right">{event.end}</td>
+                                    <td align="right">{moment(event.end).format('YYYY-MM-DD hh:mm:ss')}</td>
                                 </tr>
                                 {
-                                    event.type === 'Appointment' &&
+                                    event.type === 'APP' &&
                                     <tr>
                                         <th>Start appointment</th>
                                         <td colSpan="2" align="right">

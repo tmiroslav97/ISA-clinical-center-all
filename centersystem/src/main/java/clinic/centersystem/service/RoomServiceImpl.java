@@ -71,6 +71,7 @@ public class RoomServiceImpl implements RoomService {
         for (Room room : rooms.getContent()) {
             RoomResponseTerminDTO rrtDTO = new RoomResponseTerminDTO();
             rrtDTO.setRoom(room);
+            rrtDTO.setDate(dtf.print(dt));
             rrtDTO.setTermins(roomCalendarService.findByRoomAndDate(room.getId(), dt));
             roomResponseTerminDTO.add(rrtDTO);
             if (rrtDTO.getTermins().size() == 4) {
