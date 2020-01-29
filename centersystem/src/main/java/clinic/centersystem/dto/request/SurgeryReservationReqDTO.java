@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -20,5 +21,5 @@ public class SurgeryReservationReqDTO {
 
     private Long pickedRoom;
 
-    private List<Integer> chosenDoc;
+    private List<Integer> chosenDoc = new ArrayList<>();
 }

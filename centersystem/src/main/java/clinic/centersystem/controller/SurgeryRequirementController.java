@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 @RequestMapping(value = "/sur-req")
@@ -31,7 +32,7 @@ public class SurgeryRequirementController {
         return new ResponseEntity<>(surgeryRequirementService.findByClinicId(clinicId, pageCnt), HttpStatus.OK);
     }
 
-    @RequestMapping(method = GET, value = "/reserve")
+    @RequestMapping(method = POST, value = "/reserve")
     public ResponseEntity<String> getClinicRooms(@RequestBody SurgeryReservationReqDTO surgeryReservationReqDTO) {
         return new ResponseEntity<>(surgeryRequirementService.reserveRoomForSurgery(surgeryReservationReqDTO), HttpStatus.OK);
     }

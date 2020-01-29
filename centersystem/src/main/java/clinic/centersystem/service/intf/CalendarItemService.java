@@ -13,5 +13,5 @@ public interface CalendarItemService {
 
     CalendarItem save(CalendarItem calendarItem);
 
-    List<CalendarItem> findByCalendarIdandDate(Long calId, DateTime dt);
+    Integer findByCalendarIdandDate(Long calId, DateTime dtStart, DateTime dtEnd);
 }

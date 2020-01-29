@@ -6,11 +6,9 @@ import clinic.centersystem.dto.response.RoomResponseDTO;
 import clinic.centersystem.dto.response.SurgeryRequirementResponseDTO;
 import clinic.centersystem.model.*;
 import clinic.centersystem.repository.SurgeryRequirementRepository;
-import clinic.centersystem.service.intf.DoctorService;
-import clinic.centersystem.service.intf.RoomCalendarService;
-import clinic.centersystem.service.intf.RoomService;
-import clinic.centersystem.service.intf.SurgeryRequirementService;
+import clinic.centersystem.service.intf.*;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -34,6 +32,12 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
 
     @Autowired
     private DoctorService doctorService;
+
+    @Autowired
+    private CalendarService calendarService;
+
+    @Autowired
+    private CalendarItemService calendarItemService;
 
     @Override
     public SurgeryRequirement findById(Long id) {
@@ -60,19 +64,44 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
     @Override
     public String reserveRoomForSurgery(SurgeryReservationReqDTO surgeryReservationReqDTO) {
         String pickedDateStr = surgeryReservationReqDTO.getPickedTerm().split(" ")[0];
-        String pickedTermStr = (surgeryReservationReqDTO.getPickedTerm().split(" ")[1]).substring(0, 0);
-        DateTime pickedDate = new DateTime(pickedDateStr);
-        Integer pickedTerm = Integer.valueOf(pickedTermStr);
+        String pickedTermsStr[] = (surgeryReservationReqDTO.getPickedTerm().split(" ")[1]).split("-");
+        Integer pickedTermStart = Integer.valueOf(pickedTermsStr[0]);
+        Integer pickedTermEnd = Integer.valueOf(pickedTermsStr[1]);
+        DateTime pickedDate = new DateTime(pickedDateStr, DateTimeZone.UTC);
+
+        DateTime pickedDateStart = new DateTime(pickedDateStr, DateTimeZone.UTC);
+        pickedDateStart = pickedDateStart.plusHours(pickedTermStart);
+
+        DateTime pickedDateEnd = new DateTime(pickedDateStr, DateTimeZone.UTC);
+        pickedDateEnd = pickedDateEnd.plusHours(pickedTermEnd);
+
         List<Integer> bookedTerm = roomCalendarService.findByRoomAndDate(surgeryReservationReqDTO.getPickedRoom(), pickedDate);
 
-        if (bookedTerm.contains(pickedTerm)) {
+        if (bookedTerm.contains(pickedTermStart)) {
             return "Room is unavailable for desired date and term";
         }
 
         boolean avDoctors = false;
         Doctor doctor = doctorService.findById(surgeryReservationReqDTO.getPickedSurReq().getDoctorId());
+        Long calendarId = calendarService.findCalendarIdByPersonnelId(doctor.getId());
+        Integer cntCi = calendarItemService.findByCalendarIdandDate(calendarId, pickedDateStart, pickedDateEnd);
+        if (cntCi == 0) {
+            avDoctors = true;
+            //doktor ima slobodnih termina unjeti mu u kalendar sto treba
+        }
+        for (Integer docId : surgeryReservationReqDTO.getChosenDoc()) {
+            doctor = doctorService.findById(Long.valueOf(docId));
+            calendarId = calendarService.findCalendarIdByPersonnelId(doctor.getId());
+            cntCi = calendarItemService.findByCalendarIdandDate(calendarId, pickedDateStart, pickedDateEnd);
+            if (cntCi == 0) {
+                avDoctors = true;
+                //doktor ima slobodnih termina unjeti mu u kalendar sto treba
+            }
+        }
 
-
+        if(!avDoctors){
+            return "There are no available doctors for this surgery";
+        }
 
         Room room = roomService.findById(surgeryReservationReqDTO.getPickedRoom());
 

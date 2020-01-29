@@ -32,7 +32,7 @@ public class CalendarItemServiceImpl implements CalendarItemService {
     }
 
     @Override
-    public List<CalendarItem> findByCalendarIdandDate(Long calId, DateTime dt) {
-        return calendarItemRepository.findByCalendarIdandDate(calId, dt);
+    public Integer findByCalendarIdandDate(Long calId, DateTime dtStart, DateTime dtEnd) {
+        return calendarItemRepository.findByCalendarIdandDate(calId, dtStart, dtEnd);
     }
 }

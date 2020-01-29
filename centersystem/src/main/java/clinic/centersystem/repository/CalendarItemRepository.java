@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface CalendarItemRepository extends JpaRepository<CalendarItem, Long> {
 
-    @Query("select ci from CalendarItem  ci  where ci.calendar.id=(?1) and ci.start>=(?2)")
-    List<CalendarItem> findByCalendarIdandDate(Long calId, DateTime dt);
+    @Query("select count(ci) from CalendarItem  ci  where ci.calendar.id=(?1) and ((ci.start<=(?2) and ci.end>(?2)) or (ci.start>=(?2) and ci.end<=(?3)) or (ci.start<(?3) and ci.end>=(?3)) )")
+    Integer findByCalendarIdandDate(Long calId, DateTime dtStart, DateTime dtEnd);
 }
