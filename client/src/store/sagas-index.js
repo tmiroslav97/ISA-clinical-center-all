@@ -39,6 +39,7 @@ export default function* rootSaga() {
             yield call(saga);
           } catch (e) {
             yield put(putErrorMsg(e.message));
+            yield put(putErrorMsg(null));
           }
         }
       })
