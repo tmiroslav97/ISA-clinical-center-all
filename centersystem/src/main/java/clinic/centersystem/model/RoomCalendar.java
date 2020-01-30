@@ -36,6 +36,6 @@ public class RoomCalendar {
     private Integer termin;
 
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Room room;
 }

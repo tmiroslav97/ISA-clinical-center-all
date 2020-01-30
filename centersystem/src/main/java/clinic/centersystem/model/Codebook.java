@@ -14,6 +14,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = DbTableConstants.CODEBOOK)
 public class Codebook {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,7 +24,6 @@ public class Codebook {
 
     @Column(name = DbColumnConstants.CODE, unique = true, nullable = false)
     private String code;
-
 
     @Column(name = DbColumnConstants.TYPE, nullable = false)
     private String type;
