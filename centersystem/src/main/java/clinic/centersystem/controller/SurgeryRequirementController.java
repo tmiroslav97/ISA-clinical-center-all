@@ -43,7 +43,7 @@ public class SurgeryRequirementController {
         } else if (flag == 3) {
             return new ResponseEntity<>("Room is reserved for surgery", HttpStatus.OK);
         }else{
-            return new ResponseEntity<>("Error", HttpStatus.OK);
+            return new ResponseEntity<>("Error", HttpStatus.BAD_REQUEST);
         }
 
     }

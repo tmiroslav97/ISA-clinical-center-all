@@ -24,11 +24,11 @@ class SurgeryRequirementService extends HttpClient {
 
     fetchFinishReservation = async payload => {
         try {
-            const { data } = await this.getApiClient().post(
+            const data  = await this.getApiClient().post(
                 FINALPOINTS.FETCH_FINISH_RESERVATION,
                 payload
             );
-
+            
             return { data };
         } catch (error) {
             console.log(error.response.data);
