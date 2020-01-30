@@ -4,6 +4,7 @@ package clinic.centersystem.model;
 import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
 import clinic.centersystem.model.enumeration.RoleEnum;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -27,26 +29,33 @@ public class Doctor extends Personnel {
     @Column(name = DbColumnConstants.CNTRATING, nullable = false)
     private Integer cntRating;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Surgery> surgeries;
-
     @Column(name = DbColumnConstants.STARTTIME, nullable = false)
     private Integer startTime;
 
     @Column(name = DbColumnConstants.ENDTIME, nullable = false)
     private Integer endTime;
 
+    @JsonBackReference
+    @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY)
+    private Set<Appointment> appointments = new HashSet<>();
+
+    @JsonBackReference
+    @ManyToMany(fetch = FetchType.LAZY)
+    private Set<Surgery> surgeries = new HashSet<>();
+
     @Builder(builderMethodName = "doctorBuilder")
     public Doctor(Long id, String email, String password, String firstName, String lastName,
                   boolean enabled, RoleEnum role, boolean isFirstLog, Timestamp lastPasswordResetDate,
                   List<Authority> authorities, Clinic clinic, Calendar calendar,
-                  Set<AbsenceRequirement> absenceRequirements, Set<Appointment> appointments, Float sumRating,
+                  Set<AbsenceRequirement> absenceRequirements, Set<Appointment> appointments, Set<Surgery> surgeries, Float sumRating,
                   Integer cntRating, Integer startTime, Integer endTime) {
-        super(id, email, password, firstName, lastName, enabled, role, isFirstLog, lastPasswordResetDate, authorities, clinic, calendar, absenceRequirements, appointments);
+        super(id, email, password, firstName, lastName, enabled, role, isFirstLog, lastPasswordResetDate, authorities, clinic, calendar, absenceRequirements);
         this.sumRating = sumRating;
         this.cntRating = cntRating;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.appointments = appointments;
+        this.surgeries = surgeries;
     }
 
 

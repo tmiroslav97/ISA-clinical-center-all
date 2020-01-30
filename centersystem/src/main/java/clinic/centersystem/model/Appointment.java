@@ -3,6 +3,7 @@ package clinic.centersystem.model;
 import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
 import clinic.centersystem.model.enumeration.AppStateEnum;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,32 +32,37 @@ public class Appointment {
     })
     private Long dateTime;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private AppointmentType type;
-
-    @Column(name = DbColumnConstants.APPSTATE, nullable = false)
-    private AppStateEnum appState;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Room room;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Personnel personnel;
-
     @Column(name = DbColumnConstants.PRICE, nullable = false)
     private Float price;
 
     @Column(name = DbColumnConstants.DISCOUNT, nullable = false)
     private Float discount;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
     private Patient patient;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonBackReference
+    @OneToOne(fetch = FetchType.LAZY)
     private MedicalReport medicalReport;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
     private Clinic clinic;
 
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    private AppointmentType type;
+
+    @Column(name = DbColumnConstants.APPSTATE, nullable = false)
+    private AppStateEnum appState;
+
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Room room;
+
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Doctor doctor;
 
 }
