@@ -1,7 +1,7 @@
 package clinic.centersystem.controller;
 
-import clinic.centersystem.model.Codebook;
-import clinic.centersystem.service.CodebookServiceImpl;
+import clinic.centersystem.model.Medicine;
+import clinic.centersystem.service.MedicineServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,25 +14,24 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/med-diag", produces = MediaType.APPLICATION_JSON_VALUE)
-public class CodebookController {
+@RequestMapping(value = "/medicine", produces = MediaType.APPLICATION_JSON_VALUE)
+public class MedicineController {
 
-    private final CodebookServiceImpl codebookService;
+    private final MedicineServiceImpl medicineService;
 
-    public CodebookController(CodebookServiceImpl codebookService) {
-        this.codebookService = codebookService;
+    public MedicineController(MedicineServiceImpl medicineService) {
+        this.medicineService = medicineService;
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public ResponseEntity<List<Codebook>> getCodebook() {
-        List<Codebook> codebooks = this.codebookService.findAll();
-        return new ResponseEntity<>(codebooks, HttpStatus.OK);
+    public ResponseEntity<List<Medicine>> getMedicines() {
+        return new ResponseEntity<>(this.medicineService.findAll(), HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('CCADMIN')")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseEntity<String> addCodebook(@RequestBody Codebook codebook) {
-        this.codebookService.add(codebook);
+    public ResponseEntity<String> addMedicine(@RequestBody Medicine medicine) {
+        this.medicineService.save(medicine);
         return new ResponseEntity<>("Code successfuly added", HttpStatus.OK);
     }
 }
