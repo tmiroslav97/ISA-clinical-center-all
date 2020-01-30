@@ -10,3 +10,6 @@ export const FETCH_PICK_DOC = "fetch_pick_doc";
 export const PUT_PICKED_TERM = "put_picked_term";
 export const PUT_PICKED_ROOM = "put_picked_room";
 export const FETCH_FINISH_RESERVATION = "fetch_finish_reservation";
+export const PUT_RESERVATION_SUR_REQ_RESPONSE = "put_reservation_sur_req_response";
+export const PUT_IS_FETCH_SUR_REQ_RESPONSE = "put_is_fetch_req_response";
+export const FETCH_PUT_IS_FETCH_SUR_REQ_RESPONSE = "fetch_put_is_fetch_req_response";

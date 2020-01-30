@@ -45,6 +45,9 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
     @Autowired
     private SurgeryService surgeryService;
 
+    @Autowired
+    private EmailService emailService;
+
     @Override
     public SurgeryRequirement findById(Long id) {
         return surgeryRequirementRepository.findById(id).orElseGet(null);
@@ -68,7 +71,7 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
     }
 
     @Override
-    public String reserveRoomForSurgery(SurgeryReservationReqDTO surgeryReservationReqDTO) {
+    public int reserveRoomForSurgery(SurgeryReservationReqDTO surgeryReservationReqDTO) {
         String pickedDateStr = surgeryReservationReqDTO.getPickedTerm().split(" ")[0];
         String pickedTermsStr[] = (surgeryReservationReqDTO.getPickedTerm().split(" ")[1]).split("-");
         Integer pickedTermStart = Integer.valueOf(pickedTermsStr[0]);
@@ -84,7 +87,7 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
         List<Integer> bookedTerm = roomCalendarService.findByRoomAndDate(surgeryReservationReqDTO.getPickedRoom(), pickedDate);
 
         if (bookedTerm.contains(pickedTermStart)) {
-            return "Room is unavailable for desired date and term";
+            return 1;
         }
 
         surgeryReservationReqDTO.getChosenDoc().add(surgeryReservationReqDTO.getPickedSurReq().getDoctorId());
@@ -93,6 +96,8 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
         Long calendarId;
         Integer cntCi;
         Surgery surgery = null;
+        Patient patient = null;
+        Room room = null;
         for (Long docId : surgeryReservationReqDTO.getChosenDoc()) {
             doctor = doctorService.findById(Long.valueOf(docId));
 
@@ -106,8 +111,8 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
                 avDoctors = true;
                 //doktor ima slobodnih termina unjeti mu u kalendar sta treba
                 if (surgery == null) {
-                    Patient patient = patientService.findById(surgeryReservationReqDTO.getPickedSurReq().getPatientId());
-                    Room room = roomService.findById(surgeryReservationReqDTO.getPickedRoom());
+                    patient = patientService.findById(surgeryReservationReqDTO.getPickedSurReq().getPatientId());
+                    room = roomService.findById(surgeryReservationReqDTO.getPickedRoom());
                     RoomCalendar roomCalendar = RoomCalendar.builder()
                             .date(pickedDate)
                             .room(room)
@@ -133,15 +138,39 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
                         .typeId(surgery.getId())
                         .build();
                 calendarItemService.save(calendarItem);
+
+                String subject = "Term for surgery";
+                String answer = "Term of surgery for patient " + patient.getFirstName() + " " + patient.getLastName() + " is\n" +
+                        surgeryReservationReqDTO.getPickedTerm() + "\n" +
+                        "Room for surgery is: " + room.getName() + " " + room.getRoomNum();
+
+                emailService.sendMailTo(doctor.getEmail(), subject, answer);
             }
         }
 
         if (!avDoctors) {
-            return "There are no available doctors for this surgery";
+            return 2;
         }
 
         this.deleteById(surgeryReservationReqDTO.getPickedSurReq().getId());
-        return "Room is reserved for surgery";
+
+        if (!pickedDateStr.equals(surgeryReservationReqDTO.getPickedSurReq().getDate()) || !pickedTermsStr[0].equals(surgeryReservationReqDTO.getPickedSurReq().getTermin().toString())) {
+            String subject = "Term for surgery";
+            String answer = "Your term for surgery is changed from:\n" +
+                    surgeryReservationReqDTO.getPickedSurReq().getDate() + " " + pickedTermsStr[0] + "-" + (Integer.valueOf(pickedTermsStr[0]) + 3) + " to " +
+                    surgeryReservationReqDTO.getPickedTerm() + "\n" +
+                    "Room for surgery is: " + room.getName() + " " + room.getRoomNum();
+
+            emailService.sendMailTo(patient.getEmail(), subject, answer);
+        } else {
+            String subject = "Term for surgery";
+            String answer = "Your term for surgery is\n" +
+                    surgeryReservationReqDTO.getPickedTerm() + "\n" +
+                    "Room for surgery is: " + room.getName() + " " + room.getRoomNum();
+
+            emailService.sendMailTo(patient.getEmail(), subject, answer);
+        }
+        return 3;
     }
 
     @Override
