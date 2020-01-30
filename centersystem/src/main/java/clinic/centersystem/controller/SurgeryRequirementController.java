@@ -34,6 +34,17 @@ public class SurgeryRequirementController {
 
     @RequestMapping(method = POST, value = "/reserve")
     public ResponseEntity<String> getClinicRooms(@RequestBody SurgeryReservationReqDTO surgeryReservationReqDTO) {
-        return new ResponseEntity<>(surgeryRequirementService.reserveRoomForSurgery(surgeryReservationReqDTO), HttpStatus.OK);
+        int flag = surgeryRequirementService.reserveRoomForSurgery(surgeryReservationReqDTO);
+
+        if (flag == 1) {
+            return new ResponseEntity<>("Room is unavailable for desired date and term", HttpStatus.OK);
+        } else if (flag == 2) {
+            return new ResponseEntity<>("There are no available doctors for this surgery", HttpStatus.OK);
+        } else if (flag == 3) {
+            return new ResponseEntity<>("Room is reserved for surgery", HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>("Error", HttpStatus.BAD_REQUEST);
+        }
+
     }
 }

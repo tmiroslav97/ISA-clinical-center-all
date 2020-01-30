@@ -14,7 +14,7 @@ public interface SurgeryRequirementService {
 
     SurgeryRequirementResponseDTO findByClinicId(Long clinicId, Integer pageCnt);
 
-    String reserveRoomForSurgery(SurgeryReservationReqDTO surgeryReservationReqDTO);
+    int reserveRoomForSurgery(SurgeryReservationReqDTO surgeryReservationReqDTO);
 
     void deleteById(Long id);
 

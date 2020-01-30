@@ -21,9 +21,21 @@ import {
     putPickedRoom
 } from './actions';
 
+import {
+    putSuccessMsg,
+    putWarnMsg
+} from '../common/actions';
+
 export function* fetchFinishReservation() {
     const { payload } = yield take(FETCH_FINISH_RESERVATION);
     const { data } = yield call(SurgeryRequirementService.fetchFinishReservation, payload);
+    if (data == 'Room is reserved for surgery') {
+        yield put(putSuccessMsg(data));
+        yield put(putSuccessMsg(null));
+    } else {
+        yield put(putWarnMsg(data));
+        yield put(putWarnMsg(null));
+    }
     yield put(putPickSurReq(false));
     yield put(putPickedSurReq(null));
     yield put(putPickTerm(false));
