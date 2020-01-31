@@ -8,6 +8,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -17,6 +18,44 @@ import java.util.Set;
 @NoArgsConstructor
 @Table(name = DbTableConstants.PATIENT)
 public class Patient extends User {
+
+    @Column(name = DbColumnConstants.ISACTIVATED, nullable = false)
+    private boolean isActivated;
+
+    @Column(name = DbColumnConstants.ADDRESS, nullable = false)
+    private String address;
+
+    @Column(name = DbColumnConstants.COUNTRY, nullable = false)
+    private String country;
+
+    @Column(name = DbColumnConstants.CITY, nullable = false)
+    private String city;
+
+    @Column(name = DbColumnConstants.PHONENUM, nullable = false)
+    private String phoneNum;
+
+    @Column(name = DbColumnConstants.UNOIP, nullable = false)
+    private String unoip;
+
+    @JsonBackReference
+    @OneToOne(fetch = FetchType.LAZY)
+    private MedicalRecord medicalRecord;
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
+    private Set<Appointment> appointments = new HashSet<>();
+
+    @JsonBackReference
+    @ManyToMany(fetch = FetchType.LAZY)
+    private Set<Clinic> clinics = new HashSet<>();
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
+    private Set<AppointmentRequirement> appointmentRequirements = new HashSet<>();
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
+    private Set<Surgery> surgeries = new HashSet<>();
 
     @Builder(builderMethodName = "patientBuilder")
     public Patient(Long id, String email, String password, String firstName, String lastName,
@@ -37,43 +76,5 @@ public class Patient extends User {
         this.surgeries = surgeries;
         this.isActivated = isActivated;
     }
-
-    @Column(name = DbColumnConstants.ADDRESS, nullable = false)
-    private String address;
-
-    @Column(name = DbColumnConstants.COUNTRY, nullable = false)
-    private String country;
-
-    @Column(name = DbColumnConstants.CITY, nullable = false)
-    private String city;
-
-    @Column(name = DbColumnConstants.PHONENUM, nullable = false)
-    private String phoneNum;
-
-    @Column(name = DbColumnConstants.UNOIP, nullable = false)
-    private String unoip;
-
-    @JsonBackReference
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Clinic> clinics;
-
-    @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private MedicalRecord medicalRecord;
-
-    @JsonBackReference
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Appointment> appointments;
-
-    @JsonBackReference
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<AppointmentRequirement> appointmentRequirements;
-
-    @JsonBackReference
-    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Surgery> surgeries;
-
-    @Column(name = DbColumnConstants.ISACTIVATED, nullable = false)
-    private boolean isActivated;
 
 }

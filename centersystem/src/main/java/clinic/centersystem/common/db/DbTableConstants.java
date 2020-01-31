@@ -30,4 +30,6 @@ public final class DbTableConstants {
     public static final String CODEBOOK = "codebook";
     public static final String ROOMCALENDAR = "roomcalendar";
     public static final String TERMIN = "termin";
+    public static final String DIAGNOSE = "diagnose";
+    public static final String MEDICINE = "medicine";
 }

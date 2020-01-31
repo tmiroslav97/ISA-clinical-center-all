@@ -1,26 +1,62 @@
 import {
-    PUT_IS_FETCH_CODEBOOK,
-    PUT_CODEBOOK_DATA,
-    FETCH_CODEBOOK_DATA,
-    ADD_CODE
+    ADD_DIAGNOSE,
+    ADD_MEDICINE,
+    PUT_DIAGNOSE_DATA,
+    PUT_IS_FETCH_DIAGNOSE,
+    PUT_MEDICINE_DATA,
+    PUT_IS_FETCH_MEDICINE,
+    FETCH_DIAGNOSE_DATA,
+    FETCH_MEDICINE_DATA,
+    PUT_DIAGNOSE_PAGE_COUNT,
+    PUT_MEDICINE_PAGE_COUNT
 } from './constants';
 
-export const addCode = payload => ({
-    type: ADD_CODE,
+export const putDiagnosePageCount = payload => ({
+    type: PUT_DIAGNOSE_PAGE_COUNT,
     payload
 });
 
-export const fetchCodebookData = payload => ({
-    type: FETCH_CODEBOOK_DATA,
+export const putMedicinePageCount = payload => ({
+    type: PUT_MEDICINE_PAGE_COUNT,
     payload
 });
 
-export const putCodeBookData = payload => ({
-    type: PUT_CODEBOOK_DATA,
+export const fetchMedicineData = payload => ({
+    type: FETCH_MEDICINE_DATA,
     payload
 });
 
-export const putIsFetchCodebook = payload => ({
-    type: PUT_IS_FETCH_CODEBOOK,
+export const fetchDiagnoseData = payload => ({
+    type: FETCH_DIAGNOSE_DATA,
+    payload
+});
+
+export const putIsFetchDiagnose = payload => ({
+    type: PUT_IS_FETCH_DIAGNOSE,
+    payload
+});
+
+export const putIsFetchMedicine = payload => ({
+    type: PUT_IS_FETCH_MEDICINE,
+    payload
+});
+
+export const putMedicineData = payload => ({
+    type: PUT_MEDICINE_DATA,
+    payload
+});
+
+export const putDiagnoseData = payload => ({
+    type: PUT_DIAGNOSE_DATA,
+    payload
+});
+
+export const addMedicine = payload => ({
+    type: ADD_MEDICINE,
+    payload
+});
+
+export const addDiagnose = payload => ({
+    type: ADD_DIAGNOSE,
     payload
 });

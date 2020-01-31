@@ -6,7 +6,7 @@ import PatientHomePage from './components/Patient/PatientHomePage';
 import RegPage from './pages/RegPage';
 import DoctorHomePage from './pages/DoctorHomePage';
 import NurseHomePage from './pages/NurseHomePage';
-import ClinicCenterAdminProfile from './components/ClinicCenterAdmin/ClinicCenterAdminProfile';
+import ClinicCenterAdminProfile from './pages/ClinicCenterAdminProfile';
 import HolidayAproval from './components/HolidayAproval';
 import PasswordChanger from './components/PasswordChanger';
 import ClinicAdmin from './components/ClinicAdmin/CA';
@@ -30,7 +30,12 @@ import HolAbsRequest from './components/HolAbsRequest';
 import BookingDoc from './components/BookingDoc';
 import AppointmentInfo from './components/ApointmentInfo';
 import SurReqDoctors from './components/SurgeryRequirement/SurReqDoctors';
-
+import AddDiagnose from './components/med-diag/AddDiagnose';
+import AddMedicine from './components/med-diag/AddMedicine';
+import RegistrationAproval from './components/RegistrationReq/RegistrationAproval';
+import ClinicReg from './components/Clinic/ClinicReg';
+import AdminReg from './components/ClinicCenterAdmin/AdminReg';
+import ClinicAdminReg from './components/ClinicAdmin/ClinicAdminReg';
 
 const AppRouter = () => {
     return (
@@ -40,10 +45,17 @@ const AppRouter = () => {
             <PrivateRoute exact path="/pat" component={PatientHomePage} accessRole="ROLE_PATIENT" />
             <Route exact path="/signup" component={RegPage} />
             <Route exact path="/prob" component={HolidayAproval} />
-            <PrivateRoute exact path="/ccadmin/:id" component={ClinicCenterAdminProfile} accessRole="ROLE_CCADMIN" />
             <Route exact path="/signup" component={RegPage} />
             <Route exact path="/change-pass" component={PasswordChanger} />
             <PrivateRoute exact path="/nurse-page/:id" component={NurseHomePage} accessRole="ROLE_NURSE" />
+
+            <PrivateRoute exact path="/ccadmin/regca" component={ClinicAdminReg} accessRole="ROLE_CCADMIN" />
+            <PrivateRoute exact path="/ccadmin/cli-reg" component={ClinicReg} accessRole="ROLE_CCADMIN" />
+            <PrivateRoute exact path="/ccadmin/reg-req" component={RegistrationAproval} accessRole="ROLE_CCADMIN" />
+            <PrivateRoute exact path="/ccadmin/add-med" component={AddMedicine} accessRole="ROLE_CCADMIN" />
+            <PrivateRoute exact path="/ccadmin/add-diag" component={AddDiagnose} accessRole="ROLE_CCADMIN" />
+            <PrivateRoute exact path="/ccadmin/cca-reg/:id" component={AdminReg} accessRole="ROLE_CCADMIN" />
+            <PrivateRoute exact path="/ccadmin/:id" component={ClinicCenterAdminProfile} accessRole="ROLE_CCADMIN" />
 
             <PrivateRoute exact path="/doc/pat-list" component={PatientList} accessRole="ROLE_DOCTOR" />
             <PrivateRoute exact path="/doc/app-info" component={AppointmentInfo} accessRole="ROLE_DOCTOR" />

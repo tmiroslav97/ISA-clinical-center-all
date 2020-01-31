@@ -35,17 +35,17 @@ public class Room {
     private Boolean reserved = false;
 
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Clinic clinic;
 
     @JsonBackReference
-    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
     private Set<RoomCalendar> roomCalendars = new HashSet<>();
 
-    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
     private Set<Surgery> surgeries = new HashSet<>();
 
-    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
     private Set<Appointment> appointments = new HashSet<>();
 
 }

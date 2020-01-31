@@ -2,9 +2,11 @@ package clinic.centersystem.model;
 
 import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Builder
 @Getter
@@ -12,23 +14,23 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = DbTableConstants.CODEBOOK)
-public class Codebook {
+@Table(name = DbTableConstants.DIAGNOSE)
+public class Diagnose {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = DbColumnConstants.NAME, nullable = false)
-    private String name;
-
     @Column(name = DbColumnConstants.CODE, unique = true, nullable = false)
     private String code;
 
+    @Column(name = DbColumnConstants.NAME, nullable = false)
+    private String name;
 
-    @Column(name = DbColumnConstants.TYPE, nullable = false)
-    private String type;
-
-    @Column(name = DbColumnConstants.DESCRIPTION, nullable = false)
+    @Column(name = DbColumnConstants.DESCRIPTION)
     private String description;
 
+    @JsonBackReference
+    @OneToMany(mappedBy = "diagnose", fetch = FetchType.LAZY)
+    private Set<MedicalReport> medicalReport;
 }

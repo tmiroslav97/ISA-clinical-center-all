@@ -26,12 +26,11 @@ public class Personnel extends User {
     public Personnel(Long id, String email, String password, String firstName, String lastName,
                      boolean enabled, RoleEnum role, boolean isFirstLog, Timestamp lastPasswordResetDate,
                      List<Authority> authorities, Clinic clinic, Calendar calendar,
-                     Set<AbsenceRequirement> absenceRequirements, Set<Appointment> appointments) {
+                     Set<AbsenceRequirement> absenceRequirements) {
         super(id, email, password, firstName, lastName, enabled, role, isFirstLog, lastPasswordResetDate, authorities);
         this.clinic = clinic;
         this.calendar = calendar;
         this.absenceRequirements = absenceRequirements;
-        this.appointments = appointments;
     }
 
     @JsonBackReference
@@ -45,7 +44,5 @@ public class Personnel extends User {
     @OneToMany(mappedBy = "personnel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<AbsenceRequirement> absenceRequirements;
 
-    @OneToMany(mappedBy = "personnel",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Appointment> appointments;
 
 }
