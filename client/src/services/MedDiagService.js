@@ -24,7 +24,7 @@ class MedDiagService extends HttpClient {
     fetchDiagnoseData = async payload => {
         try {
             const { data } = await this.getApiClient().get(
-                format(FINALPOINTS.FETCH_MEDICINE_DATA, payload.pageCnt)
+                format(FINALPOINTS.FETCH_DIAGNOSE_DATA, payload.pageCnt)
             );
             const diagnoses = data;
             return { diagnoses };
