@@ -1,15 +1,13 @@
 package clinic.centersystem.controller;
 
+import clinic.centersystem.dto.response.MedicineResponseDTO;
 import clinic.centersystem.model.Medicine;
 import clinic.centersystem.service.MedicineServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,4 +32,10 @@ public class MedicineController {
         this.medicineService.save(medicine);
         return new ResponseEntity<>("Code successfuly added", HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/all/{pageCnt}", method = RequestMethod.GET)
+    public ResponseEntity<MedicineResponseDTO> getMedicinesPages(@PathVariable Integer pageCnt) {
+        return new ResponseEntity<>(this.medicineService.findAll(pageCnt), HttpStatus.OK);
+    }
+
 }
