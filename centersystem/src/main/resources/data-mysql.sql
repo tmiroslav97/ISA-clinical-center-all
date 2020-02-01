@@ -244,3 +244,5 @@ INSERT INTO roomcalendar(date, termin, room_id) VALUES ('2020-01-22',16,1);
 INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id,patient_name,doctor_name)VALUES ('2020-01-23',7,1,2,3, 'Jovana Lakic','Nevena Djukin');
 INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id,patient_name,doctor_name)VALUES ('2020-01-31',10,1,2,3,'Jovana Lakic','Nevena Djukin');
 INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id,patient_name,doctor_name)VALUES ('2020-01-25',13,1,2,3,'Jovana Lakic','Nevena Djukin');
+
+INSERT INTO medicine(code,description,name) VALUES("123asd","good medic", "brufen");

@@ -2,10 +2,11 @@ package clinic.centersystem.model;
 
 import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Builder
@@ -29,7 +30,7 @@ public class Medicine {
     @Column(name = DbColumnConstants.DESCRIPTION)
     private String description;
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "medicine", fetch = FetchType.LAZY)
-    private Set<Prescription> prescriptions;
+    private Set<Prescription> prescriptions = new HashSet<>();
 }

@@ -10,7 +10,6 @@ const PaginationMedicine = () => {
     const dispatch = useDispatch();
     const medicinePageCnt = useSelector(medicinePageCntSelector);
     const [pageCnt, setPageCnt] = useState(0);
-
     useEffect(() => {
         dispatch(
             fetchMedicineData({
@@ -52,11 +51,6 @@ const PaginationMedicine = () => {
 
     return (
         <Container>
-            <Row>
-                <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <h2 className="border-bottom">Medicines</h2>
-                </Col>
-            </Row>
             <MedicineTable />
             <Row>
                 <Col md={{ span: 10, offset: 1 }} xs={12}>

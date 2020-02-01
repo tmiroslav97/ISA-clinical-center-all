@@ -8,7 +8,7 @@ const AddMedicine = () => {
     const dispatch = useDispatch();
     const [name, setName] = useState();
     const [description, setDescription] = useState();
-    const [code, setCode] = useState();
+    const [code, setCode] = useState();    
 
     const handleAddMedicine = () => {
         dispatch(
