@@ -2,6 +2,7 @@ package clinic.centersystem.controller;
 
 
 import clinic.centersystem.converter.RegistrationRequirementConverter;
+import clinic.centersystem.dto.response.RegistrationReqResponseDTO;
 import clinic.centersystem.dto.response.RegistrationRequirementResponse;
 import clinic.centersystem.service.RegistrationRequirementServiceImpl;
 import org.springframework.http.HttpStatus;
@@ -31,6 +32,12 @@ public class RegistrationRequirementControler {
     @PreAuthorize("hasRole('CCADMIN')")
     public ResponseEntity<List<RegistrationRequirementResponse>> registrationReqs() {
         return new ResponseEntity<>(this.registrationRequirementService.registrationRequirementList(), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = GET, value = "/regreqs/{pageCnt}")
+    @PreAuthorize("hasRole('CCADMIN')")
+    public ResponseEntity<RegistrationReqResponseDTO> getRegReqs(@PathVariable Integer pageCnt) {
+        return new ResponseEntity<>(this.registrationRequirementService.findAll(pageCnt), HttpStatus.OK);
     }
 
     @RequestMapping(method = POST, value = "/approve/{reqId}")

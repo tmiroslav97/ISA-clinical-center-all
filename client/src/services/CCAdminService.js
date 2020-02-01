@@ -4,7 +4,7 @@ import { format } from 'util';
 
 const FINALPOINTS = {
     FETCH_CCADMIN_DATA: '/cca/%s',
-    FETCH_REG_REQS_DATA: '/reg/regreqs',
+    FETCH_REG_REQS_DATA: '/reg/regreqs/%s',
     APPROVE_REG_REQ: '/reg/approve/%s',
     REJECT_REG_REQ: '/reg/reject/%s/%s',
     REG_CC_ADMIN: '/cca/reg-cca/%s',
@@ -28,7 +28,7 @@ class CCAdminService extends HttpClient {
     fetchRegReqsData = async payload => {
         try {
             const { data } = await this.getApiClient().get(
-                FINALPOINTS.FETCH_REG_REQS_DATA
+                format(FINALPOINTS.FETCH_REG_REQS_DATA, payload.pageCnt)
             );
             const reqData = data;
             return { reqData };

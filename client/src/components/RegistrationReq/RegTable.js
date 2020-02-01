@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import { Table, Button, Modal, Form } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { Table, Button, Modal, Form, Spinner } from 'react-bootstrap';
 import { approveRegReq, rejectRegReq } from '../../store/reg_req/actions';
-import { useDispatch } from 'react-redux';
+import { isFetchRegReqs, regReqsDataSelector } from '../../store/reg_req/selectors';
 
 
-const RegTable = ({ regReqs, selected }) => {
+const RegTable = () => {
     const dispatch = useDispatch();
     const [show, setShow] = useState(false);
     const [reqId, setReqId] = useState(0);
     const [message, setMessage] = useState('');
+    const regReqs = useSelector(regReqsDataSelector);
+    const isFetchReqs = useSelector(isFetchRegReqs);
 
     const handleApprove = (regReqId) => {
         dispatch(
@@ -33,6 +36,14 @@ const RegTable = ({ regReqs, selected }) => {
         setReqId(regReqId);
     };
 
+    if (!isFetchReqs) {
+        return <div className="d-flex justify-content-center">
+            <Spinner animation="border" role="status">
+                <span className="sr-only">Loading...</span>
+            </Spinner>
+        </div>;
+    }
+
     return (
         <div>
             <Modal show={show} onHide={handleClose} animation={false}>
@@ -55,7 +66,6 @@ const RegTable = ({ regReqs, selected }) => {
             <Table responsive>
                 <thead>
                     <tr>
-                        <th>#</th>
                         <th>E-mail</th>
                         <th>First Name</th>
                         <th>Last Name</th>
@@ -70,7 +80,6 @@ const RegTable = ({ regReqs, selected }) => {
                         regReqs.map((req, index) => {
                             return (
                                 <tr key={req.id}>
-                                    <td>{selected * 10 + index + 1}</td>
                                     <td>{req.email}</td>
                                     <td>{req.firstName}</td>
                                     <td>{req.lastName}</td>

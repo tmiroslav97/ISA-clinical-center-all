@@ -1,40 +1,53 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Table, Button, Modal, Form, Spinner } from 'react-bootstrap';
+import { Container, Row, Col, Pagination } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchRegReqsData } from '../../store/reg_req/actions';
-import { regReqsDataSelector, isFetchRegReqs } from '../../store/reg_req/selectors';
+import { regReqsPageCntSelector } from '../../store/reg_req/selectors';
 import RegTable from './RegTable';
-import ReactPaginate from 'react-paginate';
 
 
 const RegistrationAproval = () => {
     const dispatch = useDispatch();
-    const isFetchRegReq = useSelector(isFetchRegReqs);
-    const regReqs = useSelector(regReqsDataSelector);
-    const [selected, setSelected] = useState(0);
-    const [regReqsData, setRegReqsData] = useState(regReqs.slice(0 * 10, 10));
+    const regReqsPageCnt = useSelector(regReqsPageCntSelector);
+    const [pageCnt, setPageCnt] = useState(0);
 
     useEffect(() => {
         dispatch(
-            fetchRegReqsData({})
+            fetchRegReqsData({ pageCnt })
         );
-    }, []);
+    }, [pageCnt]);
 
-    const pageCount = Math.ceil(regReqs.length / 10);
+    let items = [];
+    for (let number = 1; number <= regReqsPageCnt; number++) {
+        items.push(
+            <Pagination.Item key={number} active={number == (pageCnt + 1)}>
+                {number}
+            </Pagination.Item>
+        );
+    }
 
-    const handlePageClick = (data) => {
-        setSelected(data.selected);
-        setRegReqsData(regReqs.slice(selected * 10, (selected + 1) * 10));
+    const handlePagination = (e) => {
+        e.preventDefault();
+        let event = e.target.text;
+        if (event != undefined && regReqsPageCnt > 0) {
+            if (event.includes('First')) {
+                setPageCnt(0);
+            } else if (event.includes('Last')) {
+                setPageCnt(regReqsPageCnt - 1);
+            } else if (event.includes('Next')) {
+                if (pageCnt < regReqsPageCnt - 1) {
+                    setPageCnt(pageCnt + 1);
+                }
+            } else if (event.includes('Previous')) {
+                if (pageCnt > 0) {
+                    setPageCnt(pageCnt - 1);
+                }
+            } else {
+                setPageCnt(event - 1);
+            }
+        }
     };
 
-    if (!isFetchRegReq) {
-        return <div className="d-flex justify-content-center">
-            <Spinner animation="border" role="status">
-                <span className="sr-only">Loading...</span>
-            </Spinner>
-        </div>;
-    } 
-    
 
     return (
 
@@ -42,23 +55,17 @@ const RegistrationAproval = () => {
             <Row>
                 <h3>Approve or refuse registration requests</h3>
             </Row>
+            <RegTable />
             <Row>
-                <div className="commentBox">
-                    <RegTable regReqs={regReqsData} selected={selected} />
-                    <ReactPaginate
-                        previousLabel={'previous'}
-                        nextLabel={'next'}
-                        breakLabel={'...'}
-                        breakClassName={'break-me'}
-                        pageCount={pageCount}
-                        marginPagesDisplayed={2}
-                        pageRangeDisplayed={5}
-                        onPageChange={handlePageClick}
-                        containerClassName={'pagination'}
-                        subContainerClassName={'pages pagination'}
-                        activeClassName={'active'}
-                    />
-                </div>
+                <Col md={{ span: 10, offset: 1 }} xs={12}>
+                    <Pagination onClick={handlePagination} className="pagination justify-content-center mb-5">
+                        <Pagination.First />
+                        <Pagination.Prev />
+                        {items}
+                        <Pagination.Next />
+                        <Pagination.Last />
+                    </Pagination>
+                </Col>
             </Row>
         </Container>
     );
