@@ -68,12 +68,7 @@ public class PatientServiceImpl implements PatientService {
         return PatientConverter.toCreatePatientResponseFromPatient(patient);
     }
 
-
-
-
-
-
-
+    @Override
     public List<PatientResponse> getPatients() {
         List<Patient> patients = this.findAll();
         List<PatientResponse> patientResponses = new ArrayList<PatientResponse>();
@@ -84,6 +79,7 @@ public class PatientServiceImpl implements PatientService {
         return patientResponses;
     }
 
+    @Override
     public Set<PatientResponse> getPatientsByClinicId(Long clinicId) {
         Clinic clinic = this.clinicService.findById(clinicId);
         Set<Patient> patients = clinic.getPatients();
