@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class PatientServiceImpl implements PatientService {
@@ -36,8 +37,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Patient findById(Long id) {
-        Patient patient = patientRepository.findById(id).orElse(null);
-        return patient;
+        return patientRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -72,6 +72,7 @@ public class PatientServiceImpl implements PatientService {
         return patientRepository.save(patient);
     }
 
+    @Override
     public PatientResponse patient(Long id) {
         Patient patient = this.findById(id);
         return PatientConverter.toCreatePatientResponseFromPatient(patient);
@@ -80,11 +81,7 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public List<PatientResponse> getPatients() {
         List<Patient> patients = this.findAll();
-        List<PatientResponse> patientResponses = new ArrayList<PatientResponse>();
-        for (Patient patient : patients) {
-            patientResponses.add(PatientConverter.toCreatePatientResponseFromPatient(patient));
-        }
-
+        List<PatientResponse> patientResponses = patients.stream().map(PatientConverter::toCreatePatientResponseFromPatient).collect(Collectors.toList());
         return patientResponses;
     }
 
