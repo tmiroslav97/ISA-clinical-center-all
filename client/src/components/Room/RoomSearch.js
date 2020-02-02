@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Form, Button, Pagination } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Pagination, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { searchRoomsData } from '../../store/rooms/actions';
 import { pageCountSelector } from '../../store/rooms/selectors';
+import { pickSurReqSelector, pickedSurReqSelector } from '../../store/sur-req/selectors';
+import { userDataSelector } from '../../store/user/selectors';
 import RoomList from './RoomList';
+import PickedSurReq from '../SurgeryRequirement/PickedSurReq';
 
 
-const RoomSearch = ({ match }) => {
+const RoomSearch = () => {
     const dispatch = useDispatch();
-    const clinicId = match.params.clinicId;
+    const data = useSelector(userDataSelector);
+    const clinicId = data.clinicId;
     const pageCount = useSelector(pageCountSelector);
+    const pickSurReq = useSelector(pickSurReqSelector);
+    const pickedSurReq = useSelector(pickedSurReqSelector);
     const [today, setToday] = useState(moment().format('YYYY-MM-DD'));
     const [date, setDate] = useState(moment().format('YYYY-MM-DD'));
     const [name, setName] = useState('');
@@ -72,6 +78,10 @@ const RoomSearch = ({ match }) => {
 
     return (
         <Container>
+            {
+                pickSurReq ?
+                    <PickedSurReq pickedSurReq={pickedSurReq} /> : null
+            }
             <Row>
                 <Col md={{ span: 10, offset: 1 }} xs={12}>
                     <h2 className="border-bottom">Search rooms</h2>
@@ -86,7 +96,7 @@ const RoomSearch = ({ match }) => {
                                 <Form.Control type="text" placeholder="Name"
                                     onChange={({ currentTarget }) => {
                                         setName(currentTarget.value);
-                                    }}/>
+                                    }} />
                             </Form.Group>
                             <Form.Group as={Col} >
                                 <Form.Label>Date:</Form.Label>

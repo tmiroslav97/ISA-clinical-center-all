@@ -46,8 +46,10 @@ export function* fetchCAdminData() {
 //doctor sagas
 export function* fetchDoctorData() {
     const { payload } = yield take(FETCH_DOCTOR_DATA);
+    yield put(putIsFetchUserData(false));
     const { data } = yield call(DoctorService.fetchDoctorData, payload);
     yield put(putUserData(data));
+    yield put(putIsFetchUserData(true));
 }
 
 
@@ -124,7 +126,7 @@ export function* changePassword() {
     } else if (data.role === 'ROLE_CCADMIN') {
         history.push('/ccadmin/' + data.id);
     } else if (data.role === 'ROLE_DOCTOR') {
-        history.push('/doc');
+        history.push('/doc/' + data.id);
     } else if (data.role === 'ROLE_NURSE') {
         history.push('/nurse-page/' + data.id);
     } else if (data.role === 'ROLE_ADMINC') {

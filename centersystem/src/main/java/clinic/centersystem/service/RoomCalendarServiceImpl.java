@@ -26,4 +26,9 @@ public class RoomCalendarServiceImpl implements RoomCalendarService {
         return roomCalendarRepository.findByRoomAndDate(roomId, dt);
     }
 
+    @Override
+    public RoomCalendar save(RoomCalendar roomCalendar) {
+        return roomCalendarRepository.save(roomCalendar);
+    }
+
 }

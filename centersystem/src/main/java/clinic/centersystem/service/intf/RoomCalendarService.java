@@ -9,4 +9,6 @@ public interface RoomCalendarService {
     RoomCalendar findById(Long id);
 
     List<Integer> findByRoomAndDate(Long roomId, DateTime dt);
+
+    RoomCalendar save(RoomCalendar roomCalendar);
 }

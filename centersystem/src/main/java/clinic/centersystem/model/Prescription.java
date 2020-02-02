@@ -27,13 +27,12 @@ public class Prescription {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Nurse nurse;
 
-//    @JsonBackReference
-//    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private Medicine medicine;
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Medicine medicine;
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private MedicalReport medicalReport;
-
 
 }

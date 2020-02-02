@@ -1,13 +1,41 @@
-export function putCodebookData(state, payload) {
+export function putDiagnoseData(state, payload) {
     return {
         ...state,
-        codebook: payload
+        diagnoses: payload
     };
 }
 
-export function putIsFetchCodebook(state, payload) {
+export function putDiagnosePageCnt(state, payload) {
     return {
         ...state,
-        isFetchCodebook: payload
+        diagnosePageCnt: payload
+    };
+}
+
+export function putIsFetchDiagnoses(state, payload) {
+    return {
+        ...state,
+        isFetchDiagnoses: payload
+    };
+}
+
+export function putMedicineData(state, payload) {
+    return {
+        ...state,
+        medicines: payload
+    };
+}
+
+export function putMedicinePageCnt(state, payload) {
+    return {
+        ...state,
+        medicinePageCnt: payload
+    };
+}
+
+export function putIsFetchMedicines(state, payload) {
+    return {
+        ...state,
+        isFetchMedicines: payload
     };
 }
