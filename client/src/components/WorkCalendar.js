@@ -93,14 +93,14 @@ const WorkCalendar = () => {
                                 </tr>
                                 <tr>
                                     <th>Start date</th>
-                                    <td align="right">{moment(event.start).format('YYYY-MM-DD hh:mm:ss')}</td>
+                                    <td align="right">{moment(event.start).format('YYYY-MM-DD HH:mm:ss')}</td>
                                 </tr>
                                 <tr>
                                     <th>End date</th>
-                                    <td align="right">{moment(event.end).format('YYYY-MM-DD hh:mm:ss')}</td>
+                                    <td align="right">{moment(event.end).format('YYYY-MM-DD HH:mm:ss')}</td>
                                 </tr>
-                                {
-                                    event.type === 'APP' &&
+                                {  
+                                    event.type === 'APP' && moment(event.start).format('YYYY-MM-DD')===moment().format('YYYY-MM-DD') &&
                                     <tr>
                                         <th>Start appointment</th>
                                         <td colSpan="2" align="right">
