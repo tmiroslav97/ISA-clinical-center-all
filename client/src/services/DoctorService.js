@@ -34,6 +34,18 @@ class DoctorService extends HttpClient {
         }
     };
 
+    fetchDoctorsDataOnClinic = async payload => {
+            try {
+                const { data } = await this.getApiClient().get(
+                    format(FINALPOINTS.FETCH_DOCTORS_DATA_ON_CLINIC, payload.clinicId)
+                );
+    
+                return { data };
+            } catch (error) {
+                console.log(error.response.data);
+            }
+    };
+
     fetchDoctorsData = async payload => {
         try {
             const { data } = await this.getApiClient().get(
