@@ -2,9 +2,12 @@ package clinic.centersystem.service;
 
 import clinic.centersystem.converter.RegistrationRequirementConverter;
 import clinic.centersystem.dto.request.RegistrationRequirementDTO;
+import clinic.centersystem.dto.response.MedicineResponseDTO;
+import clinic.centersystem.dto.response.RegistrationReqResponseDTO;
 import clinic.centersystem.dto.response.RegistrationRequirementResponse;
 import clinic.centersystem.exception.RegistrationRequirementNotFoundException;
 import clinic.centersystem.exception.UserExistsException;
+import clinic.centersystem.model.Medicine;
 import clinic.centersystem.model.Patient;
 import clinic.centersystem.model.RegistrationRequirement;
 import clinic.centersystem.repository.RegistrationRequirementRepository;
@@ -12,6 +15,9 @@ import clinic.centersystem.service.intf.PatientService;
 import clinic.centersystem.service.intf.RegistrationRequirementService;
 import clinic.centersystem.service.intf.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -97,6 +103,18 @@ public class RegistrationRequirementServiceImpl implements RegistrationRequireme
         emailService.sendMailTo(req.getEmail(), subject, message);
 
         return "Patient registration rejected";
+    }
+
+    @Override
+    public RegistrationReqResponseDTO findAll(Integer pageCnt) {
+        Pageable pageable = PageRequest.of(pageCnt, 10);
+        Page<RegistrationRequirement> regReqs = registrationRequirementRepository.findAll(pageable);
+
+        RegistrationReqResponseDTO regReqResponseDTO = RegistrationReqResponseDTO.builder()
+                .reqs(regReqs.getContent().stream().map(RegistrationRequirementConverter::toCreateRegistrationRequirementResponse).collect(Collectors.toList()))
+                .regReqsPageCnt(regReqs.getTotalPages())
+                .build();
+        return regReqResponseDTO;
     }
 
 }

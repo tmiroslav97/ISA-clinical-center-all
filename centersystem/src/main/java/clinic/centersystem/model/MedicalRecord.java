@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Builder
@@ -31,12 +32,15 @@ public class MedicalRecord {
     @Column(name = DbColumnConstants.WEIGHT)
     private Float weight;
 
+    @Column(name = DbColumnConstants.BLOODTYPE)
+    private String bloodType;
+
     @JsonBackReference
     @OneToOne( fetch = FetchType.LAZY)
     private Patient patient;
 
     @JsonBackReference
     @OneToMany(mappedBy = "medicalRecord", fetch = FetchType.LAZY)
-    private Set<MedicalReport> diseaseHistory;
+    private Set<MedicalReport> diseaseHistory = new HashSet<>();
 
 }

@@ -52,11 +52,6 @@ const PaginationDiagnose = () => {
 
     return (
         <Container>
-            <Row>
-                <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <h2 className="border-bottom">Diagnoses</h2>
-                </Col>
-            </Row>
             <DiagnoseTable />
             <Row>
                 <Col md={{ span: 10, offset: 1 }} xs={12}>

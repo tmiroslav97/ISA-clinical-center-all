@@ -120,84 +120,6 @@ INSERT INTO registration_requirement (address, city, country, email, first_name,
                                       phone_num, unoip)
 VALUES ('Safarikova 16', 'Bijeljina', 'Bosna', 'roncevic1996@gmail.com', 'Jovica', 'Roncevic', '321', '321', '345435345',
         '432132');
-INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
-                                      phone_num, unoip)
-VALUES ('Safarikova 31', 'Bijeljina', 'Bosna', 'miroslavtomic@outlook.com', 'Miki', 'Peric', '123', '123', '065987654',
-        '1234543');
-
-INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
-                                      phone_num, unoip)
-VALUES ('Safarikova 16', 'Bijeljina', 'Bosna', 'roncevic1996@gmail.com', 'Jovica', 'Roncevic', '321', '321', '345435345',
-        '432132');
-INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
-                                      phone_num, unoip)
-VALUES ('Safarikova 31', 'Bijeljina', 'Bosna', 'miroslavtomic@outlook.com', 'Miki', 'Peric', '123', '123', '065987654',
-        '1234543');
-
-INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
-                                      phone_num, unoip)
-VALUES ('Safarikova 16', 'Bijeljina', 'Bosna', 'roncevic1996@gmail.com', 'Jovica', 'Roncevic', '321', '321', '345435345',
-        '432132');
-INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
-                                      phone_num, unoip)
-VALUES ('Safarikova 31', 'Bijeljina', 'Bosna', 'miroslavtomic@outlook.com', 'Miki', 'Peric', '123', '123', '065987654',
-        '1234543');
-
-INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
-                                      phone_num, unoip)
-VALUES ('Safarikova 16', 'Bijeljina', 'Bosna', 'roncevic1996@gmail.com', 'Jovica', 'Roncevic', '321', '321', '345435345',
-        '432132');
-INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
-                                      phone_num, unoip)
-VALUES ('Safarikova 31', 'Bijeljina', 'Bosna', 'miroslavtomic@outlook.com', 'Miki', 'Peric', '123', '123', '065987654',
-        '1234543');
-
-INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
-                                      phone_num, unoip)
-VALUES ('Safarikova 16', 'Bijeljina', 'Bosna', 'roncevic1996@gmail.com', 'Jovica', 'Roncevic', '321', '321', '345435345',
-        '432132');
-
-INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
-                                      phone_num, unoip)
-VALUES ('Safarikova 16', 'Bijeljina', 'Bosna', 'roncevic1996@gmail.com', 'Jovica', 'Roncevic', '321', '321', '345435345',
-        '432132');
-INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
-                                      phone_num, unoip)
-VALUES ('Safarikova 31', 'Bijeljina', 'Bosna', 'miroslavtomic@outlook.com', 'Miki', 'Peric', '123', '123', '065987654',
-        '1234543');
-
-INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
-                                      phone_num, unoip)
-VALUES ('Safarikova 16', 'Bijeljina', 'Bosna', 'roncevic1996@gmail.com', 'Jovica', 'Roncevic', '321', '321', '345435345',
-        '432132');
-INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
-                                      phone_num, unoip)
-VALUES ('Safarikova 31', 'Bijeljina', 'Bosna', 'miroslavtomic@outlook.com', 'Miki', 'Peric', '123', '123', '065987654',
-        '1234543');
-
-INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
-                                      phone_num, unoip)
-VALUES ('Safarikova 16', 'Bijeljina', 'Bosna', 'roncevic1996@gmail.com', 'Jovica', 'Roncevic', '321', '321', '345435345',
-        '432132');
-INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
-                                      phone_num, unoip)
-VALUES ('Safarikova 31', 'Bijeljina', 'Bosna', 'miroslavtomic@outlook.com', 'Miki', 'Peric', '123', '123', '065987654',
-        '1234543');
-
-INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
-                                      phone_num, unoip)
-VALUES ('Safarikova 16', 'Bijeljina', 'Bosna', 'roncevic1996@gmail.com', 'Jovica', 'Roncevic', '321', '321', '345435345',
-        '432132');
-INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
-                                      phone_num, unoip)
-VALUES ('Safarikova 31', 'Bijeljina', 'Bosna', 'miroslavtomic@outlook.com', 'Miki', 'Peric', '123', '123', '065987654',
-        '1234543');
-
-INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
-                                      phone_num, unoip)
-VALUES ('Safarikova 16', 'Bijeljina', 'Bosna', 'roncevic1996@gmail.com', 'Jovica', 'Roncevic', '321', '321', '345435345',
-        '432132');
-
 
 INSERT INTO clinic_patients(clinic_id, patients_id)
 VALUES (1, 2);
@@ -206,43 +128,6 @@ INSERT INTO clinic_patients(clinic_id, patients_id)
 VALUES (1, 6);
 
 
-INSERT INTO prescription(id, is_validate, nurse_id)
-VALUES (1, FALSE, NULL);
-
-INSERT INTO calendar(id, personnel_id)
-VALUES (1, 4);
-
-INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type)
-VALUES ('2020-01-28 10:00:00', '2020-01-28 09:00:00', 'First examination', 'N', 1, 1,'APP');
-
-INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type)
-VALUES ('2020-01-29 11:00:00', '2020-01-29 10:00:00', 'Second examination', 'N', 2, 1,'APP');
-
-
-
-INSERT INTO calendar(id, personnel_id)
-VALUES (2, 3);
-
-INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type)
-VALUES ('2020-01-30 11:00:00', '2020-01-30 09:00:00', 'First examination', 'N', 3, 2,'APP');
-
-INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type)
-VALUES ('2020-01-30 12:00:00', '2020-01-30 11:00:00', 'Second examination', 'N', 4, 2,'APP');
-
-INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type)
-VALUES ('2020-01-30 14:00:00', '2020-01-30 12:00:00', 'Third examination', 'N', 5, 2,'APP');
-
-
-UPDATE personnel
-SET calendar_id =1
-WHERE id = 4;
-
-UPDATE personnel
-SET calendar_id =2
-WHERE id = 3;
-
-INSERT INTO appointment_type(id, type) VALUES (1,'General examination');
-INSERT INTO appointment_type(id, type) VALUES (2,'Heart examination');
 
 INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (1,FALSE ,'SUR','For heart',1,1);
 INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (2,FALSE ,'SUR','For head',2,1);
@@ -263,3 +148,48 @@ INSERT INTO roomcalendar(date, termin, room_id) VALUES ('2020-01-22',16,1);
 INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id,patient_name,doctor_name)VALUES ('2020-01-23',7,1,2,3, 'Jovana Lakic','Nevena Djukin');
 INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id,patient_name,doctor_name)VALUES ('2020-01-31',10,1,2,3,'Jovana Lakic','Nevena Djukin');
 INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id,patient_name,doctor_name)VALUES ('2020-01-25',13,1,2,3,'Jovana Lakic','Nevena Djukin');
+
+INSERT INTO appointment_type(id, type) VALUES (1,'General examination');
+INSERT INTO appointment_type(id, type) VALUES (2,'Heart examination');
+
+INSERT INTO appointment(app_state, date_time, discount, price, clinic_id, doctor_id, patient_id, room_id, type_id) VALUES(2, '2020-02-02 11:00:00', 0,0,1,3,2,1,1);
+
+INSERT INTO prescription(id, is_validate, nurse_id)
+VALUES (1, FALSE, NULL);
+
+INSERT INTO calendar(id, personnel_id)
+VALUES (1, 4);
+
+INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type)
+VALUES ('2020-01-28 10:00:00', '2020-01-28 09:00:00', 'First examination', 'N', 1, 1,'APP');
+
+INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type)
+VALUES ('2020-01-29 11:00:00', '2020-01-29 10:00:00', 'Second examination', 'N', 2, 1,'APP');
+
+
+
+INSERT INTO calendar(id, personnel_id)
+VALUES (2, 3);
+
+INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type,typeid)
+VALUES ('2020-02-02 11:00:00', '2020-02-02 09:00:00', 'First examination', 'N', 3, 2,'APP',1);
+
+INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type)
+VALUES ('2020-02-02 12:00:00', '2020-02-02 11:00:00', 'Second examination', 'N', 4, 2,'APP');
+
+INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type)
+VALUES ('2020-02-02 14:00:00', '2020-02-02 12:00:00', 'Third examination', 'N', 5, 2,'APP');
+
+
+UPDATE personnel
+SET calendar_id =1
+WHERE id = 4;
+
+UPDATE personnel
+SET calendar_id =2
+WHERE id = 3;
+
+
+
+INSERT INTO medicine(code,description,name) VALUES("123asd","good medic", "brufen");
+

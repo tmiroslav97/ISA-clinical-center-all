@@ -3,8 +3,14 @@ import {
     PUT_REG_REQS_DATA,
     PUT_IS_FETCH_REG_REQS,
     APPROVE_REG_REQ,
-    REJECT_REG_REQ
+    REJECT_REG_REQ,
+    PUT_REG_REQS_CNT
 } from './constants';
+
+export const putRegReqsCnt = payload => ({
+    type: PUT_REG_REQS_CNT,
+    payload
+});
 
 export const fetchRegReqsData = payload => ({
     type: FETCH_REG_REQS_DATA,

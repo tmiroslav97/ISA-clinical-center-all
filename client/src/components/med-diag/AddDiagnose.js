@@ -57,7 +57,7 @@ const AddMedicine = () => {
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Button variant="primary" onClick={handleAddDiagnose}>
-                                Add medicine
+                                Add diagnose
                             </Button>
                         </Form.Group>
                     </Form>

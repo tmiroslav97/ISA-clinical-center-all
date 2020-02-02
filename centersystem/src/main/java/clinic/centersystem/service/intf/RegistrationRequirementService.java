@@ -1,6 +1,7 @@
 package clinic.centersystem.service.intf;
 
 import clinic.centersystem.dto.request.RegistrationRequirementDTO;
+import clinic.centersystem.dto.response.RegistrationReqResponseDTO;
 import clinic.centersystem.dto.response.RegistrationRequirementResponse;
 import clinic.centersystem.model.RegistrationRequirement;
 
@@ -20,6 +21,7 @@ public interface RegistrationRequirementService {
 
     String rejectRegistrationRequest(Long id, String message);
 
+    RegistrationReqResponseDTO findAll(Integer pageCnt);
 
     void deleteById(Long id);
 }

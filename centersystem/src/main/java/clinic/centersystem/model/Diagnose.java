@@ -3,6 +3,7 @@ package clinic.centersystem.model;
 import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -30,7 +31,7 @@ public class Diagnose {
     @Column(name = DbColumnConstants.DESCRIPTION)
     private String description;
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "diagnose", fetch = FetchType.LAZY)
     private Set<MedicalReport> medicalReport;
 }
