@@ -4,9 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { doctorsDataSelector, isFetchDoctorsSelector } from '../../store/doctors/selectors';
 import { addDoctor } from '../../store/doctors/actions';
 import { fetchDoctorsData } from '../../store/doctors/actions';
+import { fetchDoctorsDataOnClinic } from '../../store/doctors/saga';
 
-const DoctorAllAtOnce = () => {
+const DoctorAllAtOnce = ({ match }) => {
     const dispatch = useDispatch();
+    const clinicId = match.params.clinicId;
     const [email, setEmail] = useState();
     const [password1, setPassword1] = useState();
     const [password2, setPassword2] = useState();
@@ -50,7 +52,8 @@ const DoctorAllAtOnce = () => {
     };
     useEffect(() => {
        dispatch(
-            fetchDoctorsData({})
+            //fetchDoctorsData({})
+            fetchDoctorsDataOnClinic({clinicId})
         );
     }, []);
 
