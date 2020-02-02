@@ -10,10 +10,7 @@ import clinic.centersystem.dto.response.PatientResponse;
 import clinic.centersystem.model.*;
 import clinic.centersystem.repository.AuthorityRepository;
 import clinic.centersystem.repository.PatientRepository;
-import clinic.centersystem.service.intf.AuthorityService;
-import clinic.centersystem.service.intf.ClinicService;
-import clinic.centersystem.service.intf.DoctorService;
-import clinic.centersystem.service.intf.PatientService;
+import clinic.centersystem.service.intf.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +32,7 @@ public class PatientServiceImpl implements PatientService {
     private ClinicService clinicService;
 
     @Autowired
-    private DoctorService doctorService;
+    private MedicalRecordService medicalRecordService;
 
     @Override
     public Patient findById(Long id) {
@@ -53,14 +50,26 @@ public class PatientServiceImpl implements PatientService {
         Patient patient = PatientConverter.toCreatePatientFromRequest(registrationRequirement);
         List<Authority> auths = this.authorityService.findByName("ROLE_PATIENT");
         patient.setAuthorities(auths);
-        patient = this.patientRepository.save(patient);
+        patient = patientRepository.save(patient);
 
+        MedicalRecord medicalRecord = MedicalRecord.builder()
+                .description("Zdravstevni karton pacijenta")
+                .height(Float.valueOf(0))
+                .weight(Float.valueOf(0))
+                .bloodType("Nepoznato")
+                .patient(patient)
+                .build();
+
+        medicalRecord = medicalRecordService.save(medicalRecord);
+        patient.setMedicalRecord(medicalRecord);
+
+        patientRepository.save(patient);
         return patient;
     }
 
     @Override
     public Patient save(Patient patient) {
-        return this.patientRepository.save(patient);
+        return patientRepository.save(patient);
     }
 
     public PatientResponse patient(Long id) {
@@ -81,7 +90,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Set<PatientResponse> getPatientsByClinicId(Long clinicId) {
-        Clinic clinic = this.clinicService.findById(clinicId);
+        Clinic clinic = clinicService.findById(clinicId);
         Set<Patient> patients = clinic.getPatients();
         Set<PatientResponse> patientResponses = new HashSet<PatientResponse>();
         for (Patient patient : patients) {
