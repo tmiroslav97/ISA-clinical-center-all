@@ -2,8 +2,20 @@ import {
     FETCH_PATIENTS_DATA,
     FETCH_PATIENTS_DATA_BY_CLINIC_ID,
     PUT_PATIENTS_DATA,
-    PUT_IS_FETCH_PATIENTS
+    PUT_IS_FETCH_PATIENTS,
+    FETCH_PATIENT_BY_APP,
+    PUT_PATIENT
 } from './constants';
+
+export const fetchPatientByApp = payload => ({
+    type: FETCH_PATIENT_BY_APP,
+    payload
+});
+
+export const putPatient = payload => ({
+    type: PUT_PATIENT,
+    payload
+});
 
 export const fetchPatientsDataByClinicId = payload => ({
     type: FETCH_PATIENTS_DATA_BY_CLINIC_ID,

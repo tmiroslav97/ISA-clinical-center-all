@@ -184,14 +184,23 @@ VALUES ('2020-02-03 14:00:00', '2020-02-03 12:00:00', 'Third examination', 'N', 
 
 
 UPDATE personnel
-SET calendar_id =1
+SET calendar_id=1
 WHERE id = 4;
 
 UPDATE personnel
-SET calendar_id =2
+SET calendar_id=2
 WHERE id = 3;
 
-
-
 INSERT INTO medicine(code,description,name) VALUES("123asd","good medic", "brufen");
+
+INSERT INTO medical_record(blood_type, description, height, weight, patient_id) VALUES ('Nepoznato','Nema opisa', 0.0, 0.0, 2);
+INSERT INTO medical_record(blood_type, description, height, weight, patient_id) VALUES ('Nepoznato','Nema opisa', 0.0, 0.0, 6);
+
+UPDATE patient
+SET medical_record_id=1
+WHERE id=2;
+
+UPDATE patient
+SET medical_record_id=2
+WHERE id=6;
 

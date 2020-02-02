@@ -46,4 +46,9 @@ public class PatientController {
         return new ResponseEntity<>(this.patientService.getPatientsByClinicId(clinicId), HttpStatus.OK);
     }
 
+    @RequestMapping(method = GET, value = "/app/{typeId}")
+    public ResponseEntity<PatientResponse> getPatientByApp(@PathVariable Long typeId) {
+        return new ResponseEntity<>(this.patientService.findPatientByAppId(typeId), HttpStatus.OK);
+    }
+
 }

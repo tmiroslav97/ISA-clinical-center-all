@@ -26,4 +26,9 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     public MedicalRecord save(MedicalRecord medicalRecord) {
         return medicalRecordRepository.save(medicalRecord);
     }
+
+    @Override
+    public MedicalRecord findByAppId(Long id) {
+        return medicalRecordRepository.findByAppId(id);
+    }
 }

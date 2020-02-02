@@ -9,4 +9,6 @@ public interface MedicalRecordService {
     MedicalRecord findByPatientId(Long id);
 
     MedicalRecord save(MedicalRecord medicalRecord);
+
+    MedicalRecord findByAppId(Long id);
 }
