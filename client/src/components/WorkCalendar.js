@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { history } from '../index';
 import { Container, Spinner, Row, Col, Table, Button } from 'react-bootstrap';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
@@ -103,7 +104,7 @@ const WorkCalendar = () => {
                                     <tr>
                                         <th>Start appointment</th>
                                         <td colSpan="2" align="right">
-                                            <Button>Start</Button>
+                                            <Button variant="primary" onClick={() => { history.push('/medical-rec/'+event.typeId); }}>Start</Button>
                                         </td>
                                     </tr>
                                 }
