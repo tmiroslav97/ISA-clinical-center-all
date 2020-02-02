@@ -31,6 +31,9 @@ public class MedicalRecord {
     @Column(name = DbColumnConstants.WEIGHT)
     private Float weight;
 
+    @Column(name = DbColumnConstants.BLOODTYPE)
+    private String bloodType;
+
     @JsonBackReference
     @OneToOne( fetch = FetchType.LAZY)
     private Patient patient;

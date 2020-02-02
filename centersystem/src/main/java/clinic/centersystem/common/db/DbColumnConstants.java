@@ -64,4 +64,5 @@ public class DbColumnConstants {
     public static final String DOCTORNAME = "doctorName";
     public static final String HEIGHT = "height";
     public static final String WEIGHT = "weight";
+    public static final String BLOODTYPE = "bloodType";
 }
