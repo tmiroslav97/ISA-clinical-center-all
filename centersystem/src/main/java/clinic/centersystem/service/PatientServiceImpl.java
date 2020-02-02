@@ -89,11 +89,7 @@ public class PatientServiceImpl implements PatientService {
     public Set<PatientResponse> getPatientsByClinicId(Long clinicId) {
         Clinic clinic = clinicService.findById(clinicId);
         Set<Patient> patients = clinic.getPatients();
-        Set<PatientResponse> patientResponses = new HashSet<PatientResponse>();
-        for (Patient patient : patients) {
-            patientResponses.add(PatientConverter.toCreatePatientResponseFromPatient(patient));
-        }
-
+        Set<PatientResponse> patientResponses = patients.stream().map(PatientConverter::toCreatePatientResponseFromPatient).collect(Collectors.toSet());
         return patientResponses;
     }
 }
