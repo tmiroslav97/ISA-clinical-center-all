@@ -5,6 +5,7 @@ import {
     FETCH_MEDICAL_RECORD_BY_APP
 } from './constants';
 
+import MedicalRecordService from '../../services/MedicalRecordService';
 
 import {
     putIsFetchMedicalRecord,
@@ -15,7 +16,7 @@ import {
 export function* fetchMedicalRecord() {
     const { payload } = yield take(FETCH_MEDICAL_RECORD);
     yield put(putIsFetchMedicalRecord(false));
-    const { data } = yield call(MedDiagService.fetchMedicalRecord, payload);
+    const { data } = yield call(MedicalRecordService.fetchMedicalRecord, payload);
     yield put(putMedicalRecord(data));
     yield put(putIsFetchMedicalRecord(true));
 }
@@ -23,7 +24,7 @@ export function* fetchMedicalRecord() {
 export function* fetchMedicalRecordByApp() {
     const { payload } = yield take(FETCH_MEDICAL_RECORD_BY_APP);
     yield put(putIsFetchMedicalRecord(false));
-    const { data } = yield call(MedDiagService.fetchMedicalRecordByApp, payload);
+    const { data } = yield call(MedicalRecordService.fetchMedicalRecordByApp, payload);
     yield put(putMedicalRecord(data));
     yield put(putIsFetchMedicalRecord(true));
 }
