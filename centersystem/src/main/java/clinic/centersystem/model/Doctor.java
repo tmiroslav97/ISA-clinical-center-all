@@ -45,11 +45,11 @@ public class Doctor extends Personnel {
 
     @Builder(builderMethodName = "doctorBuilder")
     public Doctor(Long id, String email, String password, String firstName, String lastName,
-                  boolean enabled, RoleEnum role, boolean isFirstLog, Timestamp lastPasswordResetDate,
+                  boolean enabled, boolean isFirstLog, Timestamp lastPasswordResetDate,
                   List<Authority> authorities, Clinic clinic, Calendar calendar,
                   Set<AbsenceRequirement> absenceRequirements, Set<Appointment> appointments, Set<Surgery> surgeries, Float sumRating,
                   Integer cntRating, Integer startTime, Integer endTime) {
-        super(id, email, password, firstName, lastName, enabled, role, isFirstLog, lastPasswordResetDate, authorities, clinic, calendar, absenceRequirements);
+        super(id, email, password, firstName, lastName, enabled, isFirstLog, lastPasswordResetDate, authorities, clinic, calendar, absenceRequirements);
         this.sumRating = sumRating;
         this.cntRating = cntRating;
         this.startTime = startTime;

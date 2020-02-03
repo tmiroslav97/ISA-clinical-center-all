@@ -57,8 +57,10 @@ export function* fetchDoctorData() {
 //nurse sagas
 export function* fetchNurseData() {
     const { payload } = yield take(FETCH_NURSE_DATA);
+    yield put(putIsFetchUserData(false));
     const { data } = yield call(NurseService.fetchNurseData, payload);
     yield put(putUserData(data));
+    yield put(putIsFetchUserData(true));
 }
 
 //clinic center admin sagas
@@ -96,20 +98,20 @@ export function* login() {
     yield put(putUserData(data));
     yield put(putUserId(data.id));
     yield put(putUserToken(data.token));
-    if (data.role === 'ROLE_PATIENT') {
+    if (data.roles.includes('ROLE_PATIENT')) {
         history.push('/pat');
-    } else if (data.role === 'ROLE_CCADMIN') {
+    } else if (data.roles.includes('ROLE_CCADMIN')) {
         if (data.firstLog) {
             history.push('/change-pass');
         } else {
             history.push('/ccadmin');
         }
 
-    } else if (data.role === 'ROLE_DOCTOR') {
+    } else if (data.roles.includes('ROLE_DOCTOR')) {
         history.push('/doc');
-    } else if (data.role === 'ROLE_NURSE') {
+    } else if (data.roles.includes('ROLE_NURSE')) {
         history.push('/nurse-page');
-    } else if (data.role === 'ROLE_ADMINC') {
+    } else if (data.roles.includes('ROLE_ADMINC')) {
         history.push('/adminc');
     } else {
         alert('Nije odobren pristup sistemu!');
@@ -122,15 +124,15 @@ export function* changePassword() {
     yield put(putUserData(data));
     yield put(putUserToken(data.token));
 
-    if (data.role === 'ROLE_PATIENT') {
+    if (data.roles.includes('ROLE_PATIENT')) {
         history.push('/pat');
-    } else if (data.role === 'ROLE_CCADMIN') {
+    } else if (data.roles.includes('ROLE_CCADMIN')) {
         history.push('/ccadmin');
-    } else if (data.role === 'ROLE_DOCTOR') {
+    } else if (data.roles.includes('ROLE_DOCTOR')) {
         history.push('/doc');
-    } else if (data.role === 'ROLE_NURSE') {
+    } else if (data.roles.includes('ROLE_NURSE')) {
         history.push('/nurse-page');
-    } else if (data.role === 'ROLE_ADMINC') {
+    } else if (data.roles.includes('ROLE_ADMINC')) {
         history.push('/adminc');
     } else {
         alert('Nije odobren pristup sistemu!');

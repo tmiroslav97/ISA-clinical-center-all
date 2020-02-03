@@ -12,9 +12,9 @@ const initialState = {
         id: window.localStorage.getItem('userID'),
         firstName: '',
         lastName: '',
-        email: window.localStorage.getItem('email'),
+        email: '',
         firstLog: true,
-        role: localStorage.getItem('role')
+        roles: []
     },
     token: window.localStorage.getItem('token'),
     id: window.localStorage.getItem('userID'),

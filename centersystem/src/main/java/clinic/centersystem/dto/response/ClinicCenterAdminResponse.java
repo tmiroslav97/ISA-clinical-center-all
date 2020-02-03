@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
+
 @Builder
 @Data
 @AllArgsConstructor
@@ -14,7 +16,7 @@ public class ClinicCenterAdminResponse {
 
     private boolean isNotFirstLogin;
 
-    private String role;
+    private List<String> roles;
 
     private boolean predefined;
 }
