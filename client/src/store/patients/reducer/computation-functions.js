@@ -11,3 +11,10 @@ export function putIsFetchPatients(state, payload) {
         isFetchPatients: payload
     };
 }
+
+export function putPatient(state, payload) {
+    return {
+        ...state,
+        patient: payload
+    };
+}

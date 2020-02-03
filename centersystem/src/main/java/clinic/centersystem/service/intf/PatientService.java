@@ -23,4 +23,6 @@ public interface PatientService {
     Set<PatientResponse> getPatientsByClinicId(Long clinicId);
 
     PatientResponse patient(Long id);
+
+    PatientResponse findPatientByAppId(Long id);
 }

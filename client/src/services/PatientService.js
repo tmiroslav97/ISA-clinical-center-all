@@ -9,7 +9,8 @@ const FINALPOINTS = {
     SEARCH_DOCTORS_DATA_PATIENT: '/doctor/search-doctors',
     SEARCH_CLINICS_DATA_PATIENT: '/clinic/search-clinics',
     FETCH_PATIENTS: '/pat/all',
-    FETCH_PATIENTS_BY_CLINIC_ID: '/pat/all/%s'
+    FETCH_PATIENTS_BY_CLINIC_ID: '/pat/all/%s',
+    FETCH_PATIENT_BY_APP: 'pat/app/%s',
 };
 
 class PatientService extends HttpClient {
@@ -94,6 +95,17 @@ class PatientService extends HttpClient {
         }
     };
 
+    fetchPatientByApp = async payload => {
+        try {
+            const { data } = await this.getApiClient().get(
+                format(FINALPOINTS.FETCH_PATIENT_BY_APP,payload.typeId)
+            );
+
+            return { data };
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    };
 
 }
 

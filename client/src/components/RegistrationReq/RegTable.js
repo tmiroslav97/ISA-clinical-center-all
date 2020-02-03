@@ -32,7 +32,7 @@ const RegTable = () => {
 
     const handleClose = () => setShow(false);
     const handleShow = (regReqId) => {
-        setShow(true)
+        setShow(true);
         setReqId(regReqId);
     };
 
@@ -46,7 +46,7 @@ const RegTable = () => {
 
     return (
         <div>
-            <Modal show={show} onHide={handleClose} animation={false}>
+            <Modal show={show} onHide={handleClose} animation={true}>
                 <Modal.Header closeButton>
                     <Modal.Title>Rejected reason:</Modal.Title>
                 </Modal.Header>
@@ -58,7 +58,7 @@ const RegTable = () => {
                     />
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" onClick={() => { handleReject(); handleClose() }}>
+                    <Button variant="primary" onClick={() => { handleReject(); handleClose(); }}>
                         Send
                 </Button>
                 </Modal.Footer>

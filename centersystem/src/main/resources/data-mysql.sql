@@ -127,8 +127,6 @@ VALUES (1, 2);
 INSERT INTO clinic_patients(clinic_id, patients_id)
 VALUES (1, 6);
 
-
-
 INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (1,FALSE ,'SUR','For heart',1,1);
 INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (2,FALSE ,'SUR','For head',2,1);
 INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (3,FALSE ,'SUR','For brain',3,1);
@@ -152,7 +150,11 @@ INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id,patie
 INSERT INTO appointment_type(id, type) VALUES (1,'General examination');
 INSERT INTO appointment_type(id, type) VALUES (2,'Heart examination');
 
+INSERT INTO appointment(app_state, date_time, discount, price, clinic_id, doctor_id, patient_id, room_id, type_id) VALUES(2, '2020-02-01 09:00:00', 0,0,1,3,2,1,1);
 INSERT INTO appointment(app_state, date_time, discount, price, clinic_id, doctor_id, patient_id, room_id, type_id) VALUES(2, '2020-02-02 11:00:00', 0,0,1,3,2,1,1);
+INSERT INTO appointment(app_state, date_time, discount, price, clinic_id, doctor_id, patient_id, room_id, type_id) VALUES(2, '2020-02-03 12:00:00', 0,0,1,3,2,1,1);
+
+
 
 INSERT INTO prescription(id, is_validate, nurse_id)
 VALUES (1, FALSE, NULL);
@@ -172,24 +174,33 @@ INSERT INTO calendar(id, personnel_id)
 VALUES (2, 3);
 
 INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type,typeid)
-VALUES ('2020-02-02 11:00:00', '2020-02-02 09:00:00', 'First examination', 'N', 3, 2,'APP',1);
+VALUES ('2020-02-01 11:00:00', '2020-02-01 09:00:00', 'First examination', 'N', 3, 2,'APP',1);
 
-INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type)
-VALUES ('2020-02-02 12:00:00', '2020-02-02 11:00:00', 'Second examination', 'N', 4, 2,'APP');
+INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type,typeid)
+VALUES ('2020-02-02 12:00:00', '2020-02-02 11:00:00', 'Second examination', 'N', 4, 2,'APP',2);
 
-INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type)
-VALUES ('2020-02-02 14:00:00', '2020-02-02 12:00:00', 'Third examination', 'N', 5, 2,'APP');
+INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type,typeid)
+VALUES ('2020-02-03 14:00:00', '2020-02-03 12:00:00', 'Third examination', 'N', 5, 2,'APP',3);
 
 
 UPDATE personnel
-SET calendar_id =1
+SET calendar_id=1
 WHERE id = 4;
 
 UPDATE personnel
-SET calendar_id =2
+SET calendar_id=2
 WHERE id = 3;
 
-
-
 INSERT INTO medicine(code,description,name) VALUES("123asd","good medic", "brufen");
+
+INSERT INTO medical_record(blood_type, description, height, weight, patient_id) VALUES ('Nepoznato','Nema opisa', 0.0, 0.0, 2);
+INSERT INTO medical_record(blood_type, description, height, weight, patient_id) VALUES ('Nepoznato','Nema opisa', 0.0, 0.0, 6);
+
+UPDATE patient
+SET medical_record_id=1
+WHERE id=2;
+
+UPDATE patient
+SET medical_record_id=2
+WHERE id=6;
 
