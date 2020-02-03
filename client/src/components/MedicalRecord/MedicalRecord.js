@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Spinner, Table, Button } from 'react-bootstrap';
+import { Container, Row, Col, Spinner, Table, Button, Modal, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { isFetchMedicalRecordSelector, medicalRecordSelector } from '../../store/medical_record/selectors';
-import { fetchMedicalRecordByApp } from '../../store/medical_record/actions';
+import { fetchMedicalRecordByApp, editMedicalRecord } from '../../store/medical_record/actions';
 import { fetchPatientByApp } from '../../store/patients/actions';
 import { isFetchPatientsSelector, patientSelector } from '../../store/patients/selectors';
 
@@ -16,6 +16,11 @@ const MedicalRecord = ({ match }) => {
     const typeId = match.params.typeId;
     const patient = useSelector(patientSelector);
     const isFetchPatient = useSelector(isFetchPatientsSelector);
+    const [show, setShow] = useState(false);
+    const [bloodType, setBloodType] = useState('');
+    const [weight, setWeight] = useState('');
+    const [height, setHeight] = useState('');
+    const [description, setDescription] = useState('');
 
     useEffect(() => {
         if (typeId != null) {
@@ -34,7 +39,24 @@ const MedicalRecord = ({ match }) => {
     }, [typeId]);
 
     const handleEditMedicalRecord = () => {
+        dispatch(
+            editMedicalRecord({
+                id: medicalRecord.id,
+                bloodType,
+                weight,
+                height,
+                description
+            })
+        );
+    };
 
+    const handleClose = () => setShow(false);
+    const handleShow = () => {
+        setBloodType(medicalRecord.bloodType);
+        setWeight(medicalRecord.weight);
+        setHeight(medicalRecord.height);
+        setDescription(medicalRecord.description);
+        setShow(true);
     };
 
     if (!isFetchMedicalRecord || !isFetchPatient) {
@@ -47,6 +69,46 @@ const MedicalRecord = ({ match }) => {
 
     return (
         <Container>
+            <Modal show={show} onHide={handleClose} animation={true}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Edit patient medical record</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group>
+                            <Form.Label>Blood type:</Form.Label>
+                            <Form.Control type="text" id="txtBloodType" defaultValue={bloodType}
+                                onChange={({ currentTarget }) => {
+                                    setBloodType(currentTarget.value);
+                                }}
+                            />
+                            <Form.Label>Weight:</Form.Label>
+                            <Form.Control type="number" min="0" step="0.01" id="txtWeight" defaultValue={weight}
+                                onChange={({ currentTarget }) => {
+                                    setWeight(currentTarget.value);
+                                }}
+                            />
+                            <Form.Label>Height:</Form.Label>
+                            <Form.Control type="number" min="0" step="0.01" id="txtHeight" defaultValue={height}
+                                onChange={({ currentTarget }) => {
+                                    setHeight(currentTarget.value);
+                                }}
+                            />
+                            <Form.Label>Description:</Form.Label>
+                            <Form.Control as="textarea" id="txtDescription" rows="4" defaultValue={description}
+                                onChange={({ currentTarget }) => {
+                                    setDescription(currentTarget.value);
+                                }}
+                            />
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="primary" onClick={() => { handleEditMedicalRecord(); handleClose() }}>
+                        Edit
+                    </Button>
+                </Modal.Footer>
+            </Modal>
             <Row>
                 <Col md={{ span: 10, offset: 1 }} xs={12}>
                     <h3 className="border-bottom">Patient information</h3>
@@ -92,6 +154,15 @@ const MedicalRecord = ({ match }) => {
                             <tr>
                                 <th>Height</th>
                                 <td align="right">{medicalRecord.height}</td>
+                            </tr>
+                            <tr>
+                                <th>Description</th>
+                                <td align="right">{medicalRecord.description}</td>
+                            </tr>
+                            <tr>
+                                <td colSpan="2" align="right">
+                                    <Button variant="primary" onClick={() => { handleShow(); }}>Edit</Button>
+                                </td>
                             </tr>
                         </tbody>
                     </Table>

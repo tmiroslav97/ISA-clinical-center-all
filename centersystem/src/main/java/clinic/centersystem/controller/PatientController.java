@@ -51,4 +51,6 @@ public class PatientController {
         return new ResponseEntity<>(this.patientService.findPatientByAppId(typeId), HttpStatus.OK);
     }
 
+
+
 }
