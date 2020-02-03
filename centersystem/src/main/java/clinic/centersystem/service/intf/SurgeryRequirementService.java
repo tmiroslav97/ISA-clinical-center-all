@@ -18,4 +18,6 @@ public interface SurgeryRequirementService {
 
     void deleteById(Long id);
 
+    void autoReserveRoomForSurgery();
+
 }

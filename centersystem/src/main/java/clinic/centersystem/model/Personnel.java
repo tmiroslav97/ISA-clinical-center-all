@@ -34,14 +34,14 @@ public class Personnel extends User {
     }
 
     @JsonBackReference
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     private Calendar calendar;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Clinic clinic;
 
     @JsonBackReference
-    @OneToMany(mappedBy = "personnel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "personnel", fetch = FetchType.LAZY)
     private Set<AbsenceRequirement> absenceRequirements;
 
 

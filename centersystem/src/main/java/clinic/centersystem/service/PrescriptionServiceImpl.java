@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class PrescriptionServiceImpl implements PrescriptionService {
@@ -27,5 +28,10 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     @Override
     public Prescription save(Prescription prescription) {
         return this.prescriptionRepository.save(prescription);
+    }
+
+    @Override
+    public List<Prescription> saveAll(List<Prescription> prescriptions) {
+        return prescriptionRepository.saveAll(prescriptions);
     }
 }

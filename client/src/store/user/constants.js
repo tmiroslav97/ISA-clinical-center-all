@@ -4,6 +4,7 @@ export const REGISTRATION = 'registration';
 export const PUT_USER_DATA = 'put_user_data';
 export const PUT_USER_TOKEN = 'put_user_token';
 export const CHANGE_PASSWORD = 'change_password';
+export const PUT_USER_ID = 'put_user_id';
 export const SIGN_OUT = 'sign_out';
 export const PUT_IS_FETCH_USER_DATA = 'put_is_fetch_user_data';
 //clinic center admin constants

@@ -9,12 +9,20 @@ import clinic.centersystem.repository.SurgeryRequirementRepository;
 import clinic.centersystem.service.intf.*;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.joda.time.LocalDate;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,6 +55,9 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
 
     @Autowired
     private EmailService emailService;
+
+    @Autowired
+    private ClinicService clinicService;
 
     @Override
     public SurgeryRequirement findById(Long id) {
@@ -177,6 +188,64 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
     public void deleteById(Long id) {
         surgeryRequirementRepository.deleteById(id);
         return;
+    }
+
+    @Override
+    public void autoReserveRoomForSurgery() {
+        List<SurgeryRequirement> surgeryRequirements = surgeryRequirementRepository.findAll();
+        for (SurgeryRequirement surgeryRequirement : surgeryRequirements) {
+            DateTime pickedDate = surgeryRequirement.getDate();
+
+            List<Room> rooms = roomService.findByClinicId(surgeryRequirement.getClinic().getId());
+            for (Room room : rooms) {
+                DateTime dt = new DateTime(pickedDate, DateTimeZone.UTC);
+                DateTime now = new DateTime(LocalDate.now().toString(), DateTimeZone.UTC);
+                if (dt.isBefore(now) || dt.equals(now)) {
+                    dt = now.plusDays(1);
+                }
+                boolean flag = true;
+                boolean roomRes = false;
+                Integer firstFree = 7;
+                while (flag) {
+                    List<Integer> termins = roomCalendarService.findByRoomAndDate(room.getId(), dt);
+                    for (int i = 7; i <= 16; i += 3) {
+                        if (!termins.contains(i)) {
+                            firstFree = i;
+                            flag = false;
+                            break;
+                        }
+                    }
+                    if (flag) {
+                        dt = dt.plusDays(1);
+                        continue;
+                    }
+
+                    Integer pickedTermStart = firstFree;
+                    Integer pickedTermEnd = firstFree + 3;
+                    DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd");
+
+                    SurgeryReservationReqDTO surgeryReservationReqDTO = SurgeryReservationReqDTO.builder()
+                            .pickedRoom(room.getId())
+                            .pickedTerm(dtf.print(dt) + " " + pickedTermStart + "-" + pickedTermEnd)
+                            .chosenDoc(new ArrayList<Long>(Arrays.asList(surgeryRequirement.getDoctorId())))
+                            .pickedSurReq(SurgeryRequirementConverter.fromSurReqToSurReqDTO(surgeryRequirement))
+                            .build();
+                    int ans = this.reserveRoomForSurgery(surgeryReservationReqDTO);
+
+                    if (ans == 3) {
+                        roomRes = true;
+                    } else {
+                        flag = true;
+                        dt = dt.plusDays(1);
+                    }
+                }
+
+                if (roomRes) {
+                    break;
+                }
+            }
+        }
+
     }
 
 

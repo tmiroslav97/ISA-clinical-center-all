@@ -29,10 +29,6 @@ const SurReqDoctors = () => {
         );
     }, [clinicId]);
 
-    const removeChosenDoc = (remId) => {
-        setChosenDoc(chosenDoc.filter(id => id !== remId));
-    };
-
     const handleFinishReservation = () => {
         dispatch(
             fetchFinishReservation({
@@ -82,24 +78,23 @@ const SurReqDoctors = () => {
             }
             <Row>
                 <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <h2>Pick doctor</h2>
+                    <h2>Pick doctors</h2>
                 </Col>
             </Row>
             <Row>
                 <Col md={{ span: 3, offset: 1 }} xs={12}>
                     <Form>
                         <Form.Group as={Col}>
-                            <Form.Control as="select" defaultValue={"none"} onChange={({ currentTarget }) => {
-                                let flag = chosenDoc.filter(id => id === currentTarget.value)[0];
-                                if (flag == undefined && currentTarget.value != "none") {
-                                    setChosenDoc([
-                                        ...chosenDoc,
-                                        currentTarget.value
-                                    ]);
+                            <Form.Control as="select" multiple onChange={({ currentTarget }) => {
+                                let options = currentTarget.options;
+                                let vals = [];
+                                for (let i = 0; i < options.length; i++) {
+                                    if (options[i].selected) {
+                                        vals.push(options[i].value);
+                                    }
                                 }
-                            }} >
-                                <option value="none">Please choose doctor</option>
-                                {
+                                setChosenDoc(vals);
+                            }} >                                {
                                     doctors.map((doctor, index) => {
                                         if (pickedSurReq != null) {
                                             if (pickedSurReq.doctorId != doctor.id) {
@@ -116,39 +111,6 @@ const SurReqDoctors = () => {
                     </Form>
                 </Col>
             </Row>
-            <Row>
-                <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <h2>Picked Doctors</h2>
-                </Col>
-            </Row>
-            <Row>
-                <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <Table responsive>
-                        <thead>
-                            <tr>
-                                <th>First name</th>
-                                <th>Last name</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                chosenDoc.map((id, index) => {
-                                    const findDoc = doctors.filter(doc => doc.id == id)[0];
-                                    return (
-                                        <tr key={index}>
-                                            <td>{findDoc.firstName}</td>
-                                            <td>{findDoc.lastName}</td>
-                                            <td><Button onClick={(e) => { removeChosenDoc(id) }}>Remove</Button></td>
-                                        </tr>
-                                    );
-                                })
-                            }
-                        </tbody>
-                    </Table>
-                </Col>
-            </Row>
-
         </Container >
     );
 }

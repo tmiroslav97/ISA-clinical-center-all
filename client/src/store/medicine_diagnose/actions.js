@@ -8,8 +8,20 @@ import {
     FETCH_DIAGNOSE_DATA,
     FETCH_MEDICINE_DATA,
     PUT_DIAGNOSE_PAGE_COUNT,
-    PUT_MEDICINE_PAGE_COUNT
+    PUT_MEDICINE_PAGE_COUNT,
+    FETCH_DIAGNOSES_ALL,
+    FETCH_MEDICINES_ALL
 } from './constants';
+
+export const fetchDiagnosesAll = payload => ({
+    type: FETCH_DIAGNOSES_ALL,
+    payload
+});
+
+export const fetchMedicinesAll = payload => ({
+    type: FETCH_MEDICINES_ALL,
+    payload
+});
 
 export const putDiagnosePageCount = payload => ({
     type: PUT_DIAGNOSE_PAGE_COUNT,

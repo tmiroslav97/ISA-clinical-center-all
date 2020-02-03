@@ -21,24 +21,24 @@ public class AbsenceRequirement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = DbColumnConstants.TYPE, unique = false, nullable = false)
+    @Column(name = DbColumnConstants.TYPE,nullable = false)
     private String type;
 
-    @Column(name = DbColumnConstants.STATUS, unique = false, nullable = false)
+    @Column(name = DbColumnConstants.STATUS, nullable = false)
     private String status;
 
-    @Column(name = DbColumnConstants.STARTDATE, unique = false, nullable = false)
+    @Column(name = DbColumnConstants.STARTDATE,nullable = false)
     private Long startDate;
 
-    @Column(name = DbColumnConstants.ENDDATE, unique = false, nullable = false)
+    @Column(name = DbColumnConstants.ENDDATE, nullable = false)
     private Long endDate;
 
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Personnel personnel;
 
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Clinic clinic;
 
 }

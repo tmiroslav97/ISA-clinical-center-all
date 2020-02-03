@@ -73,5 +73,7 @@ public class Clinic {
     @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
     private Set<SurgeryRequirement> surReqs = new HashSet<>();
 
+    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
+    private Set<Prescription> prescriptions = new HashSet<>();
 
 }

@@ -1,21 +1,23 @@
 import React, { useEffect } from 'react';
 import { history } from '../index';
 import { useDispatch, useSelector } from 'react-redux';
-import { Spinner, Card, Button, Col, Row, Container } from 'react-bootstrap';
+import { Card, Button, Col, Row, Container } from 'react-bootstrap';
 import { fetchCCAdminData } from '../store/user/actions';
-import { userDataSelector } from '../store/user/selectors';
+import { userIdSelector } from '../store/user/selectors';
 
 
-function ClinicCenterAdminProfile({ match }) {
+const ClinicCenterAdminProfile = () => {
     const dispatch = useDispatch();
-    const ccAdminId = match.params.id;
-    const ccAdminData = useSelector(userDataSelector);
+    const ccAdminId = useSelector(userIdSelector);
+
     useEffect(() => {
-        dispatch(
-            fetchCCAdminData({
-                ccAdminId
-            })
-        );
+        if (ccAdminId != null) {
+            dispatch(
+                fetchCCAdminData({
+                    ccAdminId
+                })
+            );
+        }
     }, [ccAdminId]);
 
 
@@ -23,7 +25,7 @@ function ClinicCenterAdminProfile({ match }) {
         <Container>
             <Row>
                 <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <h2 className="border-bottom">Doctor admin profile</h2>
+                    <h2 className="border-bottom">Clinic center admin profile</h2>
                 </Col>
             </Row>
             <Row>

@@ -20,7 +20,7 @@ import java.util.List;
 @Table(name = DbTableConstants.CLINICADMIN)
 public class ClinicAdmin extends User {
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Clinic clinic;
 
     @Builder(builderMethodName = "clinicAdminBuilder")
