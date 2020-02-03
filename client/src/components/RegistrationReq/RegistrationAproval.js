@@ -11,7 +11,6 @@ const RegistrationAproval = () => {
     const regReqsPageCnt = useSelector(pageCntSelector);
     const selpageCnt = useSelector(pageSelCntSelector);
     const [pageCnt, setPageCnt] = useState(selpageCnt);
-    console.log(pageCnt);
 
     useEffect(() => {
         dispatch(

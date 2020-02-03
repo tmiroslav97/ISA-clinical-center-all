@@ -37,16 +37,8 @@ class CCAdminService extends HttpClient {
         }
     };
 
-    approveRegReq = async payload => {
-        try {
-            const { data } = await this.getApiClient().post(
-                format(FINALPOINTS.APPROVE_REG_REQ, payload.regReqId)
-            );
-
-            return { data };
-        } catch (error) {
-            console.log(error.response.data);
-        }
+    approveRegReq = payload => {
+        return this.getApiClient().post(format(FINALPOINTS.APPROVE_REG_REQ, payload.regReqId));
     };
 
     rejectRegReq = async payload => {
