@@ -23,7 +23,7 @@ import java.util.Set;
 public class Nurse extends Personnel {
 
     @JsonBackReference
-    @OneToMany(mappedBy = "nurse", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "nurse", fetch = FetchType.LAZY)
     private Set<Prescription> prescriptions = new HashSet<Prescription>();
 
     @Builder(builderMethodName = "nurseBuilder")
