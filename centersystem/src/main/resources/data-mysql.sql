@@ -191,7 +191,11 @@ UPDATE personnel
 SET calendar_id=2
 WHERE id = 3;
 
-INSERT INTO medicine(code,description,name) VALUES("123asd","good medic", "brufen");
+INSERT INTO medicine(code,description,name) VALUES('12545','For head', 'Brufen');
+INSERT INTO medicine(code,description,name) VALUES('4315','For head', 'Paracetamol');
+INSERT INTO medicine(code,description,name) VALUES('3h46','For head', 'Cafetin');
+INSERT INTO diagnose(code,description,name) VALUES('s5sg4','Strong pain in head', 'Migren');
+INSERT INTO diagnose(code,description,name) VALUES('d3y5','Pain in head', 'Head ache    ');
 
 INSERT INTO medical_record(blood_type, description, height, weight, patient_id) VALUES ('Nepoznato','Nema opisa', 0.0, 0.0, 2);
 INSERT INTO medical_record(blood_type, description, height, weight, patient_id) VALUES ('Nepoznato','Nema opisa', 0.0, 0.0, 6);

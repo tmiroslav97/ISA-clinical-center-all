@@ -10,8 +10,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping(value = "/med-rec", produces = MediaType.APPLICATION_JSON_VALUE)
 public class MedicalRecordController {

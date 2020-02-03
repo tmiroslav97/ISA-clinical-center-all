@@ -1,13 +1,13 @@
-export function putMedicalRecord(state, payload) {
+export function putMedicalReport(state, payload) {
     return {
         ...state,
-        medicalRecord: payload
+        medicalReport: payload
     };
 }
 
-export function putIsFetchMedicalRecord(state, payload) {
+export function putIsFetchMedicalReport(state, payload) {
     return {
         ...state,
-        isFetchMedicalRecord: payload
+        isFetchMedicalReport: payload
     };
 }

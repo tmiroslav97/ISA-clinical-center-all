@@ -8,3 +8,5 @@ export const FETCH_DIAGNOSE_DATA = 'fetch_diagnose_data';
 export const PUT_IS_FETCH_DIAGNOSE = 'put_is_fetch_diagnose';
 export const PUT_MEDICINE_PAGE_COUNT = 'put_medicine_page_count';
 export const PUT_DIAGNOSE_PAGE_COUNT = 'put_diagnose_page_count';
+export const FETCH_MEDICINES_ALL = 'fetch_medicines_all';
+export const FETCH_DIAGNOSES_ALL = 'fetch_diagnoses_all';

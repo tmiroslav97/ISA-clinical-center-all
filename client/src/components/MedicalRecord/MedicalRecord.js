@@ -5,6 +5,7 @@ import { isFetchMedicalRecordSelector, medicalRecordSelector } from '../../store
 import { fetchMedicalRecordByApp, editMedicalRecord } from '../../store/medical_record/actions';
 import { fetchPatientByApp } from '../../store/patients/actions';
 import { isFetchPatientsSelector, patientSelector } from '../../store/patients/selectors';
+import MedicalReport from '../MedicalReport/MedicalReport';
 
 
 
@@ -21,6 +22,7 @@ const MedicalRecord = ({ match }) => {
     const [weight, setWeight] = useState('');
     const [height, setHeight] = useState('');
     const [description, setDescription] = useState('');
+    const [mrDescription, setMrDescription] = useState('');
 
     useEffect(() => {
         if (typeId != null) {
@@ -168,7 +170,7 @@ const MedicalRecord = ({ match }) => {
                     </Table>
                 </Col>
             </Row>
-
+            <MedicalReport typeId={typeId} medRecId={medicalRecord.id}/>
         </Container>
     );
 }
