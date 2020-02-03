@@ -8,5 +8,5 @@ public interface MedicalReportService {
 
     MedicalReport findById(Long id);
 
-    String addMedicalReport(MedicalRecordRequestDTO medicalRecordRequestDTO);
+    String addMedicalReport(MedicalReportRequestDTO medicalReportRequestDTO);
 }

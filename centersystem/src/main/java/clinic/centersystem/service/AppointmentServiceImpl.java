@@ -16,4 +16,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     public Appointment findById(Long id) {
         return appointmentRepository.findById(id).orElseGet(null);
     }
+
+    @Override
+    public Appointment save(Appointment appointment) {
+        return appointmentRepository.save(appointment);
+    }
 }

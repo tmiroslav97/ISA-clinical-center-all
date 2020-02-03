@@ -14,6 +14,7 @@ import java.util.Set;
 public class MedicalReportRequestDTO {
     private Long appId;
     private Long medRecId;
+    private String description;
     private Set<Long> medicines;
     private Long diagnose;
 }

@@ -32,7 +32,8 @@ const MedicalReport = ({ typeId, medRecId }) => {
                 appId:typeId,
                 medRecId,
                 medicines:medicinesSel,
-                diagnose
+                diagnose,
+                description
             })
         );
     };
@@ -70,7 +71,6 @@ const MedicalReport = ({ typeId, medRecId }) => {
                                 <Form.Label>Diagnoses:</Form.Label>
                                 <Form.Control as="select" onChange={({ currentTarget }) => {
                                     setDiagnose(currentTarget.value);
-                                    console.log(diagnose);
                                 }} >
 
                                     {

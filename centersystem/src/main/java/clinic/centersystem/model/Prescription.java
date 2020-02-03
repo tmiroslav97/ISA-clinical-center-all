@@ -24,15 +24,19 @@ public class Prescription {
     private boolean isValidate = false;
 
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Nurse nurse;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Medicine medicine;
 
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     private MedicalReport medicalReport;
+
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Clinic clinic;
 
 }

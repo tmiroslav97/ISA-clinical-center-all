@@ -5,4 +5,6 @@ import clinic.centersystem.model.Appointment;
 public interface AppointmentService {
 
     Appointment findById(Long id);
+
+    Appointment save(Appointment appointment);
 }

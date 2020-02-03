@@ -13,6 +13,7 @@ import roomsReducer from './rooms/reducer';
 import surReqReducer from './sur-req/reducer';
 import msgReducer from './common/reducer';
 import medicalRecordReducer from './medical_record/reducer';
+import medicalReportReducer from './medical_report/reducer';
 
 
 const rootReducer = combineReducers({
@@ -29,7 +30,8 @@ const rootReducer = combineReducers({
     roomsReducer,
     surReqReducer,
     msgReducer,
-    medicalRecordReducer
+    medicalRecordReducer,
+    medicalReportReducer
 });
 
 

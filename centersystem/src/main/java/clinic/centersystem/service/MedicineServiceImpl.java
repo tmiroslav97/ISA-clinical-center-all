@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class MedicineServiceImpl implements MedicineService {
@@ -44,5 +45,10 @@ public class MedicineServiceImpl implements MedicineService {
     @Override
     public Medicine save(Medicine medicine) {
         return medicineRepository.save(medicine);
+    }
+
+    @Override
+    public Set<Medicine> findAllByIdIn(Set<Long> medicines) {
+        return medicineRepository.findAllByIdIn(medicines);
     }
 }

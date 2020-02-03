@@ -1,6 +1,7 @@
 package clinic.centersystem.controller;
 
 import clinic.centersystem.dto.request.MedicalRecordRequestDTO;
+import clinic.centersystem.dto.request.MedicalReportRequestDTO;
 import clinic.centersystem.model.MedicalRecord;
 import clinic.centersystem.service.MedicalReportServiceImpl;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,7 @@ public class MedicalReportController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseEntity<String> addMedicalReport(@RequestBody MedicalRecordRequestDTO medicalRecordRequestDTO) {
-        return new ResponseEntity<>(medicalReportService.addMedicalReport(medicalRecordRequestDTO), HttpStatus.OK);
+    public ResponseEntity<String> addMedicalReport(@RequestBody MedicalReportRequestDTO medicalReportRequestDTO) {
+        return new ResponseEntity<>(medicalReportService.addMedicalReport(medicalReportRequestDTO), HttpStatus.OK);
     }
 }

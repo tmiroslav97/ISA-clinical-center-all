@@ -3,6 +3,7 @@ package clinic.centersystem.model;
 import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -35,7 +36,7 @@ public class RoomCalendar {
     @Column(name = DbColumnConstants.TERMIN, nullable = false)
     private Integer termin;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private Room room;
 }
