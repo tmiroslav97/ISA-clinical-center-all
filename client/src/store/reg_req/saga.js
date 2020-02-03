@@ -12,15 +12,20 @@ import CCAdminService from '../../services/CCAdminService';
 import {
     putRegReqsData,
     putIsFetchRegReqs,
-    putRegReqsCnt
 } from './actions';
+
+import {
+    putPageCnt,
+    putSelPageCnt
+} from '../common/actions';
 
 
 export function* fetchRegReqsData() {
     const { payload } = yield take(FETCH_REG_REQS_DATA);
     yield put(putIsFetchRegReqs(false));
     const { reqData } = yield call(CCAdminService.fetchRegReqsData, payload);
-    yield put(putRegReqsCnt(reqData.regReqsPageCnt));
+    yield put(putSelPageCnt(payload.pageCnt));
+    yield put(putPageCnt(reqData.regReqsPageCnt));
     yield put(putRegReqsData(reqData.reqs));
     yield put(putIsFetchRegReqs(true));
 }
@@ -31,7 +36,8 @@ export function* approveRegReq() {
     const { data } = yield call(CCAdminService.approveRegReq, payload);
     yield put(putIsFetchRegReqs(false));
     const { reqData } = yield call(CCAdminService.fetchRegReqsData, { pageCnt: 0 });
-    yield put(putRegReqsCnt(reqData.regReqsPageCnt));
+    yield put(putSelPageCnt(0));
+    yield put(putPageCnt(reqData.regReqsPageCnt));
     yield put(putRegReqsData(reqData.reqs));
     yield put(putIsFetchRegReqs(true));
 }
@@ -42,7 +48,8 @@ export function* rejectRegReq() {
     const { data } = yield call(CCAdminService.rejectRegReq, payload);
     yield put(putIsFetchRegReqs(false));
     const { reqData } = yield call(CCAdminService.fetchRegReqsData, { pageCnt: 0 });
-    yield put(putRegReqsCnt(reqData.regReqsPageCnt));
+    yield put(putSelPageCnt(0));
+    yield put(putPageCnt(reqData.regReqsPageCnt));
     yield put(putRegReqsData(reqData.reqs));
     yield put(putIsFetchRegReqs(true));
 }
