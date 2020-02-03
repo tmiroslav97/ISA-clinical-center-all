@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,6 +48,9 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
 
     @Autowired
     private EmailService emailService;
+
+    @Autowired
+    private ClinicService clinicService;
 
     @Override
     public SurgeryRequirement findById(Long id) {
@@ -177,6 +181,45 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
     public void deleteById(Long id) {
         surgeryRequirementRepository.deleteById(id);
         return;
+    }
+
+    @Override
+    public void autoReserveRoomForSurgery() {
+        List<SurgeryRequirement> surgeryRequirements = surgeryRequirementRepository.findAll();
+        for (SurgeryRequirement surgeryRequirement : surgeryRequirements) {
+            DateTime pickedDate = surgeryRequirement.getDate();
+            Integer pickedTermStart = surgeryRequirement.getTermin();
+            Integer pickedTermEnd = pickedTermStart + 3;
+
+            DateTime pickedDateStart = new DateTime(pickedDate, DateTimeZone.UTC);
+            pickedDateStart = pickedDateStart.plusHours(pickedTermStart);
+
+            DateTime pickedDateEnd = new DateTime(pickedDate, DateTimeZone.UTC);
+            pickedDateEnd = pickedDateEnd.plusHours(pickedTermEnd);
+
+            List<Room> rooms = roomService.findByClinicId(surgeryRequirement.getClinic().getId());
+            for (Room room : rooms) {
+                DateTime dt = new DateTime(pickedDate, DateTimeZone.UTC);
+                boolean flag = true;
+                Integer firstFree = 7;
+                while (flag) {
+                    List<Integer> termins = roomCalendarService.findByRoomAndDate(room.getId(), dt);
+                    for (int i = 7; i <= 16; i += 3) {
+                        if (!termins.contains(i)) {
+                            firstFree = i;
+                            flag = false;
+                            break;
+                        }
+                    }
+                    if (flag) {
+                        dt = dt.plusDays(1);
+                    }
+                }
+                System.out.println(dt);
+                System.out.println(firstFree);
+            }
+        }
+
     }
 
 

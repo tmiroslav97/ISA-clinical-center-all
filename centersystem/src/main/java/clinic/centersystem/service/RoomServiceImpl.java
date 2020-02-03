@@ -48,6 +48,11 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
+    public List<Room> findByClinicId(Long id) {
+        return roomRepository.findByClinicId(id);
+    }
+
+    @Override
     public List<Room> findAll() {
         return roomRepository.findAll();
     }

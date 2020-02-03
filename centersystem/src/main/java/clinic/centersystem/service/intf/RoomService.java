@@ -14,6 +14,8 @@ public interface RoomService {
 
     RoomResponseDTO findByClinic(Long id, Integer pageCnt);
 
+    List<Room> findByClinicId(Long id);
+
     List<Room> findAll();
 
     Room save(Room room);

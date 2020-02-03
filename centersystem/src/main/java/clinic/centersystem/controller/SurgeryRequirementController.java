@@ -7,6 +7,7 @@ import clinic.centersystem.model.SurgeryRequirement;
 import clinic.centersystem.service.SurgeryRequirementServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,5 +47,10 @@ public class SurgeryRequirementController {
             return new ResponseEntity<>("Error", HttpStatus.BAD_REQUEST);
         }
 
+    }
+
+    @Scheduled(cron = "${greeting.cron}")
+    public void autoReserveRoomForSurgery() {
+        surgeryRequirementService.autoReserveRoomForSurgery();
     }
 }
