@@ -204,3 +204,13 @@ UPDATE patient
 SET medical_record_id=2
 WHERE id=6;
 
+INSERT INTO users (id,first_name, last_name, email, enabled, first_log,
+                   last_password_reset_date, password)
+VALUES (8,'Petar', 'Peric', 'pero@gmail.com', true, false, '2019-11-20 11:00:00',
+        '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra');
+
+INSERT INTO user_authority (user_id, authority_id)
+VALUES (8,1);
+
+INSERT INTO clinic_center_admin (predefined, id)
+VALUES (false, 8);

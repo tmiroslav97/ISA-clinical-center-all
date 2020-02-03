@@ -14,7 +14,7 @@ const initialState = {
         lastName: '',
         email: '',
         firstLog: true,
-        roles: []
+        roles: JSON.parse(window.localStorage.getItem('roles'))==null?[]:JSON.parse(window.localStorage.getItem('roles'))
     },
     token: window.localStorage.getItem('token'),
     id: window.localStorage.getItem('userID'),

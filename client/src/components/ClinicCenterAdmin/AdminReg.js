@@ -1,14 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { history } from '../../index';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { regCCAdmin } from '../../store/user/actions';
+import { userIdSelector, userDataSelector } from '../../store/user/selectors';
 
-const AdminReg = ({ ccaId }) => {
+const AdminReg = () => {
     const dispatch = useDispatch();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [firstName, setFirstName] = useState();
     const [lastName, setLastName] = useState();
+    const ccaId = useSelector(userIdSelector);
+    const userData = useSelector(userDataSelector);
+
+    useEffect(() => {
+        if (!userData.predefined) {
+            history.push('/ccadmin');
+        }
+    }, [ccaId]);
+
     const handleRegCCAdmin = () => {
         dispatch(
             regCCAdmin({

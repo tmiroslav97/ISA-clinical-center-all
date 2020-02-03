@@ -19,6 +19,7 @@ class AuthSecurityService extends HttpBaseClient {
             localStorage.setItem('token', data.token);
             //brisi dole
             localStorage.setItem('userID', data.id);
+            localStorage.setItem('roles', JSON.stringify(data.roles));
 
             /* this.AuthenticatorAssertionResponse({
                 Authorization: `Bearer ${data.token}`

@@ -66,8 +66,10 @@ export function* fetchNurseData() {
 //clinic center admin sagas
 export function* fetchCCAdminData() {
     const { payload } = yield take(FETCH_CCADMIN_DATA);
+    yield put(putIsFetchUserData(false));
     const { data } = yield call(CCAdminService.fetchCCAdminData, payload);
     yield put(putUserData(data));
+    yield put(putIsFetchUserData(true));
 }
 
 
