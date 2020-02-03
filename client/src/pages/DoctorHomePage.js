@@ -2,21 +2,23 @@ import React, { useEffect } from 'react';
 import { history } from '../index';
 import { useDispatch, useSelector } from 'react-redux';
 import { Spinner, Card, Button, Col, Row, Container } from 'react-bootstrap';
-import { userDataSelector, isFetchUserDataSelector } from '../store/user/selectors';
+import { userIdSelector, isFetchUserDataSelector } from '../store/user/selectors';
 import { fetchDoctorData } from '../store/user/actions';
 
 
-const DoctorHomePage = ({ match }) => {
+const DoctorHomePage = () => {
     const dispatch = useDispatch();
-    const id = match.params.id;
+    const id = useSelector(userIdSelector);
     const isFetchUserData = useSelector(isFetchUserDataSelector);
 
     useEffect(() => {
-        dispatch(
-            fetchDoctorData({
-                id
-            })
-        );
+        if (id != null) {
+            dispatch(
+                fetchDoctorData({
+                    id
+                })
+            );
+        }
     }, [id]);
 
     if (!isFetchUserData) {

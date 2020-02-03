@@ -1,23 +1,25 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Spinner, Card, Button, Col, Row, Container } from 'react-bootstrap';
-import { userDataSelector, isFetchUserDataSelector } from '../../store/user/selectors';
+import { userDataSelector, userIdSelector, isFetchUserDataSelector } from '../../store/user/selectors';
 import { fetchCAdminData } from '../../store/user/actions';
 import { history } from '../../index';
 
 
-const CA = ({ match }) => {
+const CA = () => {
     const dispatch = useDispatch();
-    const id = match.params.id;
+    const id = useSelector(userIdSelector);
     const data = useSelector(userDataSelector);
     const isFetchUserData = useSelector(isFetchUserDataSelector);
 
     useEffect(() => {
-        dispatch(
-            fetchCAdminData({
-                id
-            })
-        );
+        if (id != null) {
+            dispatch(
+                fetchCAdminData({
+                    id
+                })
+            );
+        }
     }, [id]);
 
     if (!isFetchUserData) {
