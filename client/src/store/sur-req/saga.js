@@ -29,11 +29,11 @@ import {
 export function* fetchFinishReservation() {
     const { payload } = yield take(FETCH_FINISH_RESERVATION);
     const { data } = yield call(SurgeryRequirementService.fetchFinishReservation, payload);
-    if (data == 'Room is reserved for surgery') {
-        yield put(putSuccessMsg(data));
+    if (data === 'Room is reserved for surgery') {
+        yield put(putSuccessMsg(data.data));
         yield put(putSuccessMsg(null));
     } else {
-        yield put(putWarnMsg(data));
+        yield put(putWarnMsg(data.data));
         yield put(putWarnMsg(null));
     }
     yield put(putPickSurReq(false));

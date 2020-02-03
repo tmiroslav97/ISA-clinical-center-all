@@ -48,7 +48,7 @@ public class MedicineServiceImpl implements MedicineService {
     }
 
     @Override
-    public Set<Medicine> findAllByIdIn(Set<Long> medicines) {
+    public List<Medicine> findAllByIdIn(Set<Long> medicines) {
         return medicineRepository.findAllByIdIn(medicines);
     }
 }

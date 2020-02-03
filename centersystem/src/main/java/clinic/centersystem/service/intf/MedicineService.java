@@ -16,5 +16,5 @@ public interface MedicineService {
 
     Medicine save(Medicine medicine);
 
-    Set<Medicine> findAllByIdIn(Set<Long> medicines);
+    List<Medicine> findAllByIdIn(Set<Long> medicines);
 }

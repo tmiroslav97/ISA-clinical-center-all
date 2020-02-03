@@ -12,5 +12,5 @@ public interface PrescriptionService {
 
     Prescription save(Prescription prescription);
 
-    Set<Prescription> saveAll(Set<Prescription> prescriptions);
+    List<Prescription> saveAll(List<Prescription> prescriptions);
 }

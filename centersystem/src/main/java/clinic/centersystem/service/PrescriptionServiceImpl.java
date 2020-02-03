@@ -31,7 +31,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     }
 
     @Override
-    public Set<Prescription> saveAll(Set<Prescription> prescriptions) {
-        return (Set<Prescription>) prescriptionRepository.saveAll(prescriptions);
+    public List<Prescription> saveAll(List<Prescription> prescriptions) {
+        return prescriptionRepository.saveAll(prescriptions);
     }
 }

@@ -14,6 +14,10 @@ import store from './store';
 
 export const history = createBrowserHistory();
 
+//<ToastProvider>
+//<InformationToasts />
+//</ToastProvider>
+
 ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>

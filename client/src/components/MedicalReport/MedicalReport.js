@@ -72,7 +72,7 @@ const MedicalReport = ({ typeId, medRecId }) => {
                                 <Form.Control as="select" onChange={({ currentTarget }) => {
                                     setDiagnose(currentTarget.value);
                                 }} >
-
+                                    <option value="none" disabled>Please choose doctor</option>
                                     {
                                         diagnoses.map((diagnose) => {
                                             return (

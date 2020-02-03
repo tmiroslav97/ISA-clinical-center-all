@@ -12,5 +12,5 @@ public interface MedicineRepository extends JpaRepository<Medicine, Long> {
 
     Page<Medicine> findAll(Pageable pageable);
 
-    Set<Medicine> findAllByIdIn(Set<Long> medicines);
+    List<Medicine> findAllByIdIn(Set<Long> medicines);
 }
