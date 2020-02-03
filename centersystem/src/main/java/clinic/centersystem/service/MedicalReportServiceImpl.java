@@ -15,7 +15,7 @@ public class MedicalReportServiceImpl implements MedicalReportService {
 
     @Autowired
     private MedicalReportRepository medicalReportRepository;
-    
+
     @Override
     public MedicalReport findById(Long id) {
         return medicalReportRepository.findById(id).orElseGet(null);
