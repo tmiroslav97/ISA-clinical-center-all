@@ -33,7 +33,7 @@ class AppointmentTypeService extends HttpClient {
                 format(FINALPOINTS.ADD_APPOINTMENT_TYPE, payload.clinicId)
                 
             );
-            
+            console.log(data);
             return { data };
             
         } catch (error) {
