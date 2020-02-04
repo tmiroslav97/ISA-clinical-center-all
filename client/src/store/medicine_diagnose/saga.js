@@ -67,16 +67,16 @@ export function* addMedicine() {
     if (data === 'Medicine successfuly added') {
         yield put(putSuccessMsg(data));
         yield put(putSuccessMsg(null));
+        yield put(putIsFetchMedicine(false));
+        const { medicines } = yield call(MedDiagService.fetchMedicineData, { pageCnt: 0 });
+        yield put(putMedicineData(medicines.medicines));
+        yield put(putSelPageCnt(0));
+        yield put(putPageCnt(medicines.medicinePageCnt));
+        yield put(putIsFetchMedicine(true));
     } else {
         yield put(putErrorMsg(data));
         yield put(putErrorMsg(null));
     }
-    yield put(putIsFetchMedicine(false));
-    const { medicines } = yield call(MedDiagService.fetchMedicineData, { pageCnt: 0 });
-    yield put(putMedicineData(medicines.medicines));
-    yield put(putSelPageCnt(0));
-    yield put(putPageCnt(medicines.medicinePageCnt));
-    yield put(putIsFetchMedicine(true));
 }
 
 export function* addDiagnose() {
@@ -85,14 +85,14 @@ export function* addDiagnose() {
     if (data === 'Diagnose successfuly added') {
         yield put(putSuccessMsg(data));
         yield put(putSuccessMsg(null));
+        yield put(putIsFetchDiagnose(false));
+        const { diagnoses } = yield call(MedDiagService.fetchDiagnoseData, { pageCnt: 0 });
+        yield put(putDiagnoseData(diagnoses.diagnoses));
+        yield put(putSelPageCnt(0));
+        yield put(putPageCnt(diagnoses.diagnosePageCnt));
+        yield put(putIsFetchDiagnose(true));
     } else {
         yield put(putErrorMsg(data));
         yield put(putErrorMsg(null));
     }
-    yield put(putIsFetchDiagnose(false));
-    const { diagnoses } = yield call(MedDiagService.fetchDiagnoseData, { pageCnt: 0 });
-    yield put(putDiagnoseData(diagnoses.diagnoses));
-    yield put(putSelPageCnt(0));
-    yield put(putPageCnt(diagnoses.diagnosePageCnt));
-    yield put(putIsFetchDiagnose(true));
 }

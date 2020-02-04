@@ -1,5 +1,6 @@
 package clinic.centersystem.converter;
 
+import clinic.centersystem.dto.response.PrescriptionResponse;
 import clinic.centersystem.model.Clinic;
 import clinic.centersystem.model.MedicalReport;
 import clinic.centersystem.model.Medicine;
@@ -13,6 +14,14 @@ public class PrescriptionConverter {
                 .medicine(medicine)
                 .medicalReport(medicalReport)
                 .clinic(clinic)
+                .build();
+    }
+
+    public static PrescriptionResponse toCreatePrescriptionResponseFromPrescription(Prescription prescription) {
+        return PrescriptionResponse.builder()
+                .id(prescription.getId())
+                .medicineName(prescription.getMedicine().getName())
+                .medicineCode(prescription.getMedicine().getCode())
                 .build();
     }
 }

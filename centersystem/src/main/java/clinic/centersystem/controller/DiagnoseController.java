@@ -30,13 +30,13 @@ public class DiagnoseController {
     @PreAuthorize("hasRole('CCADMIN')")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<String> addDiagnose(@RequestBody Diagnose diagnose) {
-        this.diagnoseService.save(diagnose);
+        diagnoseService.save(diagnose);
         return new ResponseEntity<>("Diagnose successfuly added", HttpStatus.OK);
     }
 
     @RequestMapping(value = "/all/{pageCnt}", method = RequestMethod.GET)
     public ResponseEntity<DiagnoseResponseDTO> getDiagnosesPage(@PathVariable Integer pageCnt) {
-        return new ResponseEntity<>(this.diagnoseService.findAll(pageCnt), HttpStatus.OK);
+        return new ResponseEntity<>(diagnoseService.findAll(pageCnt), HttpStatus.OK);
     }
 
 }

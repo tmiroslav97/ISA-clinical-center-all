@@ -4,8 +4,14 @@ import {
     PUT_PATIENTS_DATA,
     PUT_IS_FETCH_PATIENTS,
     FETCH_PATIENT_BY_APP,
-    PUT_PATIENT
+    PUT_PATIENT,
+    FETCH_PATIENTS_PAGINATION
 } from './constants';
+
+export const fetchPatientsPagination = payload => ({
+    type: FETCH_PATIENTS_PAGINATION,
+    payload
+});
 
 export const fetchPatientByApp = payload => ({
     type: FETCH_PATIENT_BY_APP,

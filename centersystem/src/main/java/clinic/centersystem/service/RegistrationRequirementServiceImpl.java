@@ -2,12 +2,10 @@ package clinic.centersystem.service;
 
 import clinic.centersystem.converter.RegistrationRequirementConverter;
 import clinic.centersystem.dto.request.RegistrationRequirementDTO;
-import clinic.centersystem.dto.response.MedicineResponseDTO;
 import clinic.centersystem.dto.response.RegistrationReqResponseDTO;
 import clinic.centersystem.dto.response.RegistrationRequirementResponse;
 import clinic.centersystem.exception.RegistrationRequirementNotFoundException;
-import clinic.centersystem.exception.UserExistsException;
-import clinic.centersystem.model.Medicine;
+import clinic.centersystem.exception.ResourceExistsException;
 import clinic.centersystem.model.Patient;
 import clinic.centersystem.model.RegistrationRequirement;
 import clinic.centersystem.repository.RegistrationRequirementRepository;
@@ -22,7 +20,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -77,10 +74,11 @@ public class RegistrationRequirementServiceImpl implements RegistrationRequireme
         RegistrationRequirement req = this.findById(id);
 
         req.setPassword(passwordEncoder.encode(req.getPassword()));
-        if (this.userService.existsByEmail(req.getEmail())) {
-            throw new UserExistsException();
+        if (userService.existsByEmail(req.getEmail())) {
+            registrationRequirementRepository.deleteById(id);
+            throw new ResourceExistsException("User with email " + req.getEmail() + " already exists");
         }
-        Patient patient = this.patientService.save(req);
+        Patient patient = patientService.save(req);
         this.registrationRequirementRepository.deleteById(id);
         String subject = "Account registration";
         String answer = String.format(
@@ -97,8 +95,14 @@ public class RegistrationRequirementServiceImpl implements RegistrationRequireme
     @Override
     public String rejectRegistrationRequest(Long id, String message) {
         RegistrationRequirement req = this.findById(id);
+
+        if (userService.existsByEmail(req.getEmail())) {
+            registrationRequirementRepository.deleteById(id);
+            throw new ResourceExistsException("User with email " + req.getEmail() + " already exists");
+        }
+
         String subject = "Account registration";
-        this.registrationRequirementRepository.deleteById(id);
+        registrationRequirementRepository.deleteById(id);
 
         emailService.sendMailTo(req.getEmail(), subject, message);
 

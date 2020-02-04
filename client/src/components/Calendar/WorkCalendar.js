@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { history } from '../index';
+import { history } from '../../index';
 import { Container, Spinner, Row, Col, Table, Button } from 'react-bootstrap';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import moment from 'moment'
-import { fetchCalendar } from '../store/calendar/actions';
-import { calendarDataSelector, isFetchCalendarSelector } from '../store/calendar/selectors';
-import { userDataSelector } from '../store/user/selectors';
+import { fetchCalendar } from '../../store/calendar/actions';
+import { calendarDataSelector, isFetchCalendarSelector } from '../../store/calendar/selectors';
+import { userDataSelector } from '../../store/user/selectors';
 
 const localizer = momentLocalizer(moment);
 

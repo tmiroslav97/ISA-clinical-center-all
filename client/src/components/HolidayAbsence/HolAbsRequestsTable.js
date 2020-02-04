@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, Container, Table, Spinner } from 'react-bootstrap';
-import moment from 'moment';
-import { fetchAbsHolRequests } from '../store/absence_holiday/actions';
-import { absHolRequestDataSelector, isFetchAbsHolRequestsSelector } from '../store/absence_holiday/selectors';
+import { fetchAbsHolRequests } from '../../store/absence_holiday/actions';
+import { absHolRequestDataSelector, isFetchAbsHolRequestsSelector } from '../../store/absence_holiday/selectors';
 
 const HolAbsRequestsTable = ({ personnelId }) => {
     const dispatch = useDispatch();
@@ -42,7 +41,6 @@ const HolAbsRequestsTable = ({ personnelId }) => {
                     <Table responsive>
                         <thead>
                             <tr>
-                                <th>#</th>
                                 <th>Type</th>
                                 <th>Start date</th>
                                 <th>End date</th>
@@ -54,10 +52,9 @@ const HolAbsRequestsTable = ({ personnelId }) => {
                                     if (req.status === 'REQUESTED') {
                                         return (
                                             <tr key={index}>
-                                                <td>{index + 1}</td>
                                                 <td>{req.type}</td>
-                                                <td>{moment.unix(req.startDate).format('DD/MM/YYYY')}</td>
-                                                <td>{moment.unix(req.endDate).format('DD/MM/YYYY')}</td>
+                                                <td>{req.startDate}</td>
+                                                <td>{req.endDate}</td>
                                             </tr>
                                         );
                                     }
@@ -77,7 +74,6 @@ const HolAbsRequestsTable = ({ personnelId }) => {
                     <Table responsive>
                         <thead>
                             <tr>
-                                <th>#</th>
                                 <th>Type</th>
                                 <th>Start date</th>
                                 <th>End date</th>
@@ -89,10 +85,9 @@ const HolAbsRequestsTable = ({ personnelId }) => {
                                     if (req.status === 'APPROVED') {
                                         return (
                                             <tr key={index}>
-                                                <td>{index + 1}</td>
                                                 <td>{req.type}</td>
-                                                <td>{moment.unix(req.startDate).format('DD/MM/YYYY')}</td>
-                                                <td>{moment.unix(req.endDate).format('DD/MM/YYYY')}</td>
+                                                <td>{req.startDate}</td>
+                                                <td>{req.endDate}</td>
                                             </tr>
                                         );
                                     }
