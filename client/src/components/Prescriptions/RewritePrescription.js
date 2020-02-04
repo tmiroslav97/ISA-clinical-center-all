@@ -3,16 +3,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, Button, Container, Table } from 'react-bootstrap';
 import { prescriptionsDataSelector } from '../../store/prescriptions/selectors';
 import { fetchPrescriptions, rewritePrescription } from '../../store/prescriptions/actions';
+import { userDataSelector } from '../../store/user/selectors';
 
-const RewritePrescription = ({ nurseId }) => {
+
+const RewritePrescription = () => {
     const dispatch = useDispatch();
     const prescriptions = useSelector(prescriptionsDataSelector);
-
-    const handleRewrite = (recepieId) => {
+    const data = useSelector(userDataSelector);
+    const nurseId = data.id;
+    const clinicId = data.clinicId;
+    const handleRewrite = (prescriptionId) => {
         dispatch(
             rewritePrescription({
                 nurseId,
-                recepieId
+                prescriptionId,
+                clinicId
             })
         );
     };
@@ -20,7 +25,7 @@ const RewritePrescription = ({ nurseId }) => {
     useEffect(() => {
         if (nurseId != null) {
             dispatch(
-                fetchPrescriptions({})
+                fetchPrescriptions({clinicId})
             );
         }
     }, [nurseId]);
@@ -29,7 +34,7 @@ const RewritePrescription = ({ nurseId }) => {
         <Container>
             <Row>
                 <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <h3>Prescriptions for rewrite (only test for rewrite)</h3>
+                    <h3>Prescriptions for rewrite</h3>
                 </Col>
             </Row>
             <Row>
@@ -37,7 +42,8 @@ const RewritePrescription = ({ nurseId }) => {
                     <Table responsive>
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th>Medicine code</th>
+                                <th>Medicine name</th>
                                 <th>Rewrite</th>
                             </tr>
                         </thead>
@@ -46,7 +52,8 @@ const RewritePrescription = ({ nurseId }) => {
                                 prescriptions.map((prescription, index) => {
                                     return (
                                         <tr key={index}>
-                                            <td>{index + 1}</td>
+                                            <td>{prescription.medicineCode}</td>
+                                            <td>{prescription.medicineName}</td>
                                             <td>
                                                 <Button variant="primary" onClick={() => handleRewrite(prescription.id)}>
                                                     Rewrite

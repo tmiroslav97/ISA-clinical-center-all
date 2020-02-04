@@ -160,11 +160,6 @@ INSERT INTO appointment(app_state, date_time, discount, price, clinic_id, doctor
 INSERT INTO appointment(app_state, date_time, discount, price, clinic_id, doctor_id, patient_id, room_id, type_id) VALUES(2, '2020-02-02 11:00:00', 0,0,1,3,2,1,1);
 INSERT INTO appointment(app_state, date_time, discount, price, clinic_id, doctor_id, patient_id, room_id, type_id) VALUES(2, '2020-02-03 12:00:00', 0,0,1,3,2,1,1);
 
-
-
-INSERT INTO prescription(id, is_validate, nurse_id)
-VALUES (1, FALSE, NULL);
-
 INSERT INTO calendar(id, personnel_id)
 VALUES (1, 4);
 
@@ -224,3 +219,6 @@ VALUES (8,1);
 
 INSERT INTO clinic_center_admin (predefined, id)
 VALUES (false, 8);
+
+INSERT INTO prescription(id, is_validate, nurse_id, clinic_id, medicine_id)
+VALUES (1, FALSE, NULL,1,1);
