@@ -17,6 +17,7 @@ const ClinicReg = () => {
         event.preventDefault();
         if (form.checkValidity() === false) {
             event.stopPropagation();
+            setValidated(true);
         } else {
             dispatch(
                 regClinic({
@@ -25,8 +26,8 @@ const ClinicReg = () => {
                     address
                 })
             );
+            setValidated(false);
         }
-        setValidated(true);
     };
 
 

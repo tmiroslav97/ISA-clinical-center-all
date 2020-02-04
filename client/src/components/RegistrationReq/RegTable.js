@@ -26,6 +26,7 @@ const RegTable = () => {
         const form = event.currentTarget;
         event.preventDefault();
         if (form.checkValidity() === false) {
+            setValidated(true);
             event.stopPropagation();
         } else {
             dispatch(
@@ -35,8 +36,8 @@ const RegTable = () => {
                 })
             );
             handleClose();
+            setValidated(false);
         }
-        setValidated(true);
     };
 
     const handleClose = () => setShow(false);

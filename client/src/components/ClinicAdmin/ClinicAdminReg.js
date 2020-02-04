@@ -26,6 +26,7 @@ const ClinicAdminReg = () => {
         event.preventDefault();
         if (form.checkValidity() === false) {
             event.stopPropagation();
+            setValidated(true);
         } else {
             dispatch(
                 regClinicAdmin({
@@ -36,8 +37,8 @@ const ClinicAdminReg = () => {
                     lastName
                 })
             );
+            setValidated(false);
         }
-        setValidated(true);
     };
 
     if (!isFetchClinics) {

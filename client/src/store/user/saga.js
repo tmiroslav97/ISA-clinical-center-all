@@ -134,7 +134,7 @@ export function* login() {
 export function* changePassword() {
     const { payload } = yield take(CHANGE_PASSWORD);
     const { data } = yield call(authService.changePassword, payload);
-    if (data != undefined) {
+    if (data !== undefined) {
         yield put(putSuccessMsg('Successfuly changed password'));
         yield put(putSuccessMsg(null));
     } else {

@@ -27,6 +27,7 @@ const AdminReg = () => {
         event.preventDefault();
         if (form.checkValidity() === false) {
             event.stopPropagation();
+            setValidated(true);
         } else {
             dispatch(
                 regCCAdmin({
@@ -37,8 +38,8 @@ const AdminReg = () => {
                     lastName
                 })
             );
+            setValidated(false);
         }
-        setValidated(true);
     };
 
     return (

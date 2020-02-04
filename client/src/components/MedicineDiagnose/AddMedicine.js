@@ -16,6 +16,7 @@ const AddMedicine = () => {
         event.preventDefault();
         if (form.checkValidity() === false) {
             event.stopPropagation();
+            setValidated(true);
         } else {
             dispatch(
                 addMedicine({
@@ -24,8 +25,8 @@ const AddMedicine = () => {
                     description
                 })
             );
+            setValidated(false);
         }
-        setValidated(true);
     };
 
 
