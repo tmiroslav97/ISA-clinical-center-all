@@ -1,5 +1,4 @@
 import HttpClient from './HttpBaseClient';
-import { history } from '../index';
 import { format } from 'util';
 
 const FINALPOINTS = {
@@ -30,7 +29,7 @@ class NurseService extends HttpClient {
             const prescriptions = data;
             return { prescriptions };
         } catch (error) {
-            console.log(error.response.data);
+            return error.response;
         }
     }
 
@@ -42,7 +41,7 @@ class NurseService extends HttpClient {
 
             return { data };
         } catch (error) {
-            console.log(error.response.data);
+            return error.response;
         }
     }
 
