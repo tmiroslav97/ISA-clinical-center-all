@@ -1,8 +1,10 @@
 package clinic.centersystem.service.intf;
 
 
+import clinic.centersystem.dto.request.PatientSearchRequestDTO;
 import clinic.centersystem.dto.request.RegistrationRequirementDTO;
 import clinic.centersystem.dto.response.PatientResponse;
+import clinic.centersystem.dto.response.PatientSortResponseDTO;
 import clinic.centersystem.model.Patient;
 import clinic.centersystem.model.RegistrationRequirement;
 
@@ -25,4 +27,6 @@ public interface PatientService {
     PatientResponse patient(Long id);
 
     PatientResponse findPatientByAppId(Long id);
+
+    PatientSortResponseDTO findAll(PatientSearchRequestDTO patientSearchRequestDTO);
 }

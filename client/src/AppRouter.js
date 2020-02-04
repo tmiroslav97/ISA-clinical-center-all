@@ -24,7 +24,7 @@ import AppointmentTypAllAtOnce from './components/ClinicAdmin/AppointmentTypeAll
 import Pricelist from './components/ClinicAdmin/Pricelist';
 import SurgeryReq from './components/SurgeryRequirement/SurgeryReq';
 import Unauthorized from './components/Unauthorized';
-import PatientList from './components/Patient/PatientList';
+import PatientPagination from './components/Patient/PatientPagination';
 import WorkCalendar from './components/WorkCalendar';
 import HolAbsRequest from './components/HolAbsRequest';
 import BookingDoc from './components/BookingDoc';
@@ -68,7 +68,7 @@ const AppRouter = () => {
             <PrivateRoute exact path="/doc/bok-doc" component={BookingDoc} accessRole={["ROLE_DOCTOR"]} />
             <PrivateRoute exact path="/doc" component={DoctorHomePage} accessRole={["ROLE_DOCTOR"]} />
 
-            <PrivateRoute exact path="/pers/pat-list" component={PatientList} accessRole={["ROLE_NURSE", "ROLE_DOCTOR"]} />
+            <PrivateRoute exact path="/pers/pat-list" component={PatientPagination} accessRole={["ROLE_NURSE", "ROLE_DOCTOR"]} />
             <PrivateRoute exact path="/pers/hol-abs" component={HolAbsRequest} accessRole={["ROLE_NURSE", "ROLE_DOCTOR"]} />
             <PrivateRoute exact path="/pers/work-cal" component={WorkCalendar} accessRole={["ROLE_NURSE", "ROLE_DOCTOR"]} />
 

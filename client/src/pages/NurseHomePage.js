@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
-import {history} from '../index';
+import { history } from '../index';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchNurseData } from '../store/user/actions';
 import { Spinner, Row, Col, Container, Card, Button } from 'react-bootstrap';
-import { userDataSelector, userIdSelector, isFetchUserDataSelector } from '../store/user/selectors';
+import { userIdSelector, isFetchUserDataSelector } from '../store/user/selectors';
 
 const NurseHomePage = () => {
     const dispatch = useDispatch();
     const id = useSelector(userIdSelector);
-    const data = useSelector(userDataSelector);
     const isFetchUserData = useSelector(isFetchUserDataSelector);
 
     useEffect(() => {
