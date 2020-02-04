@@ -25,7 +25,8 @@ import DoctorService from '../../services/DoctorService';
 import {
     putUserData,
     putUserToken,
-    putIsFetchUserData
+    putIsFetchUserData,
+    putUserId
 } from './actions';
 
 //patient sagas
@@ -46,8 +47,10 @@ export function* fetchCAdminData() {
 //doctor sagas
 export function* fetchDoctorData() {
     const { payload } = yield take(FETCH_DOCTOR_DATA);
+    yield put(putIsFetchUserData(false));
     const { data } = yield call(DoctorService.fetchDoctorData, payload);
     yield put(putUserData(data));
+    yield put(putIsFetchUserData(true));
 }
 
 
@@ -69,7 +72,7 @@ export function* fetchCCAdminData() {
 export function* regCCAdmin() {
     const { payload } = yield take(REG_CC_ADMIN);
     // eslint-disable-next-line
-    const { data } = yield call(CCAdminService.regCCAdmin, payload);
+    yield call(CCAdminService.regCCAdmin, payload);
 }
 
 //user sagas
@@ -83,8 +86,7 @@ export function* signOut() {
 
 export function* registration() {
     const { payload } = yield take(REGISTRATION);
-    // eslint-disable-next-line
-    const { data } = yield call(authService.registration, payload);
+    yield call(authService.registration, payload);
     alert('Successfuly submited!');
 }
 
@@ -92,6 +94,7 @@ export function* login() {
     const { payload } = yield take(LOGIN);
     const { data } = yield call(authService.login, payload);
     yield put(putUserData(data));
+    yield put(putUserId(data.id));
     yield put(putUserToken(data.token));
     if (data.role === 'ROLE_PATIENT') {
         history.push('/pat');
@@ -99,15 +102,15 @@ export function* login() {
         if (data.firstLog) {
             history.push('/change-pass');
         } else {
-            history.push('/ccadmin/' + data.id);
+            history.push('/ccadmin');
         }
 
     } else if (data.role === 'ROLE_DOCTOR') {
-        history.push('/doc/' + data.id);
+        history.push('/doc');
     } else if (data.role === 'ROLE_NURSE') {
-        history.push('/nurse-page/' + data.id);
+        history.push('/nurse-page');
     } else if (data.role === 'ROLE_ADMINC') {
-        history.push('/adminc/' + data.id);
+        history.push('/adminc');
     } else {
         alert('Nije odobren pristup sistemu!');
     }
@@ -122,13 +125,13 @@ export function* changePassword() {
     if (data.role === 'ROLE_PATIENT') {
         history.push('/pat');
     } else if (data.role === 'ROLE_CCADMIN') {
-        history.push('/ccadmin/' + data.id);
+        history.push('/ccadmin');
     } else if (data.role === 'ROLE_DOCTOR') {
         history.push('/doc');
     } else if (data.role === 'ROLE_NURSE') {
-        history.push('/nurse-page/' + data.id);
+        history.push('/nurse-page');
     } else if (data.role === 'ROLE_ADMINC') {
-        history.push('/adminc/' + data.id);
+        history.push('/adminc');
     } else {
         alert('Nije odobren pristup sistemu!');
     }

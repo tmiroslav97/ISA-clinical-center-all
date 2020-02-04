@@ -16,6 +16,8 @@ public class RoomResponseTerminDTO {
 
     private Room room;
 
+    private String date;
+
     private List<Integer> termins;
 
     private String firstFreeTermin;

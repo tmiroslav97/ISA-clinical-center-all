@@ -48,6 +48,11 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
+    public List<Room> findByClinicId(Long id) {
+        return roomRepository.findByClinicId(id);
+    }
+
+    @Override
     public List<Room> findAll() {
         return roomRepository.findAll();
     }
@@ -62,7 +67,6 @@ public class RoomServiceImpl implements RoomService {
         Pageable pageable = PageRequest.of(roomSearchDTO.getPageCnt(), 10);
         DateTime dt = new DateTime(roomSearchDTO.getDate(), DateTimeZone.UTC);
         DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd");
-        System.out.println(dt.toString());
         Page<Room> rooms = roomRepository.searchRooms(roomSearchDTO.getName(), roomSearchDTO.getClinicId(), pageable);
         RoomResponseTerminPageDTO roomResponseTerminPageDTO = new RoomResponseTerminPageDTO();
         List<RoomResponseTerminDTO> roomResponseTerminDTO = new ArrayList<>();
@@ -72,8 +76,8 @@ public class RoomServiceImpl implements RoomService {
         for (Room room : rooms.getContent()) {
             RoomResponseTerminDTO rrtDTO = new RoomResponseTerminDTO();
             rrtDTO.setRoom(room);
+            rrtDTO.setDate(dtf.print(dt));
             rrtDTO.setTermins(roomCalendarService.findByRoomAndDate(room.getId(), dt));
-            System.out.println(dt.toString());
             roomResponseTerminDTO.add(rrtDTO);
             if (rrtDTO.getTermins().size() == 4) {
                 boolean flag = true;

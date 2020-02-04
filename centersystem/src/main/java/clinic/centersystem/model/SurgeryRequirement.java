@@ -52,7 +52,7 @@ public class SurgeryRequirement {
     private String doctorName;
 
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Clinic clinic;
 
 }

@@ -3,14 +3,16 @@ import { history } from '../../index';
 
 import {
     FETCH_PATIENTS_DATA,
-    FETCH_PATIENTS_DATA_BY_CLINIC_ID
+    FETCH_PATIENTS_DATA_BY_CLINIC_ID,
+    FETCH_PATIENT_BY_APP
 } from './constants';
 
 import PatientService from '../../services/PatientService';
 
 import {
     putPatientsData,
-    putIsFetchPatients
+    putIsFetchPatients,
+    putPatient
 } from './actions';
 
 
@@ -19,5 +21,13 @@ export function* fetchPatientsDataByClinicId() {
     yield put(putIsFetchPatients(false));
     const { patients } = yield call(PatientService.fetchPatientsByClinicId, payload);
     yield put(putPatientsData(patients));
+    yield put(putIsFetchPatients(true));
+}
+
+export function* fetchPatientByApp() {
+    const { payload } = yield take(FETCH_PATIENT_BY_APP);
+    yield put(putIsFetchPatients(false));
+    const { data } = yield call(PatientService.fetchPatientByApp, payload);
+    yield put(putPatient(data));
     yield put(putIsFetchPatients(true));
 }

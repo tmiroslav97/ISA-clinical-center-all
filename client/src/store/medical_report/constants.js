@@ -1,0 +1,1 @@
+export const ADD_MEDICAL_REPORT = 'add_medical_report';

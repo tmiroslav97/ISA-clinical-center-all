@@ -1,4 +1,12 @@
-export const ADD_CODE = 'add_code';
-export const PUT_CODEBOOK_DATA = 'put_codebook_data';
-export const FETCH_CODEBOOK_DATA = 'fetch_code_book_data';
-export const PUT_IS_FETCH_CODEBOOK = 'put_is_fetch_codebook';
+export const ADD_MEDICINE = 'add_medicine';
+export const ADD_DIAGNOSE = 'add_diagnose';
+export const PUT_MEDICINE_DATA = 'put_medicine_data';
+export const FETCH_MEDICINE_DATA = 'fetch_medicine_data';
+export const PUT_IS_FETCH_MEDICINE = 'put_is_fetch_medicine';
+export const PUT_DIAGNOSE_DATA = 'put_diagnose_data';
+export const FETCH_DIAGNOSE_DATA = 'fetch_diagnose_data';
+export const PUT_IS_FETCH_DIAGNOSE = 'put_is_fetch_diagnose';
+export const PUT_MEDICINE_PAGE_COUNT = 'put_medicine_page_count';
+export const PUT_DIAGNOSE_PAGE_COUNT = 'put_diagnose_page_count';
+export const FETCH_MEDICINES_ALL = 'fetch_medicines_all';
+export const FETCH_DIAGNOSES_ALL = 'fetch_diagnoses_all';

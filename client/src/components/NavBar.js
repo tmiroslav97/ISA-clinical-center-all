@@ -4,6 +4,7 @@ import { Navbar, Nav, } from 'react-bootstrap';
 import { userDataSelector } from '../store/user/selectors';
 import { useSelector } from 'react-redux';
 import { signOut } from '../store/user/actions';
+import { history } from '../index';
 
 export default function NavBar() {
     const dispatch = useDispatch();
@@ -28,20 +29,20 @@ export default function NavBar() {
 
     return (
         <Navbar bg="light" expand="lg">
-            <Navbar.Brand href="/">Clinic Center</Navbar.Brand>
+            <Navbar.Brand href="#" onClick={() => { history.push('/') }}>Clinic Center</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
-                    <Nav.Link href="/">Home</Nav.Link>
-                    {role === 'ROLE_CCADMIN' && <Nav.Link href={'/ccadmin/' + user.id}>Clinic center admin profile</Nav.Link>}
-                    {role === 'ROLE_NURSE' && <Nav.Link href={'/nurse-page/' + user.id}>Nurse homepage</Nav.Link>}
-                    {role === 'ROLE_ADMINC' && <Nav.Link href={'/adminc/' + user.id}>Clinic admin profile</Nav.Link>}
-                    {role === 'ROLE_DOCTOR' && <Nav.Link href={'/doc/' + user.id}>Doctor homepage</Nav.Link>}
-                    {role === 'ROLE_PATIENT' && <Nav.Link href={'/pat'}>Patient homepage</Nav.Link>}
+                    <Nav.Link href="#" onClick={() => { history.push('/') }}>Home</Nav.Link>
+                    {role === 'ROLE_CCADMIN' && <Nav.Link href="#" onClick={() => { history.push('/ccadmin') }}>Clinic center admin profile</Nav.Link>}
+                    {role === 'ROLE_NURSE' && <Nav.Link href="#" onClick={() => { history.push('/nurse-page') }}>Nurse homepage</Nav.Link>}
+                    {role === 'ROLE_ADMINC' && <Nav.Link href="#" onClick={() => { history.push('/adminc') }}>Clinic admin profile</Nav.Link>}
+                    {role === 'ROLE_DOCTOR' && <Nav.Link href="#" onClick={() => { history.push('/doc') }}>Doctor homepage</Nav.Link>}
+                    {role === 'ROLE_PATIENT' && <Nav.Link href="#" onClick={() => { history.push('/pat') }}>Patient homepage</Nav.Link>}
                 </Nav>
                 <Nav className="ml-auto">
-                    {role == null && <Nav.Link href="/login">Login</Nav.Link>}
-                    {role == null && <Nav.Link href="/signup">Sign Up</Nav.Link>}
+                    {role == null && <Nav.Link href="#" onClick={() => { history.push('/login') }}>Login</Nav.Link>}
+                    {role == null && <Nav.Link href="#" onClick={() => { history.push('/signup') }}>Sign Up</Nav.Link>}
                     {role != null && <Nav.Link href="#" onClick={() => handleSignOut()}>Sign out</Nav.Link>}
                 </Nav>
 

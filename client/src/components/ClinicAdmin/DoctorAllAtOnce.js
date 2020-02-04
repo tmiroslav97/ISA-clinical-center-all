@@ -5,8 +5,9 @@ import { doctorsDataSelector, isFetchDoctorsSelector } from '../../store/doctors
 import { addDoctor } from '../../store/doctors/actions';
 import { fetchDoctorsData } from '../../store/doctors/actions';
 
-const DoctorAllAtOnce = () => {
+const DoctorAllAtOnce = ({ match }) => {
     const dispatch = useDispatch();
+    const clinicId = match.params.clinicId;
     const [email, setEmail] = useState();
     const [password1, setPassword1] = useState();
     const [password2, setPassword2] = useState();
@@ -50,7 +51,8 @@ const DoctorAllAtOnce = () => {
     };
     useEffect(() => {
        dispatch(
-            fetchDoctorsData({})
+            //fetchDoctorsData({})
+            //fetchDoctorsDataOnClinic({clinicId})
         );
     }, []);
 

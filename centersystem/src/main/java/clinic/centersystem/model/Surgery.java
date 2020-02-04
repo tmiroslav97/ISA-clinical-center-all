@@ -2,14 +2,20 @@ package clinic.centersystem.model;
 
 import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Setter
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity
 @Table(name = DbTableConstants.SURGERY)
 public class Surgery {
@@ -18,30 +24,32 @@ public class Surgery {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = DbColumnConstants.DATETIME, nullable = false)
-    private Long dateTime;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Room room;
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Doctor> doctors;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Patient patient;
-
     @Column(name = DbColumnConstants.STARTTIME, nullable = false)
-    private Long startTime;
+    @Temporal(TemporalType.DATE)
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime", parameters = {
+            @org.hibernate.annotations.Parameter(name = "databaseZone", value = "UTC"),
+            @org.hibernate.annotations.Parameter(name = "javaZone", value = "UTC")
+    })
+    private DateTime startTime;
 
     @Column(name = DbColumnConstants.ENDTIME, nullable = false)
-    private Long endTime;
+    @Temporal(TemporalType.DATE)
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime", parameters = {
+            @org.hibernate.annotations.Parameter(name = "databaseZone", value = "UTC"),
+            @org.hibernate.annotations.Parameter(name = "javaZone", value = "UTC")
+    })
+    private DateTime endTime;
 
-    @Column(name = DbColumnConstants.DURATION, nullable = false)
-    private Long duration;
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Room room;
 
-    public Surgery() {
-        // TODO: implement
-    }
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Patient patient;
 
+    @JsonBackReference
+    @ManyToMany(fetch = FetchType.LAZY)
+    private Set<Doctor> doctors = new HashSet<>();
 
 }

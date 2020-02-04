@@ -1,39 +1,88 @@
 import HttpClient from './HttpBaseClient';
-//eslint-disable-next-line
-import { history } from '../index';
-//eslint-disable-next-line
 import { format } from 'util';
 
 const FINALPOINTS = {
-    FETCH_CODEBOOK_DATA: '/med-diag/all',
-    ADD_CODE: '/med-diag/add'
+    FETCH_MEDICINE_DATA: '/medicine/all/%s',
+    FETCH_DIAGNOSE_DATA: '/diagnose/all/%s',
+    FETCH_MEDICINE_ALL: '/medicine/all',
+    FETCH_DIAGNOSE_ALL: '/diagnose/all',
+    ADD_MEDICINE: '/medicine/add',
+    ADD_DIAGNOSE: '/diagnose/add',
 };
 
 class MedDiagService extends HttpClient {
-    fetchCodebook = async payload => {
+
+    fetchMedicineData = async payload => {
         try {
             const { data } = await this.getApiClient().get(
-                FINALPOINTS.FETCH_CODEBOOK_DATA
+                format(FINALPOINTS.FETCH_MEDICINE_DATA, payload.pageCnt)
             );
-
-            const codebook = data;
-            return { codebook };
+            const medicines = data;
+            return { medicines };
         } catch (error) {
             console.log(error.response.data);
         }
-    }
+    };
 
-    addCode = async payload => {
+    fetchDiagnoseData = async payload => {
+        try {
+            const { data } = await this.getApiClient().get(
+                format(FINALPOINTS.FETCH_DIAGNOSE_DATA, payload.pageCnt)
+            );
+            const diagnoses = data;
+            return { diagnoses };
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    };
+
+    fetchMedicineAll = async payload => {
+        try {
+            const { data } = await this.getApiClient().get(
+                FINALPOINTS.FETCH_MEDICINE_ALL
+            );
+            const medicines = data;
+            return { medicines };
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    };
+
+    fetchDiagnoseAll = async payload => {
+        try {
+            const { data } = await this.getApiClient().get(
+                FINALPOINTS.FETCH_DIAGNOSE_ALL
+            );
+            const diagnoses = data;
+            return { diagnoses };
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    };
+
+    addMedicine = async payload => {
         try {
             const { data } = await this.getApiClient().post(
-                FINALPOINTS.ADD_CODE,
+                FINALPOINTS.ADD_MEDICINE,
                 payload
             );
             return { data };
         } catch (error) {
             console.log(error.response.data);
         }
-    }
+    };
+
+    addDiagnose = async payload => {
+        try {
+            const { data } = await this.getApiClient().post(
+                FINALPOINTS.ADD_DIAGNOSE,
+                payload
+            );
+            return { data };
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    };
 
 }
 

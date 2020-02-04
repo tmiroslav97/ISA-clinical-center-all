@@ -1,6 +1,7 @@
 package clinic.centersystem.service.intf;
 
 import clinic.centersystem.model.CalendarItem;
+import org.joda.time.DateTime;
 
 import java.util.List;
 
@@ -11,4 +12,6 @@ public interface CalendarItemService {
     List<CalendarItem> findAll();
 
     CalendarItem save(CalendarItem calendarItem);
+
+    Integer findByCalendarIdandDate(Long calId, DateTime dtStart, DateTime dtEnd);
 }

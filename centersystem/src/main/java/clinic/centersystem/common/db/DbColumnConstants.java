@@ -49,7 +49,7 @@ public class DbColumnConstants {
     public static final String TITLE = "title";
     public static final String START = "start";
     public static final String END = "end";
-    public static final String UDI = "udi";
+    public static final String ALLDAY = "allDay";
     public static final String TYPEID = "typeid";
     public static final String ROOMTYPE = "room_type";
     public static final String RESERVED = "reserved";
@@ -62,4 +62,7 @@ public class DbColumnConstants {
     public static final String PATIENTID = "patientId";
     public static final String PATIENTNAME = "patientName";
     public static final String DOCTORNAME = "doctorName";
+    public static final String HEIGHT = "height";
+    public static final String WEIGHT = "weight";
+    public static final String BLOODTYPE = "bloodType";
 }

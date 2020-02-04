@@ -12,6 +12,13 @@ export function putUserToken(state, payload) {
     };
 }
 
+export function putUserId(state, payload) {
+    return {
+        ...state,
+        id: payload
+    };
+}
+
 export function putIsFetchUserData(state, payload) {
     return {
         ...state,

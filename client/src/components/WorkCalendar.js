@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { history } from '../index';
 import { Container, Spinner, Row, Col, Table, Button } from 'react-bootstrap';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import moment from 'moment'
 import { fetchCalendar } from '../store/calendar/actions';
 import { calendarDataSelector, isFetchCalendarSelector } from '../store/calendar/selectors';
+import { userDataSelector } from '../store/user/selectors';
 
-const localizer = momentLocalizer(moment)
+const localizer = momentLocalizer(moment);
 
-const WorkCalendar = ({ personnelId, role }) => {
+const WorkCalendar = () => {
     const dispatch = useDispatch();
     const calendar = useSelector(calendarDataSelector);
     const isFetchCalendar = useSelector(isFetchCalendarSelector);
+    const data = useSelector(userDataSelector);
+    const personnelId = data.id;
+    const role = data.role;
+    const [selEvent, setSelEvent] = useState(false);
 
     const [event, setEvent] = useState({
         title: '',
@@ -31,6 +37,7 @@ const WorkCalendar = ({ personnelId, role }) => {
     }, [personnelId]);
 
     const handleCalendarClick = (calEvent) => {
+        setSelEvent(true);
         setEvent(calEvent);
     };
 
@@ -40,7 +47,7 @@ const WorkCalendar = ({ personnelId, role }) => {
                 <span className="sr-only">Loading...</span>
             </Spinner>
         </div>;
-    } 
+    }
 
     return (
         <Container>
@@ -64,14 +71,14 @@ const WorkCalendar = ({ personnelId, role }) => {
                     />
                 </Col>
             </Row>
-            {role === 'ROLE_DOCTOR' &&
+            {role === 'ROLE_DOCTOR' && selEvent &&
                 <Row>
                     <Col md={{ span: 10, offset: 1 }} xs={12}>
                         <h2 className="border-bottom">Selected event: </h2>
                     </Col>
                 </Row>
             }
-            {role === 'ROLE_DOCTOR' &&
+            {role === 'ROLE_DOCTOR' && selEvent &&
                 <Row>
                     <Col md={{ span: 10, offset: 1 }} xs={12}>
                         <Table responsive>
@@ -86,18 +93,18 @@ const WorkCalendar = ({ personnelId, role }) => {
                                 </tr>
                                 <tr>
                                     <th>Start date</th>
-                                    <td align="right">{event.start}</td>
+                                    <td align="right">{moment(event.start).format('YYYY-MM-DD HH:mm:ss')}</td>
                                 </tr>
                                 <tr>
                                     <th>End date</th>
-                                    <td align="right">{event.end}</td>
+                                    <td align="right">{moment(event.end).format('YYYY-MM-DD HH:mm:ss')}</td>
                                 </tr>
-                                {
-                                    event.type === 'Appointment' &&
+                                {  
+                                    event.type === 'APP' && moment(event.start).format('YYYY-MM-DD')===moment().format('YYYY-MM-DD') &&
                                     <tr>
                                         <th>Start appointment</th>
                                         <td colSpan="2" align="right">
-                                            <Button>Start</Button>
+                                            <Button variant="primary" onClick={() => { history.push('/medical-rec/'+event.typeId); }}>Start</Button>
                                         </td>
                                     </tr>
                                 }

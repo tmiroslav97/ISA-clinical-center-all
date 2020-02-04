@@ -11,3 +11,10 @@ export function putIsFetchRegReqs(state, payload) {
         isFetchRegReqs: payload
     };
 }
+
+export function putRegReqsCnt(state, payload) {
+    return {
+        ...state,
+        regReqsPageCnt: payload
+    };
+}

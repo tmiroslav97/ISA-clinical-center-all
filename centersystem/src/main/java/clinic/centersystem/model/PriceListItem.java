@@ -25,7 +25,7 @@ public class PriceListItem {
     @Column(name = DbColumnConstants.PRICE, nullable = false)
     private Float price;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     private PriceList priceList;
 
     public PriceListItem() {

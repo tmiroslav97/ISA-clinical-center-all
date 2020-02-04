@@ -9,18 +9,18 @@ const FINALPOINTS = {
     //SEARCH_DOCTORS_DATA_PATIENT: '/pat/search-doctors',
     //SEARCH_CLINICS_DATA_PATIENT: '/pat/search-clinics',
     FETCH_PATIENTS: '/pat/all',
-    FETCH_PATIENTS_BY_CLINIC_ID: '/pat/all/%s'
+    FETCH_PATIENTS_BY_CLINIC_ID: '/pat/all/%s',
+    FETCH_PATIENT_BY_APP: 'pat/app/%s',
 };
 
-class PatientService extends HttpClient{
+class PatientService extends HttpClient {
 
     fetchPatientsByClinicId = async payload => {
         try {
-            console.log(payload);
             const { data } = await this.getApiClient().get(
-                format(FINALPOINTS.FETCH_PATIENTS_BY_CLINIC_ID,payload.clinicId)
+                format(FINALPOINTS.FETCH_PATIENTS_BY_CLINIC_ID, payload.clinicId)
             );
-            console.log(data);
+
             const patients = data;
             return { patients };
         } catch (error) {
@@ -55,7 +55,7 @@ class PatientService extends HttpClient{
             console.log(error.response.data);
         }
     };
-    
+
     fetchPatientData = async payload => {
         try {
             const { data } = await this.getApiClient().get(
@@ -95,7 +95,18 @@ class PatientService extends HttpClient{
         }
     };*/
 
-    
+    fetchPatientByApp = async payload => {
+        try {
+            const { data } = await this.getApiClient().get(
+                format(FINALPOINTS.FETCH_PATIENT_BY_APP,payload.typeId)
+            );
+
+            return { data };
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    };
+
 }
 
 export default new PatientService();
