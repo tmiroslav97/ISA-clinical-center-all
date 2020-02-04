@@ -4,7 +4,9 @@ import {
     ADD_DOCTOR,
     PUT_IS_FETCH_DOCTORS_DATA,
     SEARCH_DOCTOR,
-    PUT_PAGE_COUNT
+    PUT_PAGE_COUNT,
+    FETCH_DOCTORS_DATA_ON_CLINIC,
+    FETCH_DOCTORS_BY_CLINICID
 } from './constants';
 
 export const putPageCount = payload => ({
@@ -20,6 +22,11 @@ export const putIsFetchDoctors = payload => ({
 
 export const putDoctorsData = payload => ({
     type: PUT_DOCTORS_DATA,
+    payload
+});
+
+export const fetchDoctorsByClinicId = payload => ({
+    type: FETCH_DOCTORS_BY_CLINICID,
     payload
 });
 

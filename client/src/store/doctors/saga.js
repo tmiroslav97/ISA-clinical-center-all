@@ -4,7 +4,8 @@ import {
     ADD_DOCTOR,
     FETCH_DOCTORS_DATA,
     FETCH_DOCTORS_DATA_ON_CLINIC,
-    SEARCH_DOCTOR
+    SEARCH_DOCTOR,
+    FETCH_DOCTORS_BY_CLINICID,
 } from './constants';
 
 import DoctorService from '../../services/DoctorService';
@@ -24,11 +25,11 @@ export function* fetchDoctorsData() {
     yield put(putIsFetchDoctors(true));
 }
 
-export function* fetchDoctorsDataOnClinic() {
+export function* fetchDoctorsByClinicId() {
     //eslint-disable-next-line
-    const { payload } = yield take(FETCH_DOCTORS_DATA_ON_CLINIC);
+    const { payload } = yield take(FETCH_DOCTORS_BY_CLINICID);
     yield put(putIsFetchDoctors(false));
-    const { doctors } = yield call(DoctorService.fetchDoctorsDataOnClinic, {});
+    const { doctors } = yield call(DoctorService.fetchDoctorsByClinicId, payload);
     yield put(putDoctorsData(doctors));
     yield put(putIsFetchDoctors(true));
 }
