@@ -33,7 +33,7 @@ public class AppointmentTypeContoller {
         return new ResponseEntity<>(this.appointmentTypeService.addAppointmentType(appointmentTypeRequestDTO, clinicId), HttpStatus.OK);
     }
 
-    @RequestMapping(method = DELETE, value = "delete-appointment-type/{appointmentId}")
+    @RequestMapping(method = POST, value = "delete-appointment-type/{appointmentId}")
     public ResponseEntity<String>deleteAppointmentType(@PathVariable Long appointmentId){
         return new ResponseEntity<>(this.appointmentTypeService.deleteAppointmentType(appointmentId), HttpStatus.OK);
     }

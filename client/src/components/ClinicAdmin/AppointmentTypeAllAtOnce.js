@@ -3,15 +3,16 @@ import { Table, Container, Col, Row, Form, Button, Modal, Spinner } from 'react-
 import { useDispatch, useSelector } from 'react-redux';
 import { addAppointmentType, fetchAppointmentType, deleteAppointmentType } from '../../store/appointments/actions';
 import { appointmentTypeSelector, isFetchAppointmentTypeSelector } from '../../store/appointments/selectors';
+import { userDataSelector } from '../../store/user/selectors';
 
 
-const AppointmentTypAllAtOnce = ({match}) => {
+const AppointmentTypAllAtOnce = () => {
     const dispatch = useDispatch();
     const [type, setType] = useState();
     const appointmentTypes = useSelector(appointmentTypeSelector);
-    
     const isFetchAppointmentTypes = useSelector(isFetchAppointmentTypeSelector);
-    const clinicId = match.params.clinicId;
+    const data = useSelector(userDataSelector);
+    const clinicId = data.clinicId;
     const [show1, setShow1] = useState(false);
     const [show2, setShow2] = useState(false);
 
@@ -22,7 +23,7 @@ const AppointmentTypAllAtOnce = ({match}) => {
     const handleDelete = (appointment) => {
         console.log(appointment);
         dispatch(
-            deleteAppointmentType({id:appointment.id})
+            deleteAppointmentType({id:appointment.id, clinicId})
         );
     }
 
@@ -34,12 +35,13 @@ const AppointmentTypAllAtOnce = ({match}) => {
         );
         setShow2(false);
     };
+    console.log(clinicId);
 
     useEffect(() => {
         dispatch(
             fetchAppointmentType({clinicId})
         );
-    }, []);
+    }, [clinicId]);
 
     if (!isFetchAppointmentTypes) {
         return <div className="d-flex justify-content-center">

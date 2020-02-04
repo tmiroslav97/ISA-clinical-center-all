@@ -75,7 +75,7 @@ const AppRouter = () => {
             <PrivateRoute exact path="/adminc/bus-rep/:clinicId" component={BusinessReport} accessRole={["ROLE_ADMINC"]} />
             <PrivateRoute exact path="/adminc/free-app/:clinicId" component={FreeAppointment} accessRole={["ROLE_ADMINC"]} />
             <PrivateRoute exact path="/adminc/price-list/:clinicId" component={Pricelist} accessRole={["ROLE_ADMINC"]} />
-            <PrivateRoute exact path="/adminc/app-type/:clinicId" component={AppointmentTypAllAtOnce} accessRole={["ROLE_ADMINC"]} />
+            <PrivateRoute exact path="/adminc/app-type" component={AppointmentTypAllAtOnce} accessRole={["ROLE_ADMINC"]} />
             <PrivateRoute exact path="/adminc/sur-req/:clinicId" component={SurgeryReq} accessRole={["ROLE_ADMINC"]} />
             <PrivateRoute exact path="/adminc" component={ClinicAdmin} accessRole={["ROLE_ADMINC"]} />
 

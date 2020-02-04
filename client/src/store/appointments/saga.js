@@ -25,16 +25,16 @@ export function* addAppointmentType() {
     const { payload } = yield take(ADD_APPOINTMENT_TYPE);
     const { data } = yield call(AppointmentTypeService.addAppointmentType, payload);
     yield put(putIsFetchAppointmentTypes(false));
-    const { appointmentTypes } = yield call(AppointmentTypeService.fetchAppointmentType, payload);
+    const { appointmentTypes } = yield call(AppointmentTypeService.fetchAppointmentType, {clinicId:payload.clinicId});
     yield put(putAppointmentTypes(appointmentTypes));
     yield put(putIsFetchAppointmentTypes(true));
 }
 
 export function* deleteAppointmentType() {
     const { payload } = yield take(DELETE_APPOINTMENT_TYPE);
-    const { data } = yield call(AppointmentTypeService.deleteAppointmentType, payload);
+    const { data } = yield call(AppointmentTypeService.deleteAppointmentType, {id:payload.id});
     yield put(putIsFetchAppointmentTypes(false));
-    const { appointmentTypes } = yield call(AppointmentTypeService.fetchAppointmentType, payload);
+    const { appointmentTypes } = yield call(AppointmentTypeService.fetchAppointmentType, {clinicId:payload.clinicId});
     yield put(putAppointmentTypes(appointmentTypes));
     yield put(putIsFetchAppointmentTypes(true));
 }
