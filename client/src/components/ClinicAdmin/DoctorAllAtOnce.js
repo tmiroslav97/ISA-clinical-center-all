@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { doctorsDataSelector, isFetchDoctorsSelector } from '../../store/doctors/selectors';
 import { addDoctor } from '../../store/doctors/actions';
 import { fetchDoctorsData } from '../../store/doctors/actions';
-import { fetchDoctorsDataOnClinic } from '../../store/doctors/saga';
+import { fetchDoctorsByClinicId } from '../../store/doctors/actions';
 
 const DoctorAllAtOnce = ({ match }) => {
     const dispatch = useDispatch();
@@ -53,7 +53,7 @@ const DoctorAllAtOnce = ({ match }) => {
     useEffect(() => {
        dispatch(
             //fetchDoctorsData({})
-            fetchDoctorsDataOnClinic({clinicId})
+            fetchDoctorsByClinicId({clinicId})
         );
     }, []);
 
