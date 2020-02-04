@@ -1,17 +1,11 @@
 package clinic.centersystem.service;
 
-import clinic.centersystem.converter.AppointmentTypeConverter;
 import clinic.centersystem.converter.ClinicAdminConverter;
-import clinic.centersystem.converter.DoctorConverter;
-import clinic.centersystem.dto.request.AppointmentTypeRequestDTO;
 import clinic.centersystem.dto.request.ClinicAdminReqDTO;
-import clinic.centersystem.dto.request.DoctorRequestDTO;
 import clinic.centersystem.dto.response.ClinicAdministratoreResponse;
-import clinic.centersystem.dto.response.DoctorResponse;
-import clinic.centersystem.exception.UserExistsException;
+import clinic.centersystem.exception.ResourceExistsException;
 import clinic.centersystem.model.*;
 import clinic.centersystem.repository.ClinicAdminRepository;
-import clinic.centersystem.service.intf.AuthorityService;
 import clinic.centersystem.service.intf.ClinicAdminService;
 import clinic.centersystem.service.intf.ClinicService;
 import clinic.centersystem.service.intf.UserService;
@@ -19,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -101,7 +94,7 @@ public class ClinicAdminServiceImpl implements ClinicAdminService {
         String password = clinicAdminReqDTO.getPassword();
         clinicAdminReqDTO.setPassword(this.passwordEncoder.encode(clinicAdminReqDTO.getPassword()));
         if (this.userService.existsByEmail(clinicAdminReqDTO.getEmail())) {
-            throw new UserExistsException();
+            throw new ResourceExistsException("User with email " + clinicAdminReqDTO.getEmail() + " already exists");
         }
         ClinicAdmin clinicAdmin = this.clinicAdminService.save(clinicAdminReqDTO);
 

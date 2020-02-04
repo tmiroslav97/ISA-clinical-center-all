@@ -3,7 +3,7 @@ package clinic.centersystem.controller;
 
 import clinic.centersystem.dto.request.CCARegReqDTO;
 import clinic.centersystem.exception.CCANotPredefinedException;
-import clinic.centersystem.exception.UserExistsException;
+import clinic.centersystem.exception.ResourceExistsException;
 import clinic.centersystem.exception.UserNotFoundException;
 import clinic.centersystem.service.ClinicCenterAdminServiceImpl;
 import org.junit.Test;
@@ -60,7 +60,7 @@ public class ClinicCenterAdministratorControllerTest {
 
     @Test
     public void registerCCAShouldReturnBadRequestWhenUserExistsExceptionIsThrown(){
-        when(clinicCenterAdminServiceMock.registerCCA(ccaRegReqDTOValid, ADMIN_ID_VALID)).thenThrow(UserExistsException.class);
+        when(clinicCenterAdminServiceMock.registerCCA(ccaRegReqDTOValid, ADMIN_ID_VALID)).thenThrow(ResourceExistsException.class);
 
         ResponseEntity<String> responseEntity = testRestTemplate.postForEntity(REG_CA_ENDPOINT_VALID, ccaRegReqDTONotValid, String.class);
 
