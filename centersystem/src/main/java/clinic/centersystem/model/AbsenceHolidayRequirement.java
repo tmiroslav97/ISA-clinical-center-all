@@ -15,7 +15,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = DbTableConstants.ABSENCEREQUIREMENT)
-public class AbsenceRequirement {
+public class AbsenceHolidayRequirement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

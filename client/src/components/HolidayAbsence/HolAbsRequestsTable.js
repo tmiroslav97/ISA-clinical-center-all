@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, Container, Table, Spinner } from 'react-bootstrap';
 import moment from 'moment';
-import { fetchAbsHolRequests } from '../store/absence_holiday/actions';
-import { absHolRequestDataSelector, isFetchAbsHolRequestsSelector } from '../store/absence_holiday/selectors';
+import { fetchAbsHolRequests } from '../../store/absence_holiday/actions';
+import { absHolRequestDataSelector, isFetchAbsHolRequestsSelector } from '../../store/absence_holiday/selectors';
 
 const HolAbsRequestsTable = ({ personnelId }) => {
     const dispatch = useDispatch();

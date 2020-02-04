@@ -3,8 +3,8 @@ import { history } from '../index';
 import { format } from 'util';
 
 const FINALPOINTS = {
-    ABS_HOL_REQUEST: '/personnel/abs-hol',
-    FETCH_ABS_HOL_REQUEST: '/personnel/my-abs-hol/%s',
+    ABS_HOL_REQUEST: '/absence-hol/req',
+    FETCH_ABS_HOL_REQUEST: '/absence-hol/my-abs-hol/%s',
     FETCH_CALENDAR: '/personnel/my-cal/%s'
 };
 

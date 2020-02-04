@@ -4,8 +4,8 @@ import useStateWithCallback from 'use-state-with-callback';
 import { Row, Form, Col, Button, Container } from 'react-bootstrap';
 import moment from 'moment';
 import HolAbsRequestsTable from './HolAbsRequestsTable';
-import { absHolRequest } from '../store/absence_holiday/actions';
-import { userDataSelector } from '../store/user/selectors';
+import { absHolRequest } from '../../store/absence_holiday/actions';
+import { userDataSelector } from '../../store/user/selectors';
 
 const HolAbsRequest = () => {
     const dispatch = useDispatch();

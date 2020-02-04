@@ -65,7 +65,7 @@ public class Clinic {
 
     @JsonBackReference
     @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
-    private Set<AbsenceRequirement> reqAbs = new HashSet<>();
+    private Set<AbsenceHolidayRequirement> reqAbs = new HashSet<>();
 
     @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
     private Set<AppointmentRequirement> appReqs = new HashSet<>();

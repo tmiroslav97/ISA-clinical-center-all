@@ -2,12 +2,12 @@ package clinic.centersystem.converter;
 
 import clinic.centersystem.dto.request.AbsenceRequirementDTO;
 import clinic.centersystem.dto.response.AbsenceRequirementResponse;
-import clinic.centersystem.model.AbsenceRequirement;
+import clinic.centersystem.model.AbsenceHolidayRequirement;
 
 public class AbsenceRequirementConverter {
 
-    public static AbsenceRequirement toCreateAbsenceRequirementFromAbsenceRequest(AbsenceRequirementDTO absenceRequirementDTO) {
-        return AbsenceRequirement.builder()
+    public static AbsenceHolidayRequirement toCreateAbsenceRequirementFromAbsenceRequest(AbsenceRequirementDTO absenceRequirementDTO) {
+        return AbsenceHolidayRequirement.builder()
                 .type(absenceRequirementDTO.getType())
                 .startDate(absenceRequirementDTO.getStartDate())
                 .endDate(absenceRequirementDTO.getEndDate())
@@ -15,12 +15,12 @@ public class AbsenceRequirementConverter {
                 .build();
     }
 
-    public static AbsenceRequirementResponse toCreateAbsenceRequirementResponseFromAbsenceRequirement(AbsenceRequirement absenceRequirement) {
+    public static AbsenceRequirementResponse toCreateAbsenceRequirementResponseFromAbsenceRequirement(AbsenceHolidayRequirement absenceHolidayRequirement) {
         return AbsenceRequirementResponse.builder()
-                .type(absenceRequirement.getType())
-                .status(absenceRequirement.getStatus())
-                .startDate(absenceRequirement.getStartDate())
-                .endDate(absenceRequirement.getEndDate())
+                .type(absenceHolidayRequirement.getType())
+                .status(absenceHolidayRequirement.getStatus())
+                .startDate(absenceHolidayRequirement.getStartDate())
+                .endDate(absenceHolidayRequirement.getEndDate())
                 .build();
     }
 }
