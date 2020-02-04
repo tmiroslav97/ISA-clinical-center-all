@@ -29,6 +29,11 @@ import {
     putUserId
 } from './actions';
 
+import {
+    putSuccessMsg,
+    putErrorMsg
+} from '../common/actions';
+
 //patient sagas
 export function* fetchPatientData() {
     const { payload } = yield take(FETCH_PATIENT_DATA);
@@ -53,7 +58,6 @@ export function* fetchDoctorData() {
     yield put(putIsFetchUserData(true));
 }
 
-
 //nurse sagas
 export function* fetchNurseData() {
     const { payload } = yield take(FETCH_NURSE_DATA);
@@ -75,8 +79,15 @@ export function* fetchCCAdminData() {
 
 export function* regCCAdmin() {
     const { payload } = yield take(REG_CC_ADMIN);
-    // eslint-disable-next-line
-    yield call(CCAdminService.regCCAdmin, payload);
+    const { data } = yield call(CCAdminService.regCCAdmin, payload);
+    console.log(data);
+    if (data === 'Successfully added new clinic center administrator') {
+        yield put(putSuccessMsg(data));
+        yield put(putSuccessMsg(null));
+    } else {
+        yield put(putErrorMsg(data));
+        yield put(putErrorMsg(null));
+    }
 }
 
 //user sagas

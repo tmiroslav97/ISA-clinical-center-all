@@ -59,7 +59,7 @@ class CCAdminService extends HttpClient {
                 payload
             );
 
-            return (data);
+            return { data };
         } catch (error) {
             console.log(error.response.data);
         }
