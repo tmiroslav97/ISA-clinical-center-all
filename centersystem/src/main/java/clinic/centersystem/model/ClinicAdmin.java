@@ -25,9 +25,9 @@ public class ClinicAdmin extends User {
 
     @Builder(builderMethodName = "clinicAdminBuilder")
     public ClinicAdmin(Long id, String email, String password, String firstName, String lastName,
-                             boolean enabled, RoleEnum role, boolean isFirstLog, Timestamp lastPasswordResetDate,
+                             boolean enabled, boolean isFirstLog, Timestamp lastPasswordResetDate,
                              List<Authority> authorities, boolean predefined) {
-        super(id, email, password, firstName, lastName, enabled, role, isFirstLog, lastPasswordResetDate, authorities);
+        super(id, email, password, firstName, lastName, enabled, isFirstLog, lastPasswordResetDate, authorities);
     }
 
 }

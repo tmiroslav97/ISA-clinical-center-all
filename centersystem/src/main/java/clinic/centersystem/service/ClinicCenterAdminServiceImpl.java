@@ -36,9 +36,6 @@ public class ClinicCenterAdminServiceImpl implements ClinicCenterAdminService {
     private AuthorityService authorityService;
 
     @Autowired
-    private RegistrationRequirementService registrationRequirementService;
-
-    @Autowired
     private UserService userService;
 
     @Autowired
@@ -47,14 +44,6 @@ public class ClinicCenterAdminServiceImpl implements ClinicCenterAdminService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private PatientService patientService;
-
-    @Autowired
-    private ClinicService clinicService;
-
-    @Autowired
-    private ClinicAdminService clinicAdminService;
 
     private static final Logger logger = LoggerFactory.getLogger(ClinicCenterAdminServiceImpl.class);
 
@@ -93,8 +82,17 @@ public class ClinicCenterAdminServiceImpl implements ClinicCenterAdminService {
         if (user != null) {
             throw new UserExistsException();
         }
+        String password = ccaRegReqDTO.getPassword();
         ccaRegReqDTO.setPassword(this.passwordEncoder.encode(ccaRegReqDTO.getPassword()));
         ClinicCenterAdmin newCCAdmin = this.save(ccaRegReqDTO);
+        String subject = "Account registration";
+        String answer = String.format(
+                "Your are registered as clinic center administrator" +
+                        "\nYour email(username) is: " + newCCAdmin.getEmail() +
+                        "\nYou password is: " + password);
+
+        emailService.sendMailTo(newCCAdmin.getEmail(), subject, answer);
+
         String msg = "Successfully added new clinic center administrator";
         return msg;
     }

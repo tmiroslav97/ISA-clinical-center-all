@@ -14,7 +14,7 @@ const Unauthorized = () => {
                     'lastName': '',
                     'email': '',
                     'firstLog': true,
-                    'role': null
+                    'roles': []
                 })
             );
         }, 5000);

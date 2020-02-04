@@ -9,7 +9,7 @@ import { history } from '../index';
 export default function NavBar() {
     const dispatch = useDispatch();
     const user = useSelector(userDataSelector);
-    const role = user.role;
+    const roles = user.roles;
 
     const handleSignOut = () => {
         dispatch(
@@ -19,7 +19,7 @@ export default function NavBar() {
                 'lastName': '',
                 'email': '',
                 'firstLog': true,
-                'role': null
+                'roles': []
             })
         );
     };
@@ -34,16 +34,16 @@ export default function NavBar() {
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
                     <Nav.Link href="#" onClick={() => { history.push('/') }}>Home</Nav.Link>
-                    {role === 'ROLE_CCADMIN' && <Nav.Link href="#" onClick={() => { history.push('/ccadmin') }}>Clinic center admin profile</Nav.Link>}
-                    {role === 'ROLE_NURSE' && <Nav.Link href="#" onClick={() => { history.push('/nurse-page') }}>Nurse homepage</Nav.Link>}
-                    {role === 'ROLE_ADMINC' && <Nav.Link href="#" onClick={() => { history.push('/adminc') }}>Clinic admin profile</Nav.Link>}
-                    {role === 'ROLE_DOCTOR' && <Nav.Link href="#" onClick={() => { history.push('/doc') }}>Doctor homepage</Nav.Link>}
-                    {role === 'ROLE_PATIENT' && <Nav.Link href="#" onClick={() => { history.push('/pat') }}>Patient homepage</Nav.Link>}
+                    {roles.includes('ROLE_CCADMIN') && <Nav.Link href="#" onClick={() => { history.push('/ccadmin') }}>Clinic center admin profile</Nav.Link>}
+                    {roles.includes('ROLE_NURSE') && <Nav.Link href="#" onClick={() => { history.push('/nurse-page') }}>Nurse homepage</Nav.Link>}
+                    {roles.includes('ROLE_ADMINC') && <Nav.Link href="#" onClick={() => { history.push('/adminc') }}>Clinic admin profile</Nav.Link>}
+                    {roles.includes('ROLE_DOCTOR') && <Nav.Link href="#" onClick={() => { history.push('/doc') }}>Doctor homepage</Nav.Link>}
+                    {roles.includes('ROLE_PATIENT') && <Nav.Link href="#" onClick={() => { history.push('/pat') }}>Patient homepage</Nav.Link>}
                 </Nav>
                 <Nav className="ml-auto">
-                    {role == null && <Nav.Link href="#" onClick={() => { history.push('/login') }}>Login</Nav.Link>}
-                    {role == null && <Nav.Link href="#" onClick={() => { history.push('/signup') }}>Sign Up</Nav.Link>}
-                    {role != null && <Nav.Link href="#" onClick={() => handleSignOut()}>Sign out</Nav.Link>}
+                    {roles.length == 0 && <Nav.Link href="#" onClick={() => { history.push('/login') }}>Login</Nav.Link>}
+                    {roles.length == 0 && <Nav.Link href="#" onClick={() => { history.push('/signup') }}>Sign Up</Nav.Link>}
+                    {roles.length != 0 && <Nav.Link href="#" onClick={() => handleSignOut()}>Sign out</Nav.Link>}
                 </Nav>
 
             </Navbar.Collapse>

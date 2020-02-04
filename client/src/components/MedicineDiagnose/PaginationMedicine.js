@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Form, Button, Pagination } from 'react-bootstrap';
+import { Container, Row, Col, Pagination } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMedicineData } from '../../store/medicine_diagnose/actions';
-import { medicinePageCntSelector } from '../../store/medicine_diagnose/selectors';
+import { pageCntSelector, pageSelCntSelector } from '../../store/common/selectors';
 import MedicineTable from './MedicineTable';
 
 
 const PaginationMedicine = () => {
     const dispatch = useDispatch();
-    const medicinePageCnt = useSelector(medicinePageCntSelector);
-    const [pageCnt, setPageCnt] = useState(0);
+    const medicinePageCnt = useSelector(pageCntSelector);
+    const selPageCnt = useSelector(pageSelCntSelector);
+    const [pageCnt, setPageCnt] = useState(selPageCnt);
     useEffect(() => {
         dispatch(
             fetchMedicineData({
@@ -21,7 +22,7 @@ const PaginationMedicine = () => {
     let items = [];
     for (let number = 1; number <= medicinePageCnt; number++) {
         items.push(
-            <Pagination.Item key={number} active={number == (pageCnt + 1)}>
+            <Pagination.Item key={number} active={number == (selPageCnt + 1)}>
                 {number}
             </Pagination.Item>
         );

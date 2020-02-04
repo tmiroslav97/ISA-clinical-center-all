@@ -1,4 +1,4 @@
-import { take, put, call, select } from 'redux-saga/effects';
+import { take, put, call } from 'redux-saga/effects';
 
 import {
     FETCH_MEDICINE_DATA,
@@ -14,11 +14,16 @@ import MedDiagService from '../../services/MedDiagService';
 import {
     putDiagnoseData,
     putIsFetchDiagnose,
-    putDiagnosePageCount,
     putMedicineData,
-    putMedicinePageCount,
     putIsFetchMedicine
 } from './actions';
+
+import {
+    putPageCnt,
+    putSelPageCnt,
+    putSuccessMsg,
+    putErrorMsg
+} from '../common/actions';
 
 export function* fetchMedicinesAll() {
     const { payload } = yield take(FETCH_MEDICINES_ALL);
@@ -41,7 +46,8 @@ export function* fetchMedicineData() {
     yield put(putIsFetchMedicine(false));
     const { medicines } = yield call(MedDiagService.fetchMedicineData, payload);
     yield put(putMedicineData(medicines.medicines));
-    yield put(putMedicinePageCount(medicines.medicinePageCnt));
+    yield put(putSelPageCnt(payload.pageCnt));
+    yield put(putPageCnt(medicines.medicinePageCnt));
     yield put(putIsFetchMedicine(true));
 }
 
@@ -50,26 +56,43 @@ export function* fetchDiagnoseData() {
     yield put(putIsFetchDiagnose(false));
     const { diagnoses } = yield call(MedDiagService.fetchDiagnoseData, payload);
     yield put(putDiagnoseData(diagnoses.diagnoses));
-    yield put(putDiagnosePageCount(diagnoses.medicinePageCnt));
+    yield put(putSelPageCnt(payload.pageCnt));
+    yield put(putPageCnt(diagnoses.diagnosePageCnt));
     yield put(putIsFetchDiagnose(true));
 }
 
 export function* addMedicine() {
     const { payload } = yield take(ADD_MEDICINE);
     const { data } = yield call(MedDiagService.addMedicine, payload);
+    if (data === 'Medicine successfuly added') {
+        yield put(putSuccessMsg(data));
+        yield put(putSuccessMsg(null));
+    } else {
+        yield put(putErrorMsg(data));
+        yield put(putErrorMsg(null));
+    }
     yield put(putIsFetchMedicine(false));
     const { medicines } = yield call(MedDiagService.fetchMedicineData, { pageCnt: 0 });
     yield put(putMedicineData(medicines.medicines));
-    yield put(putMedicinePageCount(medicines.medicinePageCnt));
+    yield put(putSelPageCnt(0));
+    yield put(putPageCnt(medicines.medicinePageCnt));
     yield put(putIsFetchMedicine(true));
 }
 
 export function* addDiagnose() {
     const { payload } = yield take(ADD_DIAGNOSE);
     const { data } = yield call(MedDiagService.addDiagnose, payload);
+    if (data === 'Diagnose successfuly added') {
+        yield put(putSuccessMsg(data));
+        yield put(putSuccessMsg(null));
+    } else {
+        yield put(putErrorMsg(data));
+        yield put(putErrorMsg(null));
+    }
     yield put(putIsFetchDiagnose(false));
     const { diagnoses } = yield call(MedDiagService.fetchDiagnoseData, { pageCnt: 0 });
     yield put(putDiagnoseData(diagnoses.diagnoses));
-    yield put(putDiagnosePageCount(diagnoses.medicinePageCnt));
+    yield put(putSelPageCnt(0));
+    yield put(putPageCnt(diagnoses.diagnosePageCnt));
     yield put(putIsFetchDiagnose(true));
 }

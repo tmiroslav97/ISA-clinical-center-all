@@ -45,10 +45,6 @@ public class User implements UserDetails {
     @Column(name = DbColumnConstants.ENABLED, nullable = false)
     private boolean enabled;
 
-    @Column(name = DbColumnConstants.ROLE, nullable = false)
-    @Enumerated(EnumType.STRING)
-    private RoleEnum role;
-
     @Column(name = DbColumnConstants.FIRSTLOG, nullable = false)
     private boolean isFirstLog;
 

@@ -17,7 +17,7 @@ const WorkCalendar = () => {
     const isFetchCalendar = useSelector(isFetchCalendarSelector);
     const data = useSelector(userDataSelector);
     const personnelId = data.id;
-    const role = data.role;
+    const roles = data.roles;
     const [selEvent, setSelEvent] = useState(false);
 
     const [event, setEvent] = useState({
@@ -71,14 +71,14 @@ const WorkCalendar = () => {
                     />
                 </Col>
             </Row>
-            {role === 'ROLE_DOCTOR' && selEvent &&
+            {roles.includes('ROLE_DOCTOR') && selEvent &&
                 <Row>
                     <Col md={{ span: 10, offset: 1 }} xs={12}>
                         <h2 className="border-bottom">Selected event: </h2>
                     </Col>
                 </Row>
             }
-            {role === 'ROLE_DOCTOR' && selEvent &&
+            {roles.includes('ROLE_DOCTOR') && selEvent &&
                 <Row>
                     <Col md={{ span: 10, offset: 1 }} xs={12}>
                         <Table responsive>
