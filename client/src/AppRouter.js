@@ -55,7 +55,7 @@ const AppRouter = () => {
             <PrivateRoute exact path="/ccadmin/reg-req" component={RegistrationAproval} accessRole={["ROLE_CCADMIN"]} />
             <PrivateRoute exact path="/ccadmin/add-med" component={AddMedicine} accessRole={["ROLE_CCADMIN"]} />
             <PrivateRoute exact path="/ccadmin/add-diag" component={AddDiagnose} accessRole={["ROLE_CCADMIN"]} />
-            <PrivateRoute exact path="/ccadmin/cca-reg/:id" component={AdminReg} accessRole={["ROLE_CCADMIN"]} />
+            <PrivateRoute exact path="/ccadmin/cca-reg" component={AdminReg} accessRole={["ROLE_CCADMIN"]} />
             <PrivateRoute exact path="/ccadmin" component={ClinicCenterAdminProfile} accessRole={["ROLE_CCADMIN"]} />
 
             <PrivateRoute exact path="/doc/pat-list" component={PatientList} accessRole={["ROLE_DOCTOR"]} />

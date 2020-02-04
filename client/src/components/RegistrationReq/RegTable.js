@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Table, Button, Modal, Form, Spinner } from 'react-bootstrap';
+import { Table, Button, Modal, Form, Spinner, Col } from 'react-bootstrap';
 import { approveRegReq, rejectRegReq } from '../../store/reg_req/actions';
 import { isFetchRegReqs, regReqsDataSelector } from '../../store/reg_req/selectors';
 
@@ -12,6 +12,7 @@ const RegTable = () => {
     const [message, setMessage] = useState('');
     const regReqs = useSelector(regReqsDataSelector);
     const isFetchReqs = useSelector(isFetchRegReqs);
+    const [validated, setValidated] = useState(false);
 
     const handleApprove = (regReqId) => {
         dispatch(
@@ -21,13 +22,22 @@ const RegTable = () => {
         );
     };
 
-    const handleReject = () => {
-        dispatch(
-            rejectRegReq({
-                reqId,
-                message
-            })
-        );
+    const handleReject = (event) => {
+        const form = event.currentTarget;
+        event.preventDefault();
+        if (form.checkValidity() === false) {
+            setValidated(true);
+            event.stopPropagation();
+        } else {
+            dispatch(
+                rejectRegReq({
+                    reqId,
+                    message
+                })
+            );
+            handleClose();
+            setValidated(false);
+        }
     };
 
     const handleClose = () => setShow(false);
@@ -51,17 +61,21 @@ const RegTable = () => {
                     <Modal.Title>Rejected reason:</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form.Control as="textarea" rows="4" id="reason" name="txtReason"
-                        onChange={({ currentTarget }) => {
-                            setMessage(currentTarget.value);
-                        }}
-                    />
+                    <Form noValidate validated={validated} onSubmit={handleReject}>
+                        <Form.Group as={Col}>
+                            <Form.Control required as="textarea" pattern=".{15,90}"  rows="4" id="reason" name="txtReason"
+                                onChange={({ currentTarget }) => {
+                                    setMessage(currentTarget.value);
+                                }}
+                            />
+                        </Form.Group>
+                        <Form.Group as={Col} align="right">
+                            <Button variant="primary" type="submit">
+                                Send
+                         </Button>
+                        </Form.Group>
+                    </Form>
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary" onClick={() => { handleReject(); handleClose(); }}>
-                        Send
-                </Button>
-                </Modal.Footer>
             </Modal>
             <Table responsive>
                 <thead>

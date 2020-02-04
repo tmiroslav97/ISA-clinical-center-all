@@ -3,10 +3,10 @@ import { history } from '../index';
 import { format } from 'util';
 
 const FINALPOINTS = {
-    REG_CLINIC: '/cca/reg-clinic',
-    FETCH_CLINICS: '/cca/clinics',
-    REG_CLINIC_ADMIN: '/cca/reg-clinic-admin',
-    SEARCH_CLINIC: '/pat/search-clinics'
+    REG_CLINIC: '/clinic/reg-clinic',
+    FETCH_CLINICS: '/clinic/clinics',
+    REG_CLINIC_ADMIN: '/adm-cli/reg-clinic-admin',
+    FETCH_CLINIC_PAGINATION_DATA: '/clinic/all/%s'
 };
 
 class ClinicService extends HttpClient {
@@ -60,6 +60,19 @@ class ClinicService extends HttpClient {
             );
 
             return { data };
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    };
+    
+    fetchClinicPaginationData = async payload => {
+        try {
+            const { data } = await this.getApiClient().get(
+                format(FINALPOINTS.FETCH_CLINIC_PAGINATION_DATA, payload.pageCnt)
+            );
+            
+            const clinicPag = data;
+            return { clinicPag };
         } catch (error) {
             console.log(error.response.data);
         }

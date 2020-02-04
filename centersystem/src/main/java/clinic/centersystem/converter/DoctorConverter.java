@@ -5,6 +5,8 @@ import clinic.centersystem.dto.response.DoctorResponse;
 import clinic.centersystem.model.Doctor;
 import clinic.centersystem.model.enumeration.RoleEnum;
 
+import java.util.stream.Collectors;
+
 
 public class DoctorConverter {
     public static DoctorResponse toCreateDoctorResponseFromDoctor(Doctor doctor){
@@ -15,7 +17,7 @@ public class DoctorConverter {
                 .email(doctor.getEmail())
                 .startTime(doctor.getStartTime())
                 .endTime(doctor.getEndTime())
-                .role(doctor.getRole().name())
+                .roles(doctor.getAuthorities().stream().map(authority -> authority.getName()).collect(Collectors.toList()))
                 .clinicId(doctor.getClinic().getId())
                 .build();
     }
@@ -26,7 +28,6 @@ public class DoctorConverter {
                 .firstName(doctorRequestDTO.getFirstName())
                 .lastName(doctorRequestDTO.getLastName())
                 .password(doctorRequestDTO.getPassword1())
-                .role(RoleEnum.ROLE_DOCTOR)
                 .isFirstLog(true)
                 .enabled(true)
                 .cntRating(0)

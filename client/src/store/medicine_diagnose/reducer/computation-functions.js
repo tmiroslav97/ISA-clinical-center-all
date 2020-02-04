@@ -5,13 +5,6 @@ export function putDiagnoseData(state, payload) {
     };
 }
 
-export function putDiagnosePageCnt(state, payload) {
-    return {
-        ...state,
-        diagnosePageCnt: payload
-    };
-}
-
 export function putIsFetchDiagnoses(state, payload) {
     return {
         ...state,
@@ -23,13 +16,6 @@ export function putMedicineData(state, payload) {
     return {
         ...state,
         medicines: payload
-    };
-}
-
-export function putMedicinePageCnt(state, payload) {
-    return {
-        ...state,
-        medicinePageCnt: payload
     };
 }
 

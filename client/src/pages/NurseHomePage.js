@@ -45,7 +45,7 @@ const NurseHomePage = () => {
                 <RewritePrescription nurseId={data.id} />
             </Tab>
             <Tab eventKey="fourth" title="WorkCalendar">
-                <WorkCalendar personnelId={data.id} role={data.role} />
+                <WorkCalendar personnelId={data.id} roles={data.roles} />
             </Tab>
             <Tab eventKey="fifth" title=" User Profile">
                 <UserProfile />

@@ -6,13 +6,14 @@ import { userDataSelector, userTokenSelector } from "../store/user/selectors";
 const PrivateRoute = ({ component: Component, accessRole = null, ...rest }) => {
     const userData = useSelector(userDataSelector);
     const userToken = useSelector(userTokenSelector);
-    
+
     function hasRightRole() {
         if (!accessRole) {
             return true;
         }
 
-        return accessRole.includes(userData.role) && !userDataSelector.firstLog;
+        const role = userData.roles.filter(val => accessRole.includes(val));
+        return role.length > 0 && !userDataSelector.firstLogin;
     }
 
     return (

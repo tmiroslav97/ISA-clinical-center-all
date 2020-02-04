@@ -1,20 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Container, Row, Col, Spinner, Table } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { clinicsDataSelector, isFetchClinicsDataSelector } from '../../store/clinics/selectors';
-import { fetchClinicsData } from '../../store/clinics/actions';
 
 
 const ClinicTable = () => {
-    const dispatch = useDispatch();
     const clinics = useSelector(clinicsDataSelector);
     const isFetchClinicsData = useSelector(isFetchClinicsDataSelector);
-
-    useEffect(() => {
-        dispatch(
-            fetchClinicsData({})
-        );
-    }, []);
 
     if (!isFetchClinicsData) {
         return <div className="d-flex justify-content-center">
@@ -36,7 +28,6 @@ const ClinicTable = () => {
                     <Table responsive>
                         <thead>
                             <tr>
-                                <th>#</th>
                                 <th>Name</th>
                                 <th>Address</th>
                                 <th>Description</th>
@@ -47,7 +38,6 @@ const ClinicTable = () => {
                                 clinics.map((clinic, index) => {
                                     return (
                                         <tr key={clinic.id}>
-                                            <td>{index + 1}</td>
                                             <td>{clinic.name}</td>
                                             <td>{clinic.address}</td>
                                             <td>{clinic.description}</td>
