@@ -54,8 +54,8 @@ public class AbsenceHolidayRequirementServiceImpl implements AbsenceHolidayRequi
         AbsenceHolidayRequirement absenceHolidayRequirement = AbsenceRequirementConverter.toCreateAbsenceRequirementFromAbsenceRequest(absenceRequirementDTO);
 
         Integer count = absenceHolidayRequirementRepository.getCount(absenceHolidayRequirement.getStartDate(), absenceHolidayRequirement.getEndDate());
-        if(count>0){
-            return "Can't submit intervals of requirements have intersection";
+        if (count > 0) {
+            return "Can't submit, intervals of requirements have intersection";
         }
 
         Personnel personnel = personnelService.findById(absenceRequirementDTO.getPersonnelId());

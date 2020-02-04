@@ -18,7 +18,7 @@ class PersonnelService extends HttpClient {
 
             return { data };
         } catch (error) {
-            console.log(error.response.data);
+            return error.response;
         }
     }
 
@@ -31,7 +31,7 @@ class PersonnelService extends HttpClient {
             const absholrequests = data;
             return { absholrequests };
         } catch (error) {
-            console.log(error.response.data);
+            return error.response;
         }
     }
 
@@ -40,7 +40,7 @@ class PersonnelService extends HttpClient {
             const { data } = await this.getApiClient().get(
                 format(FINALPOINTS.FETCH_CALENDAR, payload.personnelId)
             );
-            
+
             let calendar = {
                 id: data.id,
                 calendarItemResponses: []
@@ -58,7 +58,7 @@ class PersonnelService extends HttpClient {
 
             return { calendar };
         } catch (error) {
-            console.log(error.response.data);
+            return error.response;
         }
     }
 

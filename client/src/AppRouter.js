@@ -25,7 +25,7 @@ import Pricelist from './components/ClinicAdmin/Pricelist';
 import SurgeryReq from './components/SurgeryRequirement/SurgeryReq';
 import Unauthorized from './components/Unauthorized';
 import PatientPagination from './components/Patient/PatientPagination';
-import WorkCalendar from './components/WorkCalendar';
+import WorkCalendar from './components/Calendar/WorkCalendar';
 import HolAbsRequest from './components/HolidayAbsence/HolAbsRequest';
 import BookingDoc from './components/BookingDoc';
 import AppointmentInfo from './components/ApointmentInfo';

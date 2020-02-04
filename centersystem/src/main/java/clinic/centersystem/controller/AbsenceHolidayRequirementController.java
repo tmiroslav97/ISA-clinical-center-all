@@ -30,7 +30,12 @@ public class AbsenceHolidayRequirementController {
 
     @RequestMapping(method = POST, value = "/req")
     public ResponseEntity<String> submitAbsenceRequirement(@RequestBody AbsenceRequirementDTO absenceRequirementDTO) {
-        return new ResponseEntity<>(absenceHolidayRequirementService.submitAbsenceRequirement(absenceRequirementDTO), HttpStatus.OK);
+        String resp = absenceHolidayRequirementService.submitAbsenceRequirement(absenceRequirementDTO);
+        if (resp.equals("Successfully created absence requirement")){
+            return new ResponseEntity<>(resp, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(resp, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @RequestMapping(method = GET, value = "/my-abs-hol/{personnelId}")

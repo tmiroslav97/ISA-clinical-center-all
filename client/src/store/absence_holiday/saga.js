@@ -33,6 +33,10 @@ export function* absHolRequest() {
         if (data === 'Successfully created absence requirement') {
             yield put(putSuccessMsg(data));
             yield put(putSuccessMsg(null));
+            yield put(putIsFetchAbsHolRequests(false));
+            const { absholrequests } = yield call(PersonnelService.fetchAbsHolRequests, payload);
+            yield put(putAbsHolRequest(absholrequests));
+            yield put(putIsFetchAbsHolRequests(true));
         } else {
             yield put(putWarnMsg(data));
             yield put(putWarnMsg(null));
@@ -41,8 +45,4 @@ export function* absHolRequest() {
         yield put(putErrorMsg(data));
         yield put(putErrorMsg(null));
     }
-    yield put(putIsFetchAbsHolRequests(false));
-    const { absholrequests } = yield call(PersonnelService.fetchAbsHolRequests, payload);
-    yield put(putAbsHolRequest(absholrequests));
-    yield put(putIsFetchAbsHolRequests(true));
 }
