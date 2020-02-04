@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import useStateWithCallback from 'use-state-with-callback';
 import { Row, Form, Col, Button, Container } from 'react-bootstrap';
 import moment from 'moment';
 import HolAbsRequestsTable from './HolAbsRequestsTable';
@@ -12,31 +11,32 @@ const HolAbsRequest = () => {
     const data = useSelector(userDataSelector);
     const clinicId = data.clinicId;
     const personnelId = data.id;
-    //eslint-disable-next-line
+    const [validated, setValidated] = useState(false);
     const [today, setToday] = useState(moment().format('YYYY-MM-DD'));
-    const [startDate, setStartDate] = useState();
-    const [endDate, setEndDate] = useState();
-    const [startDateString, setStartDateString] = useStateWithCallback(moment().format('YYYY-MM-DD'), sdString => {
-        setStartDate((new Date(sdString)).getTime() / 1000 | 0);
-
-    });
-    const [endDateString, setEndDateString] = useStateWithCallback(moment().format('YYYY-MM-DD'), edString => {
-        setEndDate((new Date(edString)).getTime() / 1000 | 0);
-    });
-
+    const [startDate, setStartDate] = useState(moment().format('YYYY-MM-DD'));
+    const [endDate, setEndDate] = useState(moment().format('YYYY-MM-DD'));
     const [type, setType] = useState('Absence');
 
 
-    const handleSubmit = () => {
-        dispatch(
-            absHolRequest({
-                startDate,
-                endDate,
-                type,
-                personnelId,
-                clinicId
-            })
-        );
+    const handleSubmit = (event) => {
+
+        const form = event.currentTarget;
+        event.preventDefault();
+        if (form.checkValidity() === false) {
+            event.stopPropagation();
+            setValidated(true);
+        } else {
+            dispatch(
+                absHolRequest({
+                    startDate,
+                    endDate,
+                    type,
+                    personnelId,
+                    clinicId
+                })
+            );
+            setValidated(false);
+        }
     };
 
     return (
@@ -48,12 +48,12 @@ const HolAbsRequest = () => {
             </Row>
             <Row>
                 <Col md={{ span: 3, offset: 4 }} xs={12}>
-                    <Form>
+                    <Form noValidate validated={validated} onSubmit={handleSubmit}>
                         <Form.Group as={Col}>
                             <div align="center">
                                 <Form.Label>Type of request</Form.Label>
                             </div>
-                            <Form.Control as="select" onChange={({ currentTarget }) => {
+                            <Form.Control required as="select" onChange={({ currentTarget }) => {
                                 setType(currentTarget.value);
                             }} >
                                 <option key="0" value="Absence">Absence</option>
@@ -65,9 +65,9 @@ const HolAbsRequest = () => {
                             <div align="center">
                                 <Form.Label>Choose start date:</Form.Label>
                             </div>
-                            <Form.Control type="date" min={today} value={startDateString} id="date1"
+                            <Form.Control required type="date" min={today} id="date1"
                                 onChange={({ currentTarget }) => {
-                                    setStartDateString(currentTarget.value);
+                                    setStartDate(moment(currentTarget.value).format('YYYY-MM-DD'));
                                 }} />
 
                         </Form.Group>
@@ -75,15 +75,15 @@ const HolAbsRequest = () => {
                             <div align="center">
                                 <Form.Label>Choose end date:</Form.Label>
                             </div>
-                            <Form.Control type="date" min={today} value={endDateString} id="date2"
+                            <Form.Control required type="date" min={today} id="date2"
                                 onChange={({ currentTarget }) => {
-                                    setEndDateString(currentTarget.value);
+                                    setEndDate(moment(currentTarget.value).format('YYYY-MM-DD'));
                                 }}
                             />
                         </Form.Group>
                         <Form.Group as={Col}>
                             <div align="center">
-                                <Button variant="primary" onClick={handleSubmit}>
+                                <Button variant="primary" type="submit">
                                     Submit
                                 </Button>
                             </div>

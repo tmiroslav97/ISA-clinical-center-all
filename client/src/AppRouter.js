@@ -26,7 +26,7 @@ import SurgeryReq from './components/SurgeryRequirement/SurgeryReq';
 import Unauthorized from './components/Unauthorized';
 import PatientPagination from './components/Patient/PatientPagination';
 import WorkCalendar from './components/WorkCalendar';
-import HolAbsRequest from './components/HolAbsRequest';
+import HolAbsRequest from './components/HolidayAbsence/HolAbsRequest';
 import BookingDoc from './components/BookingDoc';
 import AppointmentInfo from './components/ApointmentInfo';
 import SurReqDoctors from './components/SurgeryRequirement/SurReqDoctors';

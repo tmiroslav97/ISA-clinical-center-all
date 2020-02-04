@@ -1,6 +1,7 @@
 package clinic.centersystem.controller;
 
 import clinic.centersystem.dto.request.AbsenceRequirementDTO;
+import clinic.centersystem.dto.response.AbsenceRequirementResponse;
 import clinic.centersystem.model.AbsenceHolidayRequirement;
 import clinic.centersystem.service.AbsenceHolidayRequirementServiceImpl;
 import org.springframework.http.HttpStatus;
@@ -33,7 +34,7 @@ public class AbsenceHolidayRequirementController {
     }
 
     @RequestMapping(method = GET, value = "/my-abs-hol/{personnelId}")
-    public ResponseEntity<List<AbsenceHolidayRequirement>> getMyRequirements(@PathVariable Long personnelId) {
+    public ResponseEntity<List<AbsenceRequirementResponse>> getMyRequirements(@PathVariable Long personnelId) {
         return new ResponseEntity<>(absenceHolidayRequirementService.findAllByPersonnelId(personnelId), HttpStatus.OK);
     }
 }

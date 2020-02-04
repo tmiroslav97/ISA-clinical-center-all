@@ -2,6 +2,7 @@ package clinic.centersystem.service;
 
 import clinic.centersystem.converter.AbsenceRequirementConverter;
 import clinic.centersystem.dto.request.AbsenceRequirementDTO;
+import clinic.centersystem.dto.response.AbsenceRequirementResponse;
 import clinic.centersystem.model.AbsenceHolidayRequirement;
 import clinic.centersystem.model.Clinic;
 import clinic.centersystem.model.Personnel;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AbsenceHolidayRequirementServiceImpl implements AbsenceHolidayRequirementService {
@@ -38,8 +40,8 @@ public class AbsenceHolidayRequirementServiceImpl implements AbsenceHolidayRequi
     }
 
     @Override
-    public List<AbsenceHolidayRequirement> findAllByPersonnelId(Long id) {
-        return absenceHolidayRequirementRepository.findAllByPersonnelId(id);
+    public List<AbsenceRequirementResponse> findAllByPersonnelId(Long id) {
+        return absenceHolidayRequirementRepository.findAllByPersonnelId(id).stream().map(AbsenceRequirementConverter::toCreateAbsenceRequirementResponseFromAbsenceRequirement).collect(Collectors.toList());
     }
 
     @Override
@@ -50,6 +52,12 @@ public class AbsenceHolidayRequirementServiceImpl implements AbsenceHolidayRequi
     @Override
     public String submitAbsenceRequirement(AbsenceRequirementDTO absenceRequirementDTO) {
         AbsenceHolidayRequirement absenceHolidayRequirement = AbsenceRequirementConverter.toCreateAbsenceRequirementFromAbsenceRequest(absenceRequirementDTO);
+
+        Integer count = absenceHolidayRequirementRepository.getCount(absenceHolidayRequirement.getStartDate(), absenceHolidayRequirement.getEndDate());
+        if(count>0){
+            return "Can't submit intervals of requirements have intersection";
+        }
+
         Personnel personnel = personnelService.findById(absenceRequirementDTO.getPersonnelId());
         Clinic clinic = clinicService.findById(absenceRequirementDTO.getClinicId());
 
