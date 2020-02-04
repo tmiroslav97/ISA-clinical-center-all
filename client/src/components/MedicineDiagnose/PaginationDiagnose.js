@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Pagination } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchDiagnoseData } from '../../store/medicine_diagnose/actions';
-import { diagnosePageCntSelector } from '../../store/medicine_diagnose/selectors';
+import { pageSelCntSelector, pageCntSelector } from '../../store/common/selectors';
 import DiagnoseTable from './DiagnoseTable';
 
 
 const PaginationDiagnose = () => {
     const dispatch = useDispatch();
-    const diagnosePageCnt = useSelector(diagnosePageCntSelector);
-    const [pageCnt, setPageCnt] = useState(0);
+    const diagnosePageCnt = useSelector(pageCntSelector);
+    const selPageCnt = useSelector(pageSelCntSelector);
+    const [pageCnt, setPageCnt] = useState(selPageCnt);
 
     useEffect(() => {
         dispatch(
