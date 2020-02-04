@@ -127,8 +127,6 @@ VALUES (1, 2);
 INSERT INTO clinic_patients(clinic_id, patients_id)
 VALUES (1, 6);
 
-
-
 INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (1,FALSE ,'SUR','For heart',1,1);
 INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (2,FALSE ,'SUR','For head',2,1);
 INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (3,FALSE ,'SUR','For brain',3,1);
@@ -141,9 +139,12 @@ INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (9,FALSE 
 INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (10,FALSE ,'SUR','For Ah3',10,1);
 INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (11,FALSE ,'SUR','For heart',11,1);
 
-INSERT INTO roomcalendar(date, termin, room_id) VALUES ('2020-01-22 07:00:00',7,1);
+INSERT INTO roomcalendar(date, termin, room_id) VALUES ('2020-01-22',7,1);
 INSERT INTO roomcalendar(date, termin, room_id) VALUES ('2020-01-22',10,1);
 INSERT INTO roomcalendar(date, termin, room_id) VALUES ('2020-01-22',16,1);
+INSERT INTO roomcalendar(date, termin, room_id) VALUES ('2020-01-23',7,1);
+
+
 
 INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id,patient_name,doctor_name)VALUES ('2020-01-23',7,1,2,3, 'Jovana Lakic','Nevena Djukin');
 INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id,patient_name,doctor_name)VALUES ('2020-01-31',10,1,2,3,'Jovana Lakic','Nevena Djukin');
@@ -152,7 +153,11 @@ INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id,patie
 INSERT INTO appointment_type(id, type, clinic_id) VALUES (1,'General examination',1);
 INSERT INTO appointment_type(id, type, clinic_id) VALUES (2,'Heart examination',1);
 
+INSERT INTO appointment(app_state, date_time, discount, price, clinic_id, doctor_id, patient_id, room_id, type_id) VALUES(2, '2020-02-01 09:00:00', 0,0,1,3,2,1,1);
 INSERT INTO appointment(app_state, date_time, discount, price, clinic_id, doctor_id, patient_id, room_id, type_id) VALUES(2, '2020-02-02 11:00:00', 0,0,1,3,2,1,1);
+INSERT INTO appointment(app_state, date_time, discount, price, clinic_id, doctor_id, patient_id, room_id, type_id) VALUES(2, '2020-02-03 12:00:00', 0,0,1,3,2,1,1);
+
+
 
 INSERT INTO prescription(id, is_validate, nurse_id)
 VALUES (1, FALSE, NULL);
@@ -172,24 +177,37 @@ INSERT INTO calendar(id, personnel_id)
 VALUES (2, 3);
 
 INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type,typeid)
-VALUES ('2020-02-02 11:00:00', '2020-02-02 09:00:00', 'First examination', 'N', 3, 2,'APP',1);
+VALUES ('2020-02-01 11:00:00', '2020-02-05 09:00:00', 'First examination', 'N', 3, 2,'APP',1);
 
-INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type)
-VALUES ('2020-02-02 12:00:00', '2020-02-02 11:00:00', 'Second examination', 'N', 4, 2,'APP');
+INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type,typeid)
+VALUES ('2020-02-02 12:00:00', '2020-02-04 11:00:00', 'Second examination', 'N', 4, 2,'APP',2);
 
-INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type)
-VALUES ('2020-02-02 14:00:00', '2020-02-02 12:00:00', 'Third examination', 'N', 5, 2,'APP');
+INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type,typeid)
+VALUES ('2020-02-03 14:00:00', '2020-02-04 12:00:00', 'Third examination', 'N', 5, 2,'APP',3);
 
 
 UPDATE personnel
-SET calendar_id =1
+SET calendar_id=1
 WHERE id = 4;
 
 UPDATE personnel
-SET calendar_id =2
+SET calendar_id=2
 WHERE id = 3;
 
+INSERT INTO medicine(code,description,name) VALUES('12545','For head', 'Brufen');
+INSERT INTO medicine(code,description,name) VALUES('4315','For head', 'Paracetamol');
+INSERT INTO medicine(code,description,name) VALUES('3h46','For head', 'Cafetin');
+INSERT INTO diagnose(code,description,name) VALUES('s5sg4','Strong pain in head', 'Migren');
+INSERT INTO diagnose(code,description,name) VALUES('d3y5','Pain in head', 'Head ache    ');
 
+INSERT INTO medical_record(blood_type, description, height, weight, patient_id) VALUES ('Nepoznato','Nema opisa', 0.0, 0.0, 2);
+INSERT INTO medical_record(blood_type, description, height, weight, patient_id) VALUES ('Nepoznato','Nema opisa', 0.0, 0.0, 6);
 
-INSERT INTO medicine(code,description,name) VALUES("123asd","good medic", "brufen");
+UPDATE patient
+SET medical_record_id=1
+WHERE id=2;
+
+UPDATE patient
+SET medical_record_id=2
+WHERE id=6;
 

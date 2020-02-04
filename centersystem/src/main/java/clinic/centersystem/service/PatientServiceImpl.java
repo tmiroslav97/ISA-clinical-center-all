@@ -79,6 +79,12 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
+    public PatientResponse findPatientByAppId(Long id) {
+        Patient patient = patientRepository.findPatientByAppId(id);
+        return PatientConverter.toCreatePatientResponseFromPatient(patient);
+    }
+
+    @Override
     public List<PatientResponse> getPatients() {
         List<Patient> patients = this.findAll();
         List<PatientResponse> patientResponses = patients.stream().map(PatientConverter::toCreatePatientResponseFromPatient).collect(Collectors.toList());

@@ -1,7 +1,8 @@
 import {
     PUT_USER_DATA,
     PUT_USER_TOKEN,
-    PUT_IS_FETCH_USER_DATA
+    PUT_IS_FETCH_USER_DATA,
+    PUT_USER_ID
 } from '../constants';
 
 import * as computationFunctions from './computation-functions';
@@ -16,6 +17,7 @@ const initialState = {
         role: localStorage.getItem('role')
     },
     token: window.localStorage.getItem('token'),
+    id: window.localStorage.getItem('userID'),
     isFetchUserData: false
 };
 
@@ -29,7 +31,8 @@ const userReducer = (state = initialState, { type, payload }) => {
 const actionHandler = {
     [PUT_USER_DATA]: computationFunctions.putUserData,
     [PUT_USER_TOKEN]: computationFunctions.putUserToken,
-    [PUT_IS_FETCH_USER_DATA]: computationFunctions.putIsFetchUserData
+    [PUT_IS_FETCH_USER_DATA]: computationFunctions.putIsFetchUserData,
+    [PUT_USER_ID]: computationFunctions.putUserId
 };
 
 export default userReducer;

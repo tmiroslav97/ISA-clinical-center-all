@@ -4,7 +4,9 @@ import {
     FETCH_MEDICINE_DATA,
     FETCH_DIAGNOSE_DATA,
     ADD_MEDICINE,
-    ADD_DIAGNOSE
+    ADD_DIAGNOSE,
+    FETCH_MEDICINES_ALL,
+    FETCH_DIAGNOSES_ALL
 } from './constants';
 
 import MedDiagService from '../../services/MedDiagService';
@@ -18,6 +20,21 @@ import {
     putIsFetchMedicine
 } from './actions';
 
+export function* fetchMedicinesAll() {
+    const { payload } = yield take(FETCH_MEDICINES_ALL);
+    yield put(putIsFetchMedicine(false));
+    const { medicines } = yield call(MedDiagService.fetchMedicineAll, payload);
+    yield put(putMedicineData(medicines));
+    yield put(putIsFetchMedicine(true));
+}
+
+export function* fetchDiagnosesAll() {
+    const { payload } = yield take(FETCH_DIAGNOSES_ALL);
+    yield put(putIsFetchDiagnose(false));
+    const { diagnoses } = yield call(MedDiagService.fetchDiagnoseAll, payload);
+    yield put(putDiagnoseData(diagnoses));
+    yield put(putIsFetchDiagnose(true));
+}
 
 export function* fetchMedicineData() {
     const { payload } = yield take(FETCH_MEDICINE_DATA);

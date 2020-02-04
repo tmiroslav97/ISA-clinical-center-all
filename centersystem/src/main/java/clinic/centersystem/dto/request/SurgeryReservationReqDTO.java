@@ -1,14 +1,12 @@
 package clinic.centersystem.dto.request;
 
 import clinic.centersystem.dto.response.SurgeryRequirementDateResponseDTO;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor

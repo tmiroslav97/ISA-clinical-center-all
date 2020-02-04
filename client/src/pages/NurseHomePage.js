@@ -1,31 +1,42 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchNurseData } from '../store/user/actions';
-import { Tabs, Tab } from 'react-bootstrap';
+import { Tabs, Tab, Spinner } from 'react-bootstrap';
 import UserProfile from '../components/UserProfile';
 import PatientList from '../components/PatientList';
 import WorkCalendar from '../components/WorkCalendar';
 import HolAbsRequest from '../components/HolAbsRequest';
 import RewritePrescription from '../components/RewritePrescription';
-import { userDataSelector } from '../store/user/selectors';
+import { userDataSelector, userIdSelector, isFetchUserDataSelector } from '../store/user/selectors';
 
-const NurseHomePage = ({ match }) => {
+const NurseHomePage = () => {
     const dispatch = useDispatch();
-    const id = match.params.id;
+    const id = useSelector(userIdSelector);
     const data = useSelector(userDataSelector);
+    const isFetchUserData = useSelector(isFetchUserDataSelector);
 
     useEffect(() => {
-        dispatch(
-            fetchNurseData({
-                id
-            })
-        );
-    }, []);
+        if (id != null) {
+            dispatch(
+                fetchNurseData({
+                    id
+                })
+            );
+        }
+    }, [id]);
+
+    if (!isFetchUserData) {
+        return <div className="d-flex justify-content-center">
+            <Spinner animation="border" role="status">
+                <span className="sr-only">Loading...</span>
+            </Spinner>
+        </div>;
+    }
 
     return (
         <Tabs id="left-tabs-doc-home" >
             <Tab eventKey="zero" title="Patients list">
-                <PatientList clinicId={data.clinicId}/>
+                <PatientList clinicId={data.clinicId} />
             </Tab>
             <Tab eventKey="second" title="Holiday/absence requests">
                 <HolAbsRequest personnelId={data.id} clinicId={data.clinicId} />

@@ -1,5 +1,6 @@
 package clinic.centersystem.service;
 
+import clinic.centersystem.dto.request.MedicalRecordRequestDTO;
 import clinic.centersystem.model.MedicalRecord;
 import clinic.centersystem.repository.MedicalRecordRepository;
 import clinic.centersystem.service.intf.MedicalRecordService;
@@ -25,5 +26,25 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     @Override
     public MedicalRecord save(MedicalRecord medicalRecord) {
         return medicalRecordRepository.save(medicalRecord);
+    }
+
+    @Override
+    public MedicalRecord findByAppId(Long id) {
+        return medicalRecordRepository.findByAppId(id);
+    }
+
+    @Override
+    public String editMedicalRecord(MedicalRecordRequestDTO medicalRecordRequestDTO) {
+        MedicalRecord medicalRecord = this.findById(medicalRecordRequestDTO.getId());
+        if(medicalRecord==null){
+            return "Can't find medical record";
+        }
+        medicalRecord.setBloodType(medicalRecordRequestDTO.getBloodType());
+        medicalRecord.setWeight(medicalRecordRequestDTO.getWeight());
+        medicalRecord.setHeight(medicalRecordRequestDTO.getHeight());
+        medicalRecord.setDescription(medicalRecordRequestDTO.getDescription());
+
+        medicalRecordRepository.save(medicalRecord);
+        return "Successfuly edited";
     }
 }

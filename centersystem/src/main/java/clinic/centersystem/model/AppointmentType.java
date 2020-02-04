@@ -25,6 +25,7 @@ public class AppointmentType {
     @Column(name = DbColumnConstants.TYPE, unique = true, nullable = false)
     private String type;
 
+
     @JsonIgnore
     @OneToMany(mappedBy = "type", fetch = FetchType.LAZY)
     private Set<Appointment> appointments;

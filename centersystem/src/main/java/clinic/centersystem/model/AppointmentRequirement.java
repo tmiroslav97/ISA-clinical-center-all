@@ -22,19 +22,19 @@ public class AppointmentRequirement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = DbColumnConstants.DATETIME, unique = false, nullable = false)
+    @Column(name = DbColumnConstants.DATETIME, nullable = false)
     private Long dateTime;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private AppointmentType type;
-
-    @Column(name = DbColumnConstants.APPSTATE, unique = false, nullable = false)
+    @Column(name = DbColumnConstants.APPSTATE,  nullable = false)
     private AppStateEnum appState;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
+    private AppointmentType type;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private Patient patient;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Clinic clinic;
 
 }

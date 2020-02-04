@@ -21,7 +21,7 @@ import java.util.Set;
 @Table(name = DbTableConstants.CLINICCENTERADMIN)
 public class ClinicCenterAdmin extends User {
 
-    @Column(name = DbColumnConstants.PREDEFINED, unique = false, nullable = true)
+    @Column(name = DbColumnConstants.PREDEFINED)
     private boolean predefined;
 
     @Builder(builderMethodName = "clinicCenterAdminBuilder")

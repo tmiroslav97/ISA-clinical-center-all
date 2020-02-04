@@ -52,7 +52,7 @@ public class CalendarItem {
     private String allDay;
 
     @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Calendar calendar;
 
 }

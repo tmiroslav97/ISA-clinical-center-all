@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
 
 import javax.persistence.*;
 
@@ -25,18 +26,20 @@ public class Appointment {
     private Long id;
 
     @Column(name = DbColumnConstants.DATETIME, nullable = false)
-    @Temporal(TemporalType.DATE)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime", parameters = {
             @org.hibernate.annotations.Parameter(name = "databaseZone", value = "UTC"),
             @org.hibernate.annotations.Parameter(name = "javaZone", value = "UTC")
     })
-    private Long dateTime;
+    private DateTime dateTime;
 
     @Column(name = DbColumnConstants.PRICE, nullable = false)
     private Float price;
 
     @Column(name = DbColumnConstants.DISCOUNT, nullable = false)
     private Float discount;
+
+    @Column(name = DbColumnConstants.APPSTATE, nullable = false)
+    private AppStateEnum appState;
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
@@ -53,9 +56,6 @@ public class Appointment {
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     private AppointmentType type;
-
-    @Column(name = DbColumnConstants.APPSTATE, nullable = false)
-    private AppStateEnum appState;
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
