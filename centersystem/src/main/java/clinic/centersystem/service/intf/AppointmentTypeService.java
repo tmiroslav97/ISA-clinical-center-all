@@ -1,6 +1,5 @@
 package clinic.centersystem.service.intf;
 
-import clinic.centersystem.model.Appointment;
 import clinic.centersystem.model.AppointmentType;
 
 import java.util.List;

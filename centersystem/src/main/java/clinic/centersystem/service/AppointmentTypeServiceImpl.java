@@ -5,7 +5,6 @@ import clinic.centersystem.dto.request.AppointmentTypeRequestDTO;
 import clinic.centersystem.model.AppointmentType;
 import clinic.centersystem.model.Clinic;
 import clinic.centersystem.repository.AppointmentTypeRepository;
-import clinic.centersystem.repository.ClinicRepository;
 import clinic.centersystem.service.intf.AppointmentTypeService;
 import clinic.centersystem.service.intf.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
