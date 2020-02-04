@@ -2,6 +2,7 @@ package clinic.centersystem.controller;
 
 import clinic.centersystem.dto.request.ClinicRequestDTO;
 import clinic.centersystem.dto.response.ClinicResponse;
+import clinic.centersystem.dto.response.ClinicResponsePageDTO;
 import clinic.centersystem.model.Clinic;
 import clinic.centersystem.service.ClinicServiceImpl;
 import org.springframework.http.HttpStatus;
@@ -41,11 +42,16 @@ public class ClinicController {
 
     @RequestMapping(method = GET, value = "/clinics")
     public ResponseEntity<List<ClinicResponse>> getClinics() {
-        return new ResponseEntity<List<ClinicResponse>>(this.clinicService.getClinics(), HttpStatus.OK);
+        return new ResponseEntity<>(this.clinicService.getClinics(), HttpStatus.OK);
     }
 
     @RequestMapping(method = GET, value = "/search-clinics")
     public ResponseEntity<List<Clinic>> searchClinics(@PathVariable String name) {
-        return new ResponseEntity<List<Clinic>>(this.clinicService.searchClinics(name), HttpStatus.OK);
+        return new ResponseEntity<>(this.clinicService.searchClinics(name), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = GET, value = "/all/{pageCnt}")
+    public ResponseEntity<ClinicResponsePageDTO> getClinicPage(@PathVariable Integer pageCnt) {
+        return new ResponseEntity<>(this.clinicService.findAll(pageCnt), HttpStatus.OK);
     }
 }

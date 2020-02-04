@@ -9,15 +9,24 @@ const AddMedicine = () => {
     const [name, setName] = useState();
     const [description, setDescription] = useState();
     const [code, setCode] = useState();    
+    const [validated, setValidated] = useState(false);
 
-    const handleAddMedicine = () => {
-        dispatch(
-            addMedicine({
-                code,
-                name,
-                description
-            })
-        );
+    const handleAddMedicine = (event) => {
+        const form = event.currentTarget;
+        event.preventDefault();
+        if (form.checkValidity() === false) {
+            event.stopPropagation();
+            setValidated(true);
+        } else {
+            dispatch(
+                addMedicine({
+                    code,
+                    name,
+                    description
+                })
+            );
+            setValidated(false);
+        }
     };
 
 
@@ -30,10 +39,10 @@ const AddMedicine = () => {
             </Row>
             <Row>
                 <Col md={{ span: 5, offset: 1 }} xs={12}>
-                    <Form>
+                    <Form noValidate validated={validated} onSubmit={handleAddMedicine}>
                         <Form.Group as={Col}>
                             <Form.Label>Code:</Form.Label>
-                            <Form.Control type="text" placeholder="Enter code"
+                            <Form.Control required type="text" placeholder="Enter code"
                                 onChange={({ currentTarget }) => {
                                     setCode(currentTarget.value);
                                 }}
@@ -41,7 +50,7 @@ const AddMedicine = () => {
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Form.Label>Name:</Form.Label>
-                            <Form.Control type="text" placeholder="Enter name"
+                            <Form.Control required type="text" placeholder="Enter name"
                                 onChange={({ currentTarget }) => {
                                     setName(currentTarget.value);
                                 }}
@@ -49,14 +58,14 @@ const AddMedicine = () => {
                         </Form.Group>
                         <Form.Group as={Col}>
                             <Form.Label>Description:</Form.Label>
-                            <Form.Control type="textarea" placeholder="Enter description"
+                            <Form.Control required as="textarea" rows="4" placeholder="Enter description"
                                 onChange={({ currentTarget }) => {
                                     setDescription(currentTarget.value);
                                 }}
                             />
                         </Form.Group>
                         <Form.Group as={Col}>
-                            <Button variant="primary" onClick={handleAddMedicine}>
+                            <Button variant="primary" type="submit">
                                 Add medicine
                             </Button>
                         </Form.Group>

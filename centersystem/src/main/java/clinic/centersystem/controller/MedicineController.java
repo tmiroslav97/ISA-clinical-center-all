@@ -30,7 +30,7 @@ public class MedicineController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<String> addMedicine(@RequestBody Medicine medicine) {
         this.medicineService.save(medicine);
-        return new ResponseEntity<>("Code successfuly added", HttpStatus.OK);
+        return new ResponseEntity<>("Medicine successfuly added", HttpStatus.OK);
     }
 
     @RequestMapping(value = "/all/{pageCnt}", method = RequestMethod.GET)

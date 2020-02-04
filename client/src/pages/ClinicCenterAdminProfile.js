@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
 import { history } from '../index';
 import { useDispatch, useSelector } from 'react-redux';
-import { Card, Button, Col, Row, Container } from 'react-bootstrap';
+import { Card, Button, Col, Row, Container, Spinner } from 'react-bootstrap';
 import { fetchCCAdminData } from '../store/user/actions';
-import { userIdSelector } from '../store/user/selectors';
+import { userIdSelector, userDataSelector, isFetchUserDataSelector } from '../store/user/selectors';
 
 
 const ClinicCenterAdminProfile = () => {
     const dispatch = useDispatch();
     const ccAdminId = useSelector(userIdSelector);
+    const isFetchUserData = useSelector(isFetchUserDataSelector);
+    const userData = useSelector(userDataSelector);
 
     useEffect(() => {
         if (ccAdminId != null) {
@@ -20,6 +22,13 @@ const ClinicCenterAdminProfile = () => {
         }
     }, [ccAdminId]);
 
+    if (!isFetchUserData) {
+        return <div className="d-flex justify-content-center">
+            <Spinner animation="border" role="status">
+                <span className="sr-only">Loading...</span>
+            </Spinner>
+        </div>;
+    }
 
     return (
         <Container>
@@ -86,17 +95,19 @@ const ClinicCenterAdminProfile = () => {
                         </Card.Body>
                     </Card>
                 </Col>
-                <Col md={{ span: 3 }} xs={12}>
-                    <Card style={{ width: '18rem' }}>
-                        <Card.Body>
-                            <Card.Title>Add clinic center admin</Card.Title>
-                            <Card.Text>
-                                You can add clinic center admin.
+                {userData.predefined &&
+                    <Col md={{ span: 3 }} xs={12}>
+                        <Card style={{ width: '18rem' }}>
+                            <Card.Body>
+                                <Card.Title>Add clinic center admin</Card.Title>
+                                <Card.Text>
+                                    You can add clinic center admin.
                             </Card.Text>
-                            <Button variant="primary" onClick={() => { history.push('/ccadmin/cca-reg/' + ccAdminId); }}>Add</Button>
-                        </Card.Body>
-                    </Card>
-                </Col>
+                                <Button variant="primary" onClick={() => { history.push('/ccadmin/cca-reg'); }}>Add</Button>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                }
             </Row>
         </Container>
     );

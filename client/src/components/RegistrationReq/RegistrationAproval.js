@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Pagination } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchRegReqsData } from '../../store/reg_req/actions';
-import { regReqsPageCntSelector } from '../../store/reg_req/selectors';
+import { pageCntSelector, pageSelCntSelector } from '../../store/common/selectors';
 import RegTable from './RegTable';
 
 
 const RegistrationAproval = () => {
     const dispatch = useDispatch();
-    const regReqsPageCnt = useSelector(regReqsPageCntSelector);
-    const [pageCnt, setPageCnt] = useState(0);
+    const regReqsPageCnt = useSelector(pageCntSelector);
+    const selpageCnt = useSelector(pageSelCntSelector);
+    const [pageCnt, setPageCnt] = useState(selpageCnt);
 
     useEffect(() => {
         dispatch(
@@ -20,7 +21,7 @@ const RegistrationAproval = () => {
     let items = [];
     for (let number = 1; number <= regReqsPageCnt; number++) {
         items.push(
-            <Pagination.Item key={number} active={number == (pageCnt + 1)}>
+            <Pagination.Item key={number} active={number == (selpageCnt + 1)}>
                 {number}
             </Pagination.Item>
         );
@@ -47,7 +48,6 @@ const RegistrationAproval = () => {
             }
         }
     };
-
 
     return (
 

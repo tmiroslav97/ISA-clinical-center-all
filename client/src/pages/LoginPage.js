@@ -7,14 +7,23 @@ const LoginPage = () => {
     const dispatch = useDispatch();
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
-    
-    const handleLogin = () => {
-        dispatch(
-            loginUser({
-                username,
-                password
-            })
-        );
+    const [validated, setValidated] = useState(false);
+
+    const handleLogin = (event) => {
+        const form = event.currentTarget;
+        event.preventDefault();
+        if (form.checkValidity() === false) {
+            event.stopPropagation();
+            setValidated(true);
+        } else {
+            dispatch(
+                loginUser({
+                    username,
+                    password
+                })
+            );
+            setValidated(false);
+        }
     };
 
     return (
@@ -25,24 +34,27 @@ const LoginPage = () => {
                 </Col>
             </Row>
             <Row>
-                <Col md={{ span:3, offset: 4 }} xs={12}>
-                    <Form>
+                <Col md={{ span: 3, offset: 4 }} xs={12}>
+                    <Form noValidate validated={validated} onSubmit={handleLogin}>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" 
-                                onChange={( { currentTarget } ) => {
+                            <Form.Control required type="email" placeholder="Enter email"
+                                onChange={({ currentTarget }) => {
                                     setUsername(currentTarget.value);
-                            }} />
+                                }} />
                         </Form.Group>
 
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" 
-                                onChange={( { currentTarget } ) => {
+                            <Form.Control required type="password" pattern=".{3,25}" placeholder="Password"
+                                onChange={({ currentTarget }) => {
                                     setPassword(currentTarget.value);
-                            }} />
+                                }} />
+                            <Form.Control.Feedback type="invalid">
+                                min 5 max 25 characters
+                                </Form.Control.Feedback>
                         </Form.Group>
-                        <Button variant="primary" onClick={handleLogin}>
+                        <Button variant="primary" type="submit">
                             Login
                         </Button>
                     </Form>
@@ -50,6 +62,6 @@ const LoginPage = () => {
             </Row>
         </Container>
     );
-  }
-  
-  export default LoginPage;
+}
+
+export default LoginPage;

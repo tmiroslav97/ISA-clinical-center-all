@@ -18,10 +18,9 @@ INSERT INTO clinic (address, cnt_rating, description, name , sum_rating)
 VALUES ('Zrenjanin 66', 0, 'Clinic for neurology', 'Clinic 2', 0);
 
 INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
-                   last_password_reset_date, password, role)
+                   last_password_reset_date, password)
 VALUES (1, 'Miroslav', 'Tomic', 'tomic.miroslav97@gmail.com', true, false, '2019-11-20 11:00:00',
-        '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra',
-        'ROLE_CCADMIN');
+        '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra');
 
 INSERT INTO user_authority (user_id, authority_id)
 VALUES (1, 1);
@@ -30,10 +29,9 @@ INSERT INTO clinic_center_admin (predefined, id)
 VALUES (true, 1);
 
 INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
-                   last_password_reset_date, password, role)
+                   last_password_reset_date, password)
 VALUES (2, 'Jovana', 'Lakic', 'jovana.lakic8@gmail.com', true, false, '2019-11-20 11:25:00',
-        '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra',
-        'ROLE_PATIENT');
+        '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra');
 
 INSERT INTO user_authority (user_id, authority_id)
 VALUES (2, 5);
@@ -42,10 +40,9 @@ INSERT INTO patient (address, city, country, is_activated, phone_num, unoip, id)
 VALUES ('Ilije Bircanina', 'Vlasenica', 'Bosna i Hercegovina', true, '065987544', '1234567890', 2);
 
 INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
-                   last_password_reset_date, password, role)
+                   last_password_reset_date, password)
 VALUES (5, 'Jecko', 'Pecko', 'jecko@gmail.com', true, false, '2019-11-20 11:25:00',
-        '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra',
-        'ROLE_ADMINC');
+        '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra');
 
 INSERT INTO user_authority (user_id, authority_id)
 VALUES (5, 2);
@@ -55,10 +52,9 @@ VALUES (5, 1);
 
 
 INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
-                   last_password_reset_date, password, role)
+                   last_password_reset_date, password)
 VALUES (3, 'Nevena', 'Djukin', 'nvndjukin97@gmail.com', true, false, '2019-11-20 11:30:00',
-        '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra',
-        'ROLE_DOCTOR');
+        '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra');
 
 INSERT INTO personnel(id, clinic_id)
 VALUES (3, 1);
@@ -69,35 +65,32 @@ VALUES (0, 0, 8, 16, 3,1);
 INSERT INTO user_authority (user_id, authority_id)
 VALUES (3, 3);
 
-INSERT INTO user_authority (user_id, authority_id)
-VALUES (3, 4);
-
 INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
-                   last_password_reset_date, password, role)
+                   last_password_reset_date, password)
 VALUES (4, 'Milena', 'Milic', 'nvn@gmail.com', true, false, '2019-11-20 11:30:00',
-        '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra',
-        'ROLE_NURSE');
+        '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra');
 INSERT INTO personnel(id, clinic_id)
 VALUES (4, 1);
 
 INSERT INTO nurse(id, clinic_id)
 VALUES (4,1);
 
+INSERT INTO user_authority (user_id, authority_id)
+VALUES (4, 4);
+
 INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
-                   last_password_reset_date, password, role)
+                   last_password_reset_date, password)
 VALUES (6, 'Stefan', 'Peric', 'stefan@stefan.com', true, false, '2019-11-20 11:25:00',
-        '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra',
-        'ROLE_PATIENT');
+        '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra');
 
 INSERT INTO user_authority (user_id, authority_id)
 VALUES (2, 6);
 
 INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
-                   last_password_reset_date, password, role)
+                   last_password_reset_date, password)
 
 VALUES (7, 'Ana', 'Andjusic', 'ana@gmail.com', true, false, '2020-01-24 3:50:00',
-        '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra',
-        'ROLE_DOCTOR');
+        '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra');
 
 INSERT INTO personnel(id, clinic_id)
 VALUES (7, 2);
@@ -115,6 +108,16 @@ INSERT INTO registration_requirement (address, city, country, email, first_name,
                                       phone_num, unoip)
 VALUES ('Safarikova 31', 'Bijeljina', 'Bosna', 'miroslavtomic@outlook.com', 'Miki', 'Peric', '123', '123', '065987654',
         '1234543');
+
+INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
+                                      phone_num, unoip)
+VALUES ('Safarikova 16', 'Bijeljina', 'Bosna', 'roncevic1996@gmail.com', 'Jovica', 'Roncevic', '321', '321', '345435345',
+        '432132');
+
+INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
+                                      phone_num, unoip)
+VALUES ('Safarikova 16', 'Bijeljina', 'Bosna', 'roncevic1996@gmail.com', 'Jovica', 'Roncevic', '321', '321', '345435345',
+        '432132');
 
 INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
                                       phone_num, unoip)
@@ -177,13 +180,13 @@ INSERT INTO calendar(id, personnel_id)
 VALUES (2, 3);
 
 INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type,typeid)
-VALUES ('2020-02-01 11:00:00', '2020-02-05 09:00:00', 'First examination', 'N', 3, 2,'APP',1);
+VALUES ('2020-02-03 11:00:00', '2020-02-03 09:00:00', 'First examination', 'N', 3, 2,'APP',1);
 
 INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type,typeid)
-VALUES ('2020-02-02 12:00:00', '2020-02-04 11:00:00', 'Second examination', 'N', 4, 2,'APP',2);
+VALUES ('2020-02-04 12:00:00', '2020-02-04 11:00:00', 'Second examination', 'N', 4, 2,'APP',2);
 
 INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type,typeid)
-VALUES ('2020-02-03 14:00:00', '2020-02-04 12:00:00', 'Third examination', 'N', 5, 2,'APP',3);
+VALUES ('2020-02-04 14:00:00', '2020-02-04 12:00:00', 'Third examination', 'N', 5, 2,'APP',3);
 
 
 UPDATE personnel
@@ -211,3 +214,13 @@ UPDATE patient
 SET medical_record_id=2
 WHERE id=6;
 
+INSERT INTO users (id,first_name, last_name, email, enabled, first_log,
+                   last_password_reset_date, password)
+VALUES (8,'Petar', 'Peric', 'pero@gmail.com', true, false, '2019-11-20 11:00:00',
+        '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra');
+
+INSERT INTO user_authority (user_id, authority_id)
+VALUES (8,1);
+
+INSERT INTO clinic_center_admin (predefined, id)
+VALUES (false, 8);
