@@ -1,6 +1,7 @@
 package clinic.centersystem.service.intf;
 
 import clinic.centersystem.dto.request.ClinicRequestDTO;
+import clinic.centersystem.dto.request.ClinicSearchDTO;
 import clinic.centersystem.dto.response.ClinicResponse;
 import clinic.centersystem.dto.response.ClinicResponsePageDTO;
 import clinic.centersystem.model.Clinic;
@@ -23,4 +24,8 @@ public interface ClinicService {
     boolean registerClinic(ClinicRequestDTO clinicRequestDTO);
 
     ClinicResponsePageDTO findAll(Integer pageCnt);
+
+    ClinicResponsePageDTO findAll(ClinicSearchDTO clinicSearchDTO);
+
+    ClinicResponsePageDTO searchClinics(ClinicSearchDTO clinicSearchDTO);
 }
