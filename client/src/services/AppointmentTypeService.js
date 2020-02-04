@@ -28,16 +28,14 @@ class AppointmentTypeService extends HttpClient {
 
     addAppointmentType = async payload => {
         try {
-            console.log("Hocuu ovde");
             const { data } = await this.getApiClient().post(
-                format(FINALPOINTS.ADD_APPOINTMENT_TYPE, payload.clinicId)
+                format(FINALPOINTS.ADD_APPOINTMENT_TYPE, payload.clinicId),
+                {type:payload.type}
                 
             );
-            console.log(data);
             return { data };
             
         } catch (error) {
-            console.log("Greska, ovde sam");
             console.log(error.response.data);
         }
     };

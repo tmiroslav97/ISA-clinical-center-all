@@ -37,10 +37,10 @@ public class AppointmentTypeServiceImpl implements AppointmentTypeService {
     public List<AppointmentType> getAppointmentType(Long clinicId){ return appointmentTypeRepository.findAllByClinicId(clinicId);}
 
     public String addAppointmentType(AppointmentTypeRequestDTO appointmentTypeRequestDTO, Long clinicId) {
-        AppointmentType appointment = AppointmentTypeConverter.toCreateAppointmentTypeFromRequest(appointmentTypeRequestDTO);
+        AppointmentType appointmentType = AppointmentTypeConverter.toCreateAppointmentTypeFromRequest(appointmentTypeRequestDTO);
         Clinic clinic = clinicService.findById(clinicId);
-        appointment.setClinic(clinic);
-        AppointmentType appointmentType = appointmentTypeRepository.save(appointment);
+        appointmentType.setClinic(clinic);
+        appointmentType = appointmentTypeRepository.save(appointmentType);
 
         return "Successfully added appointment type";
     }

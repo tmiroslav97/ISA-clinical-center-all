@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Builder
@@ -28,7 +29,7 @@ public class AppointmentType {
 
     @JsonIgnore
     @OneToMany(mappedBy = "type", fetch = FetchType.LAZY)
-    private Set<Appointment> appointments;
+    private Set<Appointment> appointments = new HashSet<>();
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
