@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Container, Col, Row, Form, Button, Modal, Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { addAppointmentType, fetchAppointmentType } from '../../store/appointments/actions';
+import { addAppointmentType, fetchAppointmentType, deleteAppointmentType } from '../../store/appointments/actions';
 import { appointmentTypeSelector, isFetchAppointmentTypeSelector } from '../../store/appointments/selectors';
 
 
@@ -9,6 +9,7 @@ const AppointmentTypAllAtOnce = ({match}) => {
     const dispatch = useDispatch();
     const [type, setType] = useState();
     const appointmentTypes = useSelector(appointmentTypeSelector);
+    
     const isFetchAppointmentTypes = useSelector(isFetchAppointmentTypeSelector);
     const clinicId = match.params.clinicId;
     const [show1, setShow1] = useState(false);
@@ -18,9 +19,10 @@ const AppointmentTypAllAtOnce = ({match}) => {
 
     const handleShow2 = () => setShow2(true);
 
-    const handleDelete = () => {
+    const handleDelete = (appointment) => {
+        console.log(appointment);
         dispatch(
-
+            deleteAppointmentType({id:appointment.id})
         );
     }
 
@@ -152,7 +154,7 @@ const AppointmentTypAllAtOnce = ({match}) => {
                                                 <td>{index + 1}</td>
                                                 <td>{appointment.type}</td>
                                                 <td><Button variant="success" >Edit</Button></td>
-                                                <td><Button variant="danger" onClick={handleDelete}>Delete</Button></td>
+                                                <td><Button variant="danger" onClick={()=>{handleDelete(appointment);}}>Delete</Button></td>
                                             </tr>
                                         );
                                     })

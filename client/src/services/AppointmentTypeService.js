@@ -5,6 +5,7 @@ import { format } from 'util';
 const FINALPOINTS = {
     FETCH_APPOINTMENT_TYPES: '/appointment-type/all/%s',
     ADD_APPOINTMENT_TYPE: '/appointment-type/add-appointment-type/%s',
+    DELETE_APPOINTMENTS_TYPE: '/appointment-type/delete-appointment-type'
     //SEARCH_APPOINTMENT_TYPE: 'admi-cli/appType/search/%s/%s',
     // DELETE_ROOMS_DATA: 'admi-cli/appType/delete/%s',
     //EDIT_APPOINTMENT_TYPE: 'admi-cli/appType/edit/%s',
@@ -40,6 +41,22 @@ class AppointmentTypeService extends HttpClient {
         }
     };
 
+    deleteAppointmentType = async payload => {
+        try {
+            console.log("Hocu ovde");
+            const { data } = await this.getApiClient().delete(
+                FINALPOINTS.DELETE_APPOINTMENTS_TYPE,
+                {appointmentID:payload.id}
+            );
+            console.log(payload);
+
+            return { data };
+        } catch (error) {
+            console.log("Necu ovde");
+            console.log(error.response.data);
+        }
+    };
+
     /*editAppointmentType = async payload => {
         try {
             const { data } = await this.getApiClient().put(
@@ -54,18 +71,7 @@ class AppointmentTypeService extends HttpClient {
         }
     };
     
-    deleteAppointmentType = async payload => {
-        try {
-            const { data } = await this.getApiClient().delete(
-                FINALPOINTS.DELETE_APPOINTMENTS_TYPE,
-                payload
-            );
-
-            return { data };
-        } catch (error) {
-            console.log(error.response.data);
-        }
-    };
+    
     searchAppointmentType = async payload => {
         try {
             const { data } = await this.getApiClient().get(

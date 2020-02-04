@@ -2,6 +2,7 @@ package clinic.centersystem.service;
 
 import clinic.centersystem.converter.AppointmentTypeConverter;
 import clinic.centersystem.dto.request.AppointmentTypeRequestDTO;
+import clinic.centersystem.model.Appointment;
 import clinic.centersystem.model.AppointmentType;
 import clinic.centersystem.model.Clinic;
 import clinic.centersystem.repository.AppointmentTypeRepository;
@@ -44,6 +45,12 @@ public class AppointmentTypeServiceImpl implements AppointmentTypeService {
 
         return "Successfully added appointment type";
     }
+
+    public String deleteAppointmentType(Long appointmentId){
+        this.remove(appointmentId);
+        return "Successfully deleted appointment type";
+    }
+
 
 
 }
