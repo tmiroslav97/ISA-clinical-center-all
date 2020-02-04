@@ -21,7 +21,7 @@ import {
 export function* rewritePrescription() {
     const { payload } = yield take(REWRITE_PRESCRIPTION);
     const { data } = yield call(NurseService.reweritePrescription, { nurseId: payload.nurseId, prescriptionId: payload.prescriptionId });
-    if (data !== undefined) {
+    if (data === 'Successfully rewrited prescription') {
         yield put(putSuccessMsg(data));
         yield put(putSuccessMsg(null));
     } else {

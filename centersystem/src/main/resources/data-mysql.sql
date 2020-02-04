@@ -219,6 +219,3 @@ VALUES (8,1);
 
 INSERT INTO clinic_center_admin (predefined, id)
 VALUES (false, 8);
-
-INSERT INTO prescription(id, is_validate, nurse_id, clinic_id, medicine_id)
-VALUES (1, FALSE, NULL,1,1);

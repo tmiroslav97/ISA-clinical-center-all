@@ -2,10 +2,13 @@ package clinic.centersystem.service;
 
 import clinic.centersystem.converter.PrescriptionConverter;
 import clinic.centersystem.dto.response.PrescriptionResponse;
+import clinic.centersystem.model.Appointment;
 import clinic.centersystem.model.MedicalReport;
 import clinic.centersystem.model.Nurse;
 import clinic.centersystem.model.Prescription;
+import clinic.centersystem.model.enumeration.AppStateEnum;
 import clinic.centersystem.repository.PrescriptionRepository;
+import clinic.centersystem.service.intf.AppointmentService;
 import clinic.centersystem.service.intf.MedicalReportService;
 import clinic.centersystem.service.intf.NurseService;
 import clinic.centersystem.service.intf.PrescriptionService;
@@ -29,7 +32,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     private NurseService nurseService;
 
     @Autowired
-    private MedicalReportService medicalReportService;
+    private AppointmentService appointmentService;
 
     @Override
     public Prescription findById(Long id) {
@@ -67,6 +70,17 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         nurse = nurseService.save(nurse);
         prescription = prescriptionService.save(prescription);
         MedicalReport medicalReport = prescription.getMedicalReport();
+        boolean flag = false;
+        for(Prescription pre : medicalReport.getPrescriptions()){
+            if(!pre.isValidate()){
+                flag = true;
+            }
+        }
+        if(!flag){
+            Appointment appointment = medicalReport.getAppointment();
+            appointment.setAppState(AppStateEnum.FINISHED);
+            appointmentService.save(appointment);
+        }
         return "Successfully rewrited prescription";
     }
 }
