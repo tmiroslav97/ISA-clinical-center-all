@@ -149,8 +149,8 @@ INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id,patie
 INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id,patient_name,doctor_name)VALUES ('2020-01-31',10,1,2,3,'Jovana Lakic','Nevena Djukin');
 INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id,patient_name,doctor_name)VALUES ('2020-01-25',13,1,2,3,'Jovana Lakic','Nevena Djukin');
 
-INSERT INTO appointment_type(id, type) VALUES (1,'General examination');
-INSERT INTO appointment_type(id, type) VALUES (2,'Heart examination');
+INSERT INTO appointment_type(id, type, clinic_id) VALUES (1,'General examination',1);
+INSERT INTO appointment_type(id, type, clinic_id) VALUES (2,'Heart examination',1);
 
 INSERT INTO appointment(app_state, date_time, discount, price, clinic_id, doctor_id, patient_id, room_id, type_id) VALUES(2, '2020-02-02 11:00:00', 0,0,1,3,2,1,1);
 

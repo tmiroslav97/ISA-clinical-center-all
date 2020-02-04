@@ -3,8 +3,11 @@ package clinic.centersystem.service;
 import clinic.centersystem.converter.AppointmentTypeConverter;
 import clinic.centersystem.dto.request.AppointmentTypeRequestDTO;
 import clinic.centersystem.model.AppointmentType;
+import clinic.centersystem.model.Clinic;
 import clinic.centersystem.repository.AppointmentTypeRepository;
+import clinic.centersystem.repository.ClinicRepository;
 import clinic.centersystem.service.intf.AppointmentTypeService;
+import clinic.centersystem.service.intf.ClinicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +18,9 @@ public class AppointmentTypeServiceImpl implements AppointmentTypeService {
 
     @Autowired
     private AppointmentTypeRepository appointmentTypeRepository;
+
+    @Autowired
+    private ClinicService clinicService;
 
     @Override
     public AppointmentType findById(Long id){return this.appointmentTypeRepository.findById(id).orElseGet(null);}
@@ -29,13 +35,16 @@ public class AppointmentTypeServiceImpl implements AppointmentTypeService {
     public void remove(Long id){this.appointmentTypeRepository.deleteById(id);}
 
     @Override
-    public List<AppointmentType> getAppointmentType(){ return this.findAll();}
+    public List<AppointmentType> getAppointmentType(Long clinicId){ return appointmentTypeRepository.findAllByClinicId(clinicId);}
 
-    public String addAppointmentType(AppointmentTypeRequestDTO appointmentTypeRequestDTO) {
+    public String addAppointmentType(AppointmentTypeRequestDTO appointmentTypeRequestDTO, Long clinicId) {
         AppointmentType appointment = AppointmentTypeConverter.toCreateAppointmentTypeFromRequest(appointmentTypeRequestDTO);
+        Clinic clinic = clinicService.findById(clinicId);
+        appointment.setClinic(clinic);
         AppointmentType appointmentType = appointmentTypeRepository.save(appointment);
 
         return "Successfully added appointment type";
     }
+
 
 }

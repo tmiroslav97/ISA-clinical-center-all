@@ -54,6 +54,10 @@ public class Clinic {
 
     @JsonBackReference
     @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
+    private Set<AppointmentType> appointmentTypes = new HashSet<>();
+
+    @JsonBackReference
+    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
     private Set<Room> rooms = new HashSet<>();
 
     @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)

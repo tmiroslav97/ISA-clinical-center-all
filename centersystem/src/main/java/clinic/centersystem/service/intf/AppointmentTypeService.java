@@ -1,5 +1,6 @@
 package clinic.centersystem.service.intf;
 
+import clinic.centersystem.model.Appointment;
 import clinic.centersystem.model.AppointmentType;
 
 import java.util.List;
@@ -13,5 +14,5 @@ public interface AppointmentTypeService {
 
     public void remove(Long id);
 
-    List<AppointmentType> getAppointmentType();
+    List<AppointmentType> getAppointmentType(Long clinicId);
 }

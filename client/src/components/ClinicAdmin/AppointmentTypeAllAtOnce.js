@@ -5,24 +5,29 @@ import { addAppointmentType, fetchAppointmentType } from '../../store/appointmen
 import { appointmentTypeSelector, isFetchAppointmentTypeSelector } from '../../store/appointments/selectors';
 
 
-const AppointmentTypAllAtOnce = () => {
+const AppointmentTypAllAtOnce = ({match}) => {
     const dispatch = useDispatch();
     const [type, setType] = useState();
     const appointmentTypes = useSelector(appointmentTypeSelector);
     const isFetchAppointmentTypes = useSelector(isFetchAppointmentTypeSelector);
-
+    const clinicId = match.params.clinicId;
     const [show1, setShow1] = useState(false);
     const [show2, setShow2] = useState(false);
 
     const handleClose1 = () => setShow1(false);
-    const handleShow1 = () => setShow1(true);
 
     const handleShow2 = () => setShow2(true);
+
+    const handleDelete = () => {
+        dispatch(
+
+        );
+    }
 
     const handleAddAppointmentType = () => {
         dispatch(
             addAppointmentType({
-                type
+                type,  clinicId
             })
         );
         setShow2(false);
@@ -30,7 +35,7 @@ const AppointmentTypAllAtOnce = () => {
 
     useEffect(() => {
         dispatch(
-            fetchAppointmentType({})
+            fetchAppointmentType({clinicId})
         );
     }, []);
 
@@ -146,8 +151,8 @@ const AppointmentTypAllAtOnce = () => {
                                             <tr key={appointment.id}>
                                                 <td>{index + 1}</td>
                                                 <td>{appointment.type}</td>
-                                                <td><Button variant="success">Edit</Button></td>
-                                                <td><Button variant="danger">Delete</Button></td>
+                                                <td><Button variant="success" >Edit</Button></td>
+                                                <td><Button variant="danger" onClick={handleDelete}>Delete</Button></td>
                                             </tr>
                                         );
                                     })

@@ -2,6 +2,8 @@ package clinic.centersystem.model;
 
 import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,8 +25,11 @@ public class AppointmentType {
     @Column(name = DbColumnConstants.TYPE, unique = true, nullable = false)
     private String type;
 
-    @OneToMany(mappedBy = "type", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    @OneToMany(mappedBy = "type", fetch = FetchType.LAZY)
     private Set<Appointment> appointments;
 
-
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Clinic clinic;
 }

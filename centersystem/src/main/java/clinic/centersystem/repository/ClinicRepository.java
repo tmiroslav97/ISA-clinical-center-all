@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ClinicRepository extends JpaRepository<Clinic, Long> {
     boolean existsByName(String name);
+    Clinic findOneById(Long id);
 }
