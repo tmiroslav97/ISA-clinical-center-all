@@ -14,7 +14,7 @@ public class ClinicCenterAdminConverter {
                 .id(clinicCenterAdmin.getId())
                 .email(clinicCenterAdmin.getEmail())
                 .roles(clinicCenterAdmin.getAuthorities().stream().map(authority -> authority.getName()).collect(Collectors.toList()))
-                .isNotFirstLogin(clinicCenterAdmin.isFirstLog())
+                .firstLogin(clinicCenterAdmin.isFirstLog())
                 .predefined(clinicCenterAdmin.isPredefined())
                 .build();
     }

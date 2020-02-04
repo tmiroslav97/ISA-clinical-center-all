@@ -13,7 +13,7 @@ const PrivateRoute = ({ component: Component, accessRole = null, ...rest }) => {
         }
 
         const role = userData.roles.filter(val => accessRole.includes(val));
-        return role.length > 0 && !userDataSelector.firstLog;
+        return role.length > 0 && !userDataSelector.firstLogin;
     }
 
     return (

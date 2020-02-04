@@ -14,7 +14,7 @@ public class UserConverter {
                 .email(user.getEmail())
                 .token(jwt)
                 .roles(user.getAuthorities().stream().map(authority -> authority.getName()).collect(Collectors.toList()))
-                .isFirstLog(user.isFirstLog())
+                .firstLogin(user.isFirstLog())
                 .build();
     }
 }

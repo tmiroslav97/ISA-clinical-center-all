@@ -80,7 +80,6 @@ export function* fetchCCAdminData() {
 export function* regCCAdmin() {
     const { payload } = yield take(REG_CC_ADMIN);
     const { data } = yield call(CCAdminService.regCCAdmin, payload);
-    console.log(data);
     if (data === 'Successfully added new clinic center administrator') {
         yield put(putSuccessMsg(data));
         yield put(putSuccessMsg(null));
@@ -114,7 +113,7 @@ export function* login() {
     if (data.roles.includes('ROLE_PATIENT')) {
         history.push('/pat');
     } else if (data.roles.includes('ROLE_CCADMIN')) {
-        if (data.firstLog) {
+        if (data.firstLogin) {
             history.push('/change-pass');
         } else {
             history.push('/ccadmin');
@@ -128,12 +127,20 @@ export function* login() {
         history.push('/adminc');
     } else {
         alert('Nije odobren pristup sistemu!');
+        history.push('/');
     }
 }
 
 export function* changePassword() {
     const { payload } = yield take(CHANGE_PASSWORD);
     const { data } = yield call(authService.changePassword, payload);
+    if (data != undefined) {
+        yield put(putSuccessMsg('Successfuly changed password'));
+        yield put(putSuccessMsg(null));
+    } else {
+        yield put(putErrorMsg(data));
+        yield put(putErrorMsg(null));
+    }
     yield put(putUserData(data));
     yield put(putUserToken(data.token));
 

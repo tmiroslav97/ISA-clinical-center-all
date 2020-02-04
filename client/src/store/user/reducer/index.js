@@ -13,7 +13,7 @@ const initialState = {
         firstName: '',
         lastName: '',
         email: '',
-        firstLog: true,
+        firstLogin: true,
         roles: JSON.parse(window.localStorage.getItem('roles'))==null?[]:JSON.parse(window.localStorage.getItem('roles'))
     },
     token: window.localStorage.getItem('token'),

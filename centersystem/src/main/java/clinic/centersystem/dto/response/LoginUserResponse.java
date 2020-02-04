@@ -17,7 +17,7 @@ public class LoginUserResponse {
 
     private String token;
 
-    private boolean isFirstLog;
+    private boolean firstLogin;
 
     private List<String> roles;
 

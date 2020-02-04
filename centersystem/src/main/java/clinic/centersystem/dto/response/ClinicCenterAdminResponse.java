@@ -14,7 +14,7 @@ public class ClinicCenterAdminResponse {
 
     private String email;
 
-    private boolean isNotFirstLogin;
+    private boolean firstLogin;
 
     private List<String> roles;
 

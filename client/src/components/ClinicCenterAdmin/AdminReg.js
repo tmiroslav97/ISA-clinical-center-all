@@ -62,7 +62,7 @@ const AdminReg = () => {
                             </Form.Group>
                             <Form.Group as={Col}>
                                 <Form.Label>Admin password:</Form.Label>
-                                <Form.Control required type="password" placeholder="Enter admin password"
+                                <Form.Control required type="password" pattern=".{5,25}" placeholder="Enter admin password"
                                     onChange={({ currentTarget }) => {
                                         setPassword(currentTarget.value);
                                     }}
