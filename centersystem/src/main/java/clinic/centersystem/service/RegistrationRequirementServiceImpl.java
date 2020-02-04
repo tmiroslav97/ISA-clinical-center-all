@@ -77,10 +77,11 @@ public class RegistrationRequirementServiceImpl implements RegistrationRequireme
         RegistrationRequirement req = this.findById(id);
 
         req.setPassword(passwordEncoder.encode(req.getPassword()));
-        if (this.userService.existsByEmail(req.getEmail())) {
+        if (userService.existsByEmail(req.getEmail())) {
+            registrationRequirementRepository.deleteById(id);
             throw new UserExistsException();
         }
-        Patient patient = this.patientService.save(req);
+        Patient patient = patientService.save(req);
         this.registrationRequirementRepository.deleteById(id);
         String subject = "Account registration";
         String answer = String.format(
@@ -97,8 +98,14 @@ public class RegistrationRequirementServiceImpl implements RegistrationRequireme
     @Override
     public String rejectRegistrationRequest(Long id, String message) {
         RegistrationRequirement req = this.findById(id);
+
+        if (userService.existsByEmail(req.getEmail())) {
+            registrationRequirementRepository.deleteById(id);
+            throw new UserExistsException();
+        }
+
         String subject = "Account registration";
-        this.registrationRequirementRepository.deleteById(id);
+        registrationRequirementRepository.deleteById(id);
 
         emailService.sendMailTo(req.getEmail(), subject, message);
 

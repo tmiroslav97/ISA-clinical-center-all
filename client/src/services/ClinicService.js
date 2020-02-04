@@ -20,8 +20,7 @@ class ClinicService extends HttpClient {
 
             return { data };
         } catch (error) {
-            console.log(error.response.data);
-            alert(error.response.data);
+            return error.response;
         }
     };
 

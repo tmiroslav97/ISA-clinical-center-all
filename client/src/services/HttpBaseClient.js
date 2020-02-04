@@ -30,7 +30,7 @@ class HttpBaseClient {
             if (status === 401) {
                 history.push('/unauthorized');
             }
-            return Promise.reject.error;
+            throw error;
         });
     };
 
