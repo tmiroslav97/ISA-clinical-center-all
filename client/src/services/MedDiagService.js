@@ -20,7 +20,7 @@ class MedDiagService extends HttpClient {
             const medicines = data;
             return { medicines };
         } catch (error) {
-            console.log(error.response.data);
+            return error.response;
         }
     };
 
@@ -32,7 +32,7 @@ class MedDiagService extends HttpClient {
             const diagnoses = data;
             return { diagnoses };
         } catch (error) {
-            console.log(error.response.data);
+            return error.response;
         }
     };
 
@@ -44,7 +44,7 @@ class MedDiagService extends HttpClient {
             const medicines = data;
             return { medicines };
         } catch (error) {
-            console.log(error.response.data);
+            return error.response;
         }
     };
 
@@ -56,7 +56,7 @@ class MedDiagService extends HttpClient {
             const diagnoses = data;
             return { diagnoses };
         } catch (error) {
-            console.log(error.response.data);
+            return error.response;
         }
     };
 
@@ -68,7 +68,7 @@ class MedDiagService extends HttpClient {
             );
             return { data };
         } catch (error) {
-            console.log(error.response.data);
+            return error.response;
         }
     };
 
@@ -80,7 +80,7 @@ class MedDiagService extends HttpClient {
             );
             return { data };
         } catch (error) {
-            console.log(error.response.data);
+            return error.response;
         }
     };
 

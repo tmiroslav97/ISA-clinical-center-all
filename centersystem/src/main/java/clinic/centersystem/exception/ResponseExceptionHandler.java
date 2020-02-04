@@ -13,6 +13,16 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
 
+    @ExceptionHandler(value = {ResourceExistsException.class})
+    protected ResponseEntity<Object> handleResourceAlreadyExists(RuntimeException ex, WebRequest request) {
+        return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
+    @ExceptionHandler(value = {ResourceNotExistsException.class})
+    protected ResponseEntity<Object> handleResouceNotExists(RuntimeException ex, WebRequest request) {
+        return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
     @ExceptionHandler(value = {UserExistsException.class})
     protected ResponseEntity<Object> handleUserExistsException(RuntimeException ex, WebRequest request) {
         String bodyOfResponse = "User already exists";
