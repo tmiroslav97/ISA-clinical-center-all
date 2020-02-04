@@ -24,8 +24,8 @@ const RegTable = () => {
 
     const handleReject = (event) => {
         const form = event.currentTarget;
+        event.preventDefault();
         if (form.checkValidity() === false) {
-            event.preventDefault();
             event.stopPropagation();
         } else {
             dispatch(
@@ -62,7 +62,7 @@ const RegTable = () => {
                 <Modal.Body>
                     <Form noValidate validated={validated} onSubmit={handleReject}>
                         <Form.Group as={Col}>
-                            <Form.Control required as="textarea" rows="4" id="reason" name="txtReason"
+                            <Form.Control required as="textarea" pattern=".{15,90}"  rows="4" id="reason" name="txtReason"
                                 onChange={({ currentTarget }) => {
                                     setMessage(currentTarget.value);
                                 }}

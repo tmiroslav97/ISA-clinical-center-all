@@ -3,8 +3,14 @@ import {
     FETCH_CLINICS_DATA,
     PUT_CLINICS_DATA,
     REG_CLINIC_ADMIN,
-    PUT_IS_FETCH_CLINICS_DATA
+    PUT_IS_FETCH_CLINICS_DATA,
+    FETCH_CLINIC_PAGINATION_DATA
 } from './constants';
+
+export const fetchClinicPaginationData = payload => ({
+    type: FETCH_CLINIC_PAGINATION_DATA,
+    payload
+});
 
 export const regClinicAdmin = payload => ({
     type: REG_CLINIC_ADMIN,
