@@ -17,6 +17,7 @@ public class ClinicAdminConverter {
                 .firstName(clinicAdminReqDTO.getFirstName())
                 .lastName(clinicAdminReqDTO.getLastName())
                 .password(clinicAdminReqDTO.getPassword())
+                .isFirstLog(true)
                 .build();
     }
 

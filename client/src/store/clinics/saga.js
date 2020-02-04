@@ -26,6 +26,13 @@ import {
 export function* regClinicAdmin() {
     const { payload } = yield take(REG_CLINIC_ADMIN);
     const { data } = yield call(ClinicService.regClinicAdmin, payload);
+    if (data === 'Clinic admin successfully registered') {
+        yield put(putSuccessMsg(data));
+        yield put(putSuccessMsg(null));
+    } else {
+        yield put(putErrorMsg(data));
+        yield put(putErrorMsg(null));
+    }
 }
 
 export function* fetchClinicsData() {

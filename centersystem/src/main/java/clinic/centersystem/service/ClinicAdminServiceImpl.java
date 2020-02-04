@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class  ClinicAdminServiceImpl implements ClinicAdminService {
+public class ClinicAdminServiceImpl implements ClinicAdminService {
 
     @Autowired
     private ClinicAdminRepository clinicAdminRepository;
@@ -46,7 +46,8 @@ public class  ClinicAdminServiceImpl implements ClinicAdminService {
     @Autowired
     private ClinicAdminService clinicAdminService;
 
-
+    @Autowired
+    private EmailService emailService;
 
     @Override
     public ClinicAdmin findById(Long id) {
@@ -81,16 +82,6 @@ public class  ClinicAdminServiceImpl implements ClinicAdminService {
         return ClinicAdminConverter.toCreateClinicAdminResponse(clinicAdmin);
     }
 
-
-
-
-
-    /*public String addAppointmentType(AppointmentTypeRequestDTO diagnoseRequestDTO) {
-        AppointmentType appointment = diagnoseService.save(diagnoseRequestDTO);
-
-        return "Successfully added apType;
-    }*/
-
     public String deleteDoctor(Long id) {
         List<Doctor> doctors = this.doctorService.findAll();
         Doctor doctor = this.doctorService.findById(id);
@@ -107,6 +98,7 @@ public class  ClinicAdminServiceImpl implements ClinicAdminService {
 
     @Override
     public String registerClinicAdmin(ClinicAdminReqDTO clinicAdminReqDTO) {
+        String password = clinicAdminReqDTO.getPassword();
         clinicAdminReqDTO.setPassword(this.passwordEncoder.encode(clinicAdminReqDTO.getPassword()));
         if (this.userService.existsByEmail(clinicAdminReqDTO.getEmail())) {
             throw new UserExistsException();
@@ -121,7 +113,15 @@ public class  ClinicAdminServiceImpl implements ClinicAdminService {
         clinicAdmin = this.clinicAdminService.saveClinicAdmin(clinicAdmin);
         clinic = this.clinicService.saveClinic(clinic);
 
-        return "Clinic admin successfully added";
+        String subject = "Account registration";
+        String answer = String.format(
+                "Your are registered as clinic administrator" +
+                        "\nYour email(username) is: " + clinicAdmin.getEmail() +
+                        "\nYou password is: " + password);
+
+        emailService.sendMailTo(clinicAdmin.getEmail(), subject, answer);
+
+        return "Clinic admin successfully registered";
     }
 
 

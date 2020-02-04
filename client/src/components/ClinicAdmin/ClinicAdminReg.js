@@ -69,7 +69,7 @@ const ClinicAdminReg = () => {
                             </Form.Group>
                             <Form.Group as={Col}>
                                 <Form.Label>Admin password:</Form.Label>
-                                <Form.Control required type="password" pattern=".{5,25}"  placeholder="Enter admin password"
+                                <Form.Control required type="password" pattern=".{5,25}" placeholder="Enter admin password"
                                     onChange={({ currentTarget }) => {
                                         setPassword(currentTarget.value);
                                     }}
@@ -88,7 +88,17 @@ const ClinicAdminReg = () => {
                                     }}
                                 />
                             </Form.Group>
-                            <Form.Group as={Col}>
+                            <Form.Group as={Col} md="6">
+                                <Form.Label>Last name:</Form.Label>
+                                <Form.Control required type="text" placeholder="Enter admin last name"
+                                    onChange={({ currentTarget }) => {
+                                        setLastName(currentTarget.value);
+                                    }}
+                                />
+                            </Form.Group>
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Group as={Col} md="6">
                                 <Form.Label>Clinic:</Form.Label>
                                 <Form.Control required as="select" onChange={({ currentTarget }) => {
                                     setClinicId(currentTarget.value);
@@ -102,16 +112,6 @@ const ClinicAdminReg = () => {
                                         })
                                     }
                                 </Form.Control>
-                            </Form.Group>
-                        </Form.Row>
-                        <Form.Row>
-                            <Form.Group as={Col} md="6">
-                                <Form.Label>Last name:</Form.Label>
-                                <Form.Control required type="text" placeholder="Enter admin last name"
-                                    onChange={({ currentTarget }) => {
-                                        setLastName(currentTarget.value);
-                                    }}
-                                />
                             </Form.Group>
                         </Form.Row>
                         <Button variant="primary" type="submit">

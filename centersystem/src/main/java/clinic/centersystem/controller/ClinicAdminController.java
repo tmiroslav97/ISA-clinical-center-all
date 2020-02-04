@@ -37,6 +37,7 @@ public class ClinicAdminController {
     }
 
     @RequestMapping(method = POST, value = "/reg-clinic-admin")
+    @PreAuthorize("hasRole('CCADMIN')")
     public ResponseEntity<String> registerClinicAdmin(@RequestBody ClinicAdminReqDTO clinicAdminReqDTO) {
         return new ResponseEntity<>(this.clinicAdminService.registerClinicAdmin(clinicAdminReqDTO), HttpStatus.OK);
     }
