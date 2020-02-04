@@ -44,7 +44,7 @@ const DoctorHomePage = () => {
                             <Card.Text>
                                 You can see patient list.
                             </Card.Text>
-                            <Button variant="primary" onClick={() => { history.push('/doc/pat-list'); }}>Patients</Button>
+                            <Button variant="primary" onClick={() => { history.push('/pers/pat-list'); }}>Patients</Button>
                         </Card.Body>
                     </Card>
                 </Col>

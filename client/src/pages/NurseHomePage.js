@@ -1,12 +1,8 @@
 import React, { useEffect } from 'react';
+import {history} from '../index';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchNurseData } from '../store/user/actions';
-import { Tabs, Tab, Spinner } from 'react-bootstrap';
-import UserProfile from '../components/UserProfile';
-import PatientList from '../components/PatientList';
-import WorkCalendar from '../components/WorkCalendar';
-import HolAbsRequest from '../components/HolAbsRequest';
-import RewritePrescription from '../components/RewritePrescription';
+import { Spinner, Row, Col, Container, Card, Button } from 'react-bootstrap';
 import { userDataSelector, userIdSelector, isFetchUserDataSelector } from '../store/user/selectors';
 
 const NurseHomePage = () => {
@@ -34,23 +30,72 @@ const NurseHomePage = () => {
     }
 
     return (
-        <Tabs id="left-tabs-doc-home" >
-            <Tab eventKey="zero" title="Patients list">
-                <PatientList clinicId={data.clinicId} />
-            </Tab>
-            <Tab eventKey="second" title="Holiday/absence requests">
-                <HolAbsRequest personnelId={data.id} clinicId={data.clinicId} />
-            </Tab>
-            <Tab eventKey="third" title="Perscriptions">
-                <RewritePrescription nurseId={data.id} />
-            </Tab>
-            <Tab eventKey="fourth" title="WorkCalendar">
-                <WorkCalendar personnelId={data.id} roles={data.roles} />
-            </Tab>
-            <Tab eventKey="fifth" title=" User Profile">
-                <UserProfile />
-            </Tab>
-        </Tabs>
+        <Container>
+            <Row>
+                <Col md={{ span: 10, offset: 1 }} xs={12}>
+                    <h2 className="border-bottom">Doctor admin profile</h2>
+                </Col>
+            </Row>
+            <Row>
+                <Col md={{ span: 3, offset: 1 }} xs={12}>
+                    <Card style={{ width: '18rem' }}>
+                        <Card.Body>
+                            <Card.Title>Patient list</Card.Title>
+                            <Card.Text>
+                                You can see patient list.
+                            </Card.Text>
+                            <Button variant="primary" onClick={() => { history.push('/pers/pat-list'); }}>Patients</Button>
+                        </Card.Body>
+                    </Card>
+                </Col>
+                <Col md={{ span: 3 }} xs={12}>
+                    <Card style={{ width: '18rem' }}>
+                        <Card.Body>
+                            <Card.Title>Work Calendar</Card.Title>
+                            <Card.Text>
+                                You can access work calendar.
+                            </Card.Text>
+                            <Button variant="primary" onClick={() => { history.push('/pers/work-cal'); }}>Calendar</Button>
+                        </Card.Body>
+                    </Card>
+                </Col>
+                <Col md={{ span: 3 }} xs={12}>
+                    <Card style={{ width: '18rem' }}>
+                        <Card.Body>
+                            <Card.Title>Holiday and absence</Card.Title>
+                            <Card.Text>
+                                You can make holiday or absence requirement
+                            </Card.Text>
+                            <Button variant="primary" onClick={() => { history.push('/pers/hol-abs'); }} >Go to</Button>
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </Row>
+            <Row>
+                <Col md={{ span: 3, offset: 1 }} xs={12}>
+                    <Card style={{ width: '18rem' }}>
+                        <Card.Body>
+                            <Card.Title>Rewrite prescriptions</Card.Title>
+                            <Card.Text>
+                                Page for prescription rewrite
+                            </Card.Text>
+                            <Button variant="primary" onClick={() => { history.push('/nurse-page/rew-presc'); }} >Go to</Button>
+                        </Card.Body>
+                    </Card>
+                </Col>
+                <Col md={{ span: 3 }} xs={12}>
+                    <Card style={{ width: '18rem' }}>
+                        <Card.Body>
+                            <Card.Title>User profile</Card.Title>
+                            <Card.Text>
+                                You can access your profile
+                            </Card.Text>
+                            <Button variant="primary" onClick={() => { history.push('/user-prof'); }}>Profile</Button>
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </Row>
+        </Container>
     );
 }
 

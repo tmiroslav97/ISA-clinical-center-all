@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Table, Row, Col, Form, Container, FormControl, Spinner } from 'react-bootstrap';
-import { patientsSelector, isFetchPatientsSelector } from '../store/patients/selectors';
-import { fetchPatientsDataByClinicId } from '../store/patients/actions';
-import { userDataSelector } from '../store/user/selectors';
+import { patientsSelector, isFetchPatientsSelector } from '../../store/patients/selectors';
+import { fetchPatientsDataByClinicId } from '../../store/patients/actions';
+import { userDataSelector } from '../../store/user/selectors';
 
 
 const PatientList = ( ) => {

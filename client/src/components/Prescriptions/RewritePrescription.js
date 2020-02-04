@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, Button, Container, Table } from 'react-bootstrap';
-import { prescriptionsDataSelector } from '../store/prescriptions/selectors';
-import { fetchPrescriptions, rewritePrescription } from '../store/prescriptions/actions';
+import { prescriptionsDataSelector } from '../../store/prescriptions/selectors';
+import { fetchPrescriptions, rewritePrescription } from '../../store/prescriptions/actions';
 
 const RewritePrescription = ({ nurseId }) => {
     const dispatch = useDispatch();
