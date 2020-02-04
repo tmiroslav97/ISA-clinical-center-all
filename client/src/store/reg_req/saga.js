@@ -33,7 +33,6 @@ export function* fetchRegReqsData() {
 
 export function* approveRegReq() {
     const { payload } = yield take(APPROVE_REG_REQ);
-    // eslint-disable-next-line
     const { data } = yield call(CCAdminService.approveRegReq, payload);
     console.log(data);
     if (data === 'Patient registration approved') {
@@ -53,7 +52,6 @@ export function* approveRegReq() {
 
 export function* rejectRegReq() {
     const { payload } = yield take(REJECT_REG_REQ);
-    // eslint-disable-next-line
     const { data } = yield call(CCAdminService.rejectRegReq, payload);
     if (data === 'Patient registration rejected') {
         yield put(putSuccessMsg(data));
