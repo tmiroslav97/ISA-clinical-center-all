@@ -86,7 +86,7 @@ const DoctorSearch = () => {
                 </Col>
             </Row>
             <Row>
-                <Col md={{ span: 3, offset: 1 }} xs={12}>
+                <Col md={{ span: 10, offset: 1 }} xs={12}>
                     <Form>
                         <Form.Row>
                         <Form.Group as={Col}>
