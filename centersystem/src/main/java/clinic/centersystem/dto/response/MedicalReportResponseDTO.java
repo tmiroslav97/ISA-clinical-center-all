@@ -12,6 +12,6 @@ import java.util.List;
 public class MedicalReportResponseDTO {
     private Long id;
     private String description;
-    private String descriptionName;
+    private String diagnoseName;
     private List<String> medicineName;
 }

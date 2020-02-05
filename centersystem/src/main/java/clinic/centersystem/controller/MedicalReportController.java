@@ -2,6 +2,7 @@ package clinic.centersystem.controller;
 
 import clinic.centersystem.dto.request.MedicalRecordRequestDTO;
 import clinic.centersystem.dto.request.MedicalReportRequestDTO;
+import clinic.centersystem.dto.response.MedicalReportResponseDTO;
 import clinic.centersystem.model.MedicalRecord;
 import clinic.centersystem.model.MedicalReport;
 import clinic.centersystem.service.MedicalReportServiceImpl;
@@ -28,7 +29,7 @@ public class MedicalReportController {
     }
 
     @RequestMapping(value = "/all/{doctorId}", method = RequestMethod.GET)
-    public ResponseEntity<List<MedicalReport>> getMedicalReport(@PathVariable Long doctorId) {
+    public ResponseEntity<List<MedicalReportResponseDTO>> getMedicalReport(@PathVariable Long doctorId) {
         return new ResponseEntity<>(medicalReportService.findDoctorReports(doctorId), HttpStatus.OK);
     }
 }

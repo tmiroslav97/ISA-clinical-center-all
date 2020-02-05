@@ -2,6 +2,7 @@ package clinic.centersystem.service;
 
 import clinic.centersystem.converter.PrescriptionConverter;
 import clinic.centersystem.dto.request.MedicalReportRequestDTO;
+import clinic.centersystem.dto.response.MedicalReportResponseDTO;
 import clinic.centersystem.exception.ResourceExistsException;
 import clinic.centersystem.exception.ResourceNotExistsException;
 import clinic.centersystem.model.*;
@@ -48,12 +49,21 @@ public class MedicalReportServiceImpl implements MedicalReportService {
     }
 
     @Override
-    public List<MedicalReport> findDoctorReports(Long id){
-        List<MedicalReport> medicalReports = new ArrayList<>();
+    public List<MedicalReportResponseDTO> findDoctorReports(Long id) {
+        List<MedicalReportResponseDTO> medicalReportResponseDTO = new ArrayList<>();
+        List<Appointment> appointments = appointmentService.findAllByDoctorIdAndAppState(id, AppStateEnum.FINISHED);
+        for (Appointment appointment : appointments) {
+            MedicalReport medicalReport = medicalReportRepository.findByAppointmentId(appointment.getId());
+            MedicalReportResponseDTO mRRDTO = MedicalReportResponseDTO.builder()
+                    .id(medicalReport.getId())
+                    .description(medicalReport.getDescription())
+                    .diagnoseName(medicalReport.getDiagnose().getName())
+                    .medicineName(medicalReport.getPrescriptions().stream().map(pres -> pres.getMedicine().getName()).collect(Collectors.toList()))
+                    .build();
+            medicalReportResponseDTO.add(mRRDTO);
+        }
 
-
-
-        return medicalReports;
+        return medicalReportResponseDTO;
     }
 
     @Override
