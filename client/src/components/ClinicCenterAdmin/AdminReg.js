@@ -3,7 +3,7 @@ import { history } from '../../index';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { regCCAdmin } from '../../store/user/actions';
-import { userIdSelector, userDataSelector } from '../../store/user/selectors';
+import { userIdSelector, userDataSelector, isFetchUserDataSelector } from '../../store/user/selectors';
 
 const AdminReg = () => {
     const dispatch = useDispatch();
@@ -13,11 +13,12 @@ const AdminReg = () => {
     const [lastName, setLastName] = useState();
     const ccaId = useSelector(userIdSelector);
     const userData = useSelector(userDataSelector);
+    const isFetchUserData = useSelector(isFetchUserDataSelector);
     const [validated, setValidated] = useState(false);
 
 
     useEffect(() => {
-        if (!userData.predefined) {
+        if (isFetchUserData && !userData.predefined) {
             history.push('/ccadmin');
         }
     }, [ccaId]);
