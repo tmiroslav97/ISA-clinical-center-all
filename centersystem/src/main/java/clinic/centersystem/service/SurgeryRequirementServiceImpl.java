@@ -116,7 +116,7 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
         for (Long docId : surgeryReservationReqDTO.getChosenDoc()) {
             doctor = doctorService.findById(Long.valueOf(docId));
 
-            if (pickedTermStart < doctor.getStartTime() && doctor.getEndTime() < pickedTermEnd) {
+            if (!(doctor.getStartTime()<=pickedTermStart && doctor.getEndTime() >= pickedTermEnd)) {
                 //doktor ne moze da prisustvuje operaciji jer operacija nije u sklopu radnog vremena
                 continue;
             }
