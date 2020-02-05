@@ -84,7 +84,13 @@ public class ClinicServiceImpl implements ClinicService {
 
     @Override
     public ClinicResponsePageDTO findAll(Integer pageCnt) {
-        return null;
+        Pageable pageable = PageRequest.of(pageCnt, 10);
+        Page<Clinic> clinics = clinicRepository.findAll(pageable);
+        ClinicResponsePageDTO clinicResponsePageDTO = ClinicResponsePageDTO.builder()
+                .clinics(clinics.getContent().stream().map(ClinicConverter::toCreateClinicResponseFromClinic).collect(Collectors.toList()))
+                .pageCnt(clinics.getTotalPages())
+                .build();
+        return clinicResponsePageDTO;
     }
 
     @Override
