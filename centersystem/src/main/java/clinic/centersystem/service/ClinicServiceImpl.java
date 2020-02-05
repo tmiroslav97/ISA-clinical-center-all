@@ -5,6 +5,8 @@ import clinic.centersystem.dto.request.ClinicRequestDTO;
 import clinic.centersystem.dto.request.ClinicSearchDTO;
 import clinic.centersystem.dto.response.ClinicResponse;
 import clinic.centersystem.dto.response.ClinicResponsePageDTO;
+import clinic.centersystem.dto.response.RegistrationReqResponseDTO;
+import clinic.centersystem.exception.ResourceNotExistsException;
 import clinic.centersystem.model.Clinic;
 import clinic.centersystem.repository.ClinicRepository;
 import clinic.centersystem.service.intf.ClinicService;
@@ -31,7 +33,7 @@ public class ClinicServiceImpl implements ClinicService {
 
     @Override
     public Clinic findById(Long id) {
-        return this.clinicRepository.findById(id).orElseGet(null);
+        return this.clinicRepository.findById(id).orElseThrow(() -> new ResourceNotExistsException("Clinic doesn't exist"));
     }
 
     @Override

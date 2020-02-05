@@ -1,8 +1,10 @@
 package clinic.centersystem.service;
 
 import clinic.centersystem.converter.AppointmentTypeConverter;
+import clinic.centersystem.dto.request.AppointmentTypeEditReqDTO;
 import clinic.centersystem.dto.request.AppointmentTypeRequestDTO;
-import clinic.centersystem.model.Appointment;
+import clinic.centersystem.dto.request.AppointmentTypeSearchReqDTO;
+import clinic.centersystem.exception.ResourceNotExistsException;
 import clinic.centersystem.model.AppointmentType;
 import clinic.centersystem.model.Clinic;
 import clinic.centersystem.repository.AppointmentTypeRepository;
@@ -23,7 +25,7 @@ public class AppointmentTypeServiceImpl implements AppointmentTypeService {
     private ClinicService clinicService;
 
     @Override
-    public AppointmentType findById(Long id){return this.appointmentTypeRepository.findById(id).orElseGet(null);}
+    public AppointmentType findById(Long id){return this.appointmentTypeRepository.findById(id).orElseThrow(()-> new ResourceNotExistsException("Appointment type doesn't exist"));}
 
     @Override
     public List<AppointmentType> findAll(){return this.appointmentTypeRepository.findAll();}
@@ -41,7 +43,7 @@ public class AppointmentTypeServiceImpl implements AppointmentTypeService {
         AppointmentType appointmentType = AppointmentTypeConverter.toCreateAppointmentTypeFromRequest(appointmentTypeRequestDTO);
         Clinic clinic = clinicService.findById(clinicId);
         appointmentType.setClinic(clinic);
-        appointmentType = appointmentTypeRepository.save(appointmentType);
+        appointmentTypeRepository.save(appointmentType);
 
         return "Successfully added appointment type";
     }
@@ -49,6 +51,18 @@ public class AppointmentTypeServiceImpl implements AppointmentTypeService {
     public String deleteAppointmentType(Long appointmentId){
         this.remove(appointmentId);
         return "Successfully deleted appointment type";
+    }
+
+    public String editAppointmentType(AppointmentTypeEditReqDTO appointmentTypeEditReqDTO){
+        AppointmentType appointmentType = this.findById(appointmentTypeEditReqDTO.getId());
+        appointmentType.setType(appointmentTypeEditReqDTO.getType());
+        appointmentTypeRepository.save(appointmentType);
+        return "Successfully edited appointment type";
+    }
+
+    public List<AppointmentType>searchAppointmentType(AppointmentTypeSearchReqDTO appointmentTypeSearchReqDTO){
+        List<AppointmentType> appointmentType = appointmentTypeRepository.findByClinicIdAndTypeIgnoreCase(appointmentTypeSearchReqDTO.getClinicId(), appointmentTypeSearchReqDTO.getType());
+        return appointmentType;
     }
 
 

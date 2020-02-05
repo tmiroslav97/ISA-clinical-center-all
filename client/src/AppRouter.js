@@ -22,9 +22,9 @@ import AppointmentTypAllAtOnce from './components/ClinicAdmin/AppointmentTypeAll
 import Pricelist from './components/ClinicAdmin/Pricelist';
 import SurgeryReq from './components/SurgeryRequirement/SurgeryReq';
 import Unauthorized from './components/Unauthorized';
-import PatientList from './components/PatientList';
-import WorkCalendar from './components/WorkCalendar';
-import HolAbsRequest from './components/HolAbsRequest';
+import PatientPagination from './components/Patient/PatientPagination';
+import WorkCalendar from './components/Calendar/WorkCalendar';
+import HolAbsRequest from './components/HolidayAbsence/HolAbsRequest';
 import BookingDoc from './components/BookingDoc';
 import AppointmentInfo from './components/ApointmentInfo';
 import SurReqDoctors from './components/SurgeryRequirement/SurReqDoctors';
@@ -38,6 +38,7 @@ import MedicalRecord from './components/MedicalRecord/MedicalRecord';
 import ClinicSearch from './components/Clinic/ClinicSearch';
 import DoctorSearch from './components/Doctor/DoctorSearch';
 import History from './components/Patient/History';
+import RewritePrescription from './components/Prescriptions/RewritePrescription';
 
 const AppRouter = () => {
     return (
@@ -48,6 +49,9 @@ const AppRouter = () => {
             <Route exact path="/prob" component={HolidayAproval} />
             <Route exact path="/signup" component={RegPage} />
             <Route exact path="/change-pass" component={PasswordChanger} />
+
+
+            <PrivateRoute exact path="/nurse-page/rew-presc" component={RewritePrescription} accessRole={["ROLE_NURSE"]} />
             <PrivateRoute exact path="/nurse-page" component={NurseHomePage} accessRole={["ROLE_NURSE"]} />
 
             <PrivateRoute exact path="/medical-rec/:typeId" component={MedicalRecord} accessRole={["ROLE_DOCTOR","ROLE_PATIENT"]} />
@@ -69,22 +73,24 @@ const AppRouter = () => {
             <PrivateRoute exact path="/doc/app-info" component={AppointmentInfo} accessRole={["ROLE_DOCTOR"]} />
             <PrivateRoute exact path="/doc/bok-doc" component={BookingDoc} accessRole={["ROLE_DOCTOR"]} />
             <PrivateRoute exact path="/doc" component={DoctorHomePage} accessRole={["ROLE_DOCTOR"]} />
+
+            <PrivateRoute exact path="/pers/pat-list" component={PatientPagination} accessRole={["ROLE_NURSE", "ROLE_DOCTOR"]} />
             <PrivateRoute exact path="/pers/hol-abs" component={HolAbsRequest} accessRole={["ROLE_NURSE", "ROLE_DOCTOR"]} />
             <PrivateRoute exact path="/pers/work-cal" component={WorkCalendar} accessRole={["ROLE_NURSE", "ROLE_DOCTOR"]} />
 
             <PrivateRoute exact path="/adminc/pick-doc" component={SurReqDoctors} accessRole={["ROLE_ADMINC"]} />
-            <PrivateRoute exact path="/adminc/room-search" component={RoomSearch} accessRole={["ROLE_ADMINC"]} />
+            <PrivateRoute exact path="/adminc/room-search/:reason" component={RoomSearch} accessRole={["ROLE_ADMINC"]} />
             <PrivateRoute exact path="/adminc/exe-room/:clinicId" component={RoomAllAtOnce} accessRole={["ROLE_ADMINC"]} />
             <PrivateRoute exact path="/adminc/doc/:clinicId" component={DoctorAllAtOnce} accessRole={["ROLE_ADMINC"]} />
             <PrivateRoute exact path="/adminc/cli-prof/:clinicId" component={ClinicProfile} accessRole={["ROLE_ADMINC"]} />
             <PrivateRoute exact path="/adminc/bus-rep/:clinicId" component={BusinessReport} accessRole={["ROLE_ADMINC"]} />
             <PrivateRoute exact path="/adminc/free-app/:clinicId" component={FreeAppointment} accessRole={["ROLE_ADMINC"]} />
             <PrivateRoute exact path="/adminc/price-list/:clinicId" component={Pricelist} accessRole={["ROLE_ADMINC"]} />
-            <PrivateRoute exact path="/adminc/app-type/:clinicId" component={AppointmentTypAllAtOnce} accessRole={["ROLE_ADMINC"]} />
+            <PrivateRoute exact path="/adminc/app-type" component={AppointmentTypAllAtOnce} accessRole={["ROLE_ADMINC"]} />
             <PrivateRoute exact path="/adminc/sur-req/:clinicId" component={SurgeryReq} accessRole={["ROLE_ADMINC"]} />
             <PrivateRoute exact path="/adminc" component={ClinicAdmin} accessRole={["ROLE_ADMINC"]} />
 
-            <Route exact path="/user-prof" component={UserProfile} />
+            <PrivateRoute exact path="/user-prof" component={UserProfile} accessRole={["ROLE_NURSE", "ROLE_DOCTOR", "ROLE_ADMINC"]} />
             <Route exact path="/page-not-found" component={() => <h1>Page not found!</h1>} />
             <Route exact path="/unauthorized" component={Unauthorized} />
             <Redirect from="*" to="/page-not-found" />

@@ -67,7 +67,7 @@ const CA = () => {
                             <Card.Text>
                                 You can access appointment types.
                             </Card.Text>
-                            <Button variant="primary" onClick={() => { history.push('/adminc/app-type/' + data.clinicId); }}>Type</Button>
+                            <Button variant="primary" onClick={() => { history.push('/adminc/app-type'); }}>Type</Button>
                         </Card.Body>
                     </Card>
                 </Col>
@@ -91,7 +91,7 @@ const CA = () => {
                             <Card.Text>
                                 You can easily search rooms.
                             </Card.Text>
-                            <Button variant="primary" onClick={() => { history.push('/adminc/room-search'); }}>Search rooms</Button>
+                            <Button variant="primary" onClick={() => { history.push('/adminc/room-search/free'); }}>Search rooms</Button>
                         </Card.Body>
                     </Card>
                 </Col>

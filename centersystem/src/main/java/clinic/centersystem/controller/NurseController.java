@@ -1,7 +1,7 @@
 package clinic.centersystem.controller;
 
 import clinic.centersystem.dto.response.NurseResponse;
-import clinic.centersystem.dto.response.RecepieResponse;
+import clinic.centersystem.dto.response.PrescriptionResponse;
 import clinic.centersystem.service.NurseServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -30,14 +30,5 @@ public class NurseController {
         return new ResponseEntity<>(this.nurseService.getNurseById(nurseId), HttpStatus.OK);
     }
 
-    @RequestMapping(method = POST, value = "/rewrite/{nurseId}/{recepieId}")
-    public ResponseEntity<String> rewriteRecepie(@PathVariable Long nurseId, @PathVariable Long recepieId) {
-        return new ResponseEntity<>(this.nurseService.rewriteRecepie(nurseId, recepieId), HttpStatus.OK);
-    }
-
-    @RequestMapping(method = GET, value = "/recepies")
-    public ResponseEntity<List<RecepieResponse>> getRecepies() {
-        return new ResponseEntity<>(this.nurseService.getRecepies(), HttpStatus.OK);
-    }
 
 }

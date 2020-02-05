@@ -157,17 +157,6 @@ const RoomAllAtOnce = ({ match }) => {
                                 </Col>
                             </Form.Group>
 
-                            <Form.Group as={Row} controlId="formGridStateRoom">
-                                <Form.Label>Filter data by</Form.Label>
-                                <Col>
-                                    <Form.Control as="select">
-                                        <option>Choose...</option>
-                                        <option>...</option>
-                                    </Form.Control>
-                                </Col>
-                            </Form.Group>
-
-
                         </Form>
                     </Col>
                 </Row>

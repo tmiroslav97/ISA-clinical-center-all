@@ -20,8 +20,7 @@ class ClinicService extends HttpClient {
 
             return { data };
         } catch (error) {
-            console.log(error.response.data);
-            alert(error.response.data);
+            return error.response;
         }
     };
 
@@ -35,7 +34,7 @@ class ClinicService extends HttpClient {
 
             return { clinics };
         } catch (error) {
-            console.log(error.response.data);
+            return error.response;
         }
     };
 
@@ -48,7 +47,7 @@ class ClinicService extends HttpClient {
 
             return { data };
         } catch (error) {
-            console.log(error.response.data);
+            return error.response;
         }
     };
 
@@ -74,7 +73,7 @@ class ClinicService extends HttpClient {
             const clinicPag = data;
             return { clinicPag };
         } catch (error) {
-            console.log(error.response.data);
+            return error.response;
         }
     };
 

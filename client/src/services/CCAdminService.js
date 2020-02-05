@@ -21,7 +21,7 @@ class CCAdminService extends HttpClient {
             );
             return { data };
         } catch (error) {
-            console.log(error.response.data);
+            return error.response;
         }
     };
 
@@ -33,18 +33,20 @@ class CCAdminService extends HttpClient {
             const reqData = data;
             return { reqData };
         } catch (error) {
-            console.log(error.response.data);
+            return error.response;
         }
     };
 
     approveRegReq = async payload => {
         try {
-            const { data } = await this.getApiClient().post(format(FINALPOINTS.APPROVE_REG_REQ, payload.regReqId));
+            const { data } = await this.getApiClient().post(
+                format(FINALPOINTS.APPROVE_REG_REQ, payload.regReqId)
+            );
             return { data };
         } catch (error) {
-            console.log(error);
-            console.log(error.response.data);
+            return error.response;
         }
+
     };
 
     rejectRegReq = async payload => {
@@ -52,7 +54,7 @@ class CCAdminService extends HttpClient {
             const { data } = await this.getApiClient().post(format(FINALPOINTS.REJECT_REG_REQ, payload.reqId, payload.message));
             return { data };
         } catch (error) {
-            console.log(error.response.data);
+            return error.response;
         }
     };
 
@@ -65,7 +67,7 @@ class CCAdminService extends HttpClient {
 
             return { data };
         } catch (error) {
-            console.log(error.response.data);
+            return error.response;
         }
     };
 
@@ -79,7 +81,7 @@ class CCAdminService extends HttpClient {
 
             return { clinics };
         } catch (error) {
-            console.log(error.response.data);
+            return error.response;
         }
     };
 

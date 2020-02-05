@@ -13,16 +13,19 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(value = {UserExistsException.class})
-    protected ResponseEntity<Object> handleUserExistsException(RuntimeException ex, WebRequest request) {
-        String bodyOfResponse = "User already exists";
-        return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    @ExceptionHandler(value = {ResourceExistsException.class})
+    protected ResponseEntity<Object> handleResourceAlreadyExists(RuntimeException ex, WebRequest request) {
+        return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
+    @ExceptionHandler(value = {ResourceNotExistsException.class})
+    protected ResponseEntity<Object> handleResouceNotExists(RuntimeException ex, WebRequest request) {
+        return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
     @ExceptionHandler(value = {UserNotFoundException.class})
     protected ResponseEntity<Object> handleUserNotFoundException(RuntimeException ex, WebRequest request) {
-        String bodyOfResponse = "User not found";
-        return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+        return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
     @ExceptionHandler(value = {CCANotPredefinedException.class})

@@ -8,6 +8,6 @@ import java.util.List;
 public interface AppointmentTypeRepository  extends JpaRepository<AppointmentType, Long> {
 
     List<AppointmentType> findAllByClinicId(Long id);
-
+    List<AppointmentType> findByClinicIdAndTypeIgnoreCase(Long id, String type);
 
 }

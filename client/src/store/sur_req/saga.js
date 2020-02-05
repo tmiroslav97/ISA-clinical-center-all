@@ -30,10 +30,10 @@ export function* fetchFinishReservation() {
     const { payload } = yield take(FETCH_FINISH_RESERVATION);
     const { data } = yield call(SurgeryRequirementService.fetchFinishReservation, payload);
     if (data === 'Room is reserved for surgery') {
-        yield put(putSuccessMsg(data.data));
+        yield put(putSuccessMsg(data));
         yield put(putSuccessMsg(null));
     } else {
-        yield put(putWarnMsg(data.data));
+        yield put(putWarnMsg(data));
         yield put(putWarnMsg(null));
     }
     yield put(putPickSurReq(false));
@@ -57,7 +57,7 @@ export function* fetchPickSurRoom() {
     const { payload } = yield take(FETCH_PICK_SUR_ROOM);
     yield put(putPickedSurReq(payload.pickedSurReq));
     yield put(putPickSurReq(true));
-    history.push('/adminc/room-search');
+    history.push('/adminc/room-search/SUR');
 }
 
 export function* fetchPickDoc() {

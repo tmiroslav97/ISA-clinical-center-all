@@ -1,8 +1,10 @@
 package clinic.centersystem.controller;
 
+import clinic.centersystem.dto.request.PatientSearchRequestDTO;
 import clinic.centersystem.dto.response.ClinicResponse;
 import clinic.centersystem.dto.response.DoctorResponse;
 import clinic.centersystem.dto.response.PatientResponse;
+import clinic.centersystem.dto.response.PatientSortResponseDTO;
 import clinic.centersystem.model.Clinic;
 import clinic.centersystem.model.Doctor;
 import clinic.centersystem.service.PatientServiceImpl;
@@ -11,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,6 +21,7 @@ import java.util.List;
 import java.util.Set;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 @RequestMapping(value = "/pat", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -51,6 +55,9 @@ public class PatientController {
         return new ResponseEntity<>(this.patientService.findPatientByAppId(typeId), HttpStatus.OK);
     }
 
-
+    @RequestMapping(method = POST, value = "/all/search")
+    public ResponseEntity<PatientSortResponseDTO> searchPatients(@RequestBody PatientSearchRequestDTO patientSearchRequestDTO) {
+        return new ResponseEntity<>(this.patientService.findAll(patientSearchRequestDTO), HttpStatus.OK);
+    }
 
 }

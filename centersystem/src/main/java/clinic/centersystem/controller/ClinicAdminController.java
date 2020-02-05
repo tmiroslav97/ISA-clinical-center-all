@@ -33,13 +33,13 @@ public class ClinicAdminController {
     @RequestMapping(method = GET, value = "/{id}")
     @PreAuthorize("hasRole('ADMINC')")
     public ResponseEntity<ClinicAdministratoreResponse> clinicAdministrator(@PathVariable Long id) {
-        return new ResponseEntity<>(this.clinicAdminService.clinicAdministrator(id), HttpStatus.CREATED);
+        return new ResponseEntity<>(clinicAdminService.clinicAdministrator(id), HttpStatus.CREATED);
     }
 
     @RequestMapping(method = POST, value = "/reg-clinic-admin")
     @PreAuthorize("hasRole('CCADMIN')")
     public ResponseEntity<String> registerClinicAdmin(@RequestBody ClinicAdminReqDTO clinicAdminReqDTO) {
-        return new ResponseEntity<>(this.clinicAdminService.registerClinicAdmin(clinicAdminReqDTO), HttpStatus.OK);
+        return new ResponseEntity<>(clinicAdminService.registerClinicAdmin(clinicAdminReqDTO), HttpStatus.OK);
     }
 
     /*@RequestMapping(method = GET, value = "/fetch")

@@ -34,7 +34,6 @@ export function* fetchRegReqsData() {
 export function* approveRegReq() {
     const { payload } = yield take(APPROVE_REG_REQ);
     const { data } = yield call(CCAdminService.approveRegReq, payload);
-    console.log(data);
     if (data === 'Patient registration approved') {
         yield put(putSuccessMsg(data));
         yield put(putSuccessMsg(null));

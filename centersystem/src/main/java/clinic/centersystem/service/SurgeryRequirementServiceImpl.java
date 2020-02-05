@@ -4,6 +4,7 @@ import clinic.centersystem.converter.SurgeryRequirementConverter;
 import clinic.centersystem.dto.request.SurgeryReservationReqDTO;
 import clinic.centersystem.dto.response.RoomResponseDTO;
 import clinic.centersystem.dto.response.SurgeryRequirementResponseDTO;
+import clinic.centersystem.exception.ResourceNotExistsException;
 import clinic.centersystem.model.*;
 import clinic.centersystem.repository.SurgeryRequirementRepository;
 import clinic.centersystem.service.intf.*;
@@ -56,12 +57,10 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
     @Autowired
     private EmailService emailService;
 
-    @Autowired
-    private ClinicService clinicService;
 
     @Override
     public SurgeryRequirement findById(Long id) {
-        return surgeryRequirementRepository.findById(id).orElseGet(null);
+        return surgeryRequirementRepository.findById(id).orElseThrow(() -> new ResourceNotExistsException("Surgery requirement doesn't exist"));
     }
 
     @Override
@@ -94,6 +93,11 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
 
         DateTime pickedDateEnd = new DateTime(pickedDateStr, DateTimeZone.UTC);
         pickedDateEnd = pickedDateEnd.plusHours(pickedTermEnd);
+
+        Room roomCheck = roomService.findById(surgeryReservationReqDTO.getPickedRoom());
+        if (!roomCheck.getType().equals("SUR")) {
+            return 4;
+        }
 
         List<Integer> bookedTerm = roomCalendarService.findByRoomAndDate(surgeryReservationReqDTO.getPickedRoom(), pickedDate);
 
@@ -196,7 +200,7 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
         for (SurgeryRequirement surgeryRequirement : surgeryRequirements) {
             DateTime pickedDate = surgeryRequirement.getDate();
 
-            List<Room> rooms = roomService.findByClinicId(surgeryRequirement.getClinic().getId());
+            List<Room> rooms = roomService.findByClinicIdAndType(surgeryRequirement.getClinic().getId(), "SUR");
             for (Room room : rooms) {
                 DateTime dt = new DateTime(pickedDate, DateTimeZone.UTC);
                 DateTime now = new DateTime(LocalDate.now().toString(), DateTimeZone.UTC);

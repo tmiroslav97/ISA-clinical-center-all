@@ -32,6 +32,7 @@ public class PatientConverter {
 
     public static PatientResponse toCreatePatientResponseFromPatient(Patient patient) {
         return PatientResponse.builder()
+                .id(patient.getId())
                 .firstName(patient.getFirstName())
                 .lastName(patient.getLastName())
                 .email(patient.getEmail())

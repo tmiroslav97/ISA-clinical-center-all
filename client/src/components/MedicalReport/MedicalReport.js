@@ -4,15 +4,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { diagnosesSelector, isFetchDiagnosesSelector, isFetchMedicinesSelector, medicinesSelector } from '../../store/medicine_diagnose/selectors';
 import { fetchDiagnosesAll, fetchMedicinesAll } from '../../store/medicine_diagnose/actions';
 import { addMedicalReport } from '../../store/medical_report/actions';
+import AppSurReq from '../Common/AppSurReq';
 
 
-const MedicalReport = ({ typeId, medRecId }) => {
+const MedicalReport = ({ typeId, medRecId, patientId }) => {
     const dispatch = useDispatch();
     const [description, setDescription] = useState('');
     const diagnoses = useSelector(diagnosesSelector);
     const medicines = useSelector(medicinesSelector);
     const [diagnose, setDiagnose] = useState('');
     const [medicinesSel, setMedicinesSel] = useState([]);
+    const [show, setShow] = useState(false);
+    const [validated, setValidated] = useState(false);
 
     useEffect(() => {
         dispatch(
@@ -26,17 +29,26 @@ const MedicalReport = ({ typeId, medRecId }) => {
         );
     }, [typeId]);
 
-    const handleFinishApp = () => {
-        dispatch(
-            addMedicalReport({
-                appId:typeId,
-                medRecId,
-                medicines:medicinesSel,
-                diagnose,
-                description
-            })
-        );
+    const handleFinishApp = (event) => {
+        const form = event.currentTarget;
+        event.preventDefault();
+        if (form.checkValidity() === false) {
+            event.stopPropagation();
+            setValidated(true);
+        } else {
+            dispatch(
+                addMedicalReport({
+                    appId: typeId,
+                    medRecId,
+                    medicines: medicinesSel,
+                    diagnose,
+                    description
+                })
+            );
+            setValidated(false);
+        }
     };
+
 
     if (!isFetchDiagnosesSelector || !isFetchMedicinesSelector) {
         return <div className="d-flex justify-content-center">
@@ -54,12 +66,23 @@ const MedicalReport = ({ typeId, medRecId }) => {
                 </Col>
             </Row>
             <Row>
+                <Col md={{ span: 2, offset: 1 }} xs={12}>
+                    <p>Book appointment or surgery</p>
+                </Col>
+                <Col md={{ span: 2 }} xs={12}>
+                    <Button variant="primary" className="mb-2" onClick={() => { setShow(!show); }}>Book</Button>
+                </Col>
+            </Row>
+            {show &&
+                <AppSurReq medRep={true} medRecId={medRecId} patientId={patientId} />
+            }
+            <Row>
                 <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <Form>
+                    <Form noValidate validated={validated} onSubmit={handleFinishApp}>
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>Short description:</Form.Label>
-                                <Form.Control as="textarea" rows="4" id="txtDescription"
+                                <Form.Control required as="textarea" rows="4" id="txtDescription"
                                     onChange={({ currentTarget }) => {
                                         setDescription(currentTarget.value);
                                     }}
@@ -69,10 +92,10 @@ const MedicalReport = ({ typeId, medRecId }) => {
                         <Form.Row>
                             <Form.Group as={Col} md="6">
                                 <Form.Label>Diagnoses:</Form.Label>
-                                <Form.Control as="select" onChange={({ currentTarget }) => {
+                                <Form.Control required as="select" id="cbDiagnoses" onChange={({ currentTarget }) => {
                                     setDiagnose(currentTarget.value);
                                 }} >
-                                    <option value="none" disabled>Please choose doctor</option>
+                                    <option></option>
                                     {
                                         diagnoses.map((diagnose) => {
                                             return (
@@ -84,7 +107,7 @@ const MedicalReport = ({ typeId, medRecId }) => {
                             </Form.Group>
                             <Form.Group as={Col} md="6">
                                 <Form.Label>Medicines:</Form.Label>
-                                <Form.Control as="select" multiple onChange={({ currentTarget }) => {
+                                <Form.Control required as="select" id="cbMedicines" multiple onChange={({ currentTarget }) => {
                                     let options = currentTarget.options;
                                     let vals = [];
                                     for (let i = 0; i < options.length; i++) {
@@ -109,7 +132,7 @@ const MedicalReport = ({ typeId, medRecId }) => {
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
-                            <Button variant="primary" onClick={handleFinishApp}>Finish</Button>
+                            <Button variant="primary" className="mb-5" type="submit">Finish</Button>
                         </Form.Row>
                     </Form>
                 </Col>

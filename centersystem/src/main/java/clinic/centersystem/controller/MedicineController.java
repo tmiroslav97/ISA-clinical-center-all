@@ -29,13 +29,13 @@ public class MedicineController {
     @PreAuthorize("hasRole('CCADMIN')")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<String> addMedicine(@RequestBody Medicine medicine) {
-        this.medicineService.save(medicine);
+        medicineService.save(medicine);
         return new ResponseEntity<>("Medicine successfuly added", HttpStatus.OK);
     }
 
     @RequestMapping(value = "/all/{pageCnt}", method = RequestMethod.GET)
     public ResponseEntity<MedicineResponseDTO> getMedicinesPages(@PathVariable Integer pageCnt) {
-        return new ResponseEntity<>(this.medicineService.findAll(pageCnt), HttpStatus.OK);
+        return new ResponseEntity<>(medicineService.findAll(pageCnt), HttpStatus.OK);
     }
 
 }

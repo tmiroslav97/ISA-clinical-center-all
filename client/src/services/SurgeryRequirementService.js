@@ -18,20 +18,20 @@ class SurgeryRequirementService extends HttpClient {
 
             return { data };
         } catch (error) {
-            console.log(error.response.data);
+            return error.response;
         }
     };
 
     fetchFinishReservation = async payload => {
         try {
-            const data  = await this.getApiClient().post(
+            const { data } = await this.getApiClient().post(
                 FINALPOINTS.FETCH_FINISH_RESERVATION,
                 payload
             );
-            
+
             return { data };
         } catch (error) {
-            console.log(error.response.data);
+            return error.response;
         }
     };
 

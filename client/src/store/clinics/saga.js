@@ -62,6 +62,12 @@ export function* regClinic() {
     if (data === 'Clinic successfuly added') {
         yield put(putSuccessMsg(data));
         yield put(putSuccessMsg(null));
+        yield put(putIsFetchClinicsData(false));
+        const { clinicPag } = yield call(ClinicService.fetchClinicPaginationData, { pageCnt: 0 });
+        yield put(putSelPageCnt(0));
+        yield put(putPageCnt(clinicPag.pageCnt));
+        yield put(putClinicsData(clinicPag.clinics))
+        yield put(putIsFetchClinicsData(true));
     } else {
         yield put(putErrorMsg(data));
         yield put(putErrorMsg(null));

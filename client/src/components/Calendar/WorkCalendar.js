@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { history } from '../index';
 import { Container, Spinner, Row, Col, Table, Button } from 'react-bootstrap';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import moment from 'moment'
-import { fetchCalendar } from '../store/calendar/actions';
-import { calendarDataSelector, isFetchCalendarSelector } from '../store/calendar/selectors';
-import { userDataSelector } from '../store/user/selectors';
+import { fetchCalendar } from '../../store/calendar/actions';
+import { calendarDataSelector, isFetchCalendarSelector } from '../../store/calendar/selectors';
+import { userDataSelector } from '../../store/user/selectors';
+import { fetchAppointment } from '../../store/appointments/actions';
+import { isFetchAppointmentSelector } from '../../store/appointments/selectors';
+import AppointmentDetails from '../Appointment/AppointmentDetails';
+
 
 const localizer = momentLocalizer(moment);
 
@@ -15,6 +18,7 @@ const WorkCalendar = () => {
     const dispatch = useDispatch();
     const calendar = useSelector(calendarDataSelector);
     const isFetchCalendar = useSelector(isFetchCalendarSelector);
+    const isFetchAppointment = useSelector(isFetchAppointmentSelector);
     const data = useSelector(userDataSelector);
     const personnelId = data.id;
     const roles = data.roles;
@@ -37,6 +41,13 @@ const WorkCalendar = () => {
     }, [personnelId]);
 
     const handleCalendarClick = (calEvent) => {
+        if (calEvent.type == 'APP') {
+            dispatch(
+                fetchAppointment({
+                    id: calEvent.typeId
+                })
+            );
+        }
         setSelEvent(true);
         setEvent(calEvent);
     };
@@ -99,19 +110,15 @@ const WorkCalendar = () => {
                                     <th>End date</th>
                                     <td align="right">{moment(event.end).format('YYYY-MM-DD HH:mm:ss')}</td>
                                 </tr>
-                                {  
-                                    event.type === 'APP' && moment(event.start).format('YYYY-MM-DD')===moment().format('YYYY-MM-DD') &&
-                                    <tr>
-                                        <th>Start appointment</th>
-                                        <td colSpan="2" align="right">
-                                            <Button variant="primary" onClick={() => { history.push('/medical-rec/'+event.typeId); }}>Start</Button>
-                                        </td>
-                                    </tr>
-                                }
                             </tbody>
                         </Table>
                     </Col>
                 </Row>
+
+            }
+            {
+                isFetchAppointment &&
+                <AppointmentDetails start={event.start} typeId={event.typeId} />
             }
         </Container>
     );

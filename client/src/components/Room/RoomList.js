@@ -2,17 +2,19 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Spinner, Table, Form, Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { roomsDataSelector, isFetchRoomsSelector } from '../../store/rooms/selectors';
-import { pickSurReqSelector } from '../../store/sur-req/selectors';
-import { fetchPickDoc } from '../../store/sur-req/actions';
+import { pickSurReqSelector } from '../../store/sur_req/selectors';
+import { fetchPickDoc } from '../../store/sur_req/actions';
 
 
-const RoomList = ({ filterTerm, cnt }) => {
+const RoomList = ({ filterTerm, cnt, reason }) => {
     const dispatch = useDispatch();
     const rooms = useSelector(roomsDataSelector);
     const isFetchRoomsData = useSelector(isFetchRoomsSelector);
     const pickSurReq = useSelector(pickSurReqSelector);
     const [pickedTerm, setPickedTerm] = useState('');
     const [preTermins, setPreTermins] = useState([7, 10, 13, 16]);
+    const [preTerminsApp, setPreTerminsApp] = useState([7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]);
+    const [validated, setValidated] = useState(false);
 
     const handleTerm = (pickedRoom) => {
         dispatch(
@@ -55,7 +57,7 @@ const RoomList = ({ filterTerm, cnt }) => {
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Number</th>
-                                <th>Term</th>
+                                <th>Free terms</th>
                                 <th>First free</th>
                             </tr>
                         </thead>
@@ -68,23 +70,41 @@ const RoomList = ({ filterTerm, cnt }) => {
                                             <td>{roomsDto.room.name}</td>
                                             <td>{roomsDto.room.roomNum}</td>
                                             <td>
-                                                <Form>
+                                                <Form noValidate onSubmit={(event) => {
+                                                    const form = event.currentTarget;
+                                                    event.preventDefault();
+                                                    if (form.checkValidity() === false) {
+                                                        event.stopPropagation();
+                                                        alert('You must pick term');
+                                                        form.validate = true;
+                                                    } else {
+                                                        handleTerm(roomsDto.room.id);
+                                                        form.validate = false;
+                                                    }
+                                                }}>
                                                     <Form.Group as={Col}>
-                                                        <Form.Control as="select" defaultValue={"none"} onChange={({ currentTarget }) => {
+                                                        <Form.Control required as="select" id={roomsDto.room.id} defaultValue={"none"} onChange={({ currentTarget }) => {
                                                             setPickedTerm(currentTarget.value);
                                                         }} >
-                                                            <option value="none" disabled hidden>Please choose term</option>
+                                                            <option></option>
                                                             {
-                                                                preTermins.map((termin, index) => {
-                                                                    let flag = roomsDto.termins.includes(termin);
-                                                                    return (
-                                                                        <option key={termin} disabled={flag} value={roomsDto.date + " " + termin + "-" + (termin + 3)}>{termin}-{termin + 3}</option>
-                                                                    );
-                                                                })
+                                                                roomsDto.room.type === 'SUR' ?
+                                                                    preTermins.map((termin) => {
+                                                                        let flag = roomsDto.termins.includes(termin);
+                                                                        return (
+                                                                            <option key={roomsDto.room.id * 10 + termin} disabled={flag} value={roomsDto.date + " " + termin + "-" + (termin + 3)}>{termin}-{termin + 3}</option>
+                                                                        );
+                                                                    }) :
+                                                                    preTerminsApp.map((termin) => {
+                                                                        let flag = roomsDto.termins.includes(termin);
+                                                                        return (
+                                                                            <option key={roomsDto.room.id * 10 + termin} disabled={flag} value={roomsDto.date + " " + termin + "-" + (termin + 1)}>{termin}-{termin + 1}</option>
+                                                                        );
+                                                                    })
                                                             }
                                                         </Form.Control>
                                                         {
-                                                            pickSurReq ? <Button className="mt-2" onClick={(e) => { handleTerm(roomsDto.room.id) }}>Reserve</Button> : null
+                                                            pickSurReq && roomsDto.room.type === reason ? <Button className="mt-2" id={'btn'+roomsDto.room.id} type="submit">Reserve</Button> : null
                                                         }
                                                     </Form.Group>
 
@@ -92,7 +112,7 @@ const RoomList = ({ filterTerm, cnt }) => {
                                             </td>
                                             <td>{roomsDto.firstFreeTermin}<br />
                                                 {
-                                                    pickSurReq ? <Button onClick={(e) => { handleFirst(roomsDto.room.id, roomsDto.firstFreeTermin) }}>Reserve</Button> : null
+                                                    pickSurReq && roomsDto.room.type === reason ? <Button id={'btnFast'+roomsDto.room.id} onClick={(e) => { handleFirst(roomsDto.room.id, roomsDto.firstFreeTermin) }}>Reserve</Button> : null
                                                 }
                                             </td>
                                         </tr>
@@ -102,8 +122,8 @@ const RoomList = ({ filterTerm, cnt }) => {
                         </tbody>
                     </Table>
                 </Col>
-            </Row>       
-        </Container>
+            </Row>
+        </Container >
     );
 }
 
