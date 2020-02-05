@@ -55,9 +55,6 @@ const AppointmentTypAllAtOnce = () => {
         dispatch(
             searchAppointmentType({type, clinicId})
         );
-        console.log("OVDE");
-        console.log(type);
-        console.log(clinicId);
     };
 
     useEffect(() => {
