@@ -8,8 +8,6 @@ import { isFetchPatientsSelector, patientSelector } from '../../store/patients/s
 import MedicalReport from '../MedicalReport/MedicalReport';
 
 
-
-
 const MedicalRecord = ({ match }) => {
     const dispatch = useDispatch();
     const isFetchMedicalRecord = useSelector(isFetchMedicalRecordSelector);
@@ -22,7 +20,8 @@ const MedicalRecord = ({ match }) => {
     const [weight, setWeight] = useState('');
     const [height, setHeight] = useState('');
     const [description, setDescription] = useState('');
-    const [mrDescription, setMrDescription] = useState('');
+    const [validated, setValidated] = useState(false);
+
 
     useEffect(() => {
         if (typeId != null) {
@@ -40,16 +39,25 @@ const MedicalRecord = ({ match }) => {
         }
     }, [typeId]);
 
-    const handleEditMedicalRecord = () => {
-        dispatch(
-            editMedicalRecord({
-                id: medicalRecord.id,
-                bloodType,
-                weight,
-                height,
-                description
-            })
-        );
+    const handleEditMedicalRecord = (event) => {
+        const form = event.currentTarget;
+        event.preventDefault();
+        if (form.checkValidity() === false) {
+            event.stopPropagation();
+            setValidated(true);
+        } else {
+            dispatch(
+                editMedicalRecord({
+                    id: medicalRecord.id,
+                    bloodType,
+                    weight,
+                    height,
+                    description
+                })
+            );
+            setValidated(false);
+            setShow(false);
+        }
     };
 
     const handleClose = () => setShow(false);
@@ -76,40 +84,40 @@ const MedicalRecord = ({ match }) => {
                     <Modal.Title>Edit patient medical record</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form>
+                    <Form noValidate validated={validated} onSubmit={handleEditMedicalRecord}>
                         <Form.Group>
                             <Form.Label>Blood type:</Form.Label>
-                            <Form.Control type="text" id="txtBloodType" defaultValue={bloodType}
+                            <Form.Control required type="text" id="txtBloodType" defaultValue={bloodType}
                                 onChange={({ currentTarget }) => {
                                     setBloodType(currentTarget.value);
                                 }}
                             />
                             <Form.Label>Weight:</Form.Label>
-                            <Form.Control type="number" min="0" step="0.01" id="txtWeight" defaultValue={weight}
+                            <Form.Control required type="number" min="0" step="0.01" id="txtWeight" defaultValue={weight}
                                 onChange={({ currentTarget }) => {
                                     setWeight(currentTarget.value);
                                 }}
                             />
                             <Form.Label>Height:</Form.Label>
-                            <Form.Control type="number" min="0" step="0.01" id="txtHeight" defaultValue={height}
+                            <Form.Control required type="number" min="0" step="0.01" id="txtHeight" defaultValue={height}
                                 onChange={({ currentTarget }) => {
                                     setHeight(currentTarget.value);
                                 }}
                             />
                             <Form.Label>Description:</Form.Label>
-                            <Form.Control as="textarea" id="txtDescription" rows="4" defaultValue={description}
+                            <Form.Control required as="textarea" id="txtDescription" rows="4" defaultValue={description}
                                 onChange={({ currentTarget }) => {
                                     setDescription(currentTarget.value);
                                 }}
                             />
                         </Form.Group>
+                        <Form.Group as={Col} align="right">
+                            <Button variant="primary" type="submit">
+                                Edit
+                            </Button>
+                        </Form.Group>
                     </Form>
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary" onClick={() => { handleEditMedicalRecord(); handleClose() }}>
-                        Edit
-                    </Button>
-                </Modal.Footer>
             </Modal>
             <Row>
                 <Col md={{ span: 10, offset: 1 }} xs={12}>
@@ -170,7 +178,7 @@ const MedicalRecord = ({ match }) => {
                     </Table>
                 </Col>
             </Row>
-            <MedicalReport typeId={typeId} medRecId={medicalRecord.id}/>
+            <MedicalReport typeId={typeId} medRecId={medicalRecord.id} patientId={patient.id} />
         </Container>
     );
 }

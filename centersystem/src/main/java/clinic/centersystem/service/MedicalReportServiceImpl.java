@@ -2,6 +2,7 @@ package clinic.centersystem.service;
 
 import clinic.centersystem.converter.PrescriptionConverter;
 import clinic.centersystem.dto.request.MedicalReportRequestDTO;
+import clinic.centersystem.exception.ResourceExistsException;
 import clinic.centersystem.model.*;
 import clinic.centersystem.model.enumeration.AppStateEnum;
 import clinic.centersystem.repository.MedicalReportRepository;
@@ -47,6 +48,9 @@ public class MedicalReportServiceImpl implements MedicalReportService {
     @Override
     public String addMedicalReport(MedicalReportRequestDTO medicalReportRequestDTO) {
         Appointment appointment = appointmentService.findById(medicalReportRequestDTO.getAppId());
+        if(appointment.getAppState()==AppStateEnum.FINISHED || appointment.getAppState()==AppStateEnum.STARTED){
+            throw new ResourceExistsException("Appointment already finished");
+        }
         Clinic clinic = clinicService.findById(appointment.getClinic().getId());
         Diagnose diagnose = diagnoseService.findById(medicalReportRequestDTO.getDiagnose());
         MedicalRecord medicalRecord = medicalRecordService.findById(medicalReportRequestDTO.getMedRecId());
@@ -67,10 +71,10 @@ public class MedicalReportServiceImpl implements MedicalReportService {
         }else{
             appointment.setAppState(AppStateEnum.FINISHED);
         }
-
+        appointment.setAppState(AppStateEnum.STARTED);
         appointment.setMedicalReport(medicalReport);
         appointmentService.save(appointment);
 
-        return "Medical report added";
+        return "Appointment finished";
     }
 }

@@ -5,7 +5,8 @@ import { format } from 'util';
 const FINALPOINTS = {
     FETCH_APPOINTMENT_TYPES: '/appointment-type/all/%s',
     ADD_APPOINTMENT_TYPE: '/appointment-type/add-appointment-type/%s',
-    DELETE_APPOINTMENTS_TYPE: '/appointment-type/delete-appointment-type'
+    DELETE_APPOINTMENTS_TYPE: '/appointment-type/delete-appointment-type',
+    FETCH_APPOINTMENT: '/appointment/%s',
     //SEARCH_APPOINTMENT_TYPE: 'admi-cli/appType/search/%s/%s',
     // DELETE_ROOMS_DATA: 'admi-cli/appType/delete/%s',
     //EDIT_APPOINTMENT_TYPE: 'admi-cli/appType/edit/%s',
@@ -31,11 +32,11 @@ class AppointmentTypeService extends HttpClient {
         try {
             const { data } = await this.getApiClient().post(
                 format(FINALPOINTS.ADD_APPOINTMENT_TYPE, payload.clinicId),
-                {type:payload.type}
-                
+                { type: payload.type }
+
             );
             return { data };
-            
+
         } catch (error) {
             console.log(error.response.data);
         }
@@ -46,7 +47,7 @@ class AppointmentTypeService extends HttpClient {
             console.log("Hocu ovde");
             const { data } = await this.getApiClient().delete(
                 FINALPOINTS.DELETE_APPOINTMENTS_TYPE,
-                {appointmentID:payload.id}
+                { appointmentID: payload.id }
             );
             console.log(payload);
 
@@ -57,6 +58,17 @@ class AppointmentTypeService extends HttpClient {
         }
     };
 
+    fetchAppointment = async payload => {
+        try {
+            const { data } = await this.getApiClient().get(
+                format(FINALPOINTS.FETCH_APPOINTMENT, payload.id)
+            );
+
+            return { data };
+        } catch (error) {
+            return error.response;
+        }
+    };
     /*editAppointmentType = async payload => {
         try {
             const { data } = await this.getApiClient().put(

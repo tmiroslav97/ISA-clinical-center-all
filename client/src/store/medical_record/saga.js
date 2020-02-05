@@ -13,9 +13,21 @@ import {
     putMedicalRecord
 } from './actions';
 
+import {
+    putSuccessMsg,
+    putErrorMsg
+} from '../common/actions';
+
 export function* editMedicalRecord() {
     const { payload } = yield take(EDIT_MEDICAL_RECORD);
-    yield call(MedicalRecordService.editMedicalRecord, payload);
+    const { edit } = yield call(MedicalRecordService.editMedicalRecord, payload);
+    if (edit === 'Successfuly edited') {
+        yield put(putSuccessMsg(edit));
+        yield put(putSuccessMsg(null));
+    } else {
+        yield put(putErrorMsg(edit));
+        yield put(putErrorMsg(null));
+    }
     yield put(putIsFetchMedicalRecord(false));
     const { data } = yield call(MedicalRecordService.fetchMedicalRecord, payload);
     yield put(putMedicalRecord(data));

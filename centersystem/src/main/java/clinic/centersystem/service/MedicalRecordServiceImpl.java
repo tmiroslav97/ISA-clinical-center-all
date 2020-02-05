@@ -1,6 +1,7 @@
 package clinic.centersystem.service;
 
 import clinic.centersystem.dto.request.MedicalRecordRequestDTO;
+import clinic.centersystem.exception.ResourceNotExistsException;
 import clinic.centersystem.model.MedicalRecord;
 import clinic.centersystem.repository.MedicalRecordRepository;
 import clinic.centersystem.service.intf.MedicalRecordService;
@@ -37,7 +38,7 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     public String editMedicalRecord(MedicalRecordRequestDTO medicalRecordRequestDTO) {
         MedicalRecord medicalRecord = this.findById(medicalRecordRequestDTO.getId());
         if(medicalRecord==null){
-            return "Can't find medical record";
+            throw new ResourceNotExistsException("Can't find medical record");
         }
         medicalRecord.setBloodType(medicalRecordRequestDTO.getBloodType());
         medicalRecord.setWeight(medicalRecordRequestDTO.getWeight());

@@ -1,5 +1,6 @@
 package clinic.centersystem.service;
 
+import clinic.centersystem.dto.response.AppointmentResponseDTO;
 import clinic.centersystem.model.Appointment;
 import clinic.centersystem.repository.AppointmentRepository;
 import clinic.centersystem.service.intf.AppointmentService;
@@ -20,5 +21,16 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public Appointment save(Appointment appointment) {
         return appointmentRepository.save(appointment);
+    }
+
+    @Override
+    public AppointmentResponseDTO getById(Long id) {
+        Appointment appointment = this.findById(id);
+        AppointmentResponseDTO appointmentResponseDTO = AppointmentResponseDTO.builder()
+                .appState(appointment.getAppState().toString())
+                .patient(appointment.getPatient().getFirstName() + " " + appointment.getPatient().getLastName())
+                .build();
+
+        return appointmentResponseDTO;
     }
 }

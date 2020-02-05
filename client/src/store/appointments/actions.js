@@ -3,8 +3,26 @@ import {
     FETCH_APPOINTMENT_TYPE,
     DELETE_APPOINTMENT_TYPE,
     ADD_APPOINTMENT_TYPE,
-    PUT_IS_FETCH_APPOINTMENT_TYPES
+    PUT_IS_FETCH_APPOINTMENT_TYPES,
+    FETCH_APPOINTMENT,
+    PUT_APPOINTMENT,
+    PUT_IS_FETCH_APPOINTMENT
 } from './constants';
+
+export const putIsFetchAppointment = payload => ({
+    type: PUT_IS_FETCH_APPOINTMENT,
+    payload
+});
+
+export const fetchAppointment = payload => ({
+    type: FETCH_APPOINTMENT,
+    payload
+});
+
+export const putAppointment = payload => ({
+    type: PUT_APPOINTMENT,
+    payload
+});
 
 export const fetchAppointmentType = payload => ({
     type: FETCH_APPOINTMENT_TYPE,

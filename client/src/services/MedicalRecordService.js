@@ -15,7 +15,7 @@ class MedicalRecordService extends HttpClient {
             );
             return { data };
         } catch (error) {
-            console.log(error.response.data);
+            return error.response;
         }
     };
 
@@ -26,7 +26,7 @@ class MedicalRecordService extends HttpClient {
             );
             return { data };
         } catch (error) {
-            console.log(error.response.data);
+            return error.response;
         }
     };
 
@@ -36,9 +36,11 @@ class MedicalRecordService extends HttpClient {
                 FINALPOINTS.EDIT_MEDICAL_RECORD,
                 payload
             );
-            return { data };
+            const edit = data;
+            return { edit };
         } catch (error) {
-            console.log(error.response.data);
+            const edit = error.response.data;
+            return { edit };
         }
     };
 
