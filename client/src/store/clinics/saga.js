@@ -40,9 +40,8 @@ export function* regClinicAdmin() {
 export function* fetchClinicsData() {
     const { payload } = yield take(FETCH_CLINICS_DATA);
     yield put(putIsFetchClinicsData(false));
-    const { data } = yield call(ClinicService.fetchClinicsData, payload);
-    yield put(putClinicsData(data.clinics));
-    yield put(putPageCount(data.pageCount));
+    const { clinics } = yield call(ClinicService.fetchClinicsData, payload);
+    yield put(putClinicsData(clinics));
     yield put(putIsFetchClinicsData(true));
 }
 
@@ -72,12 +71,6 @@ export function* regClinic() {
         yield put(putErrorMsg(data));
         yield put(putErrorMsg(null));
     }
-    yield put(putIsFetchClinicsData(false));
-    const { clinicPag } = yield call(ClinicService.fetchClinicPaginationData, { pageCnt: 0 });
-    yield put(putSelPageCnt(0));
-    yield put(putPageCnt(clinicPag.pageCnt));
-    yield put(putClinicsData(clinicPag.clinics))
-    yield put(putIsFetchClinicsData(true));
 }
 
 export function* searchClinic() {
