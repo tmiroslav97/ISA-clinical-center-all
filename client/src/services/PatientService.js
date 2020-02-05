@@ -63,10 +63,9 @@ class PatientService extends HttpClient {
                 format(FINALPOINTS.FETCH_PATIENT_DATA, payload.patientId)
             );
 
-            const patients = data;
-            return { patients };
+            return { data };
         } catch (error) {
-            console.log(error.response.data);
+            return error.response;
         }
     };
 
@@ -117,7 +116,7 @@ class PatientService extends HttpClient {
             const patients = data;
             return { patients };
         } catch (error) {
-            console.log(error.response.data);
+            return error.response;
         }
     };
 

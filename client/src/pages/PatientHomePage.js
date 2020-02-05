@@ -34,7 +34,7 @@ const PatientHomePage = () => {
         <Container>
             <Row>
                 <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <h2 className="border-bottom">Patient profile</h2>
+                    <h2 className="border-bottom">Patient home page</h2>
                 </Col>
             </Row>
             <Row>

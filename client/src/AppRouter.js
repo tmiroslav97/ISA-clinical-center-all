@@ -39,6 +39,7 @@ import ClinicSearch from './components/Clinic/ClinicSearch';
 import DoctorSearch from './components/Doctor/DoctorSearch';
 import History from './components/Patient/History';
 import RewritePrescription from './components/Prescriptions/RewritePrescription';
+import PatientList from './components/Patient/PatientList';
 
 const AppRouter = () => {
     return (
