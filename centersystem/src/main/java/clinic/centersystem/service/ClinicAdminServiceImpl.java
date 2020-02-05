@@ -4,6 +4,7 @@ import clinic.centersystem.converter.ClinicAdminConverter;
 import clinic.centersystem.dto.request.ClinicAdminReqDTO;
 import clinic.centersystem.dto.response.ClinicAdministratoreResponse;
 import clinic.centersystem.exception.ResourceExistsException;
+import clinic.centersystem.exception.ResourceNotExistsException;
 import clinic.centersystem.model.*;
 import clinic.centersystem.repository.ClinicAdminRepository;
 import clinic.centersystem.service.intf.ClinicAdminService;
@@ -45,7 +46,7 @@ public class ClinicAdminServiceImpl implements ClinicAdminService {
     @Override
     public ClinicAdmin findById(Long id) {
 
-        return this.clinicAdminRepository.findById(id).orElseGet(null);
+        return this.clinicAdminRepository.findById(id).orElseThrow(()-> new ResourceNotExistsException("Clinic admin doesn't exist"));
     }
 
     @Override

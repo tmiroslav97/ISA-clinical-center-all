@@ -4,6 +4,7 @@ import clinic.centersystem.dto.request.RoomSearchDTO;
 import clinic.centersystem.dto.response.RoomResponseDTO;
 import clinic.centersystem.dto.response.RoomResponseTerminDTO;
 import clinic.centersystem.dto.response.RoomResponseTerminPageDTO;
+import clinic.centersystem.exception.ResourceNotExistsException;
 import clinic.centersystem.model.Room;
 import clinic.centersystem.repository.RoomRepository;
 import clinic.centersystem.service.intf.RoomCalendarService;
@@ -33,7 +34,7 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public Room findById(Long id) {
-        return roomRepository.findById(id).orElseThrow(RuntimeException::new);
+        return roomRepository.findById(id).orElseThrow(() -> new ResourceNotExistsException("Room doesn't exist"));
     }
 
     @Override

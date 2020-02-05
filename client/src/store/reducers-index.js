@@ -10,11 +10,11 @@ import clinicReducer from './clinics/reducer';
 import appointmentReducer from './appointments/reducer';
 import doctorsReducer from './doctors/reducer';
 import roomsReducer from './rooms/reducer';
-import surReqReducer from './sur-req/reducer';
+import surReqReducer from './sur_req/reducer';
 import commonReducer from './common/reducer';
 import medicalRecordReducer from './medical_record/reducer';
 import medicalReportReducer from './medical_report/reducer';
-
+import appReqReducer from './app_req/reducer';
 
 const rootReducer = combineReducers({
     userReducer,
@@ -31,7 +31,8 @@ const rootReducer = combineReducers({
     surReqReducer,
     commonReducer,
     medicalRecordReducer,
-    medicalReportReducer
+    medicalReportReducer,
+    appReqReducer
 });
 
 

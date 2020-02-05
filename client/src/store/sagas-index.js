@@ -12,9 +12,10 @@ import * as clinicSaga from './clinics/saga';
 import * as appointmentsSaga from './appointments/saga';
 import * as doctorsSaga from './doctors/saga';
 import * as roomsSaga from './rooms/saga';
-import * as surReqSaga from './sur-req/saga';
+import * as surReqSaga from './sur_req/saga';
 import * as medicalRecordSaga from './medical_record/saga';
 import * as medicalReportSaga from './medical_report/saga';
+import * as appReqSaga from './app_req/saga';
 
 export default function* rootSaga() {
   let sagas = flatten(
@@ -31,7 +32,8 @@ export default function* rootSaga() {
       roomsSaga,
       surReqSaga,
       medicalRecordSaga,
-      medicalReportSaga]
+      medicalReportSaga,
+      appReqSaga]
       .map(saga => Object.keys(saga).map(sagaFunctionName => saga[sagaFunctionName]))
   );
 

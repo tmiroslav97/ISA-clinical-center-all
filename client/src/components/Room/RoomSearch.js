@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { searchRoomsData } from '../../store/rooms/actions';
 import { pageCountSelector } from '../../store/rooms/selectors';
-import { pickSurReqSelector, pickedSurReqSelector } from '../../store/sur-req/selectors';
+import { pickSurReqSelector, pickedSurReqSelector } from '../../store/sur_req/selectors';
 import { userDataSelector } from '../../store/user/selectors';
 import RoomList from './RoomList';
 import PickedSurReq from '../SurgeryRequirement/PickedSurReq';

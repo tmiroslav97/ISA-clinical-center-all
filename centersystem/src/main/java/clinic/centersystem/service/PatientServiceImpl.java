@@ -9,6 +9,7 @@ import clinic.centersystem.dto.response.ClinicResponse;
 import clinic.centersystem.dto.response.DoctorResponse;
 import clinic.centersystem.dto.response.PatientResponse;
 import clinic.centersystem.dto.response.PatientSortResponseDTO;
+import clinic.centersystem.exception.ResourceNotExistsException;
 import clinic.centersystem.model.*;
 import clinic.centersystem.repository.AuthorityRepository;
 import clinic.centersystem.repository.PatientRepository;
@@ -43,7 +44,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Patient findById(Long id) {
-        return patientRepository.findById(id).orElse(null);
+        return patientRepository.findById(id).orElseThrow(() -> new ResourceNotExistsException("Patient doesn't exist"));
     }
 
     @Override
@@ -98,17 +99,17 @@ public class PatientServiceImpl implements PatientService {
             pageable = PageRequest.of(patientSearchRequestDTO.getPageCnt(), 10);
         } else if (sort == 1) {
             pageable = PageRequest.of(patientSearchRequestDTO.getPageCnt(), 10, Sort.by("firstName").ascending());
-        }else if (sort == 2) {
+        } else if (sort == 2) {
             pageable = PageRequest.of(patientSearchRequestDTO.getPageCnt(), 10, Sort.by("firstName").descending());
-        }else if (sort == 3) {
+        } else if (sort == 3) {
             pageable = PageRequest.of(patientSearchRequestDTO.getPageCnt(), 10, Sort.by("lastName").ascending());
-        }else if (sort == 4) {
+        } else if (sort == 4) {
             pageable = PageRequest.of(patientSearchRequestDTO.getPageCnt(), 10, Sort.by("lastName").descending());
-        }else if (sort == 5) {
+        } else if (sort == 5) {
             pageable = PageRequest.of(patientSearchRequestDTO.getPageCnt(), 10, Sort.by("unoip").ascending());
-        }else if (sort == 6) {
+        } else if (sort == 6) {
             pageable = PageRequest.of(patientSearchRequestDTO.getPageCnt(), 10, Sort.by("unoip").descending());
-        }else{
+        } else {
             pageable = PageRequest.of(patientSearchRequestDTO.getPageCnt(), 10);
         }
         Page<Patient> patients = patientRepository.findAll(pageable);

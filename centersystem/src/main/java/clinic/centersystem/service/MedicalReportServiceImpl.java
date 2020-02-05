@@ -2,6 +2,8 @@ package clinic.centersystem.service;
 
 import clinic.centersystem.converter.PrescriptionConverter;
 import clinic.centersystem.dto.request.MedicalReportRequestDTO;
+import clinic.centersystem.exception.ResourceExistsException;
+import clinic.centersystem.exception.ResourceNotExistsException;
 import clinic.centersystem.model.*;
 import clinic.centersystem.model.enumeration.AppStateEnum;
 import clinic.centersystem.repository.MedicalReportRepository;
@@ -41,12 +43,15 @@ public class MedicalReportServiceImpl implements MedicalReportService {
 
     @Override
     public MedicalReport findById(Long id) {
-        return medicalReportRepository.findById(id).orElseGet(null);
+        return medicalReportRepository.findById(id).orElseThrow(() -> new ResourceNotExistsException("Medical report doesn't exist"));
     }
 
     @Override
     public String addMedicalReport(MedicalReportRequestDTO medicalReportRequestDTO) {
         Appointment appointment = appointmentService.findById(medicalReportRequestDTO.getAppId());
+        if (appointment.getAppState() == AppStateEnum.FINISHED || appointment.getAppState() == AppStateEnum.STARTED) {
+            throw new ResourceExistsException("Appointment already finished");
+        }
         Clinic clinic = clinicService.findById(appointment.getClinic().getId());
         Diagnose diagnose = diagnoseService.findById(medicalReportRequestDTO.getDiagnose());
         MedicalRecord medicalRecord = medicalRecordService.findById(medicalReportRequestDTO.getMedRecId());
@@ -60,17 +65,17 @@ public class MedicalReportServiceImpl implements MedicalReportService {
 
         MedicalReport medRep = medicalReport;
 
-        if(medicalReportRequestDTO.getMedicines().size()>0) {
+        if (medicalReportRequestDTO.getMedicines().size() > 0) {
             List<Medicine> medicines = medicineService.findAllByIdIn(medicalReportRequestDTO.getMedicines());
             List<Prescription> prescriptions = medicines.stream().map(med -> PrescriptionConverter.toCreatePrescriptionFromMedicine(med, clinic, medRep)).collect(Collectors.toList());
             prescriptions = prescriptionService.saveAll(prescriptions);
-        }else{
+        } else {
             appointment.setAppState(AppStateEnum.FINISHED);
         }
-
+        appointment.setAppState(AppStateEnum.STARTED);
         appointment.setMedicalReport(medicalReport);
         appointmentService.save(appointment);
 
-        return "Medical report added";
+        return "Appointment finished";
     }
 }

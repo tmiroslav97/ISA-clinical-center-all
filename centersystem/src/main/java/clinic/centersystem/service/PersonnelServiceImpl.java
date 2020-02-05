@@ -4,6 +4,7 @@ import clinic.centersystem.converter.AbsenceRequirementConverter;
 import clinic.centersystem.converter.CalendarConverter;
 import clinic.centersystem.dto.request.AbsenceRequirementDTO;
 import clinic.centersystem.dto.response.CalendarResponse;
+import clinic.centersystem.exception.ResourceNotExistsException;
 import clinic.centersystem.model.*;
 import clinic.centersystem.repository.PersonnelRepository;
 import clinic.centersystem.service.intf.AbsenceHolidayRequirementService;
@@ -29,7 +30,7 @@ public class PersonnelServiceImpl implements PersonnelService {
 
     @Override
     public Personnel findById(Long id) {
-        return this.personnelRepository.findById(id).orElseGet(null);
+        return this.personnelRepository.findById(id).orElseThrow(() -> new ResourceNotExistsException("Personnel doesn't exist"));
     }
 
     @Override
@@ -68,14 +69,14 @@ public class PersonnelServiceImpl implements PersonnelService {
     }
 
     @Override
-    public CalendarResponse getMyCalendar(Long personnelId){
+    public CalendarResponse getMyCalendar(Long personnelId) {
         Personnel personnel = this.findById(personnelId);
         Calendar calendar = personnel.getCalendar();
         CalendarResponse calendarResponse = CalendarConverter.toCreateCalendarResponseFromCalendar(calendar);
-        for(CalendarItem calendarItem : calendar.getCalendarItems()){
+        for (CalendarItem calendarItem : calendar.getCalendarItems()) {
             calendarResponse.getCalendarItemResponses().add(CalendarConverter.toCreateCalendarItemResponseFromCalendarItem(calendarItem));
         }
 
-        return  calendarResponse;
+        return calendarResponse;
     }
 }

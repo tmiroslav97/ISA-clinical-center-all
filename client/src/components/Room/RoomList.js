@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Spinner, Table, Form, Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { roomsDataSelector, isFetchRoomsSelector } from '../../store/rooms/selectors';
-import { pickSurReqSelector } from '../../store/sur-req/selectors';
-import { fetchPickDoc } from '../../store/sur-req/actions';
+import { pickSurReqSelector } from '../../store/sur_req/selectors';
+import { fetchPickDoc } from '../../store/sur_req/actions';
 
 
 const RoomList = ({ filterTerm, cnt }) => {
