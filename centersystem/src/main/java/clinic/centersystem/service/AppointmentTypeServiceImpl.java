@@ -1,8 +1,14 @@
 package clinic.centersystem.service;
 
 import clinic.centersystem.converter.AppointmentTypeConverter;
+import clinic.centersystem.converter.AppointmentTypeEditConverter;
+import clinic.centersystem.dto.request.AppointmentTypeEditReqDTO;
 import clinic.centersystem.dto.request.AppointmentTypeRequestDTO;
+<<<<<<< HEAD
+import clinic.centersystem.dto.request.AppointmentTypeSearchReqDTO;
+=======
 import clinic.centersystem.exception.ResourceNotExistsException;
+>>>>>>> master
 import clinic.centersystem.model.Appointment;
 import clinic.centersystem.model.AppointmentType;
 import clinic.centersystem.model.Clinic;
@@ -42,7 +48,7 @@ public class AppointmentTypeServiceImpl implements AppointmentTypeService {
         AppointmentType appointmentType = AppointmentTypeConverter.toCreateAppointmentTypeFromRequest(appointmentTypeRequestDTO);
         Clinic clinic = clinicService.findById(clinicId);
         appointmentType.setClinic(clinic);
-        appointmentType = appointmentTypeRepository.save(appointmentType);
+        appointmentTypeRepository.save(appointmentType);
 
         return "Successfully added appointment type";
     }
@@ -50,6 +56,18 @@ public class AppointmentTypeServiceImpl implements AppointmentTypeService {
     public String deleteAppointmentType(Long appointmentId){
         this.remove(appointmentId);
         return "Successfully deleted appointment type";
+    }
+
+    public String editAppointmentType(AppointmentTypeEditReqDTO appointmentTypeEditReqDTO){
+        AppointmentType appointmentType = this.findById(appointmentTypeEditReqDTO.getId());
+        appointmentType.setType(appointmentTypeEditReqDTO.getType());
+        appointmentTypeRepository.save(appointmentType);
+        return "Successfully edited appointment type";
+    }
+
+    public List<AppointmentType>searchAppointmentType(AppointmentTypeSearchReqDTO appointmentTypeSearchReqDTO){
+        List<AppointmentType> appointmentType = appointmentTypeRepository.findByClinicIdAndTypeIgnoreCase(appointmentTypeSearchReqDTO.getClinicId(), appointmentTypeSearchReqDTO.getType());
+        return appointmentType;
     }
 
 
