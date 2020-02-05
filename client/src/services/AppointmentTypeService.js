@@ -6,8 +6,8 @@ const FINALPOINTS = {
     FETCH_APPOINTMENT_TYPES: '/appointment-type/all/%s',
     ADD_APPOINTMENT_TYPE: '/appointment-type/add-appointment-type/%s',
     DELETE_APPOINTMENTS_TYPE: '/appointment-type/delete-appointment-type/%s',
-    EDIT_APPOINTMENT_TYPE: '/appointment-type/edit-appointment-type'
-    //SEARCH_APPOINTMENT_TYPE: 'admi-cli/appType/search/%s/%s',
+    EDIT_APPOINTMENT_TYPE: '/appointment-type/edit-appointment-type',
+    SEARCH_APPOINTMENT_TYPE: 'appointment-type/search-appointment-type',
     // DELETE_ROOMS_DATA: 'admi-cli/appType/delete/%s',
     //EDIT_APPOINTMENT_TYPE: 'admi-cli/appType/edit/%s',
     //ADD_APPOINTMENT_TYPE: 'adm-cli/add-appointment-type'
@@ -61,7 +61,7 @@ class AppointmentTypeService extends HttpClient {
         try {
             const { data } = await this.getApiClient().post(
                 FINALPOINTS.EDIT_APPOINTMENT_TYPE, 
-                payload
+                {type:payload.type, id:payload.clinicId}
             );
 
             const appointmentType = data;
@@ -73,10 +73,10 @@ class AppointmentTypeService extends HttpClient {
     };
     
     
-    /*searchAppointmentType = async payload => {
+    searchAppointmentType = async payload => {
         try {
-            const { data } = await this.getApiClient().get(
-                FINALPOINTS.SEARCH_APPOINTMENTS_TYPE,
+            const { data } = await this.getApiClient().post(
+                FINALPOINTS.SEARCH_APPOINTMENT_TYPE,
                 payload
             );
 
@@ -84,6 +84,7 @@ class AppointmentTypeService extends HttpClient {
         } catch (error) {
             console.log(error.response.data);
         }
-    };*/
+    };
+
 }
 export default new AppointmentTypeService();

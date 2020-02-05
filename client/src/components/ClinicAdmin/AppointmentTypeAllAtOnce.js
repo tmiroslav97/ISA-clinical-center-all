@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Container, Col, Row, Form, Button, Modal, Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { addAppointmentType, fetchAppointmentType, deleteAppointmentType, editAppointmentType } from '../../store/appointments/actions';
+import { addAppointmentType, fetchAppointmentType, deleteAppointmentType, editAppointmentType, searchAppointmentType } from '../../store/appointments/actions';
 import { appointmentTypeSelector, isFetchAppointmentTypeSelector } from '../../store/appointments/selectors';
 import { userDataSelector } from '../../store/user/selectors';
 
@@ -10,6 +10,7 @@ const AppointmentTypAllAtOnce = () => {
     const dispatch = useDispatch();
     const [type, setType] = useState('');
     const [typeId, setTypeId] = useState(0);
+    const [cliId, setCliId] = useState(0);
     const appointmentTypes = useSelector(appointmentTypeSelector);
     const isFetchAppointmentTypes = useSelector(isFetchAppointmentTypeSelector);
     const data = useSelector(userDataSelector);
@@ -17,20 +18,16 @@ const AppointmentTypAllAtOnce = () => {
     const [show1, setShow1] = useState(false);
     const [show2, setShow2] = useState(false);
 
-    const handleShow1 = () => setShow1(true);
     const handleShow2 = () => setShow2(true);
 
     const handleEdit = () => {
-        console.log("Ovde2");
         dispatch(
             editAppointmentType({id:typeId, type, clinicId})
         );
         setShow1(false);
     }
-    //setShow1(false);
 
     const handleEditShow  = (appointment)=>{
-        console.log("Ovde1");
         setType(appointment.type);
         setTypeId(appointment.id);
         setShow1(true);
@@ -44,6 +41,7 @@ const AppointmentTypAllAtOnce = () => {
     }
 
     const handleAddAppointmentType = () => {
+        setCliId(clinicId);
         dispatch(
             addAppointmentType({
                 type,  clinicId
@@ -52,6 +50,15 @@ const AppointmentTypAllAtOnce = () => {
         setShow2(false);
     };
     //console.log(clinicId);
+
+    const handleSearchAppointmentType = () => {
+        dispatch(
+            searchAppointmentType({type, clinicId})
+        );
+        console.log("OVDE");
+        console.log(type);
+        console.log(clinicId);
+    };
 
     useEffect(() => {
         dispatch(
@@ -133,20 +140,11 @@ const AppointmentTypAllAtOnce = () => {
 
                                 <Form.Label>Search appointment types:</Form.Label>
                                 <Col>
-                                    <Form.Control type="text" placeholder="Search " />
+                                    <Form.Control type="text" placeholder="Search "  onChange={({ currentTarget }) => {
+                                setType(currentTarget.value);}}/>
                                 </Col>
                                 <Col>
-                                    <Button>Search</Button>
-                                </Col>
-                            </Form.Group>
-
-                            <Form.Group as={Row} controlId="formGridState1">
-                                <Form.Label>Filter data by</Form.Label>
-                                <Col>
-                                    <Form.Control as="select">
-                                        <option>Choose...</option>
-                                        <option>...</option>
-                                    </Form.Control>
+                                    <Button onClick={handleSearchAppointmentType}>Search</Button>
                                 </Col>
                             </Form.Group>
 

@@ -2,6 +2,7 @@ package clinic.centersystem.controller;
 
 import clinic.centersystem.dto.request.AppointmentTypeEditReqDTO;
 import clinic.centersystem.dto.request.AppointmentTypeRequestDTO;
+import clinic.centersystem.dto.request.AppointmentTypeSearchReqDTO;
 import clinic.centersystem.model.AppointmentType;
 import clinic.centersystem.service.AppointmentTypeServiceImpl;
 import org.springframework.http.HttpStatus;
@@ -42,6 +43,11 @@ public class AppointmentTypeContoller {
     @RequestMapping(method = POST, value = "/edit-appointment-type")
     public ResponseEntity<String>editAppointmentType(@RequestBody AppointmentTypeEditReqDTO appointmentTypeEditReqDTO){
         return new ResponseEntity<>(this.appointmentTypeService.editAppointmentType(appointmentTypeEditReqDTO),HttpStatus.OK);
+    }
+
+    @RequestMapping(method = POST, value = "/search-appointment-type")
+    public ResponseEntity<List<AppointmentType>>searchAppointmentType(@RequestBody AppointmentTypeSearchReqDTO appointmentTypeSearchReqDTO){
+        return new ResponseEntity<List<AppointmentType>>(this.appointmentTypeService.searchAppointmentType(appointmentTypeSearchReqDTO), HttpStatus.OK);
     }
 
 

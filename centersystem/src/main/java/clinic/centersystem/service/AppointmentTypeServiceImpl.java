@@ -4,6 +4,7 @@ import clinic.centersystem.converter.AppointmentTypeConverter;
 import clinic.centersystem.converter.AppointmentTypeEditConverter;
 import clinic.centersystem.dto.request.AppointmentTypeEditReqDTO;
 import clinic.centersystem.dto.request.AppointmentTypeRequestDTO;
+import clinic.centersystem.dto.request.AppointmentTypeSearchReqDTO;
 import clinic.centersystem.model.Appointment;
 import clinic.centersystem.model.AppointmentType;
 import clinic.centersystem.model.Clinic;
@@ -58,6 +59,11 @@ public class AppointmentTypeServiceImpl implements AppointmentTypeService {
         appointmentType.setType(appointmentTypeEditReqDTO.getType());
         appointmentTypeRepository.save(appointmentType);
         return "Successfully edited appointment type";
+    }
+
+    public List<AppointmentType>searchAppointmentType(AppointmentTypeSearchReqDTO appointmentTypeSearchReqDTO){
+        List<AppointmentType> appointmentType = appointmentTypeRepository.findByClinicIdAndTypeIgnoreCase(appointmentTypeSearchReqDTO.getClinicId(), appointmentTypeSearchReqDTO.getType());
+        return appointmentType;
     }
 
 
