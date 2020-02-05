@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
-import PatientHomePage from './components/Patient/PatientHomePage';
+import PatientHomePage from './pages/PatientHomePage';
 import RegPage from './pages/RegPage';
 import DoctorHomePage from './pages/DoctorHomePage';
 import NurseHomePage from './pages/NurseHomePage';
@@ -35,20 +35,22 @@ import ClinicReg from './components/Clinic/ClinicReg';
 import AdminReg from './components/ClinicCenterAdmin/AdminReg';
 import ClinicAdminReg from './components/ClinicAdmin/ClinicAdminReg';
 import MedicalRecord from './components/MedicalRecord/MedicalRecord';
+import ClinicSearch from './components/Clinic/ClinicSearch';
+import DoctorSearch from './components/Doctor/DoctorSearch';
+import History from './components/Patient/History';
 
 const AppRouter = () => {
     return (
         <Switch>
             <Route exact path="/" component={HomePage} />
             <Route exact path="/login" component={LoginPage} />
-            <PrivateRoute exact path="/pat" component={PatientHomePage} accessRole={["ROLE_PATIENT"]} />
             <Route exact path="/signup" component={RegPage} />
             <Route exact path="/prob" component={HolidayAproval} />
             <Route exact path="/signup" component={RegPage} />
             <Route exact path="/change-pass" component={PasswordChanger} />
             <PrivateRoute exact path="/nurse-page" component={NurseHomePage} accessRole={["ROLE_NURSE"]} />
 
-            <PrivateRoute exact path="/medical-rec/:typeId" component={MedicalRecord} accessRole={["ROLE_DOCTOR"]} />
+            <PrivateRoute exact path="/medical-rec/:typeId" component={MedicalRecord} accessRole={["ROLE_DOCTOR","ROLE_PATIENT"]} />
 
             <PrivateRoute exact path="/ccadmin/regca" component={ClinicAdminReg} accessRole={["ROLE_CCADMIN"]} />
             <PrivateRoute exact path="/ccadmin/cli-reg" component={ClinicReg} accessRole={["ROLE_CCADMIN"]} />
@@ -57,6 +59,11 @@ const AppRouter = () => {
             <PrivateRoute exact path="/ccadmin/add-diag" component={AddDiagnose} accessRole={["ROLE_CCADMIN"]} />
             <PrivateRoute exact path="/ccadmin/cca-reg" component={AdminReg} accessRole={["ROLE_CCADMIN"]} />
             <PrivateRoute exact path="/ccadmin" component={ClinicCenterAdminProfile} accessRole={["ROLE_CCADMIN"]} />
+
+            <PrivateRoute exact path="/pat/search-cli" component={ClinicSearch} accessRole={["ROLE_PATIENT"]} />
+            <PrivateRoute exact path="/pat/search-doc" component={DoctorSearch} accessRole={["ROLE_PATIENT"]} />
+            <PrivateRoute exact path="/pat/history" component={History} accessRole={["ROLE_PATIENT"]} />
+            <PrivateRoute exact path="/pat" component={PatientHomePage} accessRole={["ROLE_PATIENT"]} />
 
             <PrivateRoute exact path="/doc/pat-list" component={PatientList} accessRole={["ROLE_DOCTOR"]} />
             <PrivateRoute exact path="/doc/app-info" component={AppointmentInfo} accessRole={["ROLE_DOCTOR"]} />

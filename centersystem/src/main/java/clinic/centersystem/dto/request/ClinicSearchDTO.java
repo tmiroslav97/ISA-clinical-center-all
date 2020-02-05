@@ -15,7 +15,7 @@ public class ClinicSearchDTO {
 
     private String type;
 
-    private Integer rating;
+    private Float rating;
 
     private Integer pageCnt;
 

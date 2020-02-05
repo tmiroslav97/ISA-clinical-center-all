@@ -13,9 +13,10 @@ const ClinicSearch = ({ match }) => {
     const [today, setToday] = useState(moment().format('YYYY-MM-DD'));
     const [date, setDate] = useState(moment().format('YYYY-MM-DD'));
     const [type, setType] = useState('');
-    const [rating, setRating] = useState('');
+    const [rating, setRating] = useState('');   
     const [pageCnt, setPageCnt] = useState(0);
     const [filterTerm, setFilterTerm] = useState('');
+    const [sort, setSort] = useState(0);
     /*const [dateString, setDateString] = useStateWithCallback(moment().format('YYYY-MM-DD'), sdString => {
         setDate((new Date(sdString)).getTime() / 1000 | 0);
     });*/
@@ -27,7 +28,9 @@ const ClinicSearch = ({ match }) => {
                 date,
                 type,
                 rating,
-                pageCnt
+                pageCnt,
+                sort
+
             })
         );
     };
@@ -38,10 +41,12 @@ const ClinicSearch = ({ match }) => {
                 date,
                 type,
                 rating,
-                pageCnt
+                pageCnt,
+                sort
+
             })
         );
-    }, [pageCnt]);
+    }, [pageCnt, sort]);
 
     let items = [];
     for (let number = 1; number <= pageCount; number++) {
@@ -136,11 +141,15 @@ const ClinicSearch = ({ match }) => {
                     <Col md={{ span: 3, offset: 1 }} xs={12}>
                         <Form>
                             <Form.Label>Sort clinics by</Form.Label>
-                            <Form.Control as="select">
-                                <option>Choose...</option>
-                                <option>Name A-Z</option>
-                                <option>Name Z-A</option>
-                            </Form.Control>
+                            <Form.Control as="select" onChange={({ currentTarget }) => {
+                                    setSort(currentTarget.value);
+                                }} >
+                                    <option value="0">-</option>
+                                    <option value="1">Name (asc)</option>
+                                    <option value="2">Name (desc)</option>
+                                    <option value="3">City (asc)</option>
+                                    <option value="4">City (desc)</option>
+                                </Form.Control>
                     </Form>
                 </Col>
             </Row>

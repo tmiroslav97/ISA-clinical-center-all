@@ -110,31 +110,29 @@ public class ClinicServiceImpl implements ClinicService {
                 .build();
         return clinicResponsePageDTO;*/
        return null;
+
     }
 
-    /*public List<Clinic> searchClinics(String name) {
-        List<Clinic> listClinics = new ArrayList<>();
-        List<Clinic> clinics = this.clinicRepository.findAll();
-        for (Clinic clinic : clinics) {
-            if (clinic.getName().toLowerCase().contains(name.toLowerCase())) {
-                listClinics.add(clinic);
-            }
-        }
-        return listClinics;
-    }*/
 
     @Override
     public ClinicResponsePageDTO searchClinics(ClinicSearchDTO clinicSearchDTO) {
-        /*
-        Pageable pageable = PageRequest.of(clinicSearchDTO.getPageCnt(), 10);
+
+        /*Pageable pageable = PageRequest.of(clinicSearchDTO.getPageCnt(), 10);
         DateTime dt = new DateTime(clinicSearchDTO.getDate(), DateTimeZone.UTC);
         DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd");
-        Page<Clinic> clinics = clinicRepository.searchClinics(clinicSearchDTO.getType(), clinicSearchDTO.getRating(), pageable);
+        Page<Clinic> clinics = clinicRepository.searchClinics(clinicSearchDTO.getRating(),clinicSearchDTO.getType());
         ClinicResponsePageDTO clinicResponsePageDTO = new ClinicResponsePageDTO();
         List<ClinicResponse> clinicResponses = new ArrayList<>();
         clinicResponsePageDTO.setClinics(clinicResponses);
         clinicResponsePageDTO.setPageCnt(clinics.getTotalPages());
-        */
+
+        for (Clinic clinic : clinics.getContent()) {
+            ClinicResponse crDTO = new ClinicResponse();
+            crDTO.setClinic(clinic);
+            crDTO.setDate(dtf.print(dt));
+        }
+        return clinicResponsePageDTO;
+    }*/
         return null;
     }
 }

@@ -1,23 +1,18 @@
 package clinic.centersystem.dto.response;
 
-
 import clinic.centersystem.model.Clinic;
 import lombok.*;
 
-@Builder
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClinicResponse {
+public class ClinicResponseDTO {
 
-    private Long id;
+    private List<Clinic> clinics;
 
-    private String name;
-
-    private String description;
-
-    private String address;
-
+    private Integer pageCount;
 
 }
