@@ -13,6 +13,7 @@ import org.joda.time.DateTimeZone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -44,6 +45,15 @@ public class MedicalReportServiceImpl implements MedicalReportService {
     @Override
     public MedicalReport findById(Long id) {
         return medicalReportRepository.findById(id).orElseThrow(() -> new ResourceNotExistsException("Medical report doesn't exist"));
+    }
+
+    @Override
+    public List<MedicalReport> findDoctorReports(Long id){
+        List<MedicalReport> medicalReports = new ArrayList<>();
+
+
+
+        return medicalReports;
     }
 
     @Override
