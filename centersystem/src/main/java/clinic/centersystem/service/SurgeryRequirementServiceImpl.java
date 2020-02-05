@@ -94,6 +94,11 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
         DateTime pickedDateEnd = new DateTime(pickedDateStr, DateTimeZone.UTC);
         pickedDateEnd = pickedDateEnd.plusHours(pickedTermEnd);
 
+        Room roomCheck = roomService.findById(surgeryReservationReqDTO.getPickedRoom());
+        if (!roomCheck.getType().equals("SUR")) {
+            return 4;
+        }
+
         List<Integer> bookedTerm = roomCalendarService.findByRoomAndDate(surgeryReservationReqDTO.getPickedRoom(), pickedDate);
 
         if (bookedTerm.contains(pickedTermStart)) {
@@ -195,7 +200,7 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
         for (SurgeryRequirement surgeryRequirement : surgeryRequirements) {
             DateTime pickedDate = surgeryRequirement.getDate();
 
-            List<Room> rooms = roomService.findByClinicId(surgeryRequirement.getClinic().getId());
+            List<Room> rooms = roomService.findByClinicIdAndType(surgeryRequirement.getClinic().getId(), "SUR");
             for (Room room : rooms) {
                 DateTime dt = new DateTime(pickedDate, DateTimeZone.UTC);
                 DateTime now = new DateTime(LocalDate.now().toString(), DateTimeZone.UTC);

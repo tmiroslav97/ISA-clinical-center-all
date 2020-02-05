@@ -18,4 +18,6 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
     Page<Room> findByClinicId(Long id, Pageable pageable);
 
     List<Room> findByClinicId(Long id);
+
+    List<Room> findAllByClinicIdAndType(Long id, String type);
 }

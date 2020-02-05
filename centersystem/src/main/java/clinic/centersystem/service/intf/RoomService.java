@@ -16,6 +16,8 @@ public interface RoomService {
 
     List<Room> findByClinicId(Long id);
 
+    List<Room> findByClinicIdAndType(Long id, String type);
+
     List<Room> findAll();
 
     Room save(Room room);

@@ -1,15 +1,10 @@
 package clinic.centersystem.service;
 
 import clinic.centersystem.converter.AppointmentTypeConverter;
-import clinic.centersystem.converter.AppointmentTypeEditConverter;
 import clinic.centersystem.dto.request.AppointmentTypeEditReqDTO;
 import clinic.centersystem.dto.request.AppointmentTypeRequestDTO;
-<<<<<<< HEAD
 import clinic.centersystem.dto.request.AppointmentTypeSearchReqDTO;
-=======
 import clinic.centersystem.exception.ResourceNotExistsException;
->>>>>>> master
-import clinic.centersystem.model.Appointment;
 import clinic.centersystem.model.AppointmentType;
 import clinic.centersystem.model.Clinic;
 import clinic.centersystem.repository.AppointmentTypeRepository;

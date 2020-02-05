@@ -57,7 +57,7 @@ export function* fetchPickSurRoom() {
     const { payload } = yield take(FETCH_PICK_SUR_ROOM);
     yield put(putPickedSurReq(payload.pickedSurReq));
     yield put(putPickSurReq(true));
-    history.push('/adminc/room-search');
+    history.push('/adminc/room-search/SUR');
 }
 
 export function* fetchPickDoc() {

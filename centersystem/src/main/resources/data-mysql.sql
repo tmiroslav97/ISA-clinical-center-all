@@ -136,11 +136,11 @@ INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (3,FALSE 
 INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (4,FALSE ,'SUR','For skin',4,1);
 INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (5,FALSE ,'SUR','For legs',5,1);
 INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (6,FALSE ,'SUR','For old',6,1);
-INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (7,FALSE ,'SUR','For surgery',7,1);
-INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (8,FALSE ,'SUR','For Ah1',8,1);
-INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (9,FALSE ,'SUR','For heart',9,1);
-INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (10,FALSE ,'SUR','For Ah3',10,1);
-INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (11,FALSE ,'SUR','For heart',11,1);
+INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (7,FALSE ,'APP','For appointment',7,1);
+INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (8,FALSE ,'APP','For Ah1',8,1);
+INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (9,FALSE ,'APP','For heart',9,1);
+INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (10,FALSE ,'APP','For Ah3',10,1);
+INSERT INTO room(id,reserved,room_type,name,room_num,clinic_id) VALUES (11,FALSE ,'APP','For heart',11,1);
 
 INSERT INTO roomcalendar(date, termin, room_id) VALUES ('2020-01-22',7,1);
 INSERT INTO roomcalendar(date, termin, room_id) VALUES ('2020-01-22',10,1);

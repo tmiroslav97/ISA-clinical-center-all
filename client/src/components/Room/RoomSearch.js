@@ -5,20 +5,23 @@ import moment from 'moment';
 import { searchRoomsData } from '../../store/rooms/actions';
 import { pageCountSelector } from '../../store/rooms/selectors';
 import { pickSurReqSelector, pickedSurReqSelector } from '../../store/sur_req/selectors';
-import { userDataSelector } from '../../store/user/selectors';
+import { userDataSelector, userIdSelector } from '../../store/user/selectors';
+import { fetchCAdminData } from '../../store/user/actions';
 import RoomList from './RoomList';
 import PickedSurReq from '../SurgeryRequirement/PickedSurReq';
 
 
-const RoomSearch = () => {
+const RoomSearch = ({ match }) => {
     const dispatch = useDispatch();
+    const id = useSelector(userIdSelector);
+    const reason = match.params.reason;
     const data = useSelector(userDataSelector);
     const clinicId = data.clinicId;
     const pageCount = useSelector(pageCountSelector);
     const pickSurReq = useSelector(pickSurReqSelector);
     const pickedSurReq = useSelector(pickedSurReqSelector);
-    const [today, setToday] = useState(moment().format('YYYY-MM-DD'));
-    const [date, setDate] = useState(moment().format('YYYY-MM-DD'));
+    const [today, setToday] = useState(moment(new Date()).add(1,'days').format('YYYY-MM-DD'));
+    const [date, setDate] = useState(moment(new Date()).add(1,'days').format('YYYY-MM-DD'));
     const [name, setName] = useState('');
     const [pageCnt, setPageCnt] = useState(0);
     const [filterTerm, setFilterTerm] = useState('');
@@ -43,6 +46,13 @@ const RoomSearch = () => {
                 pageCnt
             })
         );
+        if (id != null) {
+            dispatch(
+                fetchCAdminData({
+                    id
+                })
+            );
+        }
     }, [pageCnt]);
 
     let items = [];
@@ -130,7 +140,7 @@ const RoomSearch = () => {
                     </Form>
                 </Col>
             </Row>
-            <RoomList cnt={pageCnt} filterTerm={filterTerm} />
+            <RoomList cnt={pageCnt} filterTerm={filterTerm} reason={reason} />
             <Row>
                 <Col md={{ span: 10, offset: 1 }} xs={12}>
                     <Pagination onClick={handlePagination} className="pagination justify-content-center mb-5">
