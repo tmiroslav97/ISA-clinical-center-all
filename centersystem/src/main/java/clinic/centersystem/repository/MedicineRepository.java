@@ -13,4 +13,8 @@ public interface MedicineRepository extends JpaRepository<Medicine, Long> {
     Page<Medicine> findAll(Pageable pageable);
 
     List<Medicine> findAllByIdIn(Set<Long> medicines);
+
+    boolean existsByName(String name);
+
+    boolean existsByCode(String code);
 }

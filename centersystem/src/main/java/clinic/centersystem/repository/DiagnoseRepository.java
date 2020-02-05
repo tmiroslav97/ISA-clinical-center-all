@@ -9,4 +9,7 @@ public interface DiagnoseRepository extends JpaRepository<Diagnose, Long> {
 
     Page<Diagnose> findAll(Pageable pageable);
 
+    boolean existsByName(String name);
+
+    boolean existsByCode(String code);
 }

@@ -4,7 +4,8 @@ import { history } from '../../index';
 import {
     FETCH_PATIENTS_DATA,
     FETCH_PATIENTS_DATA_BY_CLINIC_ID,
-    FETCH_PATIENT_BY_APP
+    FETCH_PATIENT_BY_APP,
+    FETCH_PATIENTS_PAGINATION
 } from './constants';
 
 import PatientService from '../../services/PatientService';
@@ -15,12 +16,29 @@ import {
     putPatient
 } from './actions';
 
+import {
+    putPageCnt,
+    putSelPageCnt,
+    putSuccessMsg,
+    putErrorMsg
+} from '../common/actions';
+
 
 export function* fetchPatientsDataByClinicId() {
     const { payload } = yield take(FETCH_PATIENTS_DATA_BY_CLINIC_ID);
     yield put(putIsFetchPatients(false));
     const { patients } = yield call(PatientService.fetchPatientsByClinicId, payload);
     yield put(putPatientsData(patients));
+    yield put(putIsFetchPatients(true));
+}
+
+export function* fetchPatinentsPagination() {
+    const { payload } = yield take(FETCH_PATIENTS_PAGINATION);
+    yield put(putIsFetchPatients(false));
+    const { patients } = yield call(PatientService.fetchPatinentsPagination, payload);
+    yield put(putSelPageCnt(payload.pageCnt));
+    yield put(putPageCnt(patients.patientPageCnt));
+    yield put(putPatientsData(patients.patients));
     yield put(putIsFetchPatients(true));
 }
 

@@ -1,6 +1,7 @@
 package clinic.centersystem.service;
 
 
+import clinic.centersystem.exception.ResourceNotExistsException;
 import clinic.centersystem.model.CalendarItem;
 import clinic.centersystem.repository.CalendarItemRepository;
 import clinic.centersystem.service.intf.CalendarItemService;
@@ -18,7 +19,7 @@ public class CalendarItemServiceImpl implements CalendarItemService {
 
     @Override
     public CalendarItem findById(Long id) {
-        return this.calendarItemRepository.findById(id).orElseGet(null);
+        return this.calendarItemRepository.findById(id).orElseThrow(() -> new ResourceNotExistsException("Calendar item doesn't exist"));
     }
 
     @Override

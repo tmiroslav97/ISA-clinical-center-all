@@ -9,8 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RecepieResponse {
+public class PrescriptionResponse {
 
     private Long id;
-
+    private String medicineName;
+    private String medicineCode;
 }

@@ -14,7 +14,7 @@ class MedicalReportService extends HttpClient {
 
             return { data };
         } catch (error) {
-            console.log(error.response.data);
+            return error.response;
         }
     }
 

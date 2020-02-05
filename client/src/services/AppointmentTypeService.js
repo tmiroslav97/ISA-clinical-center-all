@@ -8,6 +8,8 @@ const FINALPOINTS = {
     DELETE_APPOINTMENTS_TYPE: '/appointment-type/delete-appointment-type/%s',
     EDIT_APPOINTMENT_TYPE: '/appointment-type/edit-appointment-type',
     SEARCH_APPOINTMENT_TYPE: 'appointment-type/search-appointment-type',
+    FETCH_APPOINTMENT: '/appointment/%s',
+    //SEARCH_APPOINTMENT_TYPE: 'admi-cli/appType/search/%s/%s',
     // DELETE_ROOMS_DATA: 'admi-cli/appType/delete/%s',
     //EDIT_APPOINTMENT_TYPE: 'admi-cli/appType/edit/%s',
     //ADD_APPOINTMENT_TYPE: 'adm-cli/add-appointment-type'
@@ -32,11 +34,11 @@ class AppointmentTypeService extends HttpClient {
         try {
             const { data } = await this.getApiClient().post(
                 format(FINALPOINTS.ADD_APPOINTMENT_TYPE, payload.clinicId),
-                {type:payload.type}
-                
+                { type: payload.type }
+
             );
             return { data };
-            
+
         } catch (error) {
             console.log(error.response.data);
         }
@@ -69,6 +71,18 @@ class AppointmentTypeService extends HttpClient {
             return { appointmentType };
         } catch (error) {
             console.log(error.response.data);
+        }
+    };
+
+    fetchAppointment = async payload => {
+        try {
+            const { data } = await this.getApiClient().get(
+                format(FINALPOINTS.FETCH_APPOINTMENT, payload.id)
+            );
+
+            return { data };
+        } catch (error) {
+            return error.response;
         }
     };
     

@@ -1,6 +1,8 @@
 package clinic.centersystem.service;
 
 import clinic.centersystem.dto.response.MedicineResponseDTO;
+import clinic.centersystem.exception.ResourceExistsException;
+import clinic.centersystem.exception.ResourceNotExistsException;
 import clinic.centersystem.model.Medicine;
 import clinic.centersystem.model.SurgeryRequirement;
 import clinic.centersystem.repository.MedicineRepository;
@@ -22,7 +24,7 @@ public class MedicineServiceImpl implements MedicineService {
 
     @Override
     public Medicine findById(Long id) {
-        return medicineRepository.findById(id).orElseGet(null);
+        return medicineRepository.findById(id).orElseThrow(() -> new ResourceNotExistsException("Medicine doesn't exists"));
     }
 
     @Override
@@ -44,6 +46,9 @@ public class MedicineServiceImpl implements MedicineService {
 
     @Override
     public Medicine save(Medicine medicine) {
+        if (medicineRepository.existsByCode(medicine.getCode())) {
+            throw new ResourceExistsException("Medicine with code " + medicine.getCode() + " already exists");
+        }
         return medicineRepository.save(medicine);
     }
 

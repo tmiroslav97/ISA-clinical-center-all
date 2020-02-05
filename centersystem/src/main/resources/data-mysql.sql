@@ -156,14 +156,9 @@ INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id,patie
 INSERT INTO appointment_type(id, type, clinic_id) VALUES (1,'General examination',1);
 INSERT INTO appointment_type(id, type, clinic_id) VALUES (2,'Heart examination',1);
 
-INSERT INTO appointment(app_state, date_time, discount, price, clinic_id, doctor_id, patient_id, room_id, type_id) VALUES(2, '2020-02-01 09:00:00', 0,0,1,3,2,1,1);
-INSERT INTO appointment(app_state, date_time, discount, price, clinic_id, doctor_id, patient_id, room_id, type_id) VALUES(2, '2020-02-02 11:00:00', 0,0,1,3,2,1,1);
-INSERT INTO appointment(app_state, date_time, discount, price, clinic_id, doctor_id, patient_id, room_id, type_id) VALUES(2, '2020-02-03 12:00:00', 0,0,1,3,2,1,1);
-
-
-
-INSERT INTO prescription(id, is_validate, nurse_id)
-VALUES (1, FALSE, NULL);
+INSERT INTO appointment(app_state, date_time, discount, price, clinic_id, doctor_id, patient_id, room_id, type_id) VALUES(1, '2020-02-01 09:00:00', 0,0,1,3,2,1,1);
+INSERT INTO appointment(app_state, date_time, discount, price, clinic_id, doctor_id, patient_id, room_id, type_id) VALUES(1, '2020-02-02 11:00:00', 0,0,1,3,2,1,1);
+INSERT INTO appointment(app_state, date_time, discount, price, clinic_id, doctor_id, patient_id, room_id, type_id) VALUES(1, '2020-02-03 12:00:00', 0,0,1,3,2,1,1);
 
 INSERT INTO calendar(id, personnel_id)
 VALUES (1, 4);
@@ -180,13 +175,13 @@ INSERT INTO calendar(id, personnel_id)
 VALUES (2, 3);
 
 INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type,typeid)
-VALUES ('2020-02-03 11:00:00', '2020-02-03 09:00:00', 'First examination', 'N', 3, 2,'APP',1);
+VALUES ('2020-02-04 11:00:00', '2020-02-04 09:00:00', 'First examination', 'N', 3, 2,'APP',1);
 
 INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type,typeid)
-VALUES ('2020-02-04 12:00:00', '2020-02-04 11:00:00', 'Second examination', 'N', 4, 2,'APP',2);
+VALUES ('2020-02-05 12:00:00', '2020-02-05 11:00:00', 'Second examination', 'N', 4, 2,'APP',2);
 
 INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type,typeid)
-VALUES ('2020-02-04 14:00:00', '2020-02-04 12:00:00', 'Third examination', 'N', 5, 2,'APP',3);
+VALUES ('2020-02-05 14:00:00', '2020-02-05 12:00:00', 'Third examination', 'N', 5, 2,'APP',3);
 
 
 UPDATE personnel

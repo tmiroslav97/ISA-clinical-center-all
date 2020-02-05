@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Table, Button, Col, Spinner, Pagination } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { surReqDataSelector, isFetchSurReqDataSelector, surReqPageCountSelector } from '../../store/sur-req/selectors';
-import { fetchSurReqData, fetchPickSurRoom } from '../../store/sur-req/actions';
+import { surReqDataSelector, isFetchSurReqDataSelector, surReqPageCountSelector } from '../../store/sur_req/selectors';
+import { fetchSurReqData, fetchPickSurRoom } from '../../store/sur_req/actions';
 
 const SurgeryReq = ({ match }) => {
     const dispatch = useDispatch();

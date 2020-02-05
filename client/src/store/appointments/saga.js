@@ -5,16 +5,26 @@ import {
     ADD_APPOINTMENT_TYPE,
     DELETE_APPOINTMENT_TYPE,
     EDIT_APPOINTMENT_TYPE,
-    SEARCH_APPOINTMENT_TYPE
+    SEARCH_APPOINTMENT_TYPE,
+    FETCH_APPOINTMENT
 } from './constants';
 
 import AppointmentTypeService from '../../services/AppointmentTypeService';
 
 import {
     putAppointmentTypes,
-    putIsFetchAppointmentTypes
+    putIsFetchAppointmentTypes,
+    putAppointment,
+    putIsFetchAppointment
 } from './actions';
 
+export function* fetchAppointment() {
+    const { payload } = yield take(FETCH_APPOINTMENT);
+    yield put(putIsFetchAppointment(false));
+    const { data } = yield call(AppointmentTypeService.fetchAppointment, payload);
+    yield put(putAppointment(data));
+    yield put(putIsFetchAppointment(true));
+}
 
 export function* fetchAppointmentType() {
     const { payload } = yield take(FETCH_APPOINTMENT_TYPE);

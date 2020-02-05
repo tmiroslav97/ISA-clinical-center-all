@@ -4,7 +4,11 @@ import clinic.centersystem.converter.AppointmentTypeConverter;
 import clinic.centersystem.converter.AppointmentTypeEditConverter;
 import clinic.centersystem.dto.request.AppointmentTypeEditReqDTO;
 import clinic.centersystem.dto.request.AppointmentTypeRequestDTO;
+<<<<<<< HEAD
 import clinic.centersystem.dto.request.AppointmentTypeSearchReqDTO;
+=======
+import clinic.centersystem.exception.ResourceNotExistsException;
+>>>>>>> master
 import clinic.centersystem.model.Appointment;
 import clinic.centersystem.model.AppointmentType;
 import clinic.centersystem.model.Clinic;
@@ -26,7 +30,7 @@ public class AppointmentTypeServiceImpl implements AppointmentTypeService {
     private ClinicService clinicService;
 
     @Override
-    public AppointmentType findById(Long id){return this.appointmentTypeRepository.findById(id).orElseGet(null);}
+    public AppointmentType findById(Long id){return this.appointmentTypeRepository.findById(id).orElseThrow(()-> new ResourceNotExistsException("Appointment type doesn't exist"));}
 
     @Override
     public List<AppointmentType> findAll(){return this.appointmentTypeRepository.findAll();}
