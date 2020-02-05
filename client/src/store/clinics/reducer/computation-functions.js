@@ -11,3 +11,10 @@ export function putIsFetchClinicsData(state, payload) {
         isFetchClinics: payload
     };
 }
+
+export function putPageCount(state, payload) {
+    return {
+        ...state,
+        pageCount: payload
+    };
+}

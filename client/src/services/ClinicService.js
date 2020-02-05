@@ -51,6 +51,19 @@ class ClinicService extends HttpClient {
         }
     };
 
+    searchClinic = async payload => {
+        try {
+            const { data } = await this.getApiClient().post(
+                FINALPOINTS.SEARCH_CLINIC,
+                payload
+            );
+
+            return { data };
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    };
+    
     fetchClinicPaginationData = async payload => {
         try {
             const { data } = await this.getApiClient().get(

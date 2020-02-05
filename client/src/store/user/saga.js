@@ -37,8 +37,11 @@ import {
 //patient sagas
 export function* fetchPatientData() {
     const { payload } = yield take(FETCH_PATIENT_DATA);
+    yield put(putIsFetchUserData(false));
     const { data } = yield call(PatientService.fetchPatientData, payload);
     yield put(putUserData(data));
+    yield put(putIsFetchUserData(true));
+
 }
 
 //cadmin sagas

@@ -5,14 +5,16 @@ import {
     REG_CLINIC,
     FETCH_CLINICS_DATA,
     REG_CLINIC_ADMIN,
-    FETCH_CLINIC_PAGINATION_DATA
+    FETCH_CLINIC_PAGINATION_DATA,
+    SEARCH_CLINIC
 } from './constants';
 
 import ClinicService from '../../services/ClinicService';
 
 import {
     putClinicsData,
-    putIsFetchClinicsData
+    putIsFetchClinicsData,
+    putPageCount
 } from './actions';
 
 import {
@@ -38,8 +40,9 @@ export function* regClinicAdmin() {
 export function* fetchClinicsData() {
     const { payload } = yield take(FETCH_CLINICS_DATA);
     yield put(putIsFetchClinicsData(false));
-    const { clinics } = yield call(ClinicService.fetchClinicsData, payload);
-    yield put(putClinicsData(clinics));
+    const { data } = yield call(ClinicService.fetchClinicsData, payload);
+    yield put(putClinicsData(data.clinics));
+    yield put(putPageCount(data.pageCount));
     yield put(putIsFetchClinicsData(true));
 }
 
@@ -69,4 +72,19 @@ export function* regClinic() {
         yield put(putErrorMsg(data));
         yield put(putErrorMsg(null));
     }
+    yield put(putIsFetchClinicsData(false));
+    const { clinicPag } = yield call(ClinicService.fetchClinicPaginationData, { pageCnt: 0 });
+    yield put(putSelPageCnt(0));
+    yield put(putPageCnt(clinicPag.pageCnt));
+    yield put(putClinicsData(clinicPag.clinics))
+    yield put(putIsFetchClinicsData(true));
+}
+
+export function* searchClinic() {
+    const { payload } = yield take(SEARCH_CLINIC);
+    yield put(putIsFetchClinicsData(false));
+    const { data } = yield call(ClinicService.searchClinic, payload);
+    yield put(putClinicsData(data.clinics));
+    yield put(putPageCount(data.pageCount));
+    yield put(putIsFetchClinicsData(true));
 }

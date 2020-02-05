@@ -1,9 +1,9 @@
 package clinic.centersystem.controller;
 
 import clinic.centersystem.dto.request.ClinicRequestDTO;
+import clinic.centersystem.dto.request.ClinicSearchDTO;
 import clinic.centersystem.dto.response.ClinicResponse;
 import clinic.centersystem.dto.response.ClinicResponsePageDTO;
-import clinic.centersystem.model.Clinic;
 import clinic.centersystem.service.ClinicServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -45,9 +45,14 @@ public class ClinicController {
         return new ResponseEntity<>(this.clinicService.getClinics(), HttpStatus.OK);
     }
 
-    @RequestMapping(method = GET, value = "/search-clinics")
+    /*@RequestMapping(method = GET, value = "/search-clinics")
     public ResponseEntity<List<Clinic>> searchClinics(@PathVariable String name) {
         return new ResponseEntity<>(this.clinicService.searchClinics(name), HttpStatus.OK);
+    }*/
+
+    @RequestMapping(method = POST, value = "/search")
+    public ResponseEntity<ClinicResponsePageDTO> getClinics(@RequestBody ClinicSearchDTO clinicSearchDTO) {
+        return new ResponseEntity<>(clinicService.searchClinics(clinicSearchDTO), HttpStatus.OK);
     }
 
     @RequestMapping(method = GET, value = "/all/{pageCnt}")

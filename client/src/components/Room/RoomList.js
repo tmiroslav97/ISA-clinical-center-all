@@ -63,7 +63,6 @@ const RoomList = ({ filterTerm, cnt, reason }) => {
                         </thead>
                         <tbody>
                             {
-
                                 rooms.filter(roomsDto => roomsDto.room.type.includes(filterTerm)).map((roomsDto, index) => {
                                     return (
                                         <tr key={roomsDto.room.id}>

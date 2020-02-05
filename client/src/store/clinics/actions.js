@@ -4,8 +4,15 @@ import {
     PUT_CLINICS_DATA,
     REG_CLINIC_ADMIN,
     PUT_IS_FETCH_CLINICS_DATA,
-    FETCH_CLINIC_PAGINATION_DATA
+    FETCH_CLINIC_PAGINATION_DATA,
+    SEARCH_CLINIC,
+    PUT_PAGE_COUNT
 } from './constants';
+
+export const putPageCount = payload => ({
+    type: PUT_PAGE_COUNT,
+    payload
+});
 
 export const fetchClinicPaginationData = payload => ({
     type: FETCH_CLINIC_PAGINATION_DATA,
@@ -37,3 +44,7 @@ export const fetchClinicsData = payload => ({
     payload
 });
 
+export const searchClinic = payload => ({
+    type: SEARCH_CLINIC,
+    payload
+});

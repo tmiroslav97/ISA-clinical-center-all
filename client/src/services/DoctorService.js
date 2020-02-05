@@ -73,6 +73,19 @@ class DoctorService extends HttpClient {
         }
     };
 
+    searchDoctor = async payload => {
+        try {
+            const { data } = await this.getApiClient().post(
+                FINALPOINTS.SEARCH_DOCTOR,
+                payload
+            );
+
+            return { data };
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    };
+
 }
 
 export default new DoctorService();

@@ -4,6 +4,7 @@ import {
     ADD_DOCTOR,
     FETCH_DOCTORS_DATA,
     FETCH_DOCTORS_DATA_ON_CLINIC,
+    SEARCH_DOCTOR,
     FETCH_DOCTORS_BY_CLINICID,
 } from './constants';
 
@@ -12,6 +13,7 @@ import DoctorService from '../../services/DoctorService';
 import {
     putIsFetchDoctors,
     putDoctorsData,
+    putPageCount
 } from './actions';
 
 
@@ -39,5 +41,14 @@ export function* addDoctor() {
     const { data } = yield call(DoctorService.addDoctor, payload);
     const { doctors } = yield call(DoctorService.fetchDoctorsData, {});
     yield put(putDoctorsData(doctors));
+    yield put(putIsFetchDoctors(true));
+}
+
+export function* searchDoctor() {
+    const { payload } = yield take(SEARCH_DOCTOR);
+    yield put(putIsFetchDoctors(false));
+    const { data } = yield call(DoctorService.searchDoctor, payload);
+    yield put(putDoctorsData(data.doctors));
+    yield put(putPageCount(data.putPageCount));
     yield put(putIsFetchDoctors(true));
 }

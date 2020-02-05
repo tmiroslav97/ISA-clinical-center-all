@@ -8,8 +8,8 @@ const FINALPOINTS = {
     APPROVE_REG_REQ: '/reg/approve/%s',
     REJECT_REG_REQ: '/reg/reject/%s/%s',
     REG_CC_ADMIN: '/cca/reg-cca/%s',
-    REG_CLINIC: '/clinic/reg-clinic',
-    FETCH_CLINICS: '/clinic/clinics',
+    REG_CLINIC: '/cca/reg-clinic',
+    FETCH_CLINICS: '/cca/clinics',
 };
 
 class CCAdminService extends HttpClient {

@@ -84,7 +84,7 @@ VALUES (6, 'Stefan', 'Peric', 'stefan@stefan.com', true, false, '2019-11-20 11:2
         '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra');
 
 INSERT INTO user_authority (user_id, authority_id)
-VALUES (2, 6);
+VALUES (6,2);
 
 INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
                    last_password_reset_date, password)
