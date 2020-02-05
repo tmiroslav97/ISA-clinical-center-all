@@ -1,5 +1,6 @@
 package clinic.centersystem.service;
 
+import clinic.centersystem.exception.ResourceNotExistsException;
 import clinic.centersystem.model.Surgery;
 import clinic.centersystem.repository.SurgeryRepository;
 import clinic.centersystem.service.intf.SurgeryService;
@@ -14,7 +15,7 @@ public class SurgeryServiceImpl implements SurgeryService {
 
     @Override
     public Surgery findById(Long id) {
-        return surgeryRepository.findById(id).orElseGet(null);
+        return surgeryRepository.findById(id).orElseThrow(() -> new ResourceNotExistsException("Surgery doesn't exist"));
     }
 
     @Override

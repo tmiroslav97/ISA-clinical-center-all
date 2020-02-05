@@ -2,6 +2,7 @@ package clinic.centersystem.service;
 
 import clinic.centersystem.converter.PrescriptionConverter;
 import clinic.centersystem.dto.response.PrescriptionResponse;
+import clinic.centersystem.exception.ResourceNotExistsException;
 import clinic.centersystem.model.Appointment;
 import clinic.centersystem.model.MedicalReport;
 import clinic.centersystem.model.Nurse;
@@ -36,7 +37,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
     @Override
     public Prescription findById(Long id) {
-        return this.prescriptionRepository.findById(id).orElseGet(null);
+        return this.prescriptionRepository.findById(id).orElseThrow(() -> new ResourceNotExistsException("Prescription doesn't exist"));
     }
 
     @Override
@@ -71,12 +72,12 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         prescription = prescriptionService.save(prescription);
         MedicalReport medicalReport = prescription.getMedicalReport();
         boolean flag = false;
-        for(Prescription pre : medicalReport.getPrescriptions()){
-            if(!pre.isValidate()){
+        for (Prescription pre : medicalReport.getPrescriptions()) {
+            if (!pre.isValidate()) {
                 flag = true;
             }
         }
-        if(!flag){
+        if (!flag) {
             Appointment appointment = medicalReport.getAppointment();
             appointment.setAppState(AppStateEnum.FINISHED);
             appointmentService.save(appointment);

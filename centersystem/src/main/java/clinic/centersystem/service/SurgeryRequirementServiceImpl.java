@@ -4,6 +4,7 @@ import clinic.centersystem.converter.SurgeryRequirementConverter;
 import clinic.centersystem.dto.request.SurgeryReservationReqDTO;
 import clinic.centersystem.dto.response.RoomResponseDTO;
 import clinic.centersystem.dto.response.SurgeryRequirementResponseDTO;
+import clinic.centersystem.exception.ResourceNotExistsException;
 import clinic.centersystem.model.*;
 import clinic.centersystem.repository.SurgeryRequirementRepository;
 import clinic.centersystem.service.intf.*;
@@ -56,12 +57,10 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
     @Autowired
     private EmailService emailService;
 
-    @Autowired
-    private ClinicService clinicService;
 
     @Override
     public SurgeryRequirement findById(Long id) {
-        return surgeryRequirementRepository.findById(id).orElseGet(null);
+        return surgeryRequirementRepository.findById(id).orElseThrow(() -> new ResourceNotExistsException("Surgery requirement doesn't exist"));
     }
 
     @Override

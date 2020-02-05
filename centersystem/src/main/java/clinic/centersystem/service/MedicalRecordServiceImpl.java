@@ -16,7 +16,7 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
 
     @Override
     public MedicalRecord findById(Long id) {
-        return medicalRecordRepository.findById(id).orElseGet(null);
+        return medicalRecordRepository.findById(id).orElseThrow(()-> new ResourceNotExistsException("Medical record doesn't exist"));
     }
 
     @Override

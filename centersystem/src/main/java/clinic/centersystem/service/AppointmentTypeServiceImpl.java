@@ -2,6 +2,7 @@ package clinic.centersystem.service;
 
 import clinic.centersystem.converter.AppointmentTypeConverter;
 import clinic.centersystem.dto.request.AppointmentTypeRequestDTO;
+import clinic.centersystem.exception.ResourceNotExistsException;
 import clinic.centersystem.model.Appointment;
 import clinic.centersystem.model.AppointmentType;
 import clinic.centersystem.model.Clinic;
@@ -23,7 +24,7 @@ public class AppointmentTypeServiceImpl implements AppointmentTypeService {
     private ClinicService clinicService;
 
     @Override
-    public AppointmentType findById(Long id){return this.appointmentTypeRepository.findById(id).orElseGet(null);}
+    public AppointmentType findById(Long id){return this.appointmentTypeRepository.findById(id).orElseThrow(()-> new ResourceNotExistsException("Appointment type doesn't exist"));}
 
     @Override
     public List<AppointmentType> findAll(){return this.appointmentTypeRepository.findAll();}

@@ -3,6 +3,7 @@ package clinic.centersystem.service;
 import clinic.centersystem.converter.NurseConverter;
 import clinic.centersystem.dto.response.NurseResponse;
 import clinic.centersystem.dto.response.PrescriptionResponse;
+import clinic.centersystem.exception.ResourceNotExistsException;
 import clinic.centersystem.model.Nurse;
 import clinic.centersystem.model.Prescription;
 import clinic.centersystem.repository.NurseRepository;
@@ -20,12 +21,9 @@ public class NurseServiceImpl implements NurseService {
     @Autowired
     private NurseRepository nurseRepository;
 
-    @Autowired
-    private PrescriptionService prescriptionService;
-
     @Override
     public Nurse findById(Long id) {
-        return this.nurseRepository.findById(id).orElseGet(null);
+        return this.nurseRepository.findById(id).orElseThrow(() -> new ResourceNotExistsException("Nurse doesn't exist"));
     }
 
     @Override

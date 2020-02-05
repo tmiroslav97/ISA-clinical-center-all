@@ -3,6 +3,7 @@ package clinic.centersystem.service;
 import clinic.centersystem.converter.AbsenceRequirementConverter;
 import clinic.centersystem.dto.request.AbsenceRequirementDTO;
 import clinic.centersystem.dto.response.AbsenceRequirementResponse;
+import clinic.centersystem.exception.ResourceNotExistsException;
 import clinic.centersystem.model.AbsenceHolidayRequirement;
 import clinic.centersystem.model.Clinic;
 import clinic.centersystem.model.Personnel;
@@ -31,7 +32,7 @@ public class AbsenceHolidayRequirementServiceImpl implements AbsenceHolidayRequi
 
     @Override
     public AbsenceHolidayRequirement findById(Long id) {
-        return this.absenceHolidayRequirementRepository.findById(id).orElseGet(null);
+        return this.absenceHolidayRequirementRepository.findById(id).orElseThrow(()-> new ResourceNotExistsException("Absence or holiday doesn't exist"));
     }
 
     @Override
