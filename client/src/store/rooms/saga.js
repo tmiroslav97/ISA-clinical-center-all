@@ -2,7 +2,8 @@ import { take, put, call } from 'redux-saga/effects';
 
 import {
     FETCH_ROOMS_DATA,
-    SEARCH_ROOMS_DATA
+    SEARCH_ROOMS_DATA,
+    SEARCH_ROOMS
 } from './constants';
 
 import RoomService from '../../services/RoomService';
@@ -28,6 +29,15 @@ export function* searchRoomsData(){
     yield put(putIsFetchRooms(false));
     const { data } = yield call(RoomService.searchRoomsData, payload);
     yield put(putRoomsData(data.rooms));
+    yield put(putPageCount(data.pageCount));
+    yield put(putIsFetchRooms(true));
+}
+
+export function* searchRooms(){
+    const { payload } = yield take (SEARCH_ROOMS);
+    yield put(putIsFetchRooms(false));
+    const { data } = yield call(RoomService.searchRooms, payload);
+    yield put(putRoomsData(data));
     yield put(putPageCount(data.pageCount));
     yield put(putIsFetchRooms(true));
 }

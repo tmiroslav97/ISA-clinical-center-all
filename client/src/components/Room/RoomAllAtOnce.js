@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Table, Button, Col, Form, Modal, Spinner, Pagination, PageItem } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { roomsDataSelector, isFetchRoomsSelector, pageCountSelector } from '../../store/rooms/selectors'
-import { fetchRoomsData } from '../../store/rooms/actions';
+import { fetchRoomsData, searchRooms } from '../../store/rooms/actions';
 
 const RoomAllAtOnce = ({ match }) => {
     const dispatch = useDispatch();
@@ -11,10 +11,16 @@ const RoomAllAtOnce = ({ match }) => {
     const isFetchRoomsData = useSelector(isFetchRoomsSelector);
     const pageCount = useSelector(pageCountSelector);
     const [pageCnt, setPageCnt] = useState(0);
+    const [name, setName] = useState('');
 
     const handleDelitingRooms = () => {
     };
 
+    const handleSearchRooms = () => {
+        dispatch(
+            searchRooms({name, clinicId, pageCnt})
+        );
+    }
 
     useEffect(() => {
         dispatch(
@@ -148,12 +154,13 @@ const RoomAllAtOnce = ({ match }) => {
 
                             <Form.Group as={Row} >
 
-                                <Form.Label>Search surgery rooms:</Form.Label>
+                                <Form.Label>Search surgery rooms by name:</Form.Label>
                                 <Col>
-                                    <Form.Control type="text" placeholder="Search " />
+                                    <Form.Control type="text" placeholder="Search " onChange={({ currentTarget }) => {
+                                setName(currentTarget.value);}} />
                                 </Col>
                                 <Col>
-                                    <Button>Search</Button>
+                                    <Button onClick={handleSearchRooms}>Search</Button>
                                 </Col>
                             </Form.Group>
 

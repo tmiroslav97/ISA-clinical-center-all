@@ -1,6 +1,7 @@
 package clinic.centersystem.service;
 
 import clinic.centersystem.dto.request.RoomSearchDTO;
+import clinic.centersystem.dto.request.RoomSearchWithoutFiltratingReqDTO;
 import clinic.centersystem.dto.response.RoomResponseDTO;
 import clinic.centersystem.dto.response.RoomResponseTerminDTO;
 import clinic.centersystem.dto.response.RoomResponseTerminPageDTO;
@@ -110,4 +111,14 @@ public class RoomServiceImpl implements RoomService {
 
         return roomResponseTerminPageDTO;
     }
+
+    public List<Room>searchRoomsWithoutFiltrating(RoomSearchWithoutFiltratingReqDTO roomSearchWithoutFiltratingReqDTO){
+        Pageable pageable = PageRequest.of(roomSearchWithoutFiltratingReqDTO.getPageCnt(), 10);
+        List<Room> rooms = roomRepository.findByNameIgnoringCaseAndClinicId(roomSearchWithoutFiltratingReqDTO.getName(),roomSearchWithoutFiltratingReqDTO.getClinicId(), pageable);
+        return rooms;
+    }
+    /*public List<AppointmentType>searchAppointmentType(AppointmentTypeSearchReqDTO appointmentTypeSearchReqDTO){
+        List<AppointmentType> appointmentType = appointmentTypeRepository.findByClinicIdAndTypeIgnoreCase(appointmentTypeSearchReqDTO.getClinicId(), appointmentTypeSearchReqDTO.getType());
+        return appointmentType;
+    }*/
 }
