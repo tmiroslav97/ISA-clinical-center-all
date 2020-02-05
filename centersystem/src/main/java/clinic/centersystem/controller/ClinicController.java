@@ -51,8 +51,8 @@ public class ClinicController {
     }*/
 
     @RequestMapping(method = POST, value = "/search")
-    public ResponseEntity<ClinicResponsePageDTO> getClinics(@RequestBody ClinicSearchDTO clinicSearchDTO) {
-        return new ResponseEntity<>(clinicService.searchClinics(clinicSearchDTO), HttpStatus.OK);
+    public ResponseEntity<ClinicResponsePageDTO> searchClinics(@RequestBody ClinicSearchDTO clinicSearchDTO) {
+        return new ResponseEntity<>(this.clinicService.searchClinics(clinicSearchDTO), HttpStatus.OK);
     }
 
     @RequestMapping(method = GET, value = "/all/{pageCnt}")
