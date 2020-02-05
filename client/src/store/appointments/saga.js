@@ -3,7 +3,8 @@ import { take, put, call } from 'redux-saga/effects';
 import {
     FETCH_APPOINTMENT_TYPE,
     ADD_APPOINTMENT_TYPE,
-    DELETE_APPOINTMENT_TYPE
+    DELETE_APPOINTMENT_TYPE,
+    EDIT_APPOINTMENT_TYPE
 } from './constants';
 
 import AppointmentTypeService from '../../services/AppointmentTypeService';
@@ -33,6 +34,15 @@ export function* addAppointmentType() {
 export function* deleteAppointmentType() {
     const { payload } = yield take(DELETE_APPOINTMENT_TYPE);
     const { data } = yield call(AppointmentTypeService.deleteAppointmentType, {id:payload.id});
+    yield put(putIsFetchAppointmentTypes(false));
+    const { appointmentTypes } = yield call(AppointmentTypeService.fetchAppointmentType, {clinicId:payload.clinicId});
+    yield put(putAppointmentTypes(appointmentTypes));
+    yield put(putIsFetchAppointmentTypes(true));
+}
+
+export function* editAppointmentType() {
+    const { payload } = yield take(EDIT_APPOINTMENT_TYPE);
+    yield call(AppointmentTypeService.editAppointmentType, payload);
     yield put(putIsFetchAppointmentTypes(false));
     const { appointmentTypes } = yield call(AppointmentTypeService.fetchAppointmentType, {clinicId:payload.clinicId});
     yield put(putAppointmentTypes(appointmentTypes));

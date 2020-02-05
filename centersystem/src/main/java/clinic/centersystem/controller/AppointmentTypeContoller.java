@@ -1,5 +1,6 @@
 package clinic.centersystem.controller;
 
+import clinic.centersystem.dto.request.AppointmentTypeEditReqDTO;
 import clinic.centersystem.dto.request.AppointmentTypeRequestDTO;
 import clinic.centersystem.model.AppointmentType;
 import clinic.centersystem.service.AppointmentTypeServiceImpl;
@@ -33,9 +34,14 @@ public class AppointmentTypeContoller {
         return new ResponseEntity<>(this.appointmentTypeService.addAppointmentType(appointmentTypeRequestDTO, clinicId), HttpStatus.OK);
     }
 
-    @RequestMapping(method = POST, value = "delete-appointment-type/{appointmentId}")
+    @RequestMapping(method = POST, value = "/delete-appointment-type/{appointmentId}")
     public ResponseEntity<String>deleteAppointmentType(@PathVariable Long appointmentId){
         return new ResponseEntity<>(this.appointmentTypeService.deleteAppointmentType(appointmentId), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = POST, value = "/edit-appointment-type")
+    public ResponseEntity<String>editAppointmentType(@RequestBody AppointmentTypeEditReqDTO appointmentTypeEditReqDTO){
+        return new ResponseEntity<>(this.appointmentTypeService.editAppointmentType(appointmentTypeEditReqDTO),HttpStatus.OK);
     }
 
 

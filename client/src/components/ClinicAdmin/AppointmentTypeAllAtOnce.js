@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Container, Col, Row, Form, Button, Modal, Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { addAppointmentType, fetchAppointmentType, deleteAppointmentType } from '../../store/appointments/actions';
+import { addAppointmentType, fetchAppointmentType, deleteAppointmentType, editAppointmentType } from '../../store/appointments/actions';
 import { appointmentTypeSelector, isFetchAppointmentTypeSelector } from '../../store/appointments/selectors';
 import { userDataSelector } from '../../store/user/selectors';
 
 
 const AppointmentTypAllAtOnce = () => {
     const dispatch = useDispatch();
-    const [type, setType] = useState();
+    const [type, setType] = useState('');
+    const [typeId, setTypeId] = useState(0);
     const appointmentTypes = useSelector(appointmentTypeSelector);
     const isFetchAppointmentTypes = useSelector(isFetchAppointmentTypeSelector);
     const data = useSelector(userDataSelector);
@@ -16,12 +17,27 @@ const AppointmentTypAllAtOnce = () => {
     const [show1, setShow1] = useState(false);
     const [show2, setShow2] = useState(false);
 
-    const handleClose1 = () => setShow1(false);
-
+    const handleShow1 = () => setShow1(true);
     const handleShow2 = () => setShow2(true);
 
+    const handleEdit = () => {
+        console.log("Ovde2");
+        dispatch(
+            editAppointmentType({id:typeId, type, clinicId})
+        );
+        setShow1(false);
+    }
+    //setShow1(false);
+
+    const handleEditShow  = (appointment)=>{
+        console.log("Ovde1");
+        setType(appointment.type);
+        setTypeId(appointment.id);
+        setShow1(true);
+    }
+
     const handleDelete = (appointment) => {
-        console.log(appointment);
+        //console.log(appointment);
         dispatch(
             deleteAppointmentType({id:appointment.id, clinicId})
         );
@@ -35,7 +51,7 @@ const AppointmentTypAllAtOnce = () => {
         );
         setShow2(false);
     };
-    console.log(clinicId);
+    //console.log(clinicId);
 
     useEffect(() => {
         dispatch(
@@ -53,7 +69,7 @@ const AppointmentTypAllAtOnce = () => {
 
     return (
         <>
-            <Modal show={show1} onHide={handleClose1} animation={false}>
+            <Modal show={show1} onHide={handleEdit} animation={false}>
                 <Modal.Header closeButton>
                     <Modal.Title>Edit data:</Modal.Title>
                 </Modal.Header>
@@ -61,12 +77,13 @@ const AppointmentTypAllAtOnce = () => {
                     <Form>
                         <Form.Group as={Col}>
                             <Form.Label>Type:</Form.Label>
-                            <Form.Control type="text" />
+                            <Form.Control type="text" value={type} onChange={({ currentTarget }) => {
+                                setType(currentTarget.value);}} />
                         </Form.Group>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" onClick={handleClose1}>
+                    <Button variant="primary" onClick={handleEdit}>
                         Edit
           </Button>
                 </Modal.Footer>
@@ -155,7 +172,7 @@ const AppointmentTypAllAtOnce = () => {
                                             <tr key={appointment.id}>
                                                 <td>{index + 1}</td>
                                                 <td>{appointment.type}</td>
-                                                <td><Button variant="success" >Edit</Button></td>
+                                                <td><Button variant="success" onClick={()=>{handleEditShow(appointment)}}>Edit</Button></td>
                                                 <td><Button variant="danger" onClick={()=>{handleDelete(appointment);}}>Delete</Button></td>
                                             </tr>
                                         );
