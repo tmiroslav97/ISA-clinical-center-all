@@ -91,7 +91,7 @@ const CA = () => {
                             <Card.Text>
                                 You can easily search rooms.
                             </Card.Text>
-                            <Button variant="primary" onClick={() => { history.push('/adminc/room-search'); }}>Search rooms</Button>
+                            <Button variant="primary" onClick={() => { history.push('/adminc/room-search/free'); }}>Search rooms</Button>
                         </Card.Body>
                     </Card>
                 </Col>
