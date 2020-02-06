@@ -8,7 +8,8 @@ const FINALPOINTS = {
     DELETE_ROOMS_DATA: '/room/delete/%s',
     SEARCH_ROOMS: '/room/search-rooms',
     ADD_ROOM: '/room/add-room/%s',
-    EDIT_ROOM: '/room/edit-room'
+    EDIT_ROOM: '/room/edit-room',
+    DELETE_ROOM: '/room/delete-room/%s'
 
 };
 
@@ -116,6 +117,20 @@ class RoomService extends HttpClient {
             return {response};
         }
     };
+
+    deleteRoom = async payload => {
+        try{
+            const {data} = await this.getApiClient().post(
+                format(FINALPOINTS.DELETE_ROOM, payload.id),
+                payload
+            )
+            const response = data;
+            return { response };
+        } catch (error) {
+            const response = error.response.data;
+            return {response};
+        }
+    }
 
 }
 

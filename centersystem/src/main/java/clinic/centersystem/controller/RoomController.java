@@ -56,5 +56,10 @@ public class RoomController {
         return new ResponseEntity<>(this.roomService.editRoom(roomEditReqDTO), HttpStatus.OK);
     }
 
+    @RequestMapping(method = POST, value = "/delete-room/{roomId}")
+    public ResponseEntity<String>deleteRoom(@PathVariable Long roomId){
+        return new ResponseEntity<>(this.roomService.deleteRoom(roomId), HttpStatus.OK);
+    }
+
 
 }

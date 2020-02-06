@@ -146,4 +146,9 @@ public class RoomServiceImpl implements RoomService {
         return "Successfully edited room";
     }
 
+    public String deleteRoom(Long roomId){
+        this.roomRepository.deleteById(roomId);
+        return "Successfully deleted room";
+    }
+
 }

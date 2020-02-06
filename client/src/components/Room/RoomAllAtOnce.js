@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Table, Button, Col, Form, Modal, Spinner, Pagination, PageItem } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { roomsDataSelector, isFetchRoomsSelector, pageCountSelector } from '../../store/rooms/selectors'
-import { fetchRoomsData, searchRooms,addRoom, editRoom } from '../../store/rooms/actions';
+import { fetchRoomsData, searchRooms,addRoom, editRoom ,deleteRoom} from '../../store/rooms/actions';
 
 const RoomAllAtOnce = ({ match }) => {
     const dispatch = useDispatch();
@@ -16,7 +16,10 @@ const RoomAllAtOnce = ({ match }) => {
     const [type, setType] = useState('');
     const [roomId, setRoomId] = useState(0);
 
-    const handleDelitingRooms = () => {
+    const handleDelitingRooms = (room) => {
+        dispatch(
+            deleteRoom({id:room.id, clinicId, pageCnt})
+        );
     };
 
     const handleSearchRooms = () => {
@@ -229,7 +232,7 @@ const RoomAllAtOnce = ({ match }) => {
                                                     <Button onClick={()=>{handleEditShow(room)}}>Edit</Button>
                                                 </td>
                                                 <td>
-                                                    <Button onClick={handleDelitingRooms}>Delete</Button>
+                                                    <Button onClick={() => {handleDelitingRooms(room)}}>Delete</Button>
                                                 </td>
                                             </tr>
                                         );

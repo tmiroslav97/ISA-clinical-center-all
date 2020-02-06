@@ -2,7 +2,7 @@ import {
     FETCH_ROOMS_DATA,
     PUT_ROOMS_DATA,
     PUT_IS_FETCH_ROOMS,
-    //DELETE_ROOMS_DATA,
+    DELETE_ROOM,
     //ADD_ROOMS_DATA,
     //EDIT_ROOMS_DATA,
     SEARCH_ROOMS,
@@ -49,6 +49,11 @@ export const addRoom = payload => ({
 
 export const editRoom = payload => ({
     type: EDIT_ROOM,
+    payload
+});
+
+export const deleteRoom = payload => ({
+    type: DELETE_ROOM,
     payload
 });
  /*
