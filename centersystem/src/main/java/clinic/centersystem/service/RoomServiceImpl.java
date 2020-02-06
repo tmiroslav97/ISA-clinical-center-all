@@ -20,6 +20,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +38,11 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public Room findById(Long id) {
         return roomRepository.findById(id).orElseThrow(() -> new ResourceNotExistsException("Room doesn't exist"));
+    }
+
+    @Override
+    public Room findOneById(Long id) {
+        return roomRepository.findOneById(id);
     }
 
     @Override

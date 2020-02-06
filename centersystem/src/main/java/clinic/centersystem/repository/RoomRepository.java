@@ -5,8 +5,10 @@ import org.joda.time.LocalDate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
 
+import javax.persistence.LockModeType;
 import java.util.List;
 
 
@@ -20,4 +22,6 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
     List<Room> findByClinicId(Long id);
 
     List<Room> findAllByClinicIdAndType(Long id, String type);
+
+    Room findOneById(Long id);
 }

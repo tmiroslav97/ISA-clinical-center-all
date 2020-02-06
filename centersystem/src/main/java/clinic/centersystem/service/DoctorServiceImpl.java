@@ -58,6 +58,12 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
+    public Doctor findOneById(Long id){
+        return doctorRepository.findOneById(id);
+    }
+
+
+    @Override
     public Doctor save(Doctor doctor) {
         return this.doctorRepository.save(doctor);
     }

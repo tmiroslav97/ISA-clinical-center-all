@@ -29,6 +29,4 @@ public class Calendar {
     @OneToMany(mappedBy = "calendar", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Set<CalendarItem> calendarItems = new HashSet<>();
 
-    @Version
-    private Long version = 0L;
 }

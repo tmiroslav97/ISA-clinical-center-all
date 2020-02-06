@@ -16,6 +16,8 @@ public interface PatientService {
 
     List<Patient> findAll();
 
+    Patient findOneById(Long id);
+
     Patient save(RegistrationRequirement registrationRequirement);
 
     Patient save(Patient patient);

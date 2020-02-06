@@ -55,6 +55,11 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
+    public Patient findOneById(Long id){
+        return patientRepository.findOneById(id);
+    }
+
+    @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public Patient save(RegistrationRequirement registrationRequirement) {
         Patient patient = PatientConverter.toCreatePatientFromRequest(registrationRequirement);

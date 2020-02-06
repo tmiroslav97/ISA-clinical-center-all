@@ -50,6 +50,4 @@ public class Room {
     @OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
     private Set<Appointment> appointments = new HashSet<>();
 
-    @Version
-    private Long version=0L;
 }
