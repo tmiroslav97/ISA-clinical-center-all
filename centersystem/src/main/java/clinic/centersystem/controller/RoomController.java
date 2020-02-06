@@ -1,5 +1,6 @@
 package clinic.centersystem.controller;
 
+import clinic.centersystem.dto.request.RoomReqDTO;
 import clinic.centersystem.dto.request.RoomSearchDTO;
 import clinic.centersystem.dto.request.RoomSearchWithoutFiltratingReqDTO;
 import clinic.centersystem.dto.response.RoomResponseDTO;
@@ -42,5 +43,10 @@ public class RoomController {
     @RequestMapping(method = POST, value = "/search-rooms")
     public ResponseEntity<List<Room>>searchRooms(@RequestBody RoomSearchWithoutFiltratingReqDTO roomSearchWithoutFiltratingReqDTO){
         return new ResponseEntity<>(roomService.searchRoomsWithoutFiltrating(roomSearchWithoutFiltratingReqDTO),HttpStatus.OK);
+    }
+
+    @RequestMapping(method = POST, value = "/add-room/{clinicId}")
+    public ResponseEntity<String>addRoom(@RequestBody RoomReqDTO roomReqDTO, @PathVariable Long clinicId ){
+        return new ResponseEntity<>(roomService.addRoom(roomReqDTO, clinicId), HttpStatus.OK);
     }
 }

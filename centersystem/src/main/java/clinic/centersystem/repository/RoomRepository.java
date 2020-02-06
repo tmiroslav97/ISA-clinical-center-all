@@ -19,6 +19,8 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 
     List<Room> findByClinicId(Long id);
 
+    Boolean existsByRoomNum( Integer roomNum);
+
     List<Room> findAllByClinicIdAndType(Long id, String type);
 
     @Query("select r from Room r where lower(r.name) like lower(?1) and r.clinic.id=(?2)")

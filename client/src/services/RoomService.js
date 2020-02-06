@@ -6,7 +6,8 @@ const FINALPOINTS = {
     FETCH_ROOMS_DATA: '/room/all/%s/%s',
     SEARCH_ROOMS_DATA: '/room/search',
     DELETE_ROOMS_DATA: '/room/delete/%s',
-    SEARCH_ROOMS: '/room/search-rooms'
+    SEARCH_ROOMS: '/room/search-rooms',
+    ADD_ROOM: '/room/add-room/%s'
 
 };
 
@@ -82,6 +83,20 @@ class RoomService extends HttpClient {
             return { data };
         } catch (error) {
             console.log(error.response.data);
+        }
+    };
+    
+    addRoom = async payload => {
+        try {
+            const { data } = await this.getApiClient().post(
+                format(FINALPOINTS.ADD_ROOM, payload.clinicId),
+                payload
+            );
+            const response = data;
+            return { response };
+        } catch (error) {
+            const response = error.response;
+            return {response};
         }
     };
 

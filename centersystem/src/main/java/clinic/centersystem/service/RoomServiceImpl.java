@@ -1,13 +1,17 @@
 package clinic.centersystem.service;
 
+import clinic.centersystem.converter.RoomRequestConverter;
+import clinic.centersystem.dto.request.RoomReqDTO;
 import clinic.centersystem.dto.request.RoomSearchDTO;
 import clinic.centersystem.dto.request.RoomSearchWithoutFiltratingReqDTO;
 import clinic.centersystem.dto.response.RoomResponseDTO;
 import clinic.centersystem.dto.response.RoomResponseTerminDTO;
 import clinic.centersystem.dto.response.RoomResponseTerminPageDTO;
 import clinic.centersystem.exception.ResourceNotExistsException;
+import clinic.centersystem.model.Clinic;
 import clinic.centersystem.model.Room;
 import clinic.centersystem.repository.RoomRepository;
+import clinic.centersystem.service.intf.ClinicService;
 import clinic.centersystem.service.intf.RoomCalendarService;
 import clinic.centersystem.service.intf.RoomService;
 import org.joda.time.DateTime;
@@ -32,6 +36,9 @@ public class RoomServiceImpl implements RoomService {
 
     @Autowired
     private RoomCalendarService roomCalendarService;
+
+    @Autowired
+    private ClinicService clinicService;
 
     @Override
     public Room findById(Long id) {
@@ -117,8 +124,17 @@ public class RoomServiceImpl implements RoomService {
         List<Room> rooms = roomRepository.findByNameIgnoringCaseAndClinicId(roomSearchWithoutFiltratingReqDTO.getName(),roomSearchWithoutFiltratingReqDTO.getClinicId(), pageable);
         return rooms;
     }
-    /*public List<AppointmentType>searchAppointmentType(AppointmentTypeSearchReqDTO appointmentTypeSearchReqDTO){
-        List<AppointmentType> appointmentType = appointmentTypeRepository.findByClinicIdAndTypeIgnoreCase(appointmentTypeSearchReqDTO.getClinicId(), appointmentTypeSearchReqDTO.getType());
-        return appointmentType;
-    }*/
+
+    public String addRoom(RoomReqDTO roomReqDTO, Long clinicId){
+        if(this.roomRepository.existsByRoomNum(roomReqDTO.getRoomNum())){
+            return "Error, room number already used";
+        }
+        Room room = RoomRequestConverter.toCreateFromRequest(roomReqDTO);
+        Clinic clinic = clinicService.findById(clinicId);
+        room.setClinic(clinic);
+        room.setReserved(false);
+        roomRepository.save(room);
+        return "Successfully added room";
+    }
+
 }

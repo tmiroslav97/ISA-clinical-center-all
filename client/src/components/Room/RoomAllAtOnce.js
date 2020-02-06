@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Table, Button, Col, Form, Modal, Spinner, Pagination, PageItem } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { roomsDataSelector, isFetchRoomsSelector, pageCountSelector } from '../../store/rooms/selectors'
-import { fetchRoomsData, searchRooms } from '../../store/rooms/actions';
+import { fetchRoomsData, searchRooms,addRoom } from '../../store/rooms/actions';
 
 const RoomAllAtOnce = ({ match }) => {
     const dispatch = useDispatch();
@@ -12,6 +12,8 @@ const RoomAllAtOnce = ({ match }) => {
     const pageCount = useSelector(pageCountSelector);
     const [pageCnt, setPageCnt] = useState(0);
     const [name, setName] = useState('');
+    const [roomNum, setRoomNum] = useState(0);
+    const [type, setType] = useState('');
 
     const handleDelitingRooms = () => {
     };
@@ -20,6 +22,13 @@ const RoomAllAtOnce = ({ match }) => {
         dispatch(
             searchRooms({name, clinicId, pageCnt})
         );
+    }
+
+    const handelAddRoom = () => {
+        dispatch(
+            addRoom({name,roomNum, type, clinicId, pageCnt})
+        );
+        setShow2rAdd(false);
     }
 
     useEffect(() => {
@@ -68,7 +77,6 @@ const RoomAllAtOnce = ({ match }) => {
 
     const handleClose1rEdit = () => setShow1rEdit(false);
     const handleShow1rEdit = () => setShow1rEdit(true);
-    const handleClose2rAdd = () => setShow2rAdd(false);
     const handleShow2rAdd = () => setShow2rAdd(true);
 
     if (!isFetchRoomsData) {
@@ -108,7 +116,7 @@ const RoomAllAtOnce = ({ match }) => {
                 </Modal.Footer>
             </Modal>
 
-            <Modal show={show2rAdd} onHide={handleClose2rAdd} animation={false}>
+            <Modal show={show2rAdd} onHide={handelAddRoom} animation={false}>
                 <Modal.Header closeButton>
                     <Modal.Title>Add data:</Modal.Title>
                 </Modal.Header>
@@ -117,19 +125,33 @@ const RoomAllAtOnce = ({ match }) => {
                         <Form.Group as={Row}>
                             <Form.Label>Enter name of the room:</Form.Label>
                             <Col>
-                                <Form.Control type="text" placeholder="Name " />
+                                <Form.Control type="text" placeholder="Name " onChange={({ currentTarget }) => {
+                                setName(currentTarget.value);}} />
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row}>
                             <Form.Label>Enter number of the room:</Form.Label>
                             <Col>
-                                <Form.Control type="text" placeholder="Number " />
+                                <Form.Control type="number" placeholder="Number "  onChange={({ currentTarget }) => {
+                                setRoomNum(currentTarget.value);}}/>
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row}>
+                            <Form.Label>Choose type:</Form.Label>
+                            <Col>
+                            <Form.Control as="select" onChange={({ currentTarget }) => {
+                            setType(currentTarget.value);
+                        }} >
+                            <option value=""></option>
+                            <option value="SUR">surgery</option>
+                            <option value="APP">exemination</option>
+                        </Form.Control>
                             </Col>
                         </Form.Group>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" onClick={handleClose2rAdd}>
+                    <Button variant="primary" onClick={handelAddRoom}>
                         Add
           </Button>
                 </Modal.Footer>
