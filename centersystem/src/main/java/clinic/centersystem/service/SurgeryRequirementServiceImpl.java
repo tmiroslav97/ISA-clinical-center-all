@@ -20,6 +20,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -81,6 +83,7 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public int reserveRoomForSurgery(SurgeryReservationReqDTO surgeryReservationReqDTO) {
         String pickedDateStr = surgeryReservationReqDTO.getPickedTerm().split(" ")[0];
         String pickedTermsStr[] = (surgeryReservationReqDTO.getPickedTerm().split(" ")[1]).split("-");

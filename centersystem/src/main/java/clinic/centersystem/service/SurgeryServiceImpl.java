@@ -6,6 +6,8 @@ import clinic.centersystem.repository.SurgeryRepository;
 import clinic.centersystem.service.intf.SurgeryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class SurgeryServiceImpl implements SurgeryService {
@@ -19,6 +21,7 @@ public class SurgeryServiceImpl implements SurgeryService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public Surgery save(Surgery surgery) {
         return surgeryRepository.save(surgery);
     }

@@ -40,7 +40,7 @@ public class Room {
     private Clinic clinic;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Set<RoomCalendar> roomCalendars = new HashSet<>();
 
     @JsonIgnore
@@ -50,4 +50,6 @@ public class Room {
     @OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
     private Set<Appointment> appointments = new HashSet<>();
 
+    @Version
+    private Long version=0L;
 }
