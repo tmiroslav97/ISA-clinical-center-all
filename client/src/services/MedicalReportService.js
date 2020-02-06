@@ -35,7 +35,7 @@ class MedicalReportService extends HttpClient {
 
     editMedicalReport = async payload => {
         try {
-            const { data } = await this.getApiClient().post(
+            const { data } = await this.getApiClient().put(
                 FINALPOINTS.EDIT_MEDICAL_REPORT,
                 payload
             );

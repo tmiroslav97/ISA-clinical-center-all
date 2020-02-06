@@ -1,6 +1,7 @@
 package clinic.centersystem.service;
 
 import clinic.centersystem.converter.PrescriptionConverter;
+import clinic.centersystem.dto.request.MedicalReportEditDTO;
 import clinic.centersystem.dto.request.MedicalReportRequestDTO;
 import clinic.centersystem.dto.response.MedicalReportResponseDTO;
 import clinic.centersystem.exception.ResourceExistsException;
@@ -45,9 +46,30 @@ public class MedicalReportServiceImpl implements MedicalReportService {
     @Autowired
     private MedicalRecordService medicalRecordService;
 
+    @Autowired
+    private DoctorService doctorService;
+
     @Override
     public MedicalReport findById(Long id) {
         return medicalReportRepository.findById(id).orElseThrow(() -> new ResourceNotExistsException("Medical report doesn't exist"));
+    }
+
+    @Override
+    public Integer editMedicalReport(MedicalReportEditDTO medicalReportEditDTO) {
+        MedicalReport medicalReport = this.findById(medicalReportEditDTO.getId());
+        Doctor doctor = doctorService.findById(medicalReportEditDTO.getDoctorId());
+        Appointment appointment = medicalReport.getAppointment();
+        if(appointment.getDoctor().getId()!=doctor.getId()){
+            return 1;
+        }
+        if(medicalReportEditDTO.getDiagnoseId()!=null){
+            Diagnose diagnose = diagnoseService.findById(medicalReportEditDTO.getDiagnoseId());
+            medicalReport.setDiagnose(diagnose);
+        }
+        medicalReport.setDescription(medicalReportEditDTO.getDescription());
+        medicalReportRepository.save(medicalReport);
+
+        return 2;
     }
 
     @Override
@@ -59,7 +81,7 @@ public class MedicalReportServiceImpl implements MedicalReportService {
             MedicalReport medicalReport = medicalReportRepository.findByAppointmentId(appointment.getId());
             MedicalReportResponseDTO mRRDTO = MedicalReportResponseDTO.builder()
                     .id(medicalReport.getId())
-                    .patientName(appointment.getPatient().getFirstName()+ " "+appointment.getPatient().getLastName())
+                    .patientName(appointment.getPatient().getFirstName() + " " + appointment.getPatient().getLastName())
                     .appDate(dtf.print(appointment.getDateTime()))
                     .description(medicalReport.getDescription())
                     .diagnoseName(medicalReport.getDiagnose().getName())

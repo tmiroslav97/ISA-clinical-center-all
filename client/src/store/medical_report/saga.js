@@ -21,11 +21,7 @@ import {
 
 export function* editMedicalReport() {
     const { payload } = yield take(EDIT_MEDICAL_REPORT);
-    const { msg } = yield call(MedicalReportService.editMedicalReport, {
-        id: payload.id,
-        description: payload.description,
-        diagnoseId: payload.diagnoseId,
-    });
+    const { msg } = yield call(MedicalReportService.editMedicalReport, payload);
     if (msg === 'Successfuly edited') {
         yield put(putSuccessMsg(msg));
         yield put(putSuccessMsg(null));

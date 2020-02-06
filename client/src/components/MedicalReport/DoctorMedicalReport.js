@@ -20,7 +20,7 @@ const DoctorMedicalReport = () => {
     const [id, setId] = useState('');
     const [description, setDescription] = useState('');
     const [diagnoseNam, setDiagnoseNam] = useState('');
-    const [diagnoseId, setDiagnoseId] = useState('');
+    const [diagnoseId, setDiagnoseId] = useState(null);
 
     useEffect(() => {
         if (doctorId != null) {
@@ -56,7 +56,8 @@ const DoctorMedicalReport = () => {
     };
 
     const handleClose = () => setShow(false);
-    const handleShow = (description, diagnose) => {
+    const handleShow = (medRepId, description, diagnose) => {
+        setId(medRepId);
         setDiagnoseNam(diagnose);
         setDescription(description);
         setShow(true);
@@ -99,10 +100,10 @@ const DoctorMedicalReport = () => {
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>Description:</Form.Label>
-                            <Form.Control required as="textarea" id="txtDescription" rows="4" defaultValue={description}
-                                onChange={({ currentTarget }) => {
-                                    setDescription(currentTarget.value);
-                                }}
+                            <Form.Control required as="textarea" id="txtDescription" maxlength="80" rows="4" defaultValue={description}
+                            onChange={({ currentTarget }) => {
+                                setDescription(currentTarget.value);
+                            }}
                             />
                         </Form.Group>
                         <Form.Group as={Col} align="right">
@@ -152,7 +153,7 @@ const DoctorMedicalReport = () => {
                                                 </Form.Control>
                                             </td>
                                             <td>
-                                                <Button variant="primary" onClick={() => { handleShow(medRep.description, medRep.diagnoseName); }}>
+                                                <Button variant="primary" onClick={() => { handleShow(medRep.id, medRep.description, medRep.diagnoseName); }}>
                                                     Edit
                                                 </Button>
                                             </td>
