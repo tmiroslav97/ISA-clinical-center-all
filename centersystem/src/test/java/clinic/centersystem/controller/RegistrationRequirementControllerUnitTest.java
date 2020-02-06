@@ -39,6 +39,8 @@ public class RegistrationRequirementControllerUnitTest {
     private static final String REJECT_ENDPOINT_USER_EXISTS = "/reg/reject/5/Nout enough information";
     private static final String APPROVE_EDNPOINT_REG_REQ_NOT_EXISTS = "/reg/approve/50";
     private static final String REJECT_EDNPOINT_REG_REQ_NOT_EXISTS = "/reg/reject/50/Nout enough information";
+    private static final String APPROVE_ENDPOINT_USER_NOT_EXISTS = "/reg/approve/1";
+    private static final String REJECT_ENDPOINT_USER_NOT_EXISTS = "/reg/reject/1";
 
 
     @PostConstruct
@@ -48,7 +50,7 @@ public class RegistrationRequirementControllerUnitTest {
     }
 
     @Test
-    public void rejectRegistrationRequestShouldReturnNotFoundWhenRegistrationRequirementNotFoundExceptionIsThrown() {
+    public void rejectRegistrationRequestShouldReturnOKWhenRegistrationRequirementNotFoundExceptionIsThrown() {
         when(registrationRequirementServiceMock.rejectRegistrationRequest(Long.valueOf(50),"Nout enough information")).thenThrow(RegistrationRequirementNotFoundException.class);
 
         HttpHeaders headers = new HttpHeaders();
@@ -63,8 +65,9 @@ public class RegistrationRequirementControllerUnitTest {
         assertNull("Response does not contain body.", success);
     }
 
+
     @Test
-    public void approvetRegistrationRequestShouldReturnNotFoundWhenRegistrationRequirementNotFoundExceptionIsThrown() {
+    public void approveRegistrationRequestShouldReturnNotFoundWhenRegistrationRequirementNotFoundExceptionIsThrown() {
         when(registrationRequirementServiceMock.approveRegistrationRequest(Long.valueOf(50))).thenThrow(RegistrationRequirementNotFoundException.class);
 
         HttpHeaders headers = new HttpHeaders();
@@ -111,5 +114,20 @@ public class RegistrationRequirementControllerUnitTest {
         assertNull("Response does not contain body.", success);
     }
 
+    @Test
+    public void approveRegistrationRequestShouldReturnOKAndSuccMsgWhenRegistrationRequirementIsApproved() {
+        when(registrationRequirementServiceMock.approveRegistrationRequest(Long.valueOf(1))).thenReturn("Patient registration approved");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", accessToken);
+
+        HttpEntity<Object> request = new HttpEntity<>(null, headers);
+
+        ResponseEntity<String> responseEntity = testRestTemplate.postForEntity(APPROVE_ENDPOINT_USER_NOT_EXISTS, request, String.class);
+
+        String success = responseEntity.getBody();
+        assertEquals("Http status is OK.", HttpStatus.OK, responseEntity.getStatusCode());
+        assertEquals("Patient registration approved", success);
+    }
 
 }
