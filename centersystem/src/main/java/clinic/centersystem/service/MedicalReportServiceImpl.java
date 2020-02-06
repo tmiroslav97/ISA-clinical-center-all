@@ -11,6 +11,8 @@ import clinic.centersystem.repository.MedicalReportRepository;
 import clinic.centersystem.service.intf.*;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,11 +53,14 @@ public class MedicalReportServiceImpl implements MedicalReportService {
     @Override
     public List<MedicalReportResponseDTO> findDoctorReports(Long id) {
         List<MedicalReportResponseDTO> medicalReportResponseDTO = new ArrayList<>();
+        DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
         List<Appointment> appointments = appointmentService.findAllByDoctorIdAndAppState(id, AppStateEnum.FINISHED);
         for (Appointment appointment : appointments) {
             MedicalReport medicalReport = medicalReportRepository.findByAppointmentId(appointment.getId());
             MedicalReportResponseDTO mRRDTO = MedicalReportResponseDTO.builder()
                     .id(medicalReport.getId())
+                    .patientName(appointment.getPatient().getFirstName()+ " "+appointment.getPatient().getLastName())
+                    .appDate(dtf.print(appointment.getDateTime()))
                     .description(medicalReport.getDescription())
                     .diagnoseName(medicalReport.getDiagnose().getName())
                     .medicineName(medicalReport.getPrescriptions().stream().map(pres -> pres.getMedicine().getName()).collect(Collectors.toList()))
