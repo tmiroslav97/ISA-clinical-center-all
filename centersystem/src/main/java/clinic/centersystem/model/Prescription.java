@@ -39,4 +39,6 @@ public class Prescription {
     @ManyToOne(fetch = FetchType.LAZY)
     private Clinic clinic;
 
+    @Version
+    private Long version = 0L;
 }

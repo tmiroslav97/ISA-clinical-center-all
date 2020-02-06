@@ -8,6 +8,8 @@ import clinic.centersystem.repository.AppointmentRepository;
 import clinic.centersystem.service.intf.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,6 +25,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public Appointment save(Appointment appointment) {
         return appointmentRepository.save(appointment);
     }
