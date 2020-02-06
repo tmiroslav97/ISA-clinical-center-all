@@ -8,7 +8,8 @@ import {
     SEARCH_ROOMS,
     SEARCH_ROOMS_DATA,
     PUT_PAGE_COUNT,
-    ADD_ROOM
+    ADD_ROOM,
+    EDIT_ROOM
 } from './constants';
 
 export const putPageCount = payload => ({
@@ -43,6 +44,11 @@ export const searchRooms = payload => ({
 
 export const addRoom = payload => ({
     type: ADD_ROOM,
+    payload
+});
+
+export const editRoom = payload => ({
+    type: EDIT_ROOM,
     payload
 });
  /*

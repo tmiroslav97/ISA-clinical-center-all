@@ -7,7 +7,8 @@ const FINALPOINTS = {
     SEARCH_ROOMS_DATA: '/room/search',
     DELETE_ROOMS_DATA: '/room/delete/%s',
     SEARCH_ROOMS: '/room/search-rooms',
-    ADD_ROOM: '/room/add-room/%s'
+    ADD_ROOM: '/room/add-room/%s',
+    EDIT_ROOM: '/room/edit-room'
 
 };
 
@@ -96,6 +97,22 @@ class RoomService extends HttpClient {
             return { response };
         } catch (error) {
             const response = error.response;
+            return {response};
+        }
+    };
+
+    editRoom = async payload => {
+        try {
+            console.log("U servicu");
+            console.log(payload);
+            const { data } = await this.getApiClient().post(
+                FINALPOINTS.EDIT_ROOM,
+                payload
+            );
+            const response = data;
+            return { response };
+        } catch (error) {
+            const response = error.response.data;
             return {response};
         }
     };

@@ -1,6 +1,7 @@
 package clinic.centersystem.service;
 
 import clinic.centersystem.converter.RoomRequestConverter;
+import clinic.centersystem.dto.request.RoomEditReqDTO;
 import clinic.centersystem.dto.request.RoomReqDTO;
 import clinic.centersystem.dto.request.RoomSearchDTO;
 import clinic.centersystem.dto.request.RoomSearchWithoutFiltratingReqDTO;
@@ -135,6 +136,14 @@ public class RoomServiceImpl implements RoomService {
         room.setReserved(false);
         roomRepository.save(room);
         return "Successfully added room";
+    }
+
+    public String editRoom(RoomEditReqDTO roomEditReqDTO){
+        Room room = this.findById(roomEditReqDTO.getId());
+        room.setName(roomEditReqDTO.getName());
+        room.setRoomNum(roomEditReqDTO.getRoomNum());
+        roomRepository.save(room);
+        return "Successfully edited room";
     }
 
 }

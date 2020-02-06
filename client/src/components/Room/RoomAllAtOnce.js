@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Table, Button, Col, Form, Modal, Spinner, Pagination, PageItem } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { roomsDataSelector, isFetchRoomsSelector, pageCountSelector } from '../../store/rooms/selectors'
-import { fetchRoomsData, searchRooms,addRoom } from '../../store/rooms/actions';
+import { fetchRoomsData, searchRooms,addRoom, editRoom } from '../../store/rooms/actions';
 
 const RoomAllAtOnce = ({ match }) => {
     const dispatch = useDispatch();
@@ -14,6 +14,7 @@ const RoomAllAtOnce = ({ match }) => {
     const [name, setName] = useState('');
     const [roomNum, setRoomNum] = useState(0);
     const [type, setType] = useState('');
+    const [roomId, setRoomId] = useState(0);
 
     const handleDelitingRooms = () => {
     };
@@ -26,9 +27,22 @@ const RoomAllAtOnce = ({ match }) => {
 
     const handelAddRoom = () => {
         dispatch(
-            addRoom({name,roomNum, type, clinicId, pageCnt})
+            addRoom({roomId,name,roomNum, type, clinicId, pageCnt})
         );
         setShow2rAdd(false);
+    }
+    const handleEditShow  = (room)=>{
+        setName(room.name);
+        setRoomNum(room.roomNum);
+        setRoomId(room.id);
+        setShow1rEdit(true);
+    }
+
+    const handleEdit = () => {
+        dispatch(
+            editRoom({id:roomId, name, roomNum, clinicId, pageCnt})
+        )
+        setShow1rEdit(false);
     }
 
     useEffect(() => {
@@ -89,7 +103,7 @@ const RoomAllAtOnce = ({ match }) => {
 
     return (
         <>
-            <Modal show={show1rEdit} onHide={handleClose1rEdit} animation={false}>
+            <Modal show={show1rEdit} onHide={handleEdit} animation={false}>
                 <Modal.Header closeButton>
                     <Modal.Title>Edit data:</Modal.Title>
                 </Modal.Header>
@@ -98,19 +112,21 @@ const RoomAllAtOnce = ({ match }) => {
                         <Form.Group as={Row}>
                             <Form.Label>Enter name of the room:</Form.Label>
                             <Col>
-                                <Form.Control type="text" placeholder="Name " />
+                                <Form.Control type="text" value = {name}  placeholder="Name " onChange={({ currentTarget }) => {
+                                setName(currentTarget.value);}} />
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row}>
                             <Form.Label>Enter number of the room:</Form.Label>
                             <Col>
-                                <Form.Control type="text" placeholder="Number " />
+                                <Form.Control type="number" value = {roomNum} placeholder="Number " onChange={({ currentTarget }) => {
+                                setRoomNum(currentTarget.value);}}/>
                             </Col>
                         </Form.Group>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" onClick={handleClose1rEdit}>
+                    <Button variant="primary" onClick={handleEdit}>
                         Edit
           </Button>
                 </Modal.Footer>
@@ -210,7 +226,7 @@ const RoomAllAtOnce = ({ match }) => {
                                                 <td>{room.name}</td>
                                                 <td>{room.roomNum}</td>
                                                 <td>
-                                                    <Button onClick={handleShow1rEdit}>Edit</Button>
+                                                    <Button onClick={()=>{handleEditShow(room)}}>Edit</Button>
                                                 </td>
                                                 <td>
                                                     <Button onClick={handleDelitingRooms}>Delete</Button>
