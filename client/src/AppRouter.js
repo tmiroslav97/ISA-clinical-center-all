@@ -40,6 +40,7 @@ import DoctorSearch from './components/Doctor/DoctorSearch';
 import History from './components/Patient/History';
 import RewritePrescription from './components/Prescriptions/RewritePrescription';
 import PatientList from './components/Patient/PatientList';
+import DoctorMedicalReport from './components/MedicalReport/DoctorMedicalReport';
 
 const AppRouter = () => {
     return (
@@ -70,6 +71,7 @@ const AppRouter = () => {
             <PrivateRoute exact path="/pat/history" component={History} accessRole={["ROLE_PATIENT"]} />
             <PrivateRoute exact path="/pat" component={PatientHomePage} accessRole={["ROLE_PATIENT"]} />
 
+            <PrivateRoute exact path="/doc/med-reps" component={DoctorMedicalReport} accessRole={["ROLE_DOCTOR"]} />
             <PrivateRoute exact path="/doc/pat-list" component={PatientList} accessRole={["ROLE_DOCTOR"]} />
             <PrivateRoute exact path="/doc/app-info" component={AppointmentInfo} accessRole={["ROLE_DOCTOR"]} />
             <PrivateRoute exact path="/doc/bok-doc" component={BookingDoc} accessRole={["ROLE_DOCTOR"]} />

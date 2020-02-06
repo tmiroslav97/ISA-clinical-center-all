@@ -94,6 +94,17 @@ const DoctorHomePage = () => {
                         </Card.Body>
                     </Card>
                 </Col>
+                <Col md={{ span: 3 }} xs={12}>
+                    <Card style={{ width: '18rem' }}>
+                        <Card.Body>
+                            <Card.Title>Medical reports</Card.Title>
+                            <Card.Text>
+                                You can edit medical reports
+                            </Card.Text>
+                            <Button variant="primary" onClick={() => { history.push('/doc/med-reps'); }}>Edit</Button>
+                        </Card.Body>
+                    </Card>
+                </Col>
             </Row>
         </Container>
     );

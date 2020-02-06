@@ -11,6 +11,7 @@ import clinic.centersystem.service.intf.RoomCalendarService;
 import clinic.centersystem.service.intf.RoomService;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
+import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +56,7 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public List<Room> findByClinicIdAndType(Long id, String type) {
-        return roomRepository.findAllByClinicIdAndType(id,type);
+        return roomRepository.findAllByClinicIdAndType(id, type);
     }
 
     @Override
@@ -79,33 +80,37 @@ public class RoomServiceImpl implements RoomService {
         roomResponseTerminPageDTO.setRooms(roomResponseTerminDTO);
         roomResponseTerminPageDTO.setPageCount(rooms.getTotalPages());
 
+        DateTime now = new DateTime(LocalDate.now().toString(), DateTimeZone.UTC);
         for (Room room : rooms.getContent()) {
             RoomResponseTerminDTO rrtDTO = new RoomResponseTerminDTO();
             rrtDTO.setRoom(room);
             rrtDTO.setDate(dtf.print(dt));
             rrtDTO.setTermins(roomCalendarService.findByRoomAndDate(room.getId(), dt));
             roomResponseTerminDTO.add(rrtDTO);
-            if (rrtDTO.getTermins().size() == 4) {
-                boolean flag = true;
-                while (flag) {
-                    dt = dt.plusDays(1);
-                    List<Integer> termins = roomCalendarService.findByRoomAndDate(room.getId(), dt);
+            now = new DateTime(LocalDate.now().toString(), DateTimeZone.UTC);
+            boolean flag = true;
+            while (flag) {
+                now = now.plusDays(1);
+                List<Integer> termins = roomCalendarService.findByRoomAndDate(room.getId(), now);
+                if (room.getType().equals("SUR")) {
                     for (int i = 7; i <= 16; i += 3) {
                         if (!termins.contains(i)) {
-                            rrtDTO.setFirstFreeTermin(dtf.print(dt) + " " + String.valueOf(i) + "-" + String.valueOf(i + 3));
+                            rrtDTO.setFirstFreeTermin(dtf.print(now) + " " + i + "-" + (i + 3));
+                            flag = false;
+                            break;
+                        }
+                    }
+                } else {
+                    for (int i = 7; i <= 18; i++) {
+                        if (!termins.contains(i)) {
+                            rrtDTO.setFirstFreeTermin(dtf.print(now) + " " + i + "-" + (i + 1));
                             flag = false;
                             break;
                         }
                     }
                 }
-            } else {
-                for (int i = 7; i <= 16; i += 3) {
-                    if (!rrtDTO.getTermins().contains(i)) {
-                        rrtDTO.setFirstFreeTermin(dtf.print(dt) + " " + String.valueOf(i) + "-" + String.valueOf(i + 3));
-                        break;
-                    }
-                }
             }
+
         }
 
         return roomResponseTerminPageDTO;
