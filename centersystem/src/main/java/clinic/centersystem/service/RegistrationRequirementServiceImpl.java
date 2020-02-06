@@ -97,7 +97,7 @@ public class RegistrationRequirementServiceImpl implements RegistrationRequireme
 
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public String rejectRegistrationRequest(Long id, String message) {
+    public int rejectRegistrationRequest(Long id, String message) {
         RegistrationRequirement req = this.findById(id);
 
         if (userService.existsByEmail(req.getEmail())) {
@@ -105,12 +105,17 @@ public class RegistrationRequirementServiceImpl implements RegistrationRequireme
             throw new ResourceExistsException("User with email " + req.getEmail() + " already exists");
         }
 
+        String check = message.trim();
+        if(check.equals("")){
+            return 1;
+        }
+
         String subject = "Account registration";
         registrationRequirementRepository.deleteById(id);
 
-        emailService.sendMailTo(req.getEmail(), subject, message);
+        emailService.sendMailTo(req.getEmail(), subject, message.trim());
 
-        return "Patient registration rejected";
+        return 2;
     }
 
     @Override

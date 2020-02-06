@@ -43,12 +43,19 @@ public class RegistrationRequirementController {
     @RequestMapping(method = POST, value = "/approve/{reqId}")
     @PreAuthorize("hasRole('CCADMIN')")
     public ResponseEntity<String> approveRegistrationRequest(@PathVariable Long reqId) {
-        return new ResponseEntity<>(this.registrationRequirementService.approveRegistrationRequest(reqId), HttpStatus.OK);
+        return new ResponseEntity<>(registrationRequirementService.approveRegistrationRequest(reqId), HttpStatus.OK);
     }
 
     @RequestMapping(method = POST, value = "/reject/{reqId}/{msg}")
     @PreAuthorize("hasRole('CCADMIN')")
     public ResponseEntity<String> rejectRegistrationRequest(@PathVariable Long reqId, @PathVariable String msg) {
-        return new ResponseEntity<>(this.registrationRequirementService.rejectRegistrationRequest(reqId, msg), HttpStatus.OK);
+        int flag = registrationRequirementService.rejectRegistrationRequest(reqId, msg);
+
+        if (flag == 1) {
+            return new ResponseEntity<>("Missing message", HttpStatus.BAD_REQUEST);
+        } else {
+            return new ResponseEntity<>("Patient registration rejected", HttpStatus.OK);
+        }
+
     }
 }
