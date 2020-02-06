@@ -2,6 +2,7 @@ package clinic.centersystem.service.intf;
 
 import clinic.centersystem.dto.request.SurgeryReservationReqDTO;
 import clinic.centersystem.dto.response.SurgeryRequirementResponseDTO;
+import clinic.centersystem.model.Patient;
 import clinic.centersystem.model.SurgeryRequirement;
 
 import java.util.List;

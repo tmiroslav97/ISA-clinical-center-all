@@ -13,4 +13,6 @@ public interface CalendarService {
     Calendar save(Calendar calendar);
 
     Long findCalendarIdByPersonnelId(Long id);
+
+    Calendar findOneById(Long id);
 }

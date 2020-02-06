@@ -105,24 +105,24 @@ INSERT INTO patient (address, city, country, is_activated, phone_num, unoip, id)
 VALUES ('Masarikova', 'Novi Sad', 'Srbija', true, '065312532', '4351233', 6);
 
 INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
-                                      phone_num, unoip)
+                                      phone_num, unoip,version)
 VALUES ('Safarikova 31', 'Bijeljina', 'Bosna', 'miroslavtomic@outlook.com', 'Miki', 'Peric', '123', '123', '065987654',
-        '1234543');
+        '1234543',0);
 
 INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
-                                      phone_num, unoip)
+                                      phone_num, unoip,version)
 VALUES ('Safarikova 16', 'Bijeljina', 'Bosna', 'roncevic1996@gmail.com', 'Jovica', 'Roncevic', '321', '321', '345435345',
-        '432132');
+        '432132',0);
 
 INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
-                                      phone_num, unoip)
+                                      phone_num, unoip,version)
 VALUES ('Safarikova 16', 'Bijeljina', 'Bosna', 'roncevic1996@gmail.com', 'Jovica', 'Roncevic', '321', '321', '345435345',
-        '432132');
+        '432132',0);
 
 INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
-                                      phone_num, unoip)
+                                      phone_num, unoip,version)
 VALUES ('Safarikova 16', 'Bijeljina', 'Bosna', 'roncevic1996@gmail.com', 'Jovica', 'Roncevic', '321', '321', '345435345',
-        '432132');
+        '432132',0);
 
 INSERT INTO clinic_patients(clinic_id, patients_id)
 VALUES (1, 2);
@@ -149,9 +149,9 @@ INSERT INTO roomcalendar(date, termin, room_id) VALUES ('2020-01-23',7,1);
 
 
 
-INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id,patient_name,doctor_name)VALUES ('2020-01-23',7,1,2,3, 'Jovana Lakic','Nevena Djukin');
-INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id,patient_name,doctor_name)VALUES ('2020-01-31',10,1,2,3,'Jovana Lakic','Nevena Djukin');
-INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id,patient_name,doctor_name)VALUES ('2020-01-25',13,1,2,3,'Jovana Lakic','Nevena Djukin');
+INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id,patient_name,doctor_name,version)VALUES ('2020-01-23',7,1,2,3, 'Jovana Lakic','Nevena Djukin',0);
+INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id,patient_name,doctor_name,version)VALUES ('2020-01-31',10,1,2,3,'Jovana Lakic','Nevena Djukin',0);
+INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id,patient_name,doctor_name,version)VALUES ('2020-01-25',13,1,2,3,'Jovana Lakic','Nevena Djukin',0);
 
 INSERT INTO appointment_type(id, type, clinic_id) VALUES (1,'General examination',1);
 INSERT INTO appointment_type(id, type, clinic_id) VALUES (2,'Heart examination',1);
@@ -175,13 +175,13 @@ INSERT INTO calendar(id, personnel_id)
 VALUES (2, 3);
 
 INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type,typeid)
-VALUES ('2020-02-04 11:00:00', '2020-02-04 09:00:00', 'First examination', 'N', 3, 2,'APP',1);
+VALUES ('2020-02-05 10:00:00', '2020-02-05 09:00:00', 'First examination', 'N', 3, 2,'APP',1);
 
 INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type,typeid)
-VALUES ('2020-02-05 12:00:00', '2020-02-05 11:00:00', 'Second examination', 'N', 4, 2,'APP',2);
+VALUES ('2020-02-06 11:00:00', '2020-02-06 10:00:00', 'Second examination', 'N', 4, 2,'APP',2);
 
 INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type,typeid)
-VALUES ('2020-02-05 14:00:00', '2020-02-05 12:00:00', 'Third examination', 'N', 5, 2,'APP',3);
+VALUES ('2020-02-06 12:00:00', '2020-02-06 11:00:00', 'Third examination', 'N', 5, 2,'APP',3);
 
 
 UPDATE personnel

@@ -20,6 +20,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -68,6 +70,7 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
         return surgeryRequirementRepository.findAll();
     }
 
+
     @Override
     public SurgeryRequirementResponseDTO findByClinicId(Long clinicId, Integer pageCnt) {
         Pageable pageable = PageRequest.of(pageCnt, 10);
@@ -81,6 +84,7 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public int reserveRoomForSurgery(SurgeryReservationReqDTO surgeryReservationReqDTO) {
         String pickedDateStr = surgeryReservationReqDTO.getPickedTerm().split(" ")[0];
         String pickedTermsStr[] = (surgeryReservationReqDTO.getPickedTerm().split(" ")[1]).split("-");
@@ -94,7 +98,7 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
         DateTime pickedDateEnd = new DateTime(pickedDateStr, DateTimeZone.UTC);
         pickedDateEnd = pickedDateEnd.plusHours(pickedTermEnd);
 
-        Room roomCheck = roomService.findById(surgeryReservationReqDTO.getPickedRoom());
+        Room roomCheck = roomService.findOneById(surgeryReservationReqDTO.getPickedRoom());
         if (!roomCheck.getType().equals("SUR")) {
             return 4;
         }
@@ -116,7 +120,7 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
         for (Long docId : surgeryReservationReqDTO.getChosenDoc()) {
             doctor = doctorService.findById(Long.valueOf(docId));
 
-            if (pickedTermStart < doctor.getStartTime() && doctor.getEndTime() < pickedTermEnd) {
+            if (!(doctor.getStartTime() <= pickedTermStart && doctor.getEndTime() >= pickedTermEnd)) {
                 //doktor ne moze da prisustvuje operaciji jer operacija nije u sklopu radnog vremena
                 continue;
             }
@@ -126,8 +130,8 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
                 avDoctors = true;
                 //doktor ima slobodnih termina unjeti mu u kalendar sta treba
                 if (surgery == null) {
-                    patient = patientService.findById(surgeryReservationReqDTO.getPickedSurReq().getPatientId());
-                    room = roomService.findById(surgeryReservationReqDTO.getPickedRoom());
+                    patient = patientService.findOneById(surgeryReservationReqDTO.getPickedSurReq().getPatientId());
+                    room = roomService.findOneById(surgeryReservationReqDTO.getPickedRoom());
                     RoomCalendar roomCalendar = RoomCalendar.builder()
                             .date(pickedDate)
                             .room(room)
@@ -142,7 +146,7 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
                             .build();
                     surgeryService.save(surgery);
                 }
-                Calendar calendar = calendarService.findById(calendarId);
+                Calendar calendar = calendarService.findOneById(calendarId);
                 CalendarItem calendarItem = CalendarItem.builder()
                         .start(pickedDateStart)
                         .end(pickedDateEnd)

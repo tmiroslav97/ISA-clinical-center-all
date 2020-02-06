@@ -135,7 +135,7 @@ const RoomSearch = ({ match }) => {
                         }} >
                             <option value=""></option>
                             <option value="SUR">type: surgery</option>
-                            <option value="EXE">type: exemination</option>
+                            <option value="APP">type: exemination</option>
                         </Form.Control>
                     </Form>
                 </Col>
