@@ -104,8 +104,6 @@ class RoomService extends HttpClient {
 
     editRoom = async payload => {
         try {
-            console.log("U servicu");
-            console.log(payload);
             const { data } = await this.getApiClient().post(
                 FINALPOINTS.EDIT_ROOM,
                 payload
