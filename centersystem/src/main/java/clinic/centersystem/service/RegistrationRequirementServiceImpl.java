@@ -45,7 +45,7 @@ public class RegistrationRequirementServiceImpl implements RegistrationRequireme
 
     @Override
     public RegistrationRequirement findById(Long id) {
-        return this.registrationRequirementRepository.findById(id).orElseThrow(RegistrationRequirementNotFoundException::new);
+        return this.registrationRequirementRepository.findById(id).orElseThrow(()-> new RegistrationRequirementNotFoundException("Registration requirement not found"));
     }
 
     @Override

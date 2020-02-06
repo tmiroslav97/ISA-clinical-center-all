@@ -124,6 +124,11 @@ INSERT INTO registration_requirement (address, city, country, email, first_name,
 VALUES ('Safarikova 16', 'Bijeljina', 'Bosna', 'roncevic1996@gmail.com', 'Jovica', 'Roncevic', '321', '321', '345435345',
         '432132',0);
 
+INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
+                                      phone_num, unoip,version)
+VALUES ('Safarikova 31', 'Bijeljina', 'Bosna', 'tomic.miroslav97@gmail.com', 'Miroslav', 'Tomic', '123', '123', '345435345',
+        '432132',0);
+
 INSERT INTO clinic_patients(clinic_id, patients_id)
 VALUES (1, 2);
 

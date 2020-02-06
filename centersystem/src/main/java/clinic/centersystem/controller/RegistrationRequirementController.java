@@ -21,10 +21,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 @RequestMapping(value = "/reg", produces = MediaType.APPLICATION_JSON_VALUE)
-public class RegistrationRequirementControler {
+public class RegistrationRequirementController {
     private final RegistrationRequirementServiceImpl registrationRequirementService;
 
-    public RegistrationRequirementControler(RegistrationRequirementServiceImpl registrationRequirementService) {
+    public RegistrationRequirementController(RegistrationRequirementServiceImpl registrationRequirementService) {
         this.registrationRequirementService = registrationRequirementService;
     }
 

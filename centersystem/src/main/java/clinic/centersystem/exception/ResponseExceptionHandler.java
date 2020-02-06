@@ -36,8 +36,7 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = {RegistrationRequirementNotFoundException.class})
     protected ResponseEntity<Object> handleRegistrationRequirementNotFoundException(RuntimeException ex, WebRequest request) {
-        String bodyOfResponse = "Registration requirement not found";
-        return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+        return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
     @ExceptionHandler(value = {UsernameNotFoundException.class})
