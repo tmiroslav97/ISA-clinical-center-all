@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping(value = "/med-rec", produces = MediaType.APPLICATION_JSON_VALUE)
 public class MedicalRecordController {
 
@@ -30,7 +31,7 @@ public class MedicalRecordController {
         return new ResponseEntity<>(this.medicalRecordService.findByAppId(id), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/edit", method = RequestMethod.PUT)
     public ResponseEntity<String> editMedicalRecord(@RequestBody MedicalRecordRequestDTO medicalRecordRequestDTO) {
         return new ResponseEntity<>(this.medicalRecordService.editMedicalRecord(medicalRecordRequestDTO), HttpStatus.OK);
     }

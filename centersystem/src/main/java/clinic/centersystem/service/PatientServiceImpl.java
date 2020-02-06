@@ -20,6 +20,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -53,6 +55,7 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public Patient save(RegistrationRequirement registrationRequirement) {
         Patient patient = PatientConverter.toCreatePatientFromRequest(registrationRequirement);
         List<Authority> auths = this.authorityService.findByName("ROLE_PATIENT");

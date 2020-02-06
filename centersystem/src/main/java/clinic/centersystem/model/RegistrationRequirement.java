@@ -53,5 +53,7 @@ public class RegistrationRequirement {
     @Column(name = DbColumnConstants.UNOIP, nullable = false)
     private String unoip;
 
+    @Version
+    private Long version;
 
 }
