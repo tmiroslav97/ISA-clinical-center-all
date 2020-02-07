@@ -27,7 +27,7 @@ public class RegistrationRequirementRepositoryUnitTest {
     private RegistrationRequirementRepository registrationRequirementRepository;
 
     private static final Long VALID_ID = 1L;
-    private static final Long NOT_VALID_ID = 5L;
+    private static final Long NOT_VALID_ID = 15L;
     private static final String ADDRESS_VALID = "Safarikova 31";
     private static final String CITY_VALID = "Bijeljina";
     private static final String COUNTRY_VALID = "Bosna";

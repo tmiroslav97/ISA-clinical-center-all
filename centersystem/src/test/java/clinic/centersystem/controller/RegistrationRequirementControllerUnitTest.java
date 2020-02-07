@@ -10,7 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -20,11 +19,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.util.UriComponentsBuilder;
-
-import javax.annotation.PostConstruct;
-
-
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
@@ -47,9 +41,7 @@ public class RegistrationRequirementControllerUnitTest {
     private static final String REJECT_EDNPOINT_REG_REQ_NOT_EXISTS = "/reg/reject/50/Not enough information";
     private static final String APPROVE_ENDPOINT_USER_NOT_EXISTS = "/reg/approve/1";
     private static final String REJECT_ENDPOINT_USER_NOT_EXISTS = "/reg/reject/1/Not enough information";
-    private static final String REJECT_ENDPOINT_MESSAGE_MISSING = "/reg/reject/1/ ";
     private static final String MESSAGE = "Not enough information";
-    private static final String MESSAGE_EMPTY = "";
     private static final Long VALID_ID = 1L;
     private static final Long USER_EXISTS_ID = 4L;
     private static final Long NOT_VALID_ID = 50L;

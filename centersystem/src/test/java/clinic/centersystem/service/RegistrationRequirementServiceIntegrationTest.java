@@ -2,10 +2,6 @@ package clinic.centersystem.service;
 
 import clinic.centersystem.exception.RegistrationRequirementNotFoundException;
 import clinic.centersystem.exception.ResourceExistsException;
-import clinic.centersystem.model.Authority;
-import clinic.centersystem.model.MedicalRecord;
-import clinic.centersystem.model.Patient;
-import clinic.centersystem.model.RegistrationRequirement;
 import clinic.centersystem.repository.RegistrationRequirementRepository;
 import clinic.centersystem.service.intf.RegistrationRequirementService;
 import org.junit.Test;
@@ -13,22 +9,16 @@ import org.junit.jupiter.api.Order;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
 @TestPropertySource("classpath:application-test.properties")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Transactional
 public class RegistrationRequirementServiceIntegrationTest {
 
     @Autowired
@@ -88,7 +78,7 @@ public class RegistrationRequirementServiceIntegrationTest {
     public void approveRegistrationRequestShouldReturnSuccMsg() {
         int size = registrationRequirementRepository.findAll().size();
 
-        String succcMsg = registrationRequirementService.approveRegistrationRequest(1L);
+        String succcMsg = registrationRequirementService.approveRegistrationRequest(5L);
         assertEquals("Patient registration approved", succcMsg);
 
         assertEquals(size - 1, registrationRequirementRepository.findAll().size());
@@ -97,7 +87,7 @@ public class RegistrationRequirementServiceIntegrationTest {
     @Test
     @Order(6)
     public void rejectRegistrationRequestShouldReturnErrorMsg() {
-        int flag = registrationRequirementService.rejectRegistrationRequest(3L, "");
+        int flag = registrationRequirementService.rejectRegistrationRequest(6L, "");
         assertEquals(1, flag);
     }
 
@@ -106,7 +96,7 @@ public class RegistrationRequirementServiceIntegrationTest {
     public void rejectRegistrationRequestShouldReturnSuccMsg() {
         int size = registrationRequirementRepository.findAll().size();
 
-        int flag = registrationRequirementService.rejectRegistrationRequest(2L, "Rejected");
+        int flag = registrationRequirementService.rejectRegistrationRequest(3L, "Rejected");
         assertEquals(2, flag);
         assertEquals(size - 1, registrationRequirementRepository.findAll().size());
     }

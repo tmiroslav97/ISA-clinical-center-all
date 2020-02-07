@@ -45,11 +45,8 @@ public class RegistrationRequirementServiceUnitTest {
     @Autowired
     private RegistrationRequirementService registrationRequirementService;
 
-    private static final Long USER_EXISTS_ID = 1L;
     private static final String USER_EXISTS_EMAIL = "tomic.miroslav97@gmail.com";
-    private static final Long REG_REQ_EXISTS_USER = 4L;
     private static final Long REG_REQ_NOT_VALID = 15L;
-    private static final Long REG_REQ_VALID = 1L;
     private static final String MESSAGE = "Not enough information";
     private static final Long REG_REQ_ID_VALID = 4L;
     private static final String ADDRESS_VALID = "Safarikova 31";
