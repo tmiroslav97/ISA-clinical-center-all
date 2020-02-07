@@ -4,13 +4,12 @@ import clinic.centersystem.converter.DoctorConverter;
 import clinic.centersystem.dto.request.DoctorRequestDTO;
 import clinic.centersystem.dto.response.ClinicResponse;
 import clinic.centersystem.dto.response.DoctorResponse;
-import clinic.centersystem.model.Authority;
-import clinic.centersystem.model.Clinic;
-import clinic.centersystem.model.ClinicAdmin;
-import clinic.centersystem.model.Doctor;
+import clinic.centersystem.model.*;
 import clinic.centersystem.repository.ClinicRepository;
 import clinic.centersystem.repository.DoctorRepository;
+import clinic.centersystem.service.intf.AppointmentService;
 import clinic.centersystem.service.intf.AuthorityService;
+import clinic.centersystem.service.intf.ClinicService;
 import clinic.centersystem.service.intf.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,7 +26,10 @@ public class DoctorServiceImpl implements DoctorService {
     private DoctorRepository doctorRepository;
 
     @Autowired
-    private ClinicRepository clinicRepository;
+    private ClinicService clinicService;
+
+    @Autowired
+    private AppointmentService appointmentService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -112,14 +114,34 @@ public class DoctorServiceImpl implements DoctorService {
         return listDoctors;
     }
 
-    public String addDoctorOnClinic(Doctor doctor, Long id){
-        doctor.setPassword(passwordEncoder.encode(doctor.getPassword()));
-        Clinic clinic  = this.clinicRepository.getOne(id);
+    public String addDoctorOnClinic(DoctorRequestDTO doctorRequestDTO, Long id){
+        Doctor doctor = DoctorConverter.toCreateDoctorFromDoctorRequest(doctorRequestDTO);
+        doctor.setEmail(doctorRequestDTO.getEmail());
+        if(doctorRequestDTO.getPassword1().equals(doctorRequestDTO.getPassword2())){
+            doctor.setPassword(doctorRequestDTO.getPassword1());
+        }else{
+            return "Password wasn't confirmed";
+        }
+        doctor.setFirstName(doctorRequestDTO.getFirstName());
+        doctor.setLastName(doctorRequestDTO.getLastName());
+        doctor.setStartTime(doctorRequestDTO.getStartTime());
+        doctor.setEndTime(doctorRequestDTO.getEndTime());
+        Clinic clinic  = this.clinicService.findById(id);
         doctor.setClinic(clinic);
         List<Authority> auths = this.authorityService.findByName("ROLE_DOCTOR");
         doctor.setAuthorities(auths);
-        Doctor doc = this.save(doctor);
+        doctor.setFirstLog(true);
+        doctorRepository.save(doctor);
         return "Successfully added doctor on clinic";
+    }
+
+    public  String deleteDoctor (Long doctorId){
+        if(appointmentService.existsByDoctorId(doctorId)){
+            return "Can't delete doctor, beacause he has appointment";
+        }else {
+            doctorRepository.deleteById(doctorId);
+            return  "Successfully deleted doctor";
+        }
     }
 
     public String addDoctor(DoctorRequestDTO doctorRequestDTO) {

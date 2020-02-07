@@ -3,15 +3,19 @@ import { format } from 'util';
 
 const FINALPOINTS = {
     FETCH_DOCTOR_DATA: '/doctor/%s',
-    ADD_DOCTOR: '/doctor/add-doctor',
+    ADD_DOCTOR: '/doctor/add-doctor-on-clinic/%s',
     FETCH_DOCTORS_DATA: '/doctor/doctors',
-    FETCH_DOCTORS_BY_CLINICID: '/doctor/all/%s'
+    FETCH_DOCTORS_BY_CLINICID: '/doctor/all/%s',
+    DELETE_DOCTOR: '/doctor/delete/%s'
 };
 
 class DoctorService extends HttpClient {
 
     fetchDoctorsByClinicId = async payload => {
         try {
+            console.log("fetch u service");
+            console.log(payload);
+            console.log(payload.clinicId);
             const { data } = await this.getApiClient().get(
                 format(FINALPOINTS.FETCH_DOCTORS_BY_CLINICID, payload.clinicId)
             );
@@ -34,17 +38,6 @@ class DoctorService extends HttpClient {
         }
     };
 
-    fetchDoctorsDataOnClinic = async payload => {
-            try {
-                const { data } = await this.getApiClient().get(
-                    format(FINALPOINTS.FETCH_DOCTORS_DATA_ON_CLINIC, payload.clinicId)
-                );
-    
-                return { data };
-            } catch (error) {
-                console.log(error.response.data);
-            }
-    };
 
     fetchDoctorsData = async payload => {
         try {
@@ -62,14 +55,19 @@ class DoctorService extends HttpClient {
 
     addDoctor = async payload => {
         try {
+            console.log("U service");
+            console.log(payload);
+            console.log(payload.clinicId);
             const { data } = await this.getApiClient().post(
-                FINALPOINTS.ADD_DOCTOR,
+                format(FINALPOINTS.ADD_DOCTOR, payload.clinicId),
                 payload
             );
 
-            return { data };
+            const response = data;
+            return { response };
         } catch (error) {
-            console.log(error.response.data);
+            const response = error.response;
+            return {response};
         }
     };
 
@@ -83,6 +81,24 @@ class DoctorService extends HttpClient {
             return { data };
         } catch (error) {
             console.log(error.response.data);
+        }
+    };
+
+    deleteDoctor = async payload => {
+        try {
+            console.log("U service")
+           console.log(payload);
+            const { data } = await this.getApiClient().post(
+                format(FINALPOINTS.DELETE_DOCTOR, payload.id),
+                payload
+            );
+            
+
+            const response = data;
+            return { response };
+        } catch (error) {
+            const response = error.response;
+            return {response};
         }
     };
 

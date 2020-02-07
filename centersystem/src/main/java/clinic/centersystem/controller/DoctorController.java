@@ -54,8 +54,13 @@ public class DoctorController {
     }
 
     @RequestMapping(method = POST, value="/add-doctor-on-clinic/{clinicId}")
-    public ResponseEntity<String>addDoctor(@RequestBody Doctor doctor, @PathVariable Long clinicId){
-        return new ResponseEntity<>(this.doctorService.addDoctorOnClinic(doctor, clinicId), HttpStatus.OK);
+    public ResponseEntity<String>addDoctor(@RequestBody DoctorRequestDTO doctorRequestDTO, @PathVariable Long clinicId){
+        return new ResponseEntity<>(this.doctorService.addDoctorOnClinic(doctorRequestDTO, clinicId), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = POST, value = "/delete/{doctorId}")
+    public ResponseEntity<String>deleteDoctor(@PathVariable Long doctorId){
+        return new ResponseEntity<>(this.doctorService.deleteDoctor(doctorId),HttpStatus.OK);
     }
 
     @RequestMapping(method = GET, value = "/all/{clinicId}")

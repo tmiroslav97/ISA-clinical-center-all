@@ -15,4 +15,6 @@ public interface AppointmentService {
     List<Appointment> findAllByDoctorIdAndAppState(Long id, AppStateEnum appState);
 
     AppointmentResponseDTO getById(Long id);
+
+    Boolean existsByDoctorId (Long id);
 }

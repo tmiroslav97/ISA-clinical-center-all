@@ -2,6 +2,7 @@ import {
     FETCH_DOCTORS_DATA,
     PUT_DOCTORS_DATA,
     ADD_DOCTOR,
+    DELETE_DOCTOR,
     PUT_IS_FETCH_DOCTORS_DATA,
     SEARCH_DOCTOR,
     PUT_PAGE_COUNT,
@@ -42,6 +43,11 @@ export const addDoctor = payload => ({
 
 export const searchDoctor = payload => ({
     type: SEARCH_DOCTOR,
+    payload
+});
+
+export const deleteDoctor = payload => ({
+    type: DELETE_DOCTOR,
     payload
 });
 

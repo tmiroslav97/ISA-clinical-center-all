@@ -6,6 +6,7 @@ import clinic.centersystem.model.Appointment;
 import clinic.centersystem.model.enumeration.AppStateEnum;
 import clinic.centersystem.repository.AppointmentRepository;
 import clinic.centersystem.service.intf.AppointmentService;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -33,6 +34,11 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     public List<Appointment> findAllByDoctorIdAndAppState(Long id, AppStateEnum appState) {
         return appointmentRepository.findAllByDoctorIdAndAppState(id, appState);
+    }
+
+    @Override
+    public Boolean existsByDoctorId (Long id){
+        return  appointmentRepository.existsByDoctorId(id);
     }
 
     @Override

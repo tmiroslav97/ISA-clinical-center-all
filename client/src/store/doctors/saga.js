@@ -6,6 +6,7 @@ import {
     FETCH_DOCTORS_DATA_ON_CLINIC,
     SEARCH_DOCTOR,
     FETCH_DOCTORS_BY_CLINICID,
+    DELETE_DOCTOR
 } from './constants';
 
 import DoctorService from '../../services/DoctorService';
@@ -16,6 +17,10 @@ import {
     putPageCount
 } from './actions';
 
+import {
+    putSuccessMsg,
+    putErrorMsg
+} from '../common/actions';
 
 export function* fetchDoctorsData() {
     const { payload } = yield take(FETCH_DOCTORS_DATA);
@@ -28,6 +33,8 @@ export function* fetchDoctorsData() {
 export function* fetchDoctorsByClinicId() {
     //eslint-disable-next-line
     const { payload } = yield take(FETCH_DOCTORS_BY_CLINICID);
+    console.log("Fetch podaci");
+    console.log(payload);
     yield put(putIsFetchDoctors(false));
     const { doctors } = yield call(DoctorService.fetchDoctorsByClinicId, payload);
     yield put(putDoctorsData(doctors));
@@ -36,12 +43,44 @@ export function* fetchDoctorsByClinicId() {
 
 export function* addDoctor() {
     const { payload } = yield take(ADD_DOCTOR);
-    yield put(putIsFetchDoctors(false));
-    //eslint-disable-next-line
-    const { data } = yield call(DoctorService.addDoctor, payload);
-    const { doctors } = yield call(DoctorService.fetchDoctorsData, {});
-    yield put(putDoctorsData(doctors));
-    yield put(putIsFetchDoctors(true));
+    console.log("U sagi");
+    console.log(payload);
+    const {response} = yield call(DoctorService.addDoctor, payload);
+    if(response==='Successfully added doctor on clinic'){
+        yield put(putSuccessMsg(response));
+        yield put(putSuccessMsg(null));
+        yield put(putIsFetchDoctors(false));
+        console.log("U sagi 2");
+        console.log(payload);
+        const { data } = yield call(DoctorService.fetchDoctorsByClinicId, payload);
+        console.log("greska ");
+        console.log(data);
+        yield put(putDoctorsData(data.doctors));
+        yield put(putIsFetchDoctors(true));
+    } else {
+        yield put(putErrorMsg(response));
+        yield put(putErrorMsg(null));
+    }
+}
+
+export function* deleteDoctor() {
+    const { payload } = yield take(DELETE_DOCTOR);
+    console.log("U sagi");
+    console.log(payload);
+    const { response } = yield call(DoctorService.deleteDoctor, payload);
+    console.log(response);
+    if(response === 'Successfully deleted doctor'){
+        yield put(putSuccessMsg(response));
+        yield put(putSuccessMsg(null));
+        yield put(putIsFetchDoctors(false));
+        yield put(putIsFetchDoctors(false));
+        const { data } = yield call(DoctorService.fetchDoctorsByClinicId, payload);
+        yield put(putDoctorsData(data));
+        yield put(putIsFetchDoctors(true));
+    }else {
+        yield put(putErrorMsg(response));
+        yield put(putErrorMsg(null));
+    }
 }
 
 export function* searchDoctor() {
