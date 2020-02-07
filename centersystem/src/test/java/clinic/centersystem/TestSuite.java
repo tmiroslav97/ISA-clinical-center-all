@@ -11,4 +11,5 @@ import org.springframework.test.context.TestPropertySource;
 @Suite.SuiteClasses({RegistrationRequirementControllerUnitTest.class, RegistrationRequirementServiceUnitTest.class})
 public class TestSuite {
 
+
 }

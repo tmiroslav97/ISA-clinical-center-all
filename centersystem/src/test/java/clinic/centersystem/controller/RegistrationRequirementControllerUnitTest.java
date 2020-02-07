@@ -25,14 +25,13 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.annotation.PostConstruct;
 
 
-import java.net.URI;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
 @TestPropertySource("classpath:application-test.properties")
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class RegistrationRequirementControllerUnitTest {
 
     @Autowired
@@ -43,22 +42,27 @@ public class RegistrationRequirementControllerUnitTest {
 
     private String accessToken;
     private static final String APPROVE_ENDPOINT_USER_EXISTS = "/reg/approve/1";
-    private static final String REJECT_ENDPOINT_USER_EXISTS = "/reg/reject/1/Nout enough information";
+    private static final String REJECT_ENDPOINT_USER_EXISTS = "/reg/reject/1/Not enough information";
     private static final String APPROVE_EDNPOINT_REG_REQ_NOT_EXISTS = "/reg/approve/50";
-    private static final String REJECT_EDNPOINT_REG_REQ_NOT_EXISTS = "/reg/reject/50/Nout enough information";
+    private static final String REJECT_EDNPOINT_REG_REQ_NOT_EXISTS = "/reg/reject/50/Not enough information";
     private static final String APPROVE_ENDPOINT_USER_NOT_EXISTS = "/reg/approve/1";
     private static final String REJECT_ENDPOINT_USER_NOT_EXISTS = "/reg/reject/1/Not enough information";
-    private static final String REJECT_ENDPOINT_MESSAGE_MISSING = "/reg/reject/4/ ";
+    private static final String REJECT_ENDPOINT_MESSAGE_MISSING = "/reg/reject/1/ ";
+    private static final String MESSAGE = "Not enough information";
+    private static final String MESSAGE_EMPTY = "";
+    private static final Long VALID_ID = 1L;
+    private static final Long USER_EXISTS_ID = 1L;
+    private static final Long NOT_VALID_ID = 50L;
 
-    @PostConstruct
+    @Before
     public void login() {
         ResponseEntity<LoginUserResponse> responseEntity = testRestTemplate.postForEntity("/sec/login", new JwtAuthenticationRequest("tomic.miroslav97@gmail.com", "123"), LoginUserResponse.class);
         accessToken = "Bearer " + responseEntity.getBody().getToken();
     }
 
     @Test
-    public void rejectRegistrationRequestShouldReturnOKWhenRegistrationRequirementNotFoundExceptionIsThrown() {
-        when(registrationRequirementServiceMock.rejectRegistrationRequest(Long.valueOf(50), "Nout enough information")).thenThrow(RegistrationRequirementNotFoundException.class);
+    public void rejectRegistrationRequestShouldReturnNotFoundWhenRegistrationRequirementNotFoundExceptionIsThrown() {
+        when(registrationRequirementServiceMock.rejectRegistrationRequest(NOT_VALID_ID, MESSAGE)).thenThrow(RegistrationRequirementNotFoundException.class);
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", accessToken);
@@ -75,7 +79,7 @@ public class RegistrationRequirementControllerUnitTest {
 
     @Test
     public void approveRegistrationRequestShouldReturnNotFoundWhenRegistrationRequirementNotFoundExceptionIsThrown() {
-        when(registrationRequirementServiceMock.approveRegistrationRequest(Long.valueOf(50))).thenThrow(RegistrationRequirementNotFoundException.class);
+        when(registrationRequirementServiceMock.approveRegistrationRequest(NOT_VALID_ID)).thenThrow(RegistrationRequirementNotFoundException.class);
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", accessToken);
@@ -91,7 +95,7 @@ public class RegistrationRequirementControllerUnitTest {
 
     @Test
     public void rejectRegistrationRequestShouldReturnBadRequestWhenResourceExistsExceptionIsThrown() {
-        when(registrationRequirementServiceMock.rejectRegistrationRequest(Long.valueOf(1), "Nout enough information")).thenThrow(ResourceExistsException.class);
+        when(registrationRequirementServiceMock.rejectRegistrationRequest(USER_EXISTS_ID, MESSAGE)).thenThrow(ResourceExistsException.class);
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", accessToken);
@@ -107,7 +111,7 @@ public class RegistrationRequirementControllerUnitTest {
 
     @Test
     public void approveRegistrationRequestShouldReturnBadRequestWhenResourceExistsExceptionIsThrown() {
-        when(registrationRequirementServiceMock.approveRegistrationRequest(Long.valueOf(1))).thenThrow(ResourceExistsException.class);
+        when(registrationRequirementServiceMock.approveRegistrationRequest(USER_EXISTS_ID)).thenThrow(ResourceExistsException.class);
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", accessToken);
@@ -123,7 +127,7 @@ public class RegistrationRequirementControllerUnitTest {
 
     @Test
     public void approveRegistrationRequestShouldReturnOKAndSuccMsgWhenRegistrationRequirementIsApproved() {
-        when(registrationRequirementServiceMock.approveRegistrationRequest(Long.valueOf(1))).thenReturn("Patient registration approved");
+        when(registrationRequirementServiceMock.approveRegistrationRequest(VALID_ID)).thenReturn("Patient registration approved");
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", accessToken);
@@ -139,7 +143,7 @@ public class RegistrationRequirementControllerUnitTest {
 
     @Test
     public void rejectRegistrationRequestShouldReturnOKAndSuccMsgWhenRegistrationRequirementIsRejected() {
-        when(registrationRequirementServiceMock.rejectRegistrationRequest(Long.valueOf(1), "Not enough information")).thenReturn(5);
+        when(registrationRequirementServiceMock.rejectRegistrationRequest(VALID_ID, MESSAGE)).thenReturn(2);
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", accessToken);
@@ -155,7 +159,7 @@ public class RegistrationRequirementControllerUnitTest {
 
     @Test
     public void rejectRegistrationRequestShouldReturnBadRequestAndErrMsgWhenRegistrationRequirementMissMesage() {
-        when(registrationRequirementServiceMock.rejectRegistrationRequest(Long.valueOf(1), "")).thenReturn(1);
+        when(registrationRequirementServiceMock.rejectRegistrationRequest(VALID_ID, MESSAGE_EMPTY)).thenReturn(1);
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", accessToken);

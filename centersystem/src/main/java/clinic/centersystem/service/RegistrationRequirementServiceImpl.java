@@ -45,7 +45,7 @@ public class RegistrationRequirementServiceImpl implements RegistrationRequireme
 
     @Override
     public RegistrationRequirement findById(Long id) {
-        return this.registrationRequirementRepository.findById(id).orElseThrow(()-> new RegistrationRequirementNotFoundException("Registration requirement not found"));
+        return this.registrationRequirementRepository.findById(id).orElseThrow(() -> new RegistrationRequirementNotFoundException("Registration requirement not found"));
     }
 
     @Override
@@ -74,7 +74,7 @@ public class RegistrationRequirementServiceImpl implements RegistrationRequireme
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public String approveRegistrationRequest(Long id) {
-        RegistrationRequirement req = this.findById(id);
+        RegistrationRequirement req = registrationRequirementRepository.findById(id).orElseThrow(() -> new RegistrationRequirementNotFoundException("Registration requirement not found"));
 
         req.setPassword(passwordEncoder.encode(req.getPassword()));
         if (userService.existsByEmail(req.getEmail())) {
@@ -98,7 +98,7 @@ public class RegistrationRequirementServiceImpl implements RegistrationRequireme
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public int rejectRegistrationRequest(Long id, String message) {
-        RegistrationRequirement req = this.findById(id);
+        RegistrationRequirement req = registrationRequirementRepository.findById(id).orElseThrow(() -> new RegistrationRequirementNotFoundException("Registration requirement not found"));
 
         if (userService.existsByEmail(req.getEmail())) {
             registrationRequirementRepository.deleteById(id);
@@ -106,7 +106,7 @@ public class RegistrationRequirementServiceImpl implements RegistrationRequireme
         }
 
         String check = message.trim();
-        if(check.equals("")){
+        if (check.equals("")) {
             return 1;
         }
 
