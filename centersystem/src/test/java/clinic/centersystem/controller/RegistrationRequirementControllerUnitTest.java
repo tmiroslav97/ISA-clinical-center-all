@@ -41,8 +41,8 @@ public class RegistrationRequirementControllerUnitTest {
     private RegistrationRequirementServiceImpl registrationRequirementServiceMock;
 
     private String accessToken;
-    private static final String APPROVE_ENDPOINT_USER_EXISTS = "/reg/approve/1";
-    private static final String REJECT_ENDPOINT_USER_EXISTS = "/reg/reject/1/Not enough information";
+    private static final String APPROVE_ENDPOINT_USER_EXISTS = "/reg/approve/4";
+    private static final String REJECT_ENDPOINT_USER_EXISTS = "/reg/reject/4/Not enough information";
     private static final String APPROVE_EDNPOINT_REG_REQ_NOT_EXISTS = "/reg/approve/50";
     private static final String REJECT_EDNPOINT_REG_REQ_NOT_EXISTS = "/reg/reject/50/Not enough information";
     private static final String APPROVE_ENDPOINT_USER_NOT_EXISTS = "/reg/approve/1";
@@ -51,7 +51,7 @@ public class RegistrationRequirementControllerUnitTest {
     private static final String MESSAGE = "Not enough information";
     private static final String MESSAGE_EMPTY = "";
     private static final Long VALID_ID = 1L;
-    private static final Long USER_EXISTS_ID = 1L;
+    private static final Long USER_EXISTS_ID = 4L;
     private static final Long NOT_VALID_ID = 50L;
 
     @Before
