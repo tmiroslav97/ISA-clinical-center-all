@@ -85,7 +85,7 @@ public class RegistrationRequirementServiceUnitTest {
         when(userServiceMock.existsByEmail(USER_EXISTS_EMAIL)).thenReturn(false);
 
         int flag = registrationRequirementService.rejectRegistrationRequest(1L,"Rejected");
-        verify(emailServiceMock, times(1)).sendMailTo("miroslav.tomic@outlook.com", "Account registration",
+        verify(emailServiceMock, times(1)).sendSyncMailTo("miroslav.tomic@outlook.com", "Account registration",
                 "Rejected");
         verify(registrationRequirementRepositoryMock, times(1)).deleteById(1L);
         assertEquals(2, flag);
@@ -110,7 +110,7 @@ public class RegistrationRequirementServiceUnitTest {
 
         String succcMsg = registrationRequirementService.approveRegistrationRequest(1L);
         verify(passwordEncoderMock, times(1)).encode(PASSWORD_VALID);
-        verify(emailServiceMock, times(1)).sendMailTo("miroslav.tomic@outlook.com", "Account registration",
+        verify(emailServiceMock, times(1)).sendSyncMailTo("miroslav.tomic@outlook.com", "Account registration",
                 "    Patient account was create successfully!\n" +
                         "    Please follow this link to activate account:\n" +
                         "    http://localhost:8080/cca/activate-account/1");

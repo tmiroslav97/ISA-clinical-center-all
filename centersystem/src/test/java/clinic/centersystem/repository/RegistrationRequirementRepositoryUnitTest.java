@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -51,6 +52,7 @@ public class RegistrationRequirementRepositoryUnitTest {
         assertFalse("Registration requirement is not found.", foundRegistrationRequirement.isPresent());
     }
 
+    @Transactional
     @Test
     public void shouldReturnRegistrationRequirementWhenFindingExistingRegistrationRequirementById() {
         RegistrationRequirement registrationRequirement = new RegistrationRequirement(VALID_ID, FIRST_NAME_VALID, LAST_NAME_VALID,
@@ -58,7 +60,7 @@ public class RegistrationRequirementRepositoryUnitTest {
                 CITY_VALID, PHONE_NUME_VALID, UNOIP_VALID, VERSION_VALID);
         try {
             testEntityManager.persist(registrationRequirement);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("For some reason exception from detached to persistent object is thrown");
         }
         testEntityManager.flush();

@@ -90,7 +90,7 @@ public class RegistrationRequirementServiceImpl implements RegistrationRequireme
                         "    http://localhost:8080/cca/activate-account/%s"
                 , patient.getId().toString());
 
-        emailService.sendMailTo(patient.getEmail(), subject, answer);
+        emailService.sendSyncMailTo(patient.getEmail(), subject, answer);
 
         return "Patient registration approved";
     }
@@ -113,7 +113,7 @@ public class RegistrationRequirementServiceImpl implements RegistrationRequireme
         String subject = "Account registration";
         registrationRequirementRepository.deleteById(id);
 
-        emailService.sendMailTo(req.getEmail(), subject, message.trim());
+        emailService.sendSyncMailTo(req.getEmail(), subject, message.trim());
 
         return 2;
     }
