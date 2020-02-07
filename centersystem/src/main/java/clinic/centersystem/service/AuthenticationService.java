@@ -53,7 +53,7 @@ public class AuthenticationService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public LoginUserResponse login(HttpServletRequest request, JwtAuthenticationRequest jwtAuthenticationRequest) {
+    public LoginUserResponse login(JwtAuthenticationRequest jwtAuthenticationRequest) {
         final Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(jwtAuthenticationRequest.getUsername(),
                         jwtAuthenticationRequest.getPassword()));

@@ -58,7 +58,7 @@ const RegistrationAproval = () => {
             <RegTable />
             <Row>
                 <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <Pagination onClick={handlePagination} className="pagination justify-content-center mb-5">
+                    <Pagination onClick={handlePagination} id="regReqPag" className="pagination justify-content-center mb-5">
                         <Pagination.First />
                         <Pagination.Prev />
                         {items}

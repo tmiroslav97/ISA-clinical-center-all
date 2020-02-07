@@ -45,7 +45,7 @@ const ClinicCenterAdminProfile = () => {
                             <Card.Text>
                                 You can see registration requirements.
                             </Card.Text>
-                            <Button variant="primary" onClick={() => { history.push('/ccadmin/reg-req'); }}>Reqs</Button>
+                            <Button variant="primary" id="btnRegReqs" onClick={() => { history.push('/ccadmin/reg-req'); }}>Reqs</Button>
                         </Card.Body>
                     </Card>
                 </Col>

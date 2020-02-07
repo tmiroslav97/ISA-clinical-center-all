@@ -9,7 +9,7 @@ const Unauthorized = () => {
         setTimeout(() => {
             dispatch(
                 signOut({
-                    'id': '',
+                    'id': null,
                     'firstName': '',
                     'lastName': '',
                     'email': '',

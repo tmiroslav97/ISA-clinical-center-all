@@ -45,7 +45,7 @@ public class RegistrationRequirementServiceImpl implements RegistrationRequireme
 
     @Override
     public RegistrationRequirement findById(Long id) {
-        return this.registrationRequirementRepository.findById(id).orElseThrow(RegistrationRequirementNotFoundException::new);
+        return this.registrationRequirementRepository.findById(id).orElseThrow(() -> new RegistrationRequirementNotFoundException("Registration requirement not found"));
     }
 
     @Override
@@ -74,7 +74,7 @@ public class RegistrationRequirementServiceImpl implements RegistrationRequireme
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public String approveRegistrationRequest(Long id) {
-        RegistrationRequirement req = this.findById(id);
+        RegistrationRequirement req = registrationRequirementRepository.findById(id).orElseThrow(() -> new RegistrationRequirementNotFoundException("Registration requirement not found"));
 
         req.setPassword(passwordEncoder.encode(req.getPassword()));
         if (userService.existsByEmail(req.getEmail())) {
@@ -90,27 +90,32 @@ public class RegistrationRequirementServiceImpl implements RegistrationRequireme
                         "    http://localhost:8080/cca/activate-account/%s"
                 , patient.getId().toString());
 
-        emailService.sendMailTo(patient.getEmail(), subject, answer);
+        emailService.sendSyncMailTo(patient.getEmail(), subject, answer);
 
         return "Patient registration approved";
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public String rejectRegistrationRequest(Long id, String message) {
-        RegistrationRequirement req = this.findById(id);
+    public int rejectRegistrationRequest(Long id, String message) {
+        RegistrationRequirement req = registrationRequirementRepository.findById(id).orElseThrow(() -> new RegistrationRequirementNotFoundException("Registration requirement not found"));
 
         if (userService.existsByEmail(req.getEmail())) {
             registrationRequirementRepository.deleteById(id);
             throw new ResourceExistsException("User with email " + req.getEmail() + " already exists");
         }
 
+        String check = message.trim();
+        if (check.equals("")) {
+            return 1;
+        }
+
         String subject = "Account registration";
         registrationRequirementRepository.deleteById(id);
 
-        emailService.sendMailTo(req.getEmail(), subject, message);
+        emailService.sendSyncMailTo(req.getEmail(), subject, message.trim());
 
-        return "Patient registration rejected";
+        return 2;
     }
 
     @Override
