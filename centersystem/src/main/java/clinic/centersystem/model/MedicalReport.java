@@ -39,6 +39,7 @@ public class MedicalReport {
     private Diagnose diagnose;
 
     @JsonBackReference
+    @Builder.Default
     @OneToMany(mappedBy = "medicalReport", fetch = FetchType.LAZY)
     private Set<Prescription> prescriptions = new HashSet<>();
 

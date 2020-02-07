@@ -38,7 +38,7 @@ const LoginPage = () => {
                     <Form noValidate validated={validated} onSubmit={handleLogin}>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
-                            <Form.Control required type="email" placeholder="Enter email"
+                            <Form.Control required type="email" id="txtEmail" placeholder="Enter email"
                                 onChange={({ currentTarget }) => {
                                     setUsername(currentTarget.value);
                                 }} />
@@ -46,7 +46,7 @@ const LoginPage = () => {
 
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control required type="password" pattern=".{3,25}" placeholder="Password"
+                            <Form.Control required type="password" td="txtPass" pattern=".{3,25}" placeholder="Password"
                                 onChange={({ currentTarget }) => {
                                     setPassword(currentTarget.value);
                                 }} />
@@ -54,7 +54,7 @@ const LoginPage = () => {
                                 min 5 max 25 characters
                                 </Form.Control.Feedback>
                         </Form.Group>
-                        <Button variant="primary" type="submit">
+                        <Button variant="primary" id="btnLogin" type="submit">
                             Login
                         </Button>
                     </Form>
