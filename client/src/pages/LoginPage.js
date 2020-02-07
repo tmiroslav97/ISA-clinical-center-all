@@ -46,7 +46,7 @@ const LoginPage = () => {
             </Row>
             <Row>
                 <Col md={{ span: 3, offset: 4 }} xs={12}>
-                    <Form noValidate validated={validated} onSubmit={handleLogin}>
+                    <Form noValidate validated={validated} id="logForm" onSubmit={handleLogin}>
                         <Form.Group >
                             <Form.Label>Email address</Form.Label>
                             <Form.Control required type="email" id="txtEmail" placeholder="Enter email"
@@ -57,7 +57,7 @@ const LoginPage = () => {
 
                         <Form.Group >
                             <Form.Label>Password</Form.Label>
-                            <Form.Control required type="password" td="txtPass" pattern=".{3,25}" placeholder="Password"
+                            <Form.Control required type="password" id="txtPass" pattern=".{3,25}" placeholder="Password"
                                 onChange={({ currentTarget }) => {
                                     setPassword(currentTarget.value);
                                 }} />

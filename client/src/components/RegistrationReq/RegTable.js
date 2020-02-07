@@ -77,7 +77,7 @@ const RegTable = () => {
                     </Form>
                 </Modal.Body>
             </Modal>
-            <Table responsive>
+            <Table id="regReqTable" responsive>
                 <thead>
                     <tr>
                         <th>E-mail</th>

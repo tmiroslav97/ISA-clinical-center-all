@@ -23,23 +23,24 @@ public class LoginPage {
     @FindBy(xpath = "//*[@id=\"btnLogin\"]")
     private WebElement btnLogin;
 
-    public LoginPage(){}
+    public LoginPage() {
+    }
 
-    public LoginPage(WebDriver driver){
+    public LoginPage(WebDriver driver) {
         this.driver = driver;
     }
 
-    public void ensureIsDisplayedBtnLogin(){
+    public void ensureIsDisplayedBtnLogin() {
         (new WebDriverWait(driver, 10))
                 .until(ExpectedConditions.elementToBeClickable(btnLogin));
     }
 
-    public void ensureIsDisplayedTxtEmail(){
+    public void ensureIsDisplayedTxtEmail() {
         (new WebDriverWait(driver, 10))
                 .until(ExpectedConditions.elementToBeClickable(txtEmail));
     }
 
-    public void ensureIsDisplayedTxtPass(){
+    public void ensureIsDisplayedTxtPass() {
         (new WebDriverWait(driver, 10))
                 .until(ExpectedConditions.elementToBeClickable(txtPass));
     }
