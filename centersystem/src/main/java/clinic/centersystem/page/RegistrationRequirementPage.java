@@ -30,8 +30,17 @@ public class RegistrationRequirementPage {
     @FindBy(xpath = "//*[@id=\"regReqTable\"]/tbody/tr/td[5]/button")
     private List<WebElement> rowsRefuse;
 
-    @FindBy(className = "react-toast-notifications__toast__content css-1ad3zal")
+    @FindBy(xpath = "/html/body/div[2]/div/div/div[2]")
     private WebElement toastMsg;
+
+    @FindBy(xpath = "//*[@id=\"regReqModal\"]")
+    private WebElement regReqModal;
+
+    @FindBy(xpath = "//*[@id=\"txtReason\"]")
+    private WebElement txtReason;
+
+    @FindBy(xpath = "//*[@id=\"btnReject\"]")
+    private WebElement btnReject;
 
     public RegistrationRequirementPage() {
     }
@@ -40,8 +49,24 @@ public class RegistrationRequirementPage {
         this.driver = driver;
     }
 
-    public void ensureIsDisplayedToastMsg() {
+    public void ensureIsDisplayedTxtReason() {
         (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.visibilityOf(txtReason));
+    }
+
+    public void ensureIsDisplayedBtnReject() {
+        (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.visibilityOf(btnReject));
+    }
+
+    public void ensureIsDisplayedRegReqModal() {
+        (new WebDriverWait(driver, 10))
+                .until(ExpectedConditions.visibilityOf(regReqModal));
+    }
+
+
+    public void ensureIsDisplayedToastMsg() {
+        (new WebDriverWait(driver, 20))
                 .until(ExpectedConditions.visibilityOf(toastMsg));
     }
 
