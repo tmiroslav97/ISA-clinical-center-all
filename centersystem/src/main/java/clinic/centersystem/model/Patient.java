@@ -4,6 +4,7 @@ import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
 import clinic.centersystem.model.enumeration.RoleEnum;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -37,23 +38,23 @@ public class Patient extends User {
     @Column(name = DbColumnConstants.UNOIP, nullable = false)
     private String unoip;
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     private MedicalRecord medicalRecord;
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
     private Set<Appointment> appointments = new HashSet<>();
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Clinic> clinics = new HashSet<>();
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
     private Set<AppointmentRequirement> appointmentRequirements = new HashSet<>();
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
     private Set<Surgery> surgeries = new HashSet<>();
 

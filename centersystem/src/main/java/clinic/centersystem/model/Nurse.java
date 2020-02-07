@@ -3,6 +3,7 @@ package clinic.centersystem.model;
 
 import clinic.centersystem.common.db.DbTableConstants;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,7 +22,7 @@ import java.util.Set;
 @Table(name = DbTableConstants.NURSE)
 public class Nurse extends Personnel {
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "nurse", fetch = FetchType.LAZY)
     private Set<Prescription> prescriptions = new HashSet<Prescription>();
 

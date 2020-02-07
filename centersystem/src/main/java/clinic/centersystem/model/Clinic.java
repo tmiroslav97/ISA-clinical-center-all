@@ -3,6 +3,7 @@ package clinic.centersystem.model;
 import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -43,6 +44,7 @@ public class Clinic {
     @OneToOne(fetch = FetchType.LAZY)
     private PriceList priceList;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
     private Set<Doctor> doctors = new HashSet<>();
 
@@ -52,22 +54,22 @@ public class Clinic {
     @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
     private Set<ClinicAdmin> clinicAdmins = new HashSet<>();
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
     private Set<AppointmentType> appointmentTypes = new HashSet<>();
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
     private Set<Room> rooms = new HashSet<>();
 
     @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
     private Set<Appointment> appointments = new HashSet<>();
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Patient> patients = new HashSet<>();
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
     private Set<AbsenceHolidayRequirement> reqAbs = new HashSet<>();
 

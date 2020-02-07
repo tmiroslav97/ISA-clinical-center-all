@@ -2,6 +2,7 @@ package clinic.centersystem.controller;
 
 import clinic.centersystem.converter.DoctorConverter;
 import clinic.centersystem.dto.request.DoctorRequestDTO;
+import clinic.centersystem.dto.request.DoctorSearchReqDTO;
 import clinic.centersystem.dto.response.DoctorResponse;
 import clinic.centersystem.model.Authority;
 import clinic.centersystem.model.ClinicAdmin;
@@ -43,9 +44,9 @@ public class DoctorController {
         return new ResponseEntity<List<DoctorResponse>>(this.doctorService.getDoctors(), HttpStatus.OK);
     }
 
-    @RequestMapping(method = GET, value = "/search-doctors")
-    public ResponseEntity<List<Doctor>> searchDoctors(@PathVariable String name) {
-        return new ResponseEntity<List<Doctor>>(this.doctorService.searchDoctors(name), HttpStatus.OK);
+    @RequestMapping(method = POST, value = "/search-doctors")
+    public ResponseEntity<List<DoctorResponse>> searchDoctors(@RequestBody DoctorSearchReqDTO doctorSearchReqDTO) {
+        return new ResponseEntity<List<DoctorResponse>>(this.doctorService.searchDoctor(doctorSearchReqDTO), HttpStatus.OK);
     }
 
     @RequestMapping(method = POST, value = "/add-doctor")

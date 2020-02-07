@@ -2,7 +2,7 @@ import React,{useState, useEffect} from 'react';
 import { Container, Row, Form, Col, Button, Table, Modal, Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { doctorsDataSelector, isFetchDoctorsSelector } from '../../store/doctors/selectors';
-import { fetchDoctorsByClinicId, addDoctor, deleteDoctor } from '../../store/doctors/actions';
+import { fetchDoctorsByClinicId, addDoctor, deleteDoctor ,searchDoctors} from '../../store/doctors/actions';
 
 const DoctorAllAtOnce = ({ match }) => {
     const dispatch = useDispatch();
@@ -19,9 +19,6 @@ const DoctorAllAtOnce = ({ match }) => {
     const isFetchDoctors = useSelector(isFetchDoctorsSelector);
 
     const handleDelete = (doctor) => {
-        console.log("Sta si");
-        console.log(doctor.id);
-        setDoctorId(doctor.id)
         dispatch(
             deleteDoctor({id:doctor.id, clinicId})
         );
@@ -46,9 +43,7 @@ const DoctorAllAtOnce = ({ match }) => {
     //eslint-disable-next-line
     const handleSearch = () => {
         dispatch(
-           /* searchDoctorByName({
-                name
-            })*/
+           searchDoctors({lastName, clinicId})
         );
     };
     
@@ -164,12 +159,13 @@ const DoctorAllAtOnce = ({ match }) => {
 
                     <Form.Group as={Row} >
 
-                        <Form.Label>Search doctors:</Form.Label>
+                        <Form.Label>Search doctors by last name:</Form.Label>
                         <Col>
-                            <Form.Control type="text" placeholder="Search by name" />
+                            <Form.Control type="text" placeholder="Search " onChange={( { currentTarget } ) => {
+                                    setLastName(currentTarget.value)}}/>
                         </Col>
                         <Col>
-                            <Button>Search</Button>
+                            <Button onClick={handleSearch}>Search</Button>
                         </Col>
                     </Form.Group>
 

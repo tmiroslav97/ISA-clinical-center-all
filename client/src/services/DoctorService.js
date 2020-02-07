@@ -6,16 +6,14 @@ const FINALPOINTS = {
     ADD_DOCTOR: '/doctor/add-doctor-on-clinic/%s',
     FETCH_DOCTORS_DATA: '/doctor/doctors',
     FETCH_DOCTORS_BY_CLINICID: '/doctor/all/%s',
-    DELETE_DOCTOR: '/doctor/delete/%s'
+    DELETE_DOCTOR: '/doctor/delete/%s',
+    SEARCH_DOCTORS: '/doctor/search-doctors'
 };
 
 class DoctorService extends HttpClient {
 
     fetchDoctorsByClinicId = async payload => {
         try {
-            console.log("fetch u service");
-            console.log(payload);
-            console.log(payload.clinicId);
             const { data } = await this.getApiClient().get(
                 format(FINALPOINTS.FETCH_DOCTORS_BY_CLINICID, payload.clinicId)
             );
@@ -68,6 +66,21 @@ class DoctorService extends HttpClient {
         } catch (error) {
             const response = error.response;
             return {response};
+        }
+    };
+
+    //search bez paginije
+    searchDoctors = async payload => {
+        try {
+            const { data } = await this.getApiClient().post(
+                FINALPOINTS.SEARCH_DOCTORS,
+                payload
+            );
+            console.log("DATA u service");
+            console.log(data);
+            return { data };
+        } catch (error) {
+            console.log(error.response.data);
         }
     };
 

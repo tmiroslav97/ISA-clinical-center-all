@@ -5,6 +5,7 @@ import {
     FETCH_DOCTORS_DATA,
     FETCH_DOCTORS_DATA_ON_CLINIC,
     SEARCH_DOCTOR,
+    SEARCH_DOCTORS,
     FETCH_DOCTORS_BY_CLINICID,
     DELETE_DOCTOR
 } from './constants';
@@ -68,13 +69,16 @@ export function* deleteDoctor() {
     console.log("U sagi");
     console.log(payload);
     const { response } = yield call(DoctorService.deleteDoctor, payload);
-    console.log(response);
     if(response === 'Successfully deleted doctor'){
         yield put(putSuccessMsg(response));
         yield put(putSuccessMsg(null));
         yield put(putIsFetchDoctors(false));
         yield put(putIsFetchDoctors(false));
+        console.log("Sagaa");
+        console.log(payload.clinicId);
         const { data } = yield call(DoctorService.fetchDoctorsByClinicId, payload);
+        console.log("Sagaa");
+        console.log(data);
         yield put(putDoctorsData(data));
         yield put(putIsFetchDoctors(true));
     }else {
@@ -83,11 +87,25 @@ export function* deleteDoctor() {
     }
 }
 
+
+
 export function* searchDoctor() {
     const { payload } = yield take(SEARCH_DOCTOR);
     yield put(putIsFetchDoctors(false));
     const { data } = yield call(DoctorService.searchDoctor, payload);
     yield put(putDoctorsData(data.doctors));
     yield put(putPageCount(data.putPageCount));
+    yield put(putIsFetchDoctors(true));
+}
+
+export function* searchDoctors() {
+    const { payload } = yield take(SEARCH_DOCTORS);
+    console.log("PAyload u sagi");
+    console.log(payload);
+    yield put(putIsFetchDoctors(false));
+    const { data } = yield call(DoctorService.searchDoctors,payload);
+    console.log("Saga");
+    console.log(data);
+    yield put(putDoctorsData(data));
     yield put(putIsFetchDoctors(true));
 }

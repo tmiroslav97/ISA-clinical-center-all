@@ -2,6 +2,7 @@ package clinic.centersystem.model;
 
 import clinic.centersystem.common.db.DbTableConstants;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,14 +31,14 @@ public class Personnel extends User {
         this.absenceHolidayRequirements = absenceHolidayRequirements;
     }
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     private Calendar calendar;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Clinic clinic;
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "personnel", fetch = FetchType.LAZY)
     private Set<AbsenceHolidayRequirement> absenceHolidayRequirements;
 

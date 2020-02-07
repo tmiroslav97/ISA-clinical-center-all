@@ -2,6 +2,7 @@ package clinic.centersystem.service;
 
 import clinic.centersystem.converter.DoctorConverter;
 import clinic.centersystem.dto.request.DoctorRequestDTO;
+import clinic.centersystem.dto.request.DoctorSearchReqDTO;
 import clinic.centersystem.dto.response.ClinicResponse;
 import clinic.centersystem.dto.response.DoctorResponse;
 import clinic.centersystem.model.*;
@@ -142,6 +143,10 @@ public class DoctorServiceImpl implements DoctorService {
             doctorRepository.deleteById(doctorId);
             return  "Successfully deleted doctor";
         }
+    }
+
+    public List<DoctorResponse> searchDoctor(DoctorSearchReqDTO doctorSearchReqDTO){
+        return doctorRepository.findByClinicIdAndLastNameIgnoringCase(doctorSearchReqDTO.getClinicId(), doctorSearchReqDTO.getLastName()).stream().map(DoctorConverter::toCreateDoctorResponseFromDoctor).collect(Collectors.toList());
     }
 
     public String addDoctor(DoctorRequestDTO doctorRequestDTO) {
