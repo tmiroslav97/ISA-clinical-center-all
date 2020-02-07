@@ -66,6 +66,32 @@ public class RegistrationRequirementServiceUnitTest {
     private static final String UNOIP_VALID = "1234543";
     private static final Long VERSION_VALID = 0L;
 
+    @Test
+    public void rejectRegistrationRequestShouldReturnErrorMsg() {
+        RegistrationRequirement registrationRequirement = new RegistrationRequirement(1L, FIRST_NAME_VALID, LAST_NAME_VALID,
+                "miroslav.tomic@outlook.com", PASSWORD_VALID, PASSWORD2_VALID, ADDRESS_VALID, COUNTRY_VALID,
+                CITY_VALID, PHONE_NUME_VALID, UNOIP_VALID, VERSION_VALID);
+        when(registrationRequirementRepositoryMock.findById(1L)).thenReturn(Optional.of(registrationRequirement));
+        when(userServiceMock.existsByEmail(USER_EXISTS_EMAIL)).thenReturn(false);
+
+        int flag = registrationRequirementService.rejectRegistrationRequest(1L,"");
+        assertEquals(1, flag);
+    }
+
+    @Test
+    public void rejectRegistrationRequestShouldReturnSuccMsg() {
+        RegistrationRequirement registrationRequirement = new RegistrationRequirement(1L, FIRST_NAME_VALID, LAST_NAME_VALID,
+                "miroslav.tomic@outlook.com", PASSWORD_VALID, PASSWORD2_VALID, ADDRESS_VALID, COUNTRY_VALID,
+                CITY_VALID, PHONE_NUME_VALID, UNOIP_VALID, VERSION_VALID);
+        when(registrationRequirementRepositoryMock.findById(1L)).thenReturn(Optional.of(registrationRequirement));
+        when(userServiceMock.existsByEmail(USER_EXISTS_EMAIL)).thenReturn(false);
+
+        int flag = registrationRequirementService.rejectRegistrationRequest(1L,"Rejected");
+        verify(emailServiceMock, times(1)).sendMailTo("miroslav.tomic@outlook.com", "Account registration",
+                "Rejected");
+        verify(registrationRequirementRepositoryMock, times(1)).deleteById(1L);
+        assertEquals(2, flag);
+    }
 
     @Test
     public void approveRegistrationRequestShouldReturnSuccMsg() {
@@ -116,8 +142,6 @@ public class RegistrationRequirementServiceUnitTest {
 
         registrationRequirementService.rejectRegistrationRequest(REG_REQ_ID_VALID, MESSAGE);
         verify(registrationRequirementRepositoryMock, times(1)).deleteById(REG_REQ_ID_VALID);
-        verify(passwordEncoderMock, times(1)).encode(registrationRequirement.getPassword());
-
     }
 
     @Test(expected = RegistrationRequirementNotFoundException.class)
