@@ -143,12 +143,6 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>unset CI</id>
-                        <goals>
-                            <goal>unset CI</goal>
-                        </goals>
-                    </execution>
-                    <execution>
                         <id>npm run build</id>
                         <goals>
                             <goal>npm</goal>
