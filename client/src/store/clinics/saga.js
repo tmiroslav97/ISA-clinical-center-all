@@ -79,5 +79,5 @@ export function* searchClinic() {
     const { data } = yield call(ClinicService.searchClinic, payload);
     yield put(putClinicsData(data.clinics));
     yield put(putPageCount(data.pageCount));
-    yield put(putIsFetchClinicsData(true));
+    yield put(putIsFetchClinicsData(true)); 
 }

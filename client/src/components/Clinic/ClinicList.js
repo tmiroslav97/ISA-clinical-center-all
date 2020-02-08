@@ -10,9 +10,7 @@ const ClinicList = ({ filterTerm, cnt }) => {
 
     if (!isFetchClinicsData) {
         return <div className="d-flex justify-content-center">
-            <Spinner animation="border" role="status">
-                <span className="sr-only">Loading...</span>
-            </Spinner>
+            
         </div>;
     }
 
@@ -37,14 +35,14 @@ const ClinicList = ({ filterTerm, cnt }) => {
                         </thead>
                         <tbody>
                             {
-                                clinics.filter(clinic => clinic.type.includes(filterTerm)).map((clinic,index) => {
+                                clinics.filter(clinicsDto => clinicsDto.clinic.type.includes(filterTerm)).map((clinicsDto,index) => {
                                     return (
-                                        <tr key={clinic.id}>
+                                        <tr key={clinicsDto.clinic.id}>
                                             <td>{cnt * 10 + index + 1}</td>
-                                            <td>{clinic.name}</td>
-                                            <td>{clinic.address}</td>
-                                            <td>{clinic.averageRating}</td>
-                                            <td>{clinic.price}</td>
+                                            <td>{clinicsDto.clinic.name}</td>
+                                            <td>{clinicsDto.clinic.address}</td>
+                                            <td>{clinicsDto.clinic.averageRating}</td>
+                                            <td>{clinicsDto.clinic.price}</td>
                                         </tr>
                                     );
                                 })

@@ -88,8 +88,14 @@ public class ClinicServiceImpl implements ClinicService {
     }
 
     @Override
+    public ClinicResponse clinic(Long id) {
+        Clinic clinic = this.findById(id);
+        return ClinicConverter.toCreateClinicResponseFromClinic(clinic);
+    }
+
+    @Override
     public ClinicResponsePageDTO findAll(ClinicSearchDTO clinicSearchDTO) {
-       /*Integer sort = clinicSearchDTO.getSort();
+       Integer sort = clinicSearchDTO.getSort();
         Pageable pageable = null;
         if (sort == 0) {
             pageable = PageRequest.of(clinicSearchDTO.getPageCnt(), 10);
@@ -110,31 +116,8 @@ public class ClinicServiceImpl implements ClinicService {
                 .clinics(clinics.getContent().stream().map(ClinicConverter::toCreateClinicResponseFromClinic).collect(Collectors.toList()))
                 .pageCnt(clinics.getTotalPages())
                 .build();
-        return clinicResponsePageDTO;*/
-       return null;
-
-    }
-
-
-    @Override
-    public ClinicResponsePageDTO searchClinics(ClinicSearchDTO clinicSearchDTO) {
-
-        /*Pageable pageable = PageRequest.of(clinicSearchDTO.getPageCnt(), 10);
-        DateTime dt = new DateTime(clinicSearchDTO.getDate(), DateTimeZone.UTC);
-        DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd");
-        Page<Clinic> clinics = clinicRepository.searchClinics(clinicSearchDTO.getRating(),clinicSearchDTO.getType());
-        ClinicResponsePageDTO clinicResponsePageDTO = new ClinicResponsePageDTO();
-        List<ClinicResponse> clinicResponses = new ArrayList<>();
-        clinicResponsePageDTO.setClinics(clinicResponses);
-        clinicResponsePageDTO.setPageCnt(clinics.getTotalPages());
-
-        for (Clinic clinic : clinics.getContent()) {
-            ClinicResponse crDTO = new ClinicResponse();
-            crDTO.setClinic(clinic);
-            crDTO.setDate(dtf.print(dt));
-        }
         return clinicResponsePageDTO;
-    }*/
-        return null;
+
     }
+
 }

@@ -14,6 +14,7 @@ export const putPageCount = payload => ({
     payload
 });
 
+
 export const fetchClinicPaginationData = payload => ({
     type: FETCH_CLINIC_PAGINATION_DATA,
     payload

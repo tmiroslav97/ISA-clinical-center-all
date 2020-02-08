@@ -93,7 +93,7 @@ const AppRouter = () => {
             <PrivateRoute exact path="/adminc/sur-req/:clinicId" component={SurgeryReq} accessRole={["ROLE_ADMINC"]} />
             <PrivateRoute exact path="/adminc" component={ClinicAdmin} accessRole={["ROLE_ADMINC"]} />
 
-            <PrivateRoute exact path="/user-prof" component={UserProfile} accessRole={["ROLE_NURSE", "ROLE_DOCTOR", "ROLE_ADMINC"]} />
+            <PrivateRoute exact path="/user-prof" component={UserProfile} accessRole={["ROLE_NURSE", "ROLE_DOCTOR", "ROLE_ADMINC", "ROLE_PATIENT"]} />
             <Route exact path="/page-not-found" component={() => <h1>Page not found!</h1>} />
             <Route exact path="/unauthorized" component={Unauthorized} />
             <Redirect from="*" to="/page-not-found" />

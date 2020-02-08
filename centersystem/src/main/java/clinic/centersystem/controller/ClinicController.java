@@ -45,14 +45,10 @@ public class ClinicController {
         return new ResponseEntity<>(this.clinicService.getClinics(), HttpStatus.OK);
     }
 
-    /*@RequestMapping(method = GET, value = "/search-clinics")
-    public ResponseEntity<List<Clinic>> searchClinics(@PathVariable String name) {
-        return new ResponseEntity<>(this.clinicService.searchClinics(name), HttpStatus.OK);
-    }*/
 
-    @RequestMapping(method = POST, value = "/search")
+    @RequestMapping(method = POST, value = "/clinics/search-clinics")
     public ResponseEntity<ClinicResponsePageDTO> getClinics(@RequestBody ClinicSearchDTO clinicSearchDTO) {
-        return new ResponseEntity<>(clinicService.searchClinics(clinicSearchDTO), HttpStatus.OK);
+        return new ResponseEntity<>(this.clinicService.findAll(clinicSearchDTO), HttpStatus.OK);
     }
 
     @RequestMapping(method = GET, value = "/all/{pageCnt}")

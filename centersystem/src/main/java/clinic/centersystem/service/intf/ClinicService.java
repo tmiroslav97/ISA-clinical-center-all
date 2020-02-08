@@ -21,11 +21,13 @@ public interface ClinicService {
 
     List<ClinicResponse> getClinics();
 
+
+    ClinicResponse clinic(Long id);
+
     boolean registerClinic(ClinicRequestDTO clinicRequestDTO);
 
     ClinicResponsePageDTO findAll(Integer pageCnt);
 
     ClinicResponsePageDTO findAll(ClinicSearchDTO clinicSearchDTO);
 
-    ClinicResponsePageDTO searchClinics(ClinicSearchDTO clinicSearchDTO);
 }
