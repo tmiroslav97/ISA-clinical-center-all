@@ -39,7 +39,7 @@ jobs:
           name: Compile app
           command: |
             cd centersystem
-            mvn compile -T4
+            mvn clean install -DskipTests=false -B
 
   test_backend:
     docker:
