@@ -33,7 +33,7 @@ const DoctorHomePage = () => {
         <Container>
             <Row>
                 <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <h2 className="border-bottom">Doctor admin profile</h2>
+                    <h2 className="border-bottom">Doctor profile</h2>
                 </Col>
             </Row>
             <Row>
@@ -102,6 +102,17 @@ const DoctorHomePage = () => {
                                 You can edit medical reports
                             </Card.Text>
                             <Button variant="primary" onClick={() => { history.push('/doc/med-reps'); }}>Edit</Button>
+                        </Card.Body>
+                    </Card>
+                </Col>
+                <Col md={{ span: 4 , offset: 1}} xs={12}>
+                    <Card style={{ width: '18rem' }}>
+                        <Card.Body>
+                            <Card.Title>User profile</Card.Title>
+                            <Card.Text>
+                                You can easily acces yours profile
+                            </Card.Text>
+                            <Button variant="primary" onClick={() => { history.push('/user-prof'); }}>Profile</Button>
                         </Card.Body>
                     </Card>
                 </Col>

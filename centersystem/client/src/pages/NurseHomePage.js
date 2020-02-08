@@ -32,7 +32,7 @@ const NurseHomePage = () => {
         <Container>
             <Row>
                 <Col md={{ span: 10, offset: 1 }} xs={12}>
-                    <h2 className="border-bottom">Doctor admin profile</h2>
+                    <h2 className="border-bottom">Nurse profile</h2>
                 </Col>
             </Row>
             <Row>
