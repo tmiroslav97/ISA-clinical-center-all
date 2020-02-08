@@ -28,5 +28,6 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
     @Query("select r from Room r where lower(r.name) like lower(?1) and r.clinic.id=(?2)")
     List<Room> findByNameIgnoringCaseAndClinicId(String name, Long clinicId, Pageable pageable);
 
+    @Lock(LockModeType.PESSIMISTIC_FORCE_INCREMENT)
     Room findOneById(Long id);
 }

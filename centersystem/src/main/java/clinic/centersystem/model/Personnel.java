@@ -24,8 +24,8 @@ public class Personnel extends User {
     public Personnel(Long id, String email, String password, String firstName, String lastName,
                      boolean enabled, boolean isFirstLog, Timestamp lastPasswordResetDate,
                      List<Authority> authorities, Clinic clinic, Calendar calendar,
-                     Set<AbsenceHolidayRequirement> absenceHolidayRequirements) {
-        super(id, email, password, firstName, lastName, enabled, isFirstLog, lastPasswordResetDate, authorities);
+                     Set<AbsenceHolidayRequirement> absenceHolidayRequirements, Long version) {
+        super(id, email, password, firstName, lastName, enabled, isFirstLog, lastPasswordResetDate, authorities, version);
         this.clinic = clinic;
         this.calendar = calendar;
         this.absenceHolidayRequirements = absenceHolidayRequirements;

@@ -1,13 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { history } from '../index';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../store/user/actions';
+import { userIdSelector } from '../store/user/selectors';
 
 const LoginPage = () => {
     const dispatch = useDispatch();
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     const [validated, setValidated] = useState(false);
+    const userId = useSelector(userIdSelector);
+    console.log(userId);
+
+    useEffect(() => {
+        if (userId != null && userId != '') {
+            history.push('/');
+        }
+    }, []);
+
 
     const handleLogin = (event) => {
         const form = event.currentTarget;
@@ -35,18 +46,18 @@ const LoginPage = () => {
             </Row>
             <Row>
                 <Col md={{ span: 3, offset: 4 }} xs={12}>
-                    <Form noValidate validated={validated} onSubmit={handleLogin}>
-                        <Form.Group controlId="formBasicEmail">
+                    <Form noValidate validated={validated} id="logForm" onSubmit={handleLogin}>
+                        <Form.Group >
                             <Form.Label>Email address</Form.Label>
-                            <Form.Control required type="email" placeholder="Enter email"
+                            <Form.Control required type="email" id="txtEmail" placeholder="Enter email"
                                 onChange={({ currentTarget }) => {
                                     setUsername(currentTarget.value);
                                 }} />
                         </Form.Group>
 
-                        <Form.Group controlId="formBasicPassword">
+                        <Form.Group >
                             <Form.Label>Password</Form.Label>
-                            <Form.Control required type="password" pattern=".{3,25}" placeholder="Password"
+                            <Form.Control required type="password" id="txtPass" pattern=".{3,25}" placeholder="Password"
                                 onChange={({ currentTarget }) => {
                                     setPassword(currentTarget.value);
                                 }} />
@@ -54,7 +65,7 @@ const LoginPage = () => {
                                 min 5 max 25 characters
                                 </Form.Control.Feedback>
                         </Form.Group>
-                        <Button variant="primary" type="submit">
+                        <Button variant="primary" id="btnLogin" type="submit">
                             Login
                         </Button>
                     </Form>

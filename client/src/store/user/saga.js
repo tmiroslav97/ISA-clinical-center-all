@@ -99,7 +99,8 @@ export function* signOut() {
     const { payload } = yield take(SIGN_OUT);
     localStorage.clear();
     yield put(putUserData(payload));
-    yield put(putUserToken(''));
+    yield put(putUserId(null));
+    yield put(putUserToken(null));
     history.push('/');
 }
 

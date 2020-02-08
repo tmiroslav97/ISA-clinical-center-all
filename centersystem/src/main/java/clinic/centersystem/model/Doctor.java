@@ -48,8 +48,8 @@ public class Doctor extends Personnel {
                   boolean enabled, boolean isFirstLog, Timestamp lastPasswordResetDate,
                   List<Authority> authorities, Clinic clinic, Calendar calendar,
                   Set<AbsenceHolidayRequirement> absenceHolidayRequirements, Set<Appointment> appointments, Set<Surgery> surgeries, Float sumRating,
-                  Integer cntRating, Integer startTime, Integer endTime) {
-        super(id, email, password, firstName, lastName, enabled, isFirstLog, lastPasswordResetDate, authorities, clinic, calendar, absenceHolidayRequirements);
+                  Integer cntRating, Integer startTime, Integer endTime, Long version) {
+        super(id, email, password, firstName, lastName, enabled, isFirstLog, lastPasswordResetDate, authorities, clinic, calendar, absenceHolidayRequirements, version);
         this.sumRating = sumRating;
         this.cntRating = cntRating;
         this.startTime = startTime;

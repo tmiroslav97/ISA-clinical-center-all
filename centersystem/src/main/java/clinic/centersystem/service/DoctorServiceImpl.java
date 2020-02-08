@@ -13,6 +13,8 @@ import clinic.centersystem.service.intf.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +61,7 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.MANDATORY)
     public Doctor findOneById(Long id){
         return doctorRepository.findOneById(id);
     }

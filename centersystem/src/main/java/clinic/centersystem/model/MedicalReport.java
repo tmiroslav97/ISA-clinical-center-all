@@ -40,6 +40,7 @@ public class MedicalReport {
     private Diagnose diagnose;
 
     @JsonIgnore
+    @Builder.Default
     @OneToMany(mappedBy = "medicalReport", fetch = FetchType.LAZY)
     private Set<Prescription> prescriptions = new HashSet<>();
 

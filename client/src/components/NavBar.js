@@ -14,7 +14,7 @@ export default function NavBar() {
     const handleSignOut = () => {
         dispatch(
             signOut({
-                'id': '',
+                'id': null,
                 'firstName': '',
                 'lastName': '',
                 'email': '',
