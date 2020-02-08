@@ -6,7 +6,7 @@ services:
   - mysql
 
 before_install:
-  - chmod +x mvnw
+  - chmod +x mvn
 
 before_script: 
   - cd centersystem
