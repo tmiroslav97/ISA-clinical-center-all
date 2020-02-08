@@ -28,9 +28,12 @@ class CAdminService extends HttpClient{
                 FINALPOINTS.EDIT_USER_INFORMATION, 
                 payload
             );
-            return { data };
+            const response = data;
+            return { response };
         } catch (error) {
             console.log(error.response.data);
+            const response = error.response;
+            return {response};
         }
     };
 

@@ -47,8 +47,8 @@ export function* addDoctor() {
         yield put(putSuccessMsg(response));
         yield put(putSuccessMsg(null));
         yield put(putIsFetchDoctors(false));
-        const { data } = yield call(DoctorService.fetchDoctorsByClinicId, payload);
-        yield put(putDoctorsData(data.doctors));
+        const { doctors } = yield call(DoctorService.fetchDoctorsByClinicId, {clinicId:payload.clinicId});
+        yield put(putDoctorsData(doctors));
         yield put(putIsFetchDoctors(true));
     } else {
         yield put(putErrorMsg(response));
@@ -63,16 +63,14 @@ export function* deleteDoctor() {
         yield put(putSuccessMsg(response));
         yield put(putSuccessMsg(null));
         yield put(putIsFetchDoctors(false));
-        console.log(data);
-        const { data } = yield call(DoctorService.fetchDoctorsByClinicId, payload);
-        yield put(putDoctorsData(data));
+        const { doctors } = yield call(DoctorService.fetchDoctorsByClinicId, {clinicId:payload.clinicId});
+        yield put(putDoctorsData(doctors));
         yield put(putIsFetchDoctors(true));
     }else {
         yield put(putErrorMsg(response));
         yield put(putErrorMsg(null));
     }
 }
-
 
 
 export function* searchDoctor() {

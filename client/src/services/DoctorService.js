@@ -14,6 +14,7 @@ class DoctorService extends HttpClient {
 
     fetchDoctorsByClinicId = async payload => {
         try {
+            console.log(payload);
             const { data } = await this.getApiClient().get(
                 format(FINALPOINTS.FETCH_DOCTORS_BY_CLINICID, payload.clinicId)
             );
@@ -53,15 +54,10 @@ class DoctorService extends HttpClient {
 
     addDoctor = async payload => {
         try {
-            console.log("U service");
-            console.log(payload);
-            console.log(payload.clinicId);
             const { data } = await this.getApiClient().post(
                 format(FINALPOINTS.ADD_DOCTOR, payload.clinicId),
                 payload
             );
-            console.log("DATA")
-            console.log(data);
             const response = data;
             return { response };
         } catch (error) {
