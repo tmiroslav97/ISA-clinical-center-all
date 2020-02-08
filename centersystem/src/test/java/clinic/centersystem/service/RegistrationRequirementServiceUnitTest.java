@@ -100,7 +100,7 @@ public class RegistrationRequirementServiceUnitTest {
                 true, true, null,
                 authorities, ADDRESS_VALID, COUNTRY_VALID, CITY_VALID, PHONE_NUME_VALID, UNOIP_VALID,
                 new HashSet<>(), new MedicalRecord(), new HashSet<>(), new HashSet<>(),
-                new HashSet<>(), false);
+                new HashSet<>(), false,0L);
         when(registrationRequirementRepositoryMock.findById(1L)).thenReturn(Optional.of(registrationRequirement));
         when(userServiceMock.existsByEmail(USER_EXISTS_EMAIL)).thenReturn(false);
         when(patientServiceMock.save(registrationRequirement)).thenReturn(patient);
@@ -108,9 +108,9 @@ public class RegistrationRequirementServiceUnitTest {
         String succcMsg = registrationRequirementService.approveRegistrationRequest(1L);
         verify(passwordEncoderMock, times(1)).encode(PASSWORD_VALID);
         verify(emailServiceMock, times(1)).sendSyncMailTo("miroslav.tomic@outlook.com", "Account registration",
-                "    Patient account was create successfully!\n" +
+                "    Patient account created successfully!\n" +
                         "    Please follow this link to activate account:\n" +
-                        "    http://localhost:8080/cca/activate-account/1");
+                        "    http://localhost:8080/sec/activate-account/1");
         assertEquals("Patient registration approved", succcMsg);
     }
 

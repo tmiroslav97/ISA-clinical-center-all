@@ -85,9 +85,9 @@ public class RegistrationRequirementServiceImpl implements RegistrationRequireme
         this.registrationRequirementRepository.deleteById(id);
         String subject = "Account registration";
         String answer = String.format(
-                "    Patient account was create successfully!\n" +
+                "    Patient account created successfully!\n" +
                         "    Please follow this link to activate account:\n" +
-                        "    http://localhost:8080/cca/activate-account/%s"
+                        "    http://localhost:8080/sec/activate-account/%s"
                 , patient.getId().toString());
 
         emailService.sendSyncMailTo(patient.getEmail(), subject, answer);

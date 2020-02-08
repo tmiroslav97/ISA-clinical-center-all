@@ -65,6 +65,7 @@ public class PatientServiceImpl implements PatientService {
         Patient patient = PatientConverter.toCreatePatientFromRequest(registrationRequirement);
         List<Authority> auths = this.authorityService.findByName("ROLE_PATIENT");
         patient.setAuthorities(auths);
+        patient.setVersion(0L);
         patient = patientRepository.save(patient);
 
         MedicalRecord medicalRecord = MedicalRecord.builder()

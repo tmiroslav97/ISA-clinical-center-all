@@ -5,8 +5,12 @@ import clinic.centersystem.page.LoginPage;
 import clinic.centersystem.page.RegistrationRequirementPage;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,6 +19,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.annotation.Order;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.testng.annotations.AfterMethod;
@@ -24,6 +29,7 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @TestPropertySource("classpath:application-test.properties")
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class RegistrationRequirementEnd2EndTest {
 
@@ -60,6 +66,7 @@ public class RegistrationRequirementEnd2EndTest {
     }
 
     @Test
+    @Order(1)
     public void approveRegistrationRequirement() throws InterruptedException {
         clinicCenterAdminPage.ensureIsDisplayedBtnRegReqs();
         clinicCenterAdminPage.getBtnRegReqs().click();
@@ -79,6 +86,7 @@ public class RegistrationRequirementEnd2EndTest {
     }
 
     @Test
+    @Order(2)
     public void rejectRegistrationRequirement() throws InterruptedException {
         clinicCenterAdminPage.ensureIsDisplayedBtnRegReqs();
         clinicCenterAdminPage.getBtnRegReqs().click();
@@ -105,6 +113,7 @@ public class RegistrationRequirementEnd2EndTest {
     }
 
     @Test
+    @Order(3)
     public void rejectRegistrationRequirementMissingMsg() throws InterruptedException {
         clinicCenterAdminPage.ensureIsDisplayedBtnRegReqs();
         clinicCenterAdminPage.getBtnRegReqs().click();
@@ -128,6 +137,7 @@ public class RegistrationRequirementEnd2EndTest {
     }
 
     @Test
+    @Order(4)
     public void rejectRegistrationRequirementWrongMail() throws InterruptedException {
         clinicCenterAdminPage.ensureIsDisplayedBtnRegReqs();
         clinicCenterAdminPage.getBtnRegReqs().click();
@@ -148,6 +158,50 @@ public class RegistrationRequirementEnd2EndTest {
         String msg = registrationRequirementPage.getToastMsg().getText();
 
         assertEquals("Email address is invalid", msg);
+        assertEquals("http://localhost:3000/ccadmin/reg-req", browser.getCurrentUrl());
+    }
+
+    @Test
+    @Order(5)
+    public void rejectRegistrationRequirementWhenUserExists() throws InterruptedException {
+        clinicCenterAdminPage.ensureIsDisplayedBtnRegReqs();
+        clinicCenterAdminPage.getBtnRegReqs().click();
+
+        registrationRequirementPage.ensureIsDisplayedRegReqPag();
+        registrationRequirementPage.ensureIsDisplayedRegReqTable();
+        WebElement btnModal = registrationRequirementPage.getRowsRefuse().get(2);
+        btnModal.click();
+
+        registrationRequirementPage.ensureIsDisplayedRegReqModal();
+        registrationRequirementPage.ensureIsDisplayedTxtReason();
+        registrationRequirementPage.ensureIsDisplayedBtnReject();
+
+        registrationRequirementPage.getTxtReason().sendKeys("Not enough information");
+        registrationRequirementPage.getBtnReject().click();
+
+        registrationRequirementPage.ensureIsDisplayedToastMsg();
+        String msg = registrationRequirementPage.getToastMsg().getText();
+
+        assertEquals("User with email tomic.miroslav97@gmail.com already exists", msg);
+        assertEquals("http://localhost:3000/ccadmin/reg-req", browser.getCurrentUrl());
+    }
+
+    @Test
+    @Order(6)
+    public void approveRegistrationRequirementWhenUserExists() throws InterruptedException {
+        clinicCenterAdminPage.ensureIsDisplayedBtnRegReqs();
+        clinicCenterAdminPage.getBtnRegReqs().click();
+
+        registrationRequirementPage.ensureIsDisplayedRegReqPag();
+        registrationRequirementPage.ensureIsDisplayedRegReqTable();
+        WebElement btnModal = registrationRequirementPage.getRowsApprove().get(6);
+        btnModal.click();
+
+
+        registrationRequirementPage.ensureIsDisplayedToastMsg();
+        String msg = registrationRequirementPage.getToastMsg().getText();
+
+        assertEquals("User with email tomic.miroslav97@gmail.com already exists", msg);
         assertEquals("http://localhost:3000/ccadmin/reg-req", browser.getCurrentUrl());
     }
 

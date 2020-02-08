@@ -21,4 +21,6 @@ public interface SurgeryRequirementService {
 
     void autoReserveRoomForSurgery();
 
+    void delete(SurgeryRequirement surgeryRequirement);
+
 }

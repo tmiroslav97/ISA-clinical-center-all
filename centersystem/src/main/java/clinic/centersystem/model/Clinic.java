@@ -40,8 +40,8 @@ public class Clinic {
     @OneToOne(fetch = FetchType.LAZY)
     private BusinessReport busReport;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    private PriceList priceList;
+    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
+    private Set<PriceListItem> priceList = new HashSet<>();
 
     @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
     private Set<Doctor> doctors = new HashSet<>();

@@ -29,8 +29,8 @@ public class Nurse extends Personnel {
     public Nurse(Long id, String email, String password, String firstName, String lastName,
                  boolean enabled, boolean isFirstLog, Timestamp lastPasswordResetDate,
                  List<Authority> authorities, Clinic clinic, Calendar calendar,
-                 Set<AbsenceHolidayRequirement> absenceHolidayRequirements, Set<Prescription> prescriptions) {
-        super(id, email, password, firstName, lastName, enabled, isFirstLog, lastPasswordResetDate, authorities, clinic, calendar, absenceHolidayRequirements);
+                 Set<AbsenceHolidayRequirement> absenceHolidayRequirements, Set<Prescription> prescriptions, Long version) {
+        super(id, email, password, firstName, lastName, enabled, isFirstLog, lastPasswordResetDate, authorities, clinic, calendar, absenceHolidayRequirements, version);
         this.prescriptions = prescriptions;
     }
 }
