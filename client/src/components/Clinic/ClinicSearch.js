@@ -6,14 +6,19 @@ import moment from 'moment';
 import { fetchClinicsData, searchClinic } from '../../store/clinics/actions';
 import { pageCountSelector } from '../../store/clinics/selectors';
 import ClinicList from './ClinicList';
+import { fetchPatientData } from '../../store/user/actions';
+import { userDataSelector, userIdSelector } from '../../store/user/selectors';
+
 
 const ClinicSearch = ({ match }) => {
     const dispatch = useDispatch();
+    const id = useSelector(userIdSelector);
+    const data = useSelector(userDataSelector);
     const pageCount = useSelector(pageCountSelector);
     const [today, setToday] = useState(moment().format('YYYY-MM-DD'));
-    const [date, setDate] = useState(moment().format('YYYY-MM-DD'));
-    const [type, setType] = useState('');
-    const [rating, setRating] = useState('');   
+    const [date, setDate] = useState(null);
+    const [type, setType] = useState(null);
+    const [rating, setRating] = useState(null);   
     const [pageCnt, setPageCnt] = useState(0);
     const [filterTerm, setFilterTerm] = useState('');
     const [sort, setSort] = useState(0);
@@ -21,10 +26,10 @@ const ClinicSearch = ({ match }) => {
         setDate((new Date(sdString)).getTime() / 1000 | 0);
     });*/
 
-
-    const handleClinicSearch = () => {
+    const handleClinicSearch = (event) => {
         dispatch(
             searchClinic({
+                patientId: data.patientId,
                 date,
                 type,
                 rating,
@@ -36,16 +41,20 @@ const ClinicSearch = ({ match }) => {
     };
 
     useEffect(() => {
-        dispatch(
-            searchClinic({
-                date,
-                type,
-                rating,
-                pageCnt,
-                sort
+        if(date!=null && type!=null && rating!=null){
+            dispatch(
+                searchClinic({
+                    patientId: data.patientId,
+                    date,
+                    type,
+                    rating,
+                    pageCnt,
+                    sort
 
-            })
-        );
+                })
+            );
+        }
+
     }, [pageCnt, sort]);
 
     let items = [];

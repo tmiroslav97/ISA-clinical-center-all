@@ -3,13 +3,28 @@ import { history } from '../index';
 import { format } from 'util';
 
 const FINALPOINTS = {
+    FETCH_CLINICS_DATA: '/clinic/%s',
     REG_CLINIC: '/clinic/reg-clinic',
     FETCH_CLINICS: '/clinic/clinics',
     REG_CLINIC_ADMIN: '/adm-cli/reg-clinic-admin',
-    FETCH_CLINIC_PAGINATION_DATA: '/clinic/all/%s'
+    FETCH_CLINIC_PAGINATION_DATA: '/clinic/all/%s',
+    SEARCH_CLINIC: 'clinic/all/search-clinics',
 };
 
 class ClinicService extends HttpClient {
+
+    fetchClinicsData = async payload => {
+        try {
+            const { data } = await this.getApiClient().get(
+                FINALPOINTS.FETCH_CLINICS
+            );
+            const clinics = data;
+            return { clinics };
+        } catch (error) {
+            return error.response;
+        }
+    };
+
 
     regClinic = async payload => {
         try {
@@ -19,20 +34,6 @@ class ClinicService extends HttpClient {
             );
 
             return { data };
-        } catch (error) {
-            return error.response;
-        }
-    };
-
-    fetchClinicsData = async payload => {
-        try {
-            const { data } = await this.getApiClient().get(
-                FINALPOINTS.FETCH_CLINICS
-            );
-
-            const clinics = data;
-
-            return { clinics };
         } catch (error) {
             return error.response;
         }
@@ -60,7 +61,7 @@ class ClinicService extends HttpClient {
 
             return { data };
         } catch (error) {
-            console.log(error.response.data);
+            return error.response;
         }
     };
     
@@ -76,6 +77,18 @@ class ClinicService extends HttpClient {
             return error.response;
         }
     };
+
+    /*fetchClinicByApp = async payload => {
+        try {
+            const { data } = await this.getApiClient().get(
+                format(FINALPOINTS.FETCH_CLINIC_BY_APP, payload.typeId)
+            );
+
+            return { data };
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    };*/
 
 
 }

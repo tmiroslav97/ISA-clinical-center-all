@@ -45,14 +45,17 @@ public class ClinicController {
         return new ResponseEntity<>(this.clinicService.getClinics(), HttpStatus.OK);
     }
 
-    /*@RequestMapping(method = GET, value = "/search-clinics")
-    public ResponseEntity<List<Clinic>> searchClinics(@PathVariable String name) {
-        return new ResponseEntity<>(this.clinicService.searchClinics(name), HttpStatus.OK);
-    }*/
+    @RequestMapping(method = GET, value = "/{clinicId}")
+    @PreAuthorize("hasRole('PATIENT')")
+    public ResponseEntity<ClinicResponse> clinic(@PathVariable Long clinicId) {
+        return new ResponseEntity<>(this.clinicService.clinic(clinicId), HttpStatus.CREATED);
+    }
 
-    @RequestMapping(method = POST, value = "/search")
-    public ResponseEntity<ClinicResponsePageDTO> searchClinics(@RequestBody ClinicSearchDTO clinicSearchDTO) {
-        return new ResponseEntity<>(this.clinicService.searchClinics(clinicSearchDTO), HttpStatus.OK);
+
+
+    @RequestMapping(method = POST, value = "/clinics/search-clinics")
+    public ResponseEntity<ClinicResponsePageDTO> getClinics(@RequestBody ClinicSearchDTO clinicSearchDTO) {
+        return new ResponseEntity<>(this.clinicService.findAll(clinicSearchDTO), HttpStatus.OK);
     }
 
     @RequestMapping(method = GET, value = "/all/{pageCnt}")
