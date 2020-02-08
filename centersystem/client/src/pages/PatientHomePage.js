@@ -10,7 +10,6 @@ const PatientHomePage = () => {
     const dispatch = useDispatch();
     const patientId = useSelector(userIdSelector);
     const isFetchUserData = useSelector(isFetchUserDataSelector);
-    const userData = useSelector(userDataSelector);
 
     useEffect(() => {
         if (patientId != null) {
