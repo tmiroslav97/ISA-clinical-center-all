@@ -1,70 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Row, Col, Container, Table, Button, Modal, Form } from 'react-bootstrap';
+import React from 'react';
+import { Row, Col, Container, Table, Button } from 'react-bootstrap';
 import { userDataSelector } from '../store/user/selectors';
-import { useSelector,useDispatch } from 'react-redux';
-import {editUserInformation} from '../store/user/actions';
+import { useSelector } from 'react-redux';
 
-
-const UserProfile = () => {
-    const dispatch = useDispatch();
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [id, setId] = useState(0);
-
-    
+const UserProfile = ({ }) => {
     const data = useSelector(userDataSelector);
-    
-    const [show1, setShow1] = useState(false);
-
-    const handleShowEdit = (data) => {
-        setFirstName(data.firstName);
-        setLastName(data.lastName);
-        setEmail(data.email);
-        setId(data.id);
-        setShow1(true);
-    }
-    const handleEdit = () =>{
-        dispatch(
-            editUserInformation({id,firstName,lastName,email})
-        );
-        setShow1(false);
-    }
-    
-    
     return (
-        <>
-        <Modal show={show1}  onHide={handleEdit} animation={false}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Edit data:</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Form>
-                        <Form.Group as={Col}>
-                            <Form.Label>First name:</Form.Label>
-                            <Form.Control type="text"  value={firstName} onChange={({ currentTarget }) => {
-                                setFirstName(currentTarget.value);}}/>
-                        </Form.Group>
-                        <Form.Group as={Col}>
-                            <Form.Label>Last name:</Form.Label>
-                            <Form.Control type="text" value={lastName} onChange={({ currentTarget }) => {
-                                setLastName(currentTarget.value);}} />
-                        </Form.Group>
-                        <Form.Group as={Col}>
-                            <Form.Label>Email:</Form.Label>
-                            <Form.Control type="text" value={email} onChange={({ currentTarget }) => {
-                                setEmail(currentTarget.value);}}/>
-                        </Form.Group>
-                    </Form>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary" onClick={handleEdit}>
-                        Edit
-                    </Button>
-                </Modal.Footer>
-        </Modal>
-
-
         <Container>
             <Row>
                 <Col md={{ span: 10, offset: 1 }} xs={12}>
@@ -95,7 +36,7 @@ const UserProfile = () => {
                             </tr>
                             <tr>
                                 <td colSpan="2" align="right">
-                                    <Button onClick={()=>{handleShowEdit(data)}}>Edit data</Button>
+                                    <Button>Edit data</Button>
                                 </td>
                             </tr>
                         </tbody>
@@ -103,7 +44,6 @@ const UserProfile = () => {
                 </Col>
             </Row>
         </Container>
-        </>
     );
 }
 
