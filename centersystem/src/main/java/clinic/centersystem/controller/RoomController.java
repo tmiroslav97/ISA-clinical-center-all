@@ -1,6 +1,9 @@
 package clinic.centersystem.controller;
 
+import clinic.centersystem.dto.request.RoomEditReqDTO;
+import clinic.centersystem.dto.request.RoomReqDTO;
 import clinic.centersystem.dto.request.RoomSearchDTO;
+import clinic.centersystem.dto.request.RoomSearchWithoutFiltratingReqDTO;
 import clinic.centersystem.dto.response.RoomResponseDTO;
 import clinic.centersystem.dto.response.RoomResponseTerminPageDTO;
 import clinic.centersystem.model.Room;
@@ -37,4 +40,26 @@ public class RoomController {
     public ResponseEntity<RoomResponseTerminPageDTO> getClinicRooms(@RequestBody RoomSearchDTO roomSearchDTO) {
         return new ResponseEntity<>(roomService.searchRooms(roomSearchDTO), HttpStatus.OK);
     }
+
+    @RequestMapping(method = POST, value = "/search-rooms")
+    public ResponseEntity<List<Room>>searchRooms(@RequestBody RoomSearchWithoutFiltratingReqDTO roomSearchWithoutFiltratingReqDTO){
+        return new ResponseEntity<>(roomService.searchRoomsWithoutFiltrating(roomSearchWithoutFiltratingReqDTO),HttpStatus.OK);
+    }
+
+    @RequestMapping(method = POST, value = "/add-room/{clinicId}")
+    public ResponseEntity<String>addRoom(@RequestBody RoomReqDTO roomReqDTO, @PathVariable Long clinicId ){
+        return new ResponseEntity<>(roomService.addRoom(roomReqDTO, clinicId), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = POST, value = "/edit-room")
+    public ResponseEntity<String>editRoom(@RequestBody RoomEditReqDTO roomEditReqDTO){
+        return new ResponseEntity<>(this.roomService.editRoom(roomEditReqDTO), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = POST, value = "/delete-room/{roomId}")
+    public ResponseEntity<String>deleteRoom(@PathVariable Long roomId){
+        return new ResponseEntity<>(this.roomService.deleteRoom(roomId), HttpStatus.OK);
+    }
+
+
 }

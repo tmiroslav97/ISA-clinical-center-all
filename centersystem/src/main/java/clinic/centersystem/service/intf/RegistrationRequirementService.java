@@ -19,7 +19,7 @@ public interface RegistrationRequirementService {
 
     String approveRegistrationRequest(Long id);
 
-    String rejectRegistrationRequest(Long id, String message);
+    int rejectRegistrationRequest(Long id, String message);
 
     RegistrationReqResponseDTO findAll(Integer pageCnt);
 

@@ -35,5 +35,10 @@ public class CalendarServiceImpl implements CalendarService {
         return calendarRepository.findCalendarIdByPersonnelId(id);
     }
 
+    @Override
+    public Calendar findOneById(Long id) {
+        return calendarRepository.findOneById(id);
+    }
+
 
 }

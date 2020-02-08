@@ -18,3 +18,4 @@ export const FETCH_CADMIN_DATA = 'fetch_cadmin_data';
 export const FETCH_PATIENT_DATA = 'fetch_patient_data';
 //doctor constants
 export const FETCH_DOCTOR_DATA = 'fetch_doctor_data';
+export const EDIT_USER_INFORMATION = 'edit_user_information';

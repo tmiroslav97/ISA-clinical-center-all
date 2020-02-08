@@ -1,0 +1,20 @@
+sudo: required
+language: java
+jdk: oraclejdk8
+
+services:
+  - mysql
+
+before_install:
+  - cd centersystem
+  - chmod +x ./mvnw
+
+script:
+  - ./mvnw clean install -DskipTests=true -B
+
+dist: trusty
+
+deploy:
+  provider: heroku
+  api_key: $HEROKU_API_KEY
+  app: centersystem

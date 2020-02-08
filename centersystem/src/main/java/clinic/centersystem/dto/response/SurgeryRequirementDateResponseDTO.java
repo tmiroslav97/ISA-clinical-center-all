@@ -1,10 +1,6 @@
 package clinic.centersystem.dto.response;
 
-import clinic.centersystem.common.db.DbColumnConstants;
-import clinic.centersystem.model.Clinic;
 import lombok.*;
-
-import javax.persistence.*;
 
 @Builder
 @Getter

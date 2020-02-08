@@ -1,8 +1,6 @@
 package clinic.centersystem.repository;
 
 import clinic.centersystem.model.Clinic;
-import clinic.centersystem.model.AppointmentType;
-import org.joda.time.DateTime;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

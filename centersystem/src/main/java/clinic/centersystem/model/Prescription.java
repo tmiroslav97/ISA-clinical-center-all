@@ -23,7 +23,7 @@ public class Prescription {
     @Column(name = DbColumnConstants.ISVALIDATE, nullable = false)
     private boolean isValidate = false;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private Nurse nurse;
 
@@ -31,12 +31,14 @@ public class Prescription {
     @ManyToOne(fetch = FetchType.LAZY)
     private Medicine medicine;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private MedicalReport medicalReport;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private Clinic clinic;
 
+    @Version
+    private Long version = 0L;
 }

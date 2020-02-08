@@ -57,6 +57,9 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
     private List<Authority> authorities;
 
+    @Version
+    private Long version = 0L;
+
     public String getUsername() {
         return this.email;
     }

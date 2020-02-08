@@ -56,28 +56,28 @@ const RegTable = () => {
 
     return (
         <div>
-            <Modal show={show} onHide={handleClose} animation={true}>
+            <Modal show={show} onHide={handleClose} id="regReqModal" animation={true}>
                 <Modal.Header closeButton>
                     <Modal.Title>Rejected reason:</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form noValidate validated={validated} onSubmit={handleReject}>
+                    <Form noValidate validated={validated} id="formRegReqReject" onSubmit={handleReject}>
                         <Form.Group as={Col}>
-                            <Form.Control required as="textarea" pattern=".{15,90}"  rows="4" id="reason" name="txtReason"
+                            <Form.Control required as="textarea" max="90" rows="4" id="txtReason" name="reason"
                                 onChange={({ currentTarget }) => {
                                     setMessage(currentTarget.value);
                                 }}
                             />
                         </Form.Group>
                         <Form.Group as={Col} align="right">
-                            <Button variant="primary" type="submit">
+                            <Button variant="primary" id="btnReject" type="submit">
                                 Send
                          </Button>
                         </Form.Group>
                     </Form>
                 </Modal.Body>
             </Modal>
-            <Table responsive>
+            <Table id="regReqTable" responsive>
                 <thead>
                     <tr>
                         <th>E-mail</th>

@@ -1,12 +1,8 @@
 package clinic.centersystem.controller;
 
 import clinic.centersystem.dto.request.PatientSearchRequestDTO;
-import clinic.centersystem.dto.response.ClinicResponse;
-import clinic.centersystem.dto.response.DoctorResponse;
 import clinic.centersystem.dto.response.PatientResponse;
 import clinic.centersystem.dto.response.PatientSortResponseDTO;
-import clinic.centersystem.model.Clinic;
-import clinic.centersystem.model.Doctor;
 import clinic.centersystem.service.PatientServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
