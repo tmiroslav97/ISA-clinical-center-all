@@ -3,7 +3,6 @@ package clinic.centersystem.converter;
 import clinic.centersystem.dto.request.DoctorRequestDTO;
 import clinic.centersystem.dto.response.DoctorResponse;
 import clinic.centersystem.model.Doctor;
-import clinic.centersystem.model.enumeration.RoleEnum;
 
 import java.util.stream.Collectors;
 

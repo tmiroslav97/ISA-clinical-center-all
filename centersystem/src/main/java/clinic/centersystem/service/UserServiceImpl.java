@@ -1,5 +1,6 @@
 package clinic.centersystem.service;
 
+import clinic.centersystem.dto.request.UserEditReqDTO;
 import clinic.centersystem.exception.ResourceNotExistsException;
 import clinic.centersystem.exception.UserNotFoundException;
 import clinic.centersystem.model.User;
@@ -45,5 +46,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean existsByEmail(String email) {
         return userRepository.existsByEmail(email);
+    }
+
+    public String editUserProfile(UserEditReqDTO userEditReqDTO){
+        User user = this.findById(userEditReqDTO.getId());
+        user.setFirstName(userEditReqDTO.getFirstName());
+        user.setLastName(userEditReqDTO.getLastName());
+        user.setEmail(userEditReqDTO.getEmail());
+        userRepository.save(user);
+        return "Successfully edited users profile";
     }
 }

@@ -56,6 +56,4 @@ public class Doctor extends Personnel {
         this.appointments = appointments;
         this.surgeries = surgeries;
     }
-
-
 }

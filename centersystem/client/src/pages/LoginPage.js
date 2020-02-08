@@ -11,7 +11,6 @@ const LoginPage = () => {
     const [password, setPassword] = useState();
     const [validated, setValidated] = useState(false);
     const userId = useSelector(userIdSelector);
-    console.log(userId);
 
     useEffect(() => {
         if (userId != null && userId != '') {

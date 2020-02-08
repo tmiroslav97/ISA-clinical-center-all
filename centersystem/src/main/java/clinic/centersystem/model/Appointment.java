@@ -4,6 +4,7 @@ import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
 import clinic.centersystem.model.enumeration.AppStateEnum;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,27 +42,27 @@ public class Appointment {
     @Column(name = DbColumnConstants.APPSTATE, nullable = false)
     private AppStateEnum appState;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private Patient patient;
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     private MedicalReport medicalReport;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private Clinic clinic;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private AppointmentType type;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private Room room;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private Doctor doctor;
 

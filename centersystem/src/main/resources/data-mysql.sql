@@ -101,6 +101,18 @@ VALUES (7, 3);
 INSERT INTO user_authority (user_id, authority_id)
 VALUES (7, 4);
 
+INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
+                   last_password_reset_date, password)
+VALUES (800, 'Ana', 'Antic', 'anabanana@gmail.com', true, false, '2019-11-20 11:30:00',
+        '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra');
+
+INSERT INTO personnel(id, clinic_id)
+VALUES (800, 1);
+
+INSERT INTO doctor(cnt_rating, sum_rating, start_time, end_time, id, clinic_id)
+VALUES (0, 0, 8, 16, 800,1);
+
+
 INSERT INTO patient (address, city, country, is_activated, phone_num, unoip, id)
 VALUES ('Masarikova', 'Novi Sad', 'Srbija', true, '065312532', '4351233', 6);
 

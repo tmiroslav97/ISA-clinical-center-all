@@ -2,6 +2,7 @@ package clinic.centersystem.model;
 
 import clinic.centersystem.common.db.DbTableConstants;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,17 @@ import java.util.Set;
 @Table(name = DbTableConstants.PERSONNEL)
 public class Personnel extends User {
 
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY)
+    private Calendar calendar;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Clinic clinic;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "personnel", fetch = FetchType.LAZY)
+    private Set<AbsenceHolidayRequirement> absenceHolidayRequirements;
+
     @Builder(builderMethodName = "personnelBuilder")
     public Personnel(Long id, String email, String password, String firstName, String lastName,
                      boolean enabled, boolean isFirstLog, Timestamp lastPasswordResetDate,
@@ -29,17 +41,6 @@ public class Personnel extends User {
         this.calendar = calendar;
         this.absenceHolidayRequirements = absenceHolidayRequirements;
     }
-
-    @JsonBackReference
-    @OneToOne(fetch = FetchType.LAZY)
-    private Calendar calendar;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Clinic clinic;
-
-    @JsonBackReference
-    @OneToMany(mappedBy = "personnel", fetch = FetchType.LAZY)
-    private Set<AbsenceHolidayRequirement> absenceHolidayRequirements;
 
 
 }
