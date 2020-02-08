@@ -1,8 +1,11 @@
 import React from 'react';
 import { Nav, Col, Row , Tab} from 'react-bootstrap';
 import ClinicProfileInfo from "./ClinicsProfileInfo";
+import { useDispatch, useSelector } from 'react-redux';
+import {clinicsDataSelector} from '../../store/clinics/selectors';
 
 const ClinicProfile = () => {
+    const clinics = useSelector(clinicsDataSelector);
     return(
         <Tab.Container id="left-tabs-doc-home" >
             <Row>
