@@ -78,7 +78,7 @@ const CA = () => {
                         <Card.Body>
                             <Card.Title>Exemination room</Card.Title>
                             <Card.Text>
-                                You can acces exemination room.
+                                You can add, edit, search and delete exemination room.
                             </Card.Text>
                             <Button variant="primary" onClick={() => { history.push('/adminc/exe-room/' + data.clinicId); }} >Rooms</Button>
                         </Card.Body>

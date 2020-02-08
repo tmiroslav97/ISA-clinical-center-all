@@ -26,4 +26,6 @@ public interface DoctorService {
     List<Doctor> searchDoctorByName(String name);
 
     List<DoctorResponse> findByClinicId(Long clinicId);
+
+    Doctor findOneById(Long id);
 }

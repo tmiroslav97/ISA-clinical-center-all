@@ -1,18 +1,12 @@
 package clinic.centersystem.controller;
 
-import clinic.centersystem.converter.DoctorConverter;
 import clinic.centersystem.dto.request.DoctorRequestDTO;
+import clinic.centersystem.dto.request.DoctorSearchReqDTO;
 import clinic.centersystem.dto.response.DoctorResponse;
-import clinic.centersystem.model.Authority;
-import clinic.centersystem.model.ClinicAdmin;
-import clinic.centersystem.model.Doctor;
 import clinic.centersystem.service.DoctorServiceImpl;
-import clinic.centersystem.service.intf.AuthorityService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,9 +37,9 @@ public class DoctorController {
         return new ResponseEntity<List<DoctorResponse>>(this.doctorService.getDoctors(), HttpStatus.OK);
     }
 
-    @RequestMapping(method = GET, value = "/search-doctors")
-    public ResponseEntity<List<Doctor>> searchDoctors(@PathVariable String name) {
-        return new ResponseEntity<List<Doctor>>(this.doctorService.searchDoctors(name), HttpStatus.OK);
+    @RequestMapping(method = POST, value = "/search-doctors")
+    public ResponseEntity<List<DoctorResponse>> searchDoctors(@RequestBody DoctorSearchReqDTO doctorSearchReqDTO) {
+        return new ResponseEntity<List<DoctorResponse>>(this.doctorService.searchDoctor(doctorSearchReqDTO), HttpStatus.OK);
     }
 
     @RequestMapping(method = POST, value = "/add-doctor")
@@ -54,15 +48,19 @@ public class DoctorController {
     }
 
     @RequestMapping(method = POST, value="/add-doctor-on-clinic/{clinicId}")
-    public ResponseEntity<String>addDoctor(@RequestBody Doctor doctor, @PathVariable Long clinicId){
-        return new ResponseEntity<>(this.doctorService.addDoctorOnClinic(doctor, clinicId), HttpStatus.OK);
+    public ResponseEntity<String>addDoctor(@RequestBody DoctorRequestDTO doctorRequestDTO, @PathVariable Long clinicId){
+        return new ResponseEntity<>(this.doctorService.addDoctorOnClinic(doctorRequestDTO, clinicId), HttpStatus.OK);
+    }
+
+    @RequestMapping(method = POST, value = "/delete/{doctorId}")
+    public ResponseEntity<String>deleteDoctor(@PathVariable Long doctorId){
+        return new ResponseEntity<>(this.doctorService.deleteDoctor(doctorId),HttpStatus.OK);
     }
 
     @RequestMapping(method = GET, value = "/all/{clinicId}")
     public ResponseEntity<List<DoctorResponse>> addDoctor(@PathVariable Long clinicId) {
         return new ResponseEntity<>(doctorService.findByClinicId(clinicId), HttpStatus.OK);
     }
-
 
 
 

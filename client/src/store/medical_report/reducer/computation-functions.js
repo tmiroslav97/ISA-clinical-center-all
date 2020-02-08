@@ -11,3 +11,10 @@ export function putIsFetchMedicalReport(state, payload) {
         isFetchMedicalReport: payload
     };
 }
+
+export function putMedicalReports(state, payload) {
+    return {
+        ...state,
+        medicalReports: payload
+    };
+}

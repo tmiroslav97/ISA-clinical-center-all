@@ -1,12 +1,14 @@
 import {
-  
+    PUT_DOCTORS_MEDICAL_REPORTS,
+    PUT_IS_FETCH_MEDICAL_REPORT
 } from '../constants';
 
 import * as computationFunctions from './computation-functions';
 
 const initialState = {
     medicalReport: null,
-    isFetchMedicalReport: false
+    isFetchMedicalReport: false,
+    medicalReports: []
 };
 
 const medicalReportReducer = (state = initialState, { type, payload }) => {
@@ -17,7 +19,8 @@ const medicalReportReducer = (state = initialState, { type, payload }) => {
 };
 
 const actionHandler = {
-
+    [PUT_IS_FETCH_MEDICAL_REPORT]: computationFunctions.putIsFetchMedicalReport,
+    [PUT_DOCTORS_MEDICAL_REPORTS]: computationFunctions.putMedicalReports
 };
 
 export default medicalReportReducer;

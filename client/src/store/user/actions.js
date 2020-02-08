@@ -12,7 +12,8 @@ import {
     FETCH_PATIENT_DATA,
     FETCH_DOCTOR_DATA,
     PUT_IS_FETCH_USER_DATA,
-    PUT_USER_ID
+    PUT_USER_ID,
+    EDIT_USER_INFORMATION
 } from './constants';
 
 //patient actions
@@ -91,3 +92,7 @@ export const changePassword = payload => ({
     payload
 });
 
+export const editUserInformation = payload => ({
+    type: EDIT_USER_INFORMATION,
+    payload
+});

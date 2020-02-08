@@ -1,5 +1,6 @@
-import { take, put, call } from 'redux-saga/effects';
+import { take, put, call, select } from 'redux-saga/effects';
 import { history } from '../../index';
+import {userDataSelector} from '../../store/user/selectors';
 
 import {
     LOGIN,
@@ -11,7 +12,8 @@ import {
     FETCH_NURSE_DATA,
     FETCH_CADMIN_DATA,
     FETCH_PATIENT_DATA,
-    FETCH_DOCTOR_DATA
+    FETCH_DOCTOR_DATA,
+    EDIT_USER_INFORMATION
 } from './constants';
 
 import authService from '../../services/AuthSecurity';
@@ -97,7 +99,8 @@ export function* signOut() {
     const { payload } = yield take(SIGN_OUT);
     localStorage.clear();
     yield put(putUserData(payload));
-    yield put(putUserToken(''));
+    yield put(putUserId(null));
+    yield put(putUserToken(null));
     history.push('/');
 }
 
@@ -162,4 +165,41 @@ export function* changePassword() {
     }
 }
 
+export function* editUserInformation() {
+    const { payload } = yield take(EDIT_USER_INFORMATION);
+    const { response } = yield call(CAdminService.editUserInformation, payload);
+    if (response === 'Successfully edited users profile') {
+        yield put(putSuccessMsg(response));
+        yield put(putSuccessMsg(null));
+        const userData = yield select(userDataSelector);
+        if(userData.roles.includes("ROLE_DOCTOR")){
+            yield put(putIsFetchUserData(false));
+            const { data } = yield call(DoctorService.fetchDoctorData, {id:payload.id});
+            yield put(putUserData(data));
+            yield put(putIsFetchUserData(true));
+        }else if(userData.roles.includes("ROLE_NURSE")){
+            yield put(putIsFetchUserData(false));
+            const { data } = yield call(NurseService.fetchNurseData, {id:payload.id});
+            yield put(putUserData(data));
+            yield put(putIsFetchUserData(true));
+        }else if(userData.roles.includes("ROLE_ADMINC")){
+            yield put(putIsFetchUserData(false));
+            const { data } = yield call(CAdminService.fetchCAdminData, {id:payload.id});
+            yield put(putUserData(data));
+            yield put(putIsFetchUserData(true));
+        }else if(userData.roles.includes("ROLE_PATIENT")){
+            yield put(putIsFetchUserData(false));
+            const { data } = yield call(PatientService.fetchPatientData, {patientId:payload.id});
+            yield put(putUserData(data));
+            yield put(putIsFetchUserData(true));
+        }else{
+            yield put(putErrorMsg('Unknown user role'));
+            yield put(putErrorMsg(null));
+        }
+        
+    } else {
+        yield put(putErrorMsg(response));
+        yield put(putErrorMsg(null));
+    }
+}
 

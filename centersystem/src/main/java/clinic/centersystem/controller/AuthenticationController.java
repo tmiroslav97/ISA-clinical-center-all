@@ -26,8 +26,8 @@ public class AuthenticationController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<LoginUserResponse> createAuthenticationToken(HttpServletRequest servletRequest, @RequestBody JwtAuthenticationRequest authenticationRequest) {
-        return new ResponseEntity<>(authenticationService.login(servletRequest, authenticationRequest), HttpStatus.CREATED);
+    public ResponseEntity<LoginUserResponse> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest) {
+        return new ResponseEntity<>(authenticationService.login(authenticationRequest), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)

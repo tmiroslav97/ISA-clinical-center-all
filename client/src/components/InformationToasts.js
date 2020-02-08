@@ -48,7 +48,7 @@ const InformationToasts = () => {
     }, [info]);
 
     return (
-        <div>
+        <div id="toastMsg">
         </div>
     );
 };
