@@ -143,12 +143,18 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>CI=false npm run build</id>
+                        <id>unset CI</id>
+                        <goals>
+                            <goal>unset CI</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>npm run build</id>
                         <goals>
                             <goal>npm</goal>
                         </goals>
                         <configuration>
-                            <arguments>CI=false run build</arguments>
+                            <arguments>run build</arguments>
                         </configuration>
                     </execution>
                 </executions>
