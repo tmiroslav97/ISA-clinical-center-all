@@ -3,7 +3,8 @@ import { history } from '../index';
 import { format } from 'util';
 
 const FINALPOINTS = {
-    FETCH_ADMINC_DATA: '/adm-cli/%s'
+    FETCH_ADMINC_DATA: '/adm-cli/%s',
+    EDIT_USER_INFORMATION: '/adm-cli/edit-user-profile'
 };
 
 
@@ -20,6 +21,22 @@ class CAdminService extends HttpClient{
             console.log(error.response.data);
         }
     };
+
+    editUserInformation = async payload => {
+        try {
+            const { data } = await this.getApiClient().post(
+                FINALPOINTS.EDIT_USER_INFORMATION, 
+                payload
+            );
+            console.log(data);
+            return { data };
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    };
+
+
+
 
     
 

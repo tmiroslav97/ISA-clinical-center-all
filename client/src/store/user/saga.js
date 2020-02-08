@@ -11,7 +11,8 @@ import {
     FETCH_NURSE_DATA,
     FETCH_CADMIN_DATA,
     FETCH_PATIENT_DATA,
-    FETCH_DOCTOR_DATA
+    FETCH_DOCTOR_DATA,
+    EDIT_USER_INFORMATION
 } from './constants';
 
 import authService from '../../services/AuthSecurity';
@@ -162,4 +163,17 @@ export function* changePassword() {
     }
 }
 
+export function* editUserInformation() {
+    const { payload } = yield take(EDIT_USER_INFORMATION);
+    console.log(payload);
+    const { data } = yield call(CAdminService.editUserInformation, payload);
+    console.log(data);
+    if (data === 'Successfully edited users profile') {
+        yield put(putSuccessMsg(data));
+        yield put(putSuccessMsg(null));
+    } else {
+        yield put(putErrorMsg(data));
+        yield put(putErrorMsg(null));
+    }
+}
 

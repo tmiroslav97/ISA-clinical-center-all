@@ -60,7 +60,8 @@ class DoctorService extends HttpClient {
                 format(FINALPOINTS.ADD_DOCTOR, payload.clinicId),
                 payload
             );
-
+            console.log("DATA")
+            console.log(data);
             const response = data;
             return { response };
         } catch (error) {
@@ -105,7 +106,8 @@ class DoctorService extends HttpClient {
                 format(FINALPOINTS.DELETE_DOCTOR, payload.id),
                 payload
             );
-            
+            console.log("ISPIS DATA");
+            console.log(data);
 
             const response = data;
             return { response };

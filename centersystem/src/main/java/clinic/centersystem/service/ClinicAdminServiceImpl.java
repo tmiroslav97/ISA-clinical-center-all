@@ -1,6 +1,7 @@
 package clinic.centersystem.service;
 
 import clinic.centersystem.converter.ClinicAdminConverter;
+import clinic.centersystem.dto.request.ClinicAdminEditReqDTO;
 import clinic.centersystem.dto.request.ClinicAdminReqDTO;
 import clinic.centersystem.dto.response.ClinicAdministratoreResponse;
 import clinic.centersystem.exception.ResourceExistsException;
@@ -83,13 +84,6 @@ public class ClinicAdminServiceImpl implements ClinicAdminService {
         return "Successfully deleted doctor";
     }
 
-    public String deleteAppointmentType(Long id) {
-        List<AppointmentType> appointmentTypes = this.appointmentTypeService.findAll();
-        AppointmentType appointmentType = this.appointmentTypeService.findById(id);
-        appointmentTypes.remove(appointmentType);
-        return "Successfully deleted doctor";
-    }
-
     @Override
     public String registerClinicAdmin(ClinicAdminReqDTO clinicAdminReqDTO) {
         String password = clinicAdminReqDTO.getPassword();
@@ -117,6 +111,16 @@ public class ClinicAdminServiceImpl implements ClinicAdminService {
 
         return "Clinic admin successfully registered";
     }
+
+    public String editClinicAdmin(ClinicAdminEditReqDTO clinicAdminEditReqDTO){
+        ClinicAdmin clinicAdmin = this.findById(clinicAdminEditReqDTO.getId());
+        clinicAdmin.setFirstName(clinicAdminEditReqDTO.getFirstName());
+        clinicAdmin.setLastName(clinicAdminEditReqDTO.getLastName());
+        clinicAdmin.setEmail(clinicAdminEditReqDTO.getEmail());
+        clinicAdminRepository.save(clinicAdmin);
+        return "Successfully edited users profile";
+    }
+
 
 
 }

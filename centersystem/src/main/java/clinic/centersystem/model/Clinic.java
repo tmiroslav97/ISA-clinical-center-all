@@ -45,7 +45,7 @@ public class Clinic {
     private PriceList priceList;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Set<Doctor> doctors = new HashSet<>();
 
     @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)

@@ -181,7 +181,7 @@ const DoctorAllAtOnce = ({ match }) => {
                             <th>#</th>
                             <th>First name</th>
                             <th>Last name</th>
-                            <th>Delete</th>
+                            <th>Delete </th>
                         </tr>
                     </thead>
                     <tbody>
