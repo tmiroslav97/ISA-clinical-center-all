@@ -40,8 +40,4 @@ public class ClinicCenterAdministratorController {
         return new ResponseEntity<>(msg, HttpStatus.OK);
     }
 
-
-
-
-    
 }

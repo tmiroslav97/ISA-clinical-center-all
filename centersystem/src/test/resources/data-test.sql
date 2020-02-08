@@ -57,3 +57,8 @@ INSERT INTO registration_requirement (address, city, country, email, first_name,
                                       phone_num, unoip,version)
 VALUES ('Safarikova 31', 'Bijeljina', 'Bosna', 'asddsam', 'Miki', 'Peric', '123', '123', '065987654',
         '1234543',0);
+
+INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
+                                      phone_num, unoip,version)
+VALUES ('Safarikova 31', 'Bijeljina', 'Bosna', 'tomic.miroslav97@gmail.com', 'Miki', 'Peric', '123', '123', '065987654',
+        '1234543',0);

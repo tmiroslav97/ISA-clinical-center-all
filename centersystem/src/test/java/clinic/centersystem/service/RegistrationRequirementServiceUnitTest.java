@@ -108,9 +108,9 @@ public class RegistrationRequirementServiceUnitTest {
         String succcMsg = registrationRequirementService.approveRegistrationRequest(1L);
         verify(passwordEncoderMock, times(1)).encode(PASSWORD_VALID);
         verify(emailServiceMock, times(1)).sendSyncMailTo("miroslav.tomic@outlook.com", "Account registration",
-                "    Patient account was create successfully!\n" +
+                "    Patient account created successfully!\n" +
                         "    Please follow this link to activate account:\n" +
-                        "    http://localhost:8080/cca/activate-account/1");
+                        "    http://localhost:8080/sec/activate-account/1");
         assertEquals("Patient registration approved", succcMsg);
     }
 
