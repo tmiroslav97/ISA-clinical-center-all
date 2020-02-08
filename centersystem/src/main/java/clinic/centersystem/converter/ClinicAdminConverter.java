@@ -2,10 +2,7 @@ package clinic.centersystem.converter;
 
 import clinic.centersystem.dto.request.ClinicAdminReqDTO;
 import clinic.centersystem.dto.response.ClinicAdministratoreResponse;
-import clinic.centersystem.model.Clinic;
 import clinic.centersystem.model.ClinicAdmin;
-import clinic.centersystem.model.ClinicCenterAdmin;
-import clinic.centersystem.model.enumeration.RoleEnum;
 
 import java.util.stream.Collectors;
 

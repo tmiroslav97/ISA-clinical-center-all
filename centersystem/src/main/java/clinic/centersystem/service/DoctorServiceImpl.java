@@ -54,6 +54,11 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
+    public Doctor save(Doctor doctor) {
+        return doctorRepository.save(doctor);
+    }
+
+    @Override
     public Doctor save(DoctorRequestDTO doctorRequestDTO) {
         Doctor doctor = DoctorConverter.toCreateDoctorFromDoctorRequest(doctorRequestDTO);
         doctor = this.doctorRepository.save(doctor);
@@ -66,11 +71,6 @@ public class DoctorServiceImpl implements DoctorService {
         return doctorRepository.findOneById(id);
     }
 
-
-    @Override
-    public Doctor save(Doctor doctor) {
-        return this.doctorRepository.save(doctor);
-    }
 
     @Override
     public void remove(Long id) {

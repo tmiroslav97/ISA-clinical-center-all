@@ -3,7 +3,6 @@ package clinic.centersystem.model;
 import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -44,8 +43,7 @@ public class Clinic {
     @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
     private Set<PriceListItem> priceList = new HashSet<>();
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "clinic", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
     private Set<Doctor> doctors = new HashSet<>();
 
     @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
@@ -54,22 +52,22 @@ public class Clinic {
     @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
     private Set<ClinicAdmin> clinicAdmins = new HashSet<>();
 
-    @JsonIgnore
+    @JsonBackReference
     @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
     private Set<AppointmentType> appointmentTypes = new HashSet<>();
 
-    @JsonIgnore
+    @JsonBackReference
     @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
     private Set<Room> rooms = new HashSet<>();
 
     @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
     private Set<Appointment> appointments = new HashSet<>();
 
-    @JsonIgnore
+    @JsonBackReference
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Patient> patients = new HashSet<>();
 
-    @JsonIgnore
+    @JsonBackReference
     @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
     private Set<AbsenceHolidayRequirement> reqAbs = new HashSet<>();
 

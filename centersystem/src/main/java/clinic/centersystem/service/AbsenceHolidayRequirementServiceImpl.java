@@ -11,7 +11,6 @@ import clinic.centersystem.repository.AbsenceHolidayRequirementRepository;
 import clinic.centersystem.service.intf.AbsenceHolidayRequirementService;
 import clinic.centersystem.service.intf.ClinicService;
 import clinic.centersystem.service.intf.PersonnelService;
-import org.jadira.usertype.dateandtime.joda.PersistentDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

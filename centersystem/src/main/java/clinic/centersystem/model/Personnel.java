@@ -20,17 +20,6 @@ import java.util.Set;
 @Table(name = DbTableConstants.PERSONNEL)
 public class Personnel extends User {
 
-    @Builder(builderMethodName = "personnelBuilder")
-    public Personnel(Long id, String email, String password, String firstName, String lastName,
-                     boolean enabled, boolean isFirstLog, Timestamp lastPasswordResetDate,
-                     List<Authority> authorities, Clinic clinic, Calendar calendar,
-                     Set<AbsenceHolidayRequirement> absenceHolidayRequirements, Long version) {
-        super(id, email, password, firstName, lastName, enabled, isFirstLog, lastPasswordResetDate, authorities, version);
-        this.clinic = clinic;
-        this.calendar = calendar;
-        this.absenceHolidayRequirements = absenceHolidayRequirements;
-    }
-
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     private Calendar calendar;
@@ -41,6 +30,17 @@ public class Personnel extends User {
     @JsonIgnore
     @OneToMany(mappedBy = "personnel", fetch = FetchType.LAZY)
     private Set<AbsenceHolidayRequirement> absenceHolidayRequirements;
+
+    @Builder(builderMethodName = "personnelBuilder")
+    public Personnel(Long id, String email, String password, String firstName, String lastName,
+                     boolean enabled, boolean isFirstLog, Timestamp lastPasswordResetDate,
+                     List<Authority> authorities, Clinic clinic, Calendar calendar,
+                     Set<AbsenceHolidayRequirement> absenceHolidayRequirements, Long version) {
+        super(id, email, password, firstName, lastName, enabled, isFirstLog, lastPasswordResetDate, authorities, version);
+        this.clinic = clinic;
+        this.calendar = calendar;
+        this.absenceHolidayRequirements = absenceHolidayRequirements;
+    }
 
 
 }

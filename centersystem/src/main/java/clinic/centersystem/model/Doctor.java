@@ -4,7 +4,6 @@ package clinic.centersystem.model;
 import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,11 +34,11 @@ public class Doctor extends Personnel {
     @Column(name = DbColumnConstants.ENDTIME, nullable = false)
     private Integer endTime;
 
-    @JsonIgnore
+    @JsonBackReference
     @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY)
     private Set<Appointment> appointments = new HashSet<>();
 
-    @JsonIgnore
+    @JsonBackReference
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Surgery> surgeries = new HashSet<>();
 
