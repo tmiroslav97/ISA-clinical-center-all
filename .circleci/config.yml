@@ -134,12 +134,7 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - build_backend:
-          filters:
-            branches:
-              only: -master
-              ignore: -feature-*
-                -bugfix-*
+      - build_backend
       # dok ne skontamo kako da napravimo da radi za unit testove ovo dole ostaje zakomentarisano (ptreba kreirati bazu podataka prije ubacivanja podataka, ali ona se tek kreira kad se pokrene app odnosno testovi)
       #- test_backend:
       #requires:
@@ -151,9 +146,4 @@ workflows:
       #ignore:
       #-feature-*
       #-bugfix-*
-      - build_front:
-          filters:
-            branches:
-              only: -master
-              ignore: -feature-*
-                -bugfix-*
+      - build_front
