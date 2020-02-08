@@ -3,10 +3,8 @@ package clinic.centersystem.service;
 import clinic.centersystem.converter.DoctorConverter;
 import clinic.centersystem.dto.request.DoctorRequestDTO;
 import clinic.centersystem.dto.request.DoctorSearchReqDTO;
-import clinic.centersystem.dto.response.ClinicResponse;
 import clinic.centersystem.dto.response.DoctorResponse;
 import clinic.centersystem.model.*;
-import clinic.centersystem.repository.ClinicRepository;
 import clinic.centersystem.repository.DoctorRepository;
 import clinic.centersystem.service.intf.AppointmentService;
 import clinic.centersystem.service.intf.AuthorityService;
@@ -161,5 +159,6 @@ public class DoctorServiceImpl implements DoctorService {
 
         return "Successfully added doctor";
     }
+
 
 }

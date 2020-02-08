@@ -1,5 +1,6 @@
-import { take, put, call } from 'redux-saga/effects';
+import { take, put, call, select } from 'redux-saga/effects';
 import { history } from '../../index';
+import {userDataSelector} from '../../store/user/selectors';
 
 import {
     LOGIN,
@@ -165,12 +166,12 @@ export function* changePassword() {
 
 export function* editUserInformation() {
     const { payload } = yield take(EDIT_USER_INFORMATION);
-    console.log(payload);
     const { data } = yield call(CAdminService.editUserInformation, payload);
-    console.log(data);
     if (data === 'Successfully edited users profile') {
         yield put(putSuccessMsg(data));
         yield put(putSuccessMsg(null));
+        //nedostaje 
+        
     } else {
         yield put(putErrorMsg(data));
         yield put(putErrorMsg(null));

@@ -4,7 +4,7 @@ import { format } from 'util';
 
 const FINALPOINTS = {
     FETCH_ADMINC_DATA: '/adm-cli/%s',
-    EDIT_USER_INFORMATION: '/adm-cli/edit-user-profile'
+    EDIT_USER_INFORMATION: '/user/edit-user-profile'
 };
 
 
@@ -28,7 +28,6 @@ class CAdminService extends HttpClient{
                 FINALPOINTS.EDIT_USER_INFORMATION, 
                 payload
             );
-            console.log(data);
             return { data };
         } catch (error) {
             console.log(error.response.data);

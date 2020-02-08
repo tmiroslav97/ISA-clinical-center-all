@@ -1,19 +1,12 @@
 package clinic.centersystem.controller;
 
-import clinic.centersystem.converter.DoctorConverter;
 import clinic.centersystem.dto.request.DoctorRequestDTO;
 import clinic.centersystem.dto.request.DoctorSearchReqDTO;
 import clinic.centersystem.dto.response.DoctorResponse;
-import clinic.centersystem.model.Authority;
-import clinic.centersystem.model.ClinicAdmin;
-import clinic.centersystem.model.Doctor;
 import clinic.centersystem.service.DoctorServiceImpl;
-import clinic.centersystem.service.intf.AuthorityService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -68,7 +61,6 @@ public class DoctorController {
     public ResponseEntity<List<DoctorResponse>> addDoctor(@PathVariable Long clinicId) {
         return new ResponseEntity<>(doctorService.findByClinicId(clinicId), HttpStatus.OK);
     }
-
 
 
 
