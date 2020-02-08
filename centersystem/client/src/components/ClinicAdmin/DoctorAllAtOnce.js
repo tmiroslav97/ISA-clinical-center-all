@@ -15,6 +15,7 @@ const DoctorAllAtOnce = ({ match }) => {
     const [startTime, setStartTime] = useState();
     const [endTime, setEndTime] = useState();
     const [doctorId, setDoctorId] = useState(0);
+    const [workTime, setWorkTime] = useState();
     const doctors = useSelector(doctorsDataSelector);
     const isFetchDoctors = useSelector(isFetchDoctorsSelector);
 
@@ -113,20 +114,24 @@ const DoctorAllAtOnce = ({ match }) => {
                             }}/>
                         </Form.Group>
                     </Form.Row>
-                    <Form.Row>
-                        <Form.Group as={Col}>
-                            <Form.Label>Start time</Form.Label>
-                            <Form.Control type="number" placeholder="Start time" onChange={( { currentTarget } ) => {
-                                    setStartTime(currentTarget.value);
-                            }}  />
+                    <Form.Group as={Row}>
+                            <Form.Label>Choose work time:</Form.Label>
+                            <Col>
+                            <Form.Control as="select" onChange={({ currentTarget }) => {
+                            const str = currentTarget.value.split("-");
+                            setStartTime(str[0]);
+                            setEndTime(str[1]);
+                        }} >
+                            <option value=""></option>
+                            <option value="7-15">7-15</option>
+                            <option value="8-16">8-16</option>
+                            <option value="9-17">9-17</option>
+                            <option value="10-18">10-18</option>
+                            <option value="11-19">11-19</option>
+                        </Form.Control>
+                            </Col>
                         </Form.Group>
-                        <Form.Group as={Col} >
-                            <Form.Label>End time</Form.Label>
-                            <Form.Control type="number" placeholder="End time"   onChange={( { currentTarget } ) => {
-                                    setEndTime(currentTarget.value);
-                            }}/>
-                        </Form.Group>
-                    </Form.Row>
+                    
                     
                 </Form>
             </Modal.Body>
