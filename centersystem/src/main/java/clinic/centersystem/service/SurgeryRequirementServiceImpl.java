@@ -98,7 +98,7 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
         DateTime pickedDateEnd = new DateTime(pickedDateStr, DateTimeZone.UTC);
         pickedDateEnd = pickedDateEnd.plusHours(pickedTermEnd);
 
-        Room roomCheck = roomService.findOneById(surgeryReservationReqDTO.getPickedRoom());
+        Room roomCheck = roomService.findById(surgeryReservationReqDTO.getPickedRoom());
         if (!roomCheck.getType().equals("SUR")) {
             return 4;
         }
@@ -118,7 +118,7 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
         Patient patient = null;
         Room room = null;
         for (Long docId : surgeryReservationReqDTO.getChosenDoc()) {
-            doctor = doctorService.findById(Long.valueOf(docId));
+            doctor = doctorService.findOneById(Long.valueOf(docId));
 
             if (!(doctor.getStartTime() <= pickedTermStart && doctor.getEndTime() >= pickedTermEnd)) {
                 //doktor ne moze da prisustvuje operaciji jer operacija nije u sklopu radnog vremena
@@ -193,6 +193,7 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public void deleteById(Long id) {
         surgeryRequirementRepository.deleteById(id);
         return;
@@ -254,6 +255,12 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
             }
         }
 
+    }
+
+    @Override
+    public void delete(SurgeryRequirement surgeryRequirement) {
+        surgeryRequirementRepository.delete(surgeryRequirement);
+        return;
     }
 
 

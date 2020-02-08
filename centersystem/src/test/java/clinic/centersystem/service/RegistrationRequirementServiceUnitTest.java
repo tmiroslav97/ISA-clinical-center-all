@@ -100,7 +100,7 @@ public class RegistrationRequirementServiceUnitTest {
                 true, true, null,
                 authorities, ADDRESS_VALID, COUNTRY_VALID, CITY_VALID, PHONE_NUME_VALID, UNOIP_VALID,
                 new HashSet<>(), new MedicalRecord(), new HashSet<>(), new HashSet<>(),
-                new HashSet<>(), false);
+                new HashSet<>(), false,0L);
         when(registrationRequirementRepositoryMock.findById(1L)).thenReturn(Optional.of(registrationRequirement));
         when(userServiceMock.existsByEmail(USER_EXISTS_EMAIL)).thenReturn(false);
         when(patientServiceMock.save(registrationRequirement)).thenReturn(patient);

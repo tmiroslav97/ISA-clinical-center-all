@@ -62,8 +62,8 @@ public class Patient extends User {
                    boolean enabled, boolean isFirstLog, Timestamp lastPasswordResetDate,
                    List<Authority> authorities, String address, String country, String city, String phoneNum, String unoip,
                    Set<Clinic> clinics, MedicalRecord medicalRecord, Set<Appointment> appointments, Set<AppointmentRequirement> appointmentRequirements,
-                   Set<Surgery> surgeries, boolean isActivated) {
-        super(id, email, password, firstName, lastName, enabled,isFirstLog, lastPasswordResetDate, authorities);
+                   Set<Surgery> surgeries, boolean isActivated, Long version) {
+        super(id, email, password, firstName, lastName, enabled,isFirstLog, lastPasswordResetDate, authorities, version);
         this.address = address;
         this.country = country;
         this.city = city;

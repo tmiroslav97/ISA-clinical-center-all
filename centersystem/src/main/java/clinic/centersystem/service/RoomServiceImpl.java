@@ -50,6 +50,7 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.MANDATORY)
     public Room findOneById(Long id) {
         return roomRepository.findOneById(id);
     }

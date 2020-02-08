@@ -27,8 +27,8 @@ public class ClinicCenterAdmin extends User {
     @Builder(builderMethodName = "clinicCenterAdminBuilder")
     public ClinicCenterAdmin(Long id, String email, String password, String firstName, String lastName,
                              boolean enabled, boolean isFirstLog, Timestamp lastPasswordResetDate,
-                             List<Authority> authorities, boolean predefined) {
-        super(id, email, password, firstName, lastName, enabled, isFirstLog, lastPasswordResetDate, authorities);
+                             List<Authority> authorities, boolean predefined, Long version) {
+        super(id, email, password, firstName, lastName, enabled, isFirstLog, lastPasswordResetDate, authorities, version);
         this.predefined = predefined;
     }
 }
