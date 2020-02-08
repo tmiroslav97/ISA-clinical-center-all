@@ -6,7 +6,6 @@ services:
   - mysql
 
 before_install:
-  - nodejs
   - cd client 
   - npm install
   - cd ..
