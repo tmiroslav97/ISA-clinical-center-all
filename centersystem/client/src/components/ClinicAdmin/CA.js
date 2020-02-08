@@ -60,7 +60,7 @@ const CA = () => {
                         </Card.Body>
                     </Card>
                 </Col>
-                <Col md={{ span: 4 }} xs={12}>
+                <Col md={{ span: 3 }} xs={12}>
                     <Card style={{ width: '18rem' }}>
                         <Card.Body>
                             <Card.Title>Appointment type</Card.Title>
@@ -95,7 +95,7 @@ const CA = () => {
                         </Card.Body>
                     </Card>
                 </Col>
-                <Col md={{ span: 4 }} xs={12}>
+                <Col md={{ span: 3 }} xs={12}>
                     <Card style={{ width: '18rem' }}>
                         <Card.Body>
                             <Card.Title>Free appointments</Card.Title>
@@ -130,7 +130,7 @@ const CA = () => {
                         </Card.Body>
                     </Card>
                 </Col>
-                <Col md={{ span: 4 }} xs={12}>
+                <Col md={{ span: 3 }} xs={12}>
                     <Card style={{ width: '18rem' }}>
                         <Card.Body>
                             <Card.Title>User profile</Card.Title>

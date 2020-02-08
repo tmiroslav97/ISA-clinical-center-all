@@ -15,8 +15,6 @@ public interface DoctorService {
 
     Doctor save(Doctor doctor);
 
-    Doctor save(DoctorRequestDTO doctorRequestDTO);
-
     void remove(Long id);
 
     DoctorResponse getDoctorById(Long id);

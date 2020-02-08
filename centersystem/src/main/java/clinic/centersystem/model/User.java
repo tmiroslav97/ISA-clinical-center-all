@@ -51,7 +51,7 @@ public class User implements UserDetails {
     @Column(name = DbColumnConstants.LASTPASSWORDRESETDATE)
     private Timestamp lastPasswordResetDate;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = DbColumnConstants.USERAUTHORITY,
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))

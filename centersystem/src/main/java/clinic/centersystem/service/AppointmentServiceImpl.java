@@ -37,6 +37,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
+    public List<Appointment> findAll(){return this.appointmentRepository.findAll();}
+
+    @Override
     public Boolean existsByDoctorId (Long id){
         return  appointmentRepository.existsByDoctorId(id);
     }

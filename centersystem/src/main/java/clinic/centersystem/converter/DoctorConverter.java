@@ -2,13 +2,15 @@ package clinic.centersystem.converter;
 
 import clinic.centersystem.dto.request.DoctorRequestDTO;
 import clinic.centersystem.dto.response.DoctorResponse;
+import clinic.centersystem.model.Clinic;
 import clinic.centersystem.model.Doctor;
 
+import java.util.HashSet;
 import java.util.stream.Collectors;
 
 
 public class DoctorConverter {
-    public static DoctorResponse toCreateDoctorResponseFromDoctor(Doctor doctor){
+    public static DoctorResponse toCreateDoctorResponseFromDoctor(Doctor doctor) {
         return DoctorResponse.builder()
                 .id(doctor.getId())
                 .firstName(doctor.getFirstName())
@@ -21,7 +23,7 @@ public class DoctorConverter {
                 .build();
     }
 
-    public static Doctor toCreateDoctorFromDoctorRequest(DoctorRequestDTO doctorRequestDTO){
+    public static Doctor toCreateDoctorFromDoctorRequest(DoctorRequestDTO doctorRequestDTO, Clinic clinic) {
         return Doctor.doctorBuilder()
                 .email(doctorRequestDTO.getEmail())
                 .firstName(doctorRequestDTO.getFirstName())
@@ -33,6 +35,11 @@ public class DoctorConverter {
                 .sumRating(Float.valueOf(0))
                 .startTime(doctorRequestDTO.getStartTime())
                 .endTime(doctorRequestDTO.getEndTime())
+                .surgeries(new HashSet<>())
+                .absenceHolidayRequirements(new HashSet<>())
+                .appointments(new HashSet<>())
+                .version(0L)
+                .clinic(clinic)
                 .build();
     }
 }

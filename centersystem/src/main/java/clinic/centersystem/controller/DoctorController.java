@@ -42,11 +42,6 @@ public class DoctorController {
         return new ResponseEntity<List<DoctorResponse>>(this.doctorService.searchDoctor(doctorSearchReqDTO), HttpStatus.OK);
     }
 
-    @RequestMapping(method = POST, value = "/add-doctor")
-    public ResponseEntity<String> addDoctor(@RequestBody DoctorRequestDTO doctorRequestDTO) {
-        return new ResponseEntity<>(this.doctorService.addDoctor(doctorRequestDTO), HttpStatus.OK);
-    }
-
     @RequestMapping(method = POST, value="/add-doctor-on-clinic/{clinicId}")
     public ResponseEntity<String>addDoctor(@RequestBody DoctorRequestDTO doctorRequestDTO, @PathVariable Long clinicId){
         return new ResponseEntity<>(this.doctorService.addDoctorOnClinic(doctorRequestDTO, clinicId), HttpStatus.OK);

@@ -43,7 +43,7 @@ public class Clinic {
     @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
     private Set<PriceListItem> priceList = new HashSet<>();
 
-    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY , cascade = CascadeType.ALL)
     private Set<Doctor> doctors = new HashSet<>();
 
     @OneToMany(mappedBy = "clinic", fetch = FetchType.LAZY)

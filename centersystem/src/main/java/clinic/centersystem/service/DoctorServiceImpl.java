@@ -58,12 +58,6 @@ public class DoctorServiceImpl implements DoctorService {
         return doctorRepository.save(doctor);
     }
 
-    @Override
-    public Doctor save(DoctorRequestDTO doctorRequestDTO) {
-        Doctor doctor = DoctorConverter.toCreateDoctorFromDoctorRequest(doctorRequestDTO);
-        doctor = this.doctorRepository.save(doctor);
-        return doctor;
-    }
 
     @Override
     @Transactional(propagation = Propagation.MANDATORY)
@@ -117,22 +111,16 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     public String addDoctorOnClinic(DoctorRequestDTO doctorRequestDTO, Long id){
-        Doctor doctor = DoctorConverter.toCreateDoctorFromDoctorRequest(doctorRequestDTO);
+        Clinic clinic  = this.clinicService.findById(id);
+        Doctor doctor = DoctorConverter.toCreateDoctorFromDoctorRequest(doctorRequestDTO, clinic);
         doctor.setEmail(doctorRequestDTO.getEmail());
         if(doctorRequestDTO.getPassword1().equals(doctorRequestDTO.getPassword2())){
             doctor.setPassword(doctorRequestDTO.getPassword1());
         }else{
             return "Password wasn't confirmed";
         }
-        doctor.setFirstName(doctorRequestDTO.getFirstName());
-        doctor.setLastName(doctorRequestDTO.getLastName());
-        doctor.setStartTime(doctorRequestDTO.getStartTime());
-        doctor.setEndTime(doctorRequestDTO.getEndTime());
-        Clinic clinic  = this.clinicService.findById(id);
-        doctor.setClinic(clinic);
         List<Authority> auths = this.authorityService.findByName("ROLE_DOCTOR");
         doctor.setAuthorities(auths);
-        doctor.setFirstLog(true);
         doctorRepository.save(doctor);
         return "Successfully added doctor on clinic";
     }
@@ -141,26 +129,22 @@ public class DoctorServiceImpl implements DoctorService {
         if(appointmentService.existsByDoctorId(doctorId)){
             return "Can't delete doctor, beacause he has appointment";
         }else {
-            doctorRepository.deleteById(doctorId);
-            return  "Successfully deleted doctor";
+            boolean flag = false;
+
+            if(appointmentService.existsByDoctorId(doctorId)){
+                flag = true;
+            }
+            if(!flag) {
+                doctorRepository.deleteById(doctorId);
+                return  "Successfully deleted doctor";
+            }else{
+                return  "Can't delete the doctor";
+            }
         }
     }
 
     public List<DoctorResponse> searchDoctor(DoctorSearchReqDTO doctorSearchReqDTO){
         return doctorRepository.findByClinicIdAndLastNameIgnoringCase(doctorSearchReqDTO.getClinicId(), doctorSearchReqDTO.getLastName()).stream().map(DoctorConverter::toCreateDoctorResponseFromDoctor).collect(Collectors.toList());
-    }
-
-    public String addDoctor(DoctorRequestDTO doctorRequestDTO) {
-        doctorRequestDTO.setPassword1(passwordEncoder.encode(doctorRequestDTO.getPassword1()));
-
-        Doctor doc = DoctorConverter.toCreateDoctorFromDoctorRequest(doctorRequestDTO);
-
-        List<Authority> auths = this.authorityService.findByName("ROLE_DOCTOR");
-        doc.setAuthorities(auths);
-
-        Doctor doctor = this.doctorRepository.save(doc);
-
-        return "Successfully added doctor";
     }
 
 
