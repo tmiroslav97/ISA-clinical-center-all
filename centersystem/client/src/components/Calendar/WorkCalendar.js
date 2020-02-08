@@ -41,7 +41,7 @@ const WorkCalendar = () => {
     }, [personnelId]);
 
     const handleCalendarClick = (calEvent) => {
-        if (calEvent.type == 'APP') {
+        if (calEvent.type == 'APP' && roles.includes('ROLE_DOCTOR')) {
             dispatch(
                 fetchAppointment({
                     id: calEvent.typeId
@@ -117,7 +117,7 @@ const WorkCalendar = () => {
 
             }
             {
-                isFetchAppointment &&
+                roles.includes('ROLE_DOCTOR') && isFetchAppointment &&
                 <AppointmentDetails start={event.start} typeId={event.typeId} />
             }
         </Container>
