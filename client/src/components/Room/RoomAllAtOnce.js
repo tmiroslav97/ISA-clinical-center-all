@@ -229,10 +229,10 @@ const RoomAllAtOnce = ({ match }) => {
                                                 <td>{room.name}</td>
                                                 <td>{room.roomNum}</td>
                                                 <td>
-                                                    <Button onClick={()=>{handleEditShow(room)}}>Edit</Button>
+                                                    <Button variant="success" onClick={()=>{handleEditShow(room)}}>Edit</Button>
                                                 </td>
                                                 <td>
-                                                    <Button onClick={() => {handleDelitingRooms(room)}}>Delete</Button>
+                                                    <Button  variant="danger" onClick={() => {handleDelitingRooms(room)}}>Delete</Button>
                                                 </td>
                                             </tr>
                                         );

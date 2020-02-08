@@ -2,9 +2,6 @@ package clinic.centersystem.repository;
 
 
 import clinic.centersystem.model.Doctor;
-import clinic.centersystem.model.Room;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Lock;
 
@@ -16,4 +13,6 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
 
     @Lock(LockModeType.PESSIMISTIC_FORCE_INCREMENT)
     Doctor findOneById(Long id);
+
+    List<Doctor> findByClinicIdAndLastNameIgnoringCase(Long clinicId, String lastName);
 }

@@ -4,6 +4,7 @@ package clinic.centersystem.model;
 import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,19 +27,19 @@ public class MedicalReport {
     @Column(name = DbColumnConstants.DESCRIPTION, nullable = false)
     private String description;
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     private Appointment appointment;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private MedicalRecord medicalRecord;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private Diagnose diagnose;
 
-    @JsonBackReference
+    @JsonIgnore
     @Builder.Default
     @OneToMany(mappedBy = "medicalReport", fetch = FetchType.LAZY)
     private Set<Prescription> prescriptions = new HashSet<>();

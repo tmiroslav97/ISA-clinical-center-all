@@ -3,6 +3,7 @@ package clinic.centersystem.model;
 import clinic.centersystem.common.db.DbColumnConstants;
 import clinic.centersystem.common.db.DbTableConstants;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -40,15 +41,15 @@ public class Surgery {
     })
     private DateTime endTime;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private Room room;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private Patient patient;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Doctor> doctors = new HashSet<>();
 

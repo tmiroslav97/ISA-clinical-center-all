@@ -2,9 +2,7 @@ import React,{useState, useEffect} from 'react';
 import { Container, Row, Form, Col, Button, Table, Modal, Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { doctorsDataSelector, isFetchDoctorsSelector } from '../../store/doctors/selectors';
-import { addDoctor } from '../../store/doctors/actions';
-import { fetchDoctorsData } from '../../store/doctors/actions';
-import { fetchDoctorsByClinicId } from '../../store/doctors/actions';
+import { fetchDoctorsByClinicId, addDoctor, deleteDoctor ,searchDoctors} from '../../store/doctors/actions';
 
 const DoctorAllAtOnce = ({ match }) => {
     const dispatch = useDispatch();
@@ -16,8 +14,15 @@ const DoctorAllAtOnce = ({ match }) => {
     const [lastName, setLastName] = useState();
     const [startTime, setStartTime] = useState();
     const [endTime, setEndTime] = useState();
+    const [doctorId, setDoctorId] = useState(0);
     const doctors = useSelector(doctorsDataSelector);
     const isFetchDoctors = useSelector(isFetchDoctorsSelector);
+
+    const handleDelete = (doctor) => {
+        dispatch(
+            deleteDoctor({id:doctor.id, clinicId})
+        );
+    }
 
     const handleAddDoctor = () => {
         
@@ -29,7 +34,8 @@ const DoctorAllAtOnce = ({ match }) => {
                 firstName,
                 lastName,
                 startTime,
-                endTime
+                endTime,
+                clinicId
             })
         );
         setShow(false);
@@ -37,19 +43,10 @@ const DoctorAllAtOnce = ({ match }) => {
     //eslint-disable-next-line
     const handleSearch = () => {
         dispatch(
-           /* searchDoctorByName({
-                name
-            })*/
+           searchDoctors({lastName, clinicId})
         );
     };
-    //eslint-disable-next-line
-    const handleDeleteDoctor = () => {
-        dispatch(
-            /*deleteDoctor({
-                id
-            })*/
-        );
-    };
+    
     useEffect(() => {
        dispatch(
             //fetchDoctorsData({})
@@ -162,25 +159,15 @@ const DoctorAllAtOnce = ({ match }) => {
 
                     <Form.Group as={Row} >
 
-                        <Form.Label>Search doctors:</Form.Label>
+                        <Form.Label>Search doctors by last name:</Form.Label>
                         <Col>
-                            <Form.Control type="text" placeholder="Search by name" />
+                            <Form.Control type="text" placeholder="Search " onChange={( { currentTarget } ) => {
+                                    setLastName(currentTarget.value)}}/>
                         </Col>
                         <Col>
-                            <Button>Search</Button>
-                        </Col>
-                    </Form.Group>
-
-                    <Form.Group as={Row} controlId="formGridState">
-                        <Form.Label>Filter data by:</Form.Label>
-                        <Col>
-                            <Form.Control as="select">
-                                <option>Choose...</option>
-                                <option>...</option>
-                            </Form.Control>
+                            <Button onClick={handleSearch}>Search</Button>
                         </Col>
                     </Form.Group>
-
 
                 </Form>
                 </Col>
@@ -194,7 +181,7 @@ const DoctorAllAtOnce = ({ match }) => {
                             <th>#</th>
                             <th>First name</th>
                             <th>Last name</th>
-                            <th>Delete</th>
+                            <th>Delete </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -205,7 +192,7 @@ const DoctorAllAtOnce = ({ match }) => {
                                         <td>{index + 1}</td>
                                         <td>{doctor.firstName}</td>
                                         <td>{doctor.lastName}</td>
-                                        <td><Button variant="danger">Delete</Button></td>
+                                        <td><Button variant="danger" onClick={()=>{handleDelete(doctor)}} >Delete</Button></td>
                                         
                                     </tr>
                                 );
