@@ -6,6 +6,10 @@ services:
   - mysql
 
 before_install:
+  - node_js
+  - cd client 
+  - npm install
+  - cd ..
   - cd centersystem
   - chmod +x ./mvnw
 
