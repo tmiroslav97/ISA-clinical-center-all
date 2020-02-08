@@ -19,6 +19,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -86,6 +87,9 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public int reserveRoomForSurgery(SurgeryReservationReqDTO surgeryReservationReqDTO) {
+        this.findById(surgeryReservationReqDTO.getPickedSurReq().getId());
+
+
         String pickedDateStr = surgeryReservationReqDTO.getPickedTerm().split(" ")[0];
         String pickedTermsStr[] = (surgeryReservationReqDTO.getPickedTerm().split(" ")[1]).split("-");
         Integer pickedTermStart = Integer.valueOf(pickedTermsStr[0]);
@@ -117,13 +121,24 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
         Surgery surgery = null;
         Patient patient = null;
         Room room = null;
+        List<Doctor> avalDoctors = new ArrayList<>();
         for (Long docId : surgeryReservationReqDTO.getChosenDoc()) {
             doctor = doctorService.findOneById(Long.valueOf(docId));
+            /*
+            //otkomentarisati ako se zeli isprobati lock baze
+            try {
+                Thread.sleep(7000);
+            } catch (InterruptedException e) {
+            }
+            */
+
 
             if (!(doctor.getStartTime() <= pickedTermStart && doctor.getEndTime() >= pickedTermEnd)) {
                 //doktor ne moze da prisustvuje operaciji jer operacija nije u sklopu radnog vremena
                 continue;
             }
+
+            avalDoctors.add(doctor);
             calendarId = calendarService.findCalendarIdByPersonnelId(doctor.getId());
             cntCi = calendarItemService.findByCalendarIdandDate(calendarId, pickedDateStart, pickedDateEnd);
             if (cntCi == 0) {
@@ -157,21 +172,28 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
                         .typeId(surgery.getId())
                         .build();
                 calendarItemService.save(calendarItem);
-
-                String subject = "Term for surgery";
-                String answer = "Term of surgery for patient " + patient.getFirstName() + " " + patient.getLastName() + " is\n" +
-                        surgeryReservationReqDTO.getPickedTerm() + "\n" +
-                        "Room for surgery is: " + room.getName() + " " + room.getRoomNum();
-
-                emailService.sendMailTo(doctor.getEmail(), subject, answer);
+                doctorService.save(doctor);
             }
         }
+
+        roomService.save(room);
 
         if (!avDoctors) {
             return 2;
         }
 
         this.deleteById(surgeryReservationReqDTO.getPickedSurReq().getId());
+
+
+        for (Doctor doc : avalDoctors) {
+            String subject = "Term for surgery";
+            String answer = "Term of surgery for patient " + patient.getFirstName() + " " + patient.getLastName() + " is\n" +
+                    surgeryReservationReqDTO.getPickedTerm() + "\n" +
+                    "Room for surgery is: " + room.getName() + " " + room.getRoomNum();
+
+            emailService.sendMailTo(doc.getEmail(), subject, answer);
+        }
+
 
         if (!pickedDateStr.equals(surgeryReservationReqDTO.getPickedSurReq().getDate()) || !pickedTermsStr[0].equals(surgeryReservationReqDTO.getPickedSurReq().getTermin().toString())) {
             String subject = "Term for surgery";
@@ -190,6 +212,8 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
             emailService.sendMailTo(patient.getEmail(), subject, answer);
         }
         return 3;
+
+
     }
 
     @Override
