@@ -192,13 +192,13 @@ INSERT INTO calendar(id, personnel_id)
 VALUES (2, 3);
 
 INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type,typeid)
-VALUES ('2020-02-07 10:00:00', '2020-02-07 09:00:00', 'First examination', 'N', 3, 2,'APP',1);
+VALUES ('2020-02-08 10:00:00', '2020-02-08 09:00:00', 'First examination', 'N', 3, 2,'APP',1);
 
 INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type,typeid)
-VALUES ('2020-02-08 11:00:00', '2020-02-08 10:00:00', 'Second examination', 'N', 4, 2,'APP',2);
+VALUES ('2020-02-09 11:00:00', '2020-02-09 10:00:00', 'Second examination', 'N', 4, 2,'APP',2);
 
 INSERT INTO calendar_item(end, start, title, all_day, id, calendar_id,type,typeid)
-VALUES ('2020-02-08 12:00:00', '2020-02-08 11:00:00', 'Third examination', 'N', 5, 2,'APP',3);
+VALUES ('2020-02-09 12:00:00', '2020-02-09 11:00:00', 'Third examination', 'N', 5, 2,'APP',3);
 
 
 UPDATE personnel

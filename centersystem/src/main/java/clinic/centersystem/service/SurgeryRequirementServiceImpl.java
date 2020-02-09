@@ -124,13 +124,13 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
         List<Doctor> avalDoctors = new ArrayList<>();
         for (Long docId : surgeryReservationReqDTO.getChosenDoc()) {
             doctor = doctorService.findOneById(Long.valueOf(docId));
-            /*
-            //otkomentarisati ako se zeli isprobati lock baze
-            try {
-                Thread.sleep(7000);
-            } catch (InterruptedException e) {
-            }
-            */
+
+//            otkomentarisati ako se zeli isprobati lock baze
+//            try {
+//                Thread.sleep(7000);
+//            } catch (InterruptedException e) {
+//            }
+
 
 
             if (!(doctor.getStartTime() <= pickedTermStart && doctor.getEndTime() >= pickedTermEnd)) {

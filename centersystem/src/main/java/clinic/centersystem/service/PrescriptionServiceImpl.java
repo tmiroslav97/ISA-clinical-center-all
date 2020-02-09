@@ -2,6 +2,7 @@ package clinic.centersystem.service;
 
 import clinic.centersystem.converter.PrescriptionConverter;
 import clinic.centersystem.dto.response.PrescriptionResponse;
+import clinic.centersystem.exception.AlreadyReweritedException;
 import clinic.centersystem.exception.ResourceNotExistsException;
 import clinic.centersystem.model.Appointment;
 import clinic.centersystem.model.MedicalReport;
@@ -67,9 +68,20 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     public String rewritePrescription(Long nurseId, Long prescriptionId) {
         Nurse nurse = nurseService.findById(nurseId);
         Prescription prescription = prescriptionService.findById(prescriptionId);
+        if (prescription.isValidate()) {
+            throw new AlreadyReweritedException("Prescription is already rewrited");
+        }
         prescription.setValidate(true);
         nurse.getPrescriptions().add(prescription);
         prescription.setNurse(nurse);
+
+
+//        otkomentarisati ako se zeli isprobati lock baze
+//        try {
+//            Thread.sleep(7000);
+//        } catch (InterruptedException e) {
+//        }
+
 
         nurse = nurseService.save(nurse);
         prescription = prescriptionService.save(prescription);
