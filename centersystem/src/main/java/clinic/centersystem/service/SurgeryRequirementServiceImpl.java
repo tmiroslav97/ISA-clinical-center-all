@@ -1,6 +1,7 @@
 package clinic.centersystem.service;
 
 import clinic.centersystem.converter.SurgeryRequirementConverter;
+import clinic.centersystem.dto.request.MailRequestDTO;
 import clinic.centersystem.dto.request.SurgeryReservationReqDTO;
 import clinic.centersystem.dto.response.RoomResponseDTO;
 import clinic.centersystem.dto.response.SurgeryRequirementResponseDTO;
@@ -14,6 +15,7 @@ import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -60,6 +62,9 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
     @Autowired
     private EmailService emailService;
 
+    @Autowired
+    private ApplicationEventPublisher applicationEventPublisher;
+
 
     @Override
     public SurgeryRequirement findById(Long id) {
@@ -88,7 +93,6 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public int reserveRoomForSurgery(SurgeryReservationReqDTO surgeryReservationReqDTO) {
         this.findById(surgeryReservationReqDTO.getPickedSurReq().getId());
-
 
         String pickedDateStr = surgeryReservationReqDTO.getPickedTerm().split(" ")[0];
         String pickedTermsStr[] = (surgeryReservationReqDTO.getPickedTerm().split(" ")[1]).split("-");
@@ -130,7 +134,6 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
 //                Thread.sleep(7000);
 //            } catch (InterruptedException e) {
 //            }
-
 
 
             if (!(doctor.getStartTime() <= pickedTermStart && doctor.getEndTime() >= pickedTermEnd)) {
@@ -190,8 +193,8 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
             String answer = "Term of surgery for patient " + patient.getFirstName() + " " + patient.getLastName() + " is\n" +
                     surgeryReservationReqDTO.getPickedTerm() + "\n" +
                     "Room for surgery is: " + room.getName() + " " + room.getRoomNum();
-
-            emailService.sendMailTo(doc.getEmail(), subject, answer);
+            applicationEventPublisher.publishEvent(new MailRequestDTO(doc.getEmail(), subject, answer));
+            //emailService.sendMailTo(doc.getEmail(), subject, answer);
         }
 
 
@@ -201,15 +204,15 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
                     surgeryReservationReqDTO.getPickedSurReq().getDate() + " " + pickedTermsStr[0] + "-" + (Integer.valueOf(pickedTermsStr[0]) + 3) + " to " +
                     surgeryReservationReqDTO.getPickedTerm() + "\n" +
                     "Room for surgery is: " + room.getName() + " " + room.getRoomNum();
-
-            emailService.sendMailTo(patient.getEmail(), subject, answer);
+            applicationEventPublisher.publishEvent(new MailRequestDTO(patient.getEmail(), subject, answer));
+            //emailService.sendMailTo(patient.getEmail(), subject, answer);
         } else {
             String subject = "Term for surgery";
             String answer = "Your term for surgery is\n" +
                     surgeryReservationReqDTO.getPickedTerm() + "\n" +
                     "Room for surgery is: " + room.getName() + " " + room.getRoomNum();
-
-            emailService.sendMailTo(patient.getEmail(), subject, answer);
+            //emailService.sendMailTo(patient.getEmail(), subject, answer);
+            applicationEventPublisher.publishEvent(new MailRequestDTO(patient.getEmail(), subject, answer));
         }
         return 3;
 

@@ -13,6 +13,7 @@ import clinic.centersystem.service.intf.PatientService;
 import clinic.centersystem.service.intf.RegistrationRequirementService;
 import clinic.centersystem.service.intf.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -42,6 +43,8 @@ public class RegistrationRequirementServiceImpl implements RegistrationRequireme
     @Autowired
     private EmailService emailService;
 
+    @Autowired
+    private ApplicationEventPublisher applicationEventPublisher;
 
     @Override
     public RegistrationRequirement findById(Long id) {
@@ -82,10 +85,10 @@ public class RegistrationRequirementServiceImpl implements RegistrationRequireme
             throw new ResourceExistsException("User with email " + req.getEmail() + " already exists");
         }
         //            otkomentarisati ako se zeli isprobati lock baze
-//            try {
-//                Thread.sleep(7000);
-//            } catch (InterruptedException e) {
-//            }
+            try {
+                Thread.sleep(7000);
+            } catch (InterruptedException e) {
+            }
         Patient patient = patientService.save(req);
         this.registrationRequirementRepository.deleteById(id);
         String subject = "Account registration";
@@ -110,10 +113,10 @@ public class RegistrationRequirementServiceImpl implements RegistrationRequireme
             throw new ResourceExistsException("User with email " + req.getEmail() + " already exists");
         }
         //            otkomentarisati ako se zeli isprobati lock baze
-//            try {
-//                Thread.sleep(7000);
-//            } catch (InterruptedException e) {
-//            }
+            try {
+                Thread.sleep(7000);
+            } catch (InterruptedException e) {
+            }
 
         String check = message.trim();
         if (check.equals("")) {
