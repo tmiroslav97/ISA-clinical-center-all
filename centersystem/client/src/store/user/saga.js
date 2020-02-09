@@ -130,7 +130,11 @@ export function* login() {
     } else if (data.roles.includes('ROLE_NURSE')) {
         history.push('/nurse-page');
     } else if (data.roles.includes('ROLE_ADMINC')) {
-        history.push('/adminc');
+        if (data.firstLogin) {
+            history.push('/change-pass');
+        } else {
+            history.push('/adminc');
+        }
     } else {
         alert('Nije odobren pristup sistemu!');
         history.push('/');
