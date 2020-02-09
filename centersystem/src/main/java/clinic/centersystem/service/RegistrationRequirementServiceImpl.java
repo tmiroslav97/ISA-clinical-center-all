@@ -81,6 +81,11 @@ public class RegistrationRequirementServiceImpl implements RegistrationRequireme
             registrationRequirementRepository.deleteById(id);
             throw new ResourceExistsException("User with email " + req.getEmail() + " already exists");
         }
+        //            otkomentarisati ako se zeli isprobati lock baze
+//            try {
+//                Thread.sleep(7000);
+//            } catch (InterruptedException e) {
+//            }
         Patient patient = patientService.save(req);
         this.registrationRequirementRepository.deleteById(id);
         String subject = "Account registration";
@@ -104,6 +109,11 @@ public class RegistrationRequirementServiceImpl implements RegistrationRequireme
             registrationRequirementRepository.deleteById(id);
             throw new ResourceExistsException("User with email " + req.getEmail() + " already exists");
         }
+        //            otkomentarisati ako se zeli isprobati lock baze
+//            try {
+//                Thread.sleep(7000);
+//            } catch (InterruptedException e) {
+//            }
 
         String check = message.trim();
         if (check.equals("")) {

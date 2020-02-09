@@ -45,6 +45,8 @@ public class SurgeryRequirementController {
             return new ResponseEntity<>("Room is reserved for surgery", HttpStatus.OK);
         }else if (flag == 4){
             return new ResponseEntity<>("Room type is not for surgery", HttpStatus.BAD_REQUEST);
+        }else if(flag == 5){
+            return new ResponseEntity<>("Multiple write to database", HttpStatus.BAD_REQUEST);
         }
         else{
             return new ResponseEntity<>("Error", HttpStatus.BAD_REQUEST);
