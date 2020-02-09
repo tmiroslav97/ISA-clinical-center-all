@@ -101,7 +101,7 @@ export function* signOut() {
     yield put(putUserData(payload));
     yield put(putUserId(null));
     yield put(putUserToken(null));
-    history.push('/');
+    window.location.href = '/';
 }
 
 export function* registration() {
