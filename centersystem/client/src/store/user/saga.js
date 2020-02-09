@@ -1,6 +1,6 @@
 import { take, put, call, select } from 'redux-saga/effects';
 import { history } from '../../index';
-import {userDataSelector} from '../../store/user/selectors';
+import { userDataSelector } from '../../store/user/selectors';
 
 import {
     LOGIN,
@@ -140,28 +140,28 @@ export function* login() {
 export function* changePassword() {
     const { payload } = yield take(CHANGE_PASSWORD);
     const { data } = yield call(authService.changePassword, payload);
-    if (data !== undefined) {
+    if (data !== 'Service unavailable') {
         yield put(putSuccessMsg('Successfuly changed password'));
         yield put(putSuccessMsg(null));
+        yield put(putUserData(data));
+        yield put(putUserToken(data.token));
+
+        if (data.roles.includes('ROLE_PATIENT')) {
+            history.push('/pat');
+        } else if (data.roles.includes('ROLE_CCADMIN')) {
+            history.push('/ccadmin');
+        } else if (data.roles.includes('ROLE_DOCTOR')) {
+            history.push('/doc');
+        } else if (data.roles.includes('ROLE_NURSE')) {
+            history.push('/nurse-page');
+        } else if (data.roles.includes('ROLE_ADMINC')) {
+            history.push('/adminc');
+        } else {
+            alert('Nije odobren pristup sistemu!');
+        }
     } else {
         yield put(putErrorMsg(data));
         yield put(putErrorMsg(null));
-    }
-    yield put(putUserData(data));
-    yield put(putUserToken(data.token));
-
-    if (data.roles.includes('ROLE_PATIENT')) {
-        history.push('/pat');
-    } else if (data.roles.includes('ROLE_CCADMIN')) {
-        history.push('/ccadmin');
-    } else if (data.roles.includes('ROLE_DOCTOR')) {
-        history.push('/doc');
-    } else if (data.roles.includes('ROLE_NURSE')) {
-        history.push('/nurse-page');
-    } else if (data.roles.includes('ROLE_ADMINC')) {
-        history.push('/adminc');
-    } else {
-        alert('Nije odobren pristup sistemu!');
     }
 }
 
@@ -172,31 +172,31 @@ export function* editUserInformation() {
         yield put(putSuccessMsg(response));
         yield put(putSuccessMsg(null));
         const userData = yield select(userDataSelector);
-        if(userData.roles.includes("ROLE_DOCTOR")){
+        if (userData.roles.includes("ROLE_DOCTOR")) {
             yield put(putIsFetchUserData(false));
-            const { data } = yield call(DoctorService.fetchDoctorData, {id:payload.id});
+            const { data } = yield call(DoctorService.fetchDoctorData, { id: payload.id });
             yield put(putUserData(data));
             yield put(putIsFetchUserData(true));
-        }else if(userData.roles.includes("ROLE_NURSE")){
+        } else if (userData.roles.includes("ROLE_NURSE")) {
             yield put(putIsFetchUserData(false));
-            const { data } = yield call(NurseService.fetchNurseData, {id:payload.id});
+            const { data } = yield call(NurseService.fetchNurseData, { id: payload.id });
             yield put(putUserData(data));
             yield put(putIsFetchUserData(true));
-        }else if(userData.roles.includes("ROLE_ADMINC")){
+        } else if (userData.roles.includes("ROLE_ADMINC")) {
             yield put(putIsFetchUserData(false));
-            const { data } = yield call(CAdminService.fetchCAdminData, {id:payload.id});
+            const { data } = yield call(CAdminService.fetchCAdminData, { id: payload.id });
             yield put(putUserData(data));
             yield put(putIsFetchUserData(true));
-        }else if(userData.roles.includes("ROLE_PATIENT")){
+        } else if (userData.roles.includes("ROLE_PATIENT")) {
             yield put(putIsFetchUserData(false));
-            const { data } = yield call(PatientService.fetchPatientData, {patientId:payload.id});
+            const { data } = yield call(PatientService.fetchPatientData, { patientId: payload.id });
             yield put(putUserData(data));
             yield put(putIsFetchUserData(true));
-        }else{
+        } else {
             yield put(putErrorMsg('Unknown user role'));
             yield put(putErrorMsg(null));
         }
-        
+
     } else {
         yield put(putErrorMsg(response));
         yield put(putErrorMsg(null));

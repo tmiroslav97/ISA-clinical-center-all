@@ -247,32 +247,36 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
                     for (int i = 7; i <= 16; i += 3) {
                         if (!termins.contains(i)) {
                             firstFree = i;
-                            flag = false;
-                            break;
+
+                            Integer pickedTermStart = firstFree;
+                            Integer pickedTermEnd = firstFree + 3;
+                            DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd");
+
+                            SurgeryReservationReqDTO surgeryReservationReqDTO = SurgeryReservationReqDTO.builder()
+                                    .pickedRoom(room.getId())
+                                    .pickedTerm(dtf.print(dt) + " " + pickedTermStart + "-" + pickedTermEnd)
+                                    .chosenDoc(new ArrayList<Long>(Arrays.asList(surgeryRequirement.getDoctorId())))
+                                    .pickedSurReq(SurgeryRequirementConverter.fromSurReqToSurReqDTO(surgeryRequirement))
+                                    .build();
+                            int ans = this.helperReserve(surgeryReservationReqDTO);
+
+                            if (ans == 3) {
+                                roomRes = true;
+                                flag = false;
+                            } else if (ans == 2) {
+                                flag = true;
+                            } else {
+                                flag = true;
+                            }
+
+                            if (!flag) {
+                                break;
+                            }
                         }
                     }
                     if (flag) {
                         dt = dt.plusDays(1);
                         continue;
-                    }
-
-                    Integer pickedTermStart = firstFree;
-                    Integer pickedTermEnd = firstFree + 3;
-                    DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd");
-
-                    SurgeryReservationReqDTO surgeryReservationReqDTO = SurgeryReservationReqDTO.builder()
-                            .pickedRoom(room.getId())
-                            .pickedTerm(dtf.print(dt) + " " + pickedTermStart + "-" + pickedTermEnd)
-                            .chosenDoc(new ArrayList<Long>(Arrays.asList(surgeryRequirement.getDoctorId())))
-                            .pickedSurReq(SurgeryRequirementConverter.fromSurReqToSurReqDTO(surgeryRequirement))
-                            .build();
-                    int ans = this.reserveRoomForSurgery(surgeryReservationReqDTO);
-
-                    if (ans == 3) {
-                        roomRes = true;
-                    } else {
-                        flag = true;
-                        dt = dt.plusDays(1);
                     }
                 }
 
@@ -288,6 +292,123 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
     public void delete(SurgeryRequirement surgeryRequirement) {
         surgeryRequirementRepository.delete(surgeryRequirement);
         return;
+    }
+
+    @Override
+    public int helperReserve(SurgeryReservationReqDTO surgeryReservationReqDTO) {
+        this.findById(surgeryReservationReqDTO.getPickedSurReq().getId());
+
+        String pickedDateStr = surgeryReservationReqDTO.getPickedTerm().split(" ")[0];
+        String pickedTermsStr[] = (surgeryReservationReqDTO.getPickedTerm().split(" ")[1]).split("-");
+        Integer pickedTermStart = Integer.valueOf(pickedTermsStr[0]);
+        Integer pickedTermEnd = Integer.valueOf(pickedTermsStr[1]);
+        DateTime pickedDate = new DateTime(pickedDateStr, DateTimeZone.UTC);
+
+        DateTime pickedDateStart = new DateTime(pickedDateStr, DateTimeZone.UTC);
+        pickedDateStart = pickedDateStart.plusHours(pickedTermStart);
+
+        DateTime pickedDateEnd = new DateTime(pickedDateStr, DateTimeZone.UTC);
+        pickedDateEnd = pickedDateEnd.plusHours(pickedTermEnd);
+
+        Room roomCheck = roomService.findById(surgeryReservationReqDTO.getPickedRoom());
+        if (!roomCheck.getType().equals("SUR")) {
+            return 4;
+        }
+
+        List<Integer> bookedTerm = roomCalendarService.findByRoomAndDate(surgeryReservationReqDTO.getPickedRoom(), pickedDate);
+
+        if (bookedTerm.contains(pickedTermStart)) {
+            return 1;
+        }
+
+        surgeryReservationReqDTO.getChosenDoc().add(surgeryReservationReqDTO.getPickedSurReq().getDoctorId());
+        boolean avDoctors = false;
+        Doctor doctor;
+        Long calendarId;
+        Integer cntCi;
+        Surgery surgery = null;
+        Patient patient = null;
+        Room room = null;
+        List<Doctor> avalDoctors = new ArrayList<>();
+        for (Long docId : surgeryReservationReqDTO.getChosenDoc()) {
+            doctor = doctorService.findById(Long.valueOf(docId));
+
+            if (!(doctor.getStartTime() <= pickedTermStart && doctor.getEndTime() >= pickedTermEnd)) {
+                //doktor ne moze da prisustvuje operaciji jer operacija nije u sklopu radnog vremena
+                continue;
+            }
+
+            avalDoctors.add(doctor);
+            calendarId = calendarService.findCalendarIdByPersonnelId(doctor.getId());
+            cntCi = calendarItemService.findByCalendarIdandDate(calendarId, pickedDateStart, pickedDateEnd);
+            if (cntCi == 0) {
+                avDoctors = true;
+                //doktor ima slobodnih termina unjeti mu u kalendar sta treba
+                if (surgery == null) {
+                    patient = patientService.findOneById(surgeryReservationReqDTO.getPickedSurReq().getPatientId());
+                    room = roomService.findById(surgeryReservationReqDTO.getPickedRoom());
+                    RoomCalendar roomCalendar = RoomCalendar.builder()
+                            .date(pickedDate)
+                            .room(room)
+                            .termin(pickedTermStart)
+                            .build();
+                    roomCalendarService.save(roomCalendar);
+                    surgery = Surgery.builder()
+                            .startTime(pickedDateStart)
+                            .endTime(pickedDateEnd)
+                            .room(room)
+                            .patient(patient)
+                            .build();
+                    surgeryService.save(surgery);
+                }
+                Calendar calendar = calendarService.findOneById(calendarId);
+                CalendarItem calendarItem = CalendarItem.builder()
+                        .start(pickedDateStart)
+                        .end(pickedDateEnd)
+                        .allDay("N")
+                        .title("Surgery")
+                        .type("SUR")
+                        .calendar(calendar)
+                        .typeId(surgery.getId())
+                        .build();
+                calendarItemService.save(calendarItem);
+                doctorService.save(doctor);
+            }
+        }
+
+        if (!avDoctors) {
+            return 2;
+        }
+
+        this.deleteById(surgeryReservationReqDTO.getPickedSurReq().getId());
+
+
+        for (Doctor doc : avalDoctors) {
+            String subject = "Term for surgery";
+            String answer = "Term of surgery for patient " + patient.getFirstName() + " " + patient.getLastName() + " is\n" +
+                    surgeryReservationReqDTO.getPickedTerm() + "\n" +
+                    "Room for surgery is: " + room.getName() + " " + room.getRoomNum();
+            emailService.sendMailTo(doc.getEmail(), subject, answer);
+        }
+
+
+        if (!pickedDateStr.equals(surgeryReservationReqDTO.getPickedSurReq().getDate()) || !pickedTermsStr[0].equals(surgeryReservationReqDTO.getPickedSurReq().getTermin().toString())) {
+            String subject = "Term for surgery";
+            String answer = "Your term for surgery is changed from:\n" +
+                    surgeryReservationReqDTO.getPickedSurReq().getDate() + " " + pickedTermsStr[0] + "-" + (Integer.valueOf(pickedTermsStr[0]) + 3) + " to " +
+                    surgeryReservationReqDTO.getPickedTerm() + "\n" +
+                    "Room for surgery is: " + room.getName() + " " + room.getRoomNum();
+            emailService.sendMailTo(patient.getEmail(), subject, answer);
+        } else {
+            String subject = "Term for surgery";
+            String answer = "Your term for surgery is\n" +
+                    surgeryReservationReqDTO.getPickedTerm() + "\n" +
+                    "Room for surgery is: " + room.getName() + " " + room.getRoomNum();
+            emailService.sendMailTo(patient.getEmail(), subject, answer);
+        }
+        return 3;
+
+
     }
 
 

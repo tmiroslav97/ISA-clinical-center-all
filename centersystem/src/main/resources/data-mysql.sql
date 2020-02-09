@@ -1,3 +1,4 @@
+--podaci za autorizaciju
 INSERT INTO authority (name)
 VALUES ('ROLE_CCADMIN');
 INSERT INTO authority (name)
@@ -11,12 +12,18 @@ VALUES ('ROLE_PATIENT');
 INSERT INTO authority (name)
 VALUES ('ROLE_PERSONNEL');
 
+--podaci za klinike
 INSERT INTO clinic (address, cnt_rating, description, name , sum_rating)
-VALUES ('Vlasenica 15', 0, 'Clinic for cardiovascular disease', 'Clinic 1', 0);
+VALUES ('Vlasenica 15', 0, 'Clinic for cardiovascular disease', 'Clinic Vlasenica', 0);
 
 INSERT INTO clinic (address, cnt_rating, description, name , sum_rating)
-VALUES ('Zrenjanin 66', 0, 'Clinic for neurology', 'Clinic 2', 0);
+VALUES ('Kikinda 66', 0, 'Clinic for neurology', 'Clinic Kikinda', 0);
 
+INSERT INTO clinic (address, cnt_rating, description, name , sum_rating)
+VALUES ('Bijeljina 42', 0, 'Clinic for dermatology', 'Clinic Bijeljina', 0);
+
+--podaci administratora klinickog centra
+--predefinisani
 INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
                    last_password_reset_date, password, version)
 VALUES (1, 'Miroslav', 'Tomic', 'tomic.miroslav97@gmail.com', true, false, '2019-11-20 11:00:00',
@@ -27,6 +34,30 @@ VALUES (1, 1);
 
 INSERT INTO clinic_center_admin (predefined, id)
 VALUES (true, 1);
+
+--nisu predefinisani
+INSERT INTO users (id,first_name, last_name, email, enabled, first_log,
+                   last_password_reset_date, password, version)
+VALUES (8,'Petar', 'Peric', 'pero@gmail.com', true, false, '2019-11-20 11:00:00',
+        '$2a$10$VSlWn0nzWDB2Jxv7cx.sf.NakwjllWrSjdkWi66g2dMM.OdBGThlS',0);
+
+INSERT INTO user_authority (user_id, authority_id)
+VALUES (8,1);
+
+INSERT INTO clinic_center_admin (predefined, id)
+VALUES (false, 8);
+
+--treba da promjeni password
+INSERT INTO users (id,first_name, last_name, email, enabled, first_log,
+                   last_password_reset_date, password, version)
+VALUES (9,'Miki', 'Mitrovic', 'miki@miki.com', true, true, '2019-11-20 11:00:00',
+        '$2a$10$VSlWn0nzWDB2Jxv7cx.sf.NakwjllWrSjdkWi66g2dMM.OdBGThlS',0);
+
+INSERT INTO user_authority (user_id, authority_id)
+VALUES (9,1);
+
+INSERT INTO clinic_center_admin (predefined, id)
+VALUES (false, 9);
 
 INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
                    last_password_reset_date, password, version)
@@ -39,16 +70,40 @@ VALUES (2, 5);
 INSERT INTO patient (address, city, country, is_activated, phone_num, unoip, id)
 VALUES ('Ilije Bircanina', 'Vlasenica', 'Bosna i Hercegovina', true, '065987544', '1234567890', 2);
 
+
+--podaci administratora klinike
 INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
                    last_password_reset_date, password, version)
 VALUES (5, 'Jecko', 'Pecko', 'jecko@gmail.com', true, false, '2019-11-20 11:25:00',
         '$2a$10$VSlWn0nzWDB2Jxv7cx.sf.NakwjllWrSjdkWi66g2dMM.OdBGThlS',0);
-
 INSERT INTO user_authority (user_id, authority_id)
 VALUES (5, 2);
 
 INSERT INTO clinic_admin(id, clinic_id)
 VALUES (5, 1);
+
+INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
+                   last_password_reset_date, password, version)
+VALUES (10, 'Milena', 'Milic', 'mila@gmail.com', true, false, '2019-11-20 11:25:00',
+        '$2a$10$VSlWn0nzWDB2Jxv7cx.sf.NakwjllWrSjdkWi66g2dMM.OdBGThlS',0);
+INSERT INTO user_authority (user_id, authority_id)
+VALUES (10, 2);
+
+INSERT INTO clinic_admin(id, clinic_id)
+VALUES (10, 1);
+
+--treba da promjeni password
+INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
+                   last_password_reset_date, password, version)
+VALUES (11, 'Stevka', 'Stevic', 'stevka@gmail.com', true, true, '2019-11-20 11:25:00',
+        '$2a$10$VSlWn0nzWDB2Jxv7cx.sf.NakwjllWrSjdkWi66g2dMM.OdBGThlS',0);
+INSERT INTO user_authority (user_id, authority_id)
+VALUES (11, 2);
+
+INSERT INTO clinic_admin(id, clinic_id)
+VALUES (11, 1);
+
+
 
 
 INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
@@ -215,11 +270,18 @@ UPDATE personnel
 SET calendar_id=2
 WHERE id = 3;
 
+--poraci o lijekovima i dijagnozama
 INSERT INTO medicine(code,description,name) VALUES('12545','For head', 'Brufen');
 INSERT INTO medicine(code,description,name) VALUES('4315','For head', 'Paracetamol');
 INSERT INTO medicine(code,description,name) VALUES('3h46','For head', 'Cafetin');
+INSERT INTO medicine(code,description,name) VALUES('asd123','For stomach', 'Probiotik');
+INSERT INTO medicine(code,description,name) VALUES('3433','For stomach', 'Ranisan');
+INSERT INTO medicine(code,description,name) VALUES('1423','For liver', 'Liver forte');
+
 INSERT INTO diagnose(code,description,name) VALUES('s5sg4','Strong pain in head', 'Migren');
-INSERT INTO diagnose(code,description,name) VALUES('d3y5','Pain in head', 'Head ache    ');
+INSERT INTO diagnose(code,description,name) VALUES('d3y5','Pain in head', 'Head ache');
+INSERT INTO diagnose(code,description,name) VALUES('3453','Strong pain in stomach', 'Mononucelosis');
+INSERT INTO diagnose(code,description,name) VALUES('54451','Pain in stomach', 'Stomach');
 
 INSERT INTO medical_record(blood_type, description, height, weight, patient_id) VALUES ('Nepoznato','Nema opisa', 0.0, 0.0, 2);
 INSERT INTO medical_record(blood_type, description, height, weight, patient_id) VALUES ('Nepoznato','Nema opisa', 0.0, 0.0, 6);
@@ -231,14 +293,3 @@ WHERE id=2;
 UPDATE patient
 SET medical_record_id=2
 WHERE id=6;
-
-INSERT INTO users (id,first_name, last_name, email, enabled, first_log,
-                   last_password_reset_date, password, version)
-VALUES (8,'Petar', 'Peric', 'pero@gmail.com', true, false, '2019-11-20 11:00:00',
-        '$2a$10$VSlWn0nzWDB2Jxv7cx.sf.NakwjllWrSjdkWi66g2dMM.OdBGThlS',0);
-
-INSERT INTO user_authority (user_id, authority_id)
-VALUES (8,1);
-
-INSERT INTO clinic_center_admin (predefined, id)
-VALUES (false, 8);
