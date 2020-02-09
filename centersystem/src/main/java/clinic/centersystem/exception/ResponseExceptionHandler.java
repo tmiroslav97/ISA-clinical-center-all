@@ -29,6 +29,11 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
+    @ExceptionHandler(value = {AlreadyReweritedException.class})
+    protected ResponseEntity<Object> handelAlreadyRewritedPrescription(RuntimeException ex, WebRequest request) {
+        return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
     @ExceptionHandler(value = {CCANotPredefinedException.class})
     protected ResponseEntity<Object> handleCCANotPredefinedException(RuntimeException ex, WebRequest request) {
         String bodyOfResponse = "Clinic center admin is not predefined admin";
