@@ -1,6 +1,7 @@
 package clinic.centersystem.service;
 
 import clinic.centersystem.converter.RegistrationRequirementConverter;
+import clinic.centersystem.dto.request.MailRequestDTO;
 import clinic.centersystem.dto.request.RegistrationRequirementDTO;
 import clinic.centersystem.dto.response.RegistrationReqResponseDTO;
 import clinic.centersystem.dto.response.RegistrationRequirementResponse;
@@ -85,10 +86,10 @@ public class RegistrationRequirementServiceImpl implements RegistrationRequireme
             throw new ResourceExistsException("User with email " + req.getEmail() + " already exists");
         }
         //            otkomentarisati ako se zeli isprobati lock baze
-            try {
-                Thread.sleep(7000);
-            } catch (InterruptedException e) {
-            }
+//        try {
+//            Thread.sleep(7000);
+//        } catch (InterruptedException e) {
+//        }
         Patient patient = patientService.save(req);
         this.registrationRequirementRepository.deleteById(id);
         String subject = "Account registration";
@@ -98,7 +99,8 @@ public class RegistrationRequirementServiceImpl implements RegistrationRequireme
                         "    http://localhost:8080/sec/activate-account/%s"
                 , patient.getId().toString());
 
-        emailService.sendSyncMailTo(patient.getEmail(), subject, answer);
+        applicationEventPublisher.publishEvent(new MailRequestDTO(req.getEmail(), subject, answer));
+        //emailService.sendSyncMailTo(patient.getEmail(), subject, answer);
 
         return "Patient registration approved";
     }
@@ -113,10 +115,10 @@ public class RegistrationRequirementServiceImpl implements RegistrationRequireme
             throw new ResourceExistsException("User with email " + req.getEmail() + " already exists");
         }
         //            otkomentarisati ako se zeli isprobati lock baze
-            try {
-                Thread.sleep(7000);
-            } catch (InterruptedException e) {
-            }
+//        try {
+//            Thread.sleep(7000);
+//        } catch (InterruptedException e) {
+//        }
 
         String check = message.trim();
         if (check.equals("")) {
@@ -125,8 +127,8 @@ public class RegistrationRequirementServiceImpl implements RegistrationRequireme
 
         String subject = "Account registration";
         registrationRequirementRepository.deleteById(id);
-
-        emailService.sendSyncMailTo(req.getEmail(), subject, message.trim());
+        applicationEventPublisher.publishEvent(new MailRequestDTO(req.getEmail(), subject, message.trim()));
+        //emailService.sendSyncMailTo(req.getEmail(), subject, message.trim());
 
         return 2;
     }
