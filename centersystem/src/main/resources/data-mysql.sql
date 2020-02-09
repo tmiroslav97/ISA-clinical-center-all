@@ -20,7 +20,7 @@ VALUES ('Zrenjanin 66', 0, 'Clinic for neurology', 'Clinic 2', 0);
 INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
                    last_password_reset_date, password, version)
 VALUES (1, 'Miroslav', 'Tomic', 'tomic.miroslav97@gmail.com', true, false, '2019-11-20 11:00:00',
-        '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra',0 );
+        '$2a$10$VSlWn0nzWDB2Jxv7cx.sf.NakwjllWrSjdkWi66g2dMM.OdBGThlS',0 );
 
 INSERT INTO user_authority (user_id, authority_id)
 VALUES (1, 1);
@@ -31,7 +31,7 @@ VALUES (true, 1);
 INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
                    last_password_reset_date, password, version)
 VALUES (2, 'Jovana', 'Lakic', 'jovana.lakic8@gmail.com', true, false, '2019-11-20 11:25:00',
-        '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra',0);
+        '$2a$10$VSlWn0nzWDB2Jxv7cx.sf.NakwjllWrSjdkWi66g2dMM.OdBGThlS',0);
 
 INSERT INTO user_authority (user_id, authority_id)
 VALUES (2, 5);
@@ -42,7 +42,7 @@ VALUES ('Ilije Bircanina', 'Vlasenica', 'Bosna i Hercegovina', true, '065987544'
 INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
                    last_password_reset_date, password, version)
 VALUES (5, 'Jecko', 'Pecko', 'jecko@gmail.com', true, false, '2019-11-20 11:25:00',
-        '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra',0);
+        '$2a$10$VSlWn0nzWDB2Jxv7cx.sf.NakwjllWrSjdkWi66g2dMM.OdBGThlS',0);
 
 INSERT INTO user_authority (user_id, authority_id)
 VALUES (5, 2);
@@ -54,7 +54,7 @@ VALUES (5, 1);
 INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
                    last_password_reset_date, password, version)
 VALUES (3, 'Nevena', 'Djukin', 'nvndjukin97@gmail.com', true, false, '2019-11-20 11:30:00',
-        '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra',0);
+        '$2a$10$VSlWn0nzWDB2Jxv7cx.sf.NakwjllWrSjdkWi66g2dMM.OdBGThlS',0);
 
 INSERT INTO personnel(id, clinic_id)
 VALUES (3, 1);
@@ -68,7 +68,7 @@ VALUES (3, 3);
 INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
                    last_password_reset_date, password, version)
 VALUES (4, 'Milena', 'Milic', 'nvn@gmail.com', true, false, '2019-11-20 11:30:00',
-        '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra',0);
+        '$2a$10$VSlWn0nzWDB2Jxv7cx.sf.NakwjllWrSjdkWi66g2dMM.OdBGThlS',0);
 INSERT INTO personnel(id, clinic_id)
 VALUES (4, 1);
 
@@ -81,7 +81,7 @@ VALUES (4, 4);
 INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
                    last_password_reset_date, password, version)
 VALUES (6, 'Stefan', 'Peric', 'stefan@stefan.com', true, false, '2019-11-20 11:25:00',
-        '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra',0);
+        '$2a$10$VSlWn0nzWDB2Jxv7cx.sf.NakwjllWrSjdkWi66g2dMM.OdBGThlS',0);
 
 INSERT INTO user_authority (user_id, authority_id)
 VALUES (6,2);
@@ -90,7 +90,7 @@ INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
                    last_password_reset_date, password, version)
 
 VALUES (7, 'Ana', 'Andjusic', 'ana@gmail.com', true, false, '2020-01-24 3:50:00',
-        '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra',0);
+        '$2a$10$VSlWn0nzWDB2Jxv7cx.sf.NakwjllWrSjdkWi66g2dMM.OdBGThlS',0);
 
 INSERT INTO personnel(id, clinic_id)
 VALUES (7, 2);
@@ -104,7 +104,7 @@ VALUES (7, 4);
 INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
                    last_password_reset_date, password, version)
 VALUES (800, 'Ana', 'Antic', 'anabanana@gmail.com', true, false, '2019-11-20 11:30:00',
-        '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 0);
+        '$2a$10$VSlWn0nzWDB2Jxv7cx.sf.NakwjllWrSjdkWi66g2dMM.OdBGThlS', 0);
 
 INSERT INTO personnel(id, clinic_id)
 VALUES (800, 1);
@@ -116,29 +116,35 @@ VALUES (0, 0, 8, 16, 800,1);
 INSERT INTO patient (address, city, country, is_activated, phone_num, unoip, id)
 VALUES ('Masarikova', 'Novi Sad', 'Srbija', true, '065312532', '4351233', 6);
 
+--registration requirements
 INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
                                       phone_num, unoip,version)
-VALUES ('Safarikova 31', 'Bijeljina', 'Bosna', 'miroslavtomic@outlook.com', 'Miki', 'Peric', '123', '123', '065987654',
+VALUES ('Safarikova 31', 'Bijeljina', 'Bosna', 'miroslavtomic@outlook.com', 'Miki', 'Peric', '12345', '12345', '065987654',
         '1234543',0);
 
 INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
                                       phone_num, unoip,version)
-VALUES ('Safarikova 16', 'Bijeljina', 'Bosna', 'roncevic1996@gmail.com', 'Jovica', 'Roncevic', '321', '321', '345435345',
+VALUES ('Safarikova 16', 'Bijeljina', 'Bosna', 'roncevic1996@gmail.com', 'Jovica', 'Roncevic', '12345', '12345', '345435345',
         '432132',0);
 
 INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
                                       phone_num, unoip,version)
-VALUES ('Safarikova 16', 'Bijeljina', 'Bosna', 'roncevic1996@gmail.com', 'Jovica', 'Roncevic', '321', '321', '345435345',
+VALUES ('Safarikova 16', 'Bijeljina', 'Bosna', 'roncevic1996@gmail.com', 'Jovica', 'Roncevic', '12345', '12345', '345435345',
         '432132',0);
 
 INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
                                       phone_num, unoip,version)
-VALUES ('Safarikova 16', 'Bijeljina', 'Bosna', 'roncevic1996@gmail.com', 'Jovica', 'Roncevic', '321', '321', '345435345',
+VALUES ('Safarikova 31', 'Bijeljina', 'Bosna', 'primjer@primjer', 'Miroslav', 'Tomic', '12345', '12345', '45454545',
         '432132',0);
 
 INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
                                       phone_num, unoip,version)
-VALUES ('Safarikova 31', 'Bijeljina', 'Bosna', 'ssds@sdad', 'Miroslav', 'Tomic', '123', '123', '345435345',
+VALUES ('Safarikova 31', 'Bijeljina', 'Bosna', 'primjer1@primjer1', 'Petar', 'Peric', '12345', '12345', '14773442',
+        '432132',0);
+
+INSERT INTO registration_requirement (address, city, country, email, first_name, last_name, password, password2,
+                                      phone_num, unoip,version)
+VALUES ('Safarikova 31', 'Ugljevik', 'Bosna', 'primjer2@primjer2', 'Mitar', 'Miric', '12345', '12345', '14773442',
         '432132',0);
 
 INSERT INTO clinic_patients(clinic_id, patients_id)
@@ -229,7 +235,7 @@ WHERE id=6;
 INSERT INTO users (id,first_name, last_name, email, enabled, first_log,
                    last_password_reset_date, password, version)
 VALUES (8,'Petar', 'Peric', 'pero@gmail.com', true, false, '2019-11-20 11:00:00',
-        '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra',0);
+        '$2a$10$VSlWn0nzWDB2Jxv7cx.sf.NakwjllWrSjdkWi66g2dMM.OdBGThlS',0);
 
 INSERT INTO user_authority (user_id, authority_id)
 VALUES (8,1);
