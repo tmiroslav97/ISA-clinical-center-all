@@ -130,10 +130,10 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
             doctor = doctorService.findOneById(Long.valueOf(docId));
 
 //            otkomentarisati ako se zeli isprobati lock baze
-//            try {
-//                Thread.sleep(7000);
-//            } catch (InterruptedException e) {
-//            }
+            try {
+                Thread.sleep(7000);
+            } catch (InterruptedException e) {
+            }
 
 
             if (!(doctor.getStartTime() <= pickedTermStart && doctor.getEndTime() >= pickedTermEnd)) {
@@ -178,7 +178,7 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
                 doctorService.save(doctor);
             }
         }
-        
+
         if (!avDoctors) {
             return 2;
         }

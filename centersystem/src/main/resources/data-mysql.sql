@@ -249,11 +249,23 @@ INSERT INTO roomcalendar(date, termin, room_id) VALUES ('2020-01-23',7,1);
 
 --zahtjevi za operaciju
 INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id,patient_name,doctor_name,version)
-    VALUES ('2020-01-23',7,1,2,3, 'Jovana Lakic','Nevena Djukin',0);
+    VALUES ('2020-02-09',7,1,2,3, 'Jovana Lakic','Nevena Djukin',0);
 INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id,patient_name,doctor_name,version)
-    VALUES ('2020-01-31',10,1,2,3,'Jovana Lakic','Nevena Djukin',0);
+    VALUES ('2020-02-10',10,1,2,3,'Jovana Lakic','Nevena Djukin',0);
 INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id,patient_name,doctor_name,version)
-    VALUES ('2020-01-25',13,1,2,3,'Jovana Lakic','Nevena Djukin',0);
+    VALUES ('2020-02-24',13,1,2,3,'Jovana Lakic','Nevena Djukin',0);
+INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id,patient_name,doctor_name,version)
+    VALUES ('2020-02-25',7,1,2,3, 'Jovana Lakic','Nevena Djukin',0);
+INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id,patient_name,doctor_name,version)
+    VALUES ('2020-02-26',10,1,2,3,'Jovana Lakic','Nevena Djukin',0);
+INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id,patient_name,doctor_name,version)
+    VALUES ('2020-02-27',13,1,2,3,'Jovana Lakic','Nevena Djukin',0);
+INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id,patient_name,doctor_name,version)
+    VALUES ('2020-02-28',7,1,2,3, 'Jovana Lakic','Nevena Djukin',0);
+INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id,patient_name,doctor_name,version)
+    VALUES ('2020-02-29',10,1,2,3,'Jovana Lakic','Nevena Djukin',0);
+INSERT INTO surgery_requirement(date,termin,clinic_id,patient_id,doctor_id,patient_name,doctor_name,version)
+    VALUES ('2020-02-29',10,1,2,12,'Jovana Lakic','Doca Doktor',0);
 
 --tipovi pregleda
 INSERT INTO appointment_type(id, type, clinic_id) VALUES (1,'General examination',1);
