@@ -178,9 +178,7 @@ public class SurgeryRequirementServiceImpl implements SurgeryRequirementService 
                 doctorService.save(doctor);
             }
         }
-
-        roomService.save(room);
-
+        
         if (!avDoctors) {
             return 2;
         }
