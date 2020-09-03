@@ -72,3 +72,49 @@ VALUES ('Kikinda 66', 0, 'Clinic for neurology', 'Clinic Kikinda', 0);
 
 INSERT INTO clinic (address, cnt_rating, description, name , sum_rating)
 VALUES ('Bijeljina 42', 0, 'Clinic for dermatology', 'Clinic Bijeljina', 0);
+
+
+
+--podaci za doktore
+INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
+                   last_password_reset_date, password, version)
+VALUES (3, 'Nevena', 'Djukin', 'nvndjukin97@gmail.com', true, false, '2019-11-20 11:30:00',
+        '$2a$10$VSlWn0nzWDB2Jxv7cx.sf.NakwjllWrSjdkWi66g2dMM.OdBGThlS',0);
+
+INSERT INTO personnel(id, clinic_id)
+VALUES (3, 1);
+
+INSERT INTO doctor(cnt_rating, sum_rating, start_time, end_time, id, clinic_id)
+VALUES (0, 0, 8, 16, 3,1);
+
+INSERT INTO user_authority (user_id, authority_id)
+VALUES (3, 3);
+
+
+INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
+                   last_password_reset_date, password, version)
+VALUES (12, 'Doca', 'Doktor', 'doktor1@doktor1', true, false, '2019-11-20 11:30:00',
+        '$2a$10$VSlWn0nzWDB2Jxv7cx.sf.NakwjllWrSjdkWi66g2dMM.OdBGThlS',0);
+
+INSERT INTO personnel(id, clinic_id)
+VALUES (12, 1);
+
+INSERT INTO doctor(cnt_rating, sum_rating, start_time, end_time, id, clinic_id)
+VALUES (0, 0, 7, 15, 12,1);
+
+INSERT INTO user_authority (user_id, authority_id)
+VALUES (12, 3);
+
+INSERT INTO users (id, first_name, last_name, email, enabled, first_log,
+                   last_password_reset_date, password, version)
+VALUES (13, 'Stojanka', 'Skoric', 'doktor2@doktor2', true, false, '2019-11-20 11:30:00',
+        '$2a$10$VSlWn0nzWDB2Jxv7cx.sf.NakwjllWrSjdkWi66g2dMM.OdBGThlS',0);
+
+INSERT INTO personnel(id, clinic_id)
+VALUES (13, 1);
+
+INSERT INTO doctor(cnt_rating, sum_rating, start_time, end_time, id, clinic_id)
+VALUES (0, 0, 11, 19, 13,1);
+
+INSERT INTO user_authority (user_id, authority_id)
+VALUES (13, 3);
