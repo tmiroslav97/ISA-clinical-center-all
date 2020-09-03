@@ -62,3 +62,13 @@ INSERT INTO registration_requirement (address, city, country, email, first_name,
                                       phone_num, unoip,version)
 VALUES ('Safarikova 31', 'Bijeljina', 'Bosna', 'tomic.miroslav97@gmail.com', 'Miki', 'Peric', '123', '123', '065987654',
         '1234543',0);
+
+--podaci za klinike
+INSERT INTO clinic (address, cnt_rating, description, name , sum_rating)
+VALUES ('Vlasenica 15', 0, 'Clinic for cardiovascular disease', 'Clinic Vlasenica', 0);
+
+INSERT INTO clinic (address, cnt_rating, description, name , sum_rating)
+VALUES ('Kikinda 66', 0, 'Clinic for neurology', 'Clinic Kikinda', 0);
+
+INSERT INTO clinic (address, cnt_rating, description, name , sum_rating)
+VALUES ('Bijeljina 42', 0, 'Clinic for dermatology', 'Clinic Bijeljina', 0);
